@@ -1,0 +1,302 @@
+{
+  "schema": "shiren-gb2-runtime-widths-v1",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "source_free": true,
+  "custom_item_names": {
+    "slots": 20,
+    "slot_bytes": 8,
+    "maximum_glyph_bytes": 7,
+    "maximum": {
+      "composer_pixels": 49,
+      "renderer_pixels": 49,
+      "composer_evidence": "custom_name_7_bytes",
+      "renderer_evidence": "custom_name_7_bytes"
+    }
+  },
+  "families": [
+    {
+      "name": "actor_name_tier_1",
+      "entries": 150,
+      "unique_records": 150,
+      "membership_sha1": "d59ff4deb9293c494015b0c7103072431554b19b",
+      "translated_records": 150,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 95,
+        "renderer_pixels": 95,
+        "composer_evidence": "192:$4F42",
+        "renderer_evidence": "192:$4F42"
+      }
+    },
+    {
+      "name": "actor_name_tier_2",
+      "entries": 150,
+      "unique_records": 150,
+      "membership_sha1": "953a910482f4831ad604f245fd963606215064dd",
+      "translated_records": 150,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 72,
+        "renderer_pixels": 72,
+        "composer_evidence": "192:$54EF",
+        "renderer_evidence": "192:$54EF"
+      }
+    },
+    {
+      "name": "actor_name_tier_3",
+      "entries": 150,
+      "unique_records": 150,
+      "membership_sha1": "fd9f69888ccb468673c57ddf2c40cd3d5fb65239",
+      "translated_records": 150,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 72,
+        "renderer_pixels": 72,
+        "composer_evidence": "192:$5A60",
+        "renderer_evidence": "192:$5A60"
+      }
+    },
+    {
+      "name": "identified_item_names",
+      "entries": 216,
+      "unique_records": 216,
+      "membership_sha1": "6cd48641507a600d73afa2d805e4b10bb4142a05",
+      "translated_records": 216,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 109,
+        "renderer_pixels": 109,
+        "composer_evidence": "192:$614B",
+        "renderer_evidence": "192:$614B"
+      }
+    },
+    {
+      "name": "unidentified_item_appearances",
+      "entries": 123,
+      "unique_records": 123,
+      "membership_sha1": "f76546501368018d40bd7df293af8e0c879e4e27",
+      "translated_records": 123,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 105,
+        "renderer_pixels": 105,
+        "composer_evidence": "192:$6594",
+        "renderer_evidence": "192:$6594"
+      }
+    },
+    {
+      "name": "item_name_format_fragments",
+      "entries": 20,
+      "unique_records": 9,
+      "membership_sha1": "27323a70b6a8240b8046bd5fe94d71c8357f5403",
+      "translated_records": 9,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 46,
+        "renderer_pixels": 46,
+        "composer_evidence": "194:$558B",
+        "renderer_evidence": "194:$558B"
+      }
+    },
+    {
+      "name": "trap_names",
+      "entries": 22,
+      "unique_records": 22,
+      "membership_sha1": "557d6a3874b3d6306210c05b69327c980477dfee",
+      "translated_records": 22,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 87,
+        "renderer_pixels": 87,
+        "composer_evidence": "193:$549F",
+        "renderer_evidence": "193:$549F"
+      }
+    },
+    {
+      "name": "location_names_primary",
+      "entries": 14,
+      "unique_records": 14,
+      "membership_sha1": "eb6436612328c40a173ac0d32b4293be24586fec",
+      "translated_records": 14,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 79,
+        "renderer_pixels": 79,
+        "composer_evidence": "193:$6F4C",
+        "renderer_evidence": "193:$6F4C"
+      }
+    },
+    {
+      "name": "location_names_history",
+      "entries": 30,
+      "unique_records": 30,
+      "membership_sha1": "c46b6d400dbbc13eefc697fc1ba8a3fe3db54f45",
+      "translated_records": 30,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 80,
+        "renderer_pixels": 80,
+        "composer_evidence": "193:$6FFB",
+        "renderer_evidence": "193:$6FFB"
+      }
+    }
+  ],
+  "domains": [
+    {
+      "name": "actor_name",
+      "families": [
+        "actor_name_tier_1",
+        "actor_name_tier_2",
+        "actor_name_tier_3"
+      ],
+      "consumer_occurrences": 127,
+      "consumer_records": 120,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 95,
+        "renderer_pixels": 95,
+        "composer_evidence": "192:$4F42",
+        "renderer_evidence": "192:$4F42"
+      }
+    },
+    {
+      "name": "trap_name",
+      "families": ["trap_names"],
+      "consumer_occurrences": 8,
+      "consumer_records": 7,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 87,
+        "renderer_pixels": 87,
+        "composer_evidence": "193:$549F",
+        "renderer_evidence": "193:$549F"
+      }
+    },
+    {
+      "name": "identified_item_name",
+      "families": ["identified_item_names"],
+      "consumer_occurrences": 1,
+      "consumer_records": 1,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 109,
+        "renderer_pixels": 109,
+        "composer_evidence": "192:$614B",
+        "renderer_evidence": "192:$614B"
+      }
+    },
+    {
+      "name": "location_name",
+      "families": [
+        "location_names_primary",
+        "location_names_history"
+      ],
+      "consumer_occurrences": 1,
+      "consumer_records": 1,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 80,
+        "renderer_pixels": 80,
+        "composer_evidence": "193:$6FFB",
+        "renderer_evidence": "193:$6FFB"
+      }
+    },
+    {
+      "name": "item_name",
+      "families": [
+        "identified_item_names",
+        "unidentified_item_appearances",
+        "item_name_format_fragments"
+      ],
+      "consumer_occurrences": 104,
+      "consumer_records": 101,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 109,
+        "renderer_pixels": 109,
+        "composer_evidence": "192:$614B",
+        "renderer_evidence": "192:$614B"
+      }
+    },
+    {
+      "name": "location_record",
+      "families": [
+        "location_names_primary",
+        "location_names_history"
+      ],
+      "consumer_occurrences": 1,
+      "consumer_records": 1,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 80,
+        "renderer_pixels": 80,
+        "composer_evidence": "193:$6FFB",
+        "renderer_evidence": "193:$6FFB"
+      }
+    },
+    {
+      "name": "sender_string",
+      "families": [],
+      "consumer_occurrences": 1,
+      "consumer_records": 1,
+      "missing_records": 0,
+      "permanently_unresolved": false,
+      "ready": true,
+      "maximum": {
+        "composer_pixels": 49,
+        "renderer_pixels": 49,
+        "composer_evidence": "player_name_7_bytes",
+        "renderer_evidence": "player_name_7_bytes"
+      }
+    },
+    {
+      "name": "debug_polymorphic",
+      "families": [],
+      "consumer_occurrences": 4,
+      "consumer_records": 3,
+      "missing_records": 0,
+      "permanently_unresolved": true,
+      "ready": false,
+      "maximum": null
+    }
+  ],
+  "bounded_consumer_keys": 243,
+  "formatter_anchors": [
+    {
+      "location": "120:$47E9",
+      "purpose": "three-way item name formatter",
+      "bytes": "626BC5E5CDC05FB7281FCB772821E1237EE1C5C6004F3E0BE5CDA01FE109545DC179CD094CCD500AC9E14E3E041803E13E05E1CDA01FC9"
+    },
+    {
+      "location": "120:$4C09",
+      "purpose": "eight-byte custom-name slot resolver",
+      "bytes": "CB27CB27CB272178DD856F3E008C67C9"
+    },
+    {
+      "location": "122:$4229",
+      "purpose": "clear twenty custom-name slots",
+      "bytes": "2178DD01A000CDEE09C9"
+    }
+  ]
+}

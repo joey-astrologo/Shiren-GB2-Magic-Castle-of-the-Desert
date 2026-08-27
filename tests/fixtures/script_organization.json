@@ -1,0 +1,183 @@
+{
+  "manifest": {
+    "schema": "shiren-gb2-script-organization-v1",
+    "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+    "rules_sha1": "58eb0a6f038b375c328fc31d4a868b6a790eda59",
+    "records": 6695,
+    "logical_references": 7163,
+    "reference_coverage": {
+      "assigned_once": 7163,
+      "unclassified": 0,
+      "ambiguous": 0
+    },
+    "partition_complete": true,
+    "review_records": 0,
+    "partition_sha1": "b1a613a6fabf00a038d9664222019825dc425d16",
+    "categories": [
+      {
+        "name": "glossary",
+        "filename": "glossary.tsv",
+        "description": "canonical names, appearances, abilities, traps and locations",
+        "records": 1938,
+        "nonempty_records": 1938,
+        "logical_references": 1938,
+        "source_bytes": 16994,
+        "sections": {
+          "actor_names_tier_1": 150,
+          "actor_names_tier_2": 150,
+          "actor_names_tier_3": 150,
+          "identified_item_names": 216,
+          "item_ability_descriptions": 69,
+          "item_ability_roots": 123,
+          "location_names": 44,
+          "numbered_monster_variant_names": 891,
+          "trap_names": 22,
+          "unidentified_item_appearances": 123
+        },
+        "review_reasons": {},
+        "assignment_sha1": "b90c43025f45d9a37188188c3badaaf6cb1709a6"
+      },
+      {
+        "name": "items",
+        "filename": "items.tsv",
+        "description": "identified item descriptions",
+        "records": 216,
+        "nonempty_records": 216,
+        "logical_references": 216,
+        "source_bytes": 13631,
+        "sections": {
+          "item_descriptions": 216
+        },
+        "review_reasons": {},
+        "assignment_sha1": "cefe85a9263d199796b854c1cf1a9f9e447e986b"
+      },
+      {
+        "name": "monsters",
+        "filename": "monsters.tsv",
+        "description": "Monster Notebook and monster-meat descriptions",
+        "records": 459,
+        "nonempty_records": 428,
+        "logical_references": 459,
+        "source_bytes": 21335,
+        "sections": {
+          "monster_meat_descriptions": 222,
+          "monster_notebook_descriptions": 237
+        },
+        "review_reasons": {},
+        "assignment_sha1": "f5231da610ee0cc23c290cbfa1c05e9f82158a9d"
+      },
+      {
+        "name": "ui_system",
+        "filename": "ui_system.tsv",
+        "description": "menus, labels, status, ranking and other positioned system text",
+        "records": 493,
+        "nonempty_records": 486,
+        "logical_references": 493,
+        "source_bytes": 6130,
+        "sections": {
+          "adventure_and_miscellaneous_ui": 19,
+          "adventure_history_labels": 43,
+          "condition_labels": 56,
+          "dynamic_status_fields": 4,
+          "menus_and_system_labels": 234,
+          "ranking_outcomes_and_labels": 62,
+          "ranking_titles_and_grade_labels": 74,
+          "trap_menu_status": 1
+        },
+        "review_reasons": {},
+        "assignment_sha1": "2fb3415e18834bce6a6ee0a5e07b7ee8a7d318ff"
+      },
+      {
+        "name": "help",
+        "filename": "help.tsv",
+        "description": "Wanderer's Guide, controls and technique help",
+        "records": 176,
+        "nonempty_records": 176,
+        "logical_references": 183,
+        "source_bytes": 8832,
+        "sections": {
+          "control_help": 27,
+          "technique_help": 32,
+          "wanderer_secret_pages": 96,
+          "wanderers_guide": 21
+        },
+        "review_reasons": {},
+        "assignment_sha1": "8c38e89e2de790879174ab899807f76f8db13889"
+      },
+      {
+        "name": "messages",
+        "filename": "messages.tsv",
+        "description": "combat, dungeon, item-action and runtime gameplay messages",
+        "records": 399,
+        "nonempty_records": 384,
+        "logical_references": 410,
+        "source_bytes": 7676,
+        "sections": {
+          "combat_and_dungeon_messages": 201,
+          "floor_and_system_messages": 39,
+          "item_and_action_messages": 159
+        },
+        "review_reasons": {},
+        "assignment_sha1": "bec8241e95358cd6ae7912e3e98e9cb8442fa389"
+      },
+      {
+        "name": "prose",
+        "filename": "prose.tsv",
+        "description": "story, event and character dialogue",
+        "records": 1786,
+        "nonempty_records": 1785,
+        "logical_references": 2199,
+        "source_bytes": 96553,
+        "sections": {
+          "ending_and_credits_text": 18,
+          "story_and_event_dialogue": 1768
+        },
+        "review_reasons": {},
+        "assignment_sha1": "0a6332a7e98bc2efce5be45439bf9af48eb40c38"
+      },
+      {
+        "name": "internal",
+        "filename": "internal.tsv",
+        "description": "debug, scenario, password, animation and engine-facing labels",
+        "records": 1228,
+        "nonempty_records": 1225,
+        "logical_references": 1265,
+        "source_bytes": 10273,
+        "sections": {
+          "animation_and_effect_labels": 629,
+          "debug_and_engine_labels": 197,
+          "debug_spell_labels": 226,
+          "internal_object_labels": 37,
+          "password_fragments": 100,
+          "scenario_labels": 39
+        },
+        "review_reasons": {},
+        "assignment_sha1": "5ba5d12c67ba1185c2d6fdc75c5e0065b9418d57"
+      },
+      {
+        "name": "review",
+        "filename": "review.tsv",
+        "description": "unclassified, ambiguous or cross-category aliases requiring review",
+        "records": 0,
+        "nonempty_records": 0,
+        "logical_references": 0,
+        "source_bytes": 0,
+        "sections": {},
+        "review_reasons": {},
+        "assignment_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    ]
+  },
+  "output_sha1": {
+    "glossary.tsv": "a274e8395a8f42c1a5383873c1e385be706966fc",
+    "help.tsv": "14309d5165eab83b23c9466167802e4db0e98a73",
+    "internal.tsv": "a9a532804432c3c640466b3427dc2ccb37883235",
+    "items.tsv": "027d5813781acc8e36abf72d000c3ec4be251316",
+    "manifest.json": "99c94c9c0e135d72c2d18022031b3c4878889268",
+    "messages.tsv": "233692efdb67f358fb0d63d4dc0c3ab21b410a45",
+    "monsters.tsv": "14e9cb24ca364cf487ba9eedfbf83900d2d791cc",
+    "prose.tsv": "eb0d65c34dd452d4df29fb59c0731eafa354858f",
+    "review.tsv": "5dabf8f5a36924696031f8474f01c82e3cacdbec",
+    "ui_system.tsv": "f401f1512413e40a3838286a5fac07d0b116a4d7"
+  }
+}

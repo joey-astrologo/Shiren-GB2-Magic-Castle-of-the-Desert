@@ -1,0 +1,59 @@
+{
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "dispatcher": {
+    "bank": 0,
+    "entry": "3657",
+    "table": "3671",
+    "table_size": 32,
+    "table_sha1": "709ada7d0dbb657b57cf9be3f511e0c82d5c12ff"
+  },
+  "entries": [
+    {"code": "F0", "target": "3691", "kind": "kanji", "arity": 1},
+    {"code": "F1", "target": "3691", "kind": "kanji", "arity": 1},
+    {"code": "F2", "target": "3691", "kind": "kanji", "arity": 1},
+    {"code": "F3", "target": "3858", "kind": "control", "name": "cF3", "arity": 0},
+    {"code": "F4", "target": "369B", "kind": "glyph", "arity": 0},
+    {"code": "F5", "target": "369B", "kind": "glyph", "arity": 0},
+    {"code": "F6", "target": "369B", "kind": "glyph", "arity": 0},
+    {"code": "F7", "target": "3863", "kind": "control", "name": "hspace", "arity": 1},
+    {"code": "F8", "target": "387D", "kind": "control", "name": "cF8", "arity": 0},
+    {"code": "F9", "target": "387F", "kind": "control", "name": "cF9", "arity": 2},
+    {"code": "FA", "target": "36B6", "kind": "control", "name": "delay", "arity": 1},
+    {"code": "FB", "target": "3751", "kind": "control", "name": "page", "arity": 0},
+    {"code": "FC", "target": "386C", "kind": "control", "name": "box", "arity": 0},
+    {"code": "FD", "target": "382F", "kind": "control", "name": "br", "arity": 0},
+    {"code": "FE", "target": "3858", "kind": "control", "name": "cFE", "arity": 0},
+    {"code": "FF", "target": "386D", "kind": "terminator", "arity": 0}
+  ],
+  "runtime_probe": {
+    "payload": "F3 F4 F5 F6 F7 05 F8 F9 47 00 FA 01 FD FE FF",
+    "dispatch_offsets": [0, 1, 2, 3, 4, 6, 7, 10, 12, 13, 14]
+  },
+  "corpus": {
+    "first_bank": 192,
+    "last_bank": 205,
+    "candidate_count": 5011,
+    "rendered_glyphs": 149471,
+    "prefixed_codes": 280,
+    "prefixed_occurrences": 9281,
+    "mapped_prefixed_codes": 236,
+    "mapped_prefixed_occurrences": 9228,
+    "mapped_kanji_codes": 229,
+    "mapped_kanji_occurrences": 6686,
+    "unmapped_continuation_codes": 44,
+    "unmapped_continuation_occurrences": 53,
+    "speaker_occurrences": 2356,
+    "excluded_bank_206_font_records": 122,
+    "control_counts": {
+      "F3": 121,
+      "F7": 231,
+      "F8": 81,
+      "F9": 20,
+      "FA": 159,
+      "FB": 2973,
+      "FC": 1837,
+      "FD": 5639,
+      "FE": 23
+    }
+  }
+}

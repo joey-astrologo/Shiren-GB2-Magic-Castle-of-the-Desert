@@ -1,0 +1,145 @@
+{
+  "schema": "shiren-gb2-menu-text-v2",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "families": {
+    "control_help": {
+      "groups": [20],
+      "logical_references": 28,
+      "stable_records": 27,
+      "translated_records": 27,
+      "first_id": "193:$54FF",
+      "last_id": "193:$5C92",
+      "membership_sha1": "61f8709c60e0a635e35b493608834d896f3ee882",
+      "max_lines": 8,
+      "widest": {
+        "record": "193:$56EA",
+        "line": 4,
+        "composer_pixels": 143,
+        "renderer_pixels": 143
+      }
+    },
+    "technique_help": {
+      "groups": [21],
+      "logical_references": 33,
+      "stable_records": 32,
+      "translated_records": 32,
+      "first_id": "193:$5D58",
+      "last_id": "193:$6704",
+      "membership_sha1": "b6703007a2fb80045e47417f0d751bbba4573299",
+      "max_lines": 9,
+      "widest": {
+        "record": "193:$624D",
+        "line": 5,
+        "composer_pixels": 143,
+        "renderer_pixels": 143
+      }
+    },
+    "wanderers_guide": {
+      "groups": [19],
+      "logical_references": 22,
+      "stable_records": 21,
+      "translated_records": 21,
+      "first_id": "194:$402C",
+      "last_id": "194:$4707",
+      "membership_sha1": "991d719b5ccb181d41eb2e5ff086a28ac3feb9d0",
+      "max_lines": 10,
+      "widest": {
+        "record": "194:$40DC",
+        "line": 3,
+        "composer_pixels": 143,
+        "renderer_pixels": 143
+      }
+    },
+    "wanderer_secret_pages": {
+      "groups": [32],
+      "logical_references": 100,
+      "stable_records": 96,
+      "translated_records": 96,
+      "first_id": "200:$6EB0",
+      "last_id": "200:$786F",
+      "membership_sha1": "231ab26e48bb851179598f2ee1c9f16d62f2b901",
+      "max_lines": 2,
+      "widest": {
+        "record": "200:$72B0",
+        "line": 0,
+        "composer_pixels": 143,
+        "renderer_pixels": 143
+      }
+    },
+    "monster_notebook_descriptions": {
+      "groups": [29, 30, 31],
+      "logical_references": 219,
+      "stable_records": 219,
+      "translated_records": 219,
+      "first_id": "200:$4F9C",
+      "last_id": "200:$6DC1",
+      "membership_sha1": "1e3ebe6e05d75f45f41769006dec9ce0fd2795ed",
+      "max_lines": 2,
+      "widest": {
+        "record": "200:$50CD",
+        "line": 1,
+        "composer_pixels": 143,
+        "renderer_pixels": 143
+      }
+    }
+  },
+  "help_and_secrets_records": 176,
+  "monster_notebook_records": 219,
+  "total_translated_records": 395,
+  "native_empty_notebook_slots": [
+    "200:$5984",
+    "200:$5985",
+    "200:$5986",
+    "200:$5987",
+    "200:$5988",
+    "200:$5989",
+    "200:$63E4",
+    "200:$63E5",
+    "200:$63E6",
+    "200:$63E7",
+    "200:$63E8",
+    "200:$63E9",
+    "200:$6DE2",
+    "200:$6DE3",
+    "200:$6DE4",
+    "200:$6DE5",
+    "200:$6DE6",
+    "200:$6DE7"
+  ],
+  "positioned_topics": {
+    "wanderers_guide": {
+      "entries": 10,
+      "pixel_budget": 141,
+      "widest": {
+        "record": "194:$40C7",
+        "composer_pixels": 113,
+        "renderer_pixels": 113
+      }
+    },
+    "control_help": {
+      "entries": 9,
+      "pixel_budget": 141,
+      "widest": {
+        "record": "193:$5574",
+        "composer_pixels": 129,
+        "renderer_pixels": 129
+      }
+    },
+    "technique_help": {
+      "entries": 16,
+      "pixel_budget": 141,
+      "widest": {
+        "record": "193:$5D77",
+        "composer_pixels": 125,
+        "renderer_pixels": 125
+      }
+    }
+  },
+  "positioned_headers": {
+    "help_popup_controls": {"record": "192:$6F99", "text": "Controls", "pixel_budget": 40, "composer_pixels": 40, "renderer_pixels": 40},
+    "help_popup_techniques": {"record": "192:$6F9D", "text": "Tech", "pixel_budget": 40, "composer_pixels": 21, "renderer_pixels": 21},
+    "help_popup_secrets": {"record": "192:$6FA3", "text": "Secrets", "pixel_budget": 40, "composer_pixels": 36, "renderer_pixels": 36},
+    "control_help_heading": {"record": "192:$6FAB", "text": "Control Guide", "pixel_budget": 141, "composer_pixels": 64, "renderer_pixels": 64}
+  },
+  "translation_sha1": "a4328b9a58a77160c37853878357cd2ff836ee52"
+}

@@ -1,0 +1,73 @@
+scene_id	groups	phase	title
+first_discovery_tutorials	33:0-24	gameplay_support	First-discovery item tutorials
+opening_sandstorm	34	main_story	Opening desert sandstorm
+magic_castle_capture	35	main_story	Capture and escape from the Magic Castle
+escape_failure	36	main_story	Failed prison escape
+ilpa_sighting	37	main_story	Escape aftermath and first sight of Ilpa
+early_ilpa_rumors	38	main_story	Early Ilpa rumors
+pekeji_reunion	39	main_story	Pekeji reunion and treasure plan
+ancient_ruins_entry	40	main_story	Ancient Ruins entry and Pekeji separation
+return_to_ilpa	41	main_story	Recovery after the Ancient Ruins
+night_departure	42;43	main_story	Night departure for the ruins
+evil_god_statue	44	main_story	Discovery of the Evil God Statue
+statue_aftermath	45;46	main_story	Statue aftermath in Ilpa
+ilpa_panic	47	main_story	Ilpa panic after the ruins collapse
+lord_receives_statue	48	main_story	The Lord receives the Evil God Statue
+sachi_check_in	49	main_story	Sachi checks on Shiren
+advancing_desert	50	main_story	The desert advances toward Ilpa
+statue_pursuit	51	main_story	Pursuit of the Evil God Statue
+zagan_retry	52	main_story_branch	Zagan rematch taunt
+zagan_confrontation	53	main_story	Zagan confrontation
+zagan_recovery	54	main_story	Recovery after Zagan
+desert_status_report	55	main_story	Desert status report
+ilpa_crisis	56	main_story	Ilpa crisis dialogue
+oryu_revelation	57	main_story	Oryu reveals the castle plot
+pekeji_returns	58	main_story	Pekeji returns
+castle_infiltration	59;60	main_story	Castle guard patrol and infiltration
+full_moon_ritual	61	main_story	Full-moon ritual
+lord_retry	62	main_story_branch	Lord rematch taunt
+lord_aftermath	63	main_story	Lord confrontation aftermath
+jahannam_opens	64	main_story	Curas opens Jahannam's Gate
+final_dungeon_council	65	main_story	Ilpa council before the final dungeon
+oryu_join_prompt	66	ally_event	Oryu join prompt
+sachi_watch_post	67	main_story	Sachi's watch post
+scenario_diagnostics	68;105	internal	Scenario-counter diagnostics and fallbacks
+jahannam_depths	69	main_story	Arrival at the depths of Jahannam
+curas_confrontation	70	main_story	Curas confrontation
+curas_defeat	71	main_story	Curas defeat
+evil_god_finale	72	main_story	Escape and Evil God finale
+main_ending	73;74	main_story	Main ending and Ilpa celebration
+postgame_begins	75	postgame	Postgame begins
+nfuu_recruitment	76	ally_event	Nfuu recruitment
+tonfan_rules	77	side_dungeon	Tonfan's Hole entry rules
+tonfan_clear	78	side_dungeon	Tonfan's Hole first clear
+tonfan_interruption	79	side_dungeon	Tonfan's Hole interruption
+tonfan_depths	80	side_dungeon	Tonfan's Hole deepest floor
+tonfan_failure	81	side_dungeon	Tonfan's Hole failure
+ilpa_festival	82	postgame	Ilpa festival
+festival_decline	83	postgame	Festival invitation declined
+festival_results	84	postgame	Festival challenge results
+saruyama_quest	85	postgame	Saruyama side quest
+ultimate_soil	86	postgame	Ultimate Soil acquisition
+blacksmith_quest	87	postgame	Blacksmith side quest
+treasure_chest_a	88	postgame	Treasure-chest event A
+treasure_chest_b	89	postgame	Treasure-chest event B
+eastern_keep_expedition	90;91	postgame	Eastern Keep expedition
+abyssal_zagan	92	postgame	Abyssal Depths Zagan confrontation
+wanderer_emblem	93	postgame	Wanderer Emblem reward
+wanda_oro_quest	94;96	postgame	Wanda and Oro side quest
+bad_ending	33:25;95	main_story_branch	Bad-ending epilogue
+missing_blacksmith	97	postgame	Missing blacksmith quest
+mamo_reunion	98	postgame	Mamo reunion
+pot_sisters_intro	99	postgame	Pot sisters shop introduction
+pot_sisters_creation	100	postgame	Pot sisters creation event
+pot_sisters_repeat	101	postgame	Pot sisters repeat visit
+pot_sisters_broken_pot	102	postgame	Pot sisters broken-pot event
+pot_sisters_item_return	103	postgame	Pot sisters stored-item return
+pot_sisters_confrontation	104	postgame	Pot sisters confrontation
+town_npcs_early	106	town_dialogue	Early-game town NPC states
+town_npcs_mid	107	town_dialogue	Mid-story town NPC states
+town_npcs_late	108	town_dialogue	Late-story town NPC states
+town_npcs_postgame	109	town_dialogue	Postgame town NPC states
+training_hall_npcs	110	town_dialogue	Training Hall NPC dialogue
+monster_form_dialogue	111;112	gameplay_support	Monster-form dialogue

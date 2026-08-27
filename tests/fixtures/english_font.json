@@ -1,0 +1,45 @@
+{
+  "schema": "shiren-gb2-english-font-v1",
+  "font": "Thin Pixel-7 GB Compact",
+  "glyph_count": 78,
+  "assets": {
+    "spec_sha256": "0a951271246f402998f10d76ede332b726e59d599122949ac46a972a3cbd9efb",
+    "glyph_source_sha256": "d496e4650e510f1ec5b16e5d51d3262a8ef0f17a8ee7c38225ad477996aaa6b0",
+    "license_sha256": "4ce79ee1180477fb93bdd91596ac00e972a99341604ec53b745b392b4e87ca6c"
+  },
+  "code_page": {
+    "digits": [0, 9],
+    "capitals": [10, 35],
+    "space": 36,
+    "lowercase": [48, 73],
+    "punctuation": [74, 88],
+    "mapping_sha256": "76cbcccf5da1c55424a080c1db684be70de93c6ca2670a927930b1321eea5652"
+  },
+  "bake": {
+    "background_color": 1,
+    "ink_color": 3,
+    "advances_sha256": "fa7bb64048a40ebc295b051b716145cc36b87ae7eca082c3ec035a5a72af5c57",
+    "glyphs_2bpp_sha256": "73560e579375ea5e6641844d766d72582e967567e8e16354d92a0e6137f3b9ff",
+    "installed_width_region_sha1": "9b8ad20873f469d6a83ef136dbf94e9ba0a80e4e",
+    "installed_single_font_region_sha1": "b6b0289290a829bb53eeec8d45b00e860dec7957",
+    "changed_bytes_including_checksum": 1136
+  },
+  "anchors": [
+    {"character": "A", "code": 10, "advance": 6, "glyph": "FF70FF88FF88FFF8FF88FF88FF88FF00"},
+    {"character": "a", "code": 48, "advance": 5, "glyph": "FF00FF00FF60FF10FF70FF90FF70FF00"},
+    {"character": "g", "code": 54, "advance": 5, "glyph": "FF00FF00FF70FF90FF90FF70FF10FF60"},
+    {"character": "j", "code": 57, "advance": 4, "glyph": "FF40FF00FFE0FF20FF20FF20FF20FFC0"},
+    {"character": "?", "code": 78, "advance": 6, "glyph": "FF70FF88FF08FF10FF20FF00FF20FF00"},
+    {"character": "%", "code": 88, "advance": 7, "glyph": "FF62FF64FF08FF10FF26FF46FF00FF00"},
+    {"character": " ", "code": 36, "advance": 4, "glyph": "FF00FF00FF00FF00FF00FF00FF00FF00"}
+  ],
+  "smoke": {
+    "record": "195:$562F",
+    "source": "Hello, Shiren!<br>Native VWF works.<page><box>",
+    "encoded": "11343B3B3E4B241C373841343D4FFD173043384534241F200F24463E413A424AFBFC",
+    "lines": [
+      {"text": "Hello, Shiren!", "x": 8, "y": 109, "advance": 63, "ink_pixels": 135, "mask_sha256": "1e696183915de9108f46a8085fc119eac4d9d79c73b3da4f90d61cbc959dc09c"},
+      {"text": "Native VWF works.", "x": 8, "y": 120, "advance": 84, "ink_pixels": 167, "mask_sha256": "67e8cc1139bf2720c02f5d24e39ed6d812f47c774c914ebf8307e4b0253eac28"}
+    ]
+  }
+}

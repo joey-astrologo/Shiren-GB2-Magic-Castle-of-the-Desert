@@ -1,0 +1,71 @@
+{
+  "default_name": "Shiren",
+  "diary": {
+    "legacy_prefix_address": "$C252",
+    "marker_address": "$C2A4",
+    "marker_offsets": [
+      104,
+      105
+    ],
+    "native_size": 106,
+    "old_save_fallback": "marker absent: render legacy prefix only",
+    "suffix_address": "$C2A2",
+    "suffix_offsets": [
+      102,
+      103
+    ]
+  },
+  "keyboard": {
+    "blank_unreachable_nodes": [
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      76
+    ],
+    "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    "glyph_bytes": 1232,
+    "glyph_sha1": "bca0cd30039fb23ad5e8dd2b46a41dafb95e105d",
+    "grid_character_nodes": 62,
+    "insertable_nodes": 63,
+    "left_cursor_control_node": 78,
+    "map_bytes": 320,
+    "map_sha1": "f42ddaad9e8d94888f97050d77a80e3ca4417d21",
+    "mode": 4,
+    "navigation_bytes": 567,
+    "navigation_sha1": "9471dcd6aae7a3735319ca9a9f7d3e6276ce6acf",
+    "removed_characters": ".,'-?!():/[]+~%",
+    "removed_clear_control_node": 76,
+    "right_cursor_control_node": 79,
+    "shared_mode3_source_unchanged": true,
+    "space_control_node": 75
+  },
+  "maximum_visible_characters": 6,
+  "rankings": {
+    "categories": 5,
+    "end_exclusive": "$BED0",
+    "header": "$BCD8",
+    "native_record_bytes": 32,
+    "native_structures_end_exclusive": "$BCD8",
+    "old_save_fallback": "header absent: suffix is FF,FF",
+    "physical_slots_per_category": 50,
+    "signature": "$BFF8",
+    "sram_bank": 3,
+    "suffixes": "$BCDC"
+  },
+  "runtime": {
+    "bank": 253,
+    "end_exclusive": "253:$4AD0",
+    "payload_bytes": 2768,
+    "start": "253:$4000"
+  }
+}

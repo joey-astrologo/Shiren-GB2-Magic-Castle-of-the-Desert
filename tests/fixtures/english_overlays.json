@@ -1,0 +1,151 @@
+{
+  "manifest": {
+    "schema": "shiren-gb2-english-overlays-v1",
+    "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+    "partition_sha1": "b1a613a6fabf00a038d9664222019825dc425d16",
+    "source_free": true,
+    "records": 6695,
+    "translated_records": 0,
+    "explicit_empty_records": 0,
+    "workspace_sha1": "13ec1146b73bc2a8348237d7a991497470d33b28",
+    "categories": [
+      {
+        "name": "glossary",
+        "filename": "glossary.tsv",
+        "records": 1938,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "actor_names_tier_1": 150,
+          "actor_names_tier_2": 150,
+          "actor_names_tier_3": 150,
+          "identified_item_names": 216,
+          "item_ability_descriptions": 69,
+          "item_ability_roots": 123,
+          "location_names": 44,
+          "numbered_monster_variant_names": 891,
+          "trap_names": 22,
+          "unidentified_item_appearances": 123
+        },
+        "overlay_sha1": "8720421748ba9867c20143dab7430254f615f4ae"
+      },
+      {
+        "name": "items",
+        "filename": "items.tsv",
+        "records": 216,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "item_descriptions": 216
+        },
+        "overlay_sha1": "6cca9d8edb44152def32b18f8db114754ec8f369"
+      },
+      {
+        "name": "monsters",
+        "filename": "monsters.tsv",
+        "records": 459,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "monster_meat_descriptions": 222,
+          "monster_notebook_descriptions": 237
+        },
+        "overlay_sha1": "403900731915ac1038be6cb2ce32e462c53026fb"
+      },
+      {
+        "name": "ui_system",
+        "filename": "ui_system.tsv",
+        "records": 493,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "adventure_and_miscellaneous_ui": 19,
+          "adventure_history_labels": 43,
+          "condition_labels": 56,
+          "dynamic_status_fields": 4,
+          "menus_and_system_labels": 234,
+          "ranking_outcomes_and_labels": 62,
+          "ranking_titles_and_grade_labels": 74,
+          "trap_menu_status": 1
+        },
+        "overlay_sha1": "b0b755d774929869412194f676ecfb2b006f1518"
+      },
+      {
+        "name": "help",
+        "filename": "help.tsv",
+        "records": 176,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "control_help": 27,
+          "technique_help": 32,
+          "wanderer_secret_pages": 96,
+          "wanderers_guide": 21
+        },
+        "overlay_sha1": "d6b1760a6ac07e1ceea38a92661f81856d7fe769"
+      },
+      {
+        "name": "messages",
+        "filename": "messages.tsv",
+        "records": 399,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "combat_and_dungeon_messages": 201,
+          "floor_and_system_messages": 39,
+          "item_and_action_messages": 159
+        },
+        "overlay_sha1": "e3c650f1ca405a0c8e632f9060a5294c753232bc"
+      },
+      {
+        "name": "prose",
+        "filename": "prose.tsv",
+        "records": 1786,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "ending_and_credits_text": 18,
+          "story_and_event_dialogue": 1768
+        },
+        "overlay_sha1": "17901f3e5caab092b6900b851f9fe2fb9a4fde80"
+      },
+      {
+        "name": "internal",
+        "filename": "internal.tsv",
+        "records": 1228,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {
+          "animation_and_effect_labels": 629,
+          "debug_and_engine_labels": 197,
+          "debug_spell_labels": 226,
+          "internal_object_labels": 37,
+          "password_fragments": 100,
+          "scenario_labels": 39
+        },
+        "overlay_sha1": "cc95a726d4bc349c25a96f1ac4c99c0d7e6803f1"
+      },
+      {
+        "name": "review",
+        "filename": "review.tsv",
+        "records": 0,
+        "translated_records": 0,
+        "explicit_empty_records": 0,
+        "sections": {},
+        "overlay_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    ]
+  },
+  "output_sha1": {
+    "glossary.tsv": "826becc65f9f0132eeca8ec341075b885140d2ba",
+    "help.tsv": "7a54a2eab1de9d6a1f588636e438d09cc680f17f",
+    "internal.tsv": "55a49243da6a96281e316a8bbf1956d622cfb6d8",
+    "items.tsv": "394478384c18200ef623f5df5dfc4ec4eda8b9c0",
+    "manifest.json": "b025c6174c41148b6b2f55772a7f10cc62cbbf1b",
+    "messages.tsv": "03996ec8c3b8713f890a8f668b2e8b38ecacfe22",
+    "monsters.tsv": "bf0343dbfbbf450dcc7eea5292c33085bdb799c4",
+    "prose.tsv": "5c04092fb938d0c1efa3567df6f2c0d0a9686842",
+    "review.tsv": "337a86c2edfac2025c9c69f1410ce4a1a555bd1c",
+    "ui_system.tsv": "1778f7d740dd81ec0bd29b33aa57d57b13c21432"
+  }
+}

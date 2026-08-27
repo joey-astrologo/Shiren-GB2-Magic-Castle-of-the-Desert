@@ -1,0 +1,236 @@
+{
+  "schema": "shiren-gb2-text-layout-v1",
+  "canvas": {
+    "tile_columns": 18,
+    "pixels": 144,
+    "composer_wrap_at": 144,
+    "renderer_wrap_at": 145,
+    "renderer_auto_line_advance": 10
+  },
+  "profiles": {
+    "dialogue": {
+      "representative_mode": 2,
+      "initial_y": 21,
+      "explicit_line_advance": 11,
+      "composer_line_limit": 3,
+      "safe_full_lines": 3,
+      "renderer": "full"
+    },
+    "full_screen": {
+      "representative_mode": 8,
+      "initial_y": 1,
+      "explicit_line_advance": 11,
+      "composer_line_limit": 11,
+      "safe_full_lines": 10,
+      "renderer": "full"
+    },
+    "stepped_window": {
+      "representative_mode": 16,
+      "initial_y": 24,
+      "explicit_line_advance": 16,
+      "composer_line_limit": null,
+      "safe_full_lines": null,
+      "renderer": "full"
+    },
+    "positioned": {
+      "representative_mode": 4,
+      "initial_y": 0,
+      "explicit_line_advance": 10,
+      "composer_line_limit": 1,
+      "safe_full_lines": 1,
+      "renderer": "direct"
+    }
+  },
+  "entries": {
+    "composer": "0:$312B",
+    "full_renderer": "0:$35ED",
+    "glyph_renderer": "3:$6EDD",
+    "direct_renderer": "3:$5E62",
+    "canvas_address": "3:$6F46",
+    "soft_wrap_rollback": "4:$724B"
+  },
+  "direct_calls": {
+    "composer": [
+      "3:$5AE3", "3:$5BC1", "3:$5BDF", "3:$5E55", "3:$642A", "3:$64C5",
+      "17:$45A7", "17:$46A3", "17:$4EF6", "17:$509D", "17:$511C",
+      "17:$570B", "17:$59CA", "17:$7590"
+    ],
+    "full_renderer": [
+      "3:$5BCA", "3:$5BE8", "3:$5CB2", "3:$5CC9", "3:$5E58", "3:$6663",
+      "17:$59D8"
+    ]
+  },
+  "opcode_anchors": [
+    {
+      "location": "0:$31F4",
+      "purpose": "F3 saves source/output rewind points",
+      "bytes": "FADCC4EADEC4FADDC4EADFC4FAE0C4EAE2C46FFAE1C4EAE3C4673E01EAE4C473C3"
+    },
+    {
+      "location": "0:$32D7",
+      "purpose": "composer wraps when accumulated width reaches $90",
+      "bytes": "FAD5C42108C58677FE903810E5D53E04214B72CDAC09D1E10DCA5C347EFE90380BAFEAE5C43CEAE6C4C31732"
+    },
+    {
+      "location": "0:$35ED",
+      "purpose": "full renderer initialization and mode-dependent baseline",
+      "bytes": "3E00EAE0C43EC8EAE1C4AFEA34C5FADAC4E608200BFADAC43E0321496ECDAC09FADAC4E61C202A2140D211409201C005CD6B0AFAE0C46FFAE1C4677EFEFF2811FADAC4E681280AFE812806014700CD4C3A0601FADAC4FE0828080618FE102802061578EAD7C4AFEAD6C4"
+    },
+    {
+      "location": "0:$382F",
+      "purpose": "FD uses 11 or 16 pixels and resets x",
+      "bytes": "FA34C53CEA34C51E10FADAC4E61020021E0BFAD7C483EAD7C4AFEAD6C4FADAC4FE102005FA33C5A7C879"
+    },
+    {
+      "location": "3:$5E62",
+      "purpose": "positioned FF-terminated drawer recognizes only F0-F2 prefixes",
+      "bytes": "626B16002AFEFFC81601FEF0280E14FEF1280914FEF22804160018012A5FE5CDDD6EE118DD"
+    },
+    {
+      "location": "3:$6F1F",
+      "purpose": "renderer accepts 144 and wraps when a slice reaches $91",
+      "bytes": "21D6C4FAD5C4FE0A38023E0886FE913806AF223E0A8677C921D6C4FAD5C4FE0A38023E088677C9"
+    },
+    {
+      "location": "3:$6F46",
+      "purpose": "18-tile canvas row stride",
+      "bytes": "FAD7C4CB3FCB3FCB3F211200CD200CFAD6C4CB3FCB3FCB3F4F0600097CCB2517CB2517CB2517CB251767FAD7C4E60787CDB90B7DEAD3C47CC6"
+    },
+    {
+      "location": "4:$724B",
+      "purpose": "F3 overflow rollback replaces its staged marker with FD",
+      "bytes": "FAE4C44FA7C8FAE2C4EAE0C46FFAE3C4EAE1C46736FD237DEAE0C47CEAE1C4FADEC4EADCC4FADFC4EADDC4AFEAE4C40E01C9"
+    }
+  ],
+  "opening_trace": {
+    "source": "195:$5663",
+    "mode": 2,
+    "initial_pen": [0, 21],
+    "line_widths": [134, 108, 92],
+    "explicit_breaks": [[22, 134, 21], [37, 108, 32]],
+    "boundaries": [[50, "page", 92, 43], [51, "box", 92, 43]],
+    "final_pen": [92, 43],
+    "auto_wraps": 0
+  },
+  "representative_records": {
+    "dialogue": {
+      "id": "195:$562F",
+      "reference": [35, 0],
+      "observed_mode": 2,
+      "first_page_composer_widths": [140, 108, 92],
+      "first_page_renderer_widths": [134, 108, 92]
+    },
+    "full_screen": {
+      "id": "193:$712B",
+      "reference": [24, 59],
+      "mode_set_at": "17:$50C9",
+      "renderer_call_at": "17:$50D1",
+      "observed_lines": 10,
+      "max_composer_width": 129,
+      "max_renderer_width": 128
+    },
+    "positioned": [
+      {
+        "id": "192:$6B96",
+        "reference": [7, 68],
+        "text": "日記をつくる",
+        "observed_pen": [6, 1],
+        "composer_width": 47,
+        "renderer_width": 46
+      },
+      {
+        "id": "192:$6BC6",
+        "reference": [7, 73],
+        "text": "風来おうぎ",
+        "observed_pen": [6, 12],
+        "composer_width": 49,
+        "renderer_width": 47
+      }
+    ]
+  },
+  "renderer_boundary_probe": {
+    "payload": "242424242424242424242424242424242424FD242424242424242424242424242424242474FC",
+    "mode": 2,
+    "initial_pen": [0, 21],
+    "exact_edge_dispatch": [18, 253, 144, 21],
+    "overflow_glyph": {
+      "offset": 36,
+      "code": 116,
+      "width": 9,
+      "before": [136, 32],
+      "after_wrap": [0, 42]
+    },
+    "final_pen": [9, 42]
+  },
+  "runtime_substitutions": {
+    "opcode_anchors": [
+      {
+        "location": "0:$3306",
+        "purpose": "F5 copies the player name and optionally selects one byte",
+        "bytes": "0AF511E7C43E0B212F4BCDAC09F13C281C3DB9380628043EFE18085F160021E7C4197EEAE7C43EFFEAE8C40E013E02EAE5C4C3BE33"
+      },
+      {
+        "location": "0:$333B",
+        "purpose": "F4 zero-extends one to four bytes and formats an unsigned integer",
+        "bytes": "696046232A666F11E7C4CD5B0A626B010300CDEA0901E7C43E1121B041CDAC09C3B933"
+      },
+      {
+        "location": "0:$335E",
+        "purpose": "F6 mode dispatch: mode 1 record lookup and mode 3 WRAM cached string",
+        "bytes": "0A03216733CDD309E996338F3382336F330A6F030A675E01E7C43E0321335BCDAC0918370A6F030A6711E7C4CD500A182A0A6F030A67180269604E23463E01B820123EB0B9200D11E7C43E0B212F4BCDAC0918077821E7C4CDA01F"
+      },
+      {
+        "location": "11:$4B2F",
+        "purpose": "player name begins at save structure offset $16 and is FF terminated",
+        "bytes": "D5AF066ACD450C1E16160019113CC219D1CD500A545DC9"
+      },
+      {
+        "location": "18:$515F",
+        "purpose": "name editor accepts at most seven stored bytes",
+        "bytes": "F5FA53C147F13E07B8281A216DC17EFED52841FE24283D116DC13E0B21464BCDAC090EF8C9"
+      }
+    ],
+    "corpus_controls": {
+      "unsigned_integer_1_byte": 44,
+      "unsigned_integer_2_byte": 7,
+      "unsigned_integer_3_byte": 4,
+      "unsigned_integer_4_byte": 1,
+      "player_name": 189,
+      "player_name_byte": 6,
+      "record_lookup": 139,
+      "cached_string_legacy_number_token": 108
+    },
+    "english_maximum_pixels": {
+      "unsigned_integer_1_byte": 15,
+      "unsigned_integer_2_byte": 25,
+      "unsigned_integer_3_byte": 40,
+      "unsigned_integer_4_byte": 50,
+      "player_name": 49,
+      "player_name_byte": 7
+    },
+    "unresolved_kinds": ["record_lookup", "cached_string"]
+  },
+  "corpus": {
+    "records": 6695,
+    "soft_wrap_markers": 139,
+    "dynamic_records": 434,
+    "determinate_lines": 13635,
+    "composer_overflow_lines": 17,
+    "renderer_overflow_lines": 14,
+    "max_composer_pixels": 352,
+    "max_renderer_pixels": 352,
+    "max_explicit_lines": 10,
+    "explicit_line_histogram": {
+      "1": 4522,
+      "2": 1231,
+      "3": 552,
+      "4": 43,
+      "5": 117,
+      "6": 90,
+      "7": 34,
+      "8": 37,
+      "9": 20,
+      "10": 49
+    }
+  }
+}

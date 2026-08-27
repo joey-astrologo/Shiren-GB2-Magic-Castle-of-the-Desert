@@ -1,0 +1,9 @@
+{
+  "record_id": "195:$562F",
+  "prefix_bytes": 73,
+  "prefix_sha1": "677cdb1d92ecce6bf60219b53f3b8bf148079d25",
+  "max_wait_frames": 1200,
+  "post_stage_ticks": 120,
+  "final_pen": 111,
+  "screen_rgba_sha1": "0b6abf947823238b02875d7329c75766f932dbc6"
+}

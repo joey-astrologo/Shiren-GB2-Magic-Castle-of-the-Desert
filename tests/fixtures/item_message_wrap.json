@@ -1,0 +1,22 @@
+{
+  "deferred_indices": [],
+  "draft_records": 150,
+  "draft_sha1": "eb18790a06ab335ee8d0820839d59e741094fee2",
+  "eligible_records": 150,
+  "eligible_sha1": "b29b0d365d0642d104cc7c2887c42a4a52f6f9b8",
+  "generated_records": 150,
+  "group": 11,
+  "index_range": [
+    20,
+    169
+  ],
+  "layout": {
+    "composer_max_pixels": 143,
+    "dialogue_lines_per_surface": 3,
+    "renderer_max_pixels": 144
+  },
+  "max_lines_per_surface": 3,
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "schema": "shiren-gb2-item-message-draft-v1",
+  "source_free": true
+}

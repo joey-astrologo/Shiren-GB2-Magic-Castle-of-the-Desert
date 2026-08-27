@@ -1,0 +1,138 @@
+{
+  "combat_log_index_range": [
+    0,
+    109
+  ],
+  "draft_records": 201,
+  "draft_sha1": "d48bf5e4284da9291fa9b48de09e34308c0edc89",
+  "eligible_records": 201,
+  "eligible_sha1": "ba41e455b73cd225dd10acc93fbbf6021c336a6e",
+  "generated_records": 201,
+  "group": 8,
+  "index_range": [
+    0,
+    200
+  ],
+  "layout": {
+    "combat_mode": 16,
+    "composer_wrap_at": 144,
+    "explicit_line_advance": 16,
+    "initial_y": 24,
+    "renderer_max_pixels": 144,
+    "soft_wrap_control": "cF3"
+  },
+  "partitions": [
+    {
+      "index_range": [0, 5],
+      "name": "damage",
+      "records": 6
+    },
+    {
+      "index_range": [6, 17],
+      "name": "attack_outcomes",
+      "records": 12
+    },
+    {
+      "index_range": [18, 31],
+      "name": "experience_and_levels",
+      "records": 14
+    },
+    {
+      "index_range": [32, 41],
+      "name": "resources_and_traps",
+      "records": 10
+    },
+    {
+      "index_range": [42, 64],
+      "name": "monster_abilities_and_theft",
+      "records": 23
+    },
+    {
+      "index_range": [65, 80],
+      "name": "actor_stat_changes",
+      "records": 16
+    },
+    {
+      "index_range": [81, 109],
+      "name": "statuses",
+      "records": 29
+    },
+    {
+      "index_range": [110, 118],
+      "name": "shop_and_alarm",
+      "records": 9
+    },
+    {
+      "index_range": [119, 126],
+      "name": "nfuu_abilities_and_training",
+      "records": 8
+    },
+    {
+      "index_range": [127, 133],
+      "name": "nfuu_condition_chatter",
+      "records": 7
+    },
+    {
+      "index_range": [134, 142],
+      "name": "mamo_condition_chatter",
+      "records": 9
+    },
+    {
+      "index_range": [143, 151],
+      "name": "oryu_condition_chatter",
+      "records": 9
+    },
+    {
+      "index_range": [152, 160],
+      "name": "pekeji_condition_chatter",
+      "records": 9
+    },
+    {
+      "index_range": [161, 170],
+      "name": "robot_condition_chatter",
+      "records": 10
+    },
+    {
+      "index_range": [171, 176],
+      "name": "actor_behavior_and_labels",
+      "records": 6
+    },
+    {
+      "index_range": [177, 200],
+      "name": "scripted_boss_and_story",
+      "records": 24
+    }
+  ],
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "runtime_candidate_values": {
+    "actor_name": 295,
+    "item_name": 347,
+    "trap_name": 22
+  },
+  "runtime_substitutions": {
+    "copy": 20,
+    "lookup": 113,
+    "name": 7,
+    "number": 5
+  },
+  "schema": "shiren-gb2-combat-message-draft-v1",
+  "source_controls": {
+    "box": 11,
+    "br": 76,
+    "cF3": 80,
+    "page": 103,
+    "speaker": 63
+  },
+  "source_free": true,
+  "warning_records": 201,
+  "warning_totals": {
+    "layout_distinct_combinations": 30688,
+    "layout_one_line": 15825,
+    "layout_soft_wrap": 14863,
+    "layout_unsafe": 0,
+    "one_line": 351736,
+    "runtime_value_combinations": 741656,
+    "soft_wrap": 389920,
+    "unsafe": 0
+  }
+}

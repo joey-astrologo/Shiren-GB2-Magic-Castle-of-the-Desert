@@ -1,0 +1,30 @@
+{
+  "schema": "shiren-gb2-status-menu-overlay-v4",
+  "source": {"location": "17:$5A2C", "size": 4096, "sha1": "b856fd7fdc133762e758f75e0ed4b245e4f3a990", "remains_byte_exact": true},
+  "call_sites": [
+    {"name": "help_return", "location": "4:$4148", "original_hex": "3E11212C6ACDAC09", "patch_hex": "3EFF210040CDAC09"},
+    {"name": "menu_open", "location": "16:$464F", "original_hex": "3E11212C6ACDAC09", "patch_hex": "3EFF210040CDAC09"},
+    {"name": "menu_refresh", "location": "16:$4689", "original_hex": "3E11212C6ACDAC09", "patch_hex": "3EFF210040CDAC09"}
+  ],
+  "overlay": {"location": "255:$4000", "limit": "255:$7FFF", "bytes": 2605, "sha1": "26d748a54490e98a0b0d3817dcf8b02192b174f1", "remaining_bytes": 13779},
+  "labels": [
+    {"name": "experience", "text": "Exp", "start": [56, 1], "final_x": 72, "visual_right_edge": 88, "clearance_pixels": 16},
+    {"name": "location", "text": "Location", "start": [56, 12], "final_x": 96, "visual_right_edge": 104, "clearance_pixels": 8},
+    {"name": "map", "text": "Map", "start": [3, 24], "final_x": 19, "visual_right_edge": 53, "clearance_pixels": 34},
+    {"name": "hints", "text": "Hints", "start": [3, 36], "final_x": 28, "visual_right_edge": 53, "clearance_pixels": 25},
+    {"name": "quit", "text": "Quit", "start": [3, 48], "final_x": 23, "visual_right_edge": 53, "clearance_pixels": 30},
+    {"name": "attack", "text": "Atk", "start": [0, 77], "final_x": 16, "visual_right_edge": 21, "clearance_pixels": 5},
+    {"name": "strength", "text": "Strength", "start": [40, 77], "final_x": 81, "visual_right_edge": 91, "clearance_pixels": 10},
+    {"name": "strength_separator", "text": "/", "start": [108, 77], "final_x": 115, "visual_right_edge": 120, "clearance_pixels": 5},
+    {"name": "defense", "text": "Def", "start": [0, 88], "final_x": 16, "visual_right_edge": 21, "clearance_pixels": 5},
+    {"name": "fullness", "text": "Fullness", "start": [40, 88], "final_x": 79, "visual_right_edge": 91, "clearance_pixels": 12},
+    {"name": "fullness_separator", "text": "/", "start": [108, 88], "final_x": 115, "visual_right_edge": 120, "clearance_pixels": 5},
+    {"name": "fullness_suffix", "text": "%", "start": [137, 88], "final_x": 144, "visual_right_edge": 144, "clearance_pixels": 0},
+    {"name": "money", "text": "Gitan", "start": [0, 99], "final_x": 25, "visual_right_edge": 105, "clearance_pixels": 80},
+    {"name": "money_suffix", "text": "G", "start": [138, 99], "final_x": 144, "visual_right_edge": 144, "clearance_pixels": 0}
+  ],
+  "live_mamel_menu": {"settled_frame": 1050, "screen_rgb_sha1": "dfffa7a6078aecb88f7cd744b9250b54739375aa", "dynamic_labels": ["Items", "Floor", "Ancient Ruins"]},
+  "live_mamel_hints_popup": {"settled_frame": 1249, "screen_rgb_sha1": "07221e48a4e95bc3f566478c0e16ee9a2d476b54", "labels": ["Controls", "Tech", "Secrets"]},
+  "live_mamel_hints_return": {"settled_frame": 1449, "screen_rgb_sha1": "7afbcf7d30f7944e4efd77fa190b0b8fda9204d4", "dynamic_labels": ["Items", "Floor", "Ancient Ruins"]},
+  "live_clean_boot_diary_menu": {"settled_frame": 600, "screen_rgb_sha1": "f2f55ec898dd9dde9aff3712c67daee7db181c95", "dynamic_labels": ["New Game", "Secrets"]}
+}

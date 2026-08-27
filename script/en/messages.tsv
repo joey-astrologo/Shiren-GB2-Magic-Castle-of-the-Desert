@@ -1,0 +1,400 @@
+id	sections	english
+193:$4192	combat_and_dungeon_messages	Hit <lookup:19:C5> for <cF3><copy:01:1B:C5> damage.
+193:$41AC	combat_and_dungeon_messages	Dealt <copy:01:19:C5> damage.
+193:$41C0	combat_and_dungeon_messages	<lookup:19:C5> took <cF3><copy:01:1B:C5> damage.
+193:$41D9	combat_and_dungeon_messages	<lookup:19:C5><cF3> hit you for<cF3> <copy:01:1B:C5> damage.
+193:$41F3	combat_and_dungeon_messages	Took <copy:01:19:C5> damage.
+193:$4206	combat_and_dungeon_messages	The staff dealt <cF3><copy:01:19:C5> damage.
+193:$4222	combat_and_dungeon_messages	<name> collapsed.
+193:$422E	combat_and_dungeon_messages	<lookup:19:C5><cF3> collapsed.<page>
+193:$423E	combat_and_dungeon_messages	But it revived as<cF3> <lookup:19:C5>!
+193:$4253	combat_and_dungeon_messages	<lookup:19:C5><cF3> beat<cF3> <lookup:1B:C5>.
+193:$4266	combat_and_dungeon_messages	Defeated<cF3> <lookup:19:C5>.
+193:$4272	combat_and_dungeon_messages	<lookup:19:C5><cF3> missed.
+193:$4284	combat_and_dungeon_messages	Dodged the attack by<cF3> <lookup:19:C5>.
+193:$4296	combat_and_dungeon_messages	A critical hit!
+193:$42A1	combat_and_dungeon_messages	A brutal hit!
+193:$42AC	combat_and_dungeon_messages	A super critical hit!
+193:$42BA	combat_and_dungeon_messages	<lookup:19:C5><cF3> reflected the attack!
+193:$42CF	combat_and_dungeon_messages	<lookup:19:C5><cF3> turned the effect<cF3> into damage!
+193:$42E8	combat_and_dungeon_messages	Gained <copy:03:19:C5><cF3> experience points.
+193:$42FE	combat_and_dungeon_messages	<name> reached<cF3> Level <copy:01:19:C5>.
+193:$4311	combat_and_dungeon_messages	<name> fell to<cF3> Level <copy:01:19:C5>.
+193:$4324	combat_and_dungeon_messages	You're already strong enough.
+193:$4333	combat_and_dungeon_messages	Your level can't go any lower.
+193:$4345	combat_and_dungeon_messages	<lookup:19:C5><cF3> leveled up into<cF3> <lookup:1B:C5>.
+193:$435E	combat_and_dungeon_messages	<lookup:19:C5><cF3> leveled down into<cF3> <lookup:1B:C5>.
+193:$4377	combat_and_dungeon_messages	<lookup:19:C5><cF3> grew a little stronger.
+193:$4389	combat_and_dungeon_messages	<lookup:19:C5><cF3> is already strong enough.
+193:$439F	combat_and_dungeon_messages	<lookup:19:C5>'s level<cF3> can't go any lower.
+193:$43B8	combat_and_dungeon_messages	<lookup:19:C5><cF3> grew a little weaker.
+193:$43CA	combat_and_dungeon_messages	<lookup:19:C5><cF3> reached<cF3> Level <copy:01:1B:C5>.
+193:$43E0	combat_and_dungeon_messages	<lookup:19:C5><cF3> fell to<cF3> Level <copy:01:1B:C5>.
+193:$43F6	combat_and_dungeon_messages	<lookup:19:C5>'s HP<cF3> fell to one quarter.
+193:$4409	combat_and_dungeon_messages	No arrows are equipped.
+193:$4417	combat_and_dungeon_messages	You don't have any Trap Parts.
+193:$4427	combat_and_dungeon_messages	You can't use<cF3> special abilities.
+193:$4433	combat_and_dungeon_messages	Strength decreased by <copy:01:19:C5>.
+193:$4447	combat_and_dungeon_messages	Fullness dropped to<cF3> <copy:01:19:C5>{F182=%}!
+193:$4460	combat_and_dungeon_messages	Max Fullness dropped to<cF3> <copy:01:19:C5>{F182=%}!
+193:$447C	combat_and_dungeon_messages	Fullness is now<cF3> <copy:01:19:C5>{F182=%}!
+193:$4491	combat_and_dungeon_messages	Max Fullness is now<cF3> <copy:01:19:C5>{F182=%}!
+193:$44A9	combat_and_dungeon_messages	Stepped on<cF3> <lookup:19:C5>.
+193:$44B4	combat_and_dungeon_messages	But the trap didn't activate.
+193:$44C6	combat_and_dungeon_messages	<lookup:19:C5><cF3> cast Hunger!
+193:$44DA	combat_and_dungeon_messages	<lookup:19:C5><cF3> did the Twisty Dance!
+193:$44ED	combat_and_dungeon_messages	<lookup:19:C5><cF3> cast a mysterious spell!
+193:$4503	combat_and_dungeon_messages	<lookup:19:C5><cF3> sounded the alarm!
+193:$4516	combat_and_dungeon_messages	<lookup:19:C5>'s eye<cF3> glowed!
+193:$4529	combat_and_dungeon_messages	<lookup:19:C5><cF3> spat rotten fluid!
+193:$453F	combat_and_dungeon_messages	<lookup:19:C5><cF3> lunged!
+193:$454E	combat_and_dungeon_messages	<lookup:19:C5><cF3> dodged the rock!
+193:$455C	combat_and_dungeon_messages	<lookup:19:C5><cF3> nullified the magic!
+193:$456F	combat_and_dungeon_messages	<lookup:19:C5><cF3> made <number:1B:C5><cF3> vanish!
+193:$4581	combat_and_dungeon_messages	<lookup:19:C5><cF3> didn't have<cF3> what it wanted.
+193:$4599	combat_and_dungeon_messages	<copy:02:1B:C5> Gitan<cF3> was stolen!
+193:$45A9	combat_and_dungeon_messages	Stole <cF3><copy:02:1B:C5> Gitan!
+193:$45B8	combat_and_dungeon_messages	<number:19:C5><cF3> was stolen!
+193:$45C6	combat_and_dungeon_messages	Stole <cF3><number:19:C5>!
+193:$45D3	combat_and_dungeon_messages	It stuffed<cF3> <number:19:C5><cF3> in its cheek and flung it!
+193:$45E6	combat_and_dungeon_messages	It pecked at<cF3> <number:19:C5><cF3> and digested it!
+193:$45FB	combat_and_dungeon_messages	It tried to peck, but failed.
+193:$460C	combat_and_dungeon_messages	But nothing was stolen.
+193:$461E	combat_and_dungeon_messages	But you can't carry<cF3> any more!
+193:$462F	combat_and_dungeon_messages	<lookup:19:C5><cF3> began chanting!<br>
+193:$463E	combat_and_dungeon_messages	The curses on your items<cF3> were lifted!
+193:$4651	combat_and_dungeon_messages	<lookup:19:C5><cF3> sapped <lookup:1B:C5>'s<cF3> power and recovered!
+193:$466F	combat_and_dungeon_messages	<lookup:19:C5><cF3> rusted and grew weaker.
+193:$4681	combat_and_dungeon_messages	<lookup:19:C5><cF3> was drenched.
+193:$4694	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power and<cF3> defense fell!
+193:$46B1	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power fell!
+193:$46C6	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> defense fell!
+193:$46DB	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power rose!
+193:$46F0	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> explosion switch<cF3> was activated!
+193:$4705	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power<br>was temporarily halved!
+193:$4723	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> Max HP<br>was temporarily halved!
+193:$4740	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> level<br>was temporarily halved!
+193:$475A	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power<br>was halved!
+193:$4772	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> Max HP<cF3> was halved!
+193:$4789	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> level<cF3> was halved!
+193:$479D	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> attack power<cF3> returned to normal.
+193:$47B4	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> Max HP<cF3> returned to normal.
+193:$47CA	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> level<cF3> returned to normal.
+193:$47DD	combat_and_dungeon_messages	<lookup:19:C5><cF3> slowed down!
+193:$47F0	combat_and_dungeon_messages	<lookup:19:C5><cF3> sped up!
+193:$4803	combat_and_dungeon_messages	<lookup:19:C5><cF3> returned to<cF3> normal speed.
+193:$4817	combat_and_dungeon_messages	<lookup:19:C5><cF3> became confused!
+193:$482A	combat_and_dungeon_messages	<lookup:19:C5><cF3> is no longer confused!
+193:$483B	combat_and_dungeon_messages	<lookup:19:C5><cF3> fell asleep...
+193:$484E	combat_and_dungeon_messages	<lookup:19:C5><cF3> woke up!
+193:$485F	combat_and_dungeon_messages	Too sleepy to do anything...
+193:$486F	combat_and_dungeon_messages	<lookup:19:C5><cF3> was paralyzed!
+193:$4882	combat_and_dungeon_messages	<lookup:19:C5><cF3> is no longer paralyzed!
+193:$4894	combat_and_dungeon_messages	...You can't move!
+193:$48A4	combat_and_dungeon_messages	<lookup:19:C5><cF3> was blinded!
+193:$48B8	combat_and_dungeon_messages	<lookup:19:C5><cF3> can see again.
+193:$48C8	combat_and_dungeon_messages	<lookup:19:C5><cF3> became invisible!
+193:$48D9	combat_and_dungeon_messages	<lookup:19:C5><cF3> became visible again.
+193:$48EC	combat_and_dungeon_messages	<lookup:19:C5><cF3> turned into<cF3> an Onigiri!
+193:$48FD	combat_and_dungeon_messages	<lookup:19:C5><cF3> returned to normal.
+193:$4911	combat_and_dungeon_messages	<lookup:19:C5><cF3> became inaccurate!
+193:$4926	combat_and_dungeon_messages	<lookup:19:C5><cF3> is accurate again.
+193:$4939	combat_and_dungeon_messages	<lookup:19:C5><cF3> became enraged!
+193:$494D	combat_and_dungeon_messages	<lookup:19:C5><cF3> calmed down.
+193:$495F	combat_and_dungeon_messages	<lookup:19:C5><cF3> turned to face<cF3> backward!
+193:$4976	combat_and_dungeon_messages	<lookup:19:C5><cF3> faced forward again.
+193:$4988	combat_and_dungeon_messages	<lookup:19:C5><cF3> was muzzled!<page>
+193:$499D	combat_and_dungeon_messages	<lookup:19:C5>'s<cF3> special abilities<cF3> were sealed!
+193:$49B2	combat_and_dungeon_messages	Caught in a bear trap!<cF3> Can't move!
+193:$49C5	combat_and_dungeon_messages	<lookup:19:C5><cF3> can move again!
+193:$49D7	combat_and_dungeon_messages	The spell on<cF3> <lookup:19:C5><cF3> wore off.
+193:$49E9	combat_and_dungeon_messages	<lookup:19:C5>'s status<cF3> was bugged!!
+193:$49FD	combat_and_dungeon_messages	Shopkeeper: Welcome!
+193:$4A0D	combat_and_dungeon_messages	<box>Shopkeeper: Thank you!<page>
+193:$4A22	combat_and_dungeon_messages	<box>Shopkeeper: That's too bad.<page>
+193:$4A36	combat_and_dungeon_messages	<box>Shopkeeper: Sorry...<page><br> You don't have enough Gitan.<page>
+193:$4A58	combat_and_dungeon_messages	Shopkeeper: Thank you!
+193:$4A6A	combat_and_dungeon_messages	Thief alert!<br>Thief alert!
+193:$4A88	combat_and_dungeon_messages	<box>Shopkeeper: Your total is<br> <copy:03:19:C5> Gitan.<page>
+193:$4AA7	combat_and_dungeon_messages	Shopkeeper: I'll pay you<br> <copy:03:19:C5> Gitan for<br> those items.<page>
+193:$4AC9	combat_and_dungeon_messages	Shopkeeper: Hurry! Hurry!<page>
+193:$4ADA	combat_and_dungeon_messages	It's <lookup:19:C5>!
+193:$4AE1	combat_and_dungeon_messages	<lookup:19:C5>: <cF3> BOOM!!!
+193:$4AF7	combat_and_dungeon_messages	Nfuu used the power of<br><lookup:19:C5>!
+193:$4B0B	combat_and_dungeon_messages	Nfuu: Thanks for the meal, fu!
+193:$4B1B	combat_and_dungeon_messages	Nfuu: I don't need that<br>meat, fu!
+193:$4B2F	combat_and_dungeon_messages	Nfuu: Huh...?<br>I forgot that power, fu.
+193:$4B49	combat_and_dungeon_messages	Nfuu:<br>If you throw meat at me,<br>I'll learn its power, fu!<page>
+193:$4B6C	combat_and_dungeon_messages	Nfuu: If I eat the same<br>meat twice, I'll forget<br>its power, fu!<page>
+193:$4B92	combat_and_dungeon_messages	Nfuu: <lookup:19:C5>?<br>No match for me, fu!<page>
+193:$4BAB	combat_and_dungeon_messages	Nfuu: <lookup:19:C5>?<br>I'm totally fine, fu!<page>
+193:$4BC7	combat_and_dungeon_messages	Nfuu: I don't feel so<br>good, fu.<page><box>Nfuu: I think I'll recover<br>if I walk a little, fu.<page>
+193:$4C05	combat_and_dungeon_messages	Nfuu: <lookup:19:C5><br>was a tough one, fu.<page>
+193:$4C22	combat_and_dungeon_messages	Nfuu: Yelp! That hurt, fu!!<br>That <lookup:19:C5>...!<page>
+193:$4C40	combat_and_dungeon_messages	Nfuu: I'm hurting, fu...<br>Please throw me<br>an Herb, fu...<page>
+193:$4C61	combat_and_dungeon_messages	Nfuu: I... can't go on, fu...<page><br>Otogirisou... please... fu...<page>
+193:$4C89	combat_and_dungeon_messages	Mamo:<br>You can also store items<br>by throwing them at me!<page>
+193:$4CAA	combat_and_dungeon_messages	Mamo: I'm built sturdy,<br>so I'll be fine!<page>
+193:$4CCB	combat_and_dungeon_messages	Mamo: I'm doing just fine.<page>
+193:$4CDF	combat_and_dungeon_messages	Mamo: <lookup:19:C5><br>can't break me!<page>
+193:$4CFC	combat_and_dungeon_messages	Mamo: I'm starting to<br>rattle a little...<page>
+193:$4D15	combat_and_dungeon_messages	Mamo: <lookup:19:C5><br>sure is a brute...<page>
+193:$4D30	combat_and_dungeon_messages	Mamo: <lookup:19:C5><br>really hurt me...<page>
+193:$4D49	combat_and_dungeon_messages	Mamo: I'm creaking badly now.<br>I might break soon...<page>
+193:$4D6D	combat_and_dungeon_messages	Mamo: Goodbye, <name>.<br>I'm about to fall apart...<page>
+193:$4D8E	combat_and_dungeon_messages	Oryu: With me by your side,<br>there's nothing to fear!<page>
+193:$4DAB	combat_and_dungeon_messages	Oryu: Let's give it our all!<page>
+193:$4DBC	combat_and_dungeon_messages	Oryu: <lookup:19:C5>?<br>What a pushover.<page>
+193:$4DD4	combat_and_dungeon_messages	Oryu: I'm fine.<br><lookup:19:C5>?<br>No problem.<page>
+193:$4DEC	combat_and_dungeon_messages	Oryu: Me? I'm still<br>doing just fine.<page>
+193:$4E05	combat_and_dungeon_messages	Oryu: That one's strong!<br><lookup:19:C5>!<br><name>, be careful!<page>
+193:$4E24	combat_and_dungeon_messages	Oryu: That was rough...<br><lookup:19:C5>...<page>
+193:$4E3D	combat_and_dungeon_messages	Oryu: I'm really starting<br>to struggle...<page>
+193:$4E56	combat_and_dungeon_messages	Oryu: <name>, help me...<page>
+193:$4E67	combat_and_dungeon_messages	Pekeji: Being with you is fun,<br>Bro!!<page>
+193:$4E82	combat_and_dungeon_messages	Pekeji: I'll give it my all<br>to help you, Bro!<page>
+193:$4E9D	combat_and_dungeon_messages	Pekeji: Watch out for<br><lookup:19:C5>, Bro!<page>
+193:$4EBD	combat_and_dungeon_messages	Pekeji: <lookup:19:C5>?<br>Didn't faze me!<page>
+193:$4ED8	combat_and_dungeon_messages	Pekeji: My moves feel<br>a little sluggish...<page>
+193:$4EF8	combat_and_dungeon_messages	Pekeji: Really watch out for<br><lookup:19:C5>, Bro!<page>
+193:$4F15	combat_and_dungeon_messages	Pekeji: <lookup:19:C5>!<br>Ow, ow, ow...<page>
+193:$4F2C	combat_and_dungeon_messages	Pekeji: I-I can't breathe...<page>
+193:$4F3D	combat_and_dungeon_messages	Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>
+193:$4F62	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<page>
+193:$4F70	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<page>
+193:$4F7E	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>
+193:$4F99	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>
+193:$4FB7	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>
+193:$4FD5	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... TOUGH!!<page>
+193:$4FF0	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>
+193:$500B	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>
+193:$5028	combat_and_dungeon_messages	<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>
+193:$5047	combat_and_dungeon_messages	<lookup:19:C5>: ......<page>
+193:$5055	combat_and_dungeon_messages	<lookup:19:C5><cF3> is watching.
+193:$5067	combat_and_dungeon_messages	The staff's effect<br>didn't make you fall.
+193:$5078	combat_and_dungeon_messages	Big Moai: Throwing trash<br>at me?<br>You ungrateful brat!!<page>
+193:$509C	combat_and_dungeon_messages	Unknown
+193:$50A2	combat_and_dungeon_messages	Onigiri
+193:$50A7	combat_and_dungeon_messages	<lookup:19:C5><cF3> is sleeping soundly.
+193:$50BD	combat_and_dungeon_messages	Nag, nag! You think<br>that's all I can say?!<br>In my day, swords...<page>
+193:$50E2	combat_and_dungeon_messages	When eating sushi,<br>don't drop the topping<br>in soy sauce! A sailor's...<page>
+193:$5108	combat_and_dungeon_messages	Brush your teeth<br>before bed! Even saliva<br>can affect enamel...<page>
+193:$512C	combat_and_dungeon_messages	Treat your elders well!<br>In my day, above all,<br>there was gol...<page>
+193:$5150	combat_and_dungeon_messages	You must eat fish!<br>All that meat will<br>make you moi...<page>
+193:$5173	combat_and_dungeon_messages	Don't turn down the AC<br>without asking! For<br>starters, the tem...<page>
+193:$5195	combat_and_dungeon_messages	Always keep the kettle<br>full of hot water!<br>First of all, the tem...<page>
+193:$51B7	combat_and_dungeon_messages	Put trash out on<br>the proper day!! Those<br>who disobey are mojo...<page>
+193:$51DE	combat_and_dungeon_messages	Nag-Mo? You can't<br>abbreviate everything!<br>Kids these days...<page>
+193:$5203	combat_and_dungeon_messages	Hey! Listen when<br>someone's talking! Why<br>leave it in a place like that...<page>
+193:$5225	combat_and_dungeon_messages	Ahem. The equation<br>here goes like this,<br>therefore...<page>
+193:$5240	combat_and_dungeon_messages	If you insist,<br>I have no choice.<page><box>I'll show you...<page><br>my true power!!<page><box>RUMBLE RUMBLE RUMBLE!!<page>
+193:$5282	combat_and_dungeon_messages	Like I said...<page>That's not<br>what I mean...<page>
+193:$5294	combat_and_dungeon_messages	So...<page>that...<page>baffles me.<page><br>That...<page>also...<page>baffles me.<page>
+193:$52BD	combat_and_dungeon_messages	Something still...<page><br>doesn't quite click...<page>
+193:$52CF	combat_and_dungeon_messages	....<page>It's hot.<page>
+193:$52DA	combat_and_dungeon_messages	....<page>I'm sleepy.<page>
+193:$52E5	combat_and_dungeon_messages	Heh heh...<page>No.<page>
+193:$52F0	combat_and_dungeon_messages	Heh heh...<page>Go to sleep.<page>
+193:$52FB	combat_and_dungeon_messages	I've felt lousy<br>since yesterday.<page><br>What a drag<D6><D7><D7><D7><D7><D7><D8>!!<page>
+193:$531B	combat_and_dungeon_messages	Take this!<br>My ultimate technique!!<page><box>HAAAAAAAAAAAA!!<page>
+193:$5343	combat_and_dungeon_messages	Don't stay out late!<br>Those who upset their<br>parents are topporo...<page>
+193:$5366	combat_and_dungeon_messages	At last...<page>The Evil God...<page><br>finished regenerating...<page><box><br>and reached its<br>complete form!!<page>
+193:$53A1	combat_and_dungeon_messages	Koppa: This is bad!<br>Its regeneration is<br>already well underway...<page><box>Koppa: At this rate,<br>it'll reach its<br>complete form!!<page><box>Koppa: <name>! Hurry!!<page>
+194:$5275	floor_and_system_messages	A strong wind began to blow.
+194:$5283	floor_and_system_messages	But it was no big deal.<page>
+194:$5295	floor_and_system_messages	The wind is so strong,<br>it may blow you away!<page>
+194:$52A8	floor_and_system_messages	No! You are being blown away!<page>
+194:$52B5	floor_and_system_messages	Game suspended.<page><br>You may turn off the power<br>and continue later.<page>
+194:$52E2	floor_and_system_messages	<empty>
+194:$52E3	floor_and_system_messages	<empty>
+194:$52E4	floor_and_system_messages	<empty>
+194:$52E5	floor_and_system_messages	<empty>
+194:$52E6	floor_and_system_messages	<empty>
+194:$52E7	floor_and_system_messages	You cannot place it here.
+194:$52F2	floor_and_system_messages	<empty>
+194:$52F3	floor_and_system_messages	You cannot carry any more.
+194:$52FC	floor_and_system_messages	<empty>
+194:$52FD	floor_and_system_messages	<empty>
+194:$52FE	floor_and_system_messages	<empty>
+194:$52FF	floor_and_system_messages	<empty>
+194:$5300	floor_and_system_messages	<empty>
+194:$5301	floor_and_system_messages	<empty>
+194:$5302	floor_and_system_messages	<empty>
+194:$5303	floor_and_system_messages	Created by DBC.
+194:$530F	floor_and_system_messages	The way ahead is not clear.
+194:$531B	floor_and_system_messages	Annihilated by DBC.
+194:$532C	floor_and_system_messages	Maximum level by DBC.
+194:$533A	floor_and_system_messages	<empty>
+194:$533B	floor_and_system_messages	Hunger is making<br>your head spin...
+194:$534E	floor_and_system_messages	No! You are about to collapse!<page><box>Quick... You have<br>to eat something...<page><box>You'll starve to death!<page>
+194:$537D	floor_and_system_messages	You cannot dig diagonally.
+194:$5389	floor_and_system_messages	There is nothing<br>on the ground.
+194:$5395	floor_and_system_messages	You cannot pick that up.
+194:$53A0	floor_and_system_messages	You cannot Synthesize<br>any further.
+194:$53B1	floor_and_system_messages	You cannot pick up any more.
+194:$53BF	floor_and_system_messages	You cannot steal it.
+194:$53C6	floor_and_system_messages	All your equipment came off!
+194:$53D8	floor_and_system_messages	The sleeping monster woke up!
+194:$53EB	floor_and_system_messages	All your Onigiri<br>turned rotten!
+194:$5404	floor_and_system_messages	But nothing happened.
+194:$5412	floor_and_system_messages	Grrr! Your stomach<br>is growling!
+194:$5422	floor_and_system_messages	You can now see<br>invisible things!
+194:$558B	item_and_action_messages	Bracelet:<24>
+194:$5591	item_and_action_messages	Grass:<24>
+194:$5595	item_and_action_messages	Scroll:<24>
+194:$559B	item_and_action_messages	Staff:<24>
+194:$559F	item_and_action_messages	Pot:<24>
+194:$55A3	item_and_action_messages	<empty>
+194:$55A4	item_and_action_messages	 Pot
+194:$55A8	item_and_action_messages	 Meat
+194:$55AC	item_and_action_messages	's Ability
+194:$55B1	item_and_action_messages	But nothing happened.
+194:$55C0	item_and_action_messages	But it had no effect.
+194:$55CE	item_and_action_messages	It looks like this must be<br>placed to use it.
+194:$55E0	item_and_action_messages	It looks like this must be<br>thrown to use it.
+194:$55F2	item_and_action_messages	But there was no explosion.
+194:$5604	item_and_action_messages	<number:19:C5> <cF3>hit <lookup:1A:C5>.
+194:$5616	item_and_action_messages	<number:19:C5> <cF3>missed.
+194:$5623	item_and_action_messages	Equipped <cF3><number:19:C5>.
+194:$5631	item_and_action_messages	Removed <cF3><number:19:C5>.
+194:$563E	item_and_action_messages	<box>Your equipment began to<br>resonate! Something seems to<br>have happened.<page>
+194:$5660	item_and_action_messages	Waved <cF3><number:19:C5>.
+194:$566C	item_and_action_messages	Read <cF3><number:19:C5>.
+194:$5679	item_and_action_messages	Made <number:19:C5> <cF3>into medicine <cF3>and drank it.
+194:$568C	item_and_action_messages	Pushed<br><number:19:C5>.
+194:$5697	item_and_action_messages	Ate <cF3><number:19:C5>.
+194:$56A4	item_and_action_messages	Recovered <cF3><copy:01:19:C5> HP.
+194:$56B9	item_and_action_messages	<box>Max HP increased by <copy:01:19:C5>.
+194:$56D1	item_and_action_messages	You feel a little fuller.
+194:$56E0	item_and_action_messages	Your belly is full!
+194:$56EF	item_and_action_messages	<lookup:19:C5> <cF3>choked on <cF3><number:1B:C5>.
+194:$5706	item_and_action_messages	<lookup:19:C5> <cF3>turned into a <cF3>Squid Sushi Scroll.
+194:$571C	item_and_action_messages	HP was fully restored!<page>
+194:$5729	item_and_action_messages	<box>You feel wide awake. You won't<br>get sleepy for a while!<page>
+194:$5747	item_and_action_messages	<box>You feel pleasantly full. You<br>won't get hungry for a while!<page>
+194:$5768	item_and_action_messages	<box>Your body feels light. You can<br>walk silently for a while!<page>
+194:$578B	item_and_action_messages	<box>Your mind feels crystal clear.<br>You can identify items now!<page>
+194:$57AA	item_and_action_messages	You can now identify items!<page>
+194:$57BF	item_and_action_messages	<box><number:19:C5> is <cF3>cursed!
+194:$57D0	item_and_action_messages	<number:19:C5> is<br>cursed and won't come off!
+194:$57E5	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be shot!
+194:$57F9	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be eaten!
+194:$580F	item_and_action_messages	<number:19:C5> is<br>cursed, so its magic won't<br>work!
+194:$5826	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be read!
+194:$583A	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be written<br>on!
+194:$5850	item_and_action_messages	<number:19:C5> is<br>cursed, so nothing can be put<br>inside!
+194:$5866	item_and_action_messages	<number:19:C5> is<br>cursed, so nothing can be<br>taken out!
+194:$587A	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be pushed!
+194:$588E	item_and_action_messages	<number:19:C5> is<br>cursed and cannot be placed!
+194:$58A2	item_and_action_messages	<number:19:C5> is<br>cursed and cannot draw water!
+194:$58B6	item_and_action_messages	<number:19:C5> was <cF3><number:1A:C5>.
+194:$58C6	item_and_action_messages	This must be <cF3><number:19:C5>!
+194:$58D7	item_and_action_messages	What! It was <cF3><number:19:C5>.
+194:$58E6	item_and_action_messages	This is <cF3><number:19:C5>!
+194:$58F2	item_and_action_messages	<box>Max Fullness increased by <copy:01:19:C5><br>points.
+194:$590B	item_and_action_messages	<box>Max Fullness decreased by <copy:01:19:C5><br>points.
+194:$5924	item_and_action_messages	<number:19:C5> <cF3>grew stronger.
+194:$5933	item_and_action_messages	<box><number:19:C5> <cF3>rusted and grew weaker.
+194:$5946	item_and_action_messages	<box><number:19:C5> <cF3>did not rust.
+194:$5956	item_and_action_messages	What! <number:19:C5> <cF3>was <lookup:1A:C5>!
+194:$5969	item_and_action_messages	<lookup:19:C5> <cF3>failed to emerge.
+194:$597C	item_and_action_messages	Took <number:1A:C5> <cF3>out of the Pot.
+194:$598D	item_and_action_messages	Took <copy:01:1A:C5> out of<br><number:19:C5>.
+194:$59A4	item_and_action_messages	Your pack is full, so the item<br>could not be removed.
+194:$59B7	item_and_action_messages	Put <number:1A:C5> <cF3>into the Pot.
+194:$59C9	item_and_action_messages	Put <copy:01:1A:C5> into<br><number:19:C5>.
+194:$59DF	item_and_action_messages	<lookup:19:C5> was <cF3>sucked into <cF3><number:1B:C5>.
+194:$59F2	item_and_action_messages	A Pot cannot go inside a Pot.
+194:$5A05	item_and_action_messages	The Pot is full. Nothing else<br>will fit.
+194:$5A1C	item_and_action_messages	<number:19:C5> was <cF3>empty.
+194:$5A2C	item_and_action_messages	<number:19:C5> <cF3>broke.
+194:$5A38	item_and_action_messages	<box><number:19:C5> <cF3>grew larger.
+194:$5A49	item_and_action_messages	<number:19:C5> cannot<br>grow any larger.
+194:$5A5F	item_and_action_messages	<number:19:C5> <cF3>grew smaller.
+194:$5A6F	item_and_action_messages	<number:19:C5> cannot<br>grow any smaller.
+194:$5A86	item_and_action_messages	<number:19:C5> <cF3>became unbreakable.
+194:$5A95	item_and_action_messages	Filled <cF3><number:19:C5> <cF3>with water.
+194:$5AA4	item_and_action_messages	You cannot draw water here!
+194:$5AB2	item_and_action_messages	It cannot hold any more<br>water!
+194:$5AC4	item_and_action_messages	<lookup:19:C5> <cF3>splashed water.
+194:$5AD3	item_and_action_messages	But there was nothing to<br>absorb.
+194:$5AE5	item_and_action_messages	Absorbed <cF3><number:19:C5>.
+194:$5AF3	item_and_action_messages	<number:19:C5> was<br>too small to enter.
+194:$5B0A	item_and_action_messages	<number:19:C5> <cF3>disappeared.
+194:$5B19	item_and_action_messages	You cannot dig here!
+194:$5B23	item_and_action_messages	Got <cF3><number:19:C5>.
+194:$5B30	item_and_action_messages	Put down <cF3><number:19:C5>.
+194:$5B3C	item_and_action_messages	Discarded <cF3><number:19:C5>.
+194:$5B48	item_and_action_messages	Stepped onto <cF3><number:19:C5>.
+194:$5B57	item_and_action_messages	Your pack is full. You cannot<br>carry anything else.
+194:$5B70	item_and_action_messages	<number:19:C5> <cF3>became unusable.
+194:$5B85	item_and_action_messages	Strength recovered.
+194:$5B92	item_and_action_messages	Strength increased by <copy:01:19:C5>.
+194:$5BA6	item_and_action_messages	Strength decreased by <copy:01:19:C5>.
+194:$5BBA	item_and_action_messages	<box>Max Strength increased by<br><copy:01:19:C5>.
+194:$5BD6	item_and_action_messages	<box>Max Strength decreased by<br><copy:01:19:C5>.
+194:$5BF2	item_and_action_messages	You can now see invisible<br>things.
+194:$5C06	item_and_action_messages	You can now see the entire<br>floor.
+194:$5C1D	item_and_action_messages	<name>'s mouth is sealed!
+194:$5C2B	item_and_action_messages	<name> grew a little<br>stronger!
+194:$5C3A	item_and_action_messages	<name> became unable to<br>pick up items.
+194:$5C4B	item_and_action_messages	<name> cannot pick up<br>items!
+194:$5C59	item_and_action_messages	Lucky! Everything in your pack<br>was identified.
+194:$5C71	item_and_action_messages	The monsters began moving<br>faster.
+194:$5C84	item_and_action_messages	<lookup:19:C5> vanished<br>from the dungeon!
+194:$5C9A	item_and_action_messages	The curses on your items were<br>lifted.
+194:$5CA9	item_and_action_messages	Traps appeared all over the<br>floor.
+194:$5CBC	item_and_action_messages	<number:19:C5> is<br>stuck and won't come off!
+194:$5CD1	item_and_action_messages	All traps on the floor<br>vanished.
+194:$5CE5	item_and_action_messages	But the Scroll was blank.
+194:$5CF7	item_and_action_messages	You wrote a spell on the<br>Scroll, but the words quickly<br>vanished.
+194:$5D1B	item_and_action_messages	<number:19:C5> <cF3>became <cF3><number:1A:C5>.
+194:$5D2B	item_and_action_messages	Opening the Scroll covered<br>your hands in sticky rice!
+194:$5D4F	item_and_action_messages	But no ally could be summoned.
+194:$5D60	item_and_action_messages	Pulled your ally closer.
+194:$5D6C	item_and_action_messages	Pulled every monster on the<br>floor closer.
+194:$5D80	item_and_action_messages	Pulled every item on the floor<br>closer.
+194:$5D93	item_and_action_messages	But there was nothing to pull<br>closer.
+194:$5DA5	item_and_action_messages	<box><number:19:C5> was <cF3>plated!
+194:$5DB5	item_and_action_messages	The crack in <cF3><number:19:C5> was <cF3>repaired!
+194:$5DC5	item_and_action_messages	<number:19:C5> <cF3>cracked.
+194:$5DD5	item_and_action_messages	<number:19:C5> <cF3>burned up.
+194:$5DE5	item_and_action_messages	<number:19:C5> <cF3>broke.<page>
+194:$5DF7	item_and_action_messages	<number:19:C5> <cF3>surged with power!
+194:$5E0A	item_and_action_messages	<number:19:C5> <cF3>emitted a strange light.
+194:$5E1F	item_and_action_messages	Knocked <cF3><number:19:C5> away!
+194:$5E2C	item_and_action_messages	<lookup:19:C5> was not <cF3>carrying anything.
+194:$5E41	item_and_action_messages	<number:19:C5> <cF3>became a Large Onigiri!
+194:$5E5B	item_and_action_messages	<number:19:C5>'s <cF3>plating peeled off!
+194:$5E70	item_and_action_messages	<number:19:C5> was <cF3>cursed!
+194:$5E7E	item_and_action_messages	<number:19:C5> was <cF3>blessed!
+194:$5E8F	item_and_action_messages	<number:19:C5>'s <cF3>blessing wore off.
+194:$5EA7	item_and_action_messages	But <number:19:C5><br>was not cursed!
+194:$5EBB	item_and_action_messages	A fiery breath scorched <cF3><lookup:19:C5>!
+194:$5ECD	item_and_action_messages	You can no longer explode!
+194:$5EDA	item_and_action_messages	You cannot set a trap here!
+194:$5EEC	item_and_action_messages	Placed <lookup:19:C5> on<br>the ground.
+194:$5EFD	item_and_action_messages	Modified <lookup:19:C5> <cF3>into <lookup:1B:C5>.
+194:$5F14	item_and_action_messages	Picked up <lookup:19:C5><br>as Trap Parts.
+194:$5F29	item_and_action_messages	<lookup:19:C5> is already <cF3>set.
+194:$5F3A	item_and_action_messages	This trap cannot be modified.
+194:$5F4A	item_and_action_messages	It could not be salvaged as<br>Trap Parts.
+194:$5F59	item_and_action_messages	<lookup:19:C5> got damp<br>and broke.
+194:$5F68	item_and_action_messages	Broke <lookup:19:C5>.
+194:$5F74	item_and_action_messages	Trap Parts cannot be<br>exchanged.
+194:$5F85	item_and_action_messages	<number:19:C5> went <cF3>inside <number:1A:C5>!
+194:$5F9A	item_and_action_messages	The Shield prevented the<br>curse.
+194:$5FAC	item_and_action_messages	The Bracelet prevented the<br>curse.
+194:$5FC0	item_and_action_messages	The Bracelet prevented your<br>level from dropping.
+194:$5FD8	item_and_action_messages	The Bracelet prevented your<br>Strength from dropping.
+194:$5FF0	item_and_action_messages	The Bracelet prevented your<br>Max Strength from dropping.
+194:$600F	item_and_action_messages	The Bracelet protected you.
+194:$6023	item_and_action_messages	The Bracelet prevented your<br>Fullness from dropping.
+194:$603D	item_and_action_messages	Your equipment kept you from<br>being blinded.
+194:$6057	item_and_action_messages	Seewell Grass kept you from<br>being blinded.
+194:$6072	item_and_action_messages	But Revival Grass revived you!
+194:$608A	item_and_action_messages	But the rescue party revived<br>you!
+194:$60A3	item_and_action_messages	Mamo: AUTO-STORING<br><number:19:C5>!
+194:$60BA	item_and_action_messages	But the magic was nullified!
+194:$60CB	item_and_action_messages	<number:19:C5> was<br>absorbed by the Evil God.
+194:$60E2	item_and_action_messages	The magic was absorbed by the<br>Evil God.

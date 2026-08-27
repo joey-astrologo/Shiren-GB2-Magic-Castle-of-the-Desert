@@ -1,0 +1,26 @@
+# ---- ROMs: never commit -------------------------------------------------
+*.gb
+*.gbc
+*.sgb
+
+# Save files
+*.sav
+*.srm
+*.sav.bak*
+*.state
+
+# ---- Build output: all regenerable --------------------------------------
+build/
+
+# ---- Extracted script: regenerable AND derived from the game ------------
+# Anything the tools pull out of the ROM is game content and rebuilds in seconds.
+script/script.json
+script/script.tsv
+script/organized/
+
+# ---- Python ------------------------------------------------------------
+__pycache__/
+*.pyc
+
+# ---- macOS -------------------------------------------------------------
+.DS_Store

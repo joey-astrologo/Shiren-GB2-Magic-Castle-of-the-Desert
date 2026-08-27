@@ -1,0 +1,177 @@
+id	sections	english
+193:$54FF	control_help	1. Moving Diagonally
+193:$550D	control_help	2. Viewing the Map
+193:$551A	control_help	3. Sorting Items
+193:$552B	control_help	4. Shooting Arrows
+193:$5536	control_help	5. Turning in Place
+193:$5546	control_help	6. Recovering HP
+193:$5556	control_help	7. Dashing
+193:$5562	control_help	8. Dungeon Shops
+193:$5574	control_help	9. Using a Monster's Ability
+193:$5584	control_help	<br> Hold START while moving<br> to walk diagonally.<br><br>Release START to move up,<br>down, left, or right.<br>Use this whenever you need<br>precise diagonal movement.
+193:$55EC	control_help	<br> Tap SELECT briefly.<br><br>This opens the dungeon map.<br>Every path you have explored<br>will be shown, so you should<br>never get lost again.
+193:$5655	control_help	<br> 1<27>Open the Items menu.<br> 2<27>Press START.<br><br>One button press sorts your<br>items into a tidy list!
+193:$5698	control_help	<br> 1<27>Equip some arrows.<br> 2<27>Hold SELECT and press A.<br><br>This lets you easily attack<br>monsters from a distance!
+193:$56EA	control_help	<br> 1<27>Tap START.<br> 2<27>Choose a direction.<br><br>This turns you without moving.<br>If a monster is beside you,<br>you will automatically face it.
+193:$5760	control_help	<br> Hold B and press A.<br><br>Walking also restores HP, but<br>this restores it much faster.<br>Monsters move just as fast,<br>so stay alert!
+193:$57D8	control_help	<br> Hold B while moving.<br><br>This makes you dash, but<br>monsters move just as quickly.<br>Be careful!
+193:$582E	control_help	<br> 1<27>Stand on the item you want.<br> 2<27>Use At Feet to pick it up.<br> 3<27>Talk to the shopkeeper.<br><br>Dungeon shops work<br>differently from town shops.<br>Remember these steps!
+193:$58B3	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Abilities from the<br>menu does the same thing.
+193:$5936	control_help	<br> Tap SELECT to enter<br> diagonal-lock mode.<br><br>Now you can only move<br>diagonally. Tap SELECT again<br>to move normally. A quick tap<br>is the key!
+193:$59BF	control_help	<br> Press B to open the menu.<br><br>Choose Map to see where<br>you are in the dungeon.<br>Every path you have explored<br>is shown, so you should never<br>get lost again.
+193:$5A34	control_help	<br> 1<27>Open the Items menu.<br> 2<27>Press START.<br><br>One button press sorts your<br>items into a tidy list!
+193:$5A77	control_help	<br> 1<27>Equip some arrows.<br> 2<27>Hold SELECT and press A.<br><br>This lets you easily attack<br>monsters from a distance!
+193:$5AC9	control_help	<br> 1<27>Tap START.<br> 2<27>Choose a direction.<br><br>This turns you without moving.<br>If a monster is beside you,<br>you will automatically face it.
+193:$5B3F	control_help	<br> Hold B and press A.<br><br>Walking also restores HP, but<br>this restores it much faster.<br>Monsters move just as fast,<br>so stay alert!
+193:$5BB7	control_help	<br> Hold B while moving.<br><br>This makes you dash, but<br>monsters move just as quickly.<br>Be careful!
+193:$5C0D	control_help	<br> 1<27>Stand on the item you want.<br> 2<27>Use At Feet to pick it up.<br> 3<27>Talk to the shopkeeper.<br><br>Dungeon shops work<br>differently from town shops.<br>Remember these steps!
+193:$5C92	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Abilities from the<br>menu does the same thing.
+193:$5D58	technique_help	Take Turns
+193:$5D67	technique_help	Escaping Monsters
+193:$5D77	technique_help	Throwing Herbs and Staves
+193:$5D88	technique_help	Care for Bracelets
+193:$5D9B	technique_help	Dungeon Winds
+193:$5DA8	technique_help	Using Traps
+193:$5DB7	technique_help	Blessings <ED> and Curses <EB>
+193:$5DC9	technique_help	Pots Carry More
+193:$5DD9	technique_help	Sleeping Monsters
+193:$5DE7	technique_help	Diagonal Movement
+193:$5DF8	technique_help	Stronger Gear Is Better
+193:$5E09	technique_help	Pot and Staff Limits
+193:$5E1B	technique_help	Gear Combinations
+193:$5E2C	technique_help	Identifying Items
+193:$5E3B	technique_help	Naming Unknown Items
+193:$5E4C	technique_help	Wanderer Grade
+193:$5E5C	technique_help	 You move, monsters move.<br> You stop, they stop too.<br><br>Everyone takes turns in a<br>Mystery Dungeon. Monsters act<br>only when you do, so there is<br>no need to rush. Stop and plan<br>your next move!
+193:$5EED	technique_help	 You can heal without an Herb!<br> Walking restores HP!<br><br>Fighting is not your only<br>option.<br>Flee monsters when needed.<br>Walk until HP is restored,<br>then strike back!
+193:$5F86	technique_help	 Throw Herbs and staves!<br> Even spent staves work!<br><br>Some Herbs and staves affect<br>monsters when thrown at them.<br>A staff with 0 charges still<br>works when it is thrown.<br>What a useful trick!
+193:$6005	technique_help	 Equip Bracelets right away!<br> Repair cracks quickly too!<br><br>A Bracelet works only while<br>equipped. Traps or blows may<br>crack it. If that happens, ask<br>a blacksmith to repair it as<br>soon as you can!
+193:$6083	technique_help	 Do not search forever!<br> The wind can end your trip!<br><br>Stay on one floor too long.<br>A strong wind may send you<br>back to town. Know your goal,<br>and use your time wisely!
+193:$6101	technique_help	 Items reveal hidden traps!<br> Swinging a weapon can too!<br><br>Certain items reveal traps.<br>Without one, swing a weapon<br>to check the space ahead.<br>To trigger a trap yourself,<br>bounce an item off a wall and<br>have it land on the trap!
+193:$61A6	technique_help	 Blessings power items up!<br> Curses power items down!<br><br>A blessing draws out an item's<br>power, strengthening gear or<br>improving its effect. A curse<br>does the opposite: equipment<br>may become stuck, and some<br>items cannot be used!
+193:$624D	technique_help	 Pots carry extra items!<br><br>You can store items in a Pot,<br>but usually must break it to<br>retrieve them. A Preservation<br>Pot is different: you may move<br>items in and out without ever<br>breaking it!
+193:$62DD	technique_help	 Beware of sleeping foes!<br> Sneak by while they slumber!<br><br>Even dangerous monsters may<br>be asleep. Keep your distance<br>and quietly slip past them.<br>Some wake when you enter or<br>leave a room, so stay alert!
+193:$636B	technique_help	 Move diagonally to save food!<br> Monsters cannot catch you!<br><br>Diagonal movement is vital.<br>It helps you flee safely and<br>avoid wasted steps. That also<br>conserves Fullness. Master it<br>in Wanderer's Secrets!
+193:$6405	technique_help	 Gear numbers show strength!<br><br>Higher numbers mean stronger<br>gear. For example, <2D>3 is<br>stronger than <26>1. Every<br>weapon and shield has a limit,<br>so keep that in mind!
+193:$64A4	technique_help	 Pots and staves have limits!<br><br>A Pot's number shows capacity.<br>A staff's number is charges.<br>A Pot marked 3 holds three<br>items. A staff marked 3 can<br>be used three times.
+193:$6540	technique_help	 Combine compatible gear!<br><br>Some gear pairs work well.<br>Equip a Cudgel with a Wood<br>Shield, for example, and both<br>become <2D>3. Other useful<br>combinations exist too!
+193:$65DA	technique_help	 Unknown items are a mystery.<br> Try them to learn the effect!<br><br>Use an Identifier Scroll to<br>learn its name and effect.<br>You can also test it and judge<br>the result. Once you know its<br>effect, name the item!
+193:$666C	technique_help	 Name unknown items easily!<br><br>Select an unidentified item<br>and choose Name, then Fill In.<br>A list of known item names<br>will appear for you to choose<br>from.
+193:$6704	technique_help	 There are ten grades!<br> Your grade proves your skill!<br><br>Wanderer Grade is on the Game<br>Menu. It rates your skill on<br>ten levels, based on dungeon<br>clear conditions you fulfilled.<br>Can you discover every grade?
+194:$402C	wanderers_guide	1. Diagonal Spin Kick
+194:$403D	wanderers_guide	2. Corridor Escape
+194:$404F	wanderers_guide	3. Poison Grass Retreat
+194:$4061	wanderers_guide	4. Double-Speed Retreat
+194:$4071	wanderers_guide	5. Triangle Leap
+194:$4082	wanderers_guide	6. Binding Spin Kick
+194:$4093	wanderers_guide	7. Reaching an Island
+194:$40A3	wanderers_guide	8. Gitan Gale Slash
+194:$40B3	wanderers_guide	9. Monster House Basics
+194:$40C7	wanderers_guide	10. Monster House Sweep
+194:$40DC	wanderers_guide	 <26> Diagonal Spin Kick! <26><br><br>Use diagonal movement to flee<br>from enemies while recovering.<br>It is the ultimate technique!<br>The heart of the Wanderer's<br>Secrets is finally revealed!<br>Watch it from Secrets on the<br>Game Menu, master the move,<br>and earn your license! Haaah!
+194:$4177	wanderers_guide	 <26> Corridor Escape! <26><br><br>Three monsters stand before<br>you! The odds seem hopeless,<br>yet when the struggle ends,<br>every monster lies defeated!<br>What happened to those three<br>monsters? Watch Secrets and<br>find out! Haaah!
+194:$4216	wanderers_guide	 <26> Poison Grass Retreat! <26><br><br>A Wanderer's Secret is all<br>about defeating foes without<br>taking a single blow. This<br>chapter reveals a hidden art<br>that uses Poison Grass.<br>The answer awaits in Secrets<br>on the Game Menu! Haaah!
+194:$42A8	wanderers_guide	 <26> Double-Speed Retreat! <26><br><br>A vicious monster closes in.<br>One hit means certain doom.<br>One Swift Grass decides this<br>battle. An ancient secret used<br>by countless wanderers will<br>now be revealed! Behold<br>Secrets! Haaaaah!
+194:$4348	wanderers_guide	 <26> Triangle Leap! <26><br><br>This secret art uses walls!<br>It is called Triangle Leap.<br>Here we reveal the ultimate<br>escape among its many forms.<br>Watch the movie in Secrets<br>on the Game Menu! Hah! Haaah!<br>Fwaaaaaah!
+194:$43F0	wanderers_guide	 <26> Binding Spin Kick! <26><br><br>This builds upon the Diagonal<br>Spin Kick shown earlier.<br>One day, a wanderer is<br>surrounded by two monsters,<br>with hardly any HP remaining.<br>What happens next? Watch<br>Secrets! Haaah!
+194:$4492	wanderers_guide	 <26> Reaching an Island! <26><br><br>An island surrounded by water<br>is piled high with items.<br>A wanderer can reach it using<br>only two staves. What did our<br>reporters witness there?!<br>The movie is now showing in<br>Secrets! Haaah!
+194:$4536	wanderers_guide	 <26> Gitan Gale Slash! <26><br><br>Our reporters saw it! A<br>wanderer threw Gitan at a<br>monster! It looked wasteful,<br>yet the truth was surprising!<br>What happened? There is only<br>one way to know: watch<br>Secrets! Haaah!
+194:$45D7	wanderers_guide	 <26> Monster House Basics! <26><br><br>Thank you for waiting! Secret<br>No. 9 teaches the basic way to<br>conquer a Monster House.<br>It uses Corridor Escape!<br>See it at full power! Footage<br>is coming your way! Haaah!
+194:$466A	wanderers_guide	 <26> Monster House Sweep! <26><br><br>Our final Wanderer's Secret<br>could only be about conquering<br>a Monster House. See how to<br>defeat all monsters and claim<br>the items, right on the Game<br>Menu! Secrets forever!<br>Hah! Haaah!
+194:$4707	wanderers_guide	Diagonal movement's strength<br>is how it conserves Fullness.<br><26>Wanderer's Secret No. 11<26>
+200:$6EB0	wanderer_secret_pages	Wanderer's Secret No. 1<27><br> Diagonal Spin Kick!
+200:$6ECB	wanderer_secret_pages	When HP runs low, stop<br>attacking and flee.
+200:$6EEA	wanderer_secret_pages	Monsters do not recover HP.<br>Only your HP will return.
+200:$6F0E	wanderer_secret_pages	Use diagonal movement well to<br>walk without being attacked.
+200:$6F32	wanderer_secret_pages	Skip diagonal movement, and<br>the monster gets a free hit.
+200:$6F54	wanderer_secret_pages	Use diagonal lock to move<br>diagonally without fail.
+200:$6F76	wanderer_secret_pages	Once your HP recovers, strike<br>back and flee again.
+200:$6F94	wanderer_secret_pages	Escape danger this way. Now<br>launch your final attack!
+200:$6FB6	wanderer_secret_pages	No. 1<27>Diagonal Prep
+200:$6FC3	wanderer_secret_pages	Wanderer's Secret No. 2<27><br> Corridor Escape!
+200:$6FDF	wanderer_secret_pages	Three monsters! This is tough!<br>Flee into a hallway!
+200:$7004	wanderer_secret_pages	In a hallway, you can fight<br>the monsters one at a time!
+200:$701A	wanderer_secret_pages	Wanderer's Secret No. 2:<br>Corridor Escape! Kiyaah!
+200:$7043	wanderer_secret_pages	In danger, walk around to<br>recover all the HP you can.
+200:$7063	wanderer_secret_pages	No. 2<27>Corridor 6
+200:$7073	wanderer_secret_pages	No. 2<27>Corridor 7
+200:$7083	wanderer_secret_pages	No. 2<27>Corridor 8
+200:$7093	wanderer_secret_pages	No. 2<27>Corridor 9
+200:$70A3	wanderer_secret_pages	No. 2<27>Corridor 10
+200:$70B4	wanderer_secret_pages	Wanderer's Secret No. 3<27><br> Poison Grass Retreat!
+200:$70D0	wanderer_secret_pages	Watch the foe. Move with care!
+200:$70DF	wanderer_secret_pages	Even when cornered in a room,<br>you can switch places with it!
+200:$70F9	wanderer_secret_pages	The foe is slow! Do not rush.
+200:$710A	wanderer_secret_pages	Attack once, then step back!
+200:$711D	wanderer_secret_pages	No. 3<27>Poison Grass 6
+200:$712A	wanderer_secret_pages	No. 3<27>Poison Grass 7
+200:$7137	wanderer_secret_pages	No. 3<27>Poison Grass 8
+200:$7144	wanderer_secret_pages	No. 3<27>Poison Grass 9
+200:$7151	wanderer_secret_pages	No. 3<27>Poison Grass 10
+200:$715F	wanderer_secret_pages	Wanderer's Secret No. 4<27><br> Double-Speed Retreat!
+200:$7179	wanderer_secret_pages	Keep that Fortune Grass.<br>Try throwing it at a monster!
+200:$719A	wanderer_secret_pages	Even a tough foe cannot hit<br>after you use Swift Grass.
+200:$71BE	wanderer_secret_pages	<box>At double speed, you can<br>attack while retreating.
+200:$71E2	wanderer_secret_pages	Grass effects wear off after<br>a while, so stay alert!
+200:$7205	wanderer_secret_pages	Wanderer's Secret No. 4:<br>Double-Speed Retreat! Hiyah!
+200:$722C	wanderer_secret_pages	No. 4<27>Double-Speed Prep
+200:$723A	wanderer_secret_pages	Wanderer's Secret No. 5<27><br> Triangle Leap!
+200:$7255	wanderer_secret_pages	Draw them out, then retreat<br>and fight them one at a time!
+200:$7277	wanderer_secret_pages	Wanderer's Secret No. 5:<br>Triangle Leap! Haaah!
+200:$729F	wanderer_secret_pages	Wanderer's Secrets <26>Review<26>
+200:$72B0	wanderer_secret_pages	Walking naturally restores HP.
+200:$72C2	wanderer_secret_pages	While fast, step back and<br>attack to avoid all damage.
+200:$72E9	wanderer_secret_pages	Place a Sanctuary Scroll.<br>Stand on it to block attacks.
+200:$730C	wanderer_secret_pages	Dragon Grass can hit distant<br>enemies with its flames.
+200:$7326	wanderer_secret_pages	When HP runs low, use an Herb.
+200:$733F	wanderer_secret_pages	Equip a Strength Bracelet to<br>raise your attack power.
+200:$7360	wanderer_secret_pages	Wanderer's Secret No. 6<27><br> Binding Spin Kick!
+200:$737B	wanderer_secret_pages	Battle has left you exhausted,<br>with hardly any HP remaining...
+200:$7394	wanderer_secret_pages	Now two monsters appear!<br>The crisis is twice as bad!
+200:$73B7	wanderer_secret_pages	Overcoming this crisis is<br>what makes a true wanderer!
+200:$73D5	wanderer_secret_pages	No. 6<27>Circle 5
+200:$73E2	wanderer_secret_pages	First, halt the monsters with<br>a Paralyzing Staff!
+200:$7404	wanderer_secret_pages	Quickly circle the monsters!<br>It uses advanced diagonals!
+200:$7428	wanderer_secret_pages	Once your HP is restored,<br>counterattack all at once!
+200:$7440	wanderer_secret_pages	No. 6<27>Circle 9
+200:$744D	wanderer_secret_pages	No. 6<27>Circle 10
+200:$745B	wanderer_secret_pages	Wanderer's Secret No. 7<27><br> Reaching an Island!
+200:$7475	wanderer_secret_pages	If a monster is on the island,<br>use a Switching Staff to land.
+200:$7499	wanderer_secret_pages	You can still land there,<br>even without a monster!
+200:$74B9	wanderer_secret_pages	A Knockback Staff blows foes<br>exactly 10 spaces.
+200:$74DC	wanderer_secret_pages	Then use a Switching Staff<br>to land and finish the trick!
+200:$74FA	wanderer_secret_pages	No. 7<27>Island 6
+200:$7507	wanderer_secret_pages	No. 7<27>Island 7
+200:$7514	wanderer_secret_pages	No. 7<27>Island 8
+200:$7521	wanderer_secret_pages	No. 7<27>Island 9
+200:$752E	wanderer_secret_pages	No. 7<27>Island 10
+200:$753C	wanderer_secret_pages	Wanderer's Secret No. 9<27><br> Monster House Basics!
+200:$755A	wanderer_secret_pages	Oh! It is a shop!
+200:$7563	wanderer_secret_pages	At this point, why not pick up<br>everything in sight?!
+200:$7577	wanderer_secret_pages	You have no Gitan, so there is<br>only one choice: steal it all!
+200:$758F	wanderer_secret_pages	The shopkeeper is at Stairs!
+200:$75A1	wanderer_secret_pages	Now use a Switching Staff!
+200:$75B0	wanderer_secret_pages	<box>After checking the traps,<br>claim all those items!
+200:$75D5	wanderer_secret_pages	A Pickaxe breaks walls to<br>create a shortcut.
+200:$75F0	wanderer_secret_pages	Fight a Monster House from<br>the safety of a hallway!
+200:$7606	wanderer_secret_pages	Monster Houses have traps.<br>Swing a weapon to find them!
+200:$7626	wanderer_secret_pages	Wanderer's Secret No. 8<27><br> Gitan Gale Slash!
+200:$7640	wanderer_secret_pages	A Gitan Bag grows your money,<br>but it has another use.
+200:$765F	wanderer_secret_pages	Hold B and step onto the<br>Gitan Bag.
+200:$767E	wanderer_secret_pages	Now choose At Feet to throw<br>the Gitan beneath you.
+200:$769A	wanderer_secret_pages	It deals 1/10 of its value.<br>76 Gitan deals 7 damage.
+200:$76C1	wanderer_secret_pages	Put Gitan at your feet in<br>a Pot to carry it around.
+200:$76E1	wanderer_secret_pages	Throw it for huge damage to<br>complete Gitan Gale Slash!
+200:$7706	wanderer_secret_pages	No. 9<27>Stairs Theft 8
+200:$7717	wanderer_secret_pages	No. 9<27>Stairs Theft 9
+200:$7728	wanderer_secret_pages	No. 9<27>Stairs Theft 10
+200:$773A	wanderer_secret_pages	Wanderer's Secret No. 10<27><br> Monster House Sweep!
+200:$7759	wanderer_secret_pages	A sudden Monster House!<br>Stay calm and act carefully.
+200:$777C	wanderer_secret_pages	Turn danger into a chance.<br>That is the heart of Secrets!
+200:$779E	wanderer_secret_pages	First, use a Windblade Scroll<br>to weaken the monsters.
+200:$77C2	wanderer_secret_pages	Use a Confusion Scroll.<br>It distracts the monsters.
+200:$77E6	wanderer_secret_pages	Fight each monster near<br>the entrance, ready to flee.
+200:$7809	wanderer_secret_pages	Once confusion ends, block<br>the entrance and use a corner.
+200:$782A	wanderer_secret_pages	Watch for traps while you<br>help yourself to every item!
+200:$7848	wanderer_secret_pages	Wanderer's Secret No. 10:<br>Monster House Sweep!
+200:$786F	wanderer_secret_pages	No. 10<27>Monster House 10

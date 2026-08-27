@@ -1,0 +1,813 @@
+{
+  "schema": "shiren-gb2-runtime-terms-v2",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "f6_handler": "0:$335E",
+  "player_name_sentinel": [
+    1,
+    176
+  ],
+  "cache": {
+    "bank": 4,
+    "base": "$DE00",
+    "cursor": "$C532",
+    "call_graph": {
+      "reset": {
+        "entry": "3:$5A2E",
+        "near": [
+          "3:$5DDD"
+        ],
+        "far": [
+          "5:$4237",
+          "5:$50D9"
+        ]
+      },
+      "append": {
+        "entry": "3:$5B1B",
+        "near": [],
+        "far": [
+          "0:$350A",
+          "0:$3547",
+          "1:$659B",
+          "1:$661F",
+          "1:$6636",
+          "1:$6669",
+          "8:$5070",
+          "8:$50AA",
+          "8:$603E",
+          "8:$6693",
+          "8:$66A6",
+          "8:$6ABF",
+          "8:$7C70",
+          "11:$7135",
+          "11:$714B",
+          "16:$5331",
+          "17:$4334",
+          "17:$4440",
+          "17:$4749",
+          "120:$4B23",
+          "120:$4B78",
+          "120:$5D7F",
+          "120:$6B92",
+          "120:$6BA1",
+          "120:$6E86",
+          "120:$749B",
+          "120:$77D4",
+          "120:$77E6",
+          "120:$7D0E",
+          "122:$4460",
+          "122:$44D5",
+          "122:$5F2B",
+          "122:$5F53",
+          "181:$464B"
+        ]
+      },
+      "read": {
+        "entry": "3:$5B33",
+        "near": [],
+        "far": [
+          "0:$337A",
+          "0:$34BF",
+          "0:$3516",
+          "0:$3553",
+          "17:$4340"
+        ]
+      }
+    },
+    "producer_classes": [
+      {
+        "name": "item_name",
+        "count": 29,
+        "construction": "central item formatter 120:$47C2/$47CC, directly or through a wrapper",
+        "value_domain": [
+          "identified_item_names",
+          "unidentified_item_appearances",
+          "item_name_format_fragments"
+        ],
+        "sites": [
+          "1:$659B",
+          "1:$661F",
+          "1:$6636",
+          "1:$6669",
+          "8:$5070",
+          "8:$50AA",
+          "8:$603E",
+          "8:$6693",
+          "8:$66A6",
+          "8:$6ABF",
+          "8:$7C70",
+          "11:$714B",
+          "16:$5331",
+          "17:$4440",
+          "120:$4B23",
+          "120:$4B78",
+          "120:$5D7F",
+          "120:$6B92",
+          "120:$6BA1",
+          "120:$6E86",
+          "120:$749B",
+          "120:$77D4",
+          "120:$77E6",
+          "120:$7D0E",
+          "122:$4460",
+          "122:$44D5",
+          "122:$5F2B",
+          "122:$5F53",
+          "181:$464B"
+        ]
+      },
+      {
+        "name": "location_record",
+        "count": 1,
+        "construction": "runtime-selected group-24 directory record copied to FFB0",
+        "value_domain": [
+          "location_names_primary",
+          "location_names_history"
+        ],
+        "sites": [
+          "0:$350A"
+        ]
+      },
+      {
+        "name": "unsigned_integer",
+        "count": 1,
+        "construction": "decimal formatter writes an FF-terminated value to FFB0",
+        "value_domain": [
+          "unsigned_integer"
+        ],
+        "sites": [
+          "0:$3547"
+        ]
+      },
+      {
+        "name": "sender_string",
+        "count": 1,
+        "construction": "communication sender string already present at C16D",
+        "value_domain": [
+          "remote_player_name"
+        ],
+        "sites": [
+          "11:$7135"
+        ]
+      },
+      {
+        "name": "polymorphic_value",
+        "count": 1,
+        "construction": "branch-selected item name or integer-derived display value in FFB0",
+        "value_domain": [
+          "identified_item_names",
+          "unidentified_item_appearances",
+          "item_name_format_fragments",
+          "unsigned_integer"
+        ],
+        "sites": [
+          "17:$4334"
+        ]
+      },
+      {
+        "name": "encoded_communication_string",
+        "count": 1,
+        "construction": "communication formatter generates a bounded code string at C16D",
+        "value_domain": [
+          "communication_code"
+        ],
+        "sites": [
+          "17:$4749"
+        ]
+      }
+    ]
+  },
+  "source_controls": {
+    "record_lookup": {
+      "mode": 1,
+      "occurrences": 139,
+      "records": 131,
+      "address_occurrences": {
+        "$C519": 126,
+        "$C51A": 4,
+        "$C51B": 8,
+        "$C51C": 1
+      },
+      "records_by_reference_group": {
+        "0": 2,
+        "8": 106,
+        "11": 16,
+        "16": 1,
+        "18": 3,
+        "22": 1,
+        "24": 2
+      }
+    },
+    "cached_string": {
+      "mode": 3,
+      "occurrences": 108,
+      "records": 103,
+      "address_occurrences": {
+        "$C519": 98,
+        "$C51A": 7,
+        "$C51B": 3
+      },
+      "records_by_reference_group": {
+        "0": 1,
+        "7": 2,
+        "8": 5,
+        "11": 70,
+        "33": 25
+      }
+    },
+    "unexpected_modes": {}
+  },
+  "record_lookup_consumers": [
+    {
+      "name": "actor_name",
+      "description": "actor or monster name, including the player-name sentinel",
+      "value_domain": [
+        "actor_name_tier_1",
+        "actor_name_tier_2",
+        "actor_name_tier_3",
+        "player_name"
+      ],
+      "occurrences": 127,
+      "records": 120,
+      "field_occurrences": {
+        "$C519": 119,
+        "$C51A": 1,
+        "$C51B": 7
+      },
+      "reference_group_occurrences": {
+        "8": 112,
+        "11": 9,
+        "16": 1,
+        "18": 3,
+        "24": 2
+      },
+      "sha1": "548d03d20ceec8131a3f27ad4c0974f4de6f691e",
+      "first": {
+        "record": "193:$4192",
+        "offset": 0,
+        "field": "$C519",
+        "reference": [
+          8,
+          0
+        ],
+        "source": "<lookup:19:C5>に<cF3><copy:01:1B:C5>ポイントのダメージをあたえた。"
+      }
+    },
+    {
+      "name": "trap_name",
+      "description": "trap name",
+      "value_domain": [
+        "trap_names"
+      ],
+      "occurrences": 8,
+      "records": 7,
+      "field_occurrences": {
+        "$C519": 7,
+        "$C51B": 1
+      },
+      "reference_group_occurrences": {
+        "8": 1,
+        "11": 7
+      },
+      "sha1": "5e9040bba459a86d5f8986eedf80fdc0beda5e15",
+      "first": {
+        "record": "193:$44A9",
+        "offset": 0,
+        "field": "$C519",
+        "reference": [
+          8,
+          40
+        ],
+        "source": "<lookup:19:C5>を ふんだ。"
+      }
+    },
+    {
+      "name": "identified_item_name",
+      "description": "identified item name revealed at runtime",
+      "value_domain": [
+        "identified_item_names"
+      ],
+      "occurrences": 1,
+      "records": 1,
+      "field_occurrences": {
+        "$C51A": 1
+      },
+      "reference_group_occurrences": {
+        "11": 1
+      },
+      "sha1": "e6ad6e80c105a358fc50673f66e85ee80ab5b7d4",
+      "first": {
+        "record": "194:$5956",
+        "offset": 10,
+        "field": "$C51A",
+        "reference": [
+          11,
+          68
+        ],
+        "source": "なんと <number:19:C5>は<cF3><lookup:1A:C5>だった！"
+      }
+    },
+    {
+      "name": "location_name",
+      "description": "rescue-history location",
+      "value_domain": [
+        "location_names_primary",
+        "location_names_history"
+      ],
+      "occurrences": 1,
+      "records": 1,
+      "field_occurrences": {
+        "$C51A": 1
+      },
+      "reference_group_occurrences": {
+        "22": 1
+      },
+      "sha1": "5a2aa614e24f032d2f875ac4fb4a5cc1da80d57b",
+      "first": {
+        "record": "193:$6B74",
+        "offset": 0,
+        "field": "$C51A",
+        "reference": [
+          22,
+          73
+        ],
+        "source": "<lookup:1A:C5> <copy:01:19:C5>f で救助"
+      }
+    },
+    {
+      "name": "debug_polymorphic",
+      "description": "debug-only lookup with no proven production value domain",
+      "value_domain": [
+        "unresolved_debug_lookup"
+      ],
+      "occurrences": 2,
+      "records": 2,
+      "field_occurrences": {
+        "$C51A": 1,
+        "$C51C": 1
+      },
+      "reference_group_occurrences": {
+        "0": 2
+      },
+      "sha1": "49ee874e13ae9f27b948e3fb4e756e21e90730a3",
+      "first": {
+        "record": "192:$4358",
+        "offset": 9,
+        "field": "$C51A",
+        "reference": [
+          0,
+          29
+        ],
+        "source": "  <copy:01:19:C5>   <lookup:1A:C5><br> chr<27><copy:01:1C:C5>  anm<27><copy:02:1D:C5>"
+      }
+    }
+  ],
+  "cached_string_consumers": [
+    {
+      "name": "item_name",
+      "description": "composed item name",
+      "value_domain": [
+        "identified_item_names",
+        "unidentified_item_appearances",
+        "item_name_format_fragments"
+      ],
+      "occurrences": 104,
+      "records": 101,
+      "field_occurrences": {
+        "$C519": 95,
+        "$C51A": 6,
+        "$C51B": 3
+      },
+      "reference_group_occurrences": {
+        "7": 1,
+        "8": 5,
+        "11": 73,
+        "33": 25
+      },
+      "sha1": "d14f73151d0c5a1358cdb5ae562d99735480acbd",
+      "first": {
+        "record": "192:$6DCF",
+        "offset": 9,
+        "field": "$C51A",
+        "reference": [
+          7,
+          100
+        ],
+        "source": "<number:19:C5>さんから<br><number:1A:C5>が<br>おくられてきました。"
+      }
+    },
+    {
+      "name": "sender_string",
+      "description": "communication sender name",
+      "value_domain": [
+        "remote_player_name"
+      ],
+      "occurrences": 1,
+      "records": 1,
+      "field_occurrences": {
+        "$C519": 1
+      },
+      "reference_group_occurrences": {
+        "7": 1
+      },
+      "sha1": "d3f4e385fe54b99a1116317f8cad22edc01956f0",
+      "first": {
+        "record": "192:$6DCF",
+        "offset": 0,
+        "field": "$C519",
+        "reference": [
+          7,
+          100
+        ],
+        "source": "<number:19:C5>さんから<br><number:1A:C5>が<br>おくられてきました。"
+      }
+    },
+    {
+      "name": "location_record",
+      "description": "runtime-selected location",
+      "value_domain": [
+        "location_names_primary",
+        "location_names_history"
+      ],
+      "occurrences": 1,
+      "records": 1,
+      "field_occurrences": {
+        "$C519": 1
+      },
+      "reference_group_occurrences": {
+        "7": 1
+      },
+      "sha1": "04734adf5d554c2ca7c4f8585940ed388a1b0af7",
+      "first": {
+        "record": "192:$70C6",
+        "offset": 1,
+        "field": "$C519",
+        "reference": [
+          7,
+          129
+        ],
+        "source": " <number:19:C5><br> <copy:03:1A:C5>ギタン<br> もちきん<copy:04:1D:C5>ギタン"
+      }
+    },
+    {
+      "name": "debug_polymorphic",
+      "description": "debug assertion value; item/integer branches remain possible",
+      "value_domain": [
+        "identified_item_names",
+        "unidentified_item_appearances",
+        "item_name_format_fragments",
+        "unsigned_integer"
+      ],
+      "occurrences": 2,
+      "records": 1,
+      "field_occurrences": {
+        "$C519": 1,
+        "$C51A": 1
+      },
+      "reference_group_occurrences": {
+        "0": 2
+      },
+      "sha1": "c489691dbb49ef85bd74d40527df4c5f83519d97",
+      "first": {
+        "record": "192:$4A53",
+        "offset": 7,
+        "field": "$C519",
+        "reference": [
+          0,
+          228
+        ],
+        "source": "assert<27><number:19:C5> val<27><number:1A:C5><page>"
+      }
+    }
+  ],
+  "opcode_anchors": [
+    {
+      "location": "0:$335E",
+      "purpose": "F6 mode dispatch, cache read and lookup sentinel",
+      "bytes": "0A03216733CDD309E996338F3382336F330A6F030A675E01E7C43E0321335BCDAC0918370A6F030A6711E7C4CD500A182A0A6F030A67180269604E23463E01B820123EB0B9200D11E7C43E0B212F4BCDAC09180778"
+    },
+    {
+      "location": "3:$5A2E",
+      "purpose": "clear both cache pages and reset the cursor",
+      "bytes": "3E04E0702100DF010001CDEE092100DE010001CDEE09AFEA07C5EA33C5EA10C5EA11C5EA12C5EA13C5EA14C5EA15C5EA32C53DEAE7C43E01EA0AC5C9"
+    },
+    {
+      "location": "3:$5B1B",
+      "purpose": "append an FF-terminated string at DE00+cursor",
+      "bytes": "60693E04E07016DEFA32C55F2A121C3C20FA2132C54E73C9"
+    },
+    {
+      "location": "3:$5B33",
+      "purpose": "read an FF-terminated string from DE00+offset",
+      "bytes": "6B26DE50593E04E07001FFFF7E2C1213033C20F8C9"
+    },
+    {
+      "location": "0:$34FD",
+      "purpose": "select a group-24 directory record and cache it",
+      "bytes": "3E1821B0FFCDA01F01B0FF3E03211B5BCDAC09"
+    },
+    {
+      "location": "0:$3530",
+      "purpose": "format decimal text and cache it",
+      "bytes": "AFE0B1E0B2E0B301B0FF3E1121B041CDAC0901B0FF3E03211B5BCDAC095901E7C4"
+    },
+    {
+      "location": "11:$7130",
+      "purpose": "cache a sender string, compose an item name, then cache it",
+      "bytes": "016DC13E03211B5BCDAC0979F5FA4BC55F3E0421144FCDAC093E03211B5BCDAC09"
+    },
+    {
+      "location": "17:$42CF",
+      "purpose": "polymorphic value formatter branches before caching",
+      "bytes": "3E7821C247CDAC0918593E04218A60CDAC0918463E1021C44DCDAC09131AFE012823E0B0AFE0B1E0B2E0B301B0FFCDB04121B0FF2AFEFF20FB2B3E39223EFF2201B0FF181E131A4F3E0421AA5FCDAC0918113E0421CD5FCDAC0901B0FFCDB04101B0FF3E03211B5BCDAC095901E7C43E0321335BCDAC09C9"
+    },
+    {
+      "location": "17:$4725",
+      "purpose": "encode a communication string at C16D and cache it",
+      "bytes": "C53E0B218A51CDAC09C179FE002005C5CDF57DC1CDB2760E00116DC1CD477B016DC13E03211B5BCDAC09C9"
+    },
+    {
+      "location": "17:$51AC",
+      "purpose": "store a group-24 location lookup for rescue history",
+      "bytes": "78EA19C579C601EA1AC53E18EA1BC5014916"
+    },
+    {
+      "location": "120:$47C2",
+      "purpose": "item structure wrappers format a name at C374",
+      "bytes": "3E02E0707BCD131F444D60690174C3C5CDDF47C1C9"
+    },
+    {
+      "location": "120:$47E9",
+      "purpose": "compose item names from groups 4, 5 and 11",
+      "bytes": "626BC5E5CDC05FB7281FCB772821E1237EE1C5C6004F3E0BE5CDA01FE109545DC179CD094CCD500AC9E14E3E041803E13E05E1CDA01FC9"
+    },
+    {
+      "location": "122:$4437",
+      "purpose": "long item wrapper formats before its cache append",
+      "bytes": "D53E7821CC47CDAC09D1F0B06FF0B167E5F0B26FF0B367E5F0B46FF0B567E5F0B66FF0B767E5D53E03211B5BCDAC09D1"
+    }
+  ],
+  "term_families": [
+    {
+      "name": "actor_name_tier_1",
+      "role": "monster and actor names, first tier",
+      "group": 1,
+      "index_range": [
+        0,
+        149
+      ],
+      "entries": 150,
+      "unique_records": 150,
+      "sha1": "5acb3aabd62f6ab909a5d59b2e4270a864b5eaab",
+      "first": {
+        "index": 0,
+        "record": "192:$4BD0",
+        "source": "みえざるもの"
+      },
+      "last": {
+        "index": 149,
+        "record": "192:$4F80",
+        "source": "まじょうへい3"
+      }
+    },
+    {
+      "name": "actor_name_tier_2",
+      "role": "monster and actor names, second tier",
+      "group": 2,
+      "index_range": [
+        0,
+        149
+      ],
+      "entries": 150,
+      "unique_records": 150,
+      "sha1": "327e18fd9019a1d9693a88344154fd674ed9cb3d",
+      "first": {
+        "index": 0,
+        "record": "192:$50B4",
+        "source": "みえざるもの"
+      },
+      "last": {
+        "index": 149,
+        "record": "192:$54EF",
+        "source": "みえざるもの"
+      }
+    },
+    {
+      "name": "actor_name_tier_3",
+      "role": "monster and actor names, third tier",
+      "group": 3,
+      "index_range": [
+        0,
+        149
+      ],
+      "entries": 150,
+      "unique_records": 150,
+      "sha1": "679d36d7c5ecc3136181dd130546bc72b2f85e69",
+      "first": {
+        "index": 0,
+        "record": "192:$5622",
+        "source": "みえざるもの"
+      },
+      "last": {
+        "index": 149,
+        "record": "192:$5A60",
+        "source": "みえざるもの"
+      }
+    },
+    {
+      "name": "identified_item_names",
+      "role": "identified/base item names",
+      "group": 4,
+      "index_range": [
+        0,
+        215
+      ],
+      "entries": 216,
+      "unique_records": 216,
+      "sha1": "3138b119847c3b57b367d213b4227ab02c1894ba",
+      "first": {
+        "index": 0,
+        "record": "192:$5C17",
+        "source": "おまもり"
+      },
+      "last": {
+        "index": 215,
+        "record": "192:$6334",
+        "source": "のとくぎ"
+      }
+    },
+    {
+      "name": "unidentified_item_appearances",
+      "role": "unidentified item appearances",
+      "group": 5,
+      "index_range": [
+        0,
+        122
+      ],
+      "entries": 123,
+      "unique_records": 123,
+      "sha1": "9e45373bbf5414b4ef79e4654c14aa2dcc2a62a4",
+      "first": {
+        "index": 0,
+        "record": "192:$642F",
+        "source": "ダイヤの腕輪"
+      },
+      "last": {
+        "index": 122,
+        "record": "192:$6817",
+        "source": "ろっかくの壺"
+      }
+    },
+    {
+      "name": "item_name_format_fragments",
+      "role": "item suffixes and composition fragments",
+      "group": 11,
+      "index_range": [
+        0,
+        19
+      ],
+      "entries": 20,
+      "unique_records": 9,
+      "sha1": "495cbf5f67a412a3104e57d402724e035ddae8ee",
+      "first": {
+        "index": 0,
+        "record": "194:$558B",
+        "source": "腕輪<27>"
+      },
+      "last": {
+        "index": 19,
+        "record": "194:$55AC",
+        "source": "のとくぎ"
+      }
+    },
+    {
+      "name": "item_ability_roots",
+      "role": "item ability/name roots used by item logic",
+      "group": 12,
+      "index_range": [
+        0,
+        122
+      ],
+      "entries": 123,
+      "unique_records": 123,
+      "sha1": "76a1f07b2c35fefe0070de6fdfbe57596faef816",
+      "first": {
+        "index": 0,
+        "record": "194:$61EE",
+        "source": "つうか"
+      },
+      "last": {
+        "index": 122,
+        "record": "194:$646B",
+        "source": "ギ"
+      }
+    },
+    {
+      "name": "trap_menu_status",
+      "role": "no-available-trap menu status",
+      "group": 17,
+      "index_range": [
+        0,
+        0
+      ],
+      "entries": 1,
+      "unique_records": 1,
+      "sha1": "23c2b9a104f92320594a3a660ce1d259825843d4",
+      "first": {
+        "index": 0,
+        "record": "193:$541C",
+        "source": "つくれるワナはありません"
+      },
+      "last": {
+        "index": 0,
+        "record": "193:$541C",
+        "source": "つくれるワナはありません"
+      }
+    },
+    {
+      "name": "trap_names",
+      "role": "trap names",
+      "group": 17,
+      "index_range": [
+        1,
+        22
+      ],
+      "entries": 22,
+      "unique_records": 22,
+      "sha1": "703f17f12c8dc6e414eb9cb5a432646993039665",
+      "first": {
+        "index": 1,
+        "record": "193:$5429",
+        "source": "どく矢のワナ"
+      },
+      "last": {
+        "index": 22,
+        "record": "193:$54C0",
+        "source": "イカリのワナ"
+      }
+    },
+    {
+      "name": "location_names_primary",
+      "role": "front-end dungeon and location names",
+      "group": 24,
+      "index_range": [
+        1,
+        14
+      ],
+      "entries": 14,
+      "unique_records": 14,
+      "sha1": "5b55bd19dfbaaecf3f700d74d476f48cd164f630",
+      "first": {
+        "index": 1,
+        "record": "193:$6ECE",
+        "source": "砂漠の町イルパ"
+      },
+      "last": {
+        "index": 14,
+        "record": "193:$6F56",
+        "source": "砂漠の町イルパ"
+      }
+    },
+    {
+      "name": "location_names_history",
+      "role": "main-menu and history location names",
+      "group": 24,
+      "index_range": [
+        19,
+        48
+      ],
+      "entries": 30,
+      "unique_records": 30,
+      "sha1": "c2c309d1c5cf00a6de35c29cb98cc66f144318c1",
+      "first": {
+        "index": 19,
+        "record": "193:$6FC7",
+        "source": "砂漠の町イルパ"
+      },
+      "last": {
+        "index": 48,
+        "record": "193:$70DE",
+        "source": "壺の洞窟"
+      }
+    }
+  ],
+  "mixed_cache_evidence": {
+    "record": "192:$6DCF",
+    "source": "<number:19:C5>さんから<br><number:1A:C5>が<br>おくられてきました。",
+    "cached_string_tokens": [
+      {
+        "offset": 0,
+        "source": "<number:19:C5>"
+      },
+      {
+        "offset": 9,
+        "source": "<number:1A:C5>"
+      }
+    ],
+    "references": [
+      [
+        7,
+        100
+      ]
+    ]
+  }
+}

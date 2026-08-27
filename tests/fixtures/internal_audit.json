@@ -1,0 +1,17 @@
+{
+  "schema": "shiren-gb2-internal-text-audit-v1",
+  "internal_records": 1228,
+  "translated_runtime_records": 200,
+  "retained_engine_records": 1028,
+  "partition_complete": true,
+  "runtime_translation_complete": true,
+  "policies": [
+    {"name": "runtime_spell_codes", "records": 100, "translated_records": 100, "policy": "translate"},
+    {"name": "debug_spell_codes", "records": 100, "translated_records": 100, "policy": "translate"},
+    {"name": "developer_event_selectors", "records": 126, "translated_records": 0, "policy": "retain_native"},
+    {"name": "debug_and_engine_labels", "records": 197, "translated_records": 0, "policy": "retain_native"},
+    {"name": "scenario_debug_labels", "records": 39, "translated_records": 0, "policy": "retain_native"},
+    {"name": "animation_effect_dispatch", "records": 629, "translated_records": 0, "policy": "retain_native"},
+    {"name": "internal_object_ids", "records": 37, "translated_records": 0, "policy": "retain_native"}
+  ]
+}

@@ -1,0 +1,1939 @@
+id	sections	english
+192:$4BD0	actor_names_tier_1	Invisible Thing
+192:$4BD7	actor_names_tier_1	Mamel
+192:$4BDB	actor_names_tier_1	Bow Boy
+192:$4BE0	actor_names_tier_1	Taur
+192:$4BE5	actor_names_tier_1	Healer Rabbit
+192:$4BEC	actor_names_tier_1	Demon Warrior
+192:$4BF3	actor_names_tier_1	Ghost Warrior
+192:$4BFB	actor_names_tier_1	Scurry Egg
+192:$4C00	actor_names_tier_1	Schubell
+192:$4C06	actor_names_tier_1	Floor Dragon
+192:$4C0E	actor_names_tier_1	Pumphantasm
+192:$4C15	actor_names_tier_1	Pop Tank
+192:$4C1D	actor_names_tier_1	Nigiri Morph
+192:$4C24	actor_names_tier_1	Curse Girl
+192:$4C2A	actor_names_tier_1	Gazer
+192:$4C2E	actor_names_tier_1	Impact Boar
+192:$4C37	actor_names_tier_1	Boy Tank
+192:$4C3F	actor_names_tier_1	Slime
+192:$4C43	actor_names_tier_1	Porky
+192:$4C48	actor_names_tier_1	Dragon
+192:$4C4D	actor_names_tier_1	Cell Armor
+192:$4C54	actor_names_tier_1	Death Reaper
+192:$4C5A	actor_names_tier_1	Bad Froggo
+192:$4C60	actor_names_tier_1	Mutaikon
+192:$4C68	actor_names_tier_1	Gawkulus
+192:$4C6D	actor_names_tier_1	Doze Mage
+192:$4C75	actor_names_tier_1	Bad Zalokleft
+192:$4C7B	actor_names_tier_1	Sip Leech
+192:$4C81	actor_names_tier_1	Wily Tanuki
+192:$4C87	actor_names_tier_1	Ether Devil
+192:$4C8F	actor_names_tier_1	Soldier Ant
+192:$4C96	actor_names_tier_1	Skull Mage
+192:$4C9E	actor_names_tier_1	Rock Head
+192:$4CA5	actor_names_tier_1	Lamp Puffer
+192:$4CAD	actor_names_tier_1	Explochin
+192:$4CB4	actor_names_tier_1	Crow Tengu
+192:$4CBB	actor_names_tier_1	Wolf Droid
+192:$4CC1	actor_names_tier_1	Ironhead
+192:$4CC9	actor_names_tier_1	Bat Kangaroo
+192:$4CD2	actor_names_tier_1	Mini Mixer
+192:$4CD9	actor_names_tier_1	Snacky
+192:$4CE0	actor_names_tier_1	Trap Genin
+192:$4CE5	actor_names_tier_1	Bored Kappa
+192:$4CEB	actor_names_tier_1	Sheep Priest
+192:$4CF3	actor_names_tier_1	Punter Scarab
+192:$4CFB	actor_names_tier_1	Gyadon
+192:$4D00	actor_names_tier_1	Samuraidon
+192:$4D07	actor_names_tier_1	Squid King
+192:$4D0D	actor_names_tier_1	Baby Mage
+192:$4D15	actor_names_tier_1	Pitcher Plant
+192:$4D1C	actor_names_tier_1	Alert Fly
+192:$4D23	actor_names_tier_1	Lobber Beetle
+192:$4D2A	actor_names_tier_1	Goggler
+192:$4D30	actor_names_tier_1	Dark Slasher
+192:$4D36	actor_names_tier_1	Daze Hermit
+192:$4D3F	actor_names_tier_1	Dozy Genie
+192:$4D48	actor_names_tier_1	Pot Fisher
+192:$4D50	actor_names_tier_1	Jungarian
+192:$4D58	actor_names_tier_1	Gyaza
+192:$4D5D	actor_names_tier_1	Dark Vassal
+192:$4D64	actor_names_tier_1	Morabi
+192:$4D69	actor_names_tier_1	Glare Snake
+192:$4D6F	actor_names_tier_1	Minion Mouse
+192:$4D76	actor_names_tier_1	Teaser Monkey
+192:$4D7E	actor_names_tier_1	Chintala
+192:$4D83	actor_names_tier_1	King Tusker
+192:$4D87	actor_names_tier_1	Twisty Hani
+192:$4D8F	actor_names_tier_1	Master Chicken
+192:$4D97	actor_names_tier_1	Chicken
+192:$4D9B	actor_names_tier_1	Vampire Baron
+192:$4DA4	actor_names_tier_1	Dagyan
+192:$4DA9	actor_names_tier_1	Zen Guru
+192:$4DB0	actor_names_tier_1	Shady Wisp
+192:$4DB9	actor_names_tier_1	Fog Hermit
+192:$4DC0	actor_names_tier_1	Zagan
+192:$4DC4	actor_names_tier_1	Zagan (Dummy)
+192:$4DCF	actor_names_tier_1	Lord
+192:$4DD4	actor_names_tier_1	Lord (Dummy)
+192:$4DE1	actor_names_tier_1	Curas
+192:$4DE6	actor_names_tier_1	Curas
+192:$4DEB	actor_names_tier_1	Evil God
+192:$4DF0	actor_names_tier_1	Zenmaiger
+192:$4DF7	actor_names_tier_1	Mamo
+192:$4DFB	actor_names_tier_1	Nfuu
+192:$4DFF	actor_names_tier_1	Nfuu (Dummy)
+192:$4E0A	actor_names_tier_1	Impostor
+192:$4E0F	actor_names_tier_1	Onigiri
+192:$4E14	actor_names_tier_1	Imprison Pot
+192:$4E1C	actor_names_tier_1	Sheriff
+192:$4E23	actor_names_tier_1	Guard Dog
+192:$4E28	actor_names_tier_1	Shopkeeper
+192:$4E2D	actor_names_tier_1	Koppa
+192:$4E31	actor_names_tier_1	Koppa (Dummy)
+192:$4E3C	actor_names_tier_1	Pekeji
+192:$4E40	actor_names_tier_1	Pekeji (Dummy)
+192:$4E4B	actor_names_tier_1	Oryu
+192:$4E4F	actor_names_tier_1	Oryu (Dummy)
+192:$4E5B	actor_names_tier_1	Princess Ateka
+192:$4E61	actor_names_tier_1	Sachi
+192:$4E64	actor_names_tier_1	Rookie Guard
+192:$4E6B	actor_names_tier_1	Evil God Part
+192:$4E74	actor_names_tier_1	Mole
+192:$4E78	actor_names_tier_1	Fake Rock Head
+192:$4E81	actor_names_tier_1	Item Shop
+192:$4E88	actor_names_tier_1	Bank
+192:$4E8D	actor_names_tier_1	Ohagi
+192:$4E91	actor_names_tier_1	Kinako
+192:$4E95	actor_names_tier_1	Fortune-teller
+192:$4E9D	actor_names_tier_1	Blacksmith
+192:$4EA2	actor_names_tier_1	Receptionist
+192:$4EA7	actor_names_tier_1	Sabu the Wanderer
+192:$4EAF	actor_names_tier_1	Roku the Wanderer
+192:$4EB7	actor_names_tier_1	Shiro the Wanderer
+192:$4EBF	actor_names_tier_1	Pigeon Handler
+192:$4EC5	actor_names_tier_1	Hachi the Wanderer
+192:$4ECD	actor_names_tier_1	Good
+192:$4ED1	actor_names_tier_1	Torepan
+192:$4ED6	actor_names_tier_1	Rai
+192:$4ED9	actor_names_tier_1	Oro
+192:$4EDC	actor_names_tier_1	Wanda
+192:$4EE0	actor_names_tier_1	Amokachi
+192:$4EE5	actor_names_tier_1	Mekerere
+192:$4EEA	actor_names_tier_1	Ichipeba
+192:$4EEF	actor_names_tier_1	Nipeba
+192:$4EF3	actor_names_tier_1	Sanpeba
+192:$4EF8	actor_names_tier_1	Nuwanko
+192:$4EFD	actor_names_tier_1	Goto
+192:$4F00	actor_names_tier_1	Rihipishi
+192:$4F05	actor_names_tier_1	Sara
+192:$4F08	actor_names_tier_1	Minai
+192:$4F0C	actor_names_tier_1	Kiko
+192:$4F0F	actor_names_tier_1	Tao
+192:$4F12	actor_names_tier_1	Bubuyaro
+192:$4F17	actor_names_tier_1	Shizu
+192:$4F1A	actor_names_tier_1	Collapsed Wanderer
+192:$4F20	actor_names_tier_1	Big Moai
+192:$4F27	actor_names_tier_1	Lord 2
+192:$4F2E	actor_names_tier_1	Lord 2 (Dummy)
+192:$4F3C	actor_names_tier_1	Storehouse Guard
+192:$4F42	actor_names_tier_1	Curas (Transformed)
+192:$4F4F	actor_names_tier_1	Guide
+192:$4F54	actor_names_tier_1	Gaibara
+192:$4F59	actor_names_tier_1	Saruyama
+192:$4F5E	actor_names_tier_1	Bibingida
+192:$4F64	actor_names_tier_1	Songa
+192:$4F68	actor_names_tier_1	Komaru
+192:$4F6C	actor_names_tier_1	Higechiyo
+192:$4F71	actor_names_tier_1	Castle Soldier
+192:$4F78	actor_names_tier_1	Castle Soldier 2
+192:$4F80	actor_names_tier_1	Castle Soldier 3
+192:$50B4	actor_names_tier_2	Invisible Thing
+192:$50BB	actor_names_tier_2	Pit Mamel
+192:$50C3	actor_names_tier_2	Crossbow Boy
+192:$50CB	actor_names_tier_2	Minotaur
+192:$50D2	actor_names_tier_2	Life Rabbit
+192:$50DB	actor_names_tier_2	Hannya Warrior
+192:$50E3	actor_names_tier_2	Ghost Hannya
+192:$50EC	actor_names_tier_2	Scamper Egg
+192:$50F3	actor_names_tier_2	Menbell
+192:$50F9	actor_names_tier_2	Dragon Head
+192:$5101	actor_names_tier_2	Pumphantom
+192:$5109	actor_names_tier_2	Grampa Tank
+192:$5111	actor_names_tier_2	Nigiri Boss
+192:$5119	actor_names_tier_2	Curse Sister
+192:$5122	actor_names_tier_2	Super Gazer
+192:$512A	actor_names_tier_2	Crash Boar
+192:$5133	actor_names_tier_2	Mini Tank
+192:$5139	actor_names_tier_2	Grime
+192:$513D	actor_names_tier_2	Porko
+192:$5143	actor_names_tier_2	Sky Dragon
+192:$514B	actor_names_tier_2	Chrome Armor
+192:$5153	actor_names_tier_2	Hell Reaper
+192:$515B	actor_names_tier_2	Bad Froggucci
+192:$5163	actor_names_tier_2	Dazikon
+192:$516C	actor_names_tier_2	Lockulus
+192:$5173	actor_names_tier_2	Sleep Warlock
+192:$517B	actor_names_tier_2	Gang Zalokleft
+192:$5183	actor_names_tier_2	Slurp Leech
+192:$518C	actor_names_tier_2	Tricky Tanuki
+192:$5194	actor_names_tier_2	Phantom Devil
+192:$519C	actor_names_tier_2	Captain Ant
+192:$51A4	actor_names_tier_2	Skull Wizard
+192:$51AC	actor_names_tier_2	Ogre Rock
+192:$51B4	actor_names_tier_2	Lantern Puffer
+192:$51BB	actor_names_tier_2	Concusschin
+192:$51C2	actor_names_tier_2	Falcon Tengu
+192:$51CA	actor_names_tier_2	Gorilla Bot
+192:$51D0	actor_names_tier_2	Chainhead
+192:$51D8	actor_names_tier_2	Evil Kangaroo
+192:$51E1	actor_names_tier_2	Mini Mixermon
+192:$51E8	actor_names_tier_2	Invisible Thing
+192:$51EF	actor_names_tier_2	Trap Chunin
+192:$51F6	actor_names_tier_2	Kappa Pest
+192:$51FE	actor_names_tier_2	Goat Pastor
+192:$5204	actor_names_tier_2	Striker Scarab
+192:$520C	actor_names_tier_2	Gyairas
+192:$5212	actor_names_tier_2	Taishodon
+192:$521A	actor_names_tier_2	Squid Lord
+192:$5221	actor_names_tier_2	Boy Mage
+192:$5229	actor_names_tier_2	Identify Plant
+192:$5231	actor_names_tier_2	Fink Fly
+192:$5238	actor_names_tier_2	Heaver Beetle
+192:$5240	actor_names_tier_2	Worth Goggler
+192:$5249	actor_names_tier_2	Sneaky Slasher
+192:$5250	actor_names_tier_2	Scold Hermit
+192:$5258	actor_names_tier_2	Groggy Genie
+192:$5261	actor_names_tier_2	Pot Angler
+192:$5269	actor_names_tier_2	Campbellan
+192:$5270	actor_names_tier_2	Killer Gyaza
+192:$5278	actor_names_tier_2	Demon Vassal
+192:$527F	actor_names_tier_2	Warabi
+192:$5284	actor_names_tier_2	Leer Snake
+192:$528C	actor_names_tier_2	Mobster Mouse
+192:$5294	actor_names_tier_2	Derider Monkey
+192:$529C	actor_names_tier_2	Mid Chintala
+192:$52A4	actor_names_tier_2	Monarch Tusker
+192:$52AA	actor_names_tier_2	Invisible Thing
+192:$52B1	actor_names_tier_2	Great Chicken
+192:$52B9	actor_names_tier_2	Invisible Thing
+192:$52C0	actor_names_tier_2	Vampire Duke
+192:$52C9	actor_names_tier_2	Dagyagan
+192:$52D1	actor_names_tier_2	Zen Monk
+192:$52D9	actor_names_tier_2	Fearful Wisp
+192:$52E2	actor_names_tier_2	Haze Hermit
+192:$52E9	actor_names_tier_2	Invisible Thing
+192:$52F0	actor_names_tier_2	Invisible Thing
+192:$52F7	actor_names_tier_2	Invisible Thing
+192:$52FE	actor_names_tier_2	Invisible Thing
+192:$5305	actor_names_tier_2	Invisible Thing
+192:$530C	actor_names_tier_2	Invisible Thing
+192:$5313	actor_names_tier_2	Invisible Thing
+192:$531A	actor_names_tier_2	Royal Wind
+192:$5322	actor_names_tier_2	Invisible Thing
+192:$5329	actor_names_tier_2	Nfuu
+192:$532D	actor_names_tier_2	Invisible Thing
+192:$5334	actor_names_tier_2	Invisible Thing
+192:$533B	actor_names_tier_2	Invisible Thing
+192:$5342	actor_names_tier_2	Imprison Pot
+192:$534A	actor_names_tier_2	Detective
+192:$5350	actor_names_tier_2	Fierce Dog
+192:$5355	actor_names_tier_2	Shopkeeper
+192:$535A	actor_names_tier_2	Invisible Thing
+192:$5361	actor_names_tier_2	Invisible Thing
+192:$5368	actor_names_tier_2	Pekeji
+192:$536C	actor_names_tier_2	Invisible Thing
+192:$5373	actor_names_tier_2	Oryu
+192:$5377	actor_names_tier_2	Invisible Thing
+192:$537E	actor_names_tier_2	Invisible Thing
+192:$5385	actor_names_tier_2	Invisible Thing
+192:$538C	actor_names_tier_2	Strong Guard
+192:$5395	actor_names_tier_2	Evil God Part
+192:$539E	actor_names_tier_2	Blue Mole
+192:$53A4	actor_names_tier_2	Fake Rock Head
+192:$53AD	actor_names_tier_2	Invisible Thing
+192:$53B4	actor_names_tier_2	Invisible Thing
+192:$53BB	actor_names_tier_2	Invisible Thing
+192:$53C2	actor_names_tier_2	Invisible Thing
+192:$53C9	actor_names_tier_2	Invisible Thing
+192:$53D0	actor_names_tier_2	Invisible Thing
+192:$53D7	actor_names_tier_2	Invisible Thing
+192:$53DE	actor_names_tier_2	Invisible Thing
+192:$53E5	actor_names_tier_2	Invisible Thing
+192:$53EC	actor_names_tier_2	Invisible Thing
+192:$53F3	actor_names_tier_2	Invisible Thing
+192:$53FA	actor_names_tier_2	Invisible Thing
+192:$5401	actor_names_tier_2	Invisible Thing
+192:$5408	actor_names_tier_2	Invisible Thing
+192:$540F	actor_names_tier_2	Invisible Thing
+192:$5416	actor_names_tier_2	Invisible Thing
+192:$541D	actor_names_tier_2	Invisible Thing
+192:$5424	actor_names_tier_2	Invisible Thing
+192:$542B	actor_names_tier_2	Invisible Thing
+192:$5432	actor_names_tier_2	Invisible Thing
+192:$5439	actor_names_tier_2	Invisible Thing
+192:$5440	actor_names_tier_2	Invisible Thing
+192:$5447	actor_names_tier_2	Invisible Thing
+192:$544E	actor_names_tier_2	Invisible Thing
+192:$5455	actor_names_tier_2	Invisible Thing
+192:$545C	actor_names_tier_2	Invisible Thing
+192:$5463	actor_names_tier_2	Invisible Thing
+192:$546A	actor_names_tier_2	Invisible Thing
+192:$5471	actor_names_tier_2	Invisible Thing
+192:$5478	actor_names_tier_2	Invisible Thing
+192:$547F	actor_names_tier_2	Invisible Thing
+192:$5486	actor_names_tier_2	Invisible Thing
+192:$548D	actor_names_tier_2	Invisible Thing
+192:$5494	actor_names_tier_2	Invisible Thing
+192:$549B	actor_names_tier_2	Invisible Thing
+192:$54A2	actor_names_tier_2	Invisible Thing
+192:$54A9	actor_names_tier_2	Invisible Thing
+192:$54B0	actor_names_tier_2	Invisible Thing
+192:$54B7	actor_names_tier_2	Invisible Thing
+192:$54BE	actor_names_tier_2	Invisible Thing
+192:$54C5	actor_names_tier_2	Invisible Thing
+192:$54CC	actor_names_tier_2	Invisible Thing
+192:$54D3	actor_names_tier_2	Invisible Thing
+192:$54DA	actor_names_tier_2	Invisible Thing
+192:$54E1	actor_names_tier_2	Invisible Thing
+192:$54E8	actor_names_tier_2	Invisible Thing
+192:$54EF	actor_names_tier_2	Invisible Thing
+192:$5622	actor_names_tier_3	Invisible Thing
+192:$5629	actor_names_tier_3	Cave Mamel
+192:$5631	actor_names_tier_3	Invisible Thing
+192:$5638	actor_names_tier_3	Megataur
+192:$563F	actor_names_tier_3	Invisible Thing
+192:$5646	actor_names_tier_3	Shogun
+192:$564C	actor_names_tier_3	Ghost Shogun
+192:$5655	actor_names_tier_3	Leaping Egg
+192:$565C	actor_names_tier_3	Bellthoven
+192:$5663	actor_names_tier_3	Tunnel Dragon
+192:$566B	actor_names_tier_3	Pumpanshee
+192:$5673	actor_names_tier_3	Ornery Tank
+192:$567C	actor_names_tier_3	Nigiri Master
+192:$5684	actor_names_tier_3	Curse Mom
+192:$568D	actor_names_tier_3	Hyper Gazer
+192:$5695	actor_names_tier_3	Wrecker Boar
+192:$569E	actor_names_tier_3	Invisible Thing
+192:$56A5	actor_names_tier_3	Ooze
+192:$56A9	actor_names_tier_3	Porkon
+192:$56AF	actor_names_tier_3	Archdragon
+192:$56B7	actor_names_tier_3	Titanium Armor
+192:$56BF	actor_names_tier_3	Grim Reaper
+192:$56C4	actor_names_tier_3	Bad Froggon
+192:$56CB	actor_names_tier_3	Dozikon
+192:$56D3	actor_names_tier_3	Hawkulus
+192:$56DB	actor_names_tier_3	Slumber Wizard
+192:$56E3	actor_names_tier_3	Mob Zalokleft
+192:$56EC	actor_names_tier_3	Gulp Leech
+192:$56F3	actor_names_tier_3	Crafty Tanuki
+192:$56FB	actor_names_tier_3	Mirage Devil
+192:$5702	actor_names_tier_3	General Ant
+192:$570A	actor_names_tier_3	Skull Wraith
+192:$5712	actor_names_tier_3	Demon Rock
+192:$571B	actor_names_tier_3	Beacon Puffer
+192:$5722	actor_names_tier_3	Fulminachin
+192:$572A	actor_names_tier_3	Eagle Tengu
+192:$5732	actor_names_tier_3	Bear Borg
+192:$5738	actor_names_tier_3	Gigahead
+192:$573E	actor_names_tier_3	Devil Kangaroo
+192:$5747	actor_names_tier_3	Mini Mixergon
+192:$574E	actor_names_tier_3	Invisible Thing
+192:$5755	actor_names_tier_3	Trap Jonin
+192:$575C	actor_names_tier_3	Vexing Kappa
+192:$5764	actor_names_tier_3	Gazelle Pope
+192:$576D	actor_names_tier_3	Kicker Scarab
+192:$5775	actor_names_tier_3	Gyandora
+192:$577C	actor_names_tier_3	Tonosamadon
+192:$5783	actor_names_tier_3	Squid Emperor
+192:$578B	actor_names_tier_3	Brat Mage
+192:$5794	actor_names_tier_3	Blessing Plant
+192:$579D	actor_names_tier_3	Nark Fly
+192:$57A4	actor_names_tier_3	Slinger Beetle
+192:$57AC	actor_names_tier_3	Glenn Goggler
+192:$57B5	actor_names_tier_3	Shadow Slasher
+192:$57BD	actor_names_tier_3	Spry Hermit
+192:$57C6	actor_names_tier_3	Sleepy Genie
+192:$57CF	actor_names_tier_3	Pot Giller
+192:$57D9	actor_names_tier_3	Blackbelly
+192:$57DF	actor_names_tier_3	Hell Gyaza
+192:$57E6	actor_names_tier_3	Sable Vassal
+192:$57EE	actor_names_tier_3	Takabi
+192:$57F3	actor_names_tier_3	Ogle Snake
+192:$57FA	actor_names_tier_3	Skipper Mouse
+192:$5802	actor_names_tier_3	Mocker Monkey
+192:$580A	actor_names_tier_3	Big Chintala
+192:$5811	actor_names_tier_3	Emperor Tusker
+192:$5818	actor_names_tier_3	Invisible Thing
+192:$581F	actor_names_tier_3	Invisible Thing
+192:$5826	actor_names_tier_3	Invisible Thing
+192:$582D	actor_names_tier_3	Vampire Tyrant
+192:$5835	actor_names_tier_3	Dagyagyagan
+192:$583E	actor_names_tier_3	Zen Priest
+192:$5847	actor_names_tier_3	Wailing Wisp
+192:$5850	actor_names_tier_3	Mist Hermit
+192:$5858	actor_names_tier_3	Invisible Thing
+192:$585F	actor_names_tier_3	Invisible Thing
+192:$5866	actor_names_tier_3	Invisible Thing
+192:$586D	actor_names_tier_3	Invisible Thing
+192:$5874	actor_names_tier_3	Invisible Thing
+192:$587B	actor_names_tier_3	Invisible Thing
+192:$5882	actor_names_tier_3	Invisible Thing
+192:$5889	actor_names_tier_3	Hydro Rover
+192:$5891	actor_names_tier_3	Invisible Thing
+192:$5898	actor_names_tier_3	Nfuu
+192:$589C	actor_names_tier_3	Invisible Thing
+192:$58A3	actor_names_tier_3	Invisible Thing
+192:$58AA	actor_names_tier_3	Invisible Thing
+192:$58B1	actor_names_tier_3	Imprison Pot
+192:$58B9	actor_names_tier_3	Jitte
+192:$58C0	actor_names_tier_3	Fighter Dog
+192:$58C5	actor_names_tier_3	Shopkeeper
+192:$58CA	actor_names_tier_3	Invisible Thing
+192:$58D1	actor_names_tier_3	Invisible Thing
+192:$58D8	actor_names_tier_3	Pekeji
+192:$58DC	actor_names_tier_3	Invisible Thing
+192:$58E3	actor_names_tier_3	Oryu
+192:$58E7	actor_names_tier_3	Invisible Thing
+192:$58EE	actor_names_tier_3	Invisible Thing
+192:$58F5	actor_names_tier_3	Invisible Thing
+192:$58FC	actor_names_tier_3	Dragon Guard
+192:$5905	actor_names_tier_3	Evil God Part
+192:$590E	actor_names_tier_3	Invisible Thing
+192:$5915	actor_names_tier_3	Fake Rock Head
+192:$591E	actor_names_tier_3	Invisible Thing
+192:$5925	actor_names_tier_3	Invisible Thing
+192:$592C	actor_names_tier_3	Invisible Thing
+192:$5933	actor_names_tier_3	Invisible Thing
+192:$593A	actor_names_tier_3	Invisible Thing
+192:$5941	actor_names_tier_3	Invisible Thing
+192:$5948	actor_names_tier_3	Invisible Thing
+192:$594F	actor_names_tier_3	Invisible Thing
+192:$5956	actor_names_tier_3	Invisible Thing
+192:$595D	actor_names_tier_3	Invisible Thing
+192:$5964	actor_names_tier_3	Invisible Thing
+192:$596B	actor_names_tier_3	Invisible Thing
+192:$5972	actor_names_tier_3	Invisible Thing
+192:$5979	actor_names_tier_3	Invisible Thing
+192:$5980	actor_names_tier_3	Invisible Thing
+192:$5987	actor_names_tier_3	Invisible Thing
+192:$598E	actor_names_tier_3	Invisible Thing
+192:$5995	actor_names_tier_3	Invisible Thing
+192:$599C	actor_names_tier_3	Invisible Thing
+192:$59A3	actor_names_tier_3	Invisible Thing
+192:$59AA	actor_names_tier_3	Invisible Thing
+192:$59B1	actor_names_tier_3	Invisible Thing
+192:$59B8	actor_names_tier_3	Invisible Thing
+192:$59BF	actor_names_tier_3	Invisible Thing
+192:$59C6	actor_names_tier_3	Invisible Thing
+192:$59CD	actor_names_tier_3	Invisible Thing
+192:$59D4	actor_names_tier_3	Invisible Thing
+192:$59DB	actor_names_tier_3	Invisible Thing
+192:$59E2	actor_names_tier_3	Invisible Thing
+192:$59E9	actor_names_tier_3	Invisible Thing
+192:$59F0	actor_names_tier_3	Invisible Thing
+192:$59F7	actor_names_tier_3	Invisible Thing
+192:$59FE	actor_names_tier_3	Invisible Thing
+192:$5A05	actor_names_tier_3	Invisible Thing
+192:$5A0C	actor_names_tier_3	Invisible Thing
+192:$5A13	actor_names_tier_3	Invisible Thing
+192:$5A1A	actor_names_tier_3	Invisible Thing
+192:$5A21	actor_names_tier_3	Invisible Thing
+192:$5A28	actor_names_tier_3	Invisible Thing
+192:$5A2F	actor_names_tier_3	Invisible Thing
+192:$5A36	actor_names_tier_3	Invisible Thing
+192:$5A3D	actor_names_tier_3	Invisible Thing
+192:$5A44	actor_names_tier_3	Invisible Thing
+192:$5A4B	actor_names_tier_3	Invisible Thing
+192:$5A52	actor_names_tier_3	Invisible Thing
+192:$5A59	actor_names_tier_3	Invisible Thing
+192:$5A60	actor_names_tier_3	Invisible Thing
+192:$5C17	identified_item_names	Talisman
+192:$5C1C	identified_item_names	Cudgel
+192:$5C21	identified_item_names	Bronze Sword
+192:$5C2B	identified_item_names	Katana
+192:$5C2F	identified_item_names	Doutanuki
+192:$5C35	identified_item_names	Dragonkiller
+192:$5C3D	identified_item_names	Manji Kabura
+192:$5C48	identified_item_names	Sickle of Salvation
+192:$5C51	identified_item_names	Pickaxe
+192:$5C56	identified_item_names	Adamant Pickaxe
+192:$5C5F	identified_item_names	Accurate Sword
+192:$5C67	identified_item_names	Axe of the Minotaur
+192:$5C71	identified_item_names	Kama Itachi
+192:$5C7B	identified_item_names	Cyclops Bane
+192:$5C83	identified_item_names	Drain Slayer
+192:$5C8C	identified_item_names	Kajin Fuuma
+192:$5C97	identified_item_names	Kabura Sutegi
+192:$5CA2	identified_item_names	Mamel Sword
+192:$5CA9	identified_item_names	Power Pole
+192:$5CAF	identified_item_names	Cell Armor Sword
+192:$5CB9	identified_item_names	Break-Off Blade
+192:$5CC2	identified_item_names	Wooden Mallet
+192:$5CC7	identified_item_names	Jagged Sword
+192:$5CCF	identified_item_names	Healing Sword
+192:$5CD7	identified_item_names	Ookabuto Axe
+192:$5CE0	identified_item_names	Demon Slayer
+192:$5CE8	identified_item_names	Aura Spear
+192:$5CF0	identified_item_names	Bufu's Cleaver
+192:$5CF9	identified_item_names	Chaos Axe
+192:$5D01	identified_item_names	Soul Sickle
+192:$5D09	identified_item_names	Air Slayer
+192:$5D10	identified_item_names	Crescent Blade
+192:$5D19	identified_item_names	Fuuma Katana
+192:$5D20	identified_item_names	Hidamari's Sword
+192:$5D28	identified_item_names	Ration Shield
+192:$5D30	identified_item_names	Bronzeward
+192:$5D3A	identified_item_names	Wood Shield
+192:$5D42	identified_item_names	Iron Shield
+192:$5D4A	identified_item_names	Dragonward
+192:$5D53	identified_item_names	Windshield
+192:$5D5B	identified_item_names	Spiked Ward
+192:$5D64	identified_item_names	Armor Ward
+192:$5D6C	identified_item_names	Echo Shield
+192:$5D74	identified_item_names	Evasive Shield
+192:$5D7D	identified_item_names	Demon Shield
+192:$5D85	identified_item_names	Fragile Shield
+192:$5D8E	identified_item_names	Blast Shield
+192:$5D99	identified_item_names	Walrus Shield
+192:$5D9F	identified_item_names	Stormward
+192:$5DAA	identified_item_names	Mamel Shield
+192:$5DB1	identified_item_names	Kabra's Armor
+192:$5DBC	identified_item_names	Missile Shield
+192:$5DC4	identified_item_names	Deflect Shield
+192:$5DCD	identified_item_names	Curseless Shield
+192:$5DD6	identified_item_names	Karakuroid Shield
+192:$5DE0	identified_item_names	Pickpocket Shield
+192:$5DE7	identified_item_names	Happy Shield
+192:$5DEF	identified_item_names	Power Shield
+192:$5DF7	identified_item_names	Satori Shield
+192:$5DFE	identified_item_names	Prism Shield
+192:$5E06	identified_item_names	Ookabuto Shield
+192:$5E0F	identified_item_names	Keshin Shield
+192:$5E16	identified_item_names	Unused Shield 2
+192:$5E1A	identified_item_names	Passage Bracelet
+192:$5E23	identified_item_names	Trapper's Bracelet
+192:$5E2C	identified_item_names	Healing Bracelet
+192:$5E36	identified_item_names	Dreaded Bracelet
+192:$5E40	identified_item_names	Cursebreak Bracelet
+192:$5E4B	identified_item_names	Far-throwing Bracelet
+192:$5E55	identified_item_names	Item-losing Bracelet
+192:$5E60	identified_item_names	Clairvoyant Bracelet
+192:$5E69	identified_item_names	Focusing Bracelet
+192:$5E75	identified_item_names	Strength Bracelet
+192:$5E7E	identified_item_names	Leaping Bracelet
+192:$5E88	identified_item_names	Diet Bracelet
+192:$5E93	identified_item_names	Binge Bracelet
+192:$5E9D	identified_item_names	Search Bracelet
+192:$5EA7	identified_item_names	Antidrain Bracelet
+192:$5EB3	identified_item_names	Loud Bracelet
+192:$5EBD	identified_item_names	Turn Bracelet
+192:$5EC6	identified_item_names	Paper Bracelet
+192:$5ED1	identified_item_names	Explosive Bracelet
+192:$5EDB	identified_item_names	Miss Bracelet
+192:$5EE5	identified_item_names	Trap Seek Bracelet
+192:$5EEF	identified_item_names	Swipe Bracelet
+192:$5EF9	identified_item_names	No-Control Bracelet
+192:$5F03	identified_item_names	Anti-Feeble Bracelet
+192:$5F0D	identified_item_names	Sturdy Bracelet
+192:$5F18	identified_item_names	Golden Bracelet
+192:$5F20	identified_item_names	Nfu Bracelet
+192:$5F29	identified_item_names	Wooden Arrow
+192:$5F2F	identified_item_names	Iron Arrow
+192:$5F35	identified_item_names	Silver Arrow
+192:$5F3B	identified_item_names	Knockback Arrow
+192:$5F44	identified_item_names	Fatal Arrow
+192:$5F4B	identified_item_names	Poison Arrow
+192:$5F50	identified_item_names	Karanba Arrow
+192:$5F58	identified_item_names	Onigiri
+192:$5F5D	identified_item_names	Large Onigiri
+192:$5F66	identified_item_names	Rotten Onigiri
+192:$5F70	identified_item_names	Huge Onigiri
+192:$5F7A	identified_item_names	Special Onigiri
+192:$5F83	identified_item_names	Meat
+192:$5F86	identified_item_names	Bufu's Riceball
+192:$5F8F	identified_item_names	Herb
+192:$5F94	identified_item_names	Otogirisou
+192:$5F9B	identified_item_names	Seewell Grass
+192:$5FA2	identified_item_names	Dragon Grass
+192:$5FA9	identified_item_names	Revival Grass
+192:$5FB0	identified_item_names	Life Grass
+192:$5FB6	identified_item_names	Bellyexpand Seed
+192:$5FC0	identified_item_names	Bellyshrink Seed
+192:$5FCB	identified_item_names	Fortune Grass
+192:$5FD2	identified_item_names	Angel Seed
+192:$5FD9	identified_item_names	Unlucky Seed
+192:$5FE0	identified_item_names	Antidote Grass
+192:$5FE7	identified_item_names	Strength Grass
+192:$5FEE	identified_item_names	Poison Grass
+192:$5FF3	identified_item_names	Confusion Grass
+192:$5FFA	identified_item_names	Sedating Grass
+192:$6001	identified_item_names	Weeds
+192:$6006	identified_item_names	Leaping Grass
+192:$600D	identified_item_names	Swift Grass
+192:$6014	identified_item_names	Ranzan Herb
+192:$601C	identified_item_names	Identifier Scroll
+192:$6026	identified_item_names	Mapping Scroll
+192:$602F	identified_item_names	Pot-upsize Scroll
+192:$603B	identified_item_names	Windblade Scroll
+192:$6047	identified_item_names	Muzzle Scroll
+192:$6051	identified_item_names	Swift Foe Scroll
+192:$605B	identified_item_names	Slumber Scroll
+192:$6065	identified_item_names	Power Up Scroll
+192:$6071	identified_item_names	Explosion Scroll
+192:$607A	identified_item_names	Wall-less Scroll
+192:$6086	identified_item_names	Monstercall Scroll
+192:$6091	identified_item_names	Confusion Scroll
+192:$609B	identified_item_names	Eradication Scroll
+192:$60A5	identified_item_names	Jitters Scroll
+192:$60AF	identified_item_names	Extraction Scroll
+192:$60B9	identified_item_names	Carry-ban Scroll
+192:$60C3	identified_item_names	Exorcism Scroll
+192:$60CD	identified_item_names	Heavenly Scroll
+192:$60D9	identified_item_names	Earthly Scroll
+192:$60E5	identified_item_names	Plating Scroll
+192:$60EE	identified_item_names	Escape Scroll
+192:$60F9	identified_item_names	Trap Scroll
+192:$6101	identified_item_names	Blank Scroll
+192:$610A	identified_item_names	Sanctuary Scroll
+192:$6114	identified_item_names	Failure Scroll
+192:$6120	identified_item_names	Trap-eraser Scroll
+192:$612A	identified_item_names	Sturdy Jar Scroll
+192:$6135	identified_item_names	Restock Scroll
+192:$6141	identified_item_names	Attraction Scroll
+192:$614B	identified_item_names	Monster Recover Scroll
+192:$6158	identified_item_names	Big Explosion Scroll
+192:$6164	identified_item_names	Unexploded Scroll
+192:$616D	identified_item_names	Sumeragi Scroll
+192:$6177	identified_item_names	Squid Sushi Scroll
+192:$6181	identified_item_names	Knockback Staff
+192:$618A	identified_item_names	Fortune Staff
+192:$6192	identified_item_names	Unlucky Staff
+192:$6199	identified_item_names	Disguising Staff
+192:$61A1	identified_item_names	Switching Staff
+192:$61AA	identified_item_names	Skull Staff
+192:$61B1	identified_item_names	Paralyzing Staff
+192:$61BA	identified_item_names	Narrow-escape Staff
+192:$61C4	identified_item_names	Empathetic Staff
+192:$61CD	identified_item_names	Sealing Staff
+192:$61D5	identified_item_names	Change Staff
+192:$61DC	identified_item_names	Failure Staff
+192:$61E4	identified_item_names	Herb Effect Staff
+192:$61EC	identified_item_names	Herb Reception Staff
+192:$61F4	identified_item_names	Burrowing Staff
+192:$61FC	identified_item_names	Balance Staff
+192:$6206	identified_item_names	Invisible Staff
+192:$620E	identified_item_names	Quarter Staff
+192:$6217	identified_item_names	Attract Staff
+192:$621F	identified_item_names	Bufu's Staff
+192:$6226	identified_item_names	Raging Staff
+192:$622D	identified_item_names	Accelerating Staff
+192:$6235	identified_item_names	Vaulting Staff
+192:$623D	identified_item_names	Flash Bomb Staff
+192:$6247	identified_item_names	Tenjin Staff
+192:$624F	identified_item_names	Friendship Staff
+192:$6258	identified_item_names	Preservation Pot
+192:$625F	identified_item_names	Upgrading Pot
+192:$6267	identified_item_names	Identifier Pot
+192:$626F	identified_item_names	Healing Pot
+192:$6277	identified_item_names	Degrading Pot
+192:$627F	identified_item_names	Transmutation Pot
+192:$6286	identified_item_names	Synthesis Pot
+192:$628E	identified_item_names	Sealing Pot
+192:$6296	identified_item_names	Absorb Pot
+192:$62A0	identified_item_names	Cannon Pot
+192:$62A8	identified_item_names	Water Pot
+192:$62AD	identified_item_names	Curse Pot
+192:$62B4	identified_item_names	Blessing Pot
+192:$62BD	identified_item_names	Teleport Pot
+192:$62C8	identified_item_names	Ordinary Pot
+192:$62CF	identified_item_names	Gimensha Pot
+192:$62D8	identified_item_names	Gitan
+192:$62DC	identified_item_names	Meat
+192:$62DF	identified_item_names	Stairs
+192:$62E4	identified_item_names	Trap Parts
+192:$62EA	identified_item_names	Kasa Tanuki
+192:$62F0	identified_item_names	Karakasa Tanuki
+192:$62F8	identified_item_names	Tantan Tanuki
+192:$6300	identified_item_names	Silver Talisman
+192:$6308	identified_item_names	Gold Talisman
+192:$6310	identified_item_names	Dragon Breath
+192:$6318	identified_item_names	Cannonball
+192:$6320	identified_item_names	Rock
+192:$6323	identified_item_names	All-purpose Staff
+192:$632B	identified_item_names	Water
+192:$632E	identified_item_names	Monster
+192:$6334	identified_item_names	's Ability
+192:$642F	unidentified_item_appearances	Diamond Bracelet
+192:$6438	unidentified_item_appearances	Pearl Bracelet
+192:$6441	unidentified_item_appearances	Ruby Bracelet
+192:$644A	unidentified_item_appearances	Sapphire Bracelet
+192:$6455	unidentified_item_appearances	Coral Bracelet
+192:$645E	unidentified_item_appearances	Turquoise Bracelet
+192:$6469	unidentified_item_appearances	Emerald Bracelet
+192:$6474	unidentified_item_appearances	Amethyst Bracelet
+192:$647F	unidentified_item_appearances	Opal Bracelet
+192:$6489	unidentified_item_appearances	Jade Bracelet
+192:$6492	unidentified_item_appearances	Amber Bracelet
+192:$649B	unidentified_item_appearances	Topaz Bracelet
+192:$64A5	unidentified_item_appearances	Banded Agate Bracelet
+192:$64AE	unidentified_item_appearances	Zirconia Bracelet
+192:$64B9	unidentified_item_appearances	Garnet Bracelet
+192:$64C4	unidentified_item_appearances	Cattleya Bracelet
+192:$64CE	unidentified_item_appearances	Platinum Bracelet
+192:$64D8	unidentified_item_appearances	Crystal Bracelet
+192:$64E3	unidentified_item_appearances	Peridot Bracelet
+192:$64EE	unidentified_item_appearances	Aquamarine Bracelet
+192:$64FA	unidentified_item_appearances	Pearlescent Bracelet
+192:$6504	unidentified_item_appearances	Apatite Bracelet
+192:$650F	unidentified_item_appearances	Agate Bracelet
+192:$6519	unidentified_item_appearances	Citrine Bracelet
+192:$6523	unidentified_item_appearances	Amazonite Bracelet
+192:$652F	unidentified_item_appearances	Alabaster Bracelet
+192:$653B	unidentified_item_appearances	Cat's Eye Bracelet
+192:$6547	unidentified_item_appearances	Red Grass
+192:$654D	unidentified_item_appearances	Blue Grass
+192:$6553	unidentified_item_appearances	Yellow Grass
+192:$655A	unidentified_item_appearances	Green Grass
+192:$6561	unidentified_item_appearances	White Grass
+192:$6567	unidentified_item_appearances	Black Grass
+192:$656D	unidentified_item_appearances	Brown Grass
+192:$6575	unidentified_item_appearances	Gray Grass
+192:$657D	unidentified_item_appearances	Aqua Grass
+192:$6585	unidentified_item_appearances	Rose Grass
+192:$658D	unidentified_item_appearances	Pink Grass
+192:$6594	unidentified_item_appearances	Black-and-White Grass
+192:$659C	unidentified_item_appearances	Peppermint Grass
+192:$65A4	unidentified_item_appearances	Peach Grass
+192:$65AC	unidentified_item_appearances	Golden Grass
+192:$65B4	unidentified_item_appearances	Silver Grass
+192:$65BC	unidentified_item_appearances	Sky Blue Grass
+192:$65C4	unidentified_item_appearances	Dark Green Grass
+192:$65CD	unidentified_item_appearances	Indigo Grass
+192:$65D6	unidentified_item_appearances	Ochre Grass
+192:$65DF	unidentified_item_appearances	Mouse Scroll
+192:$65E8	unidentified_item_appearances	Cow Scroll
+192:$65F0	unidentified_item_appearances	Tiger Scroll
+192:$65F8	unidentified_item_appearances	Rabbit Scroll
+192:$6601	unidentified_item_appearances	Dragon Scroll
+192:$660A	unidentified_item_appearances	Snake Scroll
+192:$6612	unidentified_item_appearances	Horse Scroll
+192:$661A	unidentified_item_appearances	Sheep Scroll
+192:$6623	unidentified_item_appearances	Monkey Scroll
+192:$662B	unidentified_item_appearances	Eagle Scroll
+192:$6633	unidentified_item_appearances	Dog Scroll
+192:$663B	unidentified_item_appearances	Hawk Scroll
+192:$6643	unidentified_item_appearances	Cat Scroll
+192:$664B	unidentified_item_appearances	Deer Scroll
+192:$6653	unidentified_item_appearances	Frog Scroll
+192:$665C	unidentified_item_appearances	Elephant Scroll
+192:$6664	unidentified_item_appearances	Giraffe Scroll
+192:$666D	unidentified_item_appearances	Turtle Scroll
+192:$6675	unidentified_item_appearances	Crane Scroll
+192:$667D	unidentified_item_appearances	Fox Scroll
+192:$6686	unidentified_item_appearances	Raccoon Scroll
+192:$668F	unidentified_item_appearances	Crow Scroll
+192:$6698	unidentified_item_appearances	Gator Scroll
+192:$66A0	unidentified_item_appearances	Bear Scroll
+192:$66A8	unidentified_item_appearances	Sparrow Scroll
+192:$66B1	unidentified_item_appearances	Hippo Scroll
+192:$66B9	unidentified_item_appearances	Lizard Scroll
+192:$66C2	unidentified_item_appearances	Owl Scroll
+192:$66CC	unidentified_item_appearances	Rhino Scroll
+192:$66D4	unidentified_item_appearances	Camel Scroll
+192:$66DD	unidentified_item_appearances	Lion Scroll
+192:$66E7	unidentified_item_appearances	Marmot Scroll
+192:$66EF	unidentified_item_appearances	Wolf Scroll
+192:$66F9	unidentified_item_appearances	Reindeer Scroll
+192:$6703	unidentified_item_appearances	Cherry Staff
+192:$670A	unidentified_item_appearances	Plum Staff
+192:$6710	unidentified_item_appearances	Pinyon Staff
+192:$6716	unidentified_item_appearances	Bamboo Staff
+192:$671C	unidentified_item_appearances	Cedar Staff
+192:$6722	unidentified_item_appearances	Sallows Staff
+192:$6729	unidentified_item_appearances	Chestnut Staff
+192:$672F	unidentified_item_appearances	Zelkova Staff
+192:$6736	unidentified_item_appearances	Deutzia Staff
+192:$673D	unidentified_item_appearances	Goji Staff
+192:$6743	unidentified_item_appearances	Snowbell Staff
+192:$674B	unidentified_item_appearances	Camellia Staff
+192:$6752	unidentified_item_appearances	Holly Staff
+192:$675A	unidentified_item_appearances	Gardenia Staff
+192:$6762	unidentified_item_appearances	Red Pine Staff
+192:$676A	unidentified_item_appearances	Cypress Staff
+192:$6771	unidentified_item_appearances	Fir Staff
+192:$6777	unidentified_item_appearances	Oak Staff
+192:$677D	unidentified_item_appearances	Ginkgo Staff
+192:$6785	unidentified_item_appearances	Loquat Staff
+192:$678B	unidentified_item_appearances	Red Maple Staff
+192:$6792	unidentified_item_appearances	Udo Staff
+192:$6798	unidentified_item_appearances	Bush Clover Staff
+192:$679E	unidentified_item_appearances	Sawtooth Oak Staff
+192:$67A5	unidentified_item_appearances	Kumquat Staff
+192:$67AD	unidentified_item_appearances	Japanese Aralia Staff
+192:$67B4	unidentified_item_appearances	Round Pot
+192:$67BA	unidentified_item_appearances	Square Pot
+192:$67C1	unidentified_item_appearances	Angular Pot
+192:$67C9	unidentified_item_appearances	Star Pot
+192:$67D1	unidentified_item_appearances	Long Pot
+192:$67D7	unidentified_item_appearances	Thin Pot
+192:$67DD	unidentified_item_appearances	Thick Pot
+192:$67E3	unidentified_item_appearances	Shallow Pot
+192:$67E9	unidentified_item_appearances	Deep Pot
+192:$67EF	unidentified_item_appearances	Heavy Pot
+192:$67F5	unidentified_item_appearances	Slender Pot
+192:$67FB	unidentified_item_appearances	Small Pot
+192:$6802	unidentified_item_appearances	Large Pot
+192:$6809	unidentified_item_appearances	Sharp Pot
+192:$6810	unidentified_item_appearances	Warped Pot
+192:$6817	unidentified_item_appearances	Hexagonal Pot
+193:$5429	trap_names	Poison Arrow Trap
+193:$5431	trap_names	Pitfall Trap
+193:$5437	trap_names	Curse Trap
+193:$543E	trap_names	Spring Trap
+193:$5441	trap_names	Trip Stone
+193:$5447	trap_names	Rust Trap
+193:$544C	trap_names	Alarm Switch
+193:$5454	trap_names	Summoning Trap
+193:$545E	trap_names	Removal Trap
+193:$5465	trap_names	Rockfall Trap
+193:$546D	trap_names	Hunger Trap
+193:$5475	trap_names	Rotting Trap
+193:$547C	trap_names	Spinning Trap
+193:$5483	trap_names	Landmine Trap
+193:$5488	trap_names	Big Landmine Trap
+193:$5491	trap_names	Sluggish Trap
+193:$5499	trap_names	Sleep Trap
+193:$549F	trap_names	Wooden Arrow Trap
+193:$54A8	trap_names	Log Trap
+193:$54AF	trap_names	Iron Arrow Trap
+193:$54B8	trap_names	Flood Trap
+193:$54C0	trap_names	Rage Trap
+193:$6ECE	location_names	Town of Ilpa
+193:$6ED9	location_names	Castle Dungeon
+193:$6EE4	location_names	Ancient Ruins
+193:$6EED	location_names	Castle Tower
+193:$6EFA	location_names	Castle Keep
+193:$6F07	location_names	Jahannam's Gate
+193:$6F11	location_names	Abyssal Depths
+193:$6F1A	location_names	Tonfan's Hole
+193:$6F23	location_names	Wanado
+193:$6F30	location_names	Smith's Forge
+193:$6F3B	location_names	Pot Cave
+193:$6F43	location_names	Road to Rescue
+193:$6F4C	location_names	Training Dungeon
+193:$6F56	location_names	Town of Ilpa
+193:$6FC7	location_names	Town of Ilpa
+193:$6FD2	location_names	Castle Dungeon
+193:$6FDD	location_names	Ancient Ruins
+193:$6FE6	location_names	Closed Room
+193:$6FF1	location_names	Inner Ramparts
+193:$6FFB	location_names	Tono Gate Shrine
+193:$7004	location_names	Second Bailey
+193:$700F	location_names	Dark Chamber
+193:$7017	location_names	Castle Tower
+193:$7024	location_names	Castle Walls
+193:$702D	location_names	Main Bailey
+193:$7036	location_names	Murky Tower
+193:$703D	location_names	Hall of Carnage
+193:$7045	location_names	Silver Chamber
+193:$704B	location_names	Gold Chamber
+193:$7051	location_names	Top Chamber
+193:$7059	location_names	Castle Keep
+193:$7066	location_names	Jahannam's Gate
+193:$7070	location_names	Dark Depths
+193:$7078	location_names	Final Gate
+193:$7080	location_names	Evil God's Lair
+193:$708D	location_names	Abyssal Depths
+193:$7096	location_names	Tonfan's Hole
+193:$709F	location_names	Wanado
+193:$70AC	location_names	Smith's Forge
+193:$70B7	location_names	Pot Cave
+193:$70BF	location_names	Training Dungeon
+193:$70C9	location_names	Road to Rescue
+193:$70D2	location_names	Castle Prison
+193:$70DE	location_names	Pot Cave
+194:$61EE	item_ability_roots	Passage
+194:$61F2	item_ability_roots	Trapper's
+194:$61F6	item_ability_roots	Healing
+194:$61FB	item_ability_roots	Dreaded
+194:$6200	item_ability_roots	Cursebreak
+194:$6206	item_ability_roots	Far-throwing
+194:$620B	item_ability_roots	Item-losing
+194:$6211	item_ability_roots	Clairvoyant
+194:$6215	item_ability_roots	Focusing
+194:$621C	item_ability_roots	Strength
+194:$6220	item_ability_roots	Leaping
+194:$6225	item_ability_roots	Diet
+194:$622B	item_ability_roots	Binge
+194:$6230	item_ability_roots	Search
+194:$6235	item_ability_roots	Antidrain
+194:$623C	item_ability_roots	Loud
+194:$6241	item_ability_roots	Turn
+194:$6245	item_ability_roots	Paper
+194:$624B	item_ability_roots	Explosive
+194:$6250	item_ability_roots	Miss
+194:$6255	item_ability_roots	Trap Seek
+194:$625A	item_ability_roots	Swipe
+194:$625F	item_ability_roots	No-Control
+194:$6264	item_ability_roots	Anti-Feeble
+194:$6269	item_ability_roots	Sturdy
+194:$626F	item_ability_roots	Golden
+194:$6272	item_ability_roots	Nfu
+194:$6276	item_ability_roots	Herb
+194:$627B	item_ability_roots	Otogirisou
+194:$6280	item_ability_roots	Seewell
+194:$6285	item_ability_roots	Dragon
+194:$628A	item_ability_roots	Revival
+194:$628F	item_ability_roots	Life
+194:$6293	item_ability_roots	Bellyexpand
+194:$629A	item_ability_roots	Bellyshrink
+194:$62A2	item_ability_roots	Fortune
+194:$62A7	item_ability_roots	Angel
+194:$62AB	item_ability_roots	Unlucky
+194:$62AF	item_ability_roots	Antidote
+194:$62B4	item_ability_roots	Strength
+194:$62B8	item_ability_roots	Poison
+194:$62BB	item_ability_roots	Confusion
+194:$62C0	item_ability_roots	Sedating
+194:$62C5	item_ability_roots	Weeds
+194:$62CA	item_ability_roots	Leaping
+194:$62CF	item_ability_roots	Swift
+194:$62D4	item_ability_roots	Ranzan
+194:$62D9	item_ability_roots	Identifier
+194:$62DE	item_ability_roots	Mapping
+194:$62E2	item_ability_roots	Pot-upsize
+194:$62E9	item_ability_roots	Windblade
+194:$62F0	item_ability_roots	Muzzle
+194:$62F5	item_ability_roots	Swift Foe
+194:$62FA	item_ability_roots	Slumber
+194:$62FF	item_ability_roots	Power Up
+194:$6306	item_ability_roots	Explosion
+194:$630A	item_ability_roots	Wall-less
+194:$630F	item_ability_roots	Monster
+194:$6315	item_ability_roots	Confusion
+194:$631A	item_ability_roots	Eradication
+194:$631F	item_ability_roots	Jitters
+194:$6324	item_ability_roots	Extraction
+194:$6329	item_ability_roots	Carry-ban
+194:$632E	item_ability_roots	Exorcism
+194:$6333	item_ability_roots	Heavenly
+194:$633A	item_ability_roots	Earthly
+194:$6340	item_ability_roots	Plating
+194:$6344	item_ability_roots	Escape
+194:$634A	item_ability_roots	Trap
+194:$634D	item_ability_roots	xBlank
+194:$6352	item_ability_roots	Sanctuary
+194:$6357	item_ability_roots	Failure
+194:$635E	item_ability_roots	Trap-eraser
+194:$6363	item_ability_roots	Sturdy Jar
+194:$6369	item_ability_roots	Restock
+194:$6370	item_ability_roots	Attraction
+194:$6375	item_ability_roots	Monster Recover
+194:$637D	item_ability_roots	Big Explosion
+194:$6384	item_ability_roots	Unexploded
+194:$6388	item_ability_roots	xSumeragi
+194:$638E	item_ability_roots	Squid Sushi
+194:$6393	item_ability_roots	Knockback
+194:$6399	item_ability_roots	Fortune
+194:$639E	item_ability_roots	Unlucky
+194:$63A2	item_ability_roots	Disguising
+194:$63A7	item_ability_roots	Switching
+194:$63AD	item_ability_roots	Skull
+194:$63B1	item_ability_roots	Paralyzing
+194:$63B7	item_ability_roots	Narrow-escape
+194:$63BE	item_ability_roots	Empathetic
+194:$63C4	item_ability_roots	Sealing
+194:$63C9	item_ability_roots	Change
+194:$63CD	item_ability_roots	Failure
+194:$63D2	item_ability_roots	Herb Effect
+194:$63D7	item_ability_roots	Herb Reception
+194:$63DC	item_ability_roots	Burrowing
+194:$63E1	item_ability_roots	Balance
+194:$63E8	item_ability_roots	Invisible
+194:$63ED	item_ability_roots	Quarter
+194:$63F3	item_ability_roots	Attract
+194:$63F8	item_ability_roots	Bufu's
+194:$63FC	item_ability_roots	Raging
+194:$6400	item_ability_roots	Accelerating
+194:$6405	item_ability_roots	Vaulting
+194:$640A	item_ability_roots	Flash Bomb
+194:$6411	item_ability_roots	Tenjin
+194:$6416	item_ability_roots	Friendship
+194:$641C	item_ability_roots	Preservation
+194:$6420	item_ability_roots	Upgrading
+194:$6425	item_ability_roots	Identifier
+194:$642A	item_ability_roots	Healing
+194:$642F	item_ability_roots	Degrading
+194:$6434	item_ability_roots	Transmutation
+194:$6438	item_ability_roots	Synthesis
+194:$643D	item_ability_roots	xSealing
+194:$6443	item_ability_roots	Absorb
+194:$644A	item_ability_roots	Cannon
+194:$644F	item_ability_roots	Water
+194:$6454	item_ability_roots	Curse
+194:$6458	item_ability_roots	Blessing
+194:$645E	item_ability_roots	Teleport
+194:$6466	item_ability_roots	xOrdinary
+194:$646B	item_ability_roots	G
+194:$7263	item_ability_descriptions	<EC>Strong vs. Dragon types
+194:$7273	item_ability_descriptions	<EC>Strong vs. Ghost types
+194:$7283	item_ability_descriptions	<EC>Strong vs. Drain types
+194:$7293	item_ability_descriptions	<EC>Strong vs. Cyclops types
+194:$72A4	item_ability_descriptions	<EC>Strong vs. Exploding types
+194:$72B4	item_ability_descriptions	<EC>Strong vs. Floating types
+194:$72C3	item_ability_descriptions	<EC>Damages monsters
+194:$72D4	item_ability_descriptions	<EC>Normal attacks always hit
+194:$72E2	item_ability_descriptions	<EC>Attacks in 3 directions
+194:$72F0	item_ability_descriptions	<EC>Attacks pierce 2 tiles ahead
+194:$72FB	item_ability_descriptions	<EC>More frequent critical hits
+194:$730C	item_ability_descriptions	<EC>Attacks restore some HP
+194:$731B	item_ability_descriptions	<EC>Misses build attack power
+194:$7329	item_ability_descriptions	<EC>Costs HP to grow, may break
+194:$733E	item_ability_descriptions	<EC>Attacks push you back 1 tile
+194:$734D	item_ability_descriptions	<EC>May knock away enemy items
+194:$735B	item_ability_descriptions	<EC>May confuse or sleep foes
+194:$736E	item_ability_descriptions	<EC>May make Meat, may break
+194:$737F	item_ability_descriptions	<EC>Digs walls, but may break
+194:$7390	item_ability_descriptions	<EC>Digs walls and never breaks
+194:$739F	item_ability_descriptions	<EC>Breaks traps, but may break
+194:$73B1	item_ability_descriptions	<EC>Loses 1 Upgrade per hit
+194:$73C2	item_ability_descriptions	<EC>Halves Fullness depletion
+194:$73D0	item_ability_descriptions	<EC>Doubles Fullness depletion
+194:$73DE	item_ability_descriptions	<EC>No hunger, Max Fullness 0
+194:$73ED	item_ability_descriptions	<EC>Reduces fire damage
+194:$73FA	item_ability_descriptions	<EC>Reduces explosion damage
+194:$7409	item_ability_descriptions	<EC>Reduces damage received
+194:$7414	item_ability_descriptions	<EC>You take less damage
+194:$741F	item_ability_descriptions	<EC>You take less damage
+194:$742A	item_ability_descriptions	<EC>Reflects some damage taken
+194:$743B	item_ability_descriptions	<EC>Evades attacks more often
+194:$7449	item_ability_descriptions	<EC>Prevents rust
+194:$744F	item_ability_descriptions	<EC>Stops item and Gitan theft
+194:$7459	item_ability_descriptions	<EC>Protects against curses
+194:$7463	item_ability_descriptions	<EC>Prevents traps you step on
+194:$7470	item_ability_descriptions	<EC>Dodges most incoming items
+194:$747F	item_ability_descriptions	<EC>Reflects magic attacks
+194:$748B	item_ability_descriptions	<EC>Reflects most projectiles
+194:$749D	item_ability_descriptions	<EC>Damage grants Experience
+194:$74B1	item_ability_descriptions	<EC>Taking damage grants Gitan
+194:$74C3	item_ability_descriptions	<EC>Specials deal 10 damage
+194:$74D6	item_ability_descriptions	<EC>Loses 1 Upgrade when hit
+194:$74E7	item_ability_descriptions	<EC>Also raises attack power
+194:$74F5	item_ability_descriptions	<EC>May break when hit
+194:$7508	item_ability_descriptions	<EC>Protects items from curses
+194:$7512	item_ability_descriptions	<EC>Prevents Confused status
+194:$751E	item_ability_descriptions	<EC>Prevents Strength loss
+194:$752C	item_ability_descriptions	<EC>Blocks stat drain attacks
+194:$753E	item_ability_descriptions	<EC>Stops Fullness depletion
+194:$754B	item_ability_descriptions	<EC>Doubles Fullness depletion
+194:$7559	item_ability_descriptions	<EC>Thrown items pierce all
+194:$7569	item_ability_descriptions	<EC>Throws curve around corners
+194:$7576	item_ability_descriptions	<EC>Thrown items always miss
+194:$7587	item_ability_descriptions	<EC>Thrown items fly randomly
+194:$7596	item_ability_descriptions	<EC>Throws seek nearby traps
+194:$75A7	item_ability_descriptions	<EC>Take more critical hits
+194:$75B9	item_ability_descriptions	<EC>Raises Strength by 3
+194:$75C3	item_ability_descriptions	<EC>Reveals items and monsters
+194:$75D5	item_ability_descriptions	<EC>Reveals invisible things
+194:$75E8	item_ability_descriptions	<EC>Wakes every monster
+194:$75F8	item_ability_descriptions	<EC>Heals fast, gets hungry fast
+194:$760A	item_ability_descriptions	<EC>Evade more, but can burn up
+194:$761C	item_ability_descriptions	<EC>Critical attacks, may break
+194:$762E	item_ability_descriptions	<EC>Lets you walk on water
+194:$763F	item_ability_descriptions	<EC>May drop items while walking
+194:$764D	item_ability_descriptions	<EC>May warp while walking
+194:$765C	item_ability_descriptions	<EC>May explode while walking
+194:$766C	item_ability_descriptions	<EC>Grants Trapper status
+204:$40C6	numbered_monster_variant_names	Zenmaiger
+204:$40CD	numbered_monster_variant_names	Zenmaiger No. 2
+204:$40D7	numbered_monster_variant_names	Zenmaiger No. 3
+204:$40E1	numbered_monster_variant_names	Zenmaiger No. 4
+204:$40EB	numbered_monster_variant_names	Zenmaiger No. 5
+204:$40F5	numbered_monster_variant_names	Zenmaiger No. 6
+204:$40FF	numbered_monster_variant_names	Zenmaiger No. 7
+204:$4109	numbered_monster_variant_names	Zenmaiger No. 8
+204:$4113	numbered_monster_variant_names	Zenmaiger No. 9
+204:$411D	numbered_monster_variant_names	Zenmaiger No. 10
+204:$4128	numbered_monster_variant_names	Zenmaiger No. 11
+204:$4133	numbered_monster_variant_names	Zenmaiger No. 12
+204:$413E	numbered_monster_variant_names	Zenmaiger No. 13
+204:$4149	numbered_monster_variant_names	Zenmaiger No. 14
+204:$4154	numbered_monster_variant_names	Zenmaiger No. 15
+204:$415F	numbered_monster_variant_names	Zenmaiger No. 16
+204:$416A	numbered_monster_variant_names	Zenmaiger No. 17
+204:$4175	numbered_monster_variant_names	Zenmaiger No. 18
+204:$4180	numbered_monster_variant_names	Zenmaiger No. 19
+204:$418B	numbered_monster_variant_names	Zenmaiger No. 20
+204:$4196	numbered_monster_variant_names	Zenmaiger No. 21
+204:$41A1	numbered_monster_variant_names	Zenmaiger No. 22
+204:$41AC	numbered_monster_variant_names	Zenmaiger No. 23
+204:$41B7	numbered_monster_variant_names	Zenmaiger No. 24
+204:$41C2	numbered_monster_variant_names	Zenmaiger No. 25
+204:$41CD	numbered_monster_variant_names	Zenmaiger No. 26
+204:$41D8	numbered_monster_variant_names	Zenmaiger No. 27
+204:$41E3	numbered_monster_variant_names	Zenmaiger No. 28
+204:$41EE	numbered_monster_variant_names	Zenmaiger No. 29
+204:$41F9	numbered_monster_variant_names	Zenmaiger No. 30
+204:$4204	numbered_monster_variant_names	Zenmaiger No. 31
+204:$420F	numbered_monster_variant_names	Zenmaiger No. 32
+204:$421A	numbered_monster_variant_names	Zenmaiger No. 33
+204:$4225	numbered_monster_variant_names	Zenmaiger No. 34
+204:$4230	numbered_monster_variant_names	Zenmaiger No. 35
+204:$423B	numbered_monster_variant_names	Zenmaiger No. 36
+204:$4246	numbered_monster_variant_names	Zenmaiger No. 37
+204:$4251	numbered_monster_variant_names	Zenmaiger No. 38
+204:$425C	numbered_monster_variant_names	Zenmaiger No. 39
+204:$4267	numbered_monster_variant_names	Zenmaiger No. 40
+204:$4272	numbered_monster_variant_names	Zenmaiger No. 41
+204:$427D	numbered_monster_variant_names	Zenmaiger No. 42
+204:$4288	numbered_monster_variant_names	Zenmaiger No. 43
+204:$4293	numbered_monster_variant_names	Zenmaiger No. 44
+204:$429E	numbered_monster_variant_names	Zenmaiger No. 45
+204:$42A9	numbered_monster_variant_names	Zenmaiger No. 46
+204:$42B4	numbered_monster_variant_names	Zenmaiger No. 47
+204:$42BF	numbered_monster_variant_names	Zenmaiger No. 48
+204:$42CA	numbered_monster_variant_names	Zenmaiger No. 49
+204:$42D5	numbered_monster_variant_names	Zenmaiger No. 50
+204:$42E0	numbered_monster_variant_names	Zenmaiger No. 51
+204:$42EB	numbered_monster_variant_names	Zenmaiger No. 52
+204:$42F6	numbered_monster_variant_names	Zenmaiger No. 53
+204:$4301	numbered_monster_variant_names	Zenmaiger No. 54
+204:$430C	numbered_monster_variant_names	Zenmaiger No. 55
+204:$4317	numbered_monster_variant_names	Zenmaiger No. 56
+204:$4322	numbered_monster_variant_names	Zenmaiger No. 57
+204:$432D	numbered_monster_variant_names	Zenmaiger No. 58
+204:$4338	numbered_monster_variant_names	Zenmaiger No. 59
+204:$4343	numbered_monster_variant_names	Zenmaiger No. 60
+204:$434E	numbered_monster_variant_names	Zenmaiger No. 61
+204:$4359	numbered_monster_variant_names	Zenmaiger No. 62
+204:$4364	numbered_monster_variant_names	Zenmaiger No. 63
+204:$436F	numbered_monster_variant_names	Zenmaiger No. 64
+204:$437A	numbered_monster_variant_names	Zenmaiger No. 65
+204:$4385	numbered_monster_variant_names	Zenmaiger No. 66
+204:$4390	numbered_monster_variant_names	Zenmaiger No. 67
+204:$439B	numbered_monster_variant_names	Zenmaiger No. 68
+204:$43A6	numbered_monster_variant_names	Zenmaiger No. 69
+204:$43B1	numbered_monster_variant_names	Zenmaiger No. 70
+204:$43BC	numbered_monster_variant_names	Zenmaiger No. 71
+204:$43C7	numbered_monster_variant_names	Zenmaiger No. 72
+204:$43D2	numbered_monster_variant_names	Zenmaiger No. 73
+204:$43DD	numbered_monster_variant_names	Zenmaiger No. 74
+204:$43E8	numbered_monster_variant_names	Zenmaiger No. 75
+204:$43F3	numbered_monster_variant_names	Zenmaiger No. 76
+204:$43FE	numbered_monster_variant_names	Zenmaiger No. 77
+204:$4409	numbered_monster_variant_names	Zenmaiger No. 78
+204:$4414	numbered_monster_variant_names	Zenmaiger No. 79
+204:$441F	numbered_monster_variant_names	Zenmaiger No. 80
+204:$442A	numbered_monster_variant_names	Zenmaiger No. 81
+204:$4435	numbered_monster_variant_names	Zenmaiger No. 82
+204:$4440	numbered_monster_variant_names	Zenmaiger No. 83
+204:$444B	numbered_monster_variant_names	Zenmaiger No. 84
+204:$4456	numbered_monster_variant_names	Zenmaiger No. 85
+204:$4461	numbered_monster_variant_names	Zenmaiger No. 86
+204:$446C	numbered_monster_variant_names	Zenmaiger No. 87
+204:$4477	numbered_monster_variant_names	Zenmaiger No. 88
+204:$4482	numbered_monster_variant_names	Zenmaiger No. 89
+204:$448D	numbered_monster_variant_names	Zenmaiger No. 90
+204:$4498	numbered_monster_variant_names	Zenmaiger No. 91
+204:$44A3	numbered_monster_variant_names	Zenmaiger No. 92
+204:$44AE	numbered_monster_variant_names	Zenmaiger No. 93
+204:$44B9	numbered_monster_variant_names	Zenmaiger No. 94
+204:$44C4	numbered_monster_variant_names	Zenmaiger No. 95
+204:$44CF	numbered_monster_variant_names	Zenmaiger No. 96
+204:$44DA	numbered_monster_variant_names	Zenmaiger No. 97
+204:$44E5	numbered_monster_variant_names	Zenmaiger No. 98
+204:$44F0	numbered_monster_variant_names	Zenmaiger No. 99
+204:$45C1	numbered_monster_variant_names	Royal Wind
+204:$45C9	numbered_monster_variant_names	Royal Wind No. 2
+204:$45D4	numbered_monster_variant_names	Royal Wind No. 3
+204:$45DF	numbered_monster_variant_names	Royal Wind No. 4
+204:$45EA	numbered_monster_variant_names	Royal Wind No. 5
+204:$45F5	numbered_monster_variant_names	Royal Wind No. 6
+204:$4600	numbered_monster_variant_names	Royal Wind No. 7
+204:$460B	numbered_monster_variant_names	Royal Wind No. 8
+204:$4616	numbered_monster_variant_names	Royal Wind No. 9
+204:$4621	numbered_monster_variant_names	Royal Wind No. 10
+204:$462D	numbered_monster_variant_names	Royal Wind No. 11
+204:$4639	numbered_monster_variant_names	Royal Wind No. 12
+204:$4645	numbered_monster_variant_names	Royal Wind No. 13
+204:$4651	numbered_monster_variant_names	Royal Wind No. 14
+204:$465D	numbered_monster_variant_names	Royal Wind No. 15
+204:$4669	numbered_monster_variant_names	Royal Wind No. 16
+204:$4675	numbered_monster_variant_names	Royal Wind No. 17
+204:$4681	numbered_monster_variant_names	Royal Wind No. 18
+204:$468D	numbered_monster_variant_names	Royal Wind No. 19
+204:$4699	numbered_monster_variant_names	Royal Wind No. 20
+204:$46A5	numbered_monster_variant_names	Royal Wind No. 21
+204:$46B1	numbered_monster_variant_names	Royal Wind No. 22
+204:$46BD	numbered_monster_variant_names	Royal Wind No. 23
+204:$46C9	numbered_monster_variant_names	Royal Wind No. 24
+204:$46D5	numbered_monster_variant_names	Royal Wind No. 25
+204:$46E1	numbered_monster_variant_names	Royal Wind No. 26
+204:$46ED	numbered_monster_variant_names	Royal Wind No. 27
+204:$46F9	numbered_monster_variant_names	Royal Wind No. 28
+204:$4705	numbered_monster_variant_names	Royal Wind No. 29
+204:$4711	numbered_monster_variant_names	Royal Wind No. 30
+204:$471D	numbered_monster_variant_names	Royal Wind No. 31
+204:$4729	numbered_monster_variant_names	Royal Wind No. 32
+204:$4735	numbered_monster_variant_names	Royal Wind No. 33
+204:$4741	numbered_monster_variant_names	Royal Wind No. 34
+204:$474D	numbered_monster_variant_names	Royal Wind No. 35
+204:$4759	numbered_monster_variant_names	Royal Wind No. 36
+204:$4765	numbered_monster_variant_names	Royal Wind No. 37
+204:$4771	numbered_monster_variant_names	Royal Wind No. 38
+204:$477D	numbered_monster_variant_names	Royal Wind No. 39
+204:$4789	numbered_monster_variant_names	Royal Wind No. 40
+204:$4795	numbered_monster_variant_names	Royal Wind No. 41
+204:$47A1	numbered_monster_variant_names	Royal Wind No. 42
+204:$47AD	numbered_monster_variant_names	Royal Wind No. 43
+204:$47B9	numbered_monster_variant_names	Royal Wind No. 44
+204:$47C5	numbered_monster_variant_names	Royal Wind No. 45
+204:$47D1	numbered_monster_variant_names	Royal Wind No. 46
+204:$47DD	numbered_monster_variant_names	Royal Wind No. 47
+204:$47E9	numbered_monster_variant_names	Royal Wind No. 48
+204:$47F5	numbered_monster_variant_names	Royal Wind No. 49
+204:$4801	numbered_monster_variant_names	Royal Wind No. 50
+204:$480D	numbered_monster_variant_names	Royal Wind No. 51
+204:$4819	numbered_monster_variant_names	Royal Wind No. 52
+204:$4825	numbered_monster_variant_names	Royal Wind No. 53
+204:$4831	numbered_monster_variant_names	Royal Wind No. 54
+204:$483D	numbered_monster_variant_names	Royal Wind No. 55
+204:$4849	numbered_monster_variant_names	Royal Wind No. 56
+204:$4855	numbered_monster_variant_names	Royal Wind No. 57
+204:$4861	numbered_monster_variant_names	Royal Wind No. 58
+204:$486D	numbered_monster_variant_names	Royal Wind No. 59
+204:$4879	numbered_monster_variant_names	Royal Wind No. 60
+204:$4885	numbered_monster_variant_names	Royal Wind No. 61
+204:$4891	numbered_monster_variant_names	Royal Wind No. 62
+204:$489D	numbered_monster_variant_names	Royal Wind No. 63
+204:$48A9	numbered_monster_variant_names	Royal Wind No. 64
+204:$48B5	numbered_monster_variant_names	Royal Wind No. 65
+204:$48C1	numbered_monster_variant_names	Royal Wind No. 66
+204:$48CD	numbered_monster_variant_names	Royal Wind No. 67
+204:$48D9	numbered_monster_variant_names	Royal Wind No. 68
+204:$48E5	numbered_monster_variant_names	Royal Wind No. 69
+204:$48F1	numbered_monster_variant_names	Royal Wind No. 70
+204:$48FD	numbered_monster_variant_names	Royal Wind No. 71
+204:$4909	numbered_monster_variant_names	Royal Wind No. 72
+204:$4915	numbered_monster_variant_names	Royal Wind No. 73
+204:$4921	numbered_monster_variant_names	Royal Wind No. 74
+204:$492D	numbered_monster_variant_names	Royal Wind No. 75
+204:$4939	numbered_monster_variant_names	Royal Wind No. 76
+204:$4945	numbered_monster_variant_names	Royal Wind No. 77
+204:$4951	numbered_monster_variant_names	Royal Wind No. 78
+204:$495D	numbered_monster_variant_names	Royal Wind No. 79
+204:$4969	numbered_monster_variant_names	Royal Wind No. 80
+204:$4975	numbered_monster_variant_names	Royal Wind No. 81
+204:$4981	numbered_monster_variant_names	Royal Wind No. 82
+204:$498D	numbered_monster_variant_names	Royal Wind No. 83
+204:$4999	numbered_monster_variant_names	Royal Wind No. 84
+204:$49A5	numbered_monster_variant_names	Royal Wind No. 85
+204:$49B1	numbered_monster_variant_names	Royal Wind No. 86
+204:$49BD	numbered_monster_variant_names	Royal Wind No. 87
+204:$49C9	numbered_monster_variant_names	Royal Wind No. 88
+204:$49D5	numbered_monster_variant_names	Royal Wind No. 89
+204:$49E1	numbered_monster_variant_names	Royal Wind No. 90
+204:$49ED	numbered_monster_variant_names	Royal Wind No. 91
+204:$49F9	numbered_monster_variant_names	Royal Wind No. 92
+204:$4A05	numbered_monster_variant_names	Royal Wind No. 93
+204:$4A11	numbered_monster_variant_names	Royal Wind No. 94
+204:$4A1D	numbered_monster_variant_names	Royal Wind No. 95
+204:$4A29	numbered_monster_variant_names	Royal Wind No. 96
+204:$4A35	numbered_monster_variant_names	Royal Wind No. 97
+204:$4A41	numbered_monster_variant_names	Royal Wind No. 98
+204:$4A4D	numbered_monster_variant_names	Royal Wind No. 99
+204:$4B1F	numbered_monster_variant_names	Hydro Rover
+204:$4B27	numbered_monster_variant_names	Hydro Rover No. 2
+204:$4B32	numbered_monster_variant_names	Hydro Rover No. 3
+204:$4B3D	numbered_monster_variant_names	Hydro Rover No. 4
+204:$4B48	numbered_monster_variant_names	Hydro Rover No. 5
+204:$4B53	numbered_monster_variant_names	Hydro Rover No. 6
+204:$4B5E	numbered_monster_variant_names	Hydro Rover No. 7
+204:$4B69	numbered_monster_variant_names	Hydro Rover No. 8
+204:$4B74	numbered_monster_variant_names	Hydro Rover No. 9
+204:$4B7F	numbered_monster_variant_names	Hydro Rover No. 10
+204:$4B8B	numbered_monster_variant_names	Hydro Rover No. 11
+204:$4B97	numbered_monster_variant_names	Hydro Rover No. 12
+204:$4BA3	numbered_monster_variant_names	Hydro Rover No. 13
+204:$4BAF	numbered_monster_variant_names	Hydro Rover No. 14
+204:$4BBB	numbered_monster_variant_names	Hydro Rover No. 15
+204:$4BC7	numbered_monster_variant_names	Hydro Rover No. 16
+204:$4BD3	numbered_monster_variant_names	Hydro Rover No. 17
+204:$4BDF	numbered_monster_variant_names	Hydro Rover No. 18
+204:$4BEB	numbered_monster_variant_names	Hydro Rover No. 19
+204:$4BF7	numbered_monster_variant_names	Hydro Rover No. 20
+204:$4C03	numbered_monster_variant_names	Hydro Rover No. 21
+204:$4C0F	numbered_monster_variant_names	Hydro Rover No. 22
+204:$4C1B	numbered_monster_variant_names	Hydro Rover No. 23
+204:$4C27	numbered_monster_variant_names	Hydro Rover No. 24
+204:$4C33	numbered_monster_variant_names	Hydro Rover No. 25
+204:$4C3F	numbered_monster_variant_names	Hydro Rover No. 26
+204:$4C4B	numbered_monster_variant_names	Hydro Rover No. 27
+204:$4C57	numbered_monster_variant_names	Hydro Rover No. 28
+204:$4C63	numbered_monster_variant_names	Hydro Rover No. 29
+204:$4C6F	numbered_monster_variant_names	Hydro Rover No. 30
+204:$4C7B	numbered_monster_variant_names	Hydro Rover No. 31
+204:$4C87	numbered_monster_variant_names	Hydro Rover No. 32
+204:$4C93	numbered_monster_variant_names	Hydro Rover No. 33
+204:$4C9F	numbered_monster_variant_names	Hydro Rover No. 34
+204:$4CAB	numbered_monster_variant_names	Hydro Rover No. 35
+204:$4CB7	numbered_monster_variant_names	Hydro Rover No. 36
+204:$4CC3	numbered_monster_variant_names	Hydro Rover No. 37
+204:$4CCF	numbered_monster_variant_names	Hydro Rover No. 38
+204:$4CDB	numbered_monster_variant_names	Hydro Rover No. 39
+204:$4CE7	numbered_monster_variant_names	Hydro Rover No. 40
+204:$4CF3	numbered_monster_variant_names	Hydro Rover No. 41
+204:$4CFF	numbered_monster_variant_names	Hydro Rover No. 42
+204:$4D0B	numbered_monster_variant_names	Hydro Rover No. 43
+204:$4D17	numbered_monster_variant_names	Hydro Rover No. 44
+204:$4D23	numbered_monster_variant_names	Hydro Rover No. 45
+204:$4D2F	numbered_monster_variant_names	Hydro Rover No. 46
+204:$4D3B	numbered_monster_variant_names	Hydro Rover No. 47
+204:$4D47	numbered_monster_variant_names	Hydro Rover No. 48
+204:$4D53	numbered_monster_variant_names	Hydro Rover No. 49
+204:$4D5F	numbered_monster_variant_names	Hydro Rover No. 50
+204:$4D6B	numbered_monster_variant_names	Hydro Rover No. 51
+204:$4D77	numbered_monster_variant_names	Hydro Rover No. 52
+204:$4D83	numbered_monster_variant_names	Hydro Rover No. 53
+204:$4D8F	numbered_monster_variant_names	Hydro Rover No. 54
+204:$4D9B	numbered_monster_variant_names	Hydro Rover No. 55
+204:$4DA7	numbered_monster_variant_names	Hydro Rover No. 56
+204:$4DB3	numbered_monster_variant_names	Hydro Rover No. 57
+204:$4DBF	numbered_monster_variant_names	Hydro Rover No. 58
+204:$4DCB	numbered_monster_variant_names	Hydro Rover No. 59
+204:$4DD7	numbered_monster_variant_names	Hydro Rover No. 60
+204:$4DE3	numbered_monster_variant_names	Hydro Rover No. 61
+204:$4DEF	numbered_monster_variant_names	Hydro Rover No. 62
+204:$4DFB	numbered_monster_variant_names	Hydro Rover No. 63
+204:$4E07	numbered_monster_variant_names	Hydro Rover No. 64
+204:$4E13	numbered_monster_variant_names	Hydro Rover No. 65
+204:$4E1F	numbered_monster_variant_names	Hydro Rover No. 66
+204:$4E2B	numbered_monster_variant_names	Hydro Rover No. 67
+204:$4E37	numbered_monster_variant_names	Hydro Rover No. 68
+204:$4E43	numbered_monster_variant_names	Hydro Rover No. 69
+204:$4E4F	numbered_monster_variant_names	Hydro Rover No. 70
+204:$4E5B	numbered_monster_variant_names	Hydro Rover No. 71
+204:$4E67	numbered_monster_variant_names	Hydro Rover No. 72
+204:$4E73	numbered_monster_variant_names	Hydro Rover No. 73
+204:$4E7F	numbered_monster_variant_names	Hydro Rover No. 74
+204:$4E8B	numbered_monster_variant_names	Hydro Rover No. 75
+204:$4E97	numbered_monster_variant_names	Hydro Rover No. 76
+204:$4EA3	numbered_monster_variant_names	Hydro Rover No. 77
+204:$4EAF	numbered_monster_variant_names	Hydro Rover No. 78
+204:$4EBB	numbered_monster_variant_names	Hydro Rover No. 79
+204:$4EC7	numbered_monster_variant_names	Hydro Rover No. 80
+204:$4ED3	numbered_monster_variant_names	Hydro Rover No. 81
+204:$4EDF	numbered_monster_variant_names	Hydro Rover No. 82
+204:$4EEB	numbered_monster_variant_names	Hydro Rover No. 83
+204:$4EF7	numbered_monster_variant_names	Hydro Rover No. 84
+204:$4F03	numbered_monster_variant_names	Hydro Rover No. 85
+204:$4F0F	numbered_monster_variant_names	Hydro Rover No. 86
+204:$4F1B	numbered_monster_variant_names	Hydro Rover No. 87
+204:$4F27	numbered_monster_variant_names	Hydro Rover No. 88
+204:$4F33	numbered_monster_variant_names	Hydro Rover No. 89
+204:$4F3F	numbered_monster_variant_names	Hydro Rover No. 90
+204:$4F4B	numbered_monster_variant_names	Hydro Rover No. 91
+204:$4F57	numbered_monster_variant_names	Hydro Rover No. 92
+204:$4F63	numbered_monster_variant_names	Hydro Rover No. 93
+204:$4F6F	numbered_monster_variant_names	Hydro Rover No. 94
+204:$4F7B	numbered_monster_variant_names	Hydro Rover No. 95
+204:$4F87	numbered_monster_variant_names	Hydro Rover No. 96
+204:$4F93	numbered_monster_variant_names	Hydro Rover No. 97
+204:$4F9F	numbered_monster_variant_names	Hydro Rover No. 98
+204:$4FAB	numbered_monster_variant_names	Hydro Rover No. 99
+204:$507D	numbered_monster_variant_names	Thermal King
+204:$5084	numbered_monster_variant_names	Thermal King No. 2
+204:$508E	numbered_monster_variant_names	Thermal King No. 3
+204:$5098	numbered_monster_variant_names	Thermal King No. 4
+204:$50A2	numbered_monster_variant_names	Thermal King No. 5
+204:$50AC	numbered_monster_variant_names	Thermal King No. 6
+204:$50B6	numbered_monster_variant_names	Thermal King No. 7
+204:$50C0	numbered_monster_variant_names	Thermal King No. 8
+204:$50CA	numbered_monster_variant_names	Thermal King No. 9
+204:$50D4	numbered_monster_variant_names	Thermal King No. 10
+204:$50DF	numbered_monster_variant_names	Thermal King No. 11
+204:$50EA	numbered_monster_variant_names	Thermal King No. 12
+204:$50F5	numbered_monster_variant_names	Thermal King No. 13
+204:$5100	numbered_monster_variant_names	Thermal King No. 14
+204:$510B	numbered_monster_variant_names	Thermal King No. 15
+204:$5116	numbered_monster_variant_names	Thermal King No. 16
+204:$5121	numbered_monster_variant_names	Thermal King No. 17
+204:$512C	numbered_monster_variant_names	Thermal King No. 18
+204:$5137	numbered_monster_variant_names	Thermal King No. 19
+204:$5142	numbered_monster_variant_names	Thermal King No. 20
+204:$514D	numbered_monster_variant_names	Thermal King No. 21
+204:$5158	numbered_monster_variant_names	Thermal King No. 22
+204:$5163	numbered_monster_variant_names	Thermal King No. 23
+204:$516E	numbered_monster_variant_names	Thermal King No. 24
+204:$5179	numbered_monster_variant_names	Thermal King No. 25
+204:$5184	numbered_monster_variant_names	Thermal King No. 26
+204:$518F	numbered_monster_variant_names	Thermal King No. 27
+204:$519A	numbered_monster_variant_names	Thermal King No. 28
+204:$51A5	numbered_monster_variant_names	Thermal King No. 29
+204:$51B0	numbered_monster_variant_names	Thermal King No. 30
+204:$51BB	numbered_monster_variant_names	Thermal King No. 31
+204:$51C6	numbered_monster_variant_names	Thermal King No. 32
+204:$51D1	numbered_monster_variant_names	Thermal King No. 33
+204:$51DC	numbered_monster_variant_names	Thermal King No. 34
+204:$51E7	numbered_monster_variant_names	Thermal King No. 35
+204:$51F2	numbered_monster_variant_names	Thermal King No. 36
+204:$51FD	numbered_monster_variant_names	Thermal King No. 37
+204:$5208	numbered_monster_variant_names	Thermal King No. 38
+204:$5213	numbered_monster_variant_names	Thermal King No. 39
+204:$521E	numbered_monster_variant_names	Thermal King No. 40
+204:$5229	numbered_monster_variant_names	Thermal King No. 41
+204:$5234	numbered_monster_variant_names	Thermal King No. 42
+204:$523F	numbered_monster_variant_names	Thermal King No. 43
+204:$524A	numbered_monster_variant_names	Thermal King No. 44
+204:$5255	numbered_monster_variant_names	Thermal King No. 45
+204:$5260	numbered_monster_variant_names	Thermal King No. 46
+204:$526B	numbered_monster_variant_names	Thermal King No. 47
+204:$5276	numbered_monster_variant_names	Thermal King No. 48
+204:$5281	numbered_monster_variant_names	Thermal King No. 49
+204:$528C	numbered_monster_variant_names	Thermal King No. 50
+204:$5297	numbered_monster_variant_names	Thermal King No. 51
+204:$52A2	numbered_monster_variant_names	Thermal King No. 52
+204:$52AD	numbered_monster_variant_names	Thermal King No. 53
+204:$52B8	numbered_monster_variant_names	Thermal King No. 54
+204:$52C3	numbered_monster_variant_names	Thermal King No. 55
+204:$52CE	numbered_monster_variant_names	Thermal King No. 56
+204:$52D9	numbered_monster_variant_names	Thermal King No. 57
+204:$52E4	numbered_monster_variant_names	Thermal King No. 58
+204:$52EF	numbered_monster_variant_names	Thermal King No. 59
+204:$52FA	numbered_monster_variant_names	Thermal King No. 60
+204:$5305	numbered_monster_variant_names	Thermal King No. 61
+204:$5310	numbered_monster_variant_names	Thermal King No. 62
+204:$531B	numbered_monster_variant_names	Thermal King No. 63
+204:$5326	numbered_monster_variant_names	Thermal King No. 64
+204:$5331	numbered_monster_variant_names	Thermal King No. 65
+204:$533C	numbered_monster_variant_names	Thermal King No. 66
+204:$5347	numbered_monster_variant_names	Thermal King No. 67
+204:$5352	numbered_monster_variant_names	Thermal King No. 68
+204:$535D	numbered_monster_variant_names	Thermal King No. 69
+204:$5368	numbered_monster_variant_names	Thermal King No. 70
+204:$5373	numbered_monster_variant_names	Thermal King No. 71
+204:$537E	numbered_monster_variant_names	Thermal King No. 72
+204:$5389	numbered_monster_variant_names	Thermal King No. 73
+204:$5394	numbered_monster_variant_names	Thermal King No. 74
+204:$539F	numbered_monster_variant_names	Thermal King No. 75
+204:$53AA	numbered_monster_variant_names	Thermal King No. 76
+204:$53B5	numbered_monster_variant_names	Thermal King No. 77
+204:$53C0	numbered_monster_variant_names	Thermal King No. 78
+204:$53CB	numbered_monster_variant_names	Thermal King No. 79
+204:$53D6	numbered_monster_variant_names	Thermal King No. 80
+204:$53E1	numbered_monster_variant_names	Thermal King No. 81
+204:$53EC	numbered_monster_variant_names	Thermal King No. 82
+204:$53F7	numbered_monster_variant_names	Thermal King No. 83
+204:$5402	numbered_monster_variant_names	Thermal King No. 84
+204:$540D	numbered_monster_variant_names	Thermal King No. 85
+204:$5418	numbered_monster_variant_names	Thermal King No. 86
+204:$5423	numbered_monster_variant_names	Thermal King No. 87
+204:$542E	numbered_monster_variant_names	Thermal King No. 88
+204:$5439	numbered_monster_variant_names	Thermal King No. 89
+204:$5444	numbered_monster_variant_names	Thermal King No. 90
+204:$544F	numbered_monster_variant_names	Thermal King No. 91
+204:$545A	numbered_monster_variant_names	Thermal King No. 92
+204:$5465	numbered_monster_variant_names	Thermal King No. 93
+204:$5470	numbered_monster_variant_names	Thermal King No. 94
+204:$547B	numbered_monster_variant_names	Thermal King No. 95
+204:$5486	numbered_monster_variant_names	Thermal King No. 96
+204:$5491	numbered_monster_variant_names	Thermal King No. 97
+204:$549C	numbered_monster_variant_names	Thermal King No. 98
+204:$54A7	numbered_monster_variant_names	Thermal King No. 99
+204:$5578	numbered_monster_variant_names	Steam Max
+204:$5581	numbered_monster_variant_names	Steam Max No. 2
+204:$558D	numbered_monster_variant_names	Steam Max No. 3
+204:$5599	numbered_monster_variant_names	Steam Max No. 4
+204:$55A5	numbered_monster_variant_names	Steam Max No. 5
+204:$55B1	numbered_monster_variant_names	Steam Max No. 6
+204:$55BD	numbered_monster_variant_names	Steam Max No. 7
+204:$55C9	numbered_monster_variant_names	Steam Max No. 8
+204:$55D5	numbered_monster_variant_names	Steam Max No. 9
+204:$55E1	numbered_monster_variant_names	Steam Max No. 10
+204:$55EE	numbered_monster_variant_names	Steam Max No. 11
+204:$55FB	numbered_monster_variant_names	Steam Max No. 12
+204:$5608	numbered_monster_variant_names	Steam Max No. 13
+204:$5615	numbered_monster_variant_names	Steam Max No. 14
+204:$5622	numbered_monster_variant_names	Steam Max No. 15
+204:$562F	numbered_monster_variant_names	Steam Max No. 16
+204:$563C	numbered_monster_variant_names	Steam Max No. 17
+204:$5649	numbered_monster_variant_names	Steam Max No. 18
+204:$5656	numbered_monster_variant_names	Steam Max No. 19
+204:$5663	numbered_monster_variant_names	Steam Max No. 20
+204:$5670	numbered_monster_variant_names	Steam Max No. 21
+204:$567D	numbered_monster_variant_names	Steam Max No. 22
+204:$568A	numbered_monster_variant_names	Steam Max No. 23
+204:$5697	numbered_monster_variant_names	Steam Max No. 24
+204:$56A4	numbered_monster_variant_names	Steam Max No. 25
+204:$56B1	numbered_monster_variant_names	Steam Max No. 26
+204:$56BE	numbered_monster_variant_names	Steam Max No. 27
+204:$56CB	numbered_monster_variant_names	Steam Max No. 28
+204:$56D8	numbered_monster_variant_names	Steam Max No. 29
+204:$56E5	numbered_monster_variant_names	Steam Max No. 30
+204:$56F2	numbered_monster_variant_names	Steam Max No. 31
+204:$56FF	numbered_monster_variant_names	Steam Max No. 32
+204:$570C	numbered_monster_variant_names	Steam Max No. 33
+204:$5719	numbered_monster_variant_names	Steam Max No. 34
+204:$5726	numbered_monster_variant_names	Steam Max No. 35
+204:$5733	numbered_monster_variant_names	Steam Max No. 36
+204:$5740	numbered_monster_variant_names	Steam Max No. 37
+204:$574D	numbered_monster_variant_names	Steam Max No. 38
+204:$575A	numbered_monster_variant_names	Steam Max No. 39
+204:$5767	numbered_monster_variant_names	Steam Max No. 40
+204:$5774	numbered_monster_variant_names	Steam Max No. 41
+204:$5781	numbered_monster_variant_names	Steam Max No. 42
+204:$578E	numbered_monster_variant_names	Steam Max No. 43
+204:$579B	numbered_monster_variant_names	Steam Max No. 44
+204:$57A8	numbered_monster_variant_names	Steam Max No. 45
+204:$57B5	numbered_monster_variant_names	Steam Max No. 46
+204:$57C2	numbered_monster_variant_names	Steam Max No. 47
+204:$57CF	numbered_monster_variant_names	Steam Max No. 48
+204:$57DC	numbered_monster_variant_names	Steam Max No. 49
+204:$57E9	numbered_monster_variant_names	Steam Max No. 50
+204:$57F6	numbered_monster_variant_names	Steam Max No. 51
+204:$5803	numbered_monster_variant_names	Steam Max No. 52
+204:$5810	numbered_monster_variant_names	Steam Max No. 53
+204:$581D	numbered_monster_variant_names	Steam Max No. 54
+204:$582A	numbered_monster_variant_names	Steam Max No. 55
+204:$5837	numbered_monster_variant_names	Steam Max No. 56
+204:$5844	numbered_monster_variant_names	Steam Max No. 57
+204:$5851	numbered_monster_variant_names	Steam Max No. 58
+204:$585E	numbered_monster_variant_names	Steam Max No. 59
+204:$586B	numbered_monster_variant_names	Steam Max No. 60
+204:$5878	numbered_monster_variant_names	Steam Max No. 61
+204:$5885	numbered_monster_variant_names	Steam Max No. 62
+204:$5892	numbered_monster_variant_names	Steam Max No. 63
+204:$589F	numbered_monster_variant_names	Steam Max No. 64
+204:$58AC	numbered_monster_variant_names	Steam Max No. 65
+204:$58B9	numbered_monster_variant_names	Steam Max No. 66
+204:$58C6	numbered_monster_variant_names	Steam Max No. 67
+204:$58D3	numbered_monster_variant_names	Steam Max No. 68
+204:$58E0	numbered_monster_variant_names	Steam Max No. 69
+204:$58ED	numbered_monster_variant_names	Steam Max No. 70
+204:$58FA	numbered_monster_variant_names	Steam Max No. 71
+204:$5907	numbered_monster_variant_names	Steam Max No. 72
+204:$5914	numbered_monster_variant_names	Steam Max No. 73
+204:$5921	numbered_monster_variant_names	Steam Max No. 74
+204:$592E	numbered_monster_variant_names	Steam Max No. 75
+204:$593B	numbered_monster_variant_names	Steam Max No. 76
+204:$5948	numbered_monster_variant_names	Steam Max No. 77
+204:$5955	numbered_monster_variant_names	Steam Max No. 78
+204:$5962	numbered_monster_variant_names	Steam Max No. 79
+204:$596F	numbered_monster_variant_names	Steam Max No. 80
+204:$597C	numbered_monster_variant_names	Steam Max No. 81
+204:$5989	numbered_monster_variant_names	Steam Max No. 82
+204:$5996	numbered_monster_variant_names	Steam Max No. 83
+204:$59A3	numbered_monster_variant_names	Steam Max No. 84
+204:$59B0	numbered_monster_variant_names	Steam Max No. 85
+204:$59BD	numbered_monster_variant_names	Steam Max No. 86
+204:$59CA	numbered_monster_variant_names	Steam Max No. 87
+204:$59D7	numbered_monster_variant_names	Steam Max No. 88
+204:$59E4	numbered_monster_variant_names	Steam Max No. 89
+204:$59F1	numbered_monster_variant_names	Steam Max No. 90
+204:$59FE	numbered_monster_variant_names	Steam Max No. 91
+204:$5A0B	numbered_monster_variant_names	Steam Max No. 92
+204:$5A18	numbered_monster_variant_names	Steam Max No. 93
+204:$5A25	numbered_monster_variant_names	Steam Max No. 94
+204:$5A32	numbered_monster_variant_names	Steam Max No. 95
+204:$5A3F	numbered_monster_variant_names	Steam Max No. 96
+204:$5A4C	numbered_monster_variant_names	Steam Max No. 97
+204:$5A59	numbered_monster_variant_names	Steam Max No. 98
+204:$5A66	numbered_monster_variant_names	Steam Max No. 99
+204:$5B39	numbered_monster_variant_names	Diesel Ace
+204:$5B42	numbered_monster_variant_names	Diesel Ace No. 2
+204:$5B4E	numbered_monster_variant_names	Diesel Ace No. 3
+204:$5B5A	numbered_monster_variant_names	Diesel Ace No. 4
+204:$5B66	numbered_monster_variant_names	Diesel Ace No. 5
+204:$5B72	numbered_monster_variant_names	Diesel Ace No. 6
+204:$5B7E	numbered_monster_variant_names	Diesel Ace No. 7
+204:$5B8A	numbered_monster_variant_names	Diesel Ace No. 8
+204:$5B96	numbered_monster_variant_names	Diesel Ace No. 9
+204:$5BA2	numbered_monster_variant_names	Diesel Ace No. 10
+204:$5BAF	numbered_monster_variant_names	Diesel Ace No. 11
+204:$5BBC	numbered_monster_variant_names	Diesel Ace No. 12
+204:$5BC9	numbered_monster_variant_names	Diesel Ace No. 13
+204:$5BD6	numbered_monster_variant_names	Diesel Ace No. 14
+204:$5BE3	numbered_monster_variant_names	Diesel Ace No. 15
+204:$5BF0	numbered_monster_variant_names	Diesel Ace No. 16
+204:$5BFD	numbered_monster_variant_names	Diesel Ace No. 17
+204:$5C0A	numbered_monster_variant_names	Diesel Ace No. 18
+204:$5C17	numbered_monster_variant_names	Diesel Ace No. 19
+204:$5C24	numbered_monster_variant_names	Diesel Ace No. 20
+204:$5C31	numbered_monster_variant_names	Diesel Ace No. 21
+204:$5C3E	numbered_monster_variant_names	Diesel Ace No. 22
+204:$5C4B	numbered_monster_variant_names	Diesel Ace No. 23
+204:$5C58	numbered_monster_variant_names	Diesel Ace No. 24
+204:$5C65	numbered_monster_variant_names	Diesel Ace No. 25
+204:$5C72	numbered_monster_variant_names	Diesel Ace No. 26
+204:$5C7F	numbered_monster_variant_names	Diesel Ace No. 27
+204:$5C8C	numbered_monster_variant_names	Diesel Ace No. 28
+204:$5C99	numbered_monster_variant_names	Diesel Ace No. 29
+204:$5CA6	numbered_monster_variant_names	Diesel Ace No. 30
+204:$5CB3	numbered_monster_variant_names	Diesel Ace No. 31
+204:$5CC0	numbered_monster_variant_names	Diesel Ace No. 32
+204:$5CCD	numbered_monster_variant_names	Diesel Ace No. 33
+204:$5CDA	numbered_monster_variant_names	Diesel Ace No. 34
+204:$5CE7	numbered_monster_variant_names	Diesel Ace No. 35
+204:$5CF4	numbered_monster_variant_names	Diesel Ace No. 36
+204:$5D01	numbered_monster_variant_names	Diesel Ace No. 37
+204:$5D0E	numbered_monster_variant_names	Diesel Ace No. 38
+204:$5D1B	numbered_monster_variant_names	Diesel Ace No. 39
+204:$5D28	numbered_monster_variant_names	Diesel Ace No. 40
+204:$5D35	numbered_monster_variant_names	Diesel Ace No. 41
+204:$5D42	numbered_monster_variant_names	Diesel Ace No. 42
+204:$5D4F	numbered_monster_variant_names	Diesel Ace No. 43
+204:$5D5C	numbered_monster_variant_names	Diesel Ace No. 44
+204:$5D69	numbered_monster_variant_names	Diesel Ace No. 45
+204:$5D76	numbered_monster_variant_names	Diesel Ace No. 46
+204:$5D83	numbered_monster_variant_names	Diesel Ace No. 47
+204:$5D90	numbered_monster_variant_names	Diesel Ace No. 48
+204:$5D9D	numbered_monster_variant_names	Diesel Ace No. 49
+204:$5DAA	numbered_monster_variant_names	Diesel Ace No. 50
+204:$5DB7	numbered_monster_variant_names	Diesel Ace No. 51
+204:$5DC4	numbered_monster_variant_names	Diesel Ace No. 52
+204:$5DD1	numbered_monster_variant_names	Diesel Ace No. 53
+204:$5DDE	numbered_monster_variant_names	Diesel Ace No. 54
+204:$5DEB	numbered_monster_variant_names	Diesel Ace No. 55
+204:$5DF8	numbered_monster_variant_names	Diesel Ace No. 56
+204:$5E05	numbered_monster_variant_names	Diesel Ace No. 57
+204:$5E12	numbered_monster_variant_names	Diesel Ace No. 58
+204:$5E1F	numbered_monster_variant_names	Diesel Ace No. 59
+204:$5E2C	numbered_monster_variant_names	Diesel Ace No. 60
+204:$5E39	numbered_monster_variant_names	Diesel Ace No. 61
+204:$5E46	numbered_monster_variant_names	Diesel Ace No. 62
+204:$5E53	numbered_monster_variant_names	Diesel Ace No. 63
+204:$5E60	numbered_monster_variant_names	Diesel Ace No. 64
+204:$5E6D	numbered_monster_variant_names	Diesel Ace No. 65
+204:$5E7A	numbered_monster_variant_names	Diesel Ace No. 66
+204:$5E87	numbered_monster_variant_names	Diesel Ace No. 67
+204:$5E94	numbered_monster_variant_names	Diesel Ace No. 68
+204:$5EA1	numbered_monster_variant_names	Diesel Ace No. 69
+204:$5EAE	numbered_monster_variant_names	Diesel Ace No. 70
+204:$5EBB	numbered_monster_variant_names	Diesel Ace No. 71
+204:$5EC8	numbered_monster_variant_names	Diesel Ace No. 72
+204:$5ED5	numbered_monster_variant_names	Diesel Ace No. 73
+204:$5EE2	numbered_monster_variant_names	Diesel Ace No. 74
+204:$5EEF	numbered_monster_variant_names	Diesel Ace No. 75
+204:$5EFC	numbered_monster_variant_names	Diesel Ace No. 76
+204:$5F09	numbered_monster_variant_names	Diesel Ace No. 77
+204:$5F16	numbered_monster_variant_names	Diesel Ace No. 78
+204:$5F23	numbered_monster_variant_names	Diesel Ace No. 79
+204:$5F30	numbered_monster_variant_names	Diesel Ace No. 80
+204:$5F3D	numbered_monster_variant_names	Diesel Ace No. 81
+204:$5F4A	numbered_monster_variant_names	Diesel Ace No. 82
+204:$5F57	numbered_monster_variant_names	Diesel Ace No. 83
+204:$5F64	numbered_monster_variant_names	Diesel Ace No. 84
+204:$5F71	numbered_monster_variant_names	Diesel Ace No. 85
+204:$5F7E	numbered_monster_variant_names	Diesel Ace No. 86
+204:$5F8B	numbered_monster_variant_names	Diesel Ace No. 87
+204:$5F98	numbered_monster_variant_names	Diesel Ace No. 88
+204:$5FA5	numbered_monster_variant_names	Diesel Ace No. 89
+204:$5FB2	numbered_monster_variant_names	Diesel Ace No. 90
+204:$5FBF	numbered_monster_variant_names	Diesel Ace No. 91
+204:$5FCC	numbered_monster_variant_names	Diesel Ace No. 92
+204:$5FD9	numbered_monster_variant_names	Diesel Ace No. 93
+204:$5FE6	numbered_monster_variant_names	Diesel Ace No. 94
+204:$5FF3	numbered_monster_variant_names	Diesel Ace No. 95
+204:$6000	numbered_monster_variant_names	Diesel Ace No. 96
+204:$600D	numbered_monster_variant_names	Diesel Ace No. 97
+204:$601A	numbered_monster_variant_names	Diesel Ace No. 98
+204:$6027	numbered_monster_variant_names	Diesel Ace No. 99
+204:$60FA	numbered_monster_variant_names	Mega Solar
+204:$6101	numbered_monster_variant_names	Mega Solar No. 2
+204:$610B	numbered_monster_variant_names	Mega Solar No. 3
+204:$6115	numbered_monster_variant_names	Mega Solar No. 4
+204:$611F	numbered_monster_variant_names	Mega Solar No. 5
+204:$6129	numbered_monster_variant_names	Mega Solar No. 6
+204:$6133	numbered_monster_variant_names	Mega Solar No. 7
+204:$613D	numbered_monster_variant_names	Mega Solar No. 8
+204:$6147	numbered_monster_variant_names	Mega Solar No. 9
+204:$6151	numbered_monster_variant_names	Mega Solar No. 10
+204:$615C	numbered_monster_variant_names	Mega Solar No. 11
+204:$6167	numbered_monster_variant_names	Mega Solar No. 12
+204:$6172	numbered_monster_variant_names	Mega Solar No. 13
+204:$617D	numbered_monster_variant_names	Mega Solar No. 14
+204:$6188	numbered_monster_variant_names	Mega Solar No. 15
+204:$6193	numbered_monster_variant_names	Mega Solar No. 16
+204:$619E	numbered_monster_variant_names	Mega Solar No. 17
+204:$61A9	numbered_monster_variant_names	Mega Solar No. 18
+204:$61B4	numbered_monster_variant_names	Mega Solar No. 19
+204:$61BF	numbered_monster_variant_names	Mega Solar No. 20
+204:$61CA	numbered_monster_variant_names	Mega Solar No. 21
+204:$61D5	numbered_monster_variant_names	Mega Solar No. 22
+204:$61E0	numbered_monster_variant_names	Mega Solar No. 23
+204:$61EB	numbered_monster_variant_names	Mega Solar No. 24
+204:$61F6	numbered_monster_variant_names	Mega Solar No. 25
+204:$6201	numbered_monster_variant_names	Mega Solar No. 26
+204:$620C	numbered_monster_variant_names	Mega Solar No. 27
+204:$6217	numbered_monster_variant_names	Mega Solar No. 28
+204:$6222	numbered_monster_variant_names	Mega Solar No. 29
+204:$622D	numbered_monster_variant_names	Mega Solar No. 30
+204:$6238	numbered_monster_variant_names	Mega Solar No. 31
+204:$6243	numbered_monster_variant_names	Mega Solar No. 32
+204:$624E	numbered_monster_variant_names	Mega Solar No. 33
+204:$6259	numbered_monster_variant_names	Mega Solar No. 34
+204:$6264	numbered_monster_variant_names	Mega Solar No. 35
+204:$626F	numbered_monster_variant_names	Mega Solar No. 36
+204:$627A	numbered_monster_variant_names	Mega Solar No. 37
+204:$6285	numbered_monster_variant_names	Mega Solar No. 38
+204:$6290	numbered_monster_variant_names	Mega Solar No. 39
+204:$629B	numbered_monster_variant_names	Mega Solar No. 40
+204:$62A6	numbered_monster_variant_names	Mega Solar No. 41
+204:$62B1	numbered_monster_variant_names	Mega Solar No. 42
+204:$62BC	numbered_monster_variant_names	Mega Solar No. 43
+204:$62C7	numbered_monster_variant_names	Mega Solar No. 44
+204:$62D2	numbered_monster_variant_names	Mega Solar No. 45
+204:$62DD	numbered_monster_variant_names	Mega Solar No. 46
+204:$62E8	numbered_monster_variant_names	Mega Solar No. 47
+204:$62F3	numbered_monster_variant_names	Mega Solar No. 48
+204:$62FE	numbered_monster_variant_names	Mega Solar No. 49
+204:$6309	numbered_monster_variant_names	Mega Solar No. 50
+204:$6314	numbered_monster_variant_names	Mega Solar No. 51
+204:$631F	numbered_monster_variant_names	Mega Solar No. 52
+204:$632A	numbered_monster_variant_names	Mega Solar No. 53
+204:$6335	numbered_monster_variant_names	Mega Solar No. 54
+204:$6340	numbered_monster_variant_names	Mega Solar No. 55
+204:$634B	numbered_monster_variant_names	Mega Solar No. 56
+204:$6356	numbered_monster_variant_names	Mega Solar No. 57
+204:$6361	numbered_monster_variant_names	Mega Solar No. 58
+204:$636C	numbered_monster_variant_names	Mega Solar No. 59
+204:$6377	numbered_monster_variant_names	Mega Solar No. 60
+204:$6382	numbered_monster_variant_names	Mega Solar No. 61
+204:$638D	numbered_monster_variant_names	Mega Solar No. 62
+204:$6398	numbered_monster_variant_names	Mega Solar No. 63
+204:$63A3	numbered_monster_variant_names	Mega Solar No. 64
+204:$63AE	numbered_monster_variant_names	Mega Solar No. 65
+204:$63B9	numbered_monster_variant_names	Mega Solar No. 66
+204:$63C4	numbered_monster_variant_names	Mega Solar No. 67
+204:$63CF	numbered_monster_variant_names	Mega Solar No. 68
+204:$63DA	numbered_monster_variant_names	Mega Solar No. 69
+204:$63E5	numbered_monster_variant_names	Mega Solar No. 70
+204:$63F0	numbered_monster_variant_names	Mega Solar No. 71
+204:$63FB	numbered_monster_variant_names	Mega Solar No. 72
+204:$6406	numbered_monster_variant_names	Mega Solar No. 73
+204:$6411	numbered_monster_variant_names	Mega Solar No. 74
+204:$641C	numbered_monster_variant_names	Mega Solar No. 75
+204:$6427	numbered_monster_variant_names	Mega Solar No. 76
+204:$6432	numbered_monster_variant_names	Mega Solar No. 77
+204:$643D	numbered_monster_variant_names	Mega Solar No. 78
+204:$6448	numbered_monster_variant_names	Mega Solar No. 79
+204:$6453	numbered_monster_variant_names	Mega Solar No. 80
+204:$645E	numbered_monster_variant_names	Mega Solar No. 81
+204:$6469	numbered_monster_variant_names	Mega Solar No. 82
+204:$6474	numbered_monster_variant_names	Mega Solar No. 83
+204:$647F	numbered_monster_variant_names	Mega Solar No. 84
+204:$648A	numbered_monster_variant_names	Mega Solar No. 85
+204:$6495	numbered_monster_variant_names	Mega Solar No. 86
+204:$64A0	numbered_monster_variant_names	Mega Solar No. 87
+204:$64AB	numbered_monster_variant_names	Mega Solar No. 88
+204:$64B6	numbered_monster_variant_names	Mega Solar No. 89
+204:$64C1	numbered_monster_variant_names	Mega Solar No. 90
+204:$64CC	numbered_monster_variant_names	Mega Solar No. 91
+204:$64D7	numbered_monster_variant_names	Mega Solar No. 92
+204:$64E2	numbered_monster_variant_names	Mega Solar No. 93
+204:$64ED	numbered_monster_variant_names	Mega Solar No. 94
+204:$64F8	numbered_monster_variant_names	Mega Solar No. 95
+204:$6503	numbered_monster_variant_names	Mega Solar No. 96
+204:$650E	numbered_monster_variant_names	Mega Solar No. 97
+204:$6519	numbered_monster_variant_names	Mega Solar No. 98
+204:$6524	numbered_monster_variant_names	Mega Solar No. 99
+204:$65F5	numbered_monster_variant_names	Linear Shogun
+204:$65FE	numbered_monster_variant_names	Linear Shogun No. 2
+204:$660A	numbered_monster_variant_names	Linear Shogun No. 3
+204:$6616	numbered_monster_variant_names	Linear Shogun No. 4
+204:$6622	numbered_monster_variant_names	Linear Shogun No. 5
+204:$662E	numbered_monster_variant_names	Linear Shogun No. 6
+204:$663A	numbered_monster_variant_names	Linear Shogun No. 7
+204:$6646	numbered_monster_variant_names	Linear Shogun No. 8
+204:$6652	numbered_monster_variant_names	Linear Shogun No. 9
+204:$665E	numbered_monster_variant_names	Linear Shogun No. 10
+204:$666B	numbered_monster_variant_names	Linear Shogun No. 11
+204:$6678	numbered_monster_variant_names	Linear Shogun No. 12
+204:$6685	numbered_monster_variant_names	Linear Shogun No. 13
+204:$6692	numbered_monster_variant_names	Linear Shogun No. 14
+204:$669F	numbered_monster_variant_names	Linear Shogun No. 15
+204:$66AC	numbered_monster_variant_names	Linear Shogun No. 16
+204:$66B9	numbered_monster_variant_names	Linear Shogun No. 17
+204:$66C6	numbered_monster_variant_names	Linear Shogun No. 18
+204:$66D3	numbered_monster_variant_names	Linear Shogun No. 19
+204:$66E0	numbered_monster_variant_names	Linear Shogun No. 20
+204:$66ED	numbered_monster_variant_names	Linear Shogun No. 21
+204:$66FA	numbered_monster_variant_names	Linear Shogun No. 22
+204:$6707	numbered_monster_variant_names	Linear Shogun No. 23
+204:$6714	numbered_monster_variant_names	Linear Shogun No. 24
+204:$6721	numbered_monster_variant_names	Linear Shogun No. 25
+204:$672E	numbered_monster_variant_names	Linear Shogun No. 26
+204:$673B	numbered_monster_variant_names	Linear Shogun No. 27
+204:$6748	numbered_monster_variant_names	Linear Shogun No. 28
+204:$6755	numbered_monster_variant_names	Linear Shogun No. 29
+204:$6762	numbered_monster_variant_names	Linear Shogun No. 30
+204:$676F	numbered_monster_variant_names	Linear Shogun No. 31
+204:$677C	numbered_monster_variant_names	Linear Shogun No. 32
+204:$6789	numbered_monster_variant_names	Linear Shogun No. 33
+204:$6796	numbered_monster_variant_names	Linear Shogun No. 34
+204:$67A3	numbered_monster_variant_names	Linear Shogun No. 35
+204:$67B0	numbered_monster_variant_names	Linear Shogun No. 36
+204:$67BD	numbered_monster_variant_names	Linear Shogun No. 37
+204:$67CA	numbered_monster_variant_names	Linear Shogun No. 38
+204:$67D7	numbered_monster_variant_names	Linear Shogun No. 39
+204:$67E4	numbered_monster_variant_names	Linear Shogun No. 40
+204:$67F1	numbered_monster_variant_names	Linear Shogun No. 41
+204:$67FE	numbered_monster_variant_names	Linear Shogun No. 42
+204:$680B	numbered_monster_variant_names	Linear Shogun No. 43
+204:$6818	numbered_monster_variant_names	Linear Shogun No. 44
+204:$6825	numbered_monster_variant_names	Linear Shogun No. 45
+204:$6832	numbered_monster_variant_names	Linear Shogun No. 46
+204:$683F	numbered_monster_variant_names	Linear Shogun No. 47
+204:$684C	numbered_monster_variant_names	Linear Shogun No. 48
+204:$6859	numbered_monster_variant_names	Linear Shogun No. 49
+204:$6866	numbered_monster_variant_names	Linear Shogun No. 50
+204:$6873	numbered_monster_variant_names	Linear Shogun No. 51
+204:$6880	numbered_monster_variant_names	Linear Shogun No. 52
+204:$688D	numbered_monster_variant_names	Linear Shogun No. 53
+204:$689A	numbered_monster_variant_names	Linear Shogun No. 54
+204:$68A7	numbered_monster_variant_names	Linear Shogun No. 55
+204:$68B4	numbered_monster_variant_names	Linear Shogun No. 56
+204:$68C1	numbered_monster_variant_names	Linear Shogun No. 57
+204:$68CE	numbered_monster_variant_names	Linear Shogun No. 58
+204:$68DB	numbered_monster_variant_names	Linear Shogun No. 59
+204:$68E8	numbered_monster_variant_names	Linear Shogun No. 60
+204:$68F5	numbered_monster_variant_names	Linear Shogun No. 61
+204:$6902	numbered_monster_variant_names	Linear Shogun No. 62
+204:$690F	numbered_monster_variant_names	Linear Shogun No. 63
+204:$691C	numbered_monster_variant_names	Linear Shogun No. 64
+204:$6929	numbered_monster_variant_names	Linear Shogun No. 65
+204:$6936	numbered_monster_variant_names	Linear Shogun No. 66
+204:$6943	numbered_monster_variant_names	Linear Shogun No. 67
+204:$6950	numbered_monster_variant_names	Linear Shogun No. 68
+204:$695D	numbered_monster_variant_names	Linear Shogun No. 69
+204:$696A	numbered_monster_variant_names	Linear Shogun No. 70
+204:$6977	numbered_monster_variant_names	Linear Shogun No. 71
+204:$6984	numbered_monster_variant_names	Linear Shogun No. 72
+204:$6991	numbered_monster_variant_names	Linear Shogun No. 73
+204:$699E	numbered_monster_variant_names	Linear Shogun No. 74
+204:$69AB	numbered_monster_variant_names	Linear Shogun No. 75
+204:$69B8	numbered_monster_variant_names	Linear Shogun No. 76
+204:$69C5	numbered_monster_variant_names	Linear Shogun No. 77
+204:$69D2	numbered_monster_variant_names	Linear Shogun No. 78
+204:$69DF	numbered_monster_variant_names	Linear Shogun No. 79
+204:$69EC	numbered_monster_variant_names	Linear Shogun No. 80
+204:$69F9	numbered_monster_variant_names	Linear Shogun No. 81
+204:$6A06	numbered_monster_variant_names	Linear Shogun No. 82
+204:$6A13	numbered_monster_variant_names	Linear Shogun No. 83
+204:$6A20	numbered_monster_variant_names	Linear Shogun No. 84
+204:$6A2D	numbered_monster_variant_names	Linear Shogun No. 85
+204:$6A3A	numbered_monster_variant_names	Linear Shogun No. 86
+204:$6A47	numbered_monster_variant_names	Linear Shogun No. 87
+204:$6A54	numbered_monster_variant_names	Linear Shogun No. 88
+204:$6A61	numbered_monster_variant_names	Linear Shogun No. 89
+204:$6A6E	numbered_monster_variant_names	Linear Shogun No. 90
+204:$6A7B	numbered_monster_variant_names	Linear Shogun No. 91
+204:$6A88	numbered_monster_variant_names	Linear Shogun No. 92
+204:$6A95	numbered_monster_variant_names	Linear Shogun No. 93
+204:$6AA2	numbered_monster_variant_names	Linear Shogun No. 94
+204:$6AAF	numbered_monster_variant_names	Linear Shogun No. 95
+204:$6ABC	numbered_monster_variant_names	Linear Shogun No. 96
+204:$6AC9	numbered_monster_variant_names	Linear Shogun No. 97
+204:$6AD6	numbered_monster_variant_names	Linear Shogun No. 98
+204:$6AE3	numbered_monster_variant_names	Linear Shogun No. 99
+204:$6BB6	numbered_monster_variant_names	Hybrider Z
+204:$6BBF	numbered_monster_variant_names	Hybrider Z No. 2
+204:$6BCB	numbered_monster_variant_names	Hybrider Z No. 3
+204:$6BD7	numbered_monster_variant_names	Hybrider Z No. 4
+204:$6BE3	numbered_monster_variant_names	Hybrider Z No. 5
+204:$6BEF	numbered_monster_variant_names	Hybrider Z No. 6
+204:$6BFB	numbered_monster_variant_names	Hybrider Z No. 7
+204:$6C07	numbered_monster_variant_names	Hybrider Z No. 8
+204:$6C13	numbered_monster_variant_names	Hybrider Z No. 9
+204:$6C1F	numbered_monster_variant_names	Hybrider Z No. 10
+204:$6C2C	numbered_monster_variant_names	Hybrider Z No. 11
+204:$6C39	numbered_monster_variant_names	Hybrider Z No. 12
+204:$6C46	numbered_monster_variant_names	Hybrider Z No. 13
+204:$6C53	numbered_monster_variant_names	Hybrider Z No. 14
+204:$6C60	numbered_monster_variant_names	Hybrider Z No. 15
+204:$6C6D	numbered_monster_variant_names	Hybrider Z No. 16
+204:$6C7A	numbered_monster_variant_names	Hybrider Z No. 17
+204:$6C87	numbered_monster_variant_names	Hybrider Z No. 18
+204:$6C94	numbered_monster_variant_names	Hybrider Z No. 19
+204:$6CA1	numbered_monster_variant_names	Hybrider Z No. 20
+204:$6CAE	numbered_monster_variant_names	Hybrider Z No. 21
+204:$6CBB	numbered_monster_variant_names	Hybrider Z No. 22
+204:$6CC8	numbered_monster_variant_names	Hybrider Z No. 23
+204:$6CD5	numbered_monster_variant_names	Hybrider Z No. 24
+204:$6CE2	numbered_monster_variant_names	Hybrider Z No. 25
+204:$6CEF	numbered_monster_variant_names	Hybrider Z No. 26
+204:$6CFC	numbered_monster_variant_names	Hybrider Z No. 27
+204:$6D09	numbered_monster_variant_names	Hybrider Z No. 28
+204:$6D16	numbered_monster_variant_names	Hybrider Z No. 29
+204:$6D23	numbered_monster_variant_names	Hybrider Z No. 30
+204:$6D30	numbered_monster_variant_names	Hybrider Z No. 31
+204:$6D3D	numbered_monster_variant_names	Hybrider Z No. 32
+204:$6D4A	numbered_monster_variant_names	Hybrider Z No. 33
+204:$6D57	numbered_monster_variant_names	Hybrider Z No. 34
+204:$6D64	numbered_monster_variant_names	Hybrider Z No. 35
+204:$6D71	numbered_monster_variant_names	Hybrider Z No. 36
+204:$6D7E	numbered_monster_variant_names	Hybrider Z No. 37
+204:$6D8B	numbered_monster_variant_names	Hybrider Z No. 38
+204:$6D98	numbered_monster_variant_names	Hybrider Z No. 39
+204:$6DA5	numbered_monster_variant_names	Hybrider Z No. 40
+204:$6DB2	numbered_monster_variant_names	Hybrider Z No. 41
+204:$6DBF	numbered_monster_variant_names	Hybrider Z No. 42
+204:$6DCC	numbered_monster_variant_names	Hybrider Z No. 43
+204:$6DD9	numbered_monster_variant_names	Hybrider Z No. 44
+204:$6DE6	numbered_monster_variant_names	Hybrider Z No. 45
+204:$6DF3	numbered_monster_variant_names	Hybrider Z No. 46
+204:$6E00	numbered_monster_variant_names	Hybrider Z No. 47
+204:$6E0D	numbered_monster_variant_names	Hybrider Z No. 48
+204:$6E1A	numbered_monster_variant_names	Hybrider Z No. 49
+204:$6E27	numbered_monster_variant_names	Hybrider Z No. 50
+204:$6E34	numbered_monster_variant_names	Hybrider Z No. 51
+204:$6E41	numbered_monster_variant_names	Hybrider Z No. 52
+204:$6E4E	numbered_monster_variant_names	Hybrider Z No. 53
+204:$6E5B	numbered_monster_variant_names	Hybrider Z No. 54
+204:$6E68	numbered_monster_variant_names	Hybrider Z No. 55
+204:$6E75	numbered_monster_variant_names	Hybrider Z No. 56
+204:$6E82	numbered_monster_variant_names	Hybrider Z No. 57
+204:$6E8F	numbered_monster_variant_names	Hybrider Z No. 58
+204:$6E9C	numbered_monster_variant_names	Hybrider Z No. 59
+204:$6EA9	numbered_monster_variant_names	Hybrider Z No. 60
+204:$6EB6	numbered_monster_variant_names	Hybrider Z No. 61
+204:$6EC3	numbered_monster_variant_names	Hybrider Z No. 62
+204:$6ED0	numbered_monster_variant_names	Hybrider Z No. 63
+204:$6EDD	numbered_monster_variant_names	Hybrider Z No. 64
+204:$6EEA	numbered_monster_variant_names	Hybrider Z No. 65
+204:$6EF7	numbered_monster_variant_names	Hybrider Z No. 66
+204:$6F04	numbered_monster_variant_names	Hybrider Z No. 67
+204:$6F11	numbered_monster_variant_names	Hybrider Z No. 68
+204:$6F1E	numbered_monster_variant_names	Hybrider Z No. 69
+204:$6F2B	numbered_monster_variant_names	Hybrider Z No. 70
+204:$6F38	numbered_monster_variant_names	Hybrider Z No. 71
+204:$6F45	numbered_monster_variant_names	Hybrider Z No. 72
+204:$6F52	numbered_monster_variant_names	Hybrider Z No. 73
+204:$6F5F	numbered_monster_variant_names	Hybrider Z No. 74
+204:$6F6C	numbered_monster_variant_names	Hybrider Z No. 75
+204:$6F79	numbered_monster_variant_names	Hybrider Z No. 76
+204:$6F86	numbered_monster_variant_names	Hybrider Z No. 77
+204:$6F93	numbered_monster_variant_names	Hybrider Z No. 78
+204:$6FA0	numbered_monster_variant_names	Hybrider Z No. 79
+204:$6FAD	numbered_monster_variant_names	Hybrider Z No. 80
+204:$6FBA	numbered_monster_variant_names	Hybrider Z No. 81
+204:$6FC7	numbered_monster_variant_names	Hybrider Z No. 82
+204:$6FD4	numbered_monster_variant_names	Hybrider Z No. 83
+204:$6FE1	numbered_monster_variant_names	Hybrider Z No. 84
+204:$6FEE	numbered_monster_variant_names	Hybrider Z No. 85
+204:$6FFB	numbered_monster_variant_names	Hybrider Z No. 86
+204:$7008	numbered_monster_variant_names	Hybrider Z No. 87
+204:$7015	numbered_monster_variant_names	Hybrider Z No. 88
+204:$7022	numbered_monster_variant_names	Hybrider Z No. 89
+204:$702F	numbered_monster_variant_names	Hybrider Z No. 90
+204:$703C	numbered_monster_variant_names	Hybrider Z No. 91
+204:$7049	numbered_monster_variant_names	Hybrider Z No. 92
+204:$7056	numbered_monster_variant_names	Hybrider Z No. 93
+204:$7063	numbered_monster_variant_names	Hybrider Z No. 94
+204:$7070	numbered_monster_variant_names	Hybrider Z No. 95
+204:$707D	numbered_monster_variant_names	Hybrider Z No. 96
+204:$708A	numbered_monster_variant_names	Hybrider Z No. 97
+204:$7097	numbered_monster_variant_names	Hybrider Z No. 98
+204:$70A4	numbered_monster_variant_names	Hybrider Z No. 99

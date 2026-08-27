@@ -1,0 +1,132 @@
+{
+  "schema": "shiren-gb2-translation-build-v2",
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "translation_fixture": "tests/fixtures/translation_smoke.tsv",
+  "override": {
+    "id": "195:$562F",
+    "text": "Hello, Shiren!<br>Native VWF works.<page><box>",
+    "encoded": "11343B3B3E4B241C373841343D4FFD173043384534241F200F24463E413A424AFBFC",
+    "original_bytes": 170,
+    "encoded_bytes": 34,
+    "size_delta": -136,
+    "output": "220:$57E3"
+  },
+  "allocation_summary": {
+    "directory_groups": 126,
+    "unique_tables": 118,
+    "logical_references": 7163,
+    "physical_pointer_entries": 6765,
+    "unique_records": 6695,
+    "pointer_bytes": 20531,
+    "text_bytes": 187983,
+    "payload_bytes": 208514,
+    "used_banks": 13,
+    "used_bank_capacity": 212992,
+    "unused_bytes_in_used_banks": 4478,
+    "reserved_banks": 25,
+    "untouched_reserved_banks": 12,
+    "tables_with_aliases": 8,
+    "alias_pointer_entries": 70,
+    "materialized_interior_records": 1,
+    "overridden_records": 1
+  },
+  "validation": {
+    "directory_groups": 126,
+    "logical_references": 7163,
+    "exact_references": 7163,
+    "written_banks": 13,
+    "header_checksum": "CB",
+    "global_checksum": "4427",
+    "overridden_records": 1,
+    "overridden_references": 1
+  },
+  "output": {
+    "size": 4194304,
+    "sha1": "d545b58d3f1f347f7451b73ec56d87b8e3d20ccc",
+    "sha256": "796f4726abcdb1ecde09f1eb0efeae0730b70e1b68692f6af8bdeb6d1a23e855",
+    "md5": "8c4087fd741550635d28b78b5f4ae0f4",
+    "header_checksum": "CB",
+    "global_checksum": "4427",
+    "changed_bytes": 216296,
+    "mutation_offsets_sha256": "7f22618b07834b3edf1d2d7e26a4d00747bdb882b3b981cc1ef603cc3d196ff9",
+    "directory_sha1": "6fba5b254857f219c468665a9ee82638d28e1e3f",
+    "written_banks_sha1": "634f0751458bad74851a24c03ee3a67c02b1993f"
+  },
+  "font_regions": {
+    "widths": "9b8ad20873f469d6a83ef136dbf94e9ba0a80e4e",
+    "single": "b6b0289290a829bb53eeec8d45b00e860dec7957",
+    "kanji": "b1e8c516402959fc73832a4a8bfdf95c2ce26604"
+  },
+  "allocation_manifest": {
+    "bytes": 1786385,
+    "sha1": "6df297dd7e4b23531efd285db2ec942ed6958c64"
+  },
+  "table_anchors": [
+    {
+      "group": 35,
+      "output": "215:$6DBB",
+      "size": 200,
+      "text_bytes": 180,
+      "payload_sha1": "1df6d90a8c43795dc3d071317f0d282d67fd8d3d"
+    },
+    {
+      "group": 36,
+      "output": "215:$6DCF",
+      "size": 36,
+      "text_bytes": 31,
+      "payload_sha1": "34d1ce2652e577464ec100ec11e3ab8c741abd19"
+    },
+    {
+      "group": 42,
+      "output": "215:$6E83",
+      "size": 117,
+      "text_bytes": 109,
+      "payload_sha1": "4d75985b58dceca989bc225ffe109fda1c94ea3b"
+    },
+    {
+      "group": 68,
+      "output": "215:$721A",
+      "size": 5641,
+      "text_bytes": 5153,
+      "payload_sha1": "075926d7cb438d3bf548f69a5e81913d952f5763"
+    },
+    {
+      "group": 95,
+      "output": "215:$7942",
+      "size": 29,
+      "text_bytes": 24,
+      "payload_sha1": "f94e3587143694c2f3db311f150e787d9392ecea"
+    },
+    {
+      "group": 106,
+      "output": "215:$7A6B",
+      "size": 15580,
+      "text_bytes": 14960,
+      "payload_sha1": "5d935d6744fd1af220b3a031177460d972687ea1"
+    },
+    {
+      "group": 125,
+      "output": "216:$5032",
+      "size": 356,
+      "text_bytes": 243,
+      "payload_sha1": "a7789655778c70f9e48f5d80577b60b1037b1f5f"
+    }
+  ],
+  "opening": {
+    "source_trace": [
+      "220:$5753",
+      "220:$577C",
+      "220:$578F",
+      "220:$5798",
+      "220:$57B2",
+      "220:$57B3",
+      "220:$57B4",
+      "220:$57CF",
+      "220:$57E3"
+    ],
+    "staged_bytes": 34,
+    "staged_sha1": "6e53fb443f391109ab29b87ce132ee6b0d2a9ad9",
+    "screen_rgba_sha1": "52c549060084f25343ffd273282210c1530017bb",
+    "final_pen": 84
+  }
+}

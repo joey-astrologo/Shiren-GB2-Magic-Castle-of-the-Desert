@@ -1,0 +1,30 @@
+{
+  "schema": "shiren-gb2-prose-draft-v1",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "source_free": true,
+  "section": "story_and_event_dialogue",
+  "eligible_records": 1768,
+  "eligible_sha1": "1f496beeb2304279e4adc02db7d7a0e7d256bc7c",
+  "draft_records": 1767,
+  "draft_sha1": "4cd1766f8ff911c0c166c7f940cf4a8feb5a8304",
+  "generated_records": 1767,
+  "dynamic_records": 185,
+  "f6_records": 25,
+  "runtime_substitutions": {
+    "name": 183,
+    "number": 25
+  },
+  "source_boundaries": {
+    "box": 2243,
+    "page": 3581
+  },
+  "source_effects": {
+    "cF9": 0,
+    "delay": 217
+  },
+  "layout": {
+    "composer_max_pixels": 143,
+    "renderer_max_pixels": 144,
+    "dialogue_lines_per_surface": 3
+  }
+}

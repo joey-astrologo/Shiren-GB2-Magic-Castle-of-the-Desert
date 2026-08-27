@@ -1,0 +1,56 @@
+{
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "table_sha1": "f904171b2efb43d85b94b278e167ed3135656fce",
+  "mapped_prefixed_codes": 281,
+  "kanji_codes": 270,
+  "symbol_codes": 4,
+  "token_codes": 7,
+  "lossless_aliases": [
+    {"canonical": "F04E", "alias": "F174", "text": "明"},
+    {"canonical": "F0C6", "alias": "F206", "text": "血"},
+    {"canonical": "F078", "alias": "F23E", "text": "着"}
+  ],
+  "tokens": {
+    "F198": "<quoteOpen>",
+    "F19A": "<quoteClose>",
+    "F21E": "<cracked>",
+    "F224": "<speaker>",
+    "F226": "<speakerEnd>",
+    "F24C": "<passwordLeft>",
+    "F24E": "<passwordRight>"
+  },
+  "unmapped_continuation_codes": [
+    "F043", "F045", "F047", "F049", "F04D", "F04F", "F059", "F05B",
+    "F05F", "F063", "F065", "F069", "F071", "F075", "F077", "F147",
+    "F149", "F151", "F155", "F159", "F167", "F169", "F16B", "F16D",
+    "F16F", "F245", "F247", "F249", "F24B", "F251", "F255", "F256",
+    "F258", "F259", "F25B", "F261", "F266", "F268", "F26A", "F26C",
+    "F26F", "F275", "F276", "F277"
+  ],
+  "candidate_anchors": [
+    {"offset": "300257", "contains": "風来のシレン2 砂漠の魔城"},
+    {"offset": "301CF0", "contains": "ブフーの包丁"},
+    {"offset": "301C21", "contains": "有{F174=明}の太刀"},
+    {"offset": "302A7C", "contains": "ゲームボーイカラー専用です"},
+    {"offset": "303338", "contains": "古代遺跡へ 向かいますか？"},
+    {"offset": "306868", "contains": "鍛冶屋のかまどクリア"},
+    {"offset": "31D4E7", "contains": "では「合成」について"},
+    {"offset": "31E106", "contains": "日本ぜんこくには"},
+    {"offset": "337122", "contains": "世界は終りをつげた。"}
+  ],
+  "source_anchors": [
+    {"record": "192:$6B7D", "contains": "扇"},
+    {"record": "196:$433B", "contains": "苦しい？"},
+    {"record": "193:$6ED9", "contains": "魔城地下牢"},
+    {"record": "193:$703D", "contains": "修羅の間"},
+    {"record": "193:$7070", "contains": "闇の深部"},
+    {"record": "193:$6F3B", "contains": "壺の洞窟"},
+    {"record": "193:$6AB3", "contains": "鍋係り"},
+    {"record": "193:$6AC7", "contains": "二級料理人"},
+    {"record": "193:$75CC", "contains": "郵便番号"},
+    {"record": "193:$75CC", "contains": "〒160"},
+    {"record": "192:$4734", "contains": "<cracked>"},
+    {"record": "192:$7162", "contains": "<passwordLeft><passwordRight>"},
+    {"record": "194:$4EF9", "contains": "竹"}
+  ]
+}

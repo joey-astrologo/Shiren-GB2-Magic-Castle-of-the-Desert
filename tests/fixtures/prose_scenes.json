@@ -1,0 +1,30 @@
+{
+  "schema": "shiren-gb2-prose-scenes-v1",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "group_range": [33, 112],
+  "logical_groups": 80,
+  "scenes": 72,
+  "duplicate_group_scenes": 8,
+  "multi_group_scenes": 9,
+  "records": 1768,
+  "translated_records": 1767,
+  "complete_scenes": 71,
+  "scene_map_sha1": "47b4c69542865f73baeacbb44007643f28b139fe",
+  "membership_sha1": "792593f1d5425f8ec2f8730df64b1704ceb7d0fc",
+  "opening_batch": {
+    "groups": [34, 35, 36, 37],
+    "records": 17,
+    "first_id": "195:$5593",
+    "last_id": "195:$5814",
+    "membership_sha1": "b873d4b0f415c2022adde89ae248f9746f9334be",
+    "translated_records": 17
+  },
+  "ilpa_reunion_batch": {
+    "groups": [38, 39],
+    "records": 34,
+    "first_id": "195:$5848",
+    "last_id": "195:$5ECC",
+    "membership_sha1": "10ca4743d139e0213e5fab5912c96722197b7366",
+    "translated_records": 34
+  }
+}

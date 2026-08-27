@@ -1,0 +1,36 @@
+{
+  "schema": "shiren-gb2-translation-lint-v1",
+  "records": 6695,
+  "translated_records": 5667,
+  "explicit_empty_records": 54,
+  "glossary_definition_records": 1869,
+  "translated_glossary_records": 1869,
+  "glossary_families": {
+    "ability": 123,
+    "actor": 1341,
+    "appearance": 123,
+    "item": 216,
+    "location": 44,
+    "trap": 22
+  },
+  "duplicate_source_groups": 41,
+  "records_in_duplicate_source_groups": 231,
+  "searchable_definition_records": 854,
+  "searchable_plain_source_terms": 659,
+  "minimum_search_term_length": 3,
+  "runtime_substitution_records": 434,
+  "runtime_substitution_tokens": 498,
+  "runtime_substitution_kinds": {
+    "copy": 56,
+    "lookup": 139,
+    "name": 195,
+    "number": 108
+  },
+  "native_soft_wrap_translated_records": 139,
+  "native_soft_wrap_source_markers": 139,
+  "native_soft_wrap_preserved_records": 139,
+  "native_soft_wrap_english_markers": 169,
+  "reviewed_exceptions": 14,
+  "problems": 0,
+  "problem_kinds": {}
+}

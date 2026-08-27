@@ -1,0 +1,89 @@
+{
+  "schema": "shiren-gb2-lint-exceptions-v1",
+  "exceptions": [
+    {
+      "id": "192:$5F83",
+      "kind": "glossary_collision",
+      "related_id": "192:$62DC",
+      "reason": "Both directory slots intentionally name the same generic meat item; identical runtime text is semantically required."
+    },
+    {
+      "id": "194:$62F5",
+      "kind": "glossary_split",
+      "related_id": "194:$6400",
+      "reason": "The category-filtered matcher uses the established English names Swift Foe Scroll and Accelerating Staff, although both Japanese roots are identical."
+    },
+    {
+      "id": "194:$6357",
+      "kind": "glossary_collision",
+      "related_id": "194:$63CD",
+      "reason": "Failure Scroll and Failure Staff intentionally share their established English root even though their Japanese roots differ."
+    },
+    {
+      "id": "194:$6370",
+      "kind": "glossary_split",
+      "related_id": "194:$63F3",
+      "reason": "The category-filtered matcher mirrors the established item names Attraction Scroll and Attract Staff."
+    },
+    {
+      "id": "194:$63C9",
+      "kind": "glossary_split",
+      "related_id": "194:$6434",
+      "reason": "The category-filtered matcher mirrors the established item names Change Staff and Transmutation Pot."
+    },
+    {
+      "id": "192:$4C81",
+      "kind": "glossary_split",
+      "related_id": "192:$62EA",
+      "reason": "DS2 uses Wily Tanuki for the actor and Kasa Tanuki for the item-form entry even though both share the same Japanese label."
+    },
+    {
+      "id": "192:$518C",
+      "kind": "glossary_split",
+      "related_id": "192:$62F0",
+      "reason": "DS2 uses Tricky Tanuki for the actor and Karakasa Tanuki for the item-form entry even though both share the same Japanese label."
+    },
+    {
+      "id": "192:$56F3",
+      "kind": "glossary_split",
+      "related_id": "192:$62F8",
+      "reason": "DS2 uses Crafty Tanuki for the actor and Tantan Tanuki for the item-form entry even though both share the same Japanese label."
+    },
+    {
+      "id": "195:$562F",
+      "kind": "term_ignored",
+      "related_id": "192:$4F1A",
+      "reason": "This occurrence is an ordinary clause describing an unnamed person found collapsed in the desert, not the actor label Collapsed Wanderer."
+    },
+    {
+      "id": "200:$6334",
+      "kind": "term_ignored",
+      "related_id": "192:$632E",
+      "reason": "This occurrence uses monster as an ordinary common noun for Healer Rabbit, not the distinct actor label Monster."
+    },
+    {
+      "id": "200:$6D2E",
+      "kind": "term_ignored",
+      "related_id": "192:$632E",
+      "reason": "This occurrence uses monster as an ordinary common noun for Scurry Egg, not the distinct actor label Monster."
+    },
+    {
+      "id": "201:$5549",
+      "kind": "term_ignored",
+      "related_id": "192:$4BFB",
+      "reason": "The compound Japanese actor name for Scamper Egg contains the shorter Scurry Egg label; the tier-2 actor name is the intended match."
+    },
+    {
+      "id": "201:$6F66",
+      "kind": "term_ignored",
+      "related_id": "192:$5646",
+      "reason": "The compound Japanese actor name for General Ant contains the shorter Shogun label; the full actor name is the intended match."
+    },
+    {
+      "id": "192:$4DF0",
+      "kind": "glossary_collision",
+      "related_id": "204:$40C6",
+      "reason": "The actor directory and the unnumbered first model in the 1-99 variant table intentionally refer to the same Zenmaiger; the native table does not label it No. 1."
+    }
+  ]
+}

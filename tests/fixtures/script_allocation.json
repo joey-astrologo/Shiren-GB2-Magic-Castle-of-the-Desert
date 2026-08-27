@@ -1,0 +1,269 @@
+{
+  "schema": "shiren-gb2-script-allocation-fixture-v2",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "strategy": "far-tables-then-records-next-fit-v2",
+  "reserved_banks": {
+    "first": 215,
+    "last": 239,
+    "count": 25,
+    "blank_bank_sha1": "897256b6709e1a4da9daba92b6bde39ccfccd8c1"
+  },
+  "summary": {
+    "directory_groups": 126,
+    "unique_tables": 118,
+    "logical_references": 7163,
+    "physical_pointer_entries": 6765,
+    "unique_records": 6695,
+    "pointer_bytes": 20531,
+    "text_bytes": 188119,
+    "payload_bytes": 208650,
+    "used_banks": 13,
+    "used_bank_capacity": 212992,
+    "unused_bytes_in_used_banks": 4342,
+    "reserved_banks": 25,
+    "untouched_reserved_banks": 12,
+    "tables_with_aliases": 8,
+    "alias_pointer_entries": 70,
+    "materialized_interior_records": 1
+  },
+  "banks": [
+    {
+      "bank": 215,
+      "tables": 102,
+      "used": 16272,
+      "free": 112,
+      "payload_sha1": "8f775e0d97606e1b0c93ade4c629915d762e5839"
+    },
+    {
+      "bank": 216,
+      "tables": 16,
+      "used": 16266,
+      "free": 118,
+      "payload_sha1": "bfe7de8c3281142da5d09cdb60a399ca4afb424f"
+    },
+    {
+      "bank": 217,
+      "tables": 0,
+      "used": 16370,
+      "free": 14,
+      "payload_sha1": "f5dda386254166c2c4e46eadac8830132aa268c1"
+    },
+    {
+      "bank": 218,
+      "tables": 0,
+      "used": 16370,
+      "free": 14,
+      "payload_sha1": "c0020f04e8455400a81513d652f2304c92e617a8"
+    },
+    {
+      "bank": 219,
+      "tables": 0,
+      "used": 16381,
+      "free": 3,
+      "payload_sha1": "51a95aef1a5e31204ea721078afa0937a14de193"
+    },
+    {
+      "bank": 220,
+      "tables": 0,
+      "used": 16362,
+      "free": 22,
+      "payload_sha1": "54bcbb97407d53122caa61aad302f96937806050"
+    },
+    {
+      "bank": 221,
+      "tables": 0,
+      "used": 16348,
+      "free": 36,
+      "payload_sha1": "4d94fb4c7163d9293d4215766f2719d6b1bf0f98"
+    },
+    {
+      "bank": 222,
+      "tables": 0,
+      "used": 16318,
+      "free": 66,
+      "payload_sha1": "7c38ce8753c76ea1328e87a842ae846d4ff837ac"
+    },
+    {
+      "bank": 223,
+      "tables": 0,
+      "used": 16220,
+      "free": 164,
+      "payload_sha1": "4b97715cb79098e6e340ae3267e3b912532d13c6"
+    },
+    {
+      "bank": 224,
+      "tables": 0,
+      "used": 16185,
+      "free": 199,
+      "payload_sha1": "341ae254cfae2dc3e3014f688402be87708e6947"
+    },
+    {
+      "bank": 225,
+      "tables": 0,
+      "used": 16376,
+      "free": 8,
+      "payload_sha1": "a62fe15768da149de5d0397f746367bece8c0c8e"
+    },
+    {
+      "bank": 226,
+      "tables": 0,
+      "used": 16369,
+      "free": 15,
+      "payload_sha1": "1968463db0b11cee92464bea0111f8b24166db2a"
+    },
+    {
+      "bank": 227,
+      "tables": 0,
+      "used": 12813,
+      "free": 3571,
+      "payload_sha1": "a906ddacc53de7d0f19c55706c6e0dc820a170be"
+    }
+  ],
+  "digests": {
+    "directory_sha256": "7b3537fb0ee01bc34904b411c2f47ccc81b1ac2039f0c9f596424cb7f1bfabdd",
+    "tables_sha256": "07da0a8eaed8a98c8332db7041107d2ad334e028c63908d640ec4c24b9e42de9",
+    "records_sha256": "e3cf985eac9f06afb7d972f36604d0a69590ffc52c77b61393a3427564677576",
+    "manifest_sha1": "8046424c96a02b89cbb902082e8923e7d521fcdb",
+    "manifest_bytes": 1786330
+  },
+  "anchors": [
+    {
+      "group": 0,
+      "source": "192:$4000",
+      "output": "215:$4000",
+      "entries": 233,
+      "records": 197,
+      "aliases": 36,
+      "size": 2959
+    },
+    {
+      "group": 6,
+      "source": "202:$4000",
+      "output": "215:$4C06",
+      "entries": 216,
+      "records": 216,
+      "aliases": 0,
+      "size": 14497
+    },
+    {
+      "group": 33,
+      "source": "205:$68D1",
+      "output": "215:$6D57",
+      "entries": 26,
+      "records": 26,
+      "aliases": 0,
+      "size": 2183
+    },
+    {
+      "group": 42,
+      "source": "195:$6408",
+      "output": "215:$6E83",
+      "entries": 2,
+      "records": 2,
+      "aliases": 0,
+      "size": 117
+    },
+    {
+      "group": 68,
+      "source": "196:$67F6",
+      "output": "215:$721A",
+      "entries": 162,
+      "records": 162,
+      "aliases": 0,
+      "size": 5641
+    },
+    {
+      "group": 95,
+      "source": "205:$7122",
+      "output": "215:$7942",
+      "entries": 1,
+      "records": 1,
+      "aliases": 0,
+      "size": 29
+    },
+    {
+      "group": 106,
+      "source": "199:$4000",
+      "output": "215:$7A6B",
+      "entries": 206,
+      "records": 206,
+      "aliases": 0,
+      "size": 15580
+    },
+    {
+      "group": 125,
+      "source": "205:$713C",
+      "output": "216:$5032",
+      "entries": 37,
+      "records": 37,
+      "aliases": 0,
+      "size": 356
+    }
+  ],
+  "duplicate_groups": [
+    {
+      "groups": [
+        42,
+        43
+      ],
+      "output": "215:$6E83"
+    },
+    {
+      "groups": [
+        45,
+        46
+      ],
+      "output": "215:$6ECC"
+    },
+    {
+      "groups": [
+        59,
+        60
+      ],
+      "output": "215:$7096"
+    },
+    {
+      "groups": [
+        68,
+        105
+      ],
+      "output": "215:$721A"
+    },
+    {
+      "groups": [
+        73,
+        74
+      ],
+      "output": "215:$7503"
+    },
+    {
+      "groups": [
+        90,
+        91
+      ],
+      "output": "215:$7859"
+    },
+    {
+      "groups": [
+        94,
+        96
+      ],
+      "output": "215:$7928"
+    },
+    {
+      "groups": [
+        111,
+        112
+      ],
+      "output": "216:$41E1"
+    }
+  ],
+  "interior": {
+    "parent_source": "205:$7122",
+    "parent_output": "220:$5739",
+    "child_source": "205:$7124",
+    "child_output": "223:$4F0C",
+    "source_delta": 2,
+    "mode": "materialized_copy"
+  }
+}

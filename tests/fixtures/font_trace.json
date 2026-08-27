@@ -1,0 +1,19 @@
+{
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "renderer": "0:3922",
+  "width_table": {"bank": 3, "address": 17474, "size": 1024},
+  "single_font": {"bank": 3, "address": 18498, "stride": 16, "height": 8},
+  "kanji_font": {"bank": 206, "address": 16384, "stride": 20, "height": 10},
+  "samples": [
+    {"encoded": "24", "text": "space", "width": 8, "bank": 3, "address": 19074},
+    {"encoded": "31", "text": "い", "width": 8, "bank": 3, "address": 19282},
+    {"encoded": "36", "text": "き", "width": 7, "bank": 3, "address": 19362},
+    {"encoded": "71", "text": "だ", "width": 9, "bank": 3, "address": 20306},
+    {"encoded": "74", "text": "で", "width": 9, "bank": 3, "address": 20354},
+    {"encoded": "F03E", "text": "speaker kanji 1", "width": 12, "bank": 206, "address": 17624},
+    {"encoded": "F040", "text": "speaker kanji 2", "width": 12, "bank": 206, "address": 17664},
+    {"encoded": "F15A", "text": "speaker kanji 3", "width": 11, "bank": 206, "address": 23304},
+    {"encoded": "F222", "text": "speaker kanji 4", "width": 11, "bank": 206, "address": 27304},
+    {"encoded": "F224", "text": "speaker separator", "width": 4, "bank": 206, "address": 27344}
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "selector": {
+    "bank": 0,
+    "address": "1F58",
+    "span": 72,
+    "sha1": "34c94c93db1eae8f6ad3dc1070a86ac3825433e3"
+  },
+  "directory": {
+    "bank": 4,
+    "address": "660E",
+    "record_size": 3,
+    "groups": 126,
+    "sha1": "be152cb1411193e65a94148727b5e7b1cc86dd29"
+  },
+  "summary": {
+    "directory_groups": 126,
+    "unique_tables": 118,
+    "duplicate_directory_groups": 8,
+    "pointer_references": 7163,
+    "physical_pointer_references": 6765,
+    "unique_records": 6695,
+    "nonempty_records": 6638,
+    "empty_records": 57,
+    "aliased_records": 14,
+    "multi_group_records": 412,
+    "interior_records": 1,
+    "rendered_glyphs": 154922,
+    "unmapped_valid_glyph_codes": 0,
+    "unmapped_valid_glyph_occurrences": 0,
+    "density_candidates": 5011,
+    "referenced_density_candidates": 4773,
+    "density_pointer_table_false_positives": 129,
+    "density_source_continuations": 108,
+    "density_prefix_before_reference": 1,
+    "unexplained_density_candidates": 0
+  },
+  "duplicate_tables": [
+    {"groups": [42, 43], "table": "195:$6408", "entries": 2},
+    {"groups": [45, 46], "table": "195:$673E", "entries": 22},
+    {"groups": [59, 60], "table": "196:$4BE9", "entries": 11},
+    {"groups": [68, 105], "table": "196:$67F6", "entries": 162},
+    {"groups": [73, 74], "table": "197:$4E87", "entries": 50},
+    {"groups": [90, 91], "table": "198:$52E5", "entries": 43},
+    {"groups": [94, 96], "table": "198:$638F", "entries": 8},
+    {"groups": [111, 112], "table": "200:$4000", "entries": 100}
+  ],
+  "opening_groups": [
+    {
+      "group": 34,
+      "table": "195:$5587",
+      "targets": [
+        "195:$5593", "195:$55CF", "195:$55D8", "195:$55F2",
+        "195:$55F4", "195:$560F"
+      ]
+    },
+    {
+      "group": 35,
+      "table": "195:$5623",
+      "targets": [
+        "195:$562F", "195:$56DA", "195:$5705", "195:$5718",
+        "195:$5728", "195:$573F"
+      ]
+    }
+  ],
+  "opening_runtime_trace": [
+    "195:$5593", "195:$55BC", "195:$55CF", "195:$55D8", "195:$55F2",
+    "195:$55F3", "195:$55F4", "195:$560F", "195:$562F"
+  ],
+  "anchors": {
+    "dynamic_name": {
+      "id": "193:$4222",
+      "length": 11,
+      "raw_sha1": "ac6a189f6e7cba384e0b5d86858093c867dc3535",
+      "source": "<name>は ちからつきた。"
+    },
+    "opening_name": {
+      "id": "195:$55F4",
+      "length": 26,
+      "raw_sha1": "cae1d2c3c685ea069c28e914328c3caf8846ae2d"
+    },
+    "captured_opening": {
+      "id": "195:$562F",
+      "length": 170,
+      "raw_sha1": "3041c595b537ef30234fc7d4c55083b767979cf0"
+    },
+    "physical_alias": {
+      "id": "192:$43C4",
+      "reference_count": 15,
+      "first_pointer": "192:$4046",
+      "last_pointer": "192:$4062"
+    },
+    "multi_group_alias": {
+      "id": "195:$640C",
+      "groups": [42, 43]
+    },
+    "overlap_parent": {
+      "id": "205:$7122",
+      "length": 25,
+      "raw_sha1": "4db390fa909d2b42d73a8e78f3a5622462b05761"
+    },
+    "overlap_child": {
+      "id": "205:$7124",
+      "length": 23,
+      "raw_sha1": "2bbcf7e49e4446818661aa5d1b0264f46450a301",
+      "interior_of": "205:$7122"
+    },
+    "prefix_before_reference": "201:$51BA"
+  },
+  "unmapped_valid_glyphs": {},
+  "outputs": {
+    "script_json_sha1": "dd5790cc27ef23e9fab8db13fe301053b9bd4998",
+    "script_tsv_sha1": "5014867f4279156f6e4347919c9e50f5d5ca52c9"
+  }
+}

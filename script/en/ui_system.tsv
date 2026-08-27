@@ -1,0 +1,494 @@
+id	sections	english
+192:$69F3	menus_and_system_labels	Items
+192:$69F8	menus_and_system_labels	Equip
+192:$69FC	menus_and_system_labels	Remove
+192:$6A00	menus_and_system_labels	Wave
+192:$6A03	menus_and_system_labels	Read
+192:$6A06	menus_and_system_labels	Write
+192:$6A09	menus_and_system_labels	Drink
+192:$6A0C	menus_and_system_labels	Eat
+192:$6A10	menus_and_system_labels	Look
+192:$6A13	menus_and_system_labels	Put In
+192:$6A17	menus_and_system_labels	Suck
+192:$6A1A	menus_and_system_labels	Push
+192:$6A1D	menus_and_system_labels	Take Out
+192:$6A21	menus_and_system_labels	Throw
+192:$6A25	menus_and_system_labels	Shoot
+192:$6A28	menus_and_system_labels	Info
+192:$6A2D	menus_and_system_labels	Name
+192:$6A31	menus_and_system_labels	Place
+192:$6A34	menus_and_system_labels	Exchange
+192:$6A39	menus_and_system_labels	Pick Up
+192:$6A3D	menus_and_system_labels	Set
+192:$6A42	menus_and_system_labels	Step On
+192:$6A45	menus_and_system_labels	Pick Up
+192:$6A49	menus_and_system_labels	Modify
+192:$6A4E	menus_and_system_labels	Discard
+192:$6A52	menus_and_system_labels	Current Status
+192:$6A56	menus_and_system_labels	Back
+192:$6A5A	menus_and_system_labels	<26>Nothing inside.<26>
+192:$6A69	menus_and_system_labels	<26>No abilities learned.<26>
+192:$6A78	menus_and_system_labels	Shiren
+192:$6A7C	menus_and_system_labels	    This cartridge is for<br>  Game Boy Color only.<br>  Please use a Game Boy Color.
+192:$6AB0	menus_and_system_labels	   Yes<br>   No
+192:$6ABD	menus_and_system_labels	You have no items.
+192:$6ACB	menus_and_system_labels	Nothing is on the ground.
+192:$6AD6	menus_and_system_labels	You cannot view the Map here.
+192:$6AED	menus_and_system_labels	Items
+192:$6AF1	menus_and_system_labels	Floor
+192:$6AF6	menus_and_system_labels	Map
+192:$6AFA	menus_and_system_labels	Hints
+192:$6AFE	menus_and_system_labels	Trap
+192:$6B01	menus_and_system_labels	Furthest Point
+192:$6B09	menus_and_system_labels	Location
+192:$6B0D	menus_and_system_labels	Strength
+192:$6B11	menus_and_system_labels	Weapon
+192:$6B14	menus_and_system_labels	Shield
+192:$6B17	menus_and_system_labels	Fullness
+192:$6B1D	menus_and_system_labels	Gitan
+192:$6B21	menus_and_system_labels	Exp
+192:$6B28	menus_and_system_labels	<empty>
+192:$6B29	menus_and_system_labels	G
+192:$6B2B	menus_and_system_labels	F
+192:$6B2D	menus_and_system_labels	/
+192:$6B2F	menus_and_system_labels	%
+192:$6B32	menus_and_system_labels	Status
+192:$6B38	menus_and_system_labels	Items
+192:$6B3D	menus_and_system_labels	Cancel
+192:$6B41	menus_and_system_labels	Stairs
+192:$6B46	menus_and_system_labels	Step On
+192:$6B49	menus_and_system_labels	Delete the current diary?<br>Are you sure?<br><hspace:18>Yes<hspace:40>No
+192:$6B6C	menus_and_system_labels	Proceed
+192:$6B70	menus_and_system_labels	Stay Here
+192:$6B75	menus_and_system_labels	Choose an item.
+192:$6B7D	menus_and_system_labels	Fan
+192:$6B80	menus_and_system_labels	Abilities
+192:$6B84	menus_and_system_labels	Back
+192:$6B88	menus_and_system_labels	Pick Up
+192:$6B8C	menus_and_system_labels	<empty>
+192:$6B8D	menus_and_system_labels	Adventure
+192:$6B96	menus_and_system_labels	New Game
+192:$6B9F	menus_and_system_labels	Item Exchange
+192:$6BA8	menus_and_system_labels	Delete Diary
+192:$6BB1	menus_and_system_labels	Change Name
+192:$6BBB	menus_and_system_labels	Rankings
+192:$6BC6	menus_and_system_labels	Secrets
+192:$6BCE	menus_and_system_labels	History
+192:$6BD7	menus_and_system_labels	Wanderer Rank
+192:$6BE3	menus_and_system_labels	Monster Log
+192:$6BEC	menus_and_system_labels	Wanderer's Diary
+192:$6BF5	menus_and_system_labels	Rescue Team
+192:$6C01	menus_and_system_labels	Item Exchange
+192:$6C0A	menus_and_system_labels	Give Item
+192:$6C13	menus_and_system_labels	Receive Item
+192:$6C1C	menus_and_system_labels	Name:<24>
+192:$6C22	menus_and_system_labels	 Run
+192:$6C26	menus_and_system_labels	Healthy
+192:$6C2D	menus_and_system_labels	Status
+192:$6C34	menus_and_system_labels	Balance
+192:$6C39	menus_and_system_labels	Password
+192:$6C3E	menus_and_system_labels	Cable
+192:$6C43	menus_and_system_labels	You cannot suspend here.<br>Leave the warehouse first,<br>then suspend your adventure.
+192:$6C69	menus_and_system_labels	Turn off the power,<br>then check again.
+192:$6C8A	menus_and_system_labels	Your Diary data is corrupted.<br>Please select Reset.
+192:$6CAF	menus_and_system_labels	Your Diary data is corrupted.<br>Turn off the power,<br>then try selecting Reset.
+192:$6CDF	menus_and_system_labels	Your Diary data is corrupted.<br>Please turn off the power.
+192:$6D01	menus_and_system_labels	The other player<br>was not ready to connect.
+192:$6D1B	menus_and_system_labels	Communicating.<br>Please wait.
+192:$6D34	menus_and_system_labels	The warehouse is empty.<br>Store an item, then<br>leave the warehouse once.
+192:$6D61	menus_and_system_labels	The warehouse is full.<br>Remove an item, then<br>leave the warehouse once.
+192:$6D8F	menus_and_system_labels	Connect the Link Cable.<br>When both players are ready,<br>press any button.
+192:$6DC0	menus_and_system_labels	Item sent.
+192:$6DCF	menus_and_system_labels	From <number:19:C5>:<br><number:1A:C5>
+192:$6DE9	menus_and_system_labels	Send another item?<br><br><hspace:18>Yes<hspace:40>No
+192:$6E05	menus_and_system_labels	Give an item in return?<br><br><hspace:18>Yes<hspace:40>No
+192:$6E23	menus_and_system_labels	Communication error.<br>Please start over.
+192:$6E4C	menus_and_system_labels	An error occurred while<br>writing the Diary.<br>Please start over.
+192:$6E7A	menus_and_system_labels	If one player selects Send,<br>the other must select Receive.
+192:$6EA4	menus_and_system_labels	Link modes differ.<br>Select the same mode<br>and start over.
+192:$6ED7	menus_and_system_labels	Sent the SOS Password.<br>After the rescue, connect<br>the Link Cable again.
+192:$6F11	menus_and_system_labels	Stop the Item Exchange?<br><br><hspace:18>Yes<hspace:40>No
+192:$6F33	menus_and_system_labels	Lose all items and Gitan,<br>then return to town?<br><hspace:18>Yes<hspace:40>No
+192:$6F61	menus_and_system_labels	Lose all items and Gitan,<br>then return to jail?<br><hspace:18>Yes<hspace:40>No
+192:$6F90	menus_and_system_labels	Send
+192:$6F94	menus_and_system_labels	Receive
+192:$6F99	menus_and_system_labels	Controls
+192:$6F9D	menus_and_system_labels	Tech
+192:$6FA3	menus_and_system_labels	Secrets
+192:$6FA7	menus_and_system_labels	Quit
+192:$6FAB	menus_and_system_labels	Control Guide
+192:$6FB3	menus_and_system_labels	SOS Password:<br><cF8>0
+192:$6FC6	menus_and_system_labels	Revival Password:<br><cF8>1
+192:$6FDA	menus_and_system_labels	No Password is registered.
+192:$6FF2	menus_and_system_labels	Congratulations!!<page><box>Return to the Rescue Team<br>and report your success!
+192:$7019	menus_and_system_labels	Analysis failed.
+192:$7028	menus_and_system_labels	Revival complete!<br>Select Continue<br>to resume the game.
+192:$7052	menus_and_system_labels	Thank-You Password:<br><quoteOpen><cF8>2<quoteClose><br>Give it to your rescuer.
+192:$707A	menus_and_system_labels	You will no longer be rescued.<br>Are you sure?<br><hspace:18>Yes<hspace:40>No
+192:$709C	menus_and_system_labels	You cannot call for help<br>right now.
+192:$70BC	menus_and_system_labels	Password
+192:$70C1	menus_and_system_labels	Cable
+192:$70C6	menus_and_system_labels	 <number:19:C5><br> <copy:03:1A:C5> Gitan<br> Funds: <copy:04:1D:C5> Gitan
+192:$70E2	menus_and_system_labels	<copy:01:19:C5>F
+192:$70E8	menus_and_system_labels	Train in which dungeon?
+192:$70F6	menus_and_system_labels	Where will you go?
+192:$7104	menus_and_system_labels	Deposit
+192:$7109	menus_and_system_labels	Withdraw
+192:$710D	menus_and_system_labels	Quit
+192:$7111	menus_and_system_labels	Yes
+192:$7114	menus_and_system_labels	No
+192:$7118	menus_and_system_labels	Rule 1
+192:$711D	menus_and_system_labels	Rule 2
+192:$7122	menus_and_system_labels	Rule 3
+192:$7127	menus_and_system_labels	Buy
+192:$712A	menus_and_system_labels	Sell
+192:$712D	menus_and_system_labels	Discard
+192:$7131	menus_and_system_labels	Trash
+192:$7136	menus_and_system_labels	Caution
+192:$713B	menus_and_system_labels	Cancel
+192:$7140	menus_and_system_labels	Withdraw
+192:$7145	menus_and_system_labels	Forge
+192:$714A	menus_and_system_labels	Repair
+192:$714F	menus_and_system_labels	Remove
+192:$7153	menus_and_system_labels	Synthesis
+192:$7158	menus_and_system_labels	Training
+192:$715D	menus_and_system_labels	Intensive Training
+192:$7162	menus_and_system_labels	<passwordLeft><passwordRight>
+192:$7167	menus_and_system_labels	OK
+192:$716C	menus_and_system_labels	Input
+192:$7171	menus_and_system_labels	View
+192:$7175	menus_and_system_labels	Later
+192:$7179	menus_and_system_labels	Next
+192:$717D	menus_and_system_labels	SOS
+192:$7181	menus_and_system_labels	Revival
+192:$7186	menus_and_system_labels	Thank-You
+192:$718A	menus_and_system_labels	Adventure History
+192:$7193	menus_and_system_labels	Clear Campaign
+192:$719D	menus_and_system_labels	True Wanderer
+192:$71A7	menus_and_system_labels	SOS Password Guide
+192:$71B4	menus_and_system_labels	Mamo: What will you do?<br><br><hspace:18>Deposit<hspace:2C>Withdraw
+192:$71CD	menus_and_system_labels	Awaiting Rescue
+192:$71D5	menus_and_system_labels	Mamo: Mamo-ry WARNING!<br>Items inside Pots will vanish!<br><hspace:18>Yes<hspace:40>No
+192:$7202	menus_and_system_labels	Recruit Pekeji?<br><br><hspace:18>Yes<hspace:40>No
+192:$721C	menus_and_system_labels	Recruit Oryu?<br><br><hspace:18>Yes<hspace:40>No
+192:$7236	menus_and_system_labels	Recruit Mamo?<br><br><hspace:18>Yes<hspace:40>No
+192:$7250	menus_and_system_labels	Recruit <cF8>h?<br><br><hspace:18>Yes<hspace:40>No
+192:$7268	menus_and_system_labels	Recruit Nfuu?<br><br><hspace:18>Yes<hspace:40>No
+192:$7282	menus_and_system_labels	Discard this item?<br><br><hspace:18>Yes<hspace:40>No
+192:$729B	menus_and_system_labels	<br><br><hspace:18>Yes<hspace:40>No
+192:$72A7	menus_and_system_labels	Oro: Hear the Wanado rules?<br><hspace:18>Yes<hspace:40>No
+192:$72C8	menus_and_system_labels	Oro: Will you enter?<br><br><hspace:18>Yes<hspace:40>No
+192:$72E5	menus_and_system_labels	Koppa: <name>,<br>will you hear Nfuu's request?<br><hspace:18>Yes<hspace:40>No
+192:$730E	menus_and_system_labels	Nfuu: That's all, fu.<br>Hear it again?<br><hspace:18>Yes<hspace:40>No
+192:$7338	menus_and_system_labels	Go to the Ancient Ruins?<br><br><hspace:18>Yes<hspace:40>No
+192:$7356	menus_and_system_labels	Go to the Castle Tower?<br><br><hspace:18>Yes<hspace:40>No
+192:$7377	menus_and_system_labels	Go to the Castle Keep?<br><br><hspace:18>Yes<hspace:40>No
+192:$7398	menus_and_system_labels	Go to Jahannam's Gate?<br><br><hspace:18>Yes<hspace:40>No
+192:$73B6	menus_and_system_labels	Enter Tonfan's Hole?<br><br><hspace:18>Yes<hspace:40>No
+192:$73D3	menus_and_system_labels	Enter the Wanado?<br><br><hspace:18>Yes<hspace:40>No
+192:$73EF	menus_and_system_labels	Enter Blacksmith's Furnace?<br><br><hspace:18>Yes<hspace:40>No
+192:$7407	menus_and_system_labels	Enter the Pot Cave?<br><br><hspace:18>Yes<hspace:40>No
+192:$7423	menus_and_system_labels	A friend can rescue you<br>with another cartridge and<br>revive you where you fell!<page><box>Wait for a friend's rescue?<br><hspace:18>Yes<hspace:40>No
+192:$746E	menus_and_system_labels	Enter the Rescue Gate?<br><br><hspace:18>Yes<hspace:40>No
+192:$748A	menus_and_system_labels	Rihipishi: Want to hear<br>something useful?<br><hspace:18>Yes<hspace:40>No
+192:$74AF	menus_and_system_labels	Give up the item?<br><br><hspace:18>Yes<hspace:40>No
+192:$74C8	menus_and_system_labels	Look at the scrap of paper?<br><br><hspace:18>Yes<hspace:40>No
+192:$74E0	menus_and_system_labels	Try reading it?<br><br><hspace:18>Yes<hspace:40>No
+192:$74F5	menus_and_system_labels	Return to Ilpa Town?<br><br><hspace:18>Yes<hspace:40>No
+192:$750F	menus_and_system_labels	Oro: Hear the rules again?<br><hspace:18>Yes<hspace:40>No
+192:$7530	menus_and_system_labels	Give Item
+192:$7535	menus_and_system_labels	Weapons/Shields
+192:$753A	menus_and_system_labels	Bracelets/Grass
+192:$753F	menus_and_system_labels	Scrolls/Staves
+192:$7544	menus_and_system_labels	Pots/Arrows
+192:$7548	menus_and_system_labels	Meat
+192:$754B	menus_and_system_labels	Weapon 1
+192:$754F	menus_and_system_labels	Weapon 2
+192:$7553	menus_and_system_labels	Shield 1
+192:$7557	menus_and_system_labels	Shield 2
+192:$755B	menus_and_system_labels	Bracelet 1
+192:$7560	menus_and_system_labels	Bracelet 2
+192:$7565	menus_and_system_labels	Grass
+192:$7568	menus_and_system_labels	Scroll 1
+192:$756D	menus_and_system_labels	Scroll 2
+192:$7572	menus_and_system_labels	Staff 1
+192:$7576	menus_and_system_labels	Staff 2
+192:$757A	menus_and_system_labels	Pot
+192:$757D	menus_and_system_labels	Arrow
+192:$757F	menus_and_system_labels	A-U
+192:$7583	menus_and_system_labels	U-KA
+192:$7587	menus_and_system_labels	KA-GYA
+192:$758C	menus_and_system_labels	GYA-KO
+192:$7591	menus_and_system_labels	KO-JA
+192:$7596	menus_and_system_labels	JI-CHO
+192:$759B	menus_and_system_labels	CHI-DO
+192:$759F	menus_and_system_labels	NI-BA
+192:$75A3	menus_and_system_labels	BA-HYA
+192:$75A8	menus_and_system_labels	PI-MA
+192:$75AC	menus_and_system_labels	MI-WA
+192:$75B0	menus_and_system_labels	Evil Types
+192:$75B5	menus_and_system_labels	Set Flag
+192:$75BA	menus_and_system_labels	Mamo
+192:$75BE	menus_and_system_labels	Robot
+192:$75C3	menus_and_system_labels	Furnace
+192:$75C7	menus_and_system_labels	Moai
+192:$75CB	menus_and_system_labels	<delay:F0>
+193:$541C	trap_menu_status	No traps can be made.
+193:$6830	ranking_titles_and_grade_labels	Escaped from the castle
+193:$683D	ranking_titles_and_grade_labels	Defeated Zagan
+193:$6847	ranking_titles_and_grade_labels	Defeated the Lord
+193:$6852	ranking_titles_and_grade_labels	Defeated Curas
+193:$685D	ranking_titles_and_grade_labels	Defeated the Evil God
+193:$6868	ranking_titles_and_grade_labels	Cleared Smith's Forge
+193:$6876	ranking_titles_and_grade_labels	Reached Abyssal Depths 20F
+193:$6887	ranking_titles_and_grade_labels	Obtained Wanderer's Mark
+193:$6899	ranking_titles_and_grade_labels	Abyssal Depths: no shield
+193:$68AD	ranking_titles_and_grade_labels	Smith's Forge: no carry-in
+193:$68C2	ranking_titles_and_grade_labels	Reached Wanado 10F
+193:$68D8	ranking_titles_and_grade_labels	Completed the event
+193:$68E8	ranking_titles_and_grade_labels	Defeated Gaibara
+193:$68F1	ranking_titles_and_grade_labels	Reached Wanado 20F
+193:$6906	ranking_titles_and_grade_labels	Reached Wanado 99F
+193:$691B	ranking_titles_and_grade_labels	Beat 15F time record 3 times
+193:$6930	ranking_titles_and_grade_labels	Beat 15F turn record 3 times
+193:$6943	ranking_titles_and_grade_labels	Trapped a Dragon
+193:$694F	ranking_titles_and_grade_labels	Rescued 10 in Wanado
+193:$6960	ranking_titles_and_grade_labels	Rescued 30 in Wanado
+193:$6971	ranking_titles_and_grade_labels	Reached Tonfan's Hole 10F
+193:$697D	ranking_titles_and_grade_labels	Completed the event
+193:$698D	ranking_titles_and_grade_labels	Reached Tonfan's Hole 99F
+193:$699E	ranking_titles_and_grade_labels	Tonfan's Hole 99F: 5 times
+193:$69B2	ranking_titles_and_grade_labels	Reached Tonfan's Hole 30F
+193:$69C3	ranking_titles_and_grade_labels	Ate Chicken Meat
+193:$69CF	ranking_titles_and_grade_labels	Rescued 10 in Tonfan's Hole
+193:$69E1	ranking_titles_and_grade_labels	Ate Snacky Meat
+193:$69F0	ranking_titles_and_grade_labels	Ate Mirage Devil Meat
+193:$69FF	ranking_titles_and_grade_labels	Rescued 30 in Tonfan's Hole
+193:$6A11	ranking_titles_and_grade_labels	Wanderer
+193:$6A18	ranking_titles_and_grade_labels	Wanado
+193:$6A1D	ranking_titles_and_grade_labels	Chef
+193:$6A24	ranking_titles_and_grade_labels	Rescue Team
+193:$6A30	ranking_titles_and_grade_labels	Wanderer
+193:$6A37	ranking_titles_and_grade_labels	Wanado
+193:$6A3C	ranking_titles_and_grade_labels	Chef
+193:$6A43	ranking_titles_and_grade_labels	Rescue Team
+193:$6A4F	ranking_titles_and_grade_labels	<empty>
+193:$6A50	ranking_titles_and_grade_labels	Ordinary
+193:$6A54	ranking_titles_and_grade_labels	Hoodlum
+193:$6A59	ranking_titles_and_grade_labels	Drifter
+193:$6A5F	ranking_titles_and_grade_labels	Vagabond
+193:$6A65	ranking_titles_and_grade_labels	Third-Rate
+193:$6A70	ranking_titles_and_grade_labels	Second-Rate
+193:$6A7B	ranking_titles_and_grade_labels	First-Rate
+193:$6A86	ranking_titles_and_grade_labels	True
+193:$6A90	ranking_titles_and_grade_labels	At Heart
+193:$6A9A	ranking_titles_and_grade_labels	Legendary
+193:$6AA5	ranking_titles_and_grade_labels	<empty>
+193:$6AA6	ranking_titles_and_grade_labels	Blood Washer
+193:$6AAC	ranking_titles_and_grade_labels	Rice Washer
+193:$6AB3	ranking_titles_and_grade_labels	Pot Tender
+193:$6AB9	ranking_titles_and_grade_labels	Soy Guy
+193:$6AC0	ranking_titles_and_grade_labels	Knife Hand
+193:$6AC7	ranking_titles_and_grade_labels	Second-Class
+193:$6AD2	ranking_titles_and_grade_labels	First-Class
+193:$6ADD	ranking_titles_and_grade_labels	Master Chef
+193:$6AE8	ranking_titles_and_grade_labels	Blazing Chef
+193:$6AF2	ranking_titles_and_grade_labels	Phantom Chef
+193:$6AFC	ranking_titles_and_grade_labels	<empty>
+193:$6AFD	ranking_titles_and_grade_labels	1st Board
+193:$6B06	ranking_titles_and_grade_labels	2nd Board
+193:$6B0E	ranking_titles_and_grade_labels	3rd Board
+193:$6B17	ranking_titles_and_grade_labels	4th Board
+193:$6B20	ranking_titles_and_grade_labels	5th Board
+193:$6B29	ranking_titles_and_grade_labels	6th Board
+193:$6B32	ranking_titles_and_grade_labels	7th Board
+193:$6B3B	ranking_titles_and_grade_labels	Teacher
+193:$6B42	ranking_titles_and_grade_labels	Grandmaster
+193:$6B49	ranking_titles_and_grade_labels	Great Master
+193:$6B52	ranking_titles_and_grade_labels	Rescue attempts: <copy:02:19:C5>
+193:$6B67	ranking_titles_and_grade_labels	Rescue History
+193:$6B74	ranking_titles_and_grade_labels	<lookup:1A:C5> <copy:01:19:C5>F rescue
+193:$6EC7	adventure_and_miscellaneous_ui	Same as Before
+193:$6F61	dynamic_status_fields	<copy:01:19:C5>/<copy:01:1A:C5>
+193:$6F6B	dynamic_status_fields	Atk <27><br>Slots <hspace:01><27>  <hspace:05><25>
+193:$6F8F	dynamic_status_fields	Def <27><br>Slots <hspace:01><27>  <hspace:05><25>
+193:$6FB1	dynamic_status_fields	Slots <hspace:01><27>  <hspace:05><25>
+193:$70E6	adventure_and_miscellaneous_ui	Waiting for Rescue
+193:$70EF	adventure_and_miscellaneous_ui	New Game
+193:$70F5	adventure_and_miscellaneous_ui	Revive!
+193:$70FF	adventure_and_miscellaneous_ui	SOS!
+193:$7104	adventure_and_miscellaneous_ui	Give Up
+193:$710A	adventure_and_miscellaneous_ui	Continue
+193:$7110	adventure_and_miscellaneous_ui	Secrets
+193:$7118	adventure_and_miscellaneous_ui	Reset
+193:$711D	adventure_and_miscellaneous_ui	Recap
+193:$7122	adventure_and_miscellaneous_ui	Thank-You Spell
+193:$712B	adventure_and_miscellaneous_ui	  <EC><quoteOpen>SOS Password<quoteClose><EC><br><cF8>0<br><br>Give the password to a friend<br>so they can rescue you.<br>You can also view it from<br><quoteOpen>Adventure<quoteClose><2E><quoteOpen>SOS!<quoteClose><br>on the Game Menu.<br>You may also request rescue<br>using a Link Cable.
+193:$71B4	adventure_and_miscellaneous_ui	Lottery Results
+193:$71BC	adventure_and_miscellaneous_ui	1st Prize<br>    081536<br>2nd Prize<br>    092215<br>    111109<br>    151326<br>    141873<br>    201895<br>    229534
+193:$7211	adventure_and_miscellaneous_ui	3rd Prize<br>    003466<br>    007628<br>    052101<br>    088092<br>    123744<br>    139127<br>    174048<br>    191335<br>    200053
+193:$7278	adventure_and_miscellaneous_ui	3rd Prize<br>    201100<br>    255691<br>4th Prize: Last 4 Digits<br>    0719<br>5th Prize: Last 3 Digits<br>    508
+193:$72B7	adventure_and_miscellaneous_ui	Nfuu's Learned Abilities
+193:$72C3	adventure_and_miscellaneous_ui	<lookup:19:C5>
+193:$72C8	adventure_and_miscellaneous_ui	<lookup:19:C5> Ability
+193:$7326	adventure_history_labels	Defeated the Evil God
+193:$7330	adventure_history_labels	Defeated Gaibara
+193:$7339	adventure_history_labels	Granted Sachi's wish
+193:$7348	adventure_history_labels	Obtained Stormward
+193:$735B	adventure_history_labels	Rescued Ateka
+193:$7364	adventure_history_labels	Obtained Ultimate Soil
+193:$7374	adventure_history_labels	Cleared Wanado in <copy:02:19:C5> turns
+193:$738B	adventure_history_labels	Smith's Forge clears: <copy:01:19:C5>
+193:$73A1	adventure_history_labels	Abyssal Depths clears: <copy:01:19:C5>
+193:$73B5	adventure_history_labels	Tonfan's Hole clears: <copy:01:19:C5>
+193:$73C9	adventure_history_labels	Wanado clears: <copy:01:19:C5>
+193:$73E1	adventure_history_labels	Reached Pot Cave <copy:01:19:C5>F
+193:$73F5	adventure_history_labels	Trapped every monster
+193:$7406	adventure_history_labels	Used every monster meat
+193:$741A	adventure_history_labels	Thrown into a Monster House
+193:$742A	adventure_history_labels	Warped inside a wall
+193:$7436	adventure_history_labels	Equipped every item
+193:$7446	adventure_history_labels	Far-threw a Synthesis Pot
+193:$7458	adventure_history_labels	Became Grilled Onigiri
+193:$7463	adventure_history_labels	Became Spoiled Onigiri
+193:$746C	adventure_history_labels	Slain by Oryu
+193:$7476	adventure_history_labels	Slain by Pekeji
+193:$7480	adventure_history_labels	Slain by <lookup:19:C5>
+193:$748B	adventure_history_labels	Slain by Mamo
+193:$7495	adventure_history_labels	Slain by Nfuu
+193:$749F	adventure_history_labels	Slain by Snacky
+193:$74AC	adventure_history_labels	Obtained Squid Sushi Scroll
+193:$74BE	adventure_history_labels	Defeated 1,000 enemies
+193:$74CC	adventure_history_labels	Defeated 10,000 enemies
+193:$74DB	adventure_history_labels	Rescue completion: <copy:01:19:C5>%
+193:$74F0	adventure_history_labels	Advanced 1,000 floors
+193:$74FC	adventure_history_labels	Advanced 10,000 floors
+193:$7509	adventure_history_labels	Obtained Kabura Sutegi
+193:$751C	adventure_history_labels	Obtained Kajin Fuuma
+193:$752F	adventure_history_labels	Viewed every Secret
+193:$753D	adventure_history_labels	Returned alive: <copy:02:19:C5>
+193:$754C	adventure_history_labels	Abyssal Depths: no shield
+193:$755E	adventure_history_labels	Abyssal Depths: no sword
+193:$7570	adventure_history_labels	Smith's Forge: with allies
+193:$7583	adventure_history_labels	Filled the bank with Gitan
+193:$7594	adventure_history_labels	<hspace:16>Clear Campaign!<br><br>Wanderer Points<hspace:05><27> <cF8>e<br>Diary ID<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>d
+193:$75CC	adventure_history_labels	Congratulations!!<br>Shiren goods will be sent<br>to the first 100 applicants.<br>On a postcard, clearly write:<br><D2>Postal Code<D2>Address<D2>Name<D2>Age<br><D2>Phone<D2>Wanderer Points<br><D2>ID Number<D2>Password<br>Send it to:<br>160-0022 Tokyo, Shinjuku-ku,<br>Shinjuku 6-24-20,<br>Sigma Higashi-Shinjuku, 10F
+193:$7678	adventure_history_labels	Chunsoft Co., Ltd.<br><quoteOpen>True Wanderer<quoteClose> Department<br>Send it to the address above.<br>No inquiries by phone.<br>Thank you for understanding.<br>Wanderer Points<hspace:05><27> <cF8>c<br>ID Number<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>b
+193:$7764	condition_labels	Asleep
+193:$7769	condition_labels	Paralyzed
+193:$776F	condition_labels	Onigiri
+193:$7774	condition_labels	Hiding
+193:$777A	condition_labels	Slumbering
+193:$777F	condition_labels	Asleep
+193:$7784	condition_labels	Bear Trap
+193:$778A	condition_labels	Invisible
+193:$778F	condition_labels	Confused
+193:$7794	condition_labels	Sealed
+193:$7799	condition_labels	Inaccurate
+193:$779E	condition_labels	Afraid
+193:$77A2	condition_labels	Slow
+193:$77A7	condition_labels	Swift
+193:$77AC	condition_labels	Blind
+193:$77B1	condition_labels	Invisible
+193:$77B6	condition_labels	Enraged
+193:$77BA	condition_labels	Under a Spell
+193:$77C0	condition_labels	Disguised
+193:$77C5	condition_labels	Empathetic
+193:$77CB	condition_labels	1/2 Max HP
+193:$77D2	condition_labels	1/2 Attack
+193:$77DA	condition_labels	1/2 Level
+193:$77E2	condition_labels	Invincible
+193:$77E6	condition_labels	<empty>
+193:$77E7	condition_labels	<empty>
+193:$77E8	condition_labels	See All Monsters
+193:$77F5	condition_labels	See All Items
+193:$7801	condition_labels	Muzzled
+193:$7806	condition_labels	Power Up
+193:$780D	condition_labels	Grounded
+193:$7818	condition_labels	Poisonproof
+193:$781E	condition_labels	Alert
+193:$7824	condition_labels	Silent
+193:$782A	condition_labels	Perfect Accuracy
+193:$7830	condition_labels	Misses Often
+193:$7839	condition_labels	Muzzled
+193:$783E	condition_labels	Satiated
+193:$7844	condition_labels	Identifier
+193:$784D	condition_labels	Sharp Eyes
+193:$7852	condition_labels	No Explosions
+193:$785A	condition_labels	Unpaid
+193:$7866	condition_labels	Wake Enemies
+193:$786C	condition_labels	Trapper
+193:$7870	condition_labels	Clumsy
+193:$7876	condition_labels	1/2 Hunger
+193:$787F	condition_labels	2x Hunger
+193:$7887	condition_labels	HP Regeneration
+193:$7893	condition_labels	Random Warp
+193:$789C	condition_labels	Satiated
+193:$78A2	condition_labels	Water Walking
+193:$78A6	condition_labels	Explosive
+193:$78AB	condition_labels	Trapproof
+193:$78B1	condition_labels	Thief!!!
+193:$78B9	condition_labels	Starving
+193:$78C5	condition_labels	Bracelet Effect Unknown
+194:$4CEB	ranking_outcomes_and_labels	Defeated by an unknown foe
+194:$4CF7	ranking_outcomes_and_labels	Lost to <lookup:19:C5>
+194:$4D02	ranking_outcomes_and_labels	Succumbed to poison
+194:$4D0D	ranking_outcomes_and_labels	Defeated by poison breath
+194:$4D17	ranking_outcomes_and_labels	Erased from existence
+194:$4D24	ranking_outcomes_and_labels	Caught in a cannonball blast
+194:$4D33	ranking_outcomes_and_labels	<lookup:19:C5><cF3> exploded
+194:$4D40	ranking_outcomes_and_labels	Caught in a Land Mine blast
+194:$4D4C	ranking_outcomes_and_labels	Fell into a Pitfall
+194:$4D58	ranking_outcomes_and_labels	Hit by a falling rock
+194:$4D62	ranking_outcomes_and_labels	Tripped over a rock
+194:$4D6B	ranking_outcomes_and_labels	Hit by a Wooden Arrow
+194:$4D77	ranking_outcomes_and_labels	Hit by an Iron Arrow
+194:$4D83	ranking_outcomes_and_labels	Hit by a Poison Arrow
+194:$4D8E	ranking_outcomes_and_labels	Blown away by a log
+194:$4D9B	ranking_outcomes_and_labels	HP reduced to 0
+194:$4DA4	ranking_outcomes_and_labels	Incinerated by Dragon fire
+194:$4DB2	ranking_outcomes_and_labels	Hit by <lookup:19:C5>
+194:$4DBF	ranking_outcomes_and_labels	Fell and hit their head
+194:$4DCB	ranking_outcomes_and_labels	Choked on an Onigiri
+194:$4DD8	ranking_outcomes_and_labels	Became Squid Sushi
+194:$4DE1	ranking_outcomes_and_labels	Became Grilled Onigiri
+194:$4DEC	ranking_outcomes_and_labels	Became a Rotten Onigiri
+194:$4DFA	ranking_outcomes_and_labels	Defeated by the Evil God
+194:$4E05	ranking_outcomes_and_labels	Nfuu collapsed
+194:$4E10	ranking_outcomes_and_labels	Got sick from an Onigiri
+194:$4E1D	ranking_outcomes_and_labels	Effect converted to damage
+194:$4E2E	ranking_outcomes_and_labels	Sick from Onigiri
+194:$4E3C	ranking_outcomes_and_labels	Hit by a flying item
+194:$4E4A	ranking_outcomes_and_labels	Suffocated inside a wall
+194:$4E57	ranking_outcomes_and_labels	Blown away by a gust
+194:$4E64	ranking_outcomes_and_labels	Used an Escape Scroll
+194:$4E76	ranking_outcomes_and_labels	Ancient Ruins cleared!
+194:$4E83	ranking_outcomes_and_labels	Castle Tower cleared!
+194:$4E94	ranking_outcomes_and_labels	Castle Keep cleared!
+194:$4EA5	ranking_outcomes_and_labels	Jahannam's Gate cleared!
+194:$4EB3	ranking_outcomes_and_labels	Abyssal Depths cleared!
+194:$4EC0	ranking_outcomes_and_labels	Tonfan's Hole cleared!
+194:$4ECD	ranking_outcomes_and_labels	Wanado Tournament cleared!
+194:$4EDE	ranking_outcomes_and_labels	Smith's Forge cleared!
+194:$4EED	ranking_outcomes_and_labels	Pot Cave cleared!
+194:$4EF9	ranking_outcomes_and_labels	Bamboo
+194:$4EFC	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Select<27>Await Rescue<br>Start<hspace:05><27>Leave Ranking Note
+194:$4F2D	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Select<27>Await Rescue
+194:$4F4A	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Start<hspace:05><27>Leave Ranking Note
+194:$4F6C	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town
+194:$4F7A	ranking_outcomes_and_labels	Lv
+194:$4F7D	ranking_outcomes_and_labels	<EC>
+194:$4F7F	ranking_outcomes_and_labels	SOS
+194:$4F82	ranking_outcomes_and_labels	Jahannam's Gate
+194:$4F8C	ranking_outcomes_and_labels	Wanado
+194:$4F99	ranking_outcomes_and_labels	Tonfan's Hole
+194:$4FA2	ranking_outcomes_and_labels	Abyssal Depths
+194:$4FAB	ranking_outcomes_and_labels	Smith's Forge
+194:$4FB6	ranking_outcomes_and_labels	View pre-completion message
+194:$4FCA	ranking_outcomes_and_labels	Turns
+194:$4FCE	ranking_outcomes_and_labels	<copy:02:19:C5> Rescued
+194:$4FD9	ranking_outcomes_and_labels	Max HP
+194:$4FE0	ranking_outcomes_and_labels	Max Str
+194:$4FE7	ranking_outcomes_and_labels	Bare Hands
+194:$4FEA	ranking_outcomes_and_labels	None
+194:$4FED	ranking_outcomes_and_labels	Unranked

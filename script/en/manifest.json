@@ -1,0 +1,137 @@
+{
+  "schema": "shiren-gb2-english-overlays-v1",
+  "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "partition_sha1": "b1a613a6fabf00a038d9664222019825dc425d16",
+  "source_free": true,
+  "records": 6695,
+  "translated_records": 5667,
+  "explicit_empty_records": 54,
+  "workspace_sha1": "3d3a3abc11ea480e831161f287386c09d3368d2d",
+  "categories": [
+    {
+      "name": "glossary",
+      "filename": "glossary.tsv",
+      "records": 1938,
+      "translated_records": 1938,
+      "explicit_empty_records": 0,
+      "sections": {
+        "actor_names_tier_1": 150,
+        "actor_names_tier_2": 150,
+        "actor_names_tier_3": 150,
+        "identified_item_names": 216,
+        "item_ability_descriptions": 69,
+        "item_ability_roots": 123,
+        "location_names": 44,
+        "numbered_monster_variant_names": 891,
+        "trap_names": 22,
+        "unidentified_item_appearances": 123
+      },
+      "overlay_sha1": "5c2e4a90323b07b73282c43dd20f93e70b5756ef"
+    },
+    {
+      "name": "items",
+      "filename": "items.tsv",
+      "records": 216,
+      "translated_records": 216,
+      "explicit_empty_records": 0,
+      "sections": {
+        "item_descriptions": 216
+      },
+      "overlay_sha1": "a6dda745121c719d66b78da718ff6628b7a9a0c6"
+    },
+    {
+      "name": "monsters",
+      "filename": "monsters.tsv",
+      "records": 459,
+      "translated_records": 459,
+      "explicit_empty_records": 31,
+      "sections": {
+        "monster_meat_descriptions": 222,
+        "monster_notebook_descriptions": 237
+      },
+      "overlay_sha1": "35cfe5a821651bede89a8c8a1d8ce6cddd4436ed"
+    },
+    {
+      "name": "ui_system",
+      "filename": "ui_system.tsv",
+      "records": 493,
+      "translated_records": 493,
+      "explicit_empty_records": 7,
+      "sections": {
+        "adventure_and_miscellaneous_ui": 19,
+        "adventure_history_labels": 43,
+        "condition_labels": 56,
+        "dynamic_status_fields": 4,
+        "menus_and_system_labels": 234,
+        "ranking_outcomes_and_labels": 62,
+        "ranking_titles_and_grade_labels": 74,
+        "trap_menu_status": 1
+      },
+      "overlay_sha1": "e7710d42ae2c69643e63e5ee80a851b9e1db19e6"
+    },
+    {
+      "name": "help",
+      "filename": "help.tsv",
+      "records": 176,
+      "translated_records": 176,
+      "explicit_empty_records": 0,
+      "sections": {
+        "control_help": 27,
+        "technique_help": 32,
+        "wanderer_secret_pages": 96,
+        "wanderers_guide": 21
+      },
+      "overlay_sha1": "85cb5322cdf01d26c846f6d93f21a5cf668ef7e7"
+    },
+    {
+      "name": "messages",
+      "filename": "messages.tsv",
+      "records": 399,
+      "translated_records": 399,
+      "explicit_empty_records": 15,
+      "sections": {
+        "combat_and_dungeon_messages": 201,
+        "floor_and_system_messages": 39,
+        "item_and_action_messages": 159
+      },
+      "overlay_sha1": "22d6192166181e7781dc1680164b8ba2ca854e88"
+    },
+    {
+      "name": "prose",
+      "filename": "prose.tsv",
+      "records": 1786,
+      "translated_records": 1786,
+      "explicit_empty_records": 1,
+      "sections": {
+        "ending_and_credits_text": 18,
+        "story_and_event_dialogue": 1768
+      },
+      "overlay_sha1": "9110ae9e2971a8da7c618465bfa04a86376c0d23"
+    },
+    {
+      "name": "internal",
+      "filename": "internal.tsv",
+      "records": 1228,
+      "translated_records": 200,
+      "explicit_empty_records": 0,
+      "sections": {
+        "animation_and_effect_labels": 629,
+        "debug_and_engine_labels": 197,
+        "debug_spell_labels": 226,
+        "internal_object_labels": 37,
+        "password_fragments": 100,
+        "scenario_labels": 39
+      },
+      "overlay_sha1": "71edd8d0b089c55d63b9ce70dc7320e9da6f3156"
+    },
+    {
+      "name": "review",
+      "filename": "review.tsv",
+      "records": 0,
+      "translated_records": 0,
+      "explicit_empty_records": 0,
+      "sections": {},
+      "overlay_sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    }
+  ]
+}
