@@ -12,6 +12,7 @@ from pathlib import Path
 import sys
 
 import allocate
+import blank_scroll
 import dialogue_pacing
 import english_font
 import extract
@@ -228,6 +229,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = stairs_menu.install(output)
     output = dialogue_pacing.install(output)
     output = name6.install(output)
+    output = blank_scroll.install(output)
     output = spell_input.install(output)
     layout.validate_overrides(
         output, overrides, runtime_contract=runtime_contract
@@ -254,6 +256,24 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     )
     validation = insert.validate_relocated(rom, output, allocation, overrides)
     return output, allocation, validation
+
+
+def _validate_blank_scroll_catalog(extracted, translated):
+    by_reference = {
+        (reference.group, reference.index): record
+        for record in extracted["records"]
+        for reference in record.references
+    }
+    roots = {}
+    for index in range(blank_scroll.ROOT_FIRST, blank_scroll.ROOT_LAST + 1):
+        record = by_reference[(blank_scroll.ROOT_GROUP, index)]
+        value = translated.get((record.bank, record.address))
+        if value is None:
+            raise blank_scroll.BlankScrollError(
+                "Scroll root %d is not translated" % index
+            )
+        roots[index] = value.text
+    blank_scroll.validate_root_catalog(roots)
 
 
 def main(argv=None):
@@ -286,9 +306,11 @@ def main(argv=None):
         output, allocation, validation = build_rom(
             source, overrides, runtime_contract=width_analysis.contract
         )
+        _validate_blank_scroll_catalog(extracted, translated)
     except (
         OSError,
         allocate.AllocationError,
+        blank_scroll.BlankScrollError,
         dialogue_pacing.DialoguePacingError,
         english_font.FontError,
         extract.ExtractError,

@@ -104,11 +104,11 @@ artifact.
 entry screen.
 
 **Failure risk:** mode 3 has a hard four-byte spell contract, mode 4 needs six-character
-player names, and Blank Scroll has separate behavior. A shared patch can silently change a
-different editor.
+player names, and mode 1 Blank Scroll needs its own 11-character full-name field plus a
+hyphen. A shared patch can silently change another editor.
 
-**Rule:** generate and test each input mode independently. The mode-3 and mode-4 installers
-explicitly prove the other source path remains unchanged.
+**Rule:** generate and test each input mode independently. The mode-specific installers
+explicitly prove the other maximums and source paths remain unchanged.
 
 ## The save summary name is dynamic
 

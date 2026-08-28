@@ -69,6 +69,15 @@ contract. Bank 252 holds the localized keyboard/logic and all 100 English runtim
 Matching internal diagnostic labels and the seven story clues are generated from the same
 mapping so they cannot drift.
 
+## Blank Scroll writing
+
+Mode 1 uses the English graphical keyboard and a bank-251 history-filtered full-name matcher.
+The presentation field accepts 11 characters and the otherwise unused `0` cell supplies the
+hyphen required by `Trap-eraser`. Confirmation resolves the complete name to a Scroll root
+ID, restores the native seven-character backend field, and converts from that ID. The complete
+accepted-input table and manual route are documented in
+[BLANK_SCROLL.md](BLANK_SCROLL.md).
+
 ## Graphics
 
 Game graphics are uncompressed. A clean PyBoy title-screen capture found 261 of 270 nonblank

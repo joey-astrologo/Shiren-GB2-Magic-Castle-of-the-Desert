@@ -14,12 +14,6 @@
       "reason": "The category-filtered matcher uses the established English names Swift Foe Scroll and Accelerating Staff, although both Japanese roots are identical."
     },
     {
-      "id": "194:$6357",
-      "kind": "glossary_collision",
-      "related_id": "194:$63CD",
-      "reason": "Failure Scroll and Failure Staff intentionally share their established English root even though their Japanese roots differ."
-    },
-    {
       "id": "194:$6370",
       "kind": "glossary_split",
       "related_id": "194:$63F3",

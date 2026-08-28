@@ -33,9 +33,10 @@ python3 tools/runtime_widths.py "$ROM"
 python3 tools/menu_text.py "$ROM"
 ```
 
-The production build installs and validates the name and spell-input patches. Their
-focused contracts can also be run directly through `tests.test_name6` and
-`tests.test_spell_input`.
+The production build installs and validates the name, spell-input, and Blank Scroll
+patches. Their focused contracts can also be run directly through `tests.test_name6`,
+`tests.test_spell_input`, `tests.test_blank_scroll`, and
+`tests.test_mesen_blank_scroll`.
 
 When their owned files change, also run the relevant family check before applying:
 
@@ -67,17 +68,21 @@ English.
 python3 -m unittest discover -s tests
 ```
 
-For a focused name/spell check:
+For a focused graphical-input check:
 
 ```sh
-python3 -m unittest tests.test_name6 tests.test_spell_input
+python3 -m unittest \
+  tests.test_name6 \
+  tests.test_spell_input \
+  tests.test_blank_scroll \
+  tests.test_mesen_blank_scroll
 ```
 
-The current suite contains 311 tests. It covers extraction and catalogs, translation
-fixtures, control preservation, VWF widths, wrapping, menus, save/name expansion, spell
-input, runtime text domains, scene ownership, internal classification, and deterministic
-production builds. User-reported regressions should receive a focused fixture or behavioral
-test whenever the mechanism is reproducible.
+The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
+widths, wrapping, menus, save/name expansion, spell input, Blank Scroll input, runtime text
+domains, scene ownership, internal classification, and deterministic production builds.
+User-reported regressions should receive a focused fixture or behavioral test whenever the
+mechanism is reproducible.
 
 The committed fixtures are deliberate contracts. If an intentional change updates one,
 review the semantic difference rather than accepting fixture churn blindly.
@@ -100,3 +105,18 @@ python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
 `mesen_state.py` extracts Mesen 2's named `cartRam` field as an ordinary 32 KiB battery
 SRAM file that PyBoy can reuse. This is the supported bridge for reproducing a live route
 from a Mesen save state.
+
+### Blank Scroll manual route
+
+`tools/mesen_spawn_blank_scroll.lua` safely adds one real Blank Scroll to the first free
+inventory slot for manual Mesen testing. Enter a dungeon, pause emulation, load the helper
+through **Debug > Script Window**, and press **Run (F5)**. Resume and reopen Items.
+
+The item name, description, `Write` action, and 11-character full-name keyboard are
+translated. The `0` cell enters the hyphen required by `Trap-eraser`. Recognition retains
+the native notebook rule: only a Scroll already discovered on that save can be written.
+The complete accepted-name table and mechanism are in
+[BLANK_SCROLL.md](BLANK_SCROLL.md).
+
+Back up the save or use a disposable state because Mesen may persist later in-game saves
+after the live WRAM injection.

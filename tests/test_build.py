@@ -24,6 +24,7 @@ import insert
 import layout
 import menu_graphics
 import name6
+import blank_scroll
 import spell_input
 import stairs_menu
 import translations
@@ -177,6 +178,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in name6.owned_ranges()
             for offset in range(start, end)
         }
+        blank_scroll_offsets = {
+            offset
+            for start, end in blank_scroll.owned_ranges()
+            for offset in range(start, end)
+        }
         spell_input_offsets = {
             offset
             for start, end in spell_input.owned_ranges()
@@ -192,6 +198,7 @@ class TranslationBuildTests(unittest.TestCase):
             | menu_offsets
             | stairs_offsets
             | name6_offsets
+            | blank_scroll_offsets
             | spell_input_offsets
             | pacing_offsets
             | checksum_offsets

@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5667,
   "explicit_empty_records": 54,
-  "workspace_sha1": "3d3a3abc11ea480e831161f287386c09d3368d2d",
+  "workspace_sha1": "ade5bd45e351516e491869dd06fa7276fff417bc",
   "categories": [
     {
       "name": "glossary",
@@ -26,7 +26,7 @@
         "trap_names": 22,
         "unidentified_item_appearances": 123
       },
-      "overlay_sha1": "5c2e4a90323b07b73282c43dd20f93e70b5756ef"
+      "overlay_sha1": "66028e0efe070aaedbead452c24fdaa26d00a813"
     },
     {
       "name": "items",
@@ -37,7 +37,7 @@
       "sections": {
         "item_descriptions": 216
       },
-      "overlay_sha1": "a6dda745121c719d66b78da718ff6628b7a9a0c6"
+      "overlay_sha1": "23a1d4ea50a5076cf7682afec349ccdb586eab3a"
     },
     {
       "name": "monsters",
@@ -94,7 +94,7 @@
         "floor_and_system_messages": 39,
         "item_and_action_messages": 159
       },
-      "overlay_sha1": "22d6192166181e7781dc1680164b8ba2ca854e88"
+      "overlay_sha1": "ff8776a8b94e5166f5c5116406a15b780cb699a3"
     },
     {
       "name": "prose",

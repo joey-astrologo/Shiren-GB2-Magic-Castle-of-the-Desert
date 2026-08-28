@@ -124,7 +124,8 @@ not the name-entry limit.
 - Measure the actual interior, not the overall box width or screen width.
 - A cursor or page marker may occupy cells outside the text payload.
 - Mode 3 spell input has a four-byte buffer; mode 4 player input has six visible
-  characters; the Blank Scroll path remains independent.
+  characters; mode 1 Blank Scroll input has a separately guarded 11-character maximum and
+  history-filtered matcher.
 
 ## Acceptance policy
 

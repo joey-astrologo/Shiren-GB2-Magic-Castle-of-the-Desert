@@ -68,10 +68,10 @@
       "missing_records": 0,
       "complete": true,
       "maximum": {
-        "composer_pixels": 109,
-        "renderer_pixels": 109,
-        "composer_evidence": "192:$614B",
-        "renderer_evidence": "192:$614B"
+        "composer_pixels": 105,
+        "renderer_pixels": 105,
+        "composer_evidence": "192:$5E4B",
+        "renderer_evidence": "192:$5E4B"
       }
     },
     {
@@ -194,10 +194,10 @@
       "permanently_unresolved": false,
       "ready": true,
       "maximum": {
-        "composer_pixels": 109,
-        "renderer_pixels": 109,
-        "composer_evidence": "192:$614B",
-        "renderer_evidence": "192:$614B"
+        "composer_pixels": 105,
+        "renderer_pixels": 105,
+        "composer_evidence": "192:$5E4B",
+        "renderer_evidence": "192:$5E4B"
       }
     },
     {
@@ -231,10 +231,10 @@
       "permanently_unresolved": false,
       "ready": true,
       "maximum": {
-        "composer_pixels": 109,
-        "renderer_pixels": 109,
-        "composer_evidence": "192:$614B",
-        "renderer_evidence": "192:$614B"
+        "composer_pixels": 105,
+        "renderer_pixels": 105,
+        "composer_evidence": "192:$6594",
+        "renderer_evidence": "192:$6594"
       }
     },
     {

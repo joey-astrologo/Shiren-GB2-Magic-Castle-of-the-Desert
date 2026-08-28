@@ -132,7 +132,7 @@ The graphical input dispatcher has independent modes and consumers:
 |---|---|---|
 | Mode 3 | Big Moai spells | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
-| Blank Scroll | Scroll naming/action path | Independent native controller; do not apply mode-3/4 patches globally |
+| Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
 
 Mode 3 and mode 4 share native graphical resources as source material, but the English
 installers generate separate maps, graphs, glyph copies, and runtime logic. A change to one
@@ -148,6 +148,7 @@ must prove that the other remains unchanged.
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
 | Six-character names and rankings | `name6.py` | `test_name6.py`, `test_save_summary.py` |
 | Spell input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
+| Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
 | Main-menu proof route | build/surface contracts | `test_poc_dungeon1.py`, `test_build.py` |
 
 ## Rules for menu changes

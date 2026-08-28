@@ -33,10 +33,10 @@ The complete current English script uses banks 215-233:
 | Logical references | 7,163 |
 | Unique records | 6,695 |
 | Pointer bytes | 20,531 |
-| Text bytes | 284,008 |
-| Total payload | 304,539 bytes |
+| Text bytes | 283,941 |
+| Total payload | 304,472 bytes |
 | Used arena banks | 19 (`215-233`) |
-| Unused capacity inside used banks | 6,757 bytes |
+| Unused capacity inside used banks | 6,824 bytes |
 | Completely untouched arena banks | 6 (`234-239`) |
 
 Do not allocate a new subsystem in the text arena merely because the current translation
@@ -66,17 +66,20 @@ text growth.
 | 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
-| 16 | `$5B66-$5B6D` | Mode-4 input redirect | `name6.py` only |
+| 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then `blank_scroll.py` mode-1 overlay |
+| 16 | `$5B84-$5B8B` | Blank Scroll full-name confirmation hook | `blank_scroll.py` only |
 | 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py` |
 | 16 | `$64B9-$6624` | Mode-3 spell navigation graph | Replaced by `spell_input.py` |
+| 16 | `$6A4C-$6A53` | Blank Scroll screen redirect | `blank_scroll.py` only |
 | 16 | `$7859-$7860` | Create-name screen redirect | `name6.py` only |
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
 | 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
 | 18 | `$5310-$5340` | Mode-3 selectable character table | Replaced by `spell_input.py` |
+| 122 | `$5EF5-$5EFC` | Blank Scroll candidate-comparison resolver hook | `blank_scroll.py` only |
 | 192-205 | full banks | Original script records and pointer tables | Preserved as source evidence; never use as free space |
 | 206 | `$4000-$7BFF` | Three pages of prefixed 8x10/16x10 glyph slices | Preserve; `font.py` verifies digest |
-| 244 | `$4066-$406D` | Mode-4 maximum-length call | `name6.py` only |
+| 244 | `$4066-$406D` | Shared graphical-input maximum hook | `name6.py`, then `blank_scroll.py` mode-1 overlay |
 
 The header checksum byte at `$014D` and global checksum at `$014E-$014F` are regenerated
 after every ROM writer. They are output metadata, not allocation space.
@@ -86,12 +89,13 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
+| 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 code, map, glyphs | Exclusive |
 | 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
 | 254 | `$4000-$426A` | `stairs_menu.py`: both popup templates and cleanup helpers | Exclusive |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
 
-Banks 252-255 were measured empty before these reservations. Their unused tails are not a
+Banks 251-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
 deterministically.
 

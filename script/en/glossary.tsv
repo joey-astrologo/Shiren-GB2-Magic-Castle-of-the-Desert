@@ -581,12 +581,12 @@ id	sections	english
 192:$6051	identified_item_names	Swift Foe Scroll
 192:$605B	identified_item_names	Slumber Scroll
 192:$6065	identified_item_names	Power Up Scroll
-192:$6071	identified_item_names	Explosion Scroll
+192:$6071	identified_item_names	Bomber Scroll
 192:$607A	identified_item_names	Wall-less Scroll
 192:$6086	identified_item_names	Monstercall Scroll
 192:$6091	identified_item_names	Confusion Scroll
 192:$609B	identified_item_names	Eradication Scroll
-192:$60A5	identified_item_names	Jitters Scroll
+192:$60A5	identified_item_names	Fear Scroll
 192:$60AF	identified_item_names	Extraction Scroll
 192:$60B9	identified_item_names	Carry-ban Scroll
 192:$60C3	identified_item_names	Exorcism Scroll
@@ -597,14 +597,14 @@ id	sections	english
 192:$60F9	identified_item_names	Trap Scroll
 192:$6101	identified_item_names	Blank Scroll
 192:$610A	identified_item_names	Sanctuary Scroll
-192:$6114	identified_item_names	Failure Scroll
+192:$6114	identified_item_names	Inaccurate Scroll
 192:$6120	identified_item_names	Trap-eraser Scroll
-192:$612A	identified_item_names	Sturdy Jar Scroll
+192:$612A	identified_item_names	Sturdy Pot Scroll
 192:$6135	identified_item_names	Restock Scroll
 192:$6141	identified_item_names	Attraction Scroll
-192:$614B	identified_item_names	Monster Recover Scroll
-192:$6158	identified_item_names	Big Explosion Scroll
-192:$6164	identified_item_names	Unexploded Scroll
+192:$614B	identified_item_names	Altruism Scroll
+192:$6158	identified_item_names	Explosion Scroll
+192:$6164	identified_item_names	Damp Scroll
 192:$616D	identified_item_names	Sumeragi Scroll
 192:$6177	identified_item_names	Squid Sushi Scroll
 192:$6181	identified_item_names	Knockback Staff
@@ -909,12 +909,12 @@ id	sections	english
 194:$62F5	item_ability_roots	Swift Foe
 194:$62FA	item_ability_roots	Slumber
 194:$62FF	item_ability_roots	Power Up
-194:$6306	item_ability_roots	Explosion
+194:$6306	item_ability_roots	Bomber
 194:$630A	item_ability_roots	Wall-less
 194:$630F	item_ability_roots	Monster
 194:$6315	item_ability_roots	Confusion
 194:$631A	item_ability_roots	Eradication
-194:$631F	item_ability_roots	Jitters
+194:$631F	item_ability_roots	Fear
 194:$6324	item_ability_roots	Extraction
 194:$6329	item_ability_roots	Carry-ban
 194:$632E	item_ability_roots	Exorcism
@@ -923,17 +923,17 @@ id	sections	english
 194:$6340	item_ability_roots	Plating
 194:$6344	item_ability_roots	Escape
 194:$634A	item_ability_roots	Trap
-194:$634D	item_ability_roots	xBlank
+194:$634D	item_ability_roots	XBlank
 194:$6352	item_ability_roots	Sanctuary
-194:$6357	item_ability_roots	Failure
+194:$6357	item_ability_roots	Inaccurate
 194:$635E	item_ability_roots	Trap-eraser
-194:$6363	item_ability_roots	Sturdy Jar
+194:$6363	item_ability_roots	Sturdy Pot
 194:$6369	item_ability_roots	Restock
 194:$6370	item_ability_roots	Attraction
-194:$6375	item_ability_roots	Monster Recover
-194:$637D	item_ability_roots	Big Explosion
-194:$6384	item_ability_roots	Unexploded
-194:$6388	item_ability_roots	xSumeragi
+194:$6375	item_ability_roots	Altruism
+194:$637D	item_ability_roots	Explosion
+194:$6384	item_ability_roots	Damp
+194:$6388	item_ability_roots	XSumeragi
 194:$638E	item_ability_roots	Squid Sushi
 194:$6393	item_ability_roots	Knockback
 194:$6399	item_ability_roots	Fortune
@@ -968,14 +968,14 @@ id	sections	english
 194:$642F	item_ability_roots	Degrading
 194:$6434	item_ability_roots	Transmutation
 194:$6438	item_ability_roots	Synthesis
-194:$643D	item_ability_roots	xSealing
+194:$643D	item_ability_roots	XSealing
 194:$6443	item_ability_roots	Absorb
 194:$644A	item_ability_roots	Cannon
 194:$644F	item_ability_roots	Water
 194:$6454	item_ability_roots	Curse
 194:$6458	item_ability_roots	Blessing
 194:$645E	item_ability_roots	Teleport
-194:$6466	item_ability_roots	xOrdinary
+194:$6466	item_ability_roots	XOrdinary
 194:$646B	item_ability_roots	G
 194:$7263	item_ability_descriptions	<EC>Strong vs. Dragon types
 194:$7273	item_ability_descriptions	<EC>Strong vs. Ghost types

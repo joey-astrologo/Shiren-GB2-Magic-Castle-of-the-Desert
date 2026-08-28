@@ -15,6 +15,7 @@ behind those workflows.
 | [VWF_BUDGETS.md](VWF_BUDGETS.md) | Renderer contracts | You are deciding whether text fits or changing font/layout behavior |
 | [ROM_BANK_MAP.md](ROM_BANK_MAP.md) | Memory ownership | **Before** placing or moving ROM, font, menu, name, spell, graphics, or save data |
 | [MENU_STRUCTURE.md](MENU_STRUCTURE.md) | Menu architecture | You are changing a menu constructor, template, navigation graph, cursor, or return path |
+| [BLANK_SCROLL.md](BLANK_SCROLL.md) | Blank Scroll writing | You need the valid English inputs, native matching rules, patch design, or manual test route |
 | [ENGINEERING_RULES.md](ENGINEERING_RULES.md) | Change gates | Before changing code or claiming a fix complete |
 | [TRAPS.md](TRAPS.md) | Disproved assumptions | You are about to generalize a control, renderer, menu, state, or storage behavior |
 | [GRAPHICS.md](GRAPHICS.md) | Graphics localization | You are inventorying or replacing graphical Japanese |

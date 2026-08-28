@@ -261,7 +261,7 @@ id	sections	english
 194:$5660	item_and_action_messages	Waved <cF3><number:19:C5>.
 194:$566C	item_and_action_messages	Read <cF3><number:19:C5>.
 194:$5679	item_and_action_messages	Made <number:19:C5> <cF3>into medicine <cF3>and drank it.
-194:$568C	item_and_action_messages	Pushed<br><number:19:C5>.
+194:$568C	item_and_action_messages	Pushed <number:19:C5>.
 194:$5697	item_and_action_messages	Ate <cF3><number:19:C5>.
 194:$56A4	item_and_action_messages	Recovered <cF3><copy:01:19:C5> HP.
 194:$56B9	item_and_action_messages	<box>Max HP increased by <copy:01:19:C5>.

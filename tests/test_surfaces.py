@@ -1199,10 +1199,14 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
                 root = translated[(root_record.bank, root_record.address)].text
                 item = translated[(item_record.bank, item_record.address)].text
                 if index in disabled:
-                    self.assertTrue(root.startswith("x"))
+                    self.assertTrue(root.startswith("X"))
+                    # The native root matcher disables a record only when its
+                    # first encoded byte is $21.  Uppercase X deliberately
+                    # retains that byte contract; lowercase x would not.
+                    self.assertEqual(0x21, english.encode(root)[0])
                     root = root[1:]
                 else:
-                    self.assertFalse(root.startswith("x"))
+                    self.assertNotEqual(0x21, english.encode(root)[0])
                 self.assertTrue(item.casefold().startswith(root.casefold()))
                 checked += 1
         self.assertEqual(123, checked)

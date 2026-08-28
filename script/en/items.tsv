@@ -131,12 +131,12 @@ id	sections	english
 202:$64A9	item_descriptions	<26>Swift Foe Scroll<26><br>Makes monsters move faster.<br>It also affects allies.
 202:$64D9	item_descriptions	<26>Slumber Scroll<26><br>Puts every monster in the<br>room to sleep for a short<br>while. They awaken at double<br>speed. It also affects allies.
 202:$6530	item_descriptions	<26>Power Up Scroll<26><br>Raises your attack power for<br>the rest of the floor.
-202:$6560	item_descriptions	<26>Explosion Scroll<26><br>Makes you explode and<br>destroys nearby monsters. It<br>cannot defeat you, but it<br>deals heavy damage.
+202:$6560	item_descriptions	<26>Bomber Scroll<26><br>Makes you explode and<br>destroys nearby monsters. It<br>cannot defeat you, but it<br>deals heavy damage.
 202:$65B4	item_descriptions	<26>Wall-less Scroll<26><br>Turns the entire floor into<br>one large room.
 202:$65D6	item_descriptions	<26>Monstercall Scroll<26><br>Creates a Monster House in<br>one room on the floor.
 202:$6604	item_descriptions	<26>Confusion Scroll<26><br>Confuses every monster in the<br>room for a short while, making<br>them move erratically. It also<br>affects allies.
 202:$6652	item_descriptions	<26>Eradication Scroll<26><br>Throw it at a monster to stop<br>that species from appearing.<br>Only one species can be<br>erased at a time. Mysterious<br>forces may still make one<br>appear.
-202:$66C5	item_descriptions	<26>Jitters Scroll<26><br>Makes monsters too uneasy to<br>turn toward you. It also<br>affects allies.
+202:$66C5	item_descriptions	<26>Fear Scroll<26><br>Makes monsters afraid to turn<br>toward you. It also affects<br>allies.
 202:$6708	item_descriptions	<26>Extraction Scroll<26><br>Removes everything from a<br>Pot.
 202:$672B	item_descriptions	<26>Carry-ban Scroll<26><br>Prevents you from picking up<br>items for the rest of the<br>floor.
 202:$6752	item_descriptions	<26>Exorcism Scroll<26><br>Removes curses from carried<br>items. It does not affect<br>items stored inside Pots.
@@ -147,14 +147,14 @@ id	sections	english
 202:$6847	item_descriptions	<26>Trap Scroll<26><br>Creates traps throughout the<br>floor.
 202:$6865	item_descriptions	<26>Blank Scroll<26><br>Write the name of any Scroll<br>you have read before to use<br>that Scroll's effect.
 202:$6899	item_descriptions	<26>Sanctuary Scroll<26><br>Place it on the floor and<br>stand on it to block direct<br>attacks. Thrown objects still<br>hit you. Reading it has no<br>effect.
-202:$68EF	item_descriptions	<26>Failure Scroll<26><br>Makes your attacks miss for a<br>short while.
+202:$68EF	item_descriptions	<26>Inaccurate Scroll<26><br>Makes your attacks miss for a<br>short while.
 202:$692C	item_descriptions	<26>Trap-eraser Scroll<26><br>Removes every trap on the<br>current floor.
-202:$6953	item_descriptions	<26>Sturdy Jar Scroll<26><br>Prevents a Pot from breaking.
+202:$6953	item_descriptions	<26>Sturdy Pot Scroll<26><br>Prevents a Pot from breaking.
 202:$6972	item_descriptions	<26>Restock Scroll<26><br>Replaces the merchandise in a<br>shop.
 202:$6999	item_descriptions	<26>Attraction Scroll<26><br>Calls separated allies back to<br>you. If you have no allies...
-202:$69D0	item_descriptions	<26>Monster Recover Scroll<26><br>Restores HP to monsters and<br>allies in the room.
-202:$6A04	item_descriptions	<26>Big Explosion Scroll<26><br>Makes every monster on the<br>floor explode!
-202:$6A32	item_descriptions	<26>Unexploded Scroll<26><br>Dampens all explosives on the<br>floor so they cannot explode.
+202:$69D0	item_descriptions	<26>Altruism Scroll<26><br>Restores HP to monsters and<br>allies in the room.
+202:$6A04	item_descriptions	<26>Explosion Scroll<26><br>Makes every monster on the<br>floor explode!
+202:$6A32	item_descriptions	<26>Damp Scroll<26><br>Dampens all explosives on the<br>floor so they cannot explode.
 202:$6A65	item_descriptions	<26>Sumeragi Scroll<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$6AC5	item_descriptions	<26>Squid Sushi Scroll<26><br>Delicious squid sushi!<br>Whatever it used to be, trust<br>me and try a bite!
 202:$6B01	item_descriptions	<26>Knockback Staff<26><br>Wave it to blow away all kinds<br>of things. Shop merchandise<br>cannot be blown away.
