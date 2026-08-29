@@ -98,6 +98,19 @@ Game graphics are uncompressed. A clean PyBoy title-screen capture found 261 of 
 VRAM tiles verbatim in the ROM, so the project does not need a graphics decompressor before
 localizing artwork. Dense high-entropy banks are art rather than a packed stream. Graphics
 fonts remain an art-direction decision separate from the Thin Pixel-7 in-game text font.
+One important exception to blanket prefixed-font preservation is the `F2 1E` cracked-Bracelet
+composite: its stock pixels spell Japanese `(hibi)`. `item_status.py` replaces only that
+40-byte raster with `(Cr)`, preserving the native token and width contract.
+
+## Dynamic item rows
+
+Group 4 supplies translated item roots, but the inventory list is not stored as complete
+strings. Native bank-120 and bank-122 routines append equipment signs, arrow quantities,
+staff charges, and Pot capacities; the shared status decorator adds equip, curse, blessing,
+and plate glyphs. `item_formatting.py` localizes only those punctuation producers, while
+`item_status.py` owns the cracked-Bracelet composite bitmap. Exhaustive width checks and a
+two-page live Mesen gallery cover the combined result. See
+[ITEM_FORMATTING.md](ITEM_FORMATTING.md).
 
 ## Emulator state recovery
 

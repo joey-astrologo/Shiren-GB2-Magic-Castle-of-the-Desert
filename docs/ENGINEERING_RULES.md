@@ -39,7 +39,7 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete discovered suite (351 tests at the current snapshot) with the matching
+6. Run the complete discovered suite (363 tests at the current snapshot) with the matching
    source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
@@ -81,6 +81,7 @@ Examples already in the suite include:
 - Adventure -> save-file navigation retaining native type `$13`, with all four cursor
   positions and a stable cursor-masked framebuffer;
 - mode-0 unidentified naming using private type `$F4` without stealing a native menu graph;
+- dynamic item rows exercising nonzero arrow/staff/Pot branches and combined status flags;
 - generated prose ownership and conflicts between editor, draft, and catalogs.
 
 Tracked JSON fixtures belong under `tests/fixtures/`. Prefer hashes, counts, geometry,
@@ -137,8 +138,8 @@ contracts are in [VWF_BUDGETS.md](VWF_BUDGETS.md).
 
 ## Save-state handling
 
-ROMs, ordinary SRAM files, PyBoy states, and personal saves stay untracked. The committed
-Mesen reproduction state is an explicit project fixture; its extracted `.srm` remains
+ROMs, ordinary SRAM files, PyBoy states, and personal saves stay untracked. The explicitly
+reviewed Mesen reproduction states are project fixtures; extracted `.srm` files remain
 ignored. Convert Mesen 2's named `cartRam` field with:
 
 ```sh

@@ -179,3 +179,48 @@ cursor, sprite, clear region, timing interval, or sentence still feels wrong.
 **Rule:** inspect player-facing changes in the real emulator route. Preserve a screenshot or
 behavioral assertion when the failure is reproducible, but retain human review as a separate
 gate.
+
+## A preserved composite glyph may still contain Japanese text
+
+**Tempting assumption:** a named prefixed token is a language-neutral status icon, so
+preserving its bitmap is sufficient localization.
+
+**Failure:** `F2 1E` is appended to cracked Bracelets, but its 16x10 stock bitmap spells
+Japanese `(hibi)`—`(crack)`—inside parentheses. Beside an English item name it appears to
+be a corrupt symbol even though the renderer and bitmap are functioning exactly as written.
+
+**Rule:** preserve the token identity and measured width contract, then inspect the actual
+pixels for language content. `item_status.py` exclusively replaces the 40-byte bitmap with
+`(Cr)`, retains width bytes `0F 06`, verifies every translated item-name shape with the
+14-pixel suffix, and replays the supplied Mesen failure state after a forced redraw.
+
+## A translated item root does not own its complete inventory row
+
+**Tempting assumption:** once every group-4 item name is English, all item-list text is
+English and ordinary zero-valued fixtures cover its formatter.
+
+**Failure:** the native arrow path adds the Japanese `hon no` counter, staff and Pot paths
+add Japanese corner brackets, negative modifiers use a native punctuation code, and the
+Gitan-object path joins the amount directly to the English root. A
+fixture whose arrows, charges, and capacities are all zero never executes the visible
+branches, so a green base-name test can miss mixed-language or corrupt output.
+
+**Rule:** classify and anchor every native dynamic producer, seed nonzero representative
+records, and test combined status flags. `item_formatting.py` localizes the producer bytes;
+`tests.test_item_formatting` checks all translated family maxima and freezes both pages of
+the live Mesen gallery described in [ITEM_FORMATTING.md](ITEM_FORMATTING.md).
+
+## An equipment item ID does not initialize its inherent synthesis rune
+
+**Tempting assumption:** writing item ID `$0B` and weapon class `$01` creates a complete
+Axe of the Minotaur suitable for a Synthesis Pot test.
+
+**Failure:** the object is named and handled as an Axe, but direct WRAM injection bypasses
+the native item constructor that seeds inherent rune bits. The Pot accepts the Axe and
+consumes it, producing a convincing live route, yet the released Cudgel has no transferred
+effect. Testing only the two insertion screens therefore gives a false pass.
+
+**Rule:** a synthetic equipment object must reproduce both its identity and initialized
+object state. The Minotaur Axe carries weapon rune bit 10 at object byte 6, mask `$04`.
+For a synthesis fixture, break the Pot and assert the released base record contains the
+expected rune; do not stop at donor consumption.

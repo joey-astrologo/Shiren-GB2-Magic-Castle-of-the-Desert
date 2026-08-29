@@ -1,0 +1,150 @@
+{
+  "schema": "shiren-gb2-item-formatting-v1",
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "formatter": {
+    "english_codes": {
+      "space": "24",
+      "minus": "4D",
+      "open_bracket": "54",
+      "close_bracket": "55"
+    },
+    "patches": [
+      {
+        "name": "equipment_negative_sign",
+        "location": "120:$484A",
+        "original": "3ED7",
+        "localized": "3E4D",
+        "purpose": "negative weapon/shield modifier"
+      },
+      {
+        "name": "arrow_counter_separator",
+        "location": "120:$6474",
+        "original": "3EF1223E482222",
+        "localized": "3E242200000000",
+        "purpose": "replace the Japanese arrow counter suffix with one space"
+      },
+      {
+        "name": "pot_capacity_open",
+        "location": "120:$6889",
+        "original": "3EDC",
+        "localized": "3E54",
+        "purpose": "opening Pot-capacity bracket"
+      },
+      {
+        "name": "pot_capacity_close",
+        "location": "120:$6891",
+        "original": "3EDD",
+        "localized": "3E55",
+        "purpose": "closing Pot-capacity bracket"
+      },
+      {
+        "name": "staff_charge_open",
+        "location": "122:$4E10",
+        "original": "3EDC",
+        "localized": "3E54",
+        "purpose": "opening staff-charge bracket"
+      },
+      {
+        "name": "staff_negative_sign",
+        "location": "122:$4E20",
+        "original": "3ED7",
+        "localized": "3E4D",
+        "purpose": "negative depleted-staff charge delta"
+      },
+      {
+        "name": "staff_charge_close",
+        "location": "122:$4E33",
+        "original": "3EDD",
+        "localized": "3E55",
+        "purpose": "closing staff-charge bracket"
+      },
+      {
+        "name": "gitan_separator_call",
+        "location": "122:$6FAD",
+        "original": "CD1131",
+        "localized": "CDC576",
+        "purpose": "route numeric conversion through the Gitan separator wrapper"
+      },
+      {
+        "name": "gitan_separator_wrapper",
+        "location": "122:$76C5",
+        "original": "00000000000000",
+        "localized": "CD11313E2422C9",
+        "purpose": "convert the amount, append one space, and return to the Gitan formatter"
+      }
+    ]
+  },
+  "item_row": {
+    "start_x": 7,
+    "right_edge": 144,
+    "families": {
+      "weapon_plus_99": {
+        "item_id": 11,
+        "text": "Axe of the Minotaur+99",
+        "pixels": 108,
+        "rightmost_pixel": 115
+      },
+      "shield_plus_99": {
+        "item_id": 55,
+        "text": "Pickpocket Shield+99",
+        "pixels": 98,
+        "rightmost_pixel": 105
+      },
+      "arrow_99": {
+        "item_id": 93,
+        "text": "99 Knockback Arrow",
+        "pixels": 91,
+        "rightmost_pixel": 98
+      },
+      "staff_99": {
+        "item_id": 171,
+        "text": "Herb Reception Staff[99]",
+        "pixels": 118,
+        "rightmost_pixel": 125
+      },
+      "pot_9": {
+        "item_id": 189,
+        "text": "Transmutation Pot[9]",
+        "pixels": 99,
+        "rightmost_pixel": 106
+      }
+    },
+    "maximum_status_combination": {
+      "text": "<equip>Axe of the Minotaur+99<skull><plate>",
+      "pixels": 125,
+      "rightmost_pixel": 132,
+      "remaining_pixels": 12
+    }
+  },
+  "gallery": {
+    "mesen_state": {
+      "path": "SaveStates/Mamel.mss",
+      "sha1": "bf961091090ac690e6950f3cf58dff9f9639cf0d",
+      "sha256": "42c44b909008409cfaff7d45e0f833f00e9538407bfdce8280292fbcd58672bc"
+    },
+    "page_1_screen_fnv1a": "E177C336",
+    "page_2_screen_fnv1a": "762B363F",
+    "rows": [
+      {"page": 1, "slot": 1, "label": "Normal", "expected": "Cudgel", "object_hex": "0101000000000000"},
+      {"page": 1, "slot": 2, "label": "Equipped", "expected": "<equip>Cudgel", "object_hex": "0101000010000000"},
+      {"page": 1, "slot": 3, "label": "Cursed", "expected": "Cudgel<skull>", "object_hex": "0101000002000000"},
+      {"page": 1, "slot": 4, "label": "Blessed", "expected": "Cudgel<bell>", "object_hex": "0101000008000000"},
+      {"page": 1, "slot": 5, "label": "Plated", "expected": "Cudgel<plate>", "object_hex": "0101000004000000"},
+      {"page": 1, "slot": 6, "label": "Cursed + plated", "expected": "Cudgel<skull><plate>", "object_hex": "0101000006000000"},
+      {"page": 1, "slot": 7, "label": "Blessed + plated", "expected": "Cudgel<plate><bell>", "object_hex": "010100000C000000"},
+      {"page": 1, "slot": 8, "label": "Cracked Bracelet", "expected": "Strength Bracelet(Cr)", "object_hex": "4803000100001000"},
+      {"page": 1, "slot": 9, "label": "One synthesis rune", "expected": "Cudgel (alternate color)", "object_hex": "0101000000010000"},
+      {"page": 1, "slot": 10, "label": "Equip + curse + plate", "expected": "<equip>Cudgel+99<skull><plate>", "object_hex": "0101006316000000"},
+      {"page": 2, "slot": 1, "label": "Positive shield", "expected": "Bronzeward+99", "object_hex": "2302006300000000"},
+      {"page": 2, "slot": 2, "label": "Arrow quantity", "expected": "99 Wooden Arrow", "object_hex": "5A04630000000000"},
+      {"page": 2, "slot": 3, "label": "Gitan amount", "expected": "999 Gitan", "object_hex": "C80AE70300000000"},
+      {"page": 2, "slot": 4, "label": "Monster Meat", "expected": "Mamel Meat", "object_hex": "C90B010100000000"},
+      {"page": 2, "slot": 5, "label": "Positive weapon", "expected": "Cudgel+99", "object_hex": "0101006300000000"},
+      {"page": 2, "slot": 6, "label": "Negative weapon", "expected": "Cudgel-99", "object_hex": "0101009D00000000"},
+      {"page": 2, "slot": 7, "label": "Staff zero charges", "expected": "Knockback Staff[0]", "object_hex": "9E08000000000000"},
+      {"page": 2, "slot": 8, "label": "Staff seven charges", "expected": "Knockback Staff[7]", "object_hex": "9E08070000000000"},
+      {"page": 2, "slot": 9, "label": "Empty Pot", "expected": "Preservation Pot[0]", "object_hex": "B809000000000000"},
+      {"page": 2, "slot": 10, "label": "Pot capacity", "expected": "Preservation Pot[5]", "object_hex": "B809050000FF0000"}
+    ]
+  }
+}

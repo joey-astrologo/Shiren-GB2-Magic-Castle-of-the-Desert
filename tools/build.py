@@ -17,6 +17,8 @@ import dialogue_pacing
 import english_font
 import extract
 import insert
+import item_formatting
+import item_status
 import layout
 import lint_en
 import menu_graphics
@@ -226,6 +228,8 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     allocation = allocate.allocate(rom, record_overrides=overrides)
     relocated, _allocation = insert.write_relocated(rom, allocation)
     output = english_font.install(relocated)
+    output = item_formatting.install(output)
+    output = item_status.install(output)
     output = menu_graphics.install(output)
     output = stairs_menu.install(output)
     output = dialogue_pacing.install(output)
@@ -336,6 +340,7 @@ def main(argv=None):
         english_font.FontError,
         extract.ExtractError,
         insert.InsertError,
+        item_formatting.ItemFormattingError,
         layout.LayoutError,
         lint_en.TranslationLintError,
         menu_graphics.MenuGraphicsError,

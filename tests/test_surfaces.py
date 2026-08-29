@@ -3239,6 +3239,7 @@ class LiveOpeningPositionedSurfaceTests(unittest.TestCase):
         ]["records"]
         variants = (
             ("weapon_first", 1, 1, 0, 0),
+            ("weapon_critical", 1, 1, 10, 10),
             ("weapon_last", 1, 1, 21, 21),
             ("shield_first", 35, 2, 0, 22),
             ("shield_last", 35, 2, 22, 44),

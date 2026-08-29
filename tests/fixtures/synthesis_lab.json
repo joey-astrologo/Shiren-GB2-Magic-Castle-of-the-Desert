@@ -1,0 +1,62 @@
+{
+  "schema": "shiren-gb2-synthesis-lab-v1",
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "mesen_state": {
+    "path": "SaveStates/Mamel.mss",
+    "sha1": "bf961091090ac690e6950f3cf58dff9f9639cf0d",
+    "sha256": "42c44b909008409cfaff7d45e0f833f00e9538407bfdce8280292fbcd58672bc"
+  },
+  "objects": {
+    "base": {
+      "name": "Cudgel",
+      "item_id": 1,
+      "action_class": 1,
+      "record_hex": "0101000000000000"
+    },
+    "donor": {
+      "name": "Axe of the Minotaur",
+      "item_id": 11,
+      "action_class": 1,
+      "record_hex": "0B01000000000400",
+      "natural_seal": "More frequent critical hits.",
+      "natural_seal_bit": 10,
+      "natural_seal_object_byte": 6,
+      "natural_seal_mask": 4
+    },
+    "pot": {
+      "name": "Synthesis Pot",
+      "item_id": 190,
+      "action_class": 9,
+      "root": 113,
+      "capacity": 5,
+      "record_hex": "BE09050000FFFFFF",
+      "cell_offsets": [5, 6, 7, 10, 11]
+    }
+  },
+  "screens": {
+    "initial_items_fnv1a": "A6555144",
+    "pot_action_fnv1a": "443462AC",
+    "put_in_picker_fnv1a": "AF86C0BC",
+    "after_base_fnv1a": "64B86E47",
+    "after_donor_fnv1a": "E0AC69E2"
+  },
+  "native_lifecycle": {
+    "after_base": {
+      "inventory": ["donor", "pot"],
+      "displayed_remaining_capacity": 4,
+      "pot_traversal_count": 5,
+      "contained_base_cell": 0
+    },
+    "after_donor": {
+      "inventory": ["pot"],
+      "displayed_remaining_capacity": 3,
+      "pot_traversal_count": 4,
+      "donor_record_cleared": true,
+      "seal_materializes_when_pot_breaks": true
+    },
+    "after_break": {
+      "released_base_record_hex": "0101000000000400",
+      "critical_hit_seal_bit": 10
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "shiren-gb2-item-status-v1",
+  "asset": "assets/graphics/item_status_symbols.json",
+  "asset_sha256": "f4d9748b0db3863d49ea1a132162ec79597415d6afad693f2741e9cf4158d4ed",
+  "code": "F21E",
+  "label": "(Cr)",
+  "width": 15,
+  "renderer_advance": 14,
+  "rows": [
+    "................",
+    ".#..###.....#...",
+    "#..#.........#..",
+    "#..#....##...#..",
+    "#..#....#.#..#..",
+    "#..#....#....#..",
+    "#..#....#....#..",
+    ".#..###.#...#...",
+    "................",
+    "................"
+  ],
+  "original_bitmap": "5FE0BFC1FFA2FFA2FFBBFFA2EEB3DDBBBFC05FE0D7384FF8FFA8FF08FF88FF08FF08FF88EF18D738",
+  "localized_bitmap": "FF00FF4EFF90FF90FF90FF90FF90FF4EFF00FF00FF00FF08FF04FFC4FFA4FF84FF84FF88FF00FF00",
+  "localized_bitmap_sha256": "46d3b987d0253d416a821099b2c5d3921762c790ffb4a474bf04bda20dbcb439",
+  "item_row": {
+    "start_x": 7,
+    "right_edge": 144,
+    "maximum_translated_name_pixels": 105,
+    "marker_pixels": 14,
+    "rightmost_pixel": 126,
+    "remaining_pixels": 18
+  },
+  "mesen_state": {
+    "path": "SaveStates/broken-bracelet.mss",
+    "sha1": "959d8a22878906a035b9c1c3966de2c63ac933d6",
+    "sha256": "f211e10e5fd0443b364cf93ce2f6f4edec1f931ef080ccef5de11db350589f41",
+    "initial_screen_fnv1a": "8B2311E3",
+    "localized_redraw_screen_fnv1a": "26067759"
+  }
+}

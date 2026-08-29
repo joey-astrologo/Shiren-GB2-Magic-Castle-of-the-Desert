@@ -26,6 +26,8 @@ Each asset still needs its producer and consumers mapped.
 | Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, and mode-specific hyphen cell | `blank_scroll.py` |
 | Unidentified-item keyboard | English map, dedicated mode-0 navigation, `FILL IN` history control, and full canonical-name display aligned to the native seven-cell field | `unidentified_names.py` |
 | Stairs popup geometry | Widened templates and background teardown | `stairs_menu.py` |
+| Cracked-Bracelet marker | Stock Japanese `(hibi)` composite replaced by compact `(Cr)` at native token `F2 1E` | `item_status.py` |
+| Item-row status gallery | Equip, curse, blessing, plate, cracked, synthesis color, and combined states reproduced on demand | `mesen_item_formatting_gallery.lua` |
 
 These are not evidence that title art, story cards, ending art, or every graphical menu label
 is localized.

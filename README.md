@@ -19,6 +19,11 @@ canonical names longer than the native seven-character custom-label field. Recal
 show no star padding and reset safely to ordinary free entry on typing or `DEL`.
 Its private navigation graph is isolated from the native Adventure submenu, whose
 Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
+The cracked-Bracelet suffix is also localized from the stock Japanese `(hibi)` composite
+to a compact `(Cr)` marker and replayed from the supplied failure state. Native dynamic
+item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
+and spaced Gitan amounts; a two-page Mesen gallery covers their status-symbol combinations,
+and a native Synthesis Pot lab provides a repeatable transferred-seal visual route.
 Editorial review, full playthrough testing, and graphics localization remain active
 project work.
 
@@ -32,8 +37,8 @@ project work.
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings, spells, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
-| Graphics | **In progress** | Complete the graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **351-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
+| Automated tests | **363-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -124,7 +129,10 @@ python3 -m unittest \
   tests.test_blank_scroll \
   tests.test_mesen_blank_scroll \
   tests.test_unidentified_names \
-  tests.test_mesen_unidentified_item
+  tests.test_mesen_unidentified_item \
+  tests.test_item_status \
+  tests.test_item_formatting \
+  tests.test_synthesis_lab
 ```
 
 ## Edit translated text
@@ -187,6 +195,7 @@ Start with the [documentation index](docs/README.md). In particular:
 - [Menu architecture](docs/MENU_STRUCTURE.md)
 - [Blank Scroll writing system](docs/BLANK_SCROLL.md)
 - [Unidentified item naming and manual test route](docs/UNIDENTIFIED_ITEM_NAMING.md)
+- [Dynamic item rows and visual gallery](docs/ITEM_FORMATTING.md)
 - [Engineering rules](docs/ENGINEERING_RULES.md)
 - [Known traps](docs/TRAPS.md)
 - [Graphics localization](docs/GRAPHICS.md)
@@ -216,7 +225,8 @@ and [ownership map](docs/ROM_BANK_MAP.md).
 
 Keep ROMs, generated ROMs, ordinary saves, unreviewed emulator states, credentials, and
 extracted Japanese catalogs out of commits. A deliberately reviewed regression fixture such
-as `SaveStates/Mamel.mss` is the exception, not a precedent for committing personal states.
+as the explicitly reviewed `.mss` files under `SaveStates/` are exceptions, not a precedent
+for committing personal states.
 Add a focused regression for every reproducible bug and run the complete suite before
 handing off a change.
 

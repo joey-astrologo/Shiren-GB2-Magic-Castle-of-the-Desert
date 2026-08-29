@@ -52,8 +52,19 @@ edited through the ordinary catalog workflow.
 - Adventure -> save-file navigation retains its native nine-row graph; the complete
   Continue/Secrets/Reset/Recap cursor route is replayed from the Mamel fixture and its
   cursor state, sprite positions, and stable framebuffer are frozen.
+- The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
+  but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
+  retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
+  Mesen after closing and reopening Items.
+- Dynamic inventory producers now emit English arrow quantities, signed equipment values,
+  staff/Pot brackets, and spaced Gitan amounts. Every translated family maximum fits; the widest equip + curse +
+  plate combination ends at x=132 against the x=144 edge. A two-page Mesen gallery freezes
+  all twenty representative rows for visual review. A separate native Synthesis Pot route
+  inserts a Cudgel base and correctly seeded Minotaur Axe donor, freezes both insertion
+  transitions, breaks the Pot, asserts the released critical-hit rune, and leaves the seal
+  description available for manual visual review.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 351-test fixture suite covering translation, layout, save data, menu/input
+- A passing 363-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -74,5 +85,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`edc4d6777811d3e2c0a367664d3260497e93fcdb`; always rebuild and verify locally rather
+`a33d0b4115730bf41a76b18bed3f409a26197b7a`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

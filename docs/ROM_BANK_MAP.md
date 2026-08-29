@@ -85,9 +85,16 @@ text growth.
 | 18 | `$5310-$5340` | Mode-3 selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
 | 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
+| 120 | `$484A-$484B` | Equipment negative-sign producer | `item_formatting.py` only |
+| 120 | `$6474-$647A` | Arrow counter/separator producer | `item_formatting.py` only |
+| 120 | `$6889-$688A`, `$6891-$6892` | Pot capacity brackets | `item_formatting.py` only |
+| 122 | `$4E10-$4E11`, `$4E20-$4E21`, `$4E33-$4E34` | Staff charge brackets and negative sign | `item_formatting.py` only |
 | 122 | `$5EF5-$5EFC` | Blank Scroll candidate-comparison resolver hook | `blank_scroll.py` only |
+| 122 | `$6FAD-$6FAF` | Gitan numeric-conversion call redirect | `item_formatting.py` only |
+| 122 | `$76C5-$76CB` | Gitan separator wrapper after native code ends at `$76C4` | Exclusive verified cave for `item_formatting.py`; clean tail `$76C5-$7FFF` is zero-filled, but only these seven bytes are owned |
 | 192-205 | full banks | Original script records and pointer tables | Preserved as source evidence; never use as free space |
-| 206 | `$4000-$7BFF` | Three pages of prefixed 8x10/16x10 glyph slices | Preserve; `font.py` verifies digest |
+| 206 | `$4000-$6A57`, `$6A80-$7BFF` | Prefixed 8x10/16x10 glyph slices | Preserve; `font.py` verifies the clean source digest |
+| 206 | `$6A58-$6A7F` | `F2 1E` cracked-Bracelet composite glyph | `item_status.py` replaces only this 40-byte bitmap with `(Cr)`; native width bytes `0F 06` remain unchanged |
 | 244 | `$4066-$406D` | Shared graphical-input maximum hook | `name6.py`, then `blank_scroll.py` mode-1 overlay |
 
 The header checksum byte at `$014D` and global checksum at `$014E-$014F` are regenerated
@@ -113,8 +120,11 @@ deterministically.
 
 GB2 already has a native proportional renderer. `english_font.py` changes only the
 English-owned one-byte code slots and their width entries, using the approved
-`assets/fonts/thin_pixel_7_compact.json` source. The prefixed font in bank 206 is not
-rewritten.
+`assets/fonts/thin_pixel_7_compact.json` source. The prefixed font in bank 206 remains
+byte-exact except for the exclusively owned `F2 1E` composite: its Japanese `(hibi)`
+bitmap is replaced by the reviewed `(Cr)` raster in
+`assets/graphics/item_status_symbols.json`. Its native 15-pixel width metadata and
+14-pixel two-slice renderer advance are preserved.
 
 Any font change affects every renderer budget. It therefore requires the complete layout,
 runtime-width, menu, build, and emulator matrix—not only a font-region hash update.
@@ -160,6 +170,32 @@ Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall st
 through the translated root-name table, so names such as `Windblade` are not truncated and
 the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
+
+## Live dungeon inventory and item formatting
+
+These are transient WRAM structures, not allocation space. The deterministic visual helper
+uses only cleared object records in the disposable `Mamel.mss` state and resolves all
+twenty targets before writing any of them.
+
+| Flat Mesen Work RAM / CPU view | Meaning |
+|:---|---|
+| `$12C1-$12D4` / bank 1 `$D2C1-$D2D4` | Twenty inventory object indices |
+| `$2482-$2881` / bank 2 `$D482-$D881` | 128 object records of eight bytes |
+| `$2C82...` / bank 2 `$DC82...` | Two-byte unidentified/identified root mappings |
+| CPU `$C12B` | Live action flags; bit 1 can inhibit ordinary item actions |
+
+Within an eight-byte gallery record, byte 0 is the item ID, byte 1 is the action class,
+byte 2 carries arrow/staff/Pot values (or the low numeric/index byte), byte 3 carries signed
+equipment modifiers/cracked state (or the high numeric/group byte), and byte 4 carries status
+flags. Bytes 5-7 hold synthesis bits for equipment. A capacity-five Pot uses a sparse native
+contents list at byte offsets 5, 6, 7, 10, and 11 from the Pot record; every unused cell
+must be `$FF`. Because the last two cells cross into the following record, deterministic
+helpers must reserve and clear a contiguous runway rather than treating the Pot as one
+isolated eight-byte object. Direct injection also bypasses inherent-rune initialization:
+an Axe of the Minotaur donor requires weapon rune bit 10 at object byte 6, mask `$04`, not
+only item ID `$0B`. Confirmed byte-4 flags are `$02`
+cursed, `$04` plated, `$08` blessed, and `$10` equipped. See
+[ITEM_FORMATTING.md](ITEM_FORMATTING.md) before extending this fixture.
 
 ## Menu navigation runtime state
 

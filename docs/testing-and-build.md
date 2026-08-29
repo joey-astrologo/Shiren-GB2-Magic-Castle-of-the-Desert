@@ -79,7 +79,10 @@ python3 -m unittest \
   tests.test_blank_scroll \
   tests.test_mesen_blank_scroll \
   tests.test_unidentified_names \
-  tests.test_mesen_unidentified_item
+  tests.test_mesen_unidentified_item \
+  tests.test_item_status \
+  tests.test_item_formatting \
+  tests.test_synthesis_lab
 ```
 
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
@@ -89,7 +92,7 @@ classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
 mechanism is reproducible.
 
-The current complete run is **351 tests** with the matching ROM, PyBoy, and RGBDS
+The current complete run is **363 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -98,6 +101,26 @@ with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
 Continue/Secrets/Reset/Recap cursor positions, the cursor OAM coordinates, and a
 cursor-masked framebuffer hash. This guards against input-editor navigation patches
 stealing a live menu graph or corrupting the submenu during Up/Down movement.
+
+`tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
+bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live
+Mesen route closes and reopens Items before asserting the `(Cr)` screen. Static checks also
+guard the original 40-byte `F2 1E` bitmap, native `0F 06` width pair, reviewed replacement
+raster, exclusive ROM ownership, and the 18-pixel worst-case item-row margin.
+
+`tests.test_item_formatting` guards all nine native producer/cave patches, measures every
+translated weapon/shield/arrow/staff/Pot dynamic row, and replays the two-page item gallery
+from `SaveStates/Mamel.mss`. Its widest combined status row ends at x=132 against the
+x=144 item-list edge. Manual gallery instructions and the twenty expected rows are in
+[ITEM_FORMATTING.md](ITEM_FORMATTING.md).
+
+`tests.test_synthesis_lab` drives a real Synthesis Pot through both `Put In` operations
+from the same disposable state. It freezes all five intervening screens and asserts that
+the Cudgel becomes the contained base, the Axe donor is consumed, the sparse Pot sentinels
+remain valid, and the native deferred-synthesis state is reached. It then throws and breaks
+the Pot and asserts that the released Cudgel carries weapon rune bit 10. The manual route
+reviews the recovered weapon's seal description; see
+[ITEM_FORMATTING.md](ITEM_FORMATTING.md#synthesis-seal-manual-route).
 
 The committed fixtures are deliberate contracts. If an intentional change updates one,
 review the semantic difference rather than accepting fixture churn blindly.
@@ -120,6 +143,23 @@ python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
 `mesen_state.py` extracts Mesen 2's named `cartRam` field as an ordinary 32 KiB battery
 SRAM file that PyBoy can reuse. This is the supported bridge for reproducing a live route
 from a Mesen save state.
+
+### Dynamic item-row gallery
+
+`tools/mesen_item_formatting_gallery.lua` injects a disposable twenty-item inventory into
+`SaveStates/Mamel.mss`. It presents status symbols and combinations on page 1, then numeric
+and category-specific formats on page 2. See [ITEM_FORMATTING.md](ITEM_FORMATTING.md) for
+the exact route and checklist. Do not sort or save the injected run.
+
+### Synthesis Pot manual route
+
+`tools/mesen_spawn_synthesis_lab.lua` replaces the disposable Mamel inventory with a
+Synthesis Pot, a Cudgel base, and an Axe of the Minotaur donor. Use **Synthesis Pot > Put
+In > Cudgel**, repeat with the Axe, break the Pot against a wall, recover the Cudgel, and
+inspect Info for `More frequent critical hits.` The exact route and native structure are
+documented in [ITEM_FORMATTING.md](ITEM_FORMATTING.md#synthesis-seal-manual-route). This
+helper deliberately erases the prior inventory; never run it against a save you intend to
+keep.
 
 ### Blank Scroll manual route
 

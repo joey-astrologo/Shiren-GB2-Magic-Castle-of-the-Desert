@@ -21,6 +21,8 @@ import extract
 import far_text
 import font
 import insert
+import item_formatting
+import item_status
 import layout
 import menu_graphics
 import name6
@@ -154,6 +156,16 @@ class TranslationBuildTests(unittest.TestCase):
             for code in english.ENGLISH_CODES.values()
             for byte in range(font.SINGLE_STRIDE)
         }
+        item_status_offsets = {
+            offset
+            for start, end in item_status.owned_ranges()
+            for offset in range(start, end)
+        }
+        item_formatting_offsets = {
+            offset
+            for start, end in item_formatting.owned_ranges()
+            for offset in range(start, end)
+        }
         checksum_offsets = {
             cartridge.HEADER_CHECKSUM,
             cartridge.GLOBAL_CHECKSUM,
@@ -200,6 +212,8 @@ class TranslationBuildTests(unittest.TestCase):
             directory_offsets
             | script_offsets
             | font_offsets
+            | item_formatting_offsets
+            | item_status_offsets
             | selector_offsets
             | menu_offsets
             | stairs_offsets

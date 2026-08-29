@@ -138,7 +138,18 @@ when it intentionally quotes a visible in-game label.
 
 Other named prefixed tokens represent composite symbols whose identity is preserved in
 `data/kanji.tsv`. Do not convert one into punctuation based only on its appearance in a
-single screenshot.
+single screenshot. `<cracked>` remains the lossless source token `F2 1E`; the production
+graphics pass localizes that token's stock Japanese `(hibi)` bitmap to `(Cr)` without
+changing script records or renderer width metadata.
+
+### Dynamic item-name producers
+
+Translated item roots are only one input to the inventory row. Native formatter code adds
+signed weapon/shield modifiers, arrow stack counts, staff charges, Pot capacities, Gitan
+amounts, monster-meat roots, and status decorators. `item_formatting.py` changes the
+language-bearing producer punctuation to `N Name`, `Name[N]`, and the English `-`; it does
+not encode those additions into group-4 translations. The exact object fields, row budget,
+and visual gallery are documented in [ITEM_FORMATTING.md](ITEM_FORMATTING.md).
 
 ## 7. Storage model
 
@@ -180,6 +191,7 @@ The production builder checks:
 - dialogue and positioned-surface geometry;
 - deterministic far-pointer allocation and all 7,163 references;
 - font, name, spell, menu, stairs, and pacing patch installation;
+- dynamic item formatter anchors, punctuation, and item-row geometry;
 - header and global cartridge checksums.
 
 ## 10. What the build cannot prove

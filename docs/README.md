@@ -17,6 +17,7 @@ behind those workflows.
 | [MENU_STRUCTURE.md](MENU_STRUCTURE.md) | Menu architecture | You are changing a menu constructor, template, navigation graph, cursor, or return path |
 | [BLANK_SCROLL.md](BLANK_SCROLL.md) | Blank Scroll writing | You need the valid English inputs, native matching rules, patch design, or manual test route |
 | [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md) | Unidentified item Name / Fill In | You need the mode-0 screen, canonical-token storage/history contract, or deterministic Mesen routes |
+| [ITEM_FORMATTING.md](ITEM_FORMATTING.md) | Dynamic item rows | You need status symbols, counts/modifiers, row-width limits, or the two-page Mesen gallery |
 | [ENGINEERING_RULES.md](ENGINEERING_RULES.md) | Change gates | Before changing code or claiming a fix complete |
 | [TRAPS.md](TRAPS.md) | Disproved assumptions | You are about to generalize a control, renderer, menu, state, or storage behavior |
 | [GRAPHICS.md](GRAPHICS.md) | Graphics localization | You are inventorying or replacing graphical Japanese |
