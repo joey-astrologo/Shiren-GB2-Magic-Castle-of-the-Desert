@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Install an English four-character editor for Big Moai spell codes.
+"""Install an English four-character editor for Big Moai promotional gift codes.
 
 The native graphical input mode 3 owns a four-byte buffer, 49 kana cells and
 three controls.  This patch retains the buffer and controller contracts while
 replacing the reachable character domain with A-Z and 0-9.  Mode 4 (player
-names) and the Blank Scroll editor keep their independent controllers.
+names), the Blank Scroll editor, and Wanderer Rescue keep their independent
+controllers.  The game calls the Big Moai codes "spells."
 """
 from hashlib import sha1
 

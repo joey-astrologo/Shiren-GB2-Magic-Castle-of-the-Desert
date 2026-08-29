@@ -22,7 +22,7 @@ Each asset still needs its producer and consumers mapped.
 | In-game proportional font | Thin Pixel-7 installed in native one-byte font slots | `english_font.py` |
 | Core Status template labels | English clone generated without mutating shared native graphics | `menu_graphics.py` |
 | Player-name keyboard | English A-Z/a-z/0-9 map and glyph resources | `name6.py` |
-| Big Moai spell keyboard | English A-Z/0-9 map and glyph resources | `spell_input.py` |
+| Big Moai promotional gift-code keyboard ("spells") | English A-Z/0-9 map and glyph resources | `spell_input.py` |
 | Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, and mode-specific hyphen cell | `blank_scroll.py` |
 | Unidentified-item keyboard | English map, dedicated mode-0 navigation, `FILL IN` history control, and full canonical-name display aligned to the native seven-cell field | `unidentified_names.py` |
 | Stairs popup geometry | Widened templates and background teardown | `stairs_menu.py` |
@@ -42,7 +42,7 @@ The graphics pass should explicitly audit at least:
 - town, dungeon, floor, and arrival banners;
 - HUD abbreviations or labels not drawn through the localized text font;
 - menu icons, category art, status marks, and explanatory diagrams;
-- spell/name editor decorative labels outside generated maps;
+- gift-code/name editor decorative labels outside generated maps;
 - ending cards, credits, and end marks;
 - postgame/alternate-route graphics;
 - Super Game Boy or DMG assets only if later evidence shows the CGB-only ROM consumes them

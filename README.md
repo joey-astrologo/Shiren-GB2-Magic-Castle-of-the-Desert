@@ -12,8 +12,8 @@ Fuurai no Shiren GB2 - Sabaku no Majou* from a user-supplied Japanese ROM.
 
 The extracted player-facing script is translated, the story is available in a
 scene-ordered editor, and the production ROM builds with the native variable-width
-font, six-character player names, a localized four-character spell editor, and a fully
-English Blank Scroll writer. The unidentified-item Name screen and its cycling `FILL IN`
+font, six-character player names, a localized four-character Big Moai gift-code editor,
+and a fully English Blank Scroll writer. The unidentified-item Name screen and its cycling `FILL IN`
 history recall are also localized, including a 14-character preview and full display of
 canonical names longer than the native seven-character custom-label field. Recalled names
 show no star padding and reset safely to ordinary free entry on typing or `DEL`.
@@ -35,13 +35,13 @@ project work.
 | Area | State | Remaining work |
 |---|---|---|
 | Extracted player-facing text | **Translation pass complete** | All 5,467 records have explicit English/empty values; continue editorial and route review |
-| Internal runtime text | **Complete** | 200 spell-runtime records translated; 1,028 engine-only identifiers deliberately native |
+| Internal runtime text | **Complete** | 200 Big Moai promotional-code records translated; 1,028 engine-only identifiers deliberately native |
 | Story organization | **Complete** | 1,768 dialogue records in 72 scene families; complete editorial read-through remains |
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
-| Graphical input | **Engineered** | Player names/rankings/replay snapshots, spells, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
+| Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **371-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **380-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -54,7 +54,7 @@ editorial and gameplay pass, and graphical assets still require full localizatio
   - MD5: `9e3d4ff0ba3d6deec5080f6dbed4fef8`
 - PyBoy is optional but recommended for emulator-backed integration tests.
 - Pillow is optional for font and graphics inspection tools.
-- RGBDS is optional; when installed, the tests reassemble the name, spell-input, Blank
+- RGBDS is optional; when installed, the tests reassemble the name, Big Moai gift-code, Blank
   Scroll, and unidentified-name patches and compare them byte-for-byte with the embedded
   production payloads.
 
@@ -124,7 +124,7 @@ python3 -m unittest \
   tests.test_internal_audit \
   tests.test_runtime_widths
 
-# Graphical input: names, spells, Blank Scroll writing, and unidentified items
+# Graphical input: names, Big Moai gift codes, Blank Scroll writing, and unidentified items
 python3 -m unittest \
   tests.test_save_summary \
   tests.test_name6 \
@@ -133,6 +133,7 @@ python3 -m unittest \
   tests.test_mesen_blank_scroll \
   tests.test_unidentified_names \
   tests.test_mesen_unidentified_item \
+  tests.test_rescue_password \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_synthesis_lab
@@ -198,6 +199,7 @@ Start with the [documentation index](docs/README.md). In particular:
 - [ROM and persistent-memory map](docs/ROM_BANK_MAP.md)
 - [Menu architecture](docs/MENU_STRUCTURE.md)
 - [Blank Scroll writing system](docs/BLANK_SCROLL.md)
+- [Wanderer Rescue password system](docs/RESCUE_SYSTEM.md)
 - [Unidentified item naming and manual test route](docs/UNIDENTIFIED_ITEM_NAMING.md)
 - [Dynamic item rows and visual gallery](docs/ITEM_FORMATTING.md)
 - [Engineering rules](docs/ENGINEERING_RULES.md)

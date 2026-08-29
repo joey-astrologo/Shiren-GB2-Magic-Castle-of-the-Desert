@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Audit the player-facing boundary of GB2's internal text directory.
 
-Only Big Moai's runtime four-byte spell table and its matching diagnostic
-labels need English bytes.  The remaining records are developer selectors or
+Only Big Moai's runtime four-byte promotional gift-code table (called
+"spells" by the game) and its matching diagnostic labels need English bytes.
+This system is independent of Wanderer Rescue.  The remaining records are developer selectors or
 engine dispatch names; relocating them would add no player-facing coverage and
 would weaken the native identity contracts used while reverse engineering.
 """

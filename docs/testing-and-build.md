@@ -33,8 +33,8 @@ python3 tools/runtime_widths.py "$ROM"
 python3 tools/menu_text.py "$ROM"
 ```
 
-The production build installs and validates the player-name, spell-input, Blank Scroll, and
-unidentified-item naming patches. Their focused contracts can also be run directly through
+The production build installs and validates the player-name, Big Moai promotional-code,
+Blank Scroll, and unidentified-item naming patches. Their focused contracts can also be run directly through
 `tests.test_name6`, `tests.test_spell_input`, `tests.test_blank_scroll`,
 `tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_mesen_unidentified_item`.
@@ -80,6 +80,7 @@ python3 -m unittest \
   tests.test_mesen_blank_scroll \
   tests.test_unidentified_names \
   tests.test_mesen_unidentified_item \
+  tests.test_rescue_password \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_item_terminology \
@@ -87,7 +88,7 @@ python3 -m unittest \
 ```
 
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
-widths, wrapping, menus, save/name expansion, spell input, Blank Scroll input,
+widths, wrapping, menus, save/name expansion, Big Moai promotional-code input, Blank Scroll input,
 unidentified-item free/history naming, runtime text domains, scene ownership, internal
 classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
@@ -98,7 +99,7 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **371 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **380 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 

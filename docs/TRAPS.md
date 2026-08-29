@@ -103,7 +103,8 @@ artifact.
 **Tempting assumption:** one graphical input layout/controller patch can localize every text
 entry screen.
 
-**Failure risk:** mode 3 has a hard four-byte spell contract, mode 4 needs six-character
+**Failure risk:** mode 3 has a hard four-byte Big Moai promotional gift-code contract,
+mode 4 needs six-character
 player names, mode 1 Blank Scroll needs its own 11-character full-name field plus a hyphen,
 and mode 0 unidentified-item naming needs a seven-character free-name field plus its native
 `FILL IN` history node. Reusing the reduced player-name graph disconnected that mode-0
@@ -121,6 +122,22 @@ off-screen cursors, and a trapped delete/confirmation path.
 navigation, history/control reachability, confirmation, return paths, presentation-only
 extensions, canonical-preview-to-free-entry transitions, and any persistent encoding
 specific to that consumer.
+
+## Big Moai gift codes are not rescue passwords
+
+**Tempting assumption:** internal group 23 is named `password_fragments` by a compact
+extraction heuristic, so its 100 four-character values must be a Wanderer Rescue
+codebook.
+
+**Why it fails:** group 23 is the runtime comparison table for Big Moai promotional
+reward codes, which the game calls "spells." Chunsoft distributed those codes on cards
+and in publications. They use graphical-input mode 3 and matching group-13 diagnostic
+labels. Wanderer Rescue instead uses modes 5-8, code lengths 12/9/15/13, and the
+64-symbol packet codec at `11:$76B2-$7D8B`.
+
+**Rule:** keep the two systems independent. Trace rescue from its mode callers, payload
+builders, and validators; never infer protocol ownership from a generated category name.
+See [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 
 ## An apparently unused navigation type may belong to an ordinary menu
 

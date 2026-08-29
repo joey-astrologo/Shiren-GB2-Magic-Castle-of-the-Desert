@@ -56,7 +56,7 @@ text growth.
 | 3 | `$6A49-$6A53` | Floor stairs-popup load hook | `stairs_menu.py` only |
 | 3 | `$6A8F-$6A9F` | Floor stairs-popup copy/cleanup hook | `stairs_menu.py` only |
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
-| 4 | `$4CF6-$4CFD` | Mode-3 spell-input screen redirect | `spell_input.py` only |
+| 4 | `$4CF6-$4CFD` | Mode-3 Big Moai gift-code input screen redirect | `spell_input.py` only |
 | 4 | `$660E-$6787` | 126-entry script group directory | Rewritten only by `insert.py` |
 | 11 | `$42EB-$4301` | Default-name routine | `name6.py` only |
 | 11 | `$4B2F-$4B5C` | Compatible player-name getter/setter | `name6.py` only |
@@ -65,6 +65,7 @@ text growth.
 | 11 | `$5F1C-$5F2E` | Ranking-name write | `name6.py` only |
 | 11 | `$5FB3-$5FDC` | Fourteen-entry replay diary pointer table | Preserved byte-exact and guarded by `name6.py`; event IDs 0-3 are non-Secrets demos and 4-13 are Secrets |
 | 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
+| 11 | `$76B2-$7D8B` | Native Training/SOS/Revival/Thank-You payload builders, packet codec, checksum, and bit transforms | Preserve while `rescue_password.py` freezes and reproduces the protocol; do not overlay before the two-diary fixture passes |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlays |
@@ -73,7 +74,7 @@ text growth.
 | 16 | `$5F9A-$5F9B` | Native navigation type `$13` pointer to `$6625` | Preserve; shared nine-row list used by Adventure -> Continue/Secrets/Reset/Recap |
 | 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615D` are then overlaid by `unidentified_names.py` as private type `$F4` -> WRAM `$C800` |
 | 16 | `$615C-$615D` | Private mode-0 navigation pointer `$C800` | `unidentified_names.py` only; overlaps the proven-unreachable Down/Up pair of English name-entry node 64 |
-| 16 | `$64B9-$6624` | Mode-3 spell navigation graph | Replaced by `spell_input.py` |
+| 16 | `$64B9-$6624` | Mode-3 Big Moai gift-code navigation graph | Replaced by `spell_input.py` |
 | 16 | `$6625-$6663` | Native nine-node vertical-list graph | Preserve; seven-byte records with fixed x `$36` and y `$17,$22,...,$6F` |
 | 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
 | 16 | `$6A33-$6A3A` | Mode-0 history-return screen redirect | `unidentified_names.py` only |
@@ -83,7 +84,8 @@ text growth.
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
 | 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
-| 18 | `$5310-$5340` | Mode-3 selectable character table | Replaced by `spell_input.py` |
+| 18 | `$502D-$5072` | Shared graphical-input mode-to-maximum dispatcher; modes 5-8 select 12/9/15/13 password characters | Preserve until the localized rescue input overlay owns explicit guarded hooks |
+| 18 | `$5310-$5340` | Mode-3 Big Moai gift-code selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
 | 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
 | 120 | `$484A-$484B` | Equipment negative-sign producer | `item_formatting.py` only |
@@ -109,7 +111,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
-| 252 | `$4000-$488F` | `spell_input.py`: mode-3 code, map, glyphs | Exclusive |
+| 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, glyphs | Exclusive |
 | 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
 | 254 | `$4000-$426A` | `stairs_menu.py`: both popup templates and cleanup helpers | Exclusive |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |

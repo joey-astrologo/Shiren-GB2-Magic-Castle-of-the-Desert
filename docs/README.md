@@ -14,9 +14,10 @@ behind those workflows.
 | [testing-and-build.md](testing-and-build.md) | Commands | You need the normal validation, build, test, or diagnostic commands |
 | [TEXT_REFERENCE.md](TEXT_REFERENCE.md) | Text system | You need encoding, control tokens, runtime substitutions, storage, or authoring ownership |
 | [VWF_BUDGETS.md](VWF_BUDGETS.md) | Renderer contracts | You are deciding whether text fits or changing font/layout behavior |
-| [ROM_BANK_MAP.md](ROM_BANK_MAP.md) | ROM, WRAM, SRAM, and transient menu-state ownership | **Before** placing or moving ROM, font, menu, navigation, name, spell, graphics, or save data |
+| [ROM_BANK_MAP.md](ROM_BANK_MAP.md) | ROM, WRAM, SRAM, and transient menu-state ownership | **Before** placing or moving ROM, font, menu, navigation, name, gift-code, rescue, graphics, or save data |
 | [MENU_STRUCTURE.md](MENU_STRUCTURE.md) | Menu architecture | You are changing a menu constructor, template, navigation graph, cursor, or return path |
 | [BLANK_SCROLL.md](BLANK_SCROLL.md) | Blank Scroll writing | You need the valid English inputs, native matching rules, patch design, or manual test route |
+| [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md) | Wanderer Rescue passwords | You are tracing, localizing, testing, or manually exercising the SOS/Revival/Thank-You handshake |
 | [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md) | Unidentified item Name / Fill In | You need the mode-0 screen, canonical-token storage/history contract, or deterministic Mesen routes |
 | [ITEM_FORMATTING.md](ITEM_FORMATTING.md) | Dynamic item rows | You need status symbols, counts/modifiers, row-width limits, or the two-page Mesen gallery |
 | [ENGINEERING_RULES.md](ENGINEERING_RULES.md) | Change gates | Before changing code or claiming a fix complete |

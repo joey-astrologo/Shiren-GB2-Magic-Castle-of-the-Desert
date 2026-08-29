@@ -147,7 +147,7 @@ The graphical input dispatcher has independent modes and consumers:
 | Mode/path | Purpose | Contract |
 |---|---|---|
 | Mode 0 | Unidentified item Name / Fill In | Seven-character free-name field; each `FILL IN` press cycles notebook/history roots into a 14-cell canonical preview aligned to the original field origin; dedicated bank-250 map/navigation; confirmation saves a canonical token that renders the full translated root |
-| Mode 3 | Big Moai spells | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime |
+| Mode 3 | Big Moai promotional gift codes ("spells") | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime; independent of Wanderer Rescue |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
 
@@ -166,7 +166,7 @@ history node.
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
 | Six-character names, embedded replay diaries, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
-| Spell input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
+| Big Moai gift-code input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
 | Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_mesen_unidentified_item.py` |
 | Main-menu proof route | build/surface contracts | `test_poc_dungeon1.py`, `test_build.py` |

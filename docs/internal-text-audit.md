@@ -9,8 +9,8 @@ classified and checked by `tools/internal_audit.py`:
 
 | Family | Records | Policy | Reason |
 |---|---:|---|---|
-| Big Moai runtime spell codes | 100 | English | The mode-3 input screen compares these exact four bytes. |
-| Matching spell diagnostic labels | 100 | English | Keeps all indexed spell labels synchronized with the runtime codes. |
+| Big Moai promotional gift codes ("spells") | 100 | English | The independent mode-3 reward-code screen compares these exact four bytes; these are not rescue passwords. |
+| Matching gift-code diagnostic labels | 100 | English | Keeps all indexed diagnostic labels synchronized with the runtime codes. |
 | Developer event selectors | 126 | Native | Debug event names and placeholder controls, not release dialogue. |
 | Debug/engine labels | 197 | Native | Assertion, key-scan, object, animation and engine-development names. |
 | Scenario debug labels | 39 | Native | Developer scenario-state selector names. |
@@ -18,9 +18,10 @@ classified and checked by `tools/internal_audit.py`:
 | Internal object IDs | 37 | Native | Dungeon-generation object and room-set identifiers. |
 
 Thus 200 internal records deliberately receive English overrides and 1,028
-retain their original bytes. The audit fails if a required spell record is
+retain their original bytes. The audit fails if a required gift-code record is
 blank, an engine-only record gains an override, a record changes family, or the
-partition ceases to cover all 1,228 records.
+partition ceases to cover all 1,228 records. The `spell` wording retained in tool and
+record identifiers is the game's name for this promotional system, not a rescue category.
 
 This boundary means “translation complete” covers every extracted player-facing
 record plus every internal record required by localized runtime behavior. It

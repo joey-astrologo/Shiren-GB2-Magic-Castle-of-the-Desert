@@ -190,7 +190,7 @@ The production builder checks:
 - complete runtime-width domains where required;
 - dialogue and positioned-surface geometry;
 - deterministic far-pointer allocation and all 7,163 references;
-- font, name, spell, menu, stairs, and pacing patch installation;
+- font, name, Big Moai gift-code, menu, stairs, and pacing patch installation;
 - dynamic item formatter anchors, punctuation, and item-row geometry;
 - header and global cartridge checksums.
 

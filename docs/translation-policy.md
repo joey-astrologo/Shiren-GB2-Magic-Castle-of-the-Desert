@@ -75,8 +75,9 @@ write `?<page> Next` and `!<page> Next`, not `?<page>Next` or `!<page>Next`.
 ## Fixed runtime contracts
 
 Player names have a six-character visible limit and default to `Shiren`. Big Moai's
-spell input and comparison buffers are exactly four bytes. Its keyboard, 100 codes,
-diagnostic labels, and seven story clues must remain synchronized. The story codes are
+promotional gift codes (called "spells" in game) use four-byte input and comparison buffers
+and are not rescue passwords. Their keyboard, 100 codes, diagnostic labels, and seven story
+clues must remain synchronized. The story codes are
 `WISH`, `RANU`, `BADE`, `SUGI`, `TSUB`, `MAMA`, and `HOYO`.
 
 Before completing an edit batch, run the scene/catalog owner, overlay synchronization,

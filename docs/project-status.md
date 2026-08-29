@@ -16,7 +16,7 @@ localization has completed editing, playtesting, or graphics work.
 | Gameplay messages | 399 | 399 |
 | Story, events, and endings | 1,786 | 1,786 |
 | Player-facing subtotal | 5,467 | 5,467 |
-| Runtime-facing internal spell text | 200 | 200 |
+| Runtime-facing Big Moai gift-code text | 200 | 200 |
 | Explicit production translations/empties | 5,667 | 5,667 |
 
 The internal catalog contains another 1,028 records proven to be developer selectors,
@@ -39,8 +39,9 @@ edited through the ordinary catalog workflow.
 - Six-character player names, default name `Shiren`, save compatibility metadata,
   expanded ranking-result name storage, and localized names in all fourteen embedded
   title/demo and Wanderer's Secrets replay diaries.
-- Four-character A-Z/0-9 Big Moai spell entry, with all 100 runtime codes and story
-  clues synchronized.
+- Four-character A-Z/0-9 Big Moai promotional gift-code entry, with all 100 runtime
+  codes and story clues synchronized. The game calls these codes "spells"; they are
+  independent of Wanderer Rescue passwords.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
   hyphen, and the original notebook rule. The supplied live confirmation state is retained
   as a no-reset, no-inventory-damage Mesen regression.
@@ -68,12 +69,15 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 371-test fixture suite covering translation, layout, save data, menu/input
+- A passing 380-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
 ## Remaining project work
 
+- Wanderer Rescue protocol engineering: trace the dedicated password modes and codec,
+  preserve native/cable compatibility, add a two-diary SOS -> Revival -> Thank-You fixture,
+  and localize the password presentation; see [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 - Editorial read-through of the complete scene document for voice, continuity, and
   natural English.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Synchronize Big Moai's 100 native four-byte spells with English codes.
+"""Synchronize Big Moai's 100 native four-byte promotional gift codes.
 
 Group 23 is the runtime comparison table.  Group 13 indices 127..226 are the
 matching developer/debug labels.  The first 93 codes remain deliberately
-neutral, while the seven spells taught in story dialogue receive memorable
-four-letter equivalents that fit the native input buffer.
+neutral, while the seven codes taught as "spells" in story dialogue receive
+memorable four-letter equivalents that fit the native input buffer.  These
+reward codes are independent of Wanderer Rescue passwords.
 """
 import csv
 from pathlib import Path

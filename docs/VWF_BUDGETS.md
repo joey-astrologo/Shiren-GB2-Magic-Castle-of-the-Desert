@@ -123,7 +123,7 @@ not the name-entry limit.
 
 - Measure the actual interior, not the overall box width or screen width.
 - A cursor or page marker may occupy cells outside the text payload.
-- Mode 3 spell input has a four-byte buffer; mode 4 player input has six visible
+- Mode 3 Big Moai promotional gift-code input has a four-byte buffer; mode 4 player input has six visible
   characters; mode 1 Blank Scroll input has a separately guarded 11-character maximum and
   history-filtered matcher.
 - Mode 0 unidentified-item free labels remain seven characters. A `FILL IN` canonical

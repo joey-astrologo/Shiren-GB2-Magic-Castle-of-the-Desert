@@ -69,13 +69,15 @@ are the non-Secrets demo family (the title attract route selects 0 or 1), while 
 fourteen original record hashes. Ordinary Help/Hint prose pages do not use these snapshots;
 only a launched replay does.
 
-## Big Moai spell input
+## Big Moai promotional gift-code input
 
-The native spell comparison contract is exactly four bytes. Mode 3 is localized as a compact
-A-Z/0-9 editor; it cannot be expanded to arbitrary-length prose without changing the runtime
-contract. Bank 252 holds the localized keyboard/logic and all 100 English runtime codes.
-Matching internal diagnostic labels and the seven story clues are generated from the same
-mapping so they cannot drift.
+The game calls these promotional/reward passwords "spells." Chunsoft published codes on
+cards and in publications; players enter them at Big Moai to receive rewards. This is
+independent of Wanderer Rescue. The native comparison contract is exactly four bytes.
+Mode 3 is localized as a compact A-Z/0-9 editor; it cannot be expanded to arbitrary-length
+prose without changing the runtime contract. Bank 252 holds the localized keyboard/logic
+and all 100 English runtime codes. Matching internal diagnostic labels and the seven story
+clues are generated from the same mapping so they cannot drift.
 
 ## Blank Scroll writing
 
