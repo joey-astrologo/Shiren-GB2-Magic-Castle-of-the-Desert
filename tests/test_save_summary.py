@@ -135,3 +135,67 @@ class LiveSaveSummaryNameTests(unittest.TestCase):
             self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
             pyboy.stop(save=False)
+
+    def test_continue_submenu_keeps_its_native_cursor_graph(self):
+        """Reproduce Adventure -> save file and exercise all four rows.
+
+        The mode-0 unidentified-name patch once redirected native navigation
+        type $13 to its private WRAM graph. This exact route then read $FF
+        cursor coordinates: the cursor vanished, Down stopped advancing, and
+        repeated movement corrupted the menu. Freeze both navigation state and
+        the cursor-masked framebuffer so that ownership cannot regress again.
+        """
+        pyboy = self.PyBoy(
+            str(self.localized_path),
+            window="null",
+            ram_file=io.BytesIO(self.ram),
+            sound_emulated=False,
+        )
+        pyboy.set_emulation_speed(0)
+        captures = []
+        try:
+            for frame in range(641):
+                if frame in (120, 240, 420):
+                    pyboy.button("a", capture_dialogue.PRESS_FRAMES)
+                if frame in (180, 360):
+                    pyboy.button("start", capture_dialogue.PRESS_FRAMES)
+                if frame in (500, 560, 620):
+                    pyboy.button("down", capture_dialogue.PRESS_FRAMES)
+                pyboy.tick()
+                if frame in (450, 520, 580, 640):
+                    image = pyboy.screen.image.convert("RGB")
+                    # Mask only the four possible 8x8 cursor positions. The
+                    # complete menu below the sprite must remain byte-stable.
+                    image.paste((248, 248, 248), (52, 12, 64, 62))
+                    captures.append(
+                        {
+                            "navigation_type": pyboy.memory[0xC14E],
+                            "cursor": pyboy.memory[0xC14F],
+                            "previous": pyboy.memory[0xC150],
+                            "maximum": pyboy.memory[0xC151],
+                            "cursor_x": pyboy.memory[0xFFB2],
+                            "cursor_y": pyboy.memory[0xFFB3],
+                            "oam": bytes(pyboy.memory[0xFE00:0xFE04]),
+                            "masked_sha1": sha1(image.tobytes()).hexdigest(),
+                        }
+                    )
+
+            self.assertEqual([0, 1, 2, 3], [row["cursor"] for row in captures])
+            self.assertEqual([0, 1, 2, 3], [row["previous"] for row in captures])
+            self.assertEqual({0x13}, {row["navigation_type"] for row in captures})
+            self.assertEqual({3}, {row["maximum"] for row in captures})
+            self.assertEqual({0x36}, {row["cursor_x"] for row in captures})
+            self.assertEqual(
+                [0x17, 0x22, 0x2D, 0x38],
+                [row["cursor_y"] for row in captures],
+            )
+            self.assertEqual(
+                [(0x1F, 0x3E), (0x2A, 0x3E), (0x35, 0x3E), (0x40, 0x3E)],
+                [(row["oam"][0], row["oam"][1]) for row in captures],
+            )
+            self.assertEqual(
+                {"8f630df230639195d270536063432ce74c439e08"},
+                {row["masked_sha1"] for row in captures},
+            )
+        finally:
+            pyboy.stop(save=False)

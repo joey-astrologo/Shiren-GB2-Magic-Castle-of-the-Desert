@@ -24,6 +24,7 @@ Each asset still needs its producer and consumers mapped.
 | Player-name keyboard | English A-Z/a-z/0-9 map and glyph resources | `name6.py` |
 | Big Moai spell keyboard | English A-Z/0-9 map and glyph resources | `spell_input.py` |
 | Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, and mode-specific hyphen cell | `blank_scroll.py` |
+| Unidentified-item keyboard | English map, dedicated mode-0 navigation, `FILL IN` history control, and full canonical-name display aligned to the native seven-cell field | `unidentified_names.py` |
 | Stairs popup geometry | Widened templates and background teardown | `stairs_menu.py` |
 
 These are not evidence that title art, story cards, ending art, or every graphical menu label

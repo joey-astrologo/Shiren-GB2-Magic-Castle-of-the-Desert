@@ -43,6 +43,15 @@ edited through the ordinary catalog workflow.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
   hyphen, and the original notebook rule. The supplied live confirmation state is retained
   as a no-reset, no-inventory-damage Mesen regression.
+- Localized unidentified-item Name screen with a reachable cycling `FILL IN` history
+  control, seven-character free labels, 14-character canonical previews, and tokens that
+  display complete English names without changing the native persistent slot layout.
+  Canonical previews have blank tails, retain the original seven-cell horizontal origin,
+  and atomically reset to the native free editor on either character entry or `DEL`; both
+  transitions are live-route tested through return to Items.
+- Adventure -> save-file navigation retains its native nine-row graph; the complete
+  Continue/Secrets/Reset/Recap cursor route is replayed from the Mamel fixture and its
+  cursor state, sprite positions, and stable framebuffer are frozen.
 - Scene-ordered prose editing and generated-cell ownership checks.
 - Fixture-backed translation, layout, save-data, menu, and production-build tests.
 
@@ -63,5 +72,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`37fc44000c029518074c6ce17ad9915fec0184fd`; always rebuild and verify locally rather
+`edc4d6777811d3e2c0a367664d3260497e93fcdb`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

@@ -66,16 +66,22 @@ text growth.
 | 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
-| 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then `blank_scroll.py` mode-1 overlay |
-| 16 | `$5B84-$5B8B` | Blank Scroll full-name confirmation hook | `blank_scroll.py` only |
-| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py` |
+| 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlays |
+| 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
+| 16 | `$5F9A-$5F9B` | Native navigation type `$13` pointer to `$6625` | Preserve; shared nine-row list used by Adventure -> Continue/Secrets/Reset/Recap |
+| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615D` are then overlaid by `unidentified_names.py` as private type `$F4` -> WRAM `$C800` |
 | 16 | `$64B9-$6624` | Mode-3 spell navigation graph | Replaced by `spell_input.py` |
+| 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
+| 16 | `$6A33-$6A3A` | Mode-0 history-return screen redirect | `unidentified_names.py` only |
 | 16 | `$6A4C-$6A53` | Blank Scroll screen redirect | `blank_scroll.py` only |
+| 16 | `$6B98-$6B9F` | Mode-0 secondary screen redirect | `unidentified_names.py` only |
 | 16 | `$7859-$7860` | Create-name screen redirect | `name6.py` only |
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
 | 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
 | 18 | `$5310-$5340` | Mode-3 selectable character table | Replaced by `spell_input.py` |
+| 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
+| 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
 | 122 | `$5EF5-$5EFC` | Blank Scroll candidate-comparison resolver hook | `blank_scroll.py` only |
 | 192-205 | full banks | Original script records and pointer tables | Preserved as source evidence; never use as free space |
 | 206 | `$4000-$7BFF` | Three pages of prefixed 8x10/16x10 glyph slices | Preserve; `font.py` verifies digest |
@@ -89,13 +95,14 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
+| 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 code, map, glyphs | Exclusive |
 | 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
 | 254 | `$4000-$426A` | `stairs_menu.py`: both popup templates and cleanup helpers | Exclusive |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
 
-Banks 251-255 were measured empty before these reservations. Their unused tails are not a
+Banks 250-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
 deterministically.
 
@@ -134,6 +141,22 @@ name suffixes use otherwise unused SRAM bank 3 space:
 
 The table initializes lazily when its header is absent. Do not grow it into another SRAM
 region without proving every native structure and every bank-selection path.
+
+## Unidentified-item naming persistence
+
+The loaded unidentified-item state uses WRAM bank 2:
+
+| Working address | Meaning |
+|:---|---|
+| `$DC82` | 123 two-byte root mappings: appearance index, custom-name slot |
+| `$DD78` | 20 custom-name slots of eight bytes each |
+| `$DE1C` | learned-name/history bitset consumed by `FILL IN` |
+
+Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall stores
+`FF FE <root> FF FF FF FF FF` in the same slot. The bank-250 resolver expands that token
+through the translated root-name table, so names such as `Windblade` are not truncated and
+the native persistent layout does not grow. See
+[UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
 
 ## Safe allocation procedure
 

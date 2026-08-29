@@ -106,7 +106,11 @@ is conditional:
 
 The compact hub rows start at x=6 and end before x=80, giving a 74-pixel text budget.
 Selecting Start Adventure opens a different submenu whose rows start at x=56 and have an
-88-pixel budget.
+88-pixel budget. Its controller uses native navigation type `$13`, whose pointer at
+`16:$5F9A` must remain `$6625`. That graph supplies the nine vertical cursor records used
+by this and other ordinary lists; it is not spare input-editor storage. The mode-0
+unidentified-item editor instead owns private type `$F4`, resolved through unreachable
+name-entry node 64 at `16:$615C` to its WRAM `$C800` graph.
 
 The save summary must display the persisted player name dynamically. Never hardcode
 `Shiren` into the summary merely because it is the default name.
@@ -130,13 +134,16 @@ The graphical input dispatcher has independent modes and consumers:
 
 | Mode/path | Purpose | Contract |
 |---|---|---|
+| Mode 0 | Unidentified item Name / Fill In | Seven-character free-name field; each `FILL IN` press cycles notebook/history roots into a 14-cell canonical preview aligned to the original field origin; dedicated bank-250 map/navigation; confirmation saves a canonical token that renders the full translated root |
 | Mode 3 | Big Moai spells | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
 
-Mode 3 and mode 4 share native graphical resources as source material, but the English
-installers generate separate maps, graphs, glyph copies, and runtime logic. A change to one
-must prove that the other remains unchanged.
+The English build treats all four modes as independent consumers even where the native game
+shares graphical resources. Each installer owns its map, graph, maximum, and mode-specific
+logic. A change to one must prove that the others remain unchanged. In particular, removing
+unused player-name controls from mode 4 must not disconnect mode 0's native `FILL IN`
+history node.
 
 ## Route-to-owner reference
 
@@ -146,9 +153,10 @@ must prove that the other remains unchanged.
 | Positioned call graph and budgets | `surfaces.py`, `layout.py` | `test_surfaces.py`, `test_layout.py` |
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
-| Six-character names and rankings | `name6.py` | `test_name6.py`, `test_save_summary.py` |
+| Six-character names, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
 | Spell input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
+| Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_mesen_unidentified_item.py` |
 | Main-menu proof route | build/surface contracts | `test_poc_dungeon1.py`, `test_build.py` |
 
 ## Rules for menu changes

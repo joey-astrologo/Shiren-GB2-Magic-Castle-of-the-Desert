@@ -13,7 +13,10 @@ Fuurai no Shiren GB2 - Sabaku no Majou* from a user-supplied Japanese ROM.
 The extracted player-facing script is translated, the story is available in a
 scene-ordered editor, and the production ROM builds with the native variable-width
 font, six-character player names, a localized four-character spell editor, and a fully
-English Blank Scroll writer.
+English Blank Scroll writer. The unidentified-item Name screen and its cycling `FILL IN`
+history recall are also localized, including a 14-character preview and full display of
+canonical names longer than the native seven-character custom-label field. Recalled names
+show no star padding and reset safely to ordinary free entry on typing or `DEL`.
 Editorial review, full playthrough testing, and graphics localization remain active
 project work.
 
@@ -26,7 +29,7 @@ project work.
 | Story organization | **Complete** | 1,768 dialogue records in 72 scene families; complete editorial read-through remains |
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
-| Graphical input | **Engineered** | Six-character names/ranking suffixes, four-character spells, and full-name Blank Scroll writing are fixture-tested |
+| Graphical input | **Engineered** | Player names/rankings, spells, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Graphics | **In progress** | Complete the graphical-Japanese inventory, replacement art, insertion, and visual QA |
 | Automated tests | **Extensive fixture suite** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
@@ -41,8 +44,9 @@ editorial and gameplay pass, and graphical assets still require full localizatio
   - MD5: `9e3d4ff0ba3d6deec5080f6dbed4fef8`
 - PyBoy is optional but recommended for emulator-backed integration tests.
 - Pillow is optional for font and graphics inspection tools.
-- RGBDS is optional; when installed, the tests reassemble the name, spell-input, and
-  Blank Scroll patches and compare them byte-for-byte with the embedded production payloads.
+- RGBDS is optional; when installed, the tests reassemble the name, spell-input, Blank
+  Scroll, and unidentified-name patches and compare them byte-for-byte with the embedded
+  production payloads.
 
 The normal production build uses only Python's standard library. Optional Python
 dependencies can be installed with:
@@ -110,12 +114,14 @@ python3 -m unittest \
   tests.test_internal_audit \
   tests.test_runtime_widths
 
-# Graphical input: names, spells, and Blank Scroll writing
+# Graphical input: names, spells, Blank Scroll writing, and unidentified items
 python3 -m unittest \
   tests.test_name6 \
   tests.test_spell_input \
   tests.test_blank_scroll \
-  tests.test_mesen_blank_scroll
+  tests.test_mesen_blank_scroll \
+  tests.test_unidentified_names \
+  tests.test_mesen_unidentified_item
 ```
 
 ## Edit translated text
@@ -177,6 +183,7 @@ Start with the [documentation index](docs/README.md). In particular:
 - [ROM and persistent-memory map](docs/ROM_BANK_MAP.md)
 - [Menu architecture](docs/MENU_STRUCTURE.md)
 - [Blank Scroll writing system](docs/BLANK_SCROLL.md)
+- [Unidentified item naming and manual test route](docs/UNIDENTIFIED_ITEM_NAMING.md)
 - [Engineering rules](docs/ENGINEERING_RULES.md)
 - [Known traps](docs/TRAPS.md)
 - [Graphics localization](docs/GRAPHICS.md)

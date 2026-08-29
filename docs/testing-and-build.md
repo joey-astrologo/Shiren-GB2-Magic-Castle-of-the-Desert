@@ -33,10 +33,11 @@ python3 tools/runtime_widths.py "$ROM"
 python3 tools/menu_text.py "$ROM"
 ```
 
-The production build installs and validates the name, spell-input, and Blank Scroll
-patches. Their focused contracts can also be run directly through `tests.test_name6`,
-`tests.test_spell_input`, `tests.test_blank_scroll`, and
-`tests.test_mesen_blank_scroll`.
+The production build installs and validates the player-name, spell-input, Blank Scroll, and
+unidentified-item naming patches. Their focused contracts can also be run directly through
+`tests.test_name6`, `tests.test_spell_input`, `tests.test_blank_scroll`,
+`tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
+`tests.test_mesen_unidentified_item`.
 
 When their owned files change, also run the relevant family check before applying:
 
@@ -75,14 +76,23 @@ python3 -m unittest \
   tests.test_name6 \
   tests.test_spell_input \
   tests.test_blank_scroll \
-  tests.test_mesen_blank_scroll
+  tests.test_mesen_blank_scroll \
+  tests.test_unidentified_names \
+  tests.test_mesen_unidentified_item
 ```
 
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
-widths, wrapping, menus, save/name expansion, spell input, Blank Scroll input, runtime text
-domains, scene ownership, internal classification, and deterministic production builds.
+widths, wrapping, menus, save/name expansion, spell input, Blank Scroll input,
+unidentified-item free/history naming, runtime text domains, scene ownership, internal
+classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
 mechanism is reproducible.
+
+`tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
+with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
+Continue/Secrets/Reset/Recap cursor positions, the cursor OAM coordinates, and a
+cursor-masked framebuffer hash. This guards against input-editor navigation patches
+stealing a live menu graph or corrupting the submenu during Up/Down movement.
 
 The committed fixtures are deliberate contracts. If an intentional change updates one,
 review the semantic difference rather than accepting fixture churn blindly.
@@ -120,3 +130,21 @@ The complete accepted-name table and mechanism are in
 
 Back up the save or use a disposable state because Mesen may persist later in-game saves
 after the live WRAM injection.
+
+### Unidentified item naming manual route
+
+`SaveStates/unidentified-item-naming.mss` freezes the exact reported Rabbit Scroll route.
+Because it was captured after the old screen was drawn, back out and reopen **Name** after
+loading it with the latest ROM. From the initial `A` cell, **Up, Right, Up** reaches the
+localized `FILL IN` history control. Each activation cycles to the next learned name; it
+does not open a separate list.
+
+`tools/mesen_spawn_unidentified_item.lua` provides a second disposable route from
+`Mamel.mss`: it creates a real item, presents it through a chosen unidentified appearance,
+and enables exactly its learned-name/history bit. Reload the state between free-name and
+`FILL IN` tests. Canonical recalls use a build-guarded 14-character preview and render their
+full translated root after confirmation; free labels retain the native seven-character
+maximum. The live regression also freezes the no-star `Windblade` preview, typing-after-fill
+reset, `DEL`-after-fill reset, and successful return to Items after a new free name. The
+complete checklist, token contract, alternate categories, and regression command are in
+[UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).

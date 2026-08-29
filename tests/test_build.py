@@ -28,6 +28,7 @@ import blank_scroll
 import spell_input
 import stairs_menu
 import translations
+import unidentified_names
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -188,6 +189,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in spell_input.owned_ranges()
             for offset in range(start, end)
         }
+        unidentified_name_offsets = {
+            offset
+            for start, end in unidentified_names.owned_ranges()
+            for offset in range(start, end)
+        }
         pacing_start, pacing_end = dialogue_pacing.owned_range()
         pacing_offsets = set(range(pacing_start, pacing_end))
         allowed = (
@@ -200,6 +206,7 @@ class TranslationBuildTests(unittest.TestCase):
             | name6_offsets
             | blank_scroll_offsets
             | spell_input_offsets
+            | unidentified_name_offsets
             | pacing_offsets
             | checksum_offsets
         )

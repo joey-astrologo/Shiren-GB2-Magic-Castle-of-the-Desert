@@ -126,6 +126,11 @@ not the name-entry limit.
 - Mode 3 spell input has a four-byte buffer; mode 4 player input has six visible
   characters; mode 1 Blank Scroll input has a separately guarded 11-character maximum and
   history-filtered matcher.
+- Mode 0 unidentified-item free labels remain seven characters. A `FILL IN` canonical
+  recall uses a separate 14-cell presentation field because its native slot stores a root
+  token and the ordinary item-name renderer expands the complete translated root. Those
+  14 cells render from the original seven-cell horizontal origin instead of shifting left. Every
+  active group-12 root is build-validated against that 14-cell limit.
 
 ## Acceptance policy
 

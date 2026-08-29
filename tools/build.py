@@ -25,6 +25,7 @@ import runtime_widths
 import spell_input
 import stairs_menu
 import translations as translation_file
+import unidentified_names
 
 
 # Group 15 contains all synthesis-rune descriptions. The item-detail
@@ -231,6 +232,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = name6.install(output)
     output = blank_scroll.install(output)
     output = spell_input.install(output)
+    output = unidentified_names.install(output)
     layout.validate_overrides(
         output, overrides, runtime_contract=runtime_contract
     )
@@ -276,6 +278,24 @@ def _validate_blank_scroll_catalog(extracted, translated):
     blank_scroll.validate_root_catalog(roots)
 
 
+def _validate_unidentified_name_catalog(extracted, translated):
+    by_reference = {
+        (reference.group, reference.index): record
+        for record in extracted["records"]
+        for reference in record.references
+    }
+    roots = {}
+    for index in range(unidentified_names.ROOT_ENTRIES):
+        record = by_reference[(unidentified_names.ROOT_GROUP, index)]
+        value = translated.get((record.bank, record.address))
+        if value is None:
+            raise unidentified_names.UnidentifiedNameError(
+                "item root %d is not translated" % index
+            )
+        roots[index] = value.text
+    unidentified_names.validate_root_catalog(roots)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("rom", help="original Shiren GB2 Japanese ROM")
@@ -307,6 +327,7 @@ def main(argv=None):
             source, overrides, runtime_contract=width_analysis.contract
         )
         _validate_blank_scroll_catalog(extracted, translated)
+        _validate_unidentified_name_catalog(extracted, translated)
     except (
         OSError,
         allocate.AllocationError,
@@ -321,6 +342,7 @@ def main(argv=None):
         name6.Name6Error,
         runtime_widths.RuntimeWidthError,
         spell_input.SpellInputError,
+        unidentified_names.UnidentifiedNameError,
         stairs_menu.StairsMenuError,
         translation_file.TranslationError,
     ) as exc:

@@ -98,17 +98,29 @@ available. The action cursor moves independently.
 **Rule:** identify the tile's native role and navigation state before patching a visual
 artifact.
 
-## Mode 3, mode 4, and Blank Scroll are separate
+## Every graphical input mode is separate
 
 **Tempting assumption:** one graphical input layout/controller patch can localize every text
 entry screen.
 
 **Failure risk:** mode 3 has a hard four-byte spell contract, mode 4 needs six-character
-player names, and mode 1 Blank Scroll needs its own 11-character full-name field plus a
-hyphen. A shared patch can silently change another editor.
+player names, mode 1 Blank Scroll needs its own 11-character full-name field plus a hyphen,
+and mode 0 unidentified-item naming needs a seven-character free-name field plus its native
+`FILL IN` history node. Reusing the reduced player-name graph disconnected that mode-0
+node even though the screen still opened. Raising mode 0's native maximum directly is also
+unsafe: its legacy `$C18D` recall copy runs into adjacent live input state. The safe route
+cycles the root ID under the seven-cell native contract, then redraws the translated name
+in a separate 14-cell presentation field while retaining the native seven-cell horizontal
+origin. Letting the expanded capacity drive native centering shifts every recalled name
+left. That recalled name is also a distinct state:
+typing or `DEL` must atomically rebuild the seven-cell field, redraw once, and restore the
+native tail. Treating it as an editable 14-cell free label permits invisible appends,
+off-screen cursors, and a trapped delete/confirmation path.
 
-**Rule:** generate and test each input mode independently. The mode-specific installers
-explicitly prove the other maximums and source paths remain unchanged.
+**Rule:** generate and test each input mode independently. Freeze maximums, maps, connected
+navigation, history/control reachability, confirmation, return paths, presentation-only
+extensions, canonical-preview-to-free-entry transitions, and any persistent encoding
+specific to that consumer.
 
 ## The save summary name is dynamic
 
