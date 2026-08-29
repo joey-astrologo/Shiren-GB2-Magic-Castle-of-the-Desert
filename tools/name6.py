@@ -56,6 +56,48 @@ DIARY_SIZE = 0x6A
 DIARY_SUFFIX_OFFSETS = (0x66, 0x67)
 DIARY_MARKER_OFFSETS = (0x68, 0x69)
 
+# Demo playback does not create a new diary from the localized default-name
+# routine.  Instead, the engine copies one of fourteen complete, embedded
+# 0x6A-byte diary snapshots into the ordinary $C23C record.  Localize those
+# snapshots using the same prefix/suffix/marker contract as live saves.
+REPLAY_POINTER_BANK = 11
+REPLAY_POINTER_ADDRESS = 0x5FB3
+REPLAY_POINTER_COUNT = 14
+REPLAY_POINTER_ENTRY_SIZE = 3
+REPLAY_POINTER_BYTES = bytes.fromhex(
+    "0040D20060D20040D30060D30040D00060D00040D10060D1"
+    "0040D40060D40040D50060D50040D60060D6"
+)
+REPLAY_NAME_OFFSET = 0x16
+REPLAY_NAME_FIELD_SIZE = 5
+REPLAY_ORIGINAL_NAME_FIELD = bytes.fromhex("8BA9ADFF00")  # シレン + tail
+REPLAY_ORIGINAL_TAIL = bytes(4)
+REPLAY_RECORD_SHA1S = (
+    "aec0b59d8635f35c498e3418b448b0631d1e723a",
+    "6d0abc13936f603fd5cd5cadd9f517c573a27b0f",
+    "6d0abc13936f603fd5cd5cadd9f517c573a27b0f",
+    "be079aed2c0aa07013cbbaff73459e8ca91cddf9",
+    "b231366f41208c8cf613bdbd66d4473a0fe7593c",
+    "fd655da66d814ddbcc3c2f55251c18808aef3980",
+    "76341660e3a21a0968a3bc92de154c5a892a5693",
+    "1fa575f20972f754924d202a677a888117d63420",
+    "971eed66b04f58726009ba4c3aed8743d9843203",
+    "68090e81179017d1abe05a76c4d206fc4d86b7f6",
+    "3ef50edae033300af0933b396607f2142790527c",
+    "ec8e27a4b4138328b701445853f25fe9eb2b2cc3",
+    "f5320bd18050a3c50acbdfc5516d76a70b4d2ec1",
+    "fc9d6da415f86b1cf43deb8860a070addf51c05c",
+)
+REPLAY_NON_SECRETS_EVENTS = (0, 3)
+REPLAY_TITLE_OBSERVED_EVENTS = (0, 1)
+REPLAY_SECRETS_EVENTS = (4, 13)
+REPLAY_TITLE_SELECTOR = (5, 0x40E6)
+REPLAY_TITLE_SELECTOR_BYTES = bytes.fromhex("21E9C02AE60147CD2F1D")
+REPLAY_SECRETS_SELECTOR = (16, 0x796B)
+REPLAY_SECRETS_SELECTOR_BYTES = bytes.fromhex(
+    "47C5CD2546C13E048047CD2F1D"
+)
+
 RANKING_SRAM_BANK = 3
 RANKING_SRAM_HEADER = 0xBCD8
 RANKING_SRAM_SUFFIXES = 0xBCDC
@@ -305,6 +347,123 @@ def default_name_bytes():
     return raw
 
 
+def replay_records(rom, verify_original=True):
+    """Return the fourteen event-ID-indexed embedded diary snapshots.
+
+    The native replay dispatcher indexes a three-byte ``address, bank`` table
+    directly with the event ID.  Guard both that ordering and every complete
+    diary record so a ROM revision cannot silently redirect this patch.
+    """
+    table_at = _offset(REPLAY_POINTER_BANK, REPLAY_POINTER_ADDRESS)
+    raw = bytes(
+        rom[
+            table_at:
+            table_at + REPLAY_POINTER_COUNT * REPLAY_POINTER_ENTRY_SIZE
+        ]
+    )
+    if raw != REPLAY_POINTER_BYTES:
+        raise Name6Error(
+            "replay diary pointer table at %s changed"
+            % extract.location(REPLAY_POINTER_BANK, REPLAY_POINTER_ADDRESS)
+        )
+
+    if verify_original:
+        for label, (bank, address), expected in (
+            (
+                "title replay selector",
+                REPLAY_TITLE_SELECTOR,
+                REPLAY_TITLE_SELECTOR_BYTES,
+            ),
+            (
+                "Secrets replay selector",
+                REPLAY_SECRETS_SELECTOR,
+                REPLAY_SECRETS_SELECTOR_BYTES,
+            ),
+        ):
+            at = _offset(bank, address)
+            actual = bytes(rom[at:at + len(expected)])
+            if actual != expected:
+                raise Name6Error(
+                    "%s at %s changed"
+                    % (label, extract.location(bank, address))
+                )
+
+    records = []
+    for event_id in range(REPLAY_POINTER_COUNT):
+        entry = raw[
+            event_id * REPLAY_POINTER_ENTRY_SIZE:
+            (event_id + 1) * REPLAY_POINTER_ENTRY_SIZE
+        ]
+        address = entry[0] | (entry[1] << 8)
+        bank = entry[2]
+        at = _offset(bank, address)
+        record = bytes(rom[at:at + DIARY_SIZE])
+        if len(record) != DIARY_SIZE:
+            raise Name6Error(
+                "replay event %d record at %s is truncated"
+                % (event_id, extract.location(bank, address))
+            )
+        if verify_original:
+            actual = sha1(record).hexdigest()
+            expected = REPLAY_RECORD_SHA1S[event_id]
+            if actual != expected:
+                raise Name6Error(
+                    "replay event %d record at %s SHA-1 %s, expected %s"
+                    % (
+                        event_id,
+                        extract.location(bank, address),
+                        actual,
+                        expected,
+                    )
+                )
+            if (
+                record[
+                    REPLAY_NAME_OFFSET:
+                    REPLAY_NAME_OFFSET + REPLAY_NAME_FIELD_SIZE
+                ]
+                != REPLAY_ORIGINAL_NAME_FIELD
+                or record[DIARY_SUFFIX_OFFSETS[0]:DIARY_SIZE]
+                != REPLAY_ORIGINAL_TAIL
+            ):
+                raise Name6Error(
+                    "replay event %d name storage at %s changed"
+                    % (event_id, extract.location(bank, address))
+                )
+        records.append(
+            {
+                "event_id": event_id,
+                "bank": bank,
+                "address": address,
+                "offset": at,
+                "sha1": REPLAY_RECORD_SHA1S[event_id],
+            }
+        )
+    return tuple(records)
+
+
+def localized_replay_name_parts():
+    """Return the native field and diary extension for embedded replays."""
+    raw = default_name_bytes()
+    return raw[:4] + b"\xFF", raw[4:6] + DIARY_MARKER
+
+
+def install_replay_names(rom, verify_original=True):
+    """Install ``Shiren`` in every embedded demo/Secrets diary snapshot."""
+    out = bytearray(rom)
+    native, tail = localized_replay_name_parts()
+    for record in replay_records(out, verify_original=verify_original):
+        at = record["offset"]
+        out[
+            at + REPLAY_NAME_OFFSET:
+            at + REPLAY_NAME_OFFSET + REPLAY_NAME_FIELD_SIZE
+        ] = native
+        out[
+            at + DIARY_SUFFIX_OFFSETS[0]:
+            at + DIARY_MARKER_OFFSETS[-1] + 1
+        ] = tail
+    return bytes(out)
+
+
 def keyboard_glyph_bytes(start, end):
     """Return approved glyphs in the raw keyboard's color-0/3 2bpp format."""
     approved = english_font.load_approved()
@@ -530,7 +689,27 @@ def owned_ranges():
         )
     )
     navigation_at = _offset(NAVIGATION_BANK, NAVIGATION_ADDRESS)
-    return patches + (
+    replay_ranges = []
+    for event_id in range(REPLAY_POINTER_COUNT):
+        entry = REPLAY_POINTER_BYTES[
+            event_id * REPLAY_POINTER_ENTRY_SIZE:
+            (event_id + 1) * REPLAY_POINTER_ENTRY_SIZE
+        ]
+        address = entry[0] | (entry[1] << 8)
+        at = _offset(entry[2], address)
+        replay_ranges.extend(
+            (
+                (
+                    at + REPLAY_NAME_OFFSET,
+                    at + REPLAY_NAME_OFFSET + REPLAY_NAME_FIELD_SIZE,
+                ),
+                (
+                    at + DIARY_SUFFIX_OFFSETS[0],
+                    at + DIARY_MARKER_OFFSETS[-1] + 1,
+                ),
+            )
+        )
+    return patches + tuple(replay_ranges) + (
         (navigation_at, navigation_at + NAVIGATION_SIZE),
         (
             _runtime_offset(RUNTIME_ADDRESS),
@@ -541,7 +720,7 @@ def owned_ranges():
 
 def install(rom, verify_original=True, checksums=True):
     """Return ``rom`` with six-character names and ranking suffixes installed."""
-    out = bytearray(rom)
+    out = bytearray(install_replay_names(rom, verify_original=verify_original))
     for name, bank, address, original, target in ROUTINE_PATCHES:
         at = _offset(bank, address)
         if verify_original and bytes(out[at:at + len(original)]) != original:
@@ -589,6 +768,7 @@ def summary(rom):
         keyboard_glyph_bytes(GLYPH_LOW_START, GLYPH_LOW_END)
         + keyboard_glyph_bytes(GLYPH_HIGH_START, GLYPH_HIGH_END)
     )
+    replays = replay_records(rom)
     return {
         "maximum_visible_characters": MAX_VISIBLE_CHARACTERS,
         "default_name": DEFAULT_NAME,
@@ -606,6 +786,31 @@ def summary(rom):
             "suffix_offsets": list(DIARY_SUFFIX_OFFSETS),
             "marker_offsets": list(DIARY_MARKER_OFFSETS),
             "old_save_fallback": "marker absent: render legacy prefix only",
+        },
+        "embedded_replays": {
+            "pointer_table": extract.location(
+                REPLAY_POINTER_BANK, REPLAY_POINTER_ADDRESS
+            ),
+            "events": REPLAY_POINTER_COUNT,
+            "snapshot_bytes": DIARY_SIZE,
+            "name_field_offset": REPLAY_NAME_OFFSET,
+            "name_field_bytes": REPLAY_NAME_FIELD_SIZE,
+            "non_secrets_event_range": list(REPLAY_NON_SECRETS_EVENTS),
+            "title_observed_event_range": list(REPLAY_TITLE_OBSERVED_EVENTS),
+            "secrets_event_range": list(REPLAY_SECRETS_EVENTS),
+            "localized_name": DEFAULT_NAME,
+            "title_selector": extract.location(*REPLAY_TITLE_SELECTOR),
+            "secrets_selector": extract.location(*REPLAY_SECRETS_SELECTOR),
+            "records": [
+                {
+                    "event_id": record["event_id"],
+                    "location": extract.location(
+                        record["bank"], record["address"]
+                    ),
+                    "sha1": record["sha1"],
+                }
+                for record in replays
+            ],
         },
         "rankings": {
             "native_record_bytes": 32,

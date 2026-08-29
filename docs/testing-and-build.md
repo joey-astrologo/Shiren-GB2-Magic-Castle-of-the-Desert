@@ -92,7 +92,7 @@ classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
 mechanism is reproducible.
 
-The current complete run is **363 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **365 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -101,6 +101,12 @@ with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
 Continue/Secrets/Reset/Recap cursor positions, the cursor OAM coordinates, and a
 cursor-masked framebuffer hash. This guards against input-editor navigation patches
 stealing a live menu graph or corrupting the submenu during Up/Down movement.
+
+`tests.test_name6` freezes the title and Secrets event selectors, the complete fourteen-row
+replay pointer table, and the SHA-1 of every original 106-byte embedded diary. It proves
+that installation changes only each snapshot's five-byte native name field and four-byte
+suffix/marker tail. A PyBoy-backed getter check then loads the patched title-family event 0
+and the first/last Secrets events 4 and 13 and requires the complete `Shiren` result.
 
 `tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live

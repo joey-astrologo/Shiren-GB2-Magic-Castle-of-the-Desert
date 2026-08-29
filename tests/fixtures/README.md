@@ -14,7 +14,7 @@ Fixture families include:
 | Translation workspace | `english_overlays.json`, `translation_lint.json`, `translation_build.json` |
 | Runtime layout | `text_layout.json`, `runtime_terms.json`, `runtime_widths.json`, `positioned_surfaces.json` |
 | Dialogue and messages | `prose_scenes.json`, `prose_wrap.json`, `item_message_wrap.json`, `combat_messages.json` |
-| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json`; live mode-0 and Adventure navigation contracts |
+| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json`; all fourteen embedded replay diaries plus live mode-0 and Adventure navigation contracts |
 | Proof-of-concept route | `poc_dungeon1.json`, `prose_opening.json` |
 
 ROM integration tests skip when the clean source ROM is absent or has the wrong SHA-1.

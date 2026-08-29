@@ -63,6 +63,7 @@ text growth.
 | 11 | `$5639-$5654` | Ranking-name load | `name6.py` only |
 | 11 | `$56E2-$56FB` | Ranking-name renderer | `name6.py` only |
 | 11 | `$5F1C-$5F2E` | Ranking-name write | `name6.py` only |
+| 11 | `$5FB3-$5FDC` | Fourteen-entry replay diary pointer table | Preserved byte-exact and guarded by `name6.py`; event IDs 0-3 are non-Secrets demos and 4-13 are Secrets |
 | 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
@@ -92,6 +93,7 @@ text growth.
 | 122 | `$5EF5-$5EFC` | Blank Scroll candidate-comparison resolver hook | `blank_scroll.py` only |
 | 122 | `$6FAD-$6FAF` | Gitan numeric-conversion call redirect | `item_formatting.py` only |
 | 122 | `$76C5-$76CB` | Gitan separator wrapper after native code ends at `$76C4` | Exclusive verified cave for `item_formatting.py`; clean tail `$76C5-$7FFF` is zero-filled, but only these seven bytes are owned |
+| 208-214 | `$4016-$401A`, `$4066-$4069`, `$6016-$601A`, `$6066-$6069` | Name field and six-character tail/marker in fourteen embedded 106-byte replay diaries | `name6.py` only; all other snapshot bytes remain byte-exact |
 | 192-205 | full banks | Original script records and pointer tables | Preserved as source evidence; never use as free space |
 | 206 | `$4000-$6A57`, `$6A80-$7BFF` | Prefixed 8x10/16x10 glyph slices | Preserve; `font.py` verifies the clean source digest |
 | 206 | `$6A58-$6A7F` | `F2 1E` cracked-Bracelet composite glyph | `item_status.py` replaces only this 40-byte bitmap with `(Cr)`; native width bytes `0F 06` remain unchanged |

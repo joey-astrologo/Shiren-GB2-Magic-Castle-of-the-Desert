@@ -61,6 +61,66 @@ class Name6InstallerTests(unittest.TestCase):
         )
         self.assertTrue(measured["keyboard"]["shared_mode3_source_unchanged"])
 
+    def test_all_embedded_demo_and_secrets_diaries_use_full_english_name(self):
+        measured = name6.summary(self.rom)["embedded_replays"]
+        self.assertEqual(14, measured["events"])
+        self.assertEqual([0, 3], measured["non_secrets_event_range"])
+        self.assertEqual([0, 1], measured["title_observed_event_range"])
+        self.assertEqual([4, 13], measured["secrets_event_range"])
+        self.assertEqual("5:$40E6", measured["title_selector"])
+        self.assertEqual("16:$796B", measured["secrets_selector"])
+
+        native, tail = name6.localized_replay_name_parts()
+        self.assertEqual(english.encode("Shir") + b"\xFF", native)
+        self.assertEqual(english.encode("en") + name6.DIARY_MARKER, tail)
+        for record in name6.replay_records(self.rom):
+            at = record["offset"]
+            with self.subTest(event_id=record["event_id"]):
+                self.assertEqual(
+                    native,
+                    self.output[
+                        at + name6.REPLAY_NAME_OFFSET:
+                        at
+                        + name6.REPLAY_NAME_OFFSET
+                        + name6.REPLAY_NAME_FIELD_SIZE
+                    ],
+                )
+                self.assertEqual(
+                    tail,
+                    self.output[
+                        at + name6.DIARY_SUFFIX_OFFSETS[0]:
+                        at + name6.DIARY_MARKER_OFFSETS[-1] + 1
+                    ],
+                )
+                owned = set(
+                    range(
+                        name6.REPLAY_NAME_OFFSET,
+                        name6.REPLAY_NAME_OFFSET
+                        + name6.REPLAY_NAME_FIELD_SIZE,
+                    )
+                ) | set(
+                    range(
+                        name6.DIARY_SUFFIX_OFFSETS[0],
+                        name6.DIARY_MARKER_OFFSETS[-1] + 1,
+                    )
+                )
+                self.assertEqual(
+                    bytes(
+                        value
+                        for offset, value in enumerate(
+                            self.rom[at:at + name6.DIARY_SIZE]
+                        )
+                        if offset not in owned
+                    ),
+                    bytes(
+                        value
+                        for offset, value in enumerate(
+                            self.output[at:at + name6.DIARY_SIZE]
+                        )
+                        if offset not in owned
+                    ),
+                )
+
     def test_character_plan_matches_approved_spaced_mockup(self):
         self.assertEqual(26, len(name6.UPPERCASE_CHARACTERS))
         self.assertEqual(26, len(name6.LOWERCASE_CHARACTERS))
@@ -228,6 +288,12 @@ class Name6InstallerTests(unittest.TestCase):
         ] + [
             (name6.NAVIGATION_BANK, name6.NAVIGATION_ADDRESS),
             (name6.RUNTIME_BANK, name6.RUNTIME_ADDRESS),
+            (name6.REPLAY_POINTER_BANK, name6.REPLAY_POINTER_ADDRESS),
+            name6.REPLAY_TITLE_SELECTOR,
+            name6.REPLAY_SECRETS_SELECTOR,
+        ] + [
+            (record["bank"], record["address"])
+            for record in name6.replay_records(self.rom)
         ]
         for bank, address in cases:
             damaged = bytearray(self.rom)
@@ -275,9 +341,8 @@ class LiveName6Tests(unittest.TestCase):
         cls.ram = mesen_state.cart_ram(state_path)
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "name6.gbc"
-        cls.localized_path.write_bytes(
-            name6.install(english_font.install(cls.rom))
-        )
+        cls.localized_rom = name6.install(english_font.install(cls.rom))
+        cls.localized_path.write_bytes(cls.localized_rom)
 
     @classmethod
     def tearDownClass(cls):
@@ -402,6 +467,28 @@ class LiveName6Tests(unittest.TestCase):
                 english.encode("Shiren") + b"\xFF",
                 bytes(pyboy.memory[0xC620:0xC627]),
             )
+        finally:
+            pyboy.stop(save=False)
+
+    def test_title_family_and_first_last_secrets_snapshots_render_shiren(self):
+        pyboy = self._pyboy()
+        try:
+            records = name6.replay_records(self.rom)
+            for event_id in (0, 4, 13):
+                record = records[event_id]
+                at = record["offset"]
+                for offset, value in enumerate(
+                    self.localized_rom[at:at + name6.DIARY_SIZE]
+                ):
+                    pyboy.memory[0xC23C + offset] = value
+                self._set_de(pyboy, 0xC620)
+                self._invoke(pyboy, name6.RUNTIME_BANK, name6.GET_ADDRESS)
+                with self.subTest(event_id=event_id):
+                    self.assertEqual(
+                        english.encode("Shiren") + b"\xFF",
+                        bytes(pyboy.memory[0xC620:0xC627]),
+                    )
+                    self.assertEqual(6, pyboy.register_file.C)
         finally:
             pyboy.stop(save=False)
 

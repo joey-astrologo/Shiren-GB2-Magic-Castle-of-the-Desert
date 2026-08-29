@@ -36,8 +36,9 @@ edited through the ordinary catalog workflow.
 - Far-pointer allocation that separates ROM storage from visible line constraints.
 - Localized menus, Help/Secrets, Monster Notebook, item information, gameplay messages,
   combat text, and story/event text.
-- Six-character player names, default name `Shiren`, save compatibility metadata, and
-  expanded ranking-result name storage.
+- Six-character player names, default name `Shiren`, save compatibility metadata,
+  expanded ranking-result name storage, and localized names in all fourteen embedded
+  title/demo and Wanderer's Secrets replay diaries.
 - Four-character A-Z/0-9 Big Moai spell entry, with all 100 runtime codes and story
   clues synchronized.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
@@ -64,7 +65,7 @@ edited through the ordinary catalog workflow.
   transitions, breaks the Pot, asserts the released critical-hit rune, and leaves the seal
   description available for manual visual review.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 363-test fixture suite covering translation, layout, save data, menu/input
+- A passing 365-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -85,5 +86,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`a33d0b4115730bf41a76b18bed3f409a26197b7a`; always rebuild and verify locally rather
+`9a12855adbebaf6864803d768823d99787dbd77f`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

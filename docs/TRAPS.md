@@ -148,6 +148,23 @@ default breaks Rename and every future English name.
 
 **Rule:** translate only the `Name:` label and retain the runtime name producer.
 
+## Replay characters can come from embedded diary snapshots
+
+**Tempting assumption:** once the create-name default is `Shiren`, every automated demo
+and Secrets replay will inherit it.
+
+**Failure:** the replay dispatcher bypasses the create-name routine. Event IDs 0-13 copy
+complete 106-byte diary snapshots from banks 208-214 into the ordinary loaded diary, and
+each clean snapshot contains the Japanese name `シレン`. Patching only four visible bytes
+would also lose the final two English characters; omitting the native terminator risks a
+direct consumer reading into the next field.
+
+**Rule:** treat embedded replay saves as persistent-format fixtures. Preserve their size
+and every unrelated byte, write `Shir` plus a native terminator in the five-byte name field,
+and write `en A5 5A` in the proven diary tail. Freeze the event pointer order, title and
+Secrets selectors, every source-record hash, and live getter results from both replay
+families.
+
 ## A Mesen machine state is not a PyBoy state
 
 **Tempting assumption:** load the `.mss` directly in PyBoy or treat the whole container as an

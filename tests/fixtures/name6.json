@@ -15,6 +15,100 @@
       103
     ]
   },
+  "embedded_replays": {
+    "events": 14,
+    "localized_name": "Shiren",
+    "name_field_bytes": 5,
+    "name_field_offset": 22,
+    "non_secrets_event_range": [
+      0,
+      3
+    ],
+    "pointer_table": "11:$5FB3",
+    "records": [
+      {
+        "event_id": 0,
+        "location": "210:$4000",
+        "sha1": "aec0b59d8635f35c498e3418b448b0631d1e723a"
+      },
+      {
+        "event_id": 1,
+        "location": "210:$6000",
+        "sha1": "6d0abc13936f603fd5cd5cadd9f517c573a27b0f"
+      },
+      {
+        "event_id": 2,
+        "location": "211:$4000",
+        "sha1": "6d0abc13936f603fd5cd5cadd9f517c573a27b0f"
+      },
+      {
+        "event_id": 3,
+        "location": "211:$6000",
+        "sha1": "be079aed2c0aa07013cbbaff73459e8ca91cddf9"
+      },
+      {
+        "event_id": 4,
+        "location": "208:$4000",
+        "sha1": "b231366f41208c8cf613bdbd66d4473a0fe7593c"
+      },
+      {
+        "event_id": 5,
+        "location": "208:$6000",
+        "sha1": "fd655da66d814ddbcc3c2f55251c18808aef3980"
+      },
+      {
+        "event_id": 6,
+        "location": "209:$4000",
+        "sha1": "76341660e3a21a0968a3bc92de154c5a892a5693"
+      },
+      {
+        "event_id": 7,
+        "location": "209:$6000",
+        "sha1": "1fa575f20972f754924d202a677a888117d63420"
+      },
+      {
+        "event_id": 8,
+        "location": "212:$4000",
+        "sha1": "971eed66b04f58726009ba4c3aed8743d9843203"
+      },
+      {
+        "event_id": 9,
+        "location": "212:$6000",
+        "sha1": "68090e81179017d1abe05a76c4d206fc4d86b7f6"
+      },
+      {
+        "event_id": 10,
+        "location": "213:$4000",
+        "sha1": "3ef50edae033300af0933b396607f2142790527c"
+      },
+      {
+        "event_id": 11,
+        "location": "213:$6000",
+        "sha1": "ec8e27a4b4138328b701445853f25fe9eb2b2cc3"
+      },
+      {
+        "event_id": 12,
+        "location": "214:$4000",
+        "sha1": "f5320bd18050a3c50acbdfc5516d76a70b4d2ec1"
+      },
+      {
+        "event_id": 13,
+        "location": "214:$6000",
+        "sha1": "fc9d6da415f86b1cf43deb8860a070addf51c05c"
+      }
+    ],
+    "secrets_event_range": [
+      4,
+      13
+    ],
+    "secrets_selector": "16:$796B",
+    "snapshot_bytes": 106,
+    "title_observed_event_range": [
+      0,
+      1
+    ],
+    "title_selector": "5:$40E6"
+  },
   "keyboard": {
     "blank_unreachable_nodes": [
       62,

@@ -61,6 +61,14 @@ Ranking-result suffix storage uses SRAM bank 3: header `$BCD8-$BCDB` contains `N
 the per-record suffix table occupies `$BCDC-$BECF`. The tests cover new names, existing
 Japanese saves, save/resume, and ranking-name preservation.
 
+Demo playback is a separate name source: event IDs 0-13 copy one of fourteen complete
+106-byte diary snapshots from banks 208-214 into the ordinary loaded record. Events 0-3
+are the non-Secrets demo family (the title attract route selects 0 or 1), while events
+4-13 are the ten Wanderer's Secrets. `name6.py` patches each snapshot to the same
+`Shir` + `en` + `A5 5A` contract and freezes the dispatcher table, selector code, and all
+fourteen original record hashes. Ordinary Help/Hint prose pages do not use these snapshots;
+only a launched replay does.
+
 ## Big Moai spell input
 
 The native spell comparison contract is exactly four bytes. Mode 3 is localized as a compact

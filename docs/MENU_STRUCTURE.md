@@ -121,6 +121,12 @@ there is a graph-ownership failure, not a font, label-width, or save-file proble
 The save summary must display the persisted player name dynamically. Never hardcode
 `Shiren` into the summary merely because it is the default name.
 
+Title/demo and Secrets playback do not begin with that live diary. Their replay dispatcher
+copies one of fourteen embedded 106-byte diary snapshots into the same WRAM record. Events
+0-3 are the non-Secrets demo family and events 4-13 are the ten Secrets rows. Those embedded
+records require the same six-character prefix/suffix marker as a live save; changing only
+the create-name default cannot localize them.
+
 ## Adventure History, rankings, and Grade
 
 Adventure History is a paged 40-row domain selected by progression flags. Rankings use a
@@ -159,7 +165,7 @@ history node.
 | Positioned call graph and budgets | `surfaces.py`, `layout.py` | `test_surfaces.py`, `test_layout.py` |
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
-| Six-character names, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
+| Six-character names, embedded replay diaries, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
 | Spell input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
 | Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_mesen_unidentified_item.py` |
