@@ -39,7 +39,8 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete 311-test suite with the matching source ROM and PyBoy available.
+6. Run the complete discovered suite (351 tests at the current snapshot) with the matching
+   source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
 
@@ -77,6 +78,9 @@ Examples already in the suite include:
 - status-menu overlay ownership without mutating the shared Japanese template;
 - six-character diary and ranking-name persistence;
 - the four-character spell keyboard, navigation graph, and synchronized spell tables;
+- Adventure -> save-file navigation retaining native type `$13`, with all four cursor
+  positions and a stable cursor-masked framebuffer;
+- mode-0 unidentified naming using private type `$F4` without stealing a native menu graph;
 - generated prose ownership and conflicts between editor, draft, and catalogs.
 
 Tracked JSON fixtures belong under `tests/fixtures/`. Prefer hashes, counts, geometry,

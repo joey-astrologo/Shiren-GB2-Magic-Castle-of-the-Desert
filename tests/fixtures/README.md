@@ -14,7 +14,7 @@ Fixture families include:
 | Translation workspace | `english_overlays.json`, `translation_lint.json`, `translation_build.json` |
 | Runtime layout | `text_layout.json`, `runtime_terms.json`, `runtime_widths.json`, `positioned_surfaces.json` |
 | Dialogue and messages | `prose_scenes.json`, `prose_wrap.json`, `item_message_wrap.json`, `combat_messages.json` |
-| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json` |
+| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json`; live mode-0 and Adventure navigation contracts |
 | Proof-of-concept route | `poc_dungeon1.json`, `prose_opening.json` |
 
 ROM integration tests skip when the clean source ROM is absent or has the wrong SHA-1.
@@ -34,6 +34,12 @@ state for the Blank Scroll restart regression. `tests.test_mesen_blank_scroll` v
 SHA-1, confirms `Windblade` through Mesen, and requires conversion without a reset or
 inventory damage. When the user-supplied ignored `blank-scroll.srm` sidecar is present, the
 test also verifies its SHA-1 and loads it; the immediate regression does not depend on it.
+
+`SaveStates/unidentified-item-naming.mss` freezes the Rabbit Scroll Name / `FILL IN`
+editor route. `tests.test_unidentified_names` verifies its SHA-1, the private type `$F4`
+navigation graph, canonical preview/free-entry transitions, and return to Items. The
+separate Adventure submenu regression reuses `Mamel.mss` so the same patch must also prove
+that native type `$13` still drives Continue/Secrets/Reset/Recap.
 
 When intentionally updating a fixture:
 

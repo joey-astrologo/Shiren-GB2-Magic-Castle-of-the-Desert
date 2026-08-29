@@ -112,6 +112,12 @@ by this and other ordinary lists; it is not spare input-editor storage. The mode
 unidentified-item editor instead owns private type `$F4`, resolved through unreachable
 name-entry node 64 at `16:$615C` to its WRAM `$C800` graph.
 
+The exact Adventure records are nine seven-byte nodes at `16:$6625-$6663`. Each record is
+Down, Up, Left, Right, x, y, and cursor metadata. The four-row submenu uses nodes 0-3 at
+x `$36` and y `$17,$22,$2D,$38`; `$C151=3` bounds movement. The resolved coordinates are
+published through `$FFB2-$FFB3` before the cursor sprite is emitted. Reading `$FF,$FF`
+there is a graph-ownership failure, not a font, label-width, or save-file problem.
+
 The save summary must display the persisted player name dynamically. Never hardcode
 `Shiren` into the summary merely because it is the default name.
 

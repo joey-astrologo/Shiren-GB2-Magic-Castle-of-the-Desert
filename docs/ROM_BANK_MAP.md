@@ -68,9 +68,12 @@ text growth.
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlays |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
+| 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
 | 16 | `$5F9A-$5F9B` | Native navigation type `$13` pointer to `$6625` | Preserve; shared nine-row list used by Adventure -> Continue/Secrets/Reset/Recap |
 | 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615D` are then overlaid by `unidentified_names.py` as private type `$F4` -> WRAM `$C800` |
+| 16 | `$615C-$615D` | Private mode-0 navigation pointer `$C800` | `unidentified_names.py` only; overlaps the proven-unreachable Down/Up pair of English name-entry node 64 |
 | 16 | `$64B9-$6624` | Mode-3 spell navigation graph | Replaced by `spell_input.py` |
+| 16 | `$6625-$6663` | Native nine-node vertical-list graph | Preserve; seven-byte records with fixed x `$36` and y `$17,$22,...,$6F` |
 | 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
 | 16 | `$6A33-$6A3A` | Mode-0 history-return screen redirect | `unidentified_names.py` only |
 | 16 | `$6A4C-$6A53` | Blank Scroll screen redirect | `blank_scroll.py` only |
@@ -157,6 +160,30 @@ Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall st
 through the translated root-name table, so names such as `Windblade` are not truncated and
 the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
+
+## Menu navigation runtime state
+
+These addresses are transient runtime state, not free WRAM. The generic bank-16 cursor
+machinery consumes seven-byte graph records in the order Down, Up, Left, Right, x, y, and
+cursor metadata.
+
+| Address | Meaning | Observed/owned contract |
+|:---|---|---|
+| `$C14E` | Navigation type | `$13` on Adventure -> Continue; `$F4` only inside the localized mode-0 item-name editor |
+| `$C14F` | Current node/selection | Adventure submenu visits `0,1,2,3` for Continue, Secrets, Reset, Recap |
+| `$C150` | Previously rendered node | Tracks `$C14F`; used to erase/redraw the cursor safely |
+| `$C151` | Maximum selectable index | `3` for the four-row Adventure submenu |
+| `$C152` | Graphical-input character position | Separate from menu selection; zero-based input cursor cell |
+| `$C153` | Graphical-input maximum | `7` for free unidentified labels and `14` only for canonical preview presentation |
+| `$C800-$CA36` | Mode-0 navigation scratch in fixed WRAM bank 0 | 81 records x 7 bytes (`$0237`); uploaded on screen entry and after native `FILL IN` cycling |
+| `$FFB2-$FFB3` | Resolved cursor x/y | Adventure row 0 is `$36,$17`; rows 1-3 use y `$22,$2D,$38` |
+| `$FE00-$FE03` | First OAM cursor sprite | Diagnostic output, not owned storage; Adventure rows produce OAM y/x `$1F/$3E`, `$2A/$3E`, `$35/$3E`, `$40/$3E` |
+
+The original regression replaced the type `$13` pointer with `$C800`. Outside the input
+editor that scratch held `$FF`, so `$FFB2-$FFB3` became `$FF,$FF`; the cursor sprite wrapped
+to OAM `$07,$07`, selection stopped advancing, and repeated movement could corrupt the
+screen. The production installer now leaves `16:$5F9A` byte-exact as `25 66` and writes
+`00 C8` only at the private `$F4` landing pair `16:$615C`.
 
 ## Safe allocation procedure
 

@@ -122,6 +122,23 @@ navigation, history/control reachability, confirmation, return paths, presentati
 extensions, canonical-preview-to-free-entry transitions, and any persistent encoding
 specific to that consumer.
 
+## An apparently unused navigation type may belong to an ordinary menu
+
+**Tempting assumption:** type `$13` in the bank-16 navigation pointer table is unused by
+graphical text entry, so its pointer at `16:$5F9A` can be redirected to a private WRAM
+keyboard graph.
+
+**Failure:** `$13` is the native nine-row vertical-list type at `16:$6625`. The title-screen
+Adventure submenu uses its first four nodes for Continue, Secrets, Reset, and Recap.
+Redirecting it to the unidentified-item editor's `$C800` scratch made the resolved cursor
+coordinates `$FF,$FF`, hid the cursor, prevented selection from advancing, and allowed
+repeated movement to corrupt the screen.
+
+**Rule:** determine pointer-table ownership from live consumers, not subsystem names.
+Preserve type `$13`. Mode 0 uses private type `$F4`, whose resolver landing pair is the
+Down/Up bytes of proven-unreachable English name-entry node 64 at `16:$615C`. Freeze both
+the private editor route and the displaced native-menu route.
+
 ## The save summary name is dynamic
 
 **Tempting assumption:** display `Name: Shiren` because `Shiren` is the localized default.

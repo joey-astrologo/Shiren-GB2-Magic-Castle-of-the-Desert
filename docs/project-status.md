@@ -53,7 +53,9 @@ edited through the ordinary catalog workflow.
   Continue/Secrets/Reset/Recap cursor route is replayed from the Mamel fixture and its
   cursor state, sprite positions, and stable framebuffer are frozen.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- Fixture-backed translation, layout, save-data, menu, and production-build tests.
+- A passing 351-test fixture suite covering translation, layout, save data, menu/input
+  routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
+  equivalence.
 
 ## Remaining project work
 

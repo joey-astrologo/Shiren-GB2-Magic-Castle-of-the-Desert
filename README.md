@@ -17,6 +17,8 @@ English Blank Scroll writer. The unidentified-item Name screen and its cycling `
 history recall are also localized, including a 14-character preview and full display of
 canonical names longer than the native seven-character custom-label field. Recalled names
 show no star padding and reset safely to ordinary free entry on typing or `DEL`.
+Its private navigation graph is isolated from the native Adventure submenu, whose
+Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
 Editorial review, full playthrough testing, and graphics localization remain active
 project work.
 
@@ -31,7 +33,7 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings, spells, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Graphics | **In progress** | Complete the graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **Extensive fixture suite** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **351-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -116,6 +118,7 @@ python3 -m unittest \
 
 # Graphical input: names, spells, Blank Scroll writing, and unidentified items
 python3 -m unittest \
+  tests.test_save_summary \
   tests.test_name6 \
   tests.test_spell_input \
   tests.test_blank_scroll \

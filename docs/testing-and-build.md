@@ -73,6 +73,7 @@ For a focused graphical-input check:
 
 ```sh
 python3 -m unittest \
+  tests.test_save_summary \
   tests.test_name6 \
   tests.test_spell_input \
   tests.test_blank_scroll \
@@ -87,6 +88,10 @@ unidentified-item free/history naming, runtime text domains, scene ownership, in
 classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
 mechanism is reproducible.
+
+The current complete run is **351 tests** with the matching ROM, PyBoy, and RGBDS
+available. Treat that number as a status snapshot; the required gate is always discovery
+of the complete `tests/` directory, not a hard-coded subset.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
 with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
