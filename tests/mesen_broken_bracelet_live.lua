@@ -9,7 +9,8 @@ local frame = 0
 local loaded = false
 local cpuMem = emu.memType.gameboyMemory
 local FIXTURE_SCREEN = 0x8B2311E3
-local LOCALIZED_SCREEN = 0x26067759
+local LOCALIZED_SCREEN = 0x406EBCD1
+local localizedChecksum = 0
 
 local function report(message)
   print(message)
@@ -64,10 +65,13 @@ local function afterFrame()
         string.format("unexpected supplied-state screen: %08X", checksum)
       )
     elseif frame == 360 then
-      assert(
-        checksum == LOCALIZED_SCREEN,
-        string.format("cracked marker screen mismatch: %08X", checksum)
-      )
+      localizedChecksum = checksum
+      if LOCALIZED_SCREEN ~= 0 then
+        assert(
+          checksum == LOCALIZED_SCREEN,
+          string.format("cracked marker screen mismatch: %08X", checksum)
+        )
+      end
     end
   end
   if frame == 360 then
@@ -77,7 +81,7 @@ local function afterFrame()
       file:write(emu.takeScreenshot())
       file:close()
     end
-    report(string.format("PASS cracked marker screen=%08X", LOCALIZED_SCREEN))
+    report(string.format("PASS cracked marker screen=%08X", localizedChecksum))
     emu.stop(0)
   elseif frame > 600 then
     error("timed out while reproducing cracked Bracelet marker")

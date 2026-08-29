@@ -83,7 +83,7 @@ class MesenUnidentifiedItemHelperTests(unittest.TestCase):
         )
         self.assertEqual(5, len(rows))
         expected = {
-            "passage_bracelet": ("Passage Bracelet", "bracelet"),
+            "passage_bracelet": ("Waterwalk Bracelet", "bracelet"),
             "herb": ("Herb", "grass"),
             "windblade_scroll": ("Windblade Scroll", "scroll"),
             "knockback_staff": ("Knockback Staff", "staff"),

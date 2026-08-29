@@ -109,16 +109,21 @@ class UnidentifiedNameInstallerTests(unittest.TestCase):
                 "fill_in_maximum": 14,
                 "longest": [
                     {
-                        "root_index": 94,
-                        "name": "Herb Reception",
-                        "characters": 14,
-                    }
+                        "root_index": 88,
+                        "name": "Narrow-escape",
+                        "characters": 13,
+                    },
+                    {
+                        "root_index": 112,
+                        "name": "Transmutation",
+                        "characters": 13,
+                    },
                 ],
             },
             unidentified_names.validate_root_catalog(self.roots),
         )
         damaged = dict(self.roots)
-        damaged[94] += "!"
+        damaged[88] += "!!"
         with self.assertRaises(unidentified_names.UnidentifiedNameError):
             unidentified_names.validate_root_catalog(damaged)
 

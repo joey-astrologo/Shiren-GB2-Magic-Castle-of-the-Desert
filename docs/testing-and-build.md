@@ -82,6 +82,7 @@ python3 -m unittest \
   tests.test_mesen_unidentified_item \
   tests.test_item_status \
   tests.test_item_formatting \
+  tests.test_item_terminology \
   tests.test_synthesis_lab
 ```
 
@@ -92,7 +93,12 @@ classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
 mechanism is reproducible.
 
-The current complete run is **365 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+`tests.test_item_terminology` freezes all 50 approved series-name corrections, all affected
+unidentified-item roots, every identified description-title/name pair, and the reviewed
+Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
+fixture also preserves its `<page><box>` reader wait.
+
+The current complete run is **371 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -122,9 +128,9 @@ x=144 item-list edge. Manual gallery instructions and the twenty expected rows a
 
 `tests.test_synthesis_lab` drives a real Synthesis Pot through both `Put In` operations
 from the same disposable state. It freezes all five intervening screens and asserts that
-the Cudgel becomes the contained base, the Axe donor is consumed, the sparse Pot sentinels
+the Club becomes the contained base, the Axe donor is consumed, the sparse Pot sentinels
 remain valid, and the native deferred-synthesis state is reached. It then throws and breaks
-the Pot and asserts that the released Cudgel carries weapon rune bit 10. The manual route
+the Pot and asserts that the released Club carries weapon rune bit 10. The manual route
 reviews the recovered weapon's seal description; see
 [ITEM_FORMATTING.md](ITEM_FORMATTING.md#synthesis-seal-manual-route).
 
@@ -160,8 +166,8 @@ the exact route and checklist. Do not sort or save the injected run.
 ### Synthesis Pot manual route
 
 `tools/mesen_spawn_synthesis_lab.lua` replaces the disposable Mamel inventory with a
-Synthesis Pot, a Cudgel base, and an Axe of the Minotaur donor. Use **Synthesis Pot > Put
-In > Cudgel**, repeat with the Axe, break the Pot against a wall, recover the Cudgel, and
+Synthesis Pot, a Club base, and an Axe of the Minotaur donor. Use **Synthesis Pot > Put
+In > Club**, repeat with the Axe, break the Pot against a wall, recover the Club, and
 inspect Info for `More frequent critical hits.` The exact route and native structure are
 documented in [ITEM_FORMATTING.md](ITEM_FORMATTING.md#synthesis-seal-manual-route). This
 helper deliberately erases the prior inventory; never run it against a save you intend to

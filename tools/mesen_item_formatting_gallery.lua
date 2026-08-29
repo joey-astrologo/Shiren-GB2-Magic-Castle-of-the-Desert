@@ -32,24 +32,24 @@ local workMem = emu.memType.gbWorkRam or emu.memType.gameboyWorkRam
 -- the first unused cell. Gitan and Meat use bytes 2..3.
 local GALLERY = {
   -- Page 1: name-row status markers and their supported combinations.
-  { "Normal",                "Cudgel",                    { 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
-  { "Equipped",              "<equip>Cudgel",             { 0x01, 0x01, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00 } },
-  { "Cursed",                "Cudgel<skull>",             { 0x01, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 } },
-  { "Blessed",               "Cudgel<bell>",              { 0x01, 0x01, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00 } },
-  { "Plated",                "Cudgel<plate>",             { 0x01, 0x01, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00 } },
-  { "Cursed + plated",       "Cudgel<skull><plate>",      { 0x01, 0x01, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00 } },
-  { "Blessed + plated",      "Cudgel<plate><bell>",       { 0x01, 0x01, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00 } },
+  { "Normal",                "Club",                    { 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
+  { "Equipped",              "<equip>Club",             { 0x01, 0x01, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00 } },
+  { "Cursed",                "Club<skull>",             { 0x01, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 } },
+  { "Blessed",               "Club<bell>",              { 0x01, 0x01, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00 } },
+  { "Plated",                "Club<plate>",             { 0x01, 0x01, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00 } },
+  { "Cursed + plated",       "Club<skull><plate>",      { 0x01, 0x01, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00 } },
+  { "Blessed + plated",      "Club<plate><bell>",       { 0x01, 0x01, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00 } },
   { "Cracked Bracelet",      "Strength Bracelet(Cr)",     { 0x48, 0x03, 0x00, 0x01, 0x00, 0x00, 0x10, 0x00 } },
-  { "One synthesis rune",    "Cudgel (alternate color)",  { 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00 } },
-  { "Equip + curse + plate", "<equip>Cudgel+99<skull><plate>", { 0x01, 0x01, 0x00, 0x63, 0x16, 0x00, 0x00, 0x00 } },
+  { "One synthesis rune",    "Club (alternate color)",  { 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00 } },
+  { "Equip + curse + plate", "<equip>Club+99<skull><plate>", { 0x01, 0x01, 0x00, 0x63, 0x16, 0x00, 0x00, 0x00 } },
 
   -- Page 2: numeric and dynamically composed item names.
-  { "Positive shield",       "Bronzeward+99",             { 0x23, 0x02, 0x00, 0x63, 0x00, 0x00, 0x00, 0x00 } },
+  { "Positive shield",       "Bronze Shield+99",             { 0x23, 0x02, 0x00, 0x63, 0x00, 0x00, 0x00, 0x00 } },
   { "Arrow quantity",        "99 Wooden Arrow",           { 0x5A, 0x04, 0x63, 0x00, 0x00, 0x00, 0x00, 0x00 } },
   { "Gitan amount",          "999 Gitan",                 { 0xC8, 0x0A, 0xE7, 0x03, 0x00, 0x00, 0x00, 0x00 } },
   { "Monster Meat",          "Mamel Meat",                { 0xC9, 0x0B, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00 } },
-  { "Positive weapon",       "Cudgel+99",                 { 0x01, 0x01, 0x00, 0x63, 0x00, 0x00, 0x00, 0x00 } },
-  { "Negative weapon",       "Cudgel-99",                 { 0x01, 0x01, 0x00, 0x9D, 0x00, 0x00, 0x00, 0x00 } },
+  { "Positive weapon",       "Club+99",                 { 0x01, 0x01, 0x00, 0x63, 0x00, 0x00, 0x00, 0x00 } },
+  { "Negative weapon",       "Club-99",                 { 0x01, 0x01, 0x00, 0x9D, 0x00, 0x00, 0x00, 0x00 } },
   { "Staff zero charges",    "Knockback Staff[0]",        { 0x9E, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
   { "Staff seven charges",   "Knockback Staff[7]",        { 0x9E, 0x08, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00 } },
   { "Empty Pot",             "Preservation Pot[0]",       { 0xB8, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
@@ -129,8 +129,9 @@ if fixturePath == nil or fixturePath == "" then
 else
   local frame = 0
   local loaded = false
-  local PAGE_1_SCREEN = 0xE177C336
-  local PAGE_2_SCREEN = 0x762B363F
+  local PAGE_1_SCREEN = 0xB9899EFF
+  local PAGE_2_SCREEN = 0xEA1E7AC7
+  local page1Checksum = 0
 
   local function loadFile(path)
     local file = assert(io.open(path, "rb"))
@@ -183,6 +184,7 @@ else
     if not loaded then return end
     if frame == 400 then
       local checksum = screenChecksum()
+      page1Checksum = checksum
       report(string.format("gallery page 1 screen=%08X", checksum))
       if PAGE_1_SCREEN ~= 0 then assert(checksum == PAGE_1_SCREEN, "page 1 screen changed") end
       saveScreenshot("GB2_ITEM_GALLERY_PAGE1_SCREENSHOT")
@@ -191,7 +193,7 @@ else
       report(string.format("gallery page 2 screen=%08X", checksum))
       if PAGE_2_SCREEN ~= 0 then assert(checksum == PAGE_2_SCREEN, "page 2 screen changed") end
       saveScreenshot("GB2_ITEM_GALLERY_PAGE2_SCREENSHOT")
-      report(string.format("PASS item-formatting-gallery page1=%08X page2=%08X", PAGE_1_SCREEN, PAGE_2_SCREEN))
+      report(string.format("PASS item-formatting-gallery page1=%08X page2=%08X", page1Checksum, checksum))
       emu.stop(0)
     elseif frame > 1000 then
       error("timed out while rendering the item-formatting gallery")

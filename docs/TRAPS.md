@@ -234,7 +234,7 @@ Axe of the Minotaur suitable for a Synthesis Pot test.
 
 **Failure:** the object is named and handled as an Axe, but direct WRAM injection bypasses
 the native item constructor that seeds inherent rune bits. The Pot accepts the Axe and
-consumes it, producing a convincing live route, yet the released Cudgel has no transferred
+consumes it, producing a convincing live route, yet the released Club has no transferred
 effect. Testing only the two insertion screens therefore gives a false pass.
 
 **Rule:** a synthetic equipment object must reproduce both its identity and initialized

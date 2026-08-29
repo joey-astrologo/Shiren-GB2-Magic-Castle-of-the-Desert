@@ -840,7 +840,7 @@ id	sections	english
 198:$43B4	story_and_event_dialogue	Gaibara: Nooo!<page><box>
 198:$43C3	story_and_event_dialogue	Gaibara: UNACCEPTABLE!!<page><box>
 198:$43D9	story_and_event_dialogue	Saruyama: M-Master!!<page><box>
-198:$43EB	story_and_event_dialogue	Gaibara: Ugh... I thought<br>it would be easy...<page><box>Gaibara: I let my guard down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are<br>you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you<br>suffered such a fate...<page><box>Saruyama: What kind<br>of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters<br>does not raise your<br>level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something<br>even more important...<page><box>Gaibara: This dungeon is<br>conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find<br><quoteOpen>Sealing Pots<quoteClose> inside.<page><box>Gaibara: Throw one at a<br>monster to seal it inside.<page><box>Gaibara: Ugh... Traps<br>are my specialty, but...<page><box>Gaibara: this dungeon<br>does not seem to suit me...<page><box>Saruyama: You do smash<br>every Pot you see, Master.<page><box>
+198:$43EB	story_and_event_dialogue	Gaibara: Ugh... I thought<br>it would be easy...<page><box>Gaibara: I let my guard down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are<br>you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you<br>suffered such a fate...<page><box>Saruyama: What kind<br>of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters<br>does not raise your<br>level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something<br>even more important...<page><box>Gaibara: This dungeon is<br>conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find<br><quoteOpen>Imprison Pots<quoteClose> inside.<page><box>Gaibara: Throw one at a<br>monster to seal it inside.<page><box>Gaibara: Ugh... Traps<br>are my specialty, but...<page><box>Gaibara: this dungeon<br>does not seem to suit me...<page><box>Saruyama: You do smash<br>every Pot you see, Master.<page><box>
 198:$45E5	story_and_event_dialogue	Gaibara: Silence!!
 198:$45F6	story_and_event_dialogue	Saruyama: Gah!!
 198:$4602	story_and_event_dialogue	Gaibara: <name>...<page><box>Gaibara: I beg you.<page><box>Gaibara: Will you retrieve the<br>Ultimate Clay in my stead?<page><box>
@@ -854,7 +854,7 @@ id	sections	english
 198:$4785	story_and_event_dialogue	Gaibara: Th-This is<br>the Ultimate Clay...<page><box>
 198:$47A1	story_and_event_dialogue	Gaibara: This luster...<br>This elasticity...<page><box>Gaibara: Magnificent.<page><box>Gaibara: This is truly<br>the Ultimate Clay.<page><box>Gaibara: At last, I can<br>devote myself to making<br>the Pot of my dreams.<page><box>Gaibara: You have my<br>thanks, <name>! Truly!!<page><box>Gaibara: Take this small token<br>of my gratitude. Use it well.<page><box>
 198:$485F	story_and_event_dialogue	Your inventory is full,<br>so you cannot accept it.<page><box>Please choose one<br>item to discard.<page><box>
-198:$488E	story_and_event_dialogue	<name> received the<br>Adamant Pickaxe from Gaibara!<delay:F0><delay:C0><page><box>
+198:$488E	story_and_event_dialogue	<name> received the<br>Wonder Pick from Gaibara!<delay:F0><delay:C0><page><box>
 198:$48B4	story_and_event_dialogue	Gaibara: Good! Now I shall<br>use this clay to make my Pot.<page><box>
 198:$48DB	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: We are going home!<page><box>Gaibara: Back to my workshop!<page><box>
 198:$48FB	story_and_event_dialogue	Saruyama: Y-Yes, Master!<page><box>
@@ -890,11 +890,11 @@ id	sections	english
 198:$518E	story_and_event_dialogue	Blacksmith: <name>, I'd<br>like you to have this shield...<page><box>Blacksmith: But your<br>inventory is full.<page><box>Blacksmith: Please<br>make room for one item.<page><box>
 198:$51E8	story_and_event_dialogue	Blacksmith: You<br>don't want it...?<page><box>
 198:$51FC	story_and_event_dialogue	Blacksmith: <name>...<page><box>Blacksmith: You're<br>a true Wanderer.<page><box>Blacksmith: This shield<br>belongs in your hands.<page><box>Blacksmith: Please, take it.<page><box>
-198:$5257	story_and_event_dialogue	<name> obtained<br>the Stormward!<delay:F0><delay:C0><page>
+198:$5257	story_and_event_dialogue	<name> obtained<br>the Rasen Fuuma!<delay:F0><delay:C0><page>
 198:$527D	story_and_event_dialogue	Koppa: <name>! Isn't that<br>a treasure chest over there?<page><box>
 198:$529D	story_and_event_dialogue	Koppa: You need to<br>discard something<br>before you can take it!<page><box>
 198:$52B8	story_and_event_dialogue	Koppa: Let's head back.<page>
-198:$52C8	story_and_event_dialogue	<name> obtained<br>the Stormward!<delay:F0><delay:C0><page>
+198:$52C8	story_and_event_dialogue	<name> obtained<br>the Rasen Fuuma!<delay:F0><delay:C0><page>
 198:$533B	story_and_event_dialogue	Pekeji: This should be<br>around the Eastern Keep...<page><box>
 198:$5363	story_and_event_dialogue	Pekeji: Monsters are still<br>roaming around here...<page><box>
 198:$5384	story_and_event_dialogue	Pekeji: You're still<br>recovering, my Lord,<br>so please be careful.<page><box>
@@ -1752,7 +1752,7 @@ id	sections	english
 205:$66E5	story_and_event_dialogue	Wanda: I'm getting<br>ready to fight.<page>
 205:$66FD	story_and_event_dialogue	Wanda: I wonder what<br>the story is about.<page>
 205:$670D	story_and_event_dialogue	Wanda: Should I<br>sprinkle some water?<page>
-205:$671D	story_and_event_dialogue	Wanda: We bought a Cudgel and<br>a Wood Shield for protection.<page><box>Wanda: Those two work<br>well together, so they<br>give you more power.<page>
+205:$671D	story_and_event_dialogue	Wanda: We bought a Club and a<br>Wooden Shield for protection.<page><box>Wanda: Those two work<br>well together, so they<br>give you more power.<page>
 205:$676F	story_and_event_dialogue	Wanda: Hmm...<page>
 205:$677C	story_and_event_dialogue	Wanda: Zagan comes down<br>into town sometimes.<page><box>Wanda: He seemed to approach<br>any outsider he found, but...<page>
 205:$67C9	story_and_event_dialogue	Wanda: Could it be connected<br>to the spreading desert?!<page>

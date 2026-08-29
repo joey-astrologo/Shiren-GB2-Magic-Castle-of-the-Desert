@@ -46,9 +46,9 @@ its reviewed worst value:
 | Family maximum | Width | Rightmost x |
 |---|---:|---:|
 | `Axe of the Minotaur+99` | 108 px | 115 |
-| `Pickpocket Shield+99` | 98 px | 105 |
+| `Break-Off Shield+99` | 95 px | 102 |
 | `99 Knockback Arrow` | 91 px | 98 |
-| `Herb Reception Staff[99]` | 118 px | 125 |
+| `Narrow-escape Staff[99]` | 115 px | 122 |
 | `Transmutation Pot[9]` | 99 px | 106 |
 | equip + `Axe of the Minotaur+99` + skull + plate | 125 px | 132 |
 
@@ -79,13 +79,13 @@ Use only with this disposable state. It modifies WRAM, not the ROM, but later in
 may persist the modified run.
 
 The same script has a noninteractive test-runner mode. The fixture freezes both reviewed
-framebuffers (`E177C336` and `762B363F`, FNV-1a) and the exact eight-byte object records in
+framebuffers (`B9899EFF` and `EA1E7AC7`, FNV-1a) and the exact eight-byte object records in
 `tests/fixtures/item_formatting.json`.
 
 ## Synthesis-seal manual route
 
 `tools/mesen_spawn_synthesis_lab.lua` supplies the visual test that the row gallery cannot:
-a real empty Synthesis Pot, a plain Cudgel, and an Axe of the Minotaur whose native effect
+a real empty Synthesis Pot, a plain Club, and an Axe of the Minotaur whose native effect
 donates the critical-hit seal.
 
 1. Build and load `build/shiren-gb2-english.gbc`.
@@ -93,12 +93,12 @@ donates the critical-hit seal.
 3. Pause emulation, load `tools/mesen_spawn_synthesis_lab.lua` through
    **Debug > Script Window**, and press **Run (F5)**.
 4. Resume, press **B** once to dismiss the existing message, and press **A** to open Items.
-5. Select **Synthesis Pot > Put In > Cudgel**.
+5. Select **Synthesis Pot > Put In > Club**.
 6. Repeat **Synthesis Pot > Put In**, this time choosing **Axe of the Minotaur**.
-7. Throw the Pot against a wall, recover the Cudgel, and open its **Info** screen.
+7. Throw the Pot against a wall, recover the Club, and open its **Info** screen.
 
 The Axe disappears on the second insertion and the Pot reads `[3]`. The game defers
-materializing the transferred rune until the Pot breaks. The recovered Cudgel should use
+materializing the transferred rune until the Pot breaks. The recovered Club should use
 the synthesized-item name color and list `More frequent critical hits.` in Info. This is
 the semantic seal display; there is no separate seal icon appended to the inventory row.
 
@@ -106,7 +106,7 @@ The helper must seed the Axe's inherent critical-hit rune explicitly at object b
 mask `$04` (weapon rune bit 10). Direct WRAM injection bypasses the native item constructor,
 so an object with only Axe item ID `$0B` looks correctly named but has no effect to donate.
 That malformed version was caught during manual review; the regression now breaks the Pot
-and asserts the released Cudgel actually carries bit 10.
+and asserts the released Club actually carries bit 10.
 
 The helper resolves three cleared object records before writing, reserves an eight-record
 cleared runway for the Pot's sparse native contents structure, and intentionally replaces

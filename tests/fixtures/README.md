@@ -12,6 +12,7 @@ Fixture families include:
 | Source graph and allocation | `script_directory.json`, `script_allocation.json`, `identity_insert.json` |
 | Encoding and fonts | `control_dispatch.json`, `kanji_map.json`, `font_trace.json`, `english_font.json`, `item_status.json`, `item_formatting.json`, `synthesis_lab.json` |
 | Translation workspace | `english_overlays.json`, `translation_lint.json`, `translation_build.json` |
+| Item terminology | `item_terminology.json` |
 | Runtime layout | `text_layout.json`, `runtime_terms.json`, `runtime_widths.json`, `positioned_surfaces.json` |
 | Dialogue and messages | `prose_scenes.json`, `prose_wrap.json`, `item_message_wrap.json`, `combat_messages.json` |
 | Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json`; all fourteen embedded replay diaries plus live mode-0 and Adventure navigation contracts |
@@ -53,9 +54,9 @@ from `SaveStates/Mamel.mss`, and two reviewed Mesen framebuffers. Unlike ordinar
 fixtures, its arrow, staff, and Pot rows deliberately carry nonzero dynamic values.
 
 `tests/fixtures/synthesis_lab.json` freezes the complementary native Pot lifecycle. It
-records the Cudgel base, explicitly seeded critical-hit rune on the Minotaur Axe donor,
+records the Club base, explicitly seeded critical-hit rune on the Minotaur Axe donor,
 five sparse Pot cell offsets, five Mesen framebuffers, post-insertion capacities, retained
-base pointer, consumed donor record, and released Cudgel rune bit after the Pot breaks.
+base pointer, consumed donor record, and released Club rune bit after the Pot breaks.
 The final Info-screen reading remains the explicit manual visual check.
 
 When intentionally updating a fixture:

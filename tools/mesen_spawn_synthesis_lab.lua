@@ -5,10 +5,10 @@
 --   1. Build/load the current English ROM and load SaveStates/Mamel.mss.
 --   2. Pause, open Debug > Script Window, load this file, and press Run (F5).
 --   3. Resume, dismiss the existing message with B, and open Items with A.
---   4. Select Synthesis Pot > Put In > Cudgel; it is the base weapon.
+--   4. Select Synthesis Pot > Put In > Club; it is the base weapon.
 --   5. Repeat Synthesis Pot > Put In > Axe of the Minotaur; the Axe is consumed
 --      and donates its critical-hit seal when the Pot is broken.
---   6. Throw the Pot against a wall, recover the Cudgel, and open Info.
+--   6. Throw the Pot against a wall, recover the Club, and open Info.
 --      Its ability list should contain "More frequent critical hits."
 --
 -- This replaces the twenty live inventory pointers and writes three cleared object
@@ -172,11 +172,11 @@ local function inject()
   end
 
   report(string.format(
-      "%s READY: Cudgel object=%d, Axe object=%d, Synthesis Pot object=%d.",
+      "%s READY: Club object=%d, Axe object=%d, Synthesis Pot object=%d.",
       LABEL, weapons[1], weapons[2], potObject))
   report("WARNING: the previous inventory was intentionally replaced; do not save this run.")
-  report("Use Synthesis Pot > Put In > Cudgel, then repeat with Axe of the Minotaur.")
-  report("Throw the Pot at a wall; the recovered Cudgel should list the critical-hit seal in Info.")
+  report("Use Synthesis Pot > Put In > Club, then repeat with Axe of the Minotaur.")
+  report("Throw the Pot at a wall; the recovered Club should list the critical-hit seal in Info.")
   return weapons[1], weapons[2], potObject
 end
 
@@ -187,11 +187,12 @@ else
   local frame = 0
   local loaded = false
   local objects = nil
-  local ITEM_LIST_SCREEN = 0xA6555144
-  local ACTION_SCREEN = 0x443462AC
-  local PUT_PICKER_SCREEN = 0xAF86C0BC
+  local ITEM_LIST_SCREEN = 0x9DC680AC
+  local ACTION_SCREEN = 0x30146354
+  local PUT_PICKER_SCREEN = 0x827F47E4
   local FIRST_PUT_SCREEN = 0x64B86E47
   local SECOND_PUT_SCREEN = 0xE0AC69E2
+  local actualScreens = { 0, 0, 0, 0, 0 }
 
   local function loadFile(path)
     local file = assert(io.open(path, "rb"))
@@ -221,11 +222,11 @@ else
     loaded = true
     emu.loadSavestate(loadFile(fixturePath))
     objects = { inject() }
-    assert(rd(INVENTORY) == objects[1], "Cudgel inventory pointer changed")
+    assert(rd(INVENTORY) == objects[1], "Club inventory pointer changed")
     assert(rd(INVENTORY + 1) == objects[2], "Axe inventory pointer changed")
     assert(rd(INVENTORY + 2) == objects[3], "Pot inventory pointer changed")
     assert(rd(INVENTORY + 3) == INVENTORY_SENTINEL, "gallery did not end after three items")
-    assert(readRecord(objects[1])[1] == CUDGEL[1], "Cudgel record changed")
+    assert(readRecord(objects[1])[1] == CUDGEL[1], "Club record changed")
     assert(readRecord(objects[2])[1] == MINOTAUR_AXE[1], "Axe record changed")
     local pot = readRecord(objects[3])
     assert(pot[1] == SYNTHESIS_POT[1] and pot[3] == 5 and pot[6] == 0xFF,
@@ -269,27 +270,31 @@ else
     if not loaded then return end
     if frame == 400 then
       local checksum = screenChecksum()
+      actualScreens[1] = checksum
       report(string.format("synthesis lab item list screen=%08X", checksum))
       if ITEM_LIST_SCREEN ~= 0 then assert(checksum == ITEM_LIST_SCREEN, "item list screen changed") end
       saveScreenshot("GB2_SYNTHESIS_LAB_SCREENSHOT")
     elseif frame == 700 then
       local checksum = screenChecksum()
+      actualScreens[2] = checksum
       report(string.format("synthesis lab action screen=%08X", checksum))
       if ACTION_SCREEN ~= 0 then assert(checksum == ACTION_SCREEN, "action screen changed") end
       saveScreenshot("GB2_SYNTHESIS_LAB_ACTION_SCREENSHOT")
     elseif frame == 1000 then
       local checksum = screenChecksum()
+      actualScreens[3] = checksum
       report(string.format("synthesis lab Put In picker screen=%08X", checksum))
       if PUT_PICKER_SCREEN ~= 0 then assert(checksum == PUT_PICKER_SCREEN, "Put In picker changed") end
       saveScreenshot("GB2_SYNTHESIS_LAB_PICKER_SCREENSHOT")
     elseif frame == 1300 then
       local checksum = screenChecksum()
+      actualScreens[4] = checksum
       local potBase = OBJECTS + objects[3] * OBJECT_SIZE
       assert(rd(INVENTORY) == objects[2], "Axe was not retained after the base insertion")
       assert(rd(INVENTORY + 1) == objects[3], "Pot was not retained after the base insertion")
       assert(rd(INVENTORY + 2) == INVENTORY_SENTINEL, "unexpected item after the first insertion")
       assert(rd(potBase + 2) == 5, "Pot traversal count changed after the base insertion")
-      assert(rd(potBase + POT_CELL_OFFSETS[1]) == objects[1], "Pot did not retain the Cudgel")
+      assert(rd(potBase + POT_CELL_OFFSETS[1]) == objects[1], "Pot did not retain the Club")
       for cell = 2, #POT_CELL_OFFSETS do
         assert(rd(potBase + POT_CELL_OFFSETS[cell]) == 0xFF, "unused Pot cell lost its sentinel")
       end
@@ -298,6 +303,7 @@ else
       saveScreenshot("GB2_SYNTHESIS_LAB_FIRST_PUT_SCREENSHOT")
     elseif frame == 2200 then
       local checksum = screenChecksum()
+      actualScreens[5] = checksum
       local baseWeapon = readRecord(objects[1])
       local donorWeapon = readRecord(objects[2])
       local potBase = OBJECTS + objects[3] * OBJECT_SIZE
@@ -313,14 +319,14 @@ else
     elseif frame == 3400 then
       local baseWeapon = readRecord(objects[1])
       assert(rd(INVENTORY) == INVENTORY_SENTINEL, "thrown Pot remained in inventory")
-      assert(baseWeapon[1] == CUDGEL[1], "released base is no longer a Cudgel")
-      assert((baseWeapon[7] & 0x04) ~= 0, "released Cudgel lacks the critical-hit seal")
+      assert(baseWeapon[1] == CUDGEL[1], "released base is no longer a Club")
+      assert((baseWeapon[7] & 0x04) ~= 0, "released Club lacks the critical-hit seal")
       report("synthesis lab post-break seal=weapon-bit-10")
       saveScreenshot("GB2_SYNTHESIS_LAB_POST_THROW_SCREENSHOT")
       report(string.format(
           "PASS synthesis-lab item=%08X action=%08X picker=%08X first=%08X second=%08X break=weapon-bit-10",
-          ITEM_LIST_SCREEN, ACTION_SCREEN, PUT_PICKER_SCREEN,
-          FIRST_PUT_SCREEN, SECOND_PUT_SCREEN))
+          actualScreens[1], actualScreens[2], actualScreens[3],
+          actualScreens[4], actualScreens[5]))
       emu.stop(0)
     elseif frame > 3600 then
       error("timed out while opening the Synthesis Pot lab")

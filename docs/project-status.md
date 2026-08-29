@@ -61,11 +61,14 @@ edited through the ordinary catalog workflow.
   staff/Pot brackets, and spaced Gitan amounts. Every translated family maximum fits; the widest equip + curse +
   plate combination ends at x=132 against the x=144 edge. A two-page Mesen gallery freezes
   all twenty representative rows for visual review. A separate native Synthesis Pot route
-  inserts a Cudgel base and correctly seeded Minotaur Axe donor, freezes both insertion
+  inserts a Club base and correctly seeded Minotaur Axe donor, freezes both insertion
   transitions, breaks the Pot, asserts the released critical-hit rune, and leaves the seal
   description available for manual visual review.
+- The complete 198-item terminology pass corrected 50 names to established series usage,
+  synchronized every description heading and affected unidentified-item root, and freezes
+  three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 365-test fixture suite covering translation, layout, save data, menu/input
+- A passing 371-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 

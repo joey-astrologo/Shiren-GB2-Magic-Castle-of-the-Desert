@@ -9,6 +9,7 @@ behind those workflows.
 |---|---|---|
 | [project-status.md](project-status.md) | Current status | You need authoritative coverage, completed engineering, or remaining work |
 | [translation-policy.md](translation-policy.md) | Translation policy | You are choosing terminology, voice, pacing, or line-break policy |
+| [ITEM_TERMINOLOGY.md](ITEM_TERMINOLOGY.md) | Item-name audit and review catalogue | You are changing item names, description headings, unidentified roots, or reviewing unresolved GB2 terms |
 | [editing-workflow.md](editing-workflow.md) | Scene editor | You are editing story/event prose or synchronizing it into a build |
 | [testing-and-build.md](testing-and-build.md) | Commands | You need the normal validation, build, test, or diagnostic commands |
 | [TEXT_REFERENCE.md](TEXT_REFERENCE.md) | Text system | You need encoding, control tokens, runtime substitutions, storage, or authoring ownership |

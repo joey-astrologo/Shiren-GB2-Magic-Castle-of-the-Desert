@@ -1,0 +1,116 @@
+{
+  "schema": "shiren-gb2-item-terminology-v1",
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "approved": [
+    {"item_id": 1, "category": "weapon", "previous": "Cudgel", "english": "Club"},
+    {"item_id": 9, "category": "weapon", "previous": "Adamant Pickaxe", "english": "Wonder Pick"},
+    {"item_id": 24, "category": "weapon", "previous": "Ookabuto Axe", "english": "Beetle Axe"},
+    {"item_id": 30, "category": "weapon", "previous": "Air Slayer", "english": "Sky Splitter"},
+    {"item_id": 33, "category": "weapon", "previous": "Hidamari's Sword", "english": "Hidamari Sword"},
+    {"item_id": 34, "category": "shield", "previous": "Ration Shield", "english": "Shield of Sating"},
+    {"item_id": 35, "category": "shield", "previous": "Bronzeward", "english": "Bronze Shield"},
+    {"item_id": 36, "category": "shield", "previous": "Wood Shield", "english": "Wooden Shield"},
+    {"item_id": 38, "category": "shield", "previous": "Dragonward", "english": "Dragon Shield"},
+    {"item_id": 39, "category": "shield", "previous": "Windshield", "english": "Fuuma Shield"},
+    {"item_id": 40, "category": "shield", "previous": "Spiked Ward", "english": "Counter Shield"},
+    {"item_id": 41, "category": "shield", "previous": "Armor Ward", "english": "Heavy Shield"},
+    {"item_id": 43, "category": "shield", "previous": "Evasive Shield", "english": "Watchful Shield"},
+    {"item_id": 45, "category": "shield", "previous": "Fragile Shield", "english": "Break-Off Shield"},
+    {"item_id": 48, "category": "shield", "previous": "Stormward", "english": "Rasen Fuuma"},
+    {"item_id": 50, "category": "shield", "previous": "Kabra's Armor", "english": "Kabura's Guard"},
+    {"item_id": 51, "category": "shield", "previous": "Missile Shield", "english": "Dodge Shield"},
+    {"item_id": 52, "category": "shield", "previous": "Deflect Shield", "english": "Reflect Shield"},
+    {"item_id": 53, "category": "shield", "previous": "Curseless Shield", "english": "Holy Shield"},
+    {"item_id": 54, "category": "shield", "previous": "Karakuroid Shield", "english": "Traproid Shield"},
+    {"item_id": 55, "category": "shield", "previous": "Pickpocket Shield", "english": "Froggo Shield"},
+    {"item_id": 58, "category": "shield", "previous": "Satori Shield", "english": "Nirvana Shield"},
+    {"item_id": 60, "category": "shield", "previous": "Ookabuto Shield", "english": "Beetle Shield"},
+    {"item_id": 63, "category": "bracelet", "previous": "Passage Bracelet", "english": "Waterwalk Bracelet"},
+    {"item_id": 74, "category": "bracelet", "previous": "Diet Bracelet", "english": "No Hunger Bracelet"},
+    {"item_id": 75, "category": "bracelet", "previous": "Binge Bracelet", "english": "Hunger Bracelet"},
+    {"item_id": 76, "category": "bracelet", "previous": "Search Bracelet", "english": "Vision Bracelet"},
+    {"item_id": 77, "category": "bracelet", "previous": "Antidrain Bracelet", "english": "No Drain Bracelet"},
+    {"item_id": 78, "category": "bracelet", "previous": "Loud Bracelet", "english": "Alarm Bracelet"},
+    {"item_id": 79, "category": "bracelet", "previous": "Turn Bracelet", "english": "Bend Bracelet"},
+    {"item_id": 80, "category": "bracelet", "previous": "Paper Bracelet", "english": "Paper Thin Bracelet"},
+    {"item_id": 81, "category": "bracelet", "previous": "Explosive Bracelet", "english": "Blasting Bracelet"},
+    {"item_id": 82, "category": "bracelet", "previous": "Miss Bracelet", "english": "Bad-aim Bracelet"},
+    {"item_id": 84, "category": "bracelet", "previous": "Swipe Bracelet", "english": "Critical Bracelet"},
+    {"item_id": 85, "category": "bracelet", "previous": "No-Control Bracelet", "english": "No Control Bracelet"},
+    {"item_id": 86, "category": "bracelet", "previous": "Anti-Feeble Bracelet", "english": "Cleansing Bracelet"},
+    {"item_id": 88, "category": "bracelet", "previous": "Golden Bracelet", "english": "Gold Bracelet"},
+    {"item_id": 89, "category": "bracelet", "previous": "Nfu Bracelet", "english": "Nfuu Bracelet"},
+    {"item_id": 94, "category": "projectile", "previous": "Fatal Arrow", "english": "Killer Arrow"},
+    {"item_id": 123, "category": "grass", "previous": "Ranzan Herb", "english": "Ranzan Grass"},
+    {"item_id": 163, "category": "staff", "previous": "Skull Staff", "english": "Skull Mage's Staff"},
+    {"item_id": 168, "category": "staff", "previous": "Change Staff", "english": "Presto Staff"},
+    {"item_id": 169, "category": "staff", "previous": "Failure Staff", "english": "Miss Staff"},
+    {"item_id": 170, "category": "staff", "previous": "Herb Effect Staff", "english": "Grass Tosser"},
+    {"item_id": 171, "category": "staff", "previous": "Herb Reception Staff", "english": "Grass Gainer"},
+    {"item_id": 176, "category": "staff", "previous": "Attract Staff", "english": "Pull Staff"},
+    {"item_id": 178, "category": "staff", "previous": "Raging Staff", "english": "Rage Staff"},
+    {"item_id": 179, "category": "staff", "previous": "Accelerating Staff", "english": "Swift Staff"},
+    {"item_id": 187, "category": "pot", "previous": "Healing Pot", "english": "Heal Pot"},
+    {"item_id": 191, "category": "pot", "previous": "Sealing Pot", "english": "Imprison Pot"}
+  ],
+  "provisional": [
+    {"item_id": 83, "english": "Trap Seek Bracelet"},
+    {"item_id": 181, "english": "Flash Bomb Staff"},
+    {"item_id": 183, "english": "Friendship Staff"}
+  ],
+  "roots": [
+    {"root_index": 0, "english": "Waterwalk"},
+    {"root_index": 11, "english": "No Hunger"},
+    {"root_index": 12, "english": "Hunger"},
+    {"root_index": 13, "english": "Vision"},
+    {"root_index": 14, "english": "No Drain"},
+    {"root_index": 15, "english": "Alarm"},
+    {"root_index": 16, "english": "Bend"},
+    {"root_index": 17, "english": "Paper Thin"},
+    {"root_index": 18, "english": "Blasting"},
+    {"root_index": 19, "english": "Bad-aim"},
+    {"root_index": 21, "english": "Critical"},
+    {"root_index": 22, "english": "No Control"},
+    {"root_index": 23, "english": "Cleansing"},
+    {"root_index": 25, "english": "Gold"},
+    {"root_index": 26, "english": "Nfuu"},
+    {"root_index": 46, "english": "Ranzan"},
+    {"root_index": 86, "english": "Skull Mage's"},
+    {"root_index": 91, "english": "Presto"},
+    {"root_index": 92, "english": "Miss"},
+    {"root_index": 93, "english": "Grass Tosser"},
+    {"root_index": 94, "english": "Grass Gainer"},
+    {"root_index": 99, "english": "Pull"},
+    {"root_index": 101, "english": "Rage"},
+    {"root_index": 102, "english": "Swift"},
+    {"root_index": 110, "english": "Heal"},
+    {"root_index": 114, "english": "XImprison"}
+  ],
+  "critical_description_fragment": "become critical hits",
+  "surface_records": [
+    {
+      "id": "193:$6540",
+      "english": " Combine compatible gear!<br><br>Some gear pairs work well.<br>Equip a Club with a<br>Wooden Shield, for example,<br>and both become <2D>3.<br>Other useful combinations<br>exist too!"
+    },
+    {
+      "id": "193:$7348",
+      "english": "Obtained Rasen Fuuma"
+    },
+    {
+      "id": "198:$488E",
+      "english": "<name> received the<br>Wonder Pick from Gaibara!<delay:F0><delay:C0><page><box>"
+    },
+    {
+      "id": "198:$5257",
+      "english": "<name> obtained<br>the Rasen Fuuma!<delay:F0><delay:C0><page>"
+    },
+    {
+      "id": "198:$52C8",
+      "english": "<name> obtained<br>the Rasen Fuuma!<delay:F0><delay:C0><page>"
+    },
+    {
+      "id": "205:$671D",
+      "english": "Wanda: We bought a Club and a<br>Wooden Shield for protection.<page><box>Wanda: Those two work<br>well together, so they<br>give you more power.<page>"
+    }
+  ]
+}

@@ -116,7 +116,8 @@ routine choose the next root ID at seven cells, then renders that translated roo
 into the safe `$C16D` presentation buffer. Its redraw copies 14 cells while reusing the
 native seven-cell x origin (`B=$28`, `C=$08`) instead of centering the larger capacity. The build
 validates all 123 translated root entries and rejects any active root longer than 14 cells.
-The current longest root is `Herb Reception` at exactly 14 characters.
+The current longest roots are `Narrow-escape` and `Transmutation` at 13 characters,
+leaving one cell of measured headroom inside the 14-cell field.
 
 Persistent custom labels occupy 20 slots beginning at bank 2 `$DD78`. Each slot is eight
 bytes. Free labels retain the native contract of at most seven glyph bytes followed by

@@ -85,10 +85,10 @@
         "rightmost_pixel": 115
       },
       "shield_plus_99": {
-        "item_id": 55,
-        "text": "Pickpocket Shield+99",
-        "pixels": 98,
-        "rightmost_pixel": 105
+        "item_id": 45,
+        "text": "Break-Off Shield+99",
+        "pixels": 95,
+        "rightmost_pixel": 102
       },
       "arrow_99": {
         "item_id": 93,
@@ -97,10 +97,10 @@
         "rightmost_pixel": 98
       },
       "staff_99": {
-        "item_id": 171,
-        "text": "Herb Reception Staff[99]",
-        "pixels": 118,
-        "rightmost_pixel": 125
+        "item_id": 165,
+        "text": "Narrow-escape Staff[99]",
+        "pixels": 115,
+        "rightmost_pixel": 122
       },
       "pot_9": {
         "item_id": 189,
@@ -122,25 +122,25 @@
       "sha1": "bf961091090ac690e6950f3cf58dff9f9639cf0d",
       "sha256": "42c44b909008409cfaff7d45e0f833f00e9538407bfdce8280292fbcd58672bc"
     },
-    "page_1_screen_fnv1a": "E177C336",
-    "page_2_screen_fnv1a": "762B363F",
+    "page_1_screen_fnv1a": "B9899EFF",
+    "page_2_screen_fnv1a": "EA1E7AC7",
     "rows": [
-      {"page": 1, "slot": 1, "label": "Normal", "expected": "Cudgel", "object_hex": "0101000000000000"},
-      {"page": 1, "slot": 2, "label": "Equipped", "expected": "<equip>Cudgel", "object_hex": "0101000010000000"},
-      {"page": 1, "slot": 3, "label": "Cursed", "expected": "Cudgel<skull>", "object_hex": "0101000002000000"},
-      {"page": 1, "slot": 4, "label": "Blessed", "expected": "Cudgel<bell>", "object_hex": "0101000008000000"},
-      {"page": 1, "slot": 5, "label": "Plated", "expected": "Cudgel<plate>", "object_hex": "0101000004000000"},
-      {"page": 1, "slot": 6, "label": "Cursed + plated", "expected": "Cudgel<skull><plate>", "object_hex": "0101000006000000"},
-      {"page": 1, "slot": 7, "label": "Blessed + plated", "expected": "Cudgel<plate><bell>", "object_hex": "010100000C000000"},
+      {"page": 1, "slot": 1, "label": "Normal", "expected": "Club", "object_hex": "0101000000000000"},
+      {"page": 1, "slot": 2, "label": "Equipped", "expected": "<equip>Club", "object_hex": "0101000010000000"},
+      {"page": 1, "slot": 3, "label": "Cursed", "expected": "Club<skull>", "object_hex": "0101000002000000"},
+      {"page": 1, "slot": 4, "label": "Blessed", "expected": "Club<bell>", "object_hex": "0101000008000000"},
+      {"page": 1, "slot": 5, "label": "Plated", "expected": "Club<plate>", "object_hex": "0101000004000000"},
+      {"page": 1, "slot": 6, "label": "Cursed + plated", "expected": "Club<skull><plate>", "object_hex": "0101000006000000"},
+      {"page": 1, "slot": 7, "label": "Blessed + plated", "expected": "Club<plate><bell>", "object_hex": "010100000C000000"},
       {"page": 1, "slot": 8, "label": "Cracked Bracelet", "expected": "Strength Bracelet(Cr)", "object_hex": "4803000100001000"},
-      {"page": 1, "slot": 9, "label": "One synthesis rune", "expected": "Cudgel (alternate color)", "object_hex": "0101000000010000"},
-      {"page": 1, "slot": 10, "label": "Equip + curse + plate", "expected": "<equip>Cudgel+99<skull><plate>", "object_hex": "0101006316000000"},
-      {"page": 2, "slot": 1, "label": "Positive shield", "expected": "Bronzeward+99", "object_hex": "2302006300000000"},
+      {"page": 1, "slot": 9, "label": "One synthesis rune", "expected": "Club (alternate color)", "object_hex": "0101000000010000"},
+      {"page": 1, "slot": 10, "label": "Equip + curse + plate", "expected": "<equip>Club+99<skull><plate>", "object_hex": "0101006316000000"},
+      {"page": 2, "slot": 1, "label": "Positive shield", "expected": "Bronze Shield+99", "object_hex": "2302006300000000"},
       {"page": 2, "slot": 2, "label": "Arrow quantity", "expected": "99 Wooden Arrow", "object_hex": "5A04630000000000"},
       {"page": 2, "slot": 3, "label": "Gitan amount", "expected": "999 Gitan", "object_hex": "C80AE70300000000"},
       {"page": 2, "slot": 4, "label": "Monster Meat", "expected": "Mamel Meat", "object_hex": "C90B010100000000"},
-      {"page": 2, "slot": 5, "label": "Positive weapon", "expected": "Cudgel+99", "object_hex": "0101006300000000"},
-      {"page": 2, "slot": 6, "label": "Negative weapon", "expected": "Cudgel-99", "object_hex": "0101009D00000000"},
+      {"page": 2, "slot": 5, "label": "Positive weapon", "expected": "Club+99", "object_hex": "0101006300000000"},
+      {"page": 2, "slot": 6, "label": "Negative weapon", "expected": "Club-99", "object_hex": "0101009D00000000"},
       {"page": 2, "slot": 7, "label": "Staff zero charges", "expected": "Knockback Staff[0]", "object_hex": "9E08000000000000"},
       {"page": 2, "slot": 8, "label": "Staff seven charges", "expected": "Knockback Staff[7]", "object_hex": "9E08070000000000"},
       {"page": 2, "slot": 9, "label": "Empty Pot", "expected": "Preservation Pot[0]", "object_hex": "B809000000000000"},

@@ -1,6 +1,6 @@
 id	sections	english
 202:$41B0	item_descriptions	This item is unidentified.<br>Its effect is unknown.
-202:$41C5	item_descriptions	<26>Cudgel<26><br>Atk <27><br>Slots <hspace:02><27><br>Carved from solid wood and<br>shaped for an easy grip.
+202:$41C5	item_descriptions	<26>Club<26><br>Atk <27><br>Slots <hspace:02><27><br>Carved from solid wood and<br>shaped for an easy grip.
 202:$4207	item_descriptions	<26>Bronze Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>A sword forged from bronze.
 202:$423F	item_descriptions	<26>Katana<26><br>Atk <27><br>Slots <hspace:02><27><br>A reliable sword favored by<br>Wanderers everywhere.
 202:$427D	item_descriptions	<26>Doutanuki<26><br>Atk <27><br>Slots <hspace:02><27><br>A world-famous blade forged<br>by Genma Doutanuki.
@@ -8,7 +8,7 @@ id	sections	english
 202:$4303	item_descriptions	<26>Manji Kabura<26><br>Atk <27><br>Slots <hspace:02><27><br>A masterpiece forged by the<br>genius swordsmith Kabura.
 202:$4357	item_descriptions	<26>Sickle of Salvation<26><br>Atk <27><br>Slots <hspace:02><27><br>Deals heavy damage to Ghost<br>monsters.
 202:$439F	item_descriptions	<26>Pickaxe<26><br>Atk <27><br>Slots <hspace:02><27><br>Use it to dig through walls.<br>It may break after repeated<br>use.
-202:$43EF	item_descriptions	<26>Adamant Pickaxe<26><br>Atk <27><br>Slots <hspace:02><27><br>This remarkable pickaxe never<br>breaks and can still dig<br>through walls.
+202:$43EF	item_descriptions	<26>Wonder Pick<26><br>Atk <27><br>Slots <hspace:02><27><br>This remarkable pickaxe never<br>breaks and can still dig<br>through walls.
 202:$443C	item_descriptions	<26>Accurate Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>Normal attacks never miss.
 202:$447D	item_descriptions	<26>Axe of the Minotaur<26><br>Atk <27><br>Slots <hspace:02><27><br>Often lands critical hits.
 202:$44BD	item_descriptions	<26>Kama Itachi<26><br>Atk <27><br>Slots <hspace:02><27><br>Attacks all three spaces in<br>front of you at once.
@@ -23,46 +23,46 @@ id	sections	english
 202:$47C5	item_descriptions	<26>Wooden Mallet<26><br>Atk <27><br>Slots <hspace:02><27><br>Use it to destroy traps. Be<br>careful, since the mallet may<br>break before the trap does.
 202:$4829	item_descriptions	<26>Jagged Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>After enough missed attacks,<br>your next attack is<br>guaranteed to land a critical<br>hit.
 202:$488A	item_descriptions	<26>Healing Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>Dealing damage with an attack<br>restores a little HP.
-202:$48D6	item_descriptions	<26>Ookabuto Axe<26><br>Atk <27><br>Slots <hspace:02><27><br>A sturdy axe made from an<br>Ookabuto shell.
+202:$48D6	item_descriptions	<26>Beetle Axe<26><br>Atk <27><br>Slots <hspace:02><27><br>A sturdy axe made from an<br>Ookabuto shell.
 202:$4919	item_descriptions	<26>Demon Slayer<26><br>Atk <27><br>Slots <hspace:02><27><br>Legend says it can defeat one<br>hundred demons. Its attack<br>power is exceptionally high.
 202:$4974	item_descriptions	<26>Aura Spear<26><br>Atk <27><br>Slots <hspace:02><27><br>Its attack pierces through<br>two spaces, but mastering it<br>is difficult.
 202:$49C6	item_descriptions	<26>Bufu's Cleaver<26><br>Atk <27><br>Slots <hspace:02><27><br>A mythical cleaver imbued<br>with Bufu's spirit. Defeated<br>foes may turn into Meat. It<br>can break after too much use.
 202:$4A37	item_descriptions	<26>Chaos Axe<26><br>Atk <27><br>Slots <hspace:02><27><br>Attacks may confuse the<br>target or put it to sleep.
 202:$4A87	item_descriptions	<26>Soul Sickle<26><br>Atk <27><br>Slots <hspace:02><27><br>A hit reduces the monster's<br>HP to 1 and adds the drained<br>HP to the weapon's Upgrade<br>Value. A miss weakens it. It<br>breaks if strengthened too<br>far.
-202:$4B0F	item_descriptions	<26>Air Slayer<26><br>Atk <27><br>Slots <hspace:02><27><br>Deals heavy damage to<br>Floating monsters.
+202:$4B0F	item_descriptions	<26>Sky Splitter<26><br>Atk <27><br>Slots <hspace:02><27><br>Deals heavy damage to<br>Floating monsters.
 202:$4B5A	item_descriptions	<26>Crescent Blade<26><br>Atk <27><br>Slots <hspace:02><27><br>Deals heavy damage to<br>Exploding monsters.
 202:$4BA0	item_descriptions	<26>Fuuma Katana<26><br>Atk <27><br>Slots <hspace:02><27><br>Forged from Fuuma iron, this<br>sword has exceptionally high<br>attack power.
-202:$4BED	item_descriptions	<26>Hidamari's Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
-202:$4C68	item_descriptions	<26>Ration Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Its light weight slows the<br>loss of Fullness.
-202:$4CAC	item_descriptions	<26>Bronzeward<26><br>Def <27><br>Slots <hspace:02><27><br>A shield forged from bronze.
-202:$4CE6	item_descriptions	<26>Wood Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A wooden shield that never<br>rusts.
+202:$4BED	item_descriptions	<26>Hidamari Sword<26><br>Atk <27><br>Slots <hspace:02><27><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
+202:$4C68	item_descriptions	<26>Shield of Sating<26><br>Def <27><br>Slots <hspace:02><27><br>Its light weight slows the<br>loss of Fullness.
+202:$4CAC	item_descriptions	<26>Bronze Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A shield forged from bronze.
+202:$4CE6	item_descriptions	<26>Wooden Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A wooden shield that never<br>rusts.
 202:$4D23	item_descriptions	<26>Iron Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A shield forged from iron.
-202:$4D59	item_descriptions	<26>Dragonward<26><br>Def <27><br>Slots <hspace:02><27><br>Reduces damage from Dragon<br>fire.
-202:$4DA0	item_descriptions	<26>Windshield<26><br>Def <27><br>Slots <hspace:02><27><br>Forged from Fuuma iron, this<br>shield has exceptionally high<br>defense.
-202:$4DED	item_descriptions	<26>Spiked Ward<26><br>Def <27><br>Slots <hspace:02><27><br>Returns part of the damage<br>from direct monster attacks.
-202:$4E38	item_descriptions	<26>Armor Ward<26><br>Def <27><br>Slots <hspace:02><27><br>It has high defense, but its<br>weight speeds up Fullness<br>loss.
+202:$4D59	item_descriptions	<26>Dragon Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Reduces damage from Dragon<br>fire.
+202:$4DA0	item_descriptions	<26>Fuuma Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Forged from Fuuma iron, this<br>shield has exceptionally high<br>defense.
+202:$4DED	item_descriptions	<26>Counter Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Returns part of the damage<br>from direct monster attacks.
+202:$4E38	item_descriptions	<26>Heavy Shield<26><br>Def <27><br>Slots <hspace:02><27><br>It has high defense, but its<br>weight speeds up Fullness<br>loss.
 202:$4E89	item_descriptions	<26>Echo Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Reflects staff magic and<br>monster special abilities.
-202:$4ED1	item_descriptions	<26>Evasive Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Makes enemy attacks miss<br>more often.
+202:$4ED1	item_descriptions	<26>Watchful Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Makes enemy attacks miss<br>more often.
 202:$4F0E	item_descriptions	<26>Demon Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Legend says it can withstand<br>one hundred demons. Its<br>defense is exceptionally high.
-202:$4F6A	item_descriptions	<26>Fragile Shield<26><br>Def <27><br>Slots <hspace:02><27><br>It begins with high defense,<br>but weakens whenever you take<br>an attack.
+202:$4F6A	item_descriptions	<26>Break-Off Shield<26><br>Def <27><br>Slots <hspace:02><27><br>It begins with high defense,<br>but weakens whenever you take<br>an attack.
 202:$4FBC	item_descriptions	<26>Blast Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Reduces damage from<br>explosions.
 202:$4FF8	item_descriptions	<26>Walrus Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Prevents monsters from<br>stealing your items or Gitan.
-202:$5036	item_descriptions	<26>Stormward<26><br>Def <27><br>Slots <hspace:02><27><br>A mythical shield that even<br>the greatest smiths could not<br>forge. Few Wanderers know<br>that it exists.
+202:$5036	item_descriptions	<26>Rasen Fuuma<26><br>Def <27><br>Slots <hspace:02><27><br>A mythical shield that even<br>the greatest smiths could not<br>forge. Few Wanderers know<br>that it exists.
 202:$50A4	item_descriptions	<26>Mamel Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Mamel ancestors forged this<br>legendary shield in hopes of<br>becoming stronger. No Mamel<br>could equip it, so they gave<br>up.
-202:$511C	item_descriptions	<26>Kabra's Armor<26><br>Def <27><br>Slots <hspace:02><27><br>A mythical shield forged by<br>the genius swordsmith Kabura.
-202:$5169	item_descriptions	<26>Missile Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Dodges incoming items,<br>including arrows fired by<br>traps. Some projectiles cannot<br>be avoided.
-202:$51DD	item_descriptions	<26>Deflect Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Reflects incoming items. Some<br>projectiles cannot be<br>deflected.
-202:$5232	item_descriptions	<26>Curseless Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Protects you from curses.
-202:$526A	item_descriptions	<26>Karakuroid Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Its trap-making knowledge<br>keeps you from triggering<br>traps.
-202:$52B8	item_descriptions	<26>Pickpocket Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Imbued with Gamara's love of<br>Gitan. Taking direct damage<br>from a monster earns Gitan.
+202:$511C	item_descriptions	<26>Kabura's Guard<26><br>Def <27><br>Slots <hspace:02><27><br>A mythical shield forged by<br>the genius swordsmith Kabura.
+202:$5169	item_descriptions	<26>Dodge Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Dodges incoming items,<br>including arrows fired by<br>traps. Some projectiles cannot<br>be avoided.
+202:$51DD	item_descriptions	<26>Reflect Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Reflects incoming items. Some<br>projectiles cannot be<br>deflected.
+202:$5232	item_descriptions	<26>Holy Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Protects you from curses.
+202:$526A	item_descriptions	<26>Traproid Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Its trap-making knowledge<br>keeps you from triggering<br>traps.
+202:$52B8	item_descriptions	<26>Froggo Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Imbued with Gamara's love of<br>Gitan. Taking direct damage<br>from a monster earns Gitan.
 202:$531D	item_descriptions	<26>Happy Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Taking direct damage from a<br>monster earns Experience.
 202:$536C	item_descriptions	<26>Power Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Raises both attack and<br>defense.
-202:$53B2	item_descriptions	<26>Satori Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Fullness never falls while it<br>is equipped. Equipping it once<br>reduces Max Fullness to 0.
+202:$53B2	item_descriptions	<26>Nirvana Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Fullness never falls while it<br>is equipped. Equipping it once<br>reduces Max Fullness to 0.
 202:$541E	item_descriptions	<26>Prism Shield<26><br>Def <27><br>Slots <hspace:02><27><br>Turns monster special attacks<br>into ordinary damage. Some<br>powerful abilities still<br>cannot be blocked.
-202:$548C	item_descriptions	<26>Ookabuto Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A sturdy shield made from an<br>Ookabuto shell.
+202:$548C	item_descriptions	<26>Beetle Shield<26><br>Def <27><br>Slots <hspace:02><27><br>A sturdy shield made from an<br>Ookabuto shell.
 202:$54CF	item_descriptions	<26>Keshin Shield<26><br>Def <27><br>Slots <hspace:02><27><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$5547	item_descriptions	<26>Unused Shield 2<26><br>Def <27><br>Slots <hspace:02><27>
-202:$556A	item_descriptions	<26>Passage Bracelet<26><br>Slots <hspace:02><27><br>Equip it to walk on water.
+202:$556A	item_descriptions	<26>Waterwalk Bracelet<26><br>Slots <hspace:02><27><br>Equip it to walk on water.
 202:$55A0	item_descriptions	<26>Trapper's Bracelet<26><br>Slots <hspace:02><27><br>Reveals traps and prevents<br>you from triggering them.<br>Monsters can trigger traps<br>instead. You can also collect<br>Trap Parts and use them to<br>place traps.
 202:$560C	item_descriptions	<26>Healing Bracelet<26><br>Slots <hspace:02><27><br>Speeds up HP recovery while<br>equipped, but also speeds up<br>the loss of Fullness.
 202:$5655	item_descriptions	<26>Dreaded Bracelet<26><br>Slots <hspace:02><27><br>Makes you more likely to take<br>critical hits while equipped.
@@ -73,27 +73,27 @@ id	sections	english
 202:$57B7	item_descriptions	<26>Focusing Bracelet<26><br>Slots <hspace:02><27><br>Prevents confusion while<br>equipped.
 202:$57E9	item_descriptions	<26>Strength Bracelet<26><br>Slots <hspace:02><27><br>Raises Strength while<br>equipped.
 202:$5817	item_descriptions	<26>Leaping Bracelet<26><br>Slots <hspace:02><27><br>You may randomly warp as you<br>walk while it is equipped.
-202:$584E	item_descriptions	<26>Diet Bracelet<26><br>Slots <hspace:02><27><br>Fullness never falls while<br>this is equipped.
-202:$5881	item_descriptions	<26>Binge Bracelet<26><br>Slots <hspace:02><27><br>Fullness falls faster while<br>this is equipped.
-202:$58B4	item_descriptions	<26>Search Bracelet<26><br>Slots <hspace:02><27><br>Reveals invisible creatures<br>and traps while equipped.
-202:$58ED	item_descriptions	<26>Antidrain Bracelet<26><br>Slots <hspace:02><27><br>Blocks attacks that lower<br>your stats while equipped.
-202:$5929	item_descriptions	<26>Loud Bracelet<26><br>Slots <hspace:02><27><br>Wakes monsters and prevents<br>them from sleeping. It also<br>prevents you from sleeping.
-202:$5982	item_descriptions	<26>Turn Bracelet<26><br>Slots <hspace:02><27><br>Thrown items follow corridors<br>and fly around corners while<br>this is equipped.
-202:$59CD	item_descriptions	<26>Paper Bracelet<26><br>Slots <hspace:02><27><br>Raises your chance to evade<br>monster attacks. It is made<br>of paper and will burn up.
-202:$5A1F	item_descriptions	<26>Explosive Bracelet<26><br>Slots <hspace:02><27><br>You may suddenly explode<br>while walking with it<br>equipped.
-202:$5A56	item_descriptions	<26>Miss Bracelet<26><br>Slots <hspace:02><27><br>Items thrown at monsters<br>always miss while it is<br>equipped.
+202:$584E	item_descriptions	<26>No Hunger Bracelet<26><br>Slots <hspace:02><27><br>Fullness never falls while<br>this is equipped.
+202:$5881	item_descriptions	<26>Hunger Bracelet<26><br>Slots <hspace:02><27><br>Fullness falls faster while<br>this is equipped.
+202:$58B4	item_descriptions	<26>Vision Bracelet<26><br>Slots <hspace:02><27><br>Reveals invisible creatures<br>and traps while equipped.
+202:$58ED	item_descriptions	<26>No Drain Bracelet<26><br>Slots <hspace:02><27><br>Blocks attacks that lower<br>your stats while equipped.
+202:$5929	item_descriptions	<26>Alarm Bracelet<26><br>Slots <hspace:02><27><br>Wakes monsters and prevents<br>them from sleeping. It also<br>prevents you from sleeping.
+202:$5982	item_descriptions	<26>Bend Bracelet<26><br>Slots <hspace:02><27><br>Thrown items follow corridors<br>and fly around corners while<br>this is equipped.
+202:$59CD	item_descriptions	<26>Paper Thin Bracelet<26><br>Slots <hspace:02><27><br>Raises your chance to evade<br>monster attacks. It is made<br>of paper and will burn up.
+202:$5A1F	item_descriptions	<26>Blasting Bracelet<26><br>Slots <hspace:02><27><br>You may suddenly explode<br>while walking with it<br>equipped.
+202:$5A56	item_descriptions	<26>Bad-aim Bracelet<26><br>Slots <hspace:02><27><br>Items thrown at monsters<br>always miss while it is<br>equipped.
 202:$5A92	item_descriptions	<26>Trap Seek Bracelet<26><br>Slots <hspace:02><27><br>Thrown items fly toward<br>nearby traps while equipped.
-202:$5ADA	item_descriptions	<26>Swipe Bracelet<26><br>Slots <hspace:02><27><br>Your attacks deal heavy<br>damage to monsters while it<br>is equipped. It breaks when<br>you take an attack.
-202:$5B33	item_descriptions	<26>No-Control Bracelet<26><br>Slots <hspace:02><27><br>Thrown items fly in random<br>directions while it is<br>equipped.
-202:$5B6D	item_descriptions	<26>Anti-Feeble Bracelet<26><br>Slots <hspace:02><27><br>Prevents your Strength from<br>being lowered while equipped.
+202:$5ADA	item_descriptions	<26>Critical Bracelet<26><br>Slots <hspace:02><27><br>Your attacks against monsters<br>become critical hits while it<br>is equipped. It breaks when<br>you take an attack.
+202:$5B33	item_descriptions	<26>No Control Bracelet<26><br>Slots <hspace:02><27><br>Thrown items fly in random<br>directions while it is<br>equipped.
+202:$5B6D	item_descriptions	<26>Cleansing Bracelet<26><br>Slots <hspace:02><27><br>Prevents your Strength from<br>being lowered while equipped.
 202:$5BA0	item_descriptions	<26>Sturdy Bracelet<26><br>Slots <27><br>This exceptionally sturdy<br>bracelet never breaks. Using<br>it as a synthesis base<br>preserves that trait, with<br>some exceptions.
-202:$5C02	item_descriptions	<26>Golden Bracelet<26><br>Slots <27><br>A gleaming bracelet made of<br>gold that never breaks. Using<br>it as a synthesis base<br>preserves that trait, with<br>some exceptions.
-202:$5C5F	item_descriptions	<26>Nfu Bracelet<26><br>Slots <27><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
+202:$5C02	item_descriptions	<26>Gold Bracelet<26><br>Slots <27><br>A gleaming bracelet made of<br>gold that never breaks. Using<br>it as a synthesis base<br>preserves that trait, with<br>some exceptions.
+202:$5C5F	item_descriptions	<26>Nfuu Bracelet<26><br>Slots <27><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$5CC9	item_descriptions	<26>Wooden Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire.
 202:$5D0A	item_descriptions	<26>Iron Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire.<br>It is stronger than a Wooden<br>Arrow.
 202:$5D59	item_descriptions	<26>Silver Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire.<br>It pierces through monsters<br>and walls.
 202:$5DB3	item_descriptions	<26>Knockback Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire. A<br>hit knocks the monster<br>backward.
-202:$5E0A	item_descriptions	<26>Fatal Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire.<br>It rarely hits, but defeats a<br>monster instantly when it<br>does.
+202:$5E0A	item_descriptions	<26>Killer Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire.<br>It rarely hits, but defeats a<br>monster instantly when it<br>does.
 202:$5E72	item_descriptions	<26>Poison Arrow<26><br>Attack monsters from a<br>distance. Equip it, hold<br>Select, and press A to fire. A<br>hit lowers the monster's<br>attack power.
 202:$5ECE	item_descriptions	<26>Karanba Arrow<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$5F29	item_descriptions	<26>Onigiri<26><br>Eat it to restore a little<br>Fullness.
@@ -122,7 +122,7 @@ id	sections	english
 202:$62FF	item_descriptions	<26>Weeds<26><br>Plain weeds with no special<br>effect. They restore a little<br>Fullness when consumed.
 202:$6326	item_descriptions	<26>Leaping Grass<26><br>Drink it to warp somewhere<br>else on the floor.
 202:$6341	item_descriptions	<26>Swift Grass<26><br>Drink it to move faster for a<br>short while.
-202:$6368	item_descriptions	<26>Ranzan Herb<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
+202:$6368	item_descriptions	<26>Ranzan Grass<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$63C4	item_descriptions	<26>Identifier Scroll<26><br>Read it to identify an item.
 202:$63E6	item_descriptions	<26>Mapping Scroll<26><br>Reveals the floor's layout and<br>the locations of monsters and<br>items.
 202:$641B	item_descriptions	<26>Pot-upsize Scroll<26><br>Read it to increase a Pot's<br>capacity.
@@ -162,23 +162,23 @@ id	sections	english
 202:$6B8D	item_descriptions	<26>Unlucky Staff<26><br>Wave it at a monster to lower<br>its level. Some monsters are<br>immune.
 202:$6BD8	item_descriptions	<26>Disguising Staff<26><br>Wave it at a monster to turn<br>it into a decoy for you.
 202:$6C08	item_descriptions	<26>Switching Staff<26><br>Wave it at a monster to swap<br>places with it.
-202:$6C3D	item_descriptions	<26>Skull Staff<26><br>Wave it at a monster to cause<br>one of several random effects.
+202:$6C3D	item_descriptions	<26>Skull Mage's Staff<26><br>Wave it at a monster to cause<br>one of several random effects.
 202:$6C65	item_descriptions	<26>Paralyzing Staff<26><br>Wave it at a monster to<br>paralyze it indefinitely.<br>Attacking it ends the effect.
 202:$6CAC	item_descriptions	<26>Narrow-escape Staff<26><br>Wave it at a monster to warp<br>it to the exit and paralyze it.
 202:$6CEA	item_descriptions	<26>Empathetic Staff<26><br>Wave it at a monster to make<br>it share any damage you take.<br>Only one monster can be<br>linked at a time.
 202:$6D47	item_descriptions	<26>Sealing Staff<26><br>Wave it at a monster to seal<br>its special abilities.
-202:$6D79	item_descriptions	<26>Change Staff<26><br>Wave it at a monster to turn<br>it into a different monster.
-202:$6DAC	item_descriptions	<26>Failure Staff<26><br>Wave it at a monster to make<br>its direct attacks miss.
-202:$6DE1	item_descriptions	<26>Herb Effect Staff<26><br>Stand on a Grass and wave it<br>to launch that Grass's effect<br>as a magic projectile.
-202:$6E1D	item_descriptions	<26>Herb Reception Staff<26><br>Stand on a Grass and wave it<br>to send that Grass's effect<br>toward yourself.
+202:$6D79	item_descriptions	<26>Presto Staff<26><br>Wave it at a monster to turn<br>it into a different monster.
+202:$6DAC	item_descriptions	<26>Miss Staff<26><br>Wave it at a monster to make<br>its direct attacks miss.
+202:$6DE1	item_descriptions	<26>Grass Tosser<26><br>Stand on a Grass and wave it<br>to launch that Grass's effect<br>as a magic projectile.
+202:$6E1D	item_descriptions	<26>Grass Gainer<26><br>Stand on a Grass and wave it<br>to send that Grass's effect<br>toward yourself.
 202:$6E57	item_descriptions	<26>Burrowing Staff<26><br>Wave it to destroy a wall.
 202:$6E75	item_descriptions	<26>Balance Staff<26><br>Simply carrying it prevents<br>you from falling over. Use it<br>on a monster to trip it.
 202:$6EB7	item_descriptions	<26>Invisible Staff<26><br>Wave it to turn whatever it<br>hits invisible.
 202:$6EDE	item_descriptions	<26>Quarter Staff<26><br>Wave it at a monster to<br>reduce its HP to one quarter.
-202:$6F0C	item_descriptions	<26>Attract Staff<26><br>Wave it at an object to pull<br>the object toward you. It<br>cannot pull shop merchandise.
+202:$6F0C	item_descriptions	<26>Pull Staff<26><br>Wave it at an object to pull<br>the object toward you. It<br>cannot pull shop merchandise.
 202:$6F5B	item_descriptions	<26>Bufu's Staff<26><br>Wave it at a monster to turn<br>it into Meat.
-202:$6F82	item_descriptions	<26>Raging Staff<26><br>Wave it at a monster to<br>enrage it and raise its attack<br>power. A monster with a<br>special ability will always<br>use that ability when<br>attacking.
-202:$6FF2	item_descriptions	<26>Accelerating Staff<26><br>Wave it to make the target<br>move faster.
+202:$6F82	item_descriptions	<26>Rage Staff<26><br>Wave it at a monster to<br>enrage it and raise its attack<br>power. A monster with a<br>special ability will always<br>use that ability when<br>attacking.
+202:$6FF2	item_descriptions	<26>Swift Staff<26><br>Wave it to make the target<br>move faster.
 202:$701C	item_descriptions	<26>Vaulting Staff<26><br>Wave it to move to the point<br>it hits. You cannot move there<br>if a wall blocks the way.
 202:$705D	item_descriptions	<26>Flash Bomb Staff<26><br>Wave it toward a room you<br>have not entered. A ball of<br>light will illuminate its<br>interior.
 202:$70AA	item_descriptions	<26>Tenjin Staff<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
@@ -186,11 +186,11 @@ id	sections	english
 202:$7136	item_descriptions	<26>Preservation Pot<26><br>Items can be freely inserted<br>and removed.
 202:$7160	item_descriptions	<26>Upgrading Pot<26><br>Weapons and shields inside<br>may grow stronger on the next<br>floor. Staves gain charges.<br>After it activates once, it<br>becomes an Ordinary Pot.<br>Break it against a wall to<br>remove the contents.
 202:$71D5	item_descriptions	<26>Identifier Pot<26><br>Identifies items inserted<br>into it. Break it against a<br>wall to remove the contents.
-202:$7210	item_descriptions	<26>Healing Pot<26><br>Insert an item to restore HP.<br>The inserted item disappears.
+202:$7210	item_descriptions	<26>Heal Pot<26><br>Insert an item to restore HP.<br>The inserted item disappears.
 202:$7249	item_descriptions	<26>Degrading Pot<26><br>Weapons and shields inside<br>grow weaker on the next floor.<br>Staves lose charges. Break it<br>against a wall to remove the<br>contents.
 202:$729D	item_descriptions	<26>Transmutation Pot<26><br>Transforms items inserted<br>into it. Break it against a<br>wall to remove the contents.
 202:$72D5	item_descriptions	<26>Synthesis Pot<26><br>Synthesizes weapons, shields,<br>Staves, or Bracelets.<br>Categories cannot be mixed.<br>The first item absorbs later<br>items' abilities and strength.<br>Staff charges merge. Break it<br>against a wall to remove the<br>contents.
-202:$7371	item_descriptions	<26>Sealing Pot<26><br>Throw it at a monster to<br>confine the monster inside. It<br>can hold only one. Breaking<br>the Pot frees the monster but<br>leaves it blinded.
+202:$7371	item_descriptions	<26>Imprison Pot<26><br>Throw it at a monster to<br>confine the monster inside. It<br>can hold only one. Breaking<br>the Pot frees the monster but<br>leaves it blinded.
 202:$73D4	item_descriptions	<26>Absorb Pot<26><br>Captures a monster's Ability.<br>Each press uses the next<br>captured ability in order.<br>Only one ability can be used<br>at a time, and its effect<br>lasts for one turn.
 202:$743B	item_descriptions	<26>Cannon Pot<26><br>Insert an item, then press<br>the Pot to fire it as a<br>projectile. It pierces<br>anything it hits.
 202:$7480	item_descriptions	<26>Water Pot<26><br>Stores water, but is empty<br>when found. Fill it at a water<br>source. Water lowers the<br>attack of sword-wielding<br>monsters and destroys traps.

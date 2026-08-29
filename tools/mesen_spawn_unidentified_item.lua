@@ -62,7 +62,7 @@ end
 -- One valid representative of every natively unidentified category. Item IDs and root
 -- indices follow the category partitions proven in tools/surfaces.py.
 local TARGETS = {
-  passage_bracelet = target("Passage Bracelet", 0x3F, 0x03, 0x00, 0x00),
+  passage_bracelet = target("Waterwalk Bracelet", 0x3F, 0x03, 0x00, 0x00),
   herb = target("Herb", 0x68, 0x06, 0x1B, 0x1B),
   windblade_scroll = target("Windblade Scroll", 0x7F, 0x07, 0x32, 0x32),
   knockback_staff = target("Knockback Staff", 0x9E, 0x08, 0x51, 0x51),

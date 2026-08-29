@@ -293,7 +293,7 @@ class LiveLocalizedItemMessageTests(unittest.TestCase):
             place_events.count(
                 english.encode("Put down ")
                 + b"\xF3"
-                + english.encode("Cudgel.")
+                + english.encode("Club.")
                 + b"\xFF"
             ),
         )

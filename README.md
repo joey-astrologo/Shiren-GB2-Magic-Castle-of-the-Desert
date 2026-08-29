@@ -41,7 +41,7 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, spells, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **365-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **371-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -188,6 +188,7 @@ Start with the [documentation index](docs/README.md). In particular:
 
 - [Current project status](docs/project-status.md)
 - [Translation policy](docs/translation-policy.md)
+- [Item terminology audit and review catalogue](docs/ITEM_TERMINOLOGY.md)
 - [Story editing workflow](docs/editing-workflow.md)
 - [Build and test guide](docs/testing-and-build.md)
 - [Engineering overview](docs/engineering-overview.md)

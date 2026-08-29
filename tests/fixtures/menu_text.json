@@ -141,5 +141,5 @@
     "help_popup_secrets": {"record": "192:$6FA3", "text": "Secrets", "pixel_budget": 40, "composer_pixels": 36, "renderer_pixels": 36},
     "control_help_heading": {"record": "192:$6FAB", "text": "Control Guide", "pixel_budget": 141, "composer_pixels": 64, "renderer_pixels": 64}
   },
-  "translation_sha1": "a4328b9a58a77160c37853878357cd2ff836ee52"
+  "translation_sha1": "61276d51328638da00363eed4f873fdd3eb30f44"
 }

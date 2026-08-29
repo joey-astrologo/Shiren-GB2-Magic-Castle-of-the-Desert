@@ -127,12 +127,12 @@
   "warning_records": 201,
   "warning_totals": {
     "layout_distinct_combinations": 30570,
-    "layout_one_line": 15823,
-    "layout_soft_wrap": 14747,
+    "layout_one_line": 15850,
+    "layout_soft_wrap": 14720,
     "layout_unsafe": 0,
-    "one_line": 351776,
+    "one_line": 351803,
     "runtime_value_combinations": 741656,
-    "soft_wrap": 389880,
+    "soft_wrap": 389853,
     "unsafe": 0
   }
 }

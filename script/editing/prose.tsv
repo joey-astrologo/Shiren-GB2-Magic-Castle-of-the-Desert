@@ -847,7 +847,7 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 49	saruyama_quest	postgame	Saruyama side quest	18	198:$43B4	Gaibara: Nooo!<page><box>
 49	saruyama_quest	postgame	Saruyama side quest	19	198:$43C3	Gaibara: UNACCEPTABLE!!<page><box>
 49	saruyama_quest	postgame	Saruyama side quest	20	198:$43D9	Saruyama: M-Master!!<page><box>
-49	saruyama_quest	postgame	Saruyama side quest	21	198:$43EB	Gaibara: Ugh... I thought it would be easy...<page><box>Gaibara: I let my guard down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you suffered such a fate...<page><box>Saruyama: What kind of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters does not raise your level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something even more important...<page><box>Gaibara: This dungeon is conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find <quoteOpen>Sealing Pots<quoteClose> inside.<page><box>Gaibara: Throw one at a monster to seal it inside.<page><box>Gaibara: Ugh... Traps are my specialty, but...<page><box>Gaibara: this dungeon does not seem to suit me...<page><box>Saruyama: You do smash every Pot you see, Master.<page><box>
+49	saruyama_quest	postgame	Saruyama side quest	21	198:$43EB	Gaibara: Ugh... I thought it would be easy...<page><box>Gaibara: I let my guard down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you suffered such a fate...<page><box>Saruyama: What kind of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters does not raise your level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something even more important...<page><box>Gaibara: This dungeon is conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find <quoteOpen>Imprison Pots<quoteClose> inside.<page><box>Gaibara: Throw one at a monster to seal it inside.<page><box>Gaibara: Ugh... Traps are my specialty, but...<page><box>Gaibara: this dungeon does not seem to suit me...<page><box>Saruyama: You do smash every Pot you see, Master.<page><box>
 49	saruyama_quest	postgame	Saruyama side quest	22	198:$45E5	Gaibara: Silence!!
 49	saruyama_quest	postgame	Saruyama side quest	23	198:$45F6	Saruyama: Gah!!
 49	saruyama_quest	postgame	Saruyama side quest	24	198:$4602	Gaibara: <name>...<page><box>Gaibara: I beg you.<page><box>Gaibara: Will you retrieve the Ultimate Clay in my stead?<page><box>
@@ -861,7 +861,7 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 50	ultimate_soil	postgame	Ultimate Soil acquisition	2	198:$4785	Gaibara: Th-This is the Ultimate Clay...<page><box>
 50	ultimate_soil	postgame	Ultimate Soil acquisition	3	198:$47A1	Gaibara: This luster... This elasticity...<page><box>Gaibara: Magnificent.<page><box>Gaibara: This is truly the Ultimate Clay.<page><box>Gaibara: At last, I can devote myself to making the Pot of my dreams.<page><box>Gaibara: You have my thanks, <name>! Truly!!<page><box>Gaibara: Take this small token of my gratitude. Use it well.<page><box>
 50	ultimate_soil	postgame	Ultimate Soil acquisition	4	198:$485F	Your inventory is full, so you cannot accept it.<page><box>Please choose one item to discard.<page><box>
-50	ultimate_soil	postgame	Ultimate Soil acquisition	5	198:$488E	<name> received the Adamant Pickaxe from Gaibara!<delay:F0><delay:C0><page><box>
+50	ultimate_soil	postgame	Ultimate Soil acquisition	5	198:$488E	<name> received the Wonder Pick from Gaibara!<delay:F0><delay:C0><page><box>
 50	ultimate_soil	postgame	Ultimate Soil acquisition	6	198:$48B4	Gaibara: Good! Now I shall use this clay to make my Pot.<page><box>
 50	ultimate_soil	postgame	Ultimate Soil acquisition	7	198:$48DB	Gaibara: Saruyama!<page><box>Gaibara: We are going home!<page><box>Gaibara: Back to my workshop!<page><box>
 50	ultimate_soil	postgame	Ultimate Soil acquisition	8	198:$48FB	Saruyama: Y-Yes, Master!<page><box>
@@ -897,11 +897,11 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 52	treasure_chest_a	postgame	Treasure-chest event A	7	198:$518E	Blacksmith: <name>, I'd like you to have this shield...<page><box>Blacksmith: But your inventory is full.<page><box>Blacksmith: Please make room for one item.<page><box>
 52	treasure_chest_a	postgame	Treasure-chest event A	8	198:$51E8	Blacksmith: You don't want it...?<page><box>
 52	treasure_chest_a	postgame	Treasure-chest event A	9	198:$51FC	Blacksmith: <name>...<page><box>Blacksmith: You're a true Wanderer.<page><box>Blacksmith: This shield belongs in your hands.<page><box>Blacksmith: Please, take it.<page><box>
-52	treasure_chest_a	postgame	Treasure-chest event A	10	198:$5257	<name> obtained the Stormward!<delay:F0><delay:C0><page>
+52	treasure_chest_a	postgame	Treasure-chest event A	10	198:$5257	<name> obtained the Rasen Fuuma!<delay:F0><delay:C0><page>
 53	treasure_chest_b	postgame	Treasure-chest event B	1	198:$527D	Koppa: <name>! Isn't that a treasure chest over there?<page><box>
 53	treasure_chest_b	postgame	Treasure-chest event B	2	198:$529D	Koppa: You need to discard something before you can take it!<page><box>
 53	treasure_chest_b	postgame	Treasure-chest event B	3	198:$52B8	Koppa: Let's head back.<page>
-53	treasure_chest_b	postgame	Treasure-chest event B	4	198:$52C8	<name> obtained the Stormward!<delay:F0><delay:C0><page>
+53	treasure_chest_b	postgame	Treasure-chest event B	4	198:$52C8	<name> obtained the Rasen Fuuma!<delay:F0><delay:C0><page>
 54	eastern_keep_expedition	postgame	Eastern Keep expedition	1	198:$533B	Pekeji: This should be around the Eastern Keep...<page><box>
 54	eastern_keep_expedition	postgame	Eastern Keep expedition	2	198:$5363	Pekeji: Monsters are still roaming around here...<page><box>
 54	eastern_keep_expedition	postgame	Eastern Keep expedition	3	198:$5384	Pekeji: You're still recovering, my Lord, so please be careful.<page><box>
@@ -1661,7 +1661,7 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	36	205:$66E5	Wanda: I'm getting ready to fight.<page>
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	37	205:$66FD	Wanda: I wonder what the story is about.<page>
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	38	205:$670D	Wanda: Should I sprinkle some water?<page>
-71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	39	205:$671D	Wanda: We bought a Cudgel and a Wood Shield for protection.<page><box>Wanda: Those two work well together, so they give you more power.<page>
+71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	39	205:$671D	Wanda: We bought a Club and a Wooden Shield for protection.<page><box>Wanda: Those two work well together, so they give you more power.<page>
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	40	205:$676F	Wanda: Hmm...<page>
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	41	205:$677C	Wanda: Zagan comes down into town sometimes.<page><box>Wanda: He seemed to approach any outsider he found, but...<page>
 71	training_hall_npcs	town_dialogue	Training Hall NPC dialogue	42	205:$67C9	Wanda: Could it be connected to the spreading desert?!<page>

@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5667,
   "explicit_empty_records": 54,
-  "workspace_sha1": "ade5bd45e351516e491869dd06fa7276fff417bc",
+  "workspace_sha1": "c1a42a991a9c0fb8893e2450efccf93d2f7c395e",
   "categories": [
     {
       "name": "glossary",
@@ -26,7 +26,7 @@
         "trap_names": 22,
         "unidentified_item_appearances": 123
       },
-      "overlay_sha1": "66028e0efe070aaedbead452c24fdaa26d00a813"
+      "overlay_sha1": "0e437eea367a45e3aa6397a6e01970fbc226bb96"
     },
     {
       "name": "items",
@@ -37,7 +37,7 @@
       "sections": {
         "item_descriptions": 216
       },
-      "overlay_sha1": "23a1d4ea50a5076cf7682afec349ccdb586eab3a"
+      "overlay_sha1": "5fad69ffa608f6153288a0edddb7ad4f7565720a"
     },
     {
       "name": "monsters",
@@ -67,7 +67,7 @@
         "ranking_titles_and_grade_labels": 74,
         "trap_menu_status": 1
       },
-      "overlay_sha1": "e7710d42ae2c69643e63e5ee80a851b9e1db19e6"
+      "overlay_sha1": "1b346818bc0d21e79edb859431b4979e07ce5014"
     },
     {
       "name": "help",
@@ -81,7 +81,7 @@
         "wanderer_secret_pages": 96,
         "wanderers_guide": 21
       },
-      "overlay_sha1": "85cb5322cdf01d26c846f6d93f21a5cf668ef7e7"
+      "overlay_sha1": "22b884ffb5749e93e94c7003d42733c068c135f5"
     },
     {
       "name": "messages",
@@ -106,7 +106,7 @@
         "ending_and_credits_text": 18,
         "story_and_event_dialogue": 1768
       },
-      "overlay_sha1": "9110ae9e2971a8da7c618465bfa04a86376c0d23"
+      "overlay_sha1": "6c9ae444898af1a8e0de58c5a344bbc405563569"
     },
     {
       "name": "internal",

@@ -37,7 +37,7 @@ class SynthesisLabContractTests(unittest.TestCase):
         self.assertEqual(bytes.fromhex(objects["donor"]["record_hex"]), lua_bytes(source, "MINOTAUR_AXE"))
         self.assertEqual(bytes.fromhex(objects["pot"]["record_hex"]), lua_bytes(source, "SYNTHESIS_POT"))
         self.assertEqual(objects["pot"]["cell_offsets"], list(lua_bytes(source, "POT_CELL_OFFSETS")))
-        self.assertIn("Synthesis Pot > Put In > Cudgel", source)
+        self.assertIn("Synthesis Pot > Put In > Club", source)
         self.assertIn("repeat with Axe of the Minotaur", source)
         for key, checksum in FIXTURE["screens"].items():
             constant = {

@@ -450,7 +450,7 @@ id	sections	english
 192:$5A59	actor_names_tier_3	Invisible Thing
 192:$5A60	actor_names_tier_3	Invisible Thing
 192:$5C17	identified_item_names	Talisman
-192:$5C1C	identified_item_names	Cudgel
+192:$5C1C	identified_item_names	Club
 192:$5C21	identified_item_names	Bronze Sword
 192:$5C2B	identified_item_names	Katana
 192:$5C2F	identified_item_names	Doutanuki
@@ -458,7 +458,7 @@ id	sections	english
 192:$5C3D	identified_item_names	Manji Kabura
 192:$5C48	identified_item_names	Sickle of Salvation
 192:$5C51	identified_item_names	Pickaxe
-192:$5C56	identified_item_names	Adamant Pickaxe
+192:$5C56	identified_item_names	Wonder Pick
 192:$5C5F	identified_item_names	Accurate Sword
 192:$5C67	identified_item_names	Axe of the Minotaur
 192:$5C71	identified_item_names	Kama Itachi
@@ -473,46 +473,46 @@ id	sections	english
 192:$5CC2	identified_item_names	Wooden Mallet
 192:$5CC7	identified_item_names	Jagged Sword
 192:$5CCF	identified_item_names	Healing Sword
-192:$5CD7	identified_item_names	Ookabuto Axe
+192:$5CD7	identified_item_names	Beetle Axe
 192:$5CE0	identified_item_names	Demon Slayer
 192:$5CE8	identified_item_names	Aura Spear
 192:$5CF0	identified_item_names	Bufu's Cleaver
 192:$5CF9	identified_item_names	Chaos Axe
 192:$5D01	identified_item_names	Soul Sickle
-192:$5D09	identified_item_names	Air Slayer
+192:$5D09	identified_item_names	Sky Splitter
 192:$5D10	identified_item_names	Crescent Blade
 192:$5D19	identified_item_names	Fuuma Katana
-192:$5D20	identified_item_names	Hidamari's Sword
-192:$5D28	identified_item_names	Ration Shield
-192:$5D30	identified_item_names	Bronzeward
-192:$5D3A	identified_item_names	Wood Shield
+192:$5D20	identified_item_names	Hidamari Sword
+192:$5D28	identified_item_names	Shield of Sating
+192:$5D30	identified_item_names	Bronze Shield
+192:$5D3A	identified_item_names	Wooden Shield
 192:$5D42	identified_item_names	Iron Shield
-192:$5D4A	identified_item_names	Dragonward
-192:$5D53	identified_item_names	Windshield
-192:$5D5B	identified_item_names	Spiked Ward
-192:$5D64	identified_item_names	Armor Ward
+192:$5D4A	identified_item_names	Dragon Shield
+192:$5D53	identified_item_names	Fuuma Shield
+192:$5D5B	identified_item_names	Counter Shield
+192:$5D64	identified_item_names	Heavy Shield
 192:$5D6C	identified_item_names	Echo Shield
-192:$5D74	identified_item_names	Evasive Shield
+192:$5D74	identified_item_names	Watchful Shield
 192:$5D7D	identified_item_names	Demon Shield
-192:$5D85	identified_item_names	Fragile Shield
+192:$5D85	identified_item_names	Break-Off Shield
 192:$5D8E	identified_item_names	Blast Shield
 192:$5D99	identified_item_names	Walrus Shield
-192:$5D9F	identified_item_names	Stormward
+192:$5D9F	identified_item_names	Rasen Fuuma
 192:$5DAA	identified_item_names	Mamel Shield
-192:$5DB1	identified_item_names	Kabra's Armor
-192:$5DBC	identified_item_names	Missile Shield
-192:$5DC4	identified_item_names	Deflect Shield
-192:$5DCD	identified_item_names	Curseless Shield
-192:$5DD6	identified_item_names	Karakuroid Shield
-192:$5DE0	identified_item_names	Pickpocket Shield
+192:$5DB1	identified_item_names	Kabura's Guard
+192:$5DBC	identified_item_names	Dodge Shield
+192:$5DC4	identified_item_names	Reflect Shield
+192:$5DCD	identified_item_names	Holy Shield
+192:$5DD6	identified_item_names	Traproid Shield
+192:$5DE0	identified_item_names	Froggo Shield
 192:$5DE7	identified_item_names	Happy Shield
 192:$5DEF	identified_item_names	Power Shield
-192:$5DF7	identified_item_names	Satori Shield
+192:$5DF7	identified_item_names	Nirvana Shield
 192:$5DFE	identified_item_names	Prism Shield
-192:$5E06	identified_item_names	Ookabuto Shield
+192:$5E06	identified_item_names	Beetle Shield
 192:$5E0F	identified_item_names	Keshin Shield
 192:$5E16	identified_item_names	Unused Shield 2
-192:$5E1A	identified_item_names	Passage Bracelet
+192:$5E1A	identified_item_names	Waterwalk Bracelet
 192:$5E23	identified_item_names	Trapper's Bracelet
 192:$5E2C	identified_item_names	Healing Bracelet
 192:$5E36	identified_item_names	Dreaded Bracelet
@@ -523,27 +523,27 @@ id	sections	english
 192:$5E69	identified_item_names	Focusing Bracelet
 192:$5E75	identified_item_names	Strength Bracelet
 192:$5E7E	identified_item_names	Leaping Bracelet
-192:$5E88	identified_item_names	Diet Bracelet
-192:$5E93	identified_item_names	Binge Bracelet
-192:$5E9D	identified_item_names	Search Bracelet
-192:$5EA7	identified_item_names	Antidrain Bracelet
-192:$5EB3	identified_item_names	Loud Bracelet
-192:$5EBD	identified_item_names	Turn Bracelet
-192:$5EC6	identified_item_names	Paper Bracelet
-192:$5ED1	identified_item_names	Explosive Bracelet
-192:$5EDB	identified_item_names	Miss Bracelet
+192:$5E88	identified_item_names	No Hunger Bracelet
+192:$5E93	identified_item_names	Hunger Bracelet
+192:$5E9D	identified_item_names	Vision Bracelet
+192:$5EA7	identified_item_names	No Drain Bracelet
+192:$5EB3	identified_item_names	Alarm Bracelet
+192:$5EBD	identified_item_names	Bend Bracelet
+192:$5EC6	identified_item_names	Paper Thin Bracelet
+192:$5ED1	identified_item_names	Blasting Bracelet
+192:$5EDB	identified_item_names	Bad-aim Bracelet
 192:$5EE5	identified_item_names	Trap Seek Bracelet
-192:$5EEF	identified_item_names	Swipe Bracelet
-192:$5EF9	identified_item_names	No-Control Bracelet
-192:$5F03	identified_item_names	Anti-Feeble Bracelet
+192:$5EEF	identified_item_names	Critical Bracelet
+192:$5EF9	identified_item_names	No Control Bracelet
+192:$5F03	identified_item_names	Cleansing Bracelet
 192:$5F0D	identified_item_names	Sturdy Bracelet
-192:$5F18	identified_item_names	Golden Bracelet
-192:$5F20	identified_item_names	Nfu Bracelet
+192:$5F18	identified_item_names	Gold Bracelet
+192:$5F20	identified_item_names	Nfuu Bracelet
 192:$5F29	identified_item_names	Wooden Arrow
 192:$5F2F	identified_item_names	Iron Arrow
 192:$5F35	identified_item_names	Silver Arrow
 192:$5F3B	identified_item_names	Knockback Arrow
-192:$5F44	identified_item_names	Fatal Arrow
+192:$5F44	identified_item_names	Killer Arrow
 192:$5F4B	identified_item_names	Poison Arrow
 192:$5F50	identified_item_names	Karanba Arrow
 192:$5F58	identified_item_names	Onigiri
@@ -572,7 +572,7 @@ id	sections	english
 192:$6001	identified_item_names	Weeds
 192:$6006	identified_item_names	Leaping Grass
 192:$600D	identified_item_names	Swift Grass
-192:$6014	identified_item_names	Ranzan Herb
+192:$6014	identified_item_names	Ranzan Grass
 192:$601C	identified_item_names	Identifier Scroll
 192:$6026	identified_item_names	Mapping Scroll
 192:$602F	identified_item_names	Pot-upsize Scroll
@@ -612,23 +612,23 @@ id	sections	english
 192:$6192	identified_item_names	Unlucky Staff
 192:$6199	identified_item_names	Disguising Staff
 192:$61A1	identified_item_names	Switching Staff
-192:$61AA	identified_item_names	Skull Staff
+192:$61AA	identified_item_names	Skull Mage's Staff
 192:$61B1	identified_item_names	Paralyzing Staff
 192:$61BA	identified_item_names	Narrow-escape Staff
 192:$61C4	identified_item_names	Empathetic Staff
 192:$61CD	identified_item_names	Sealing Staff
-192:$61D5	identified_item_names	Change Staff
-192:$61DC	identified_item_names	Failure Staff
-192:$61E4	identified_item_names	Herb Effect Staff
-192:$61EC	identified_item_names	Herb Reception Staff
+192:$61D5	identified_item_names	Presto Staff
+192:$61DC	identified_item_names	Miss Staff
+192:$61E4	identified_item_names	Grass Tosser
+192:$61EC	identified_item_names	Grass Gainer
 192:$61F4	identified_item_names	Burrowing Staff
 192:$61FC	identified_item_names	Balance Staff
 192:$6206	identified_item_names	Invisible Staff
 192:$620E	identified_item_names	Quarter Staff
-192:$6217	identified_item_names	Attract Staff
+192:$6217	identified_item_names	Pull Staff
 192:$621F	identified_item_names	Bufu's Staff
-192:$6226	identified_item_names	Raging Staff
-192:$622D	identified_item_names	Accelerating Staff
+192:$6226	identified_item_names	Rage Staff
+192:$622D	identified_item_names	Swift Staff
 192:$6235	identified_item_names	Vaulting Staff
 192:$623D	identified_item_names	Flash Bomb Staff
 192:$6247	identified_item_names	Tenjin Staff
@@ -636,11 +636,11 @@ id	sections	english
 192:$6258	identified_item_names	Preservation Pot
 192:$625F	identified_item_names	Upgrading Pot
 192:$6267	identified_item_names	Identifier Pot
-192:$626F	identified_item_names	Healing Pot
+192:$626F	identified_item_names	Heal Pot
 192:$6277	identified_item_names	Degrading Pot
 192:$627F	identified_item_names	Transmutation Pot
 192:$6286	identified_item_names	Synthesis Pot
-192:$628E	identified_item_names	Sealing Pot
+192:$628E	identified_item_names	Imprison Pot
 192:$6296	identified_item_names	Absorb Pot
 192:$62A0	identified_item_names	Cannon Pot
 192:$62A8	identified_item_names	Water Pot
@@ -854,7 +854,7 @@ id	sections	english
 193:$70C9	location_names	Road to Rescue
 193:$70D2	location_names	Castle Prison
 193:$70DE	location_names	Pot Cave
-194:$61EE	item_ability_roots	Passage
+194:$61EE	item_ability_roots	Waterwalk
 194:$61F2	item_ability_roots	Trapper's
 194:$61F6	item_ability_roots	Healing
 194:$61FB	item_ability_roots	Dreaded
@@ -865,22 +865,22 @@ id	sections	english
 194:$6215	item_ability_roots	Focusing
 194:$621C	item_ability_roots	Strength
 194:$6220	item_ability_roots	Leaping
-194:$6225	item_ability_roots	Diet
-194:$622B	item_ability_roots	Binge
-194:$6230	item_ability_roots	Search
-194:$6235	item_ability_roots	Antidrain
-194:$623C	item_ability_roots	Loud
-194:$6241	item_ability_roots	Turn
-194:$6245	item_ability_roots	Paper
-194:$624B	item_ability_roots	Explosive
-194:$6250	item_ability_roots	Miss
+194:$6225	item_ability_roots	No Hunger
+194:$622B	item_ability_roots	Hunger
+194:$6230	item_ability_roots	Vision
+194:$6235	item_ability_roots	No Drain
+194:$623C	item_ability_roots	Alarm
+194:$6241	item_ability_roots	Bend
+194:$6245	item_ability_roots	Paper Thin
+194:$624B	item_ability_roots	Blasting
+194:$6250	item_ability_roots	Bad-aim
 194:$6255	item_ability_roots	Trap Seek
-194:$625A	item_ability_roots	Swipe
-194:$625F	item_ability_roots	No-Control
-194:$6264	item_ability_roots	Anti-Feeble
+194:$625A	item_ability_roots	Critical
+194:$625F	item_ability_roots	No Control
+194:$6264	item_ability_roots	Cleansing
 194:$6269	item_ability_roots	Sturdy
-194:$626F	item_ability_roots	Golden
-194:$6272	item_ability_roots	Nfu
+194:$626F	item_ability_roots	Gold
+194:$6272	item_ability_roots	Nfuu
 194:$6276	item_ability_roots	Herb
 194:$627B	item_ability_roots	Otogirisou
 194:$6280	item_ability_roots	Seewell
@@ -940,23 +940,23 @@ id	sections	english
 194:$639E	item_ability_roots	Unlucky
 194:$63A2	item_ability_roots	Disguising
 194:$63A7	item_ability_roots	Switching
-194:$63AD	item_ability_roots	Skull
+194:$63AD	item_ability_roots	Skull Mage's
 194:$63B1	item_ability_roots	Paralyzing
 194:$63B7	item_ability_roots	Narrow-escape
 194:$63BE	item_ability_roots	Empathetic
 194:$63C4	item_ability_roots	Sealing
-194:$63C9	item_ability_roots	Change
-194:$63CD	item_ability_roots	Failure
-194:$63D2	item_ability_roots	Herb Effect
-194:$63D7	item_ability_roots	Herb Reception
+194:$63C9	item_ability_roots	Presto
+194:$63CD	item_ability_roots	Miss
+194:$63D2	item_ability_roots	Grass Tosser
+194:$63D7	item_ability_roots	Grass Gainer
 194:$63DC	item_ability_roots	Burrowing
 194:$63E1	item_ability_roots	Balance
 194:$63E8	item_ability_roots	Invisible
 194:$63ED	item_ability_roots	Quarter
-194:$63F3	item_ability_roots	Attract
+194:$63F3	item_ability_roots	Pull
 194:$63F8	item_ability_roots	Bufu's
-194:$63FC	item_ability_roots	Raging
-194:$6400	item_ability_roots	Accelerating
+194:$63FC	item_ability_roots	Rage
+194:$6400	item_ability_roots	Swift
 194:$6405	item_ability_roots	Vaulting
 194:$640A	item_ability_roots	Flash Bomb
 194:$6411	item_ability_roots	Tenjin
@@ -964,11 +964,11 @@ id	sections	english
 194:$641C	item_ability_roots	Preservation
 194:$6420	item_ability_roots	Upgrading
 194:$6425	item_ability_roots	Identifier
-194:$642A	item_ability_roots	Healing
+194:$642A	item_ability_roots	Heal
 194:$642F	item_ability_roots	Degrading
 194:$6434	item_ability_roots	Transmutation
 194:$6438	item_ability_roots	Synthesis
-194:$643D	item_ability_roots	XSealing
+194:$643D	item_ability_roots	XImprison
 194:$6443	item_ability_roots	Absorb
 194:$644A	item_ability_roots	Cannon
 194:$644F	item_ability_roots	Water

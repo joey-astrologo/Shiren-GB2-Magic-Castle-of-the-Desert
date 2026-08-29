@@ -34,6 +34,11 @@ Use modern category nouns consistently: `Bracelet`, `Grass`, `Scroll`, `Staff`, 
 `Pot`. Established individual names such as `Herb`, `Otogirisou`, and `Bufu's
 Riceball` retain their series wording even when their category noun differs.
 
+The approved item-name mapping and unresolved GB2-only terms are maintained in
+[ITEM_TERMINOLOGY.md](ITEM_TERMINOLOGY.md). An item rename is incomplete until its group-4
+name, group-6 description heading, applicable group-12 unidentified-item root, literal
+Help/UI/dialogue references, and terminology fixture agree.
+
 ## Dialogue and control rules
 
 - Author story/event prose in `script/editing/prose.tsv`; see the

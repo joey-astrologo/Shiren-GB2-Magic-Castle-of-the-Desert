@@ -8,7 +8,7 @@
   },
   "objects": {
     "base": {
-      "name": "Cudgel",
+      "name": "Club",
       "item_id": 1,
       "action_class": 1,
       "record_hex": "0101000000000000"
@@ -34,9 +34,9 @@
     }
   },
   "screens": {
-    "initial_items_fnv1a": "A6555144",
-    "pot_action_fnv1a": "443462AC",
-    "put_in_picker_fnv1a": "AF86C0BC",
+    "initial_items_fnv1a": "9DC680AC",
+    "pot_action_fnv1a": "30146354",
+    "put_in_picker_fnv1a": "827F47E4",
     "after_base_fnv1a": "64B86E47",
     "after_donor_fnv1a": "E0AC69E2"
   },
