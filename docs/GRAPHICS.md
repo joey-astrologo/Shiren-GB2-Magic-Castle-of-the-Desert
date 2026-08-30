@@ -22,7 +22,7 @@ Each asset still needs its producer and consumers mapped.
 | In-game proportional font | Thin Pixel-7 installed in native one-byte font slots | `english_font.py` |
 | Core Status template labels | English clone generated without mutating shared native graphics | `menu_graphics.py` |
 | Player-name keyboard | English A-Z/a-z/0-9 map and glyph resources | `name6.py` |
-| Big Moai promotional gift-code keyboard ("spells") | English A-Z/0-9 map and glyph resources | `spell_input.py` |
+| Big Moai promotional gift-code keyboard ("spells") | Approved four-row A-Z/0-9 map, private navigation, and below-label `DEL`/`OK` cursors | `spell_input.py` |
 | Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, and mode-specific hyphen cell | `blank_scroll.py` |
 | Unidentified-item keyboard | English map, dedicated mode-0 navigation, `FILL IN` history control, and full canonical-name display aligned to the native seven-cell field | `unidentified_names.py` |
 | Stairs popup geometry | Widened templates and background teardown | `stairs_menu.py` |

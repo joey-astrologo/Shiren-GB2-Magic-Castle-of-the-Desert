@@ -22,6 +22,10 @@ Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
 All fourteen title/demo and Wanderer's Secrets replay diaries also carry the localized
 six-character default name `Shiren`; they no longer fall back to their embedded Japanese
 snapshot name.
+The real Big Moai NPC route is fixture-tested from his locked story state through the
+localized `WISH` editor, the rendered Fortune Grass reward, and a stable follow-up
+conversation; a narrow Mesen helper changes only the two measured progression bytes needed
+to exercise it.
 The cracked-Bracelet suffix is also localized from the stock Japanese `(hibi)` composite
 to a compact `(Cr)` marker and replayed from the supplied failure state. Native dynamic
 item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
@@ -49,10 +53,10 @@ project work.
 | Story organization | **Complete** | 1,768 dialogue records in 72 scene families; complete editorial read-through remains |
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
-| Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
+| Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture the rescuer/Revival/resume/Thank-You routes and complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **416-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **427-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -141,6 +145,7 @@ python3 -m unittest \
   tests.test_save_summary \
   tests.test_name6 \
   tests.test_spell_input \
+  tests.test_big_moai \
   tests.test_blank_scroll \
   tests.test_mesen_blank_scroll \
   tests.test_unidentified_names \
@@ -211,6 +216,7 @@ Start with the [documentation index](docs/README.md). In particular:
 - [ROM and persistent-memory map](docs/ROM_BANK_MAP.md)
 - [Menu architecture](docs/MENU_STRUCTURE.md)
 - [Blank Scroll writing system](docs/BLANK_SCROLL.md)
+- [Big Moai spell system and manual unlock route](docs/BIG_MOAI.md)
 - [Wanderer Rescue password system](docs/RESCUE_SYSTEM.md)
 - [Unidentified item naming and manual test route](docs/UNIDENTIFIED_ITEM_NAMING.md)
 - [Dynamic item rows and visual gallery](docs/ITEM_FORMATTING.md)

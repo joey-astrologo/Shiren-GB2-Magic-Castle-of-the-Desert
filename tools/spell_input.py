@@ -45,7 +45,7 @@ NAVIGATION_NODES = 52
 NAVIGATION_RECORD_SIZE = 7
 NAVIGATION_SIZE = NAVIGATION_NODES * NAVIGATION_RECORD_SIZE
 NAVIGATION_SHA1 = "fd11cfa157fbccccb1f7965488d022beade29425"
-GENERATED_NAVIGATION_SHA1 = "bbaadc62278f36abe7d59af5a725655fb5ae7523"
+GENERATED_NAVIGATION_SHA1 = "1b7fe0984ad4003c2fb4ad9cfb00acc8b4af6d25"
 
 KEYBOARD_MAP_BANK = 4
 KEYBOARD_MAP_SOURCE_ADDRESS = 0x49C4
@@ -58,15 +58,14 @@ BACKSPACE_NODE = 50
 CONFIRM_NODE = 51
 UNREACHABLE_NODES = tuple(range(len(CHARACTERS), BACKSPACE_NODE))
 
-# The left block holds A-M.  The right block continues N-Z and places the
-# digits beneath it.  Logical columns are converted to tile/sprite positions
-# by the resource builders below.
+# Four balanced rows matching the reviewed mockup.  The left block holds A-T;
+# the right block finishes U-Z, then places the digits below it.  Logical
+# columns are converted to tile/sprite positions by the resource builders.
 DISPLAY_ROWS = (
-    ((0, "ABCDE"), (7, "NOPQR")),
-    ((0, "FGHIJ"), (7, "STUVW")),
-    ((0, "KLM"), (7, "XYZ")),
-    ((7, "01234"),),
-    ((7, "56789"),),
+    ((0, "ABCDE"), (7, "UVWXY")),
+    ((0, "FGHIJ"), (7, "Z")),
+    ((0, "KLMNO"), (7, "01234")),
+    ((0, "PQRST"), (7, "56789")),
 )
 
 
@@ -201,14 +200,14 @@ def english_navigation_table(rom):
             records[node][1] = stack[ordinal - 1] if ordinal else control
 
     left_top = node_at[(0, 0)]
-    left_bottom = node_at[(2, 0)]
+    left_bottom = node_at[(3, 0)]
     right_top = node_at[(0, 7)]
-    right_bottom = node_at[(4, 7)]
+    right_bottom = node_at[(3, 7)]
     records[BACKSPACE_NODE][:] = bytes(
-        (left_top, left_bottom, CONFIRM_NODE, CONFIRM_NODE, 9, 49, 9)
+        (left_top, left_bottom, CONFIRM_NODE, CONFIRM_NODE, 9, 57, 9)
     )
     records[CONFIRM_NODE][:] = bytes(
-        (right_top, right_bottom, BACKSPACE_NODE, BACKSPACE_NODE, 113, 49, 10)
+        (right_top, right_bottom, BACKSPACE_NODE, BACKSPACE_NODE, 113, 57, 10)
     )
 
     for node in UNREACHABLE_NODES:

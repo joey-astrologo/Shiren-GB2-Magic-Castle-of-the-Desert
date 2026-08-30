@@ -139,6 +139,61 @@ labels. Wanderer Rescue instead uses modes 5-8, code lengths 12/9/15/13, and the
 builders, and validators; never infer protocol ownership from a generated category name.
 See [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 
+## A full Big Moai code is already positioned on OK
+
+**Tempting assumption:** after entering the fourth spell character, navigate from that
+letter to the visible `OK` control.
+
+**Failure:** mode 3 automatically changes `$C14F` to node `$33` (`OK`) when the four-byte
+field fills. The first live `WISH` replay then followed a computed path from `H`, walked
+back onto `J`, and replaced the final byte. The editor correctly submitted `WISJ`, so the
+native unknown-spell response looked like a translation or comparison failure.
+
+**Rule:** assert buffer `20 12 1C 11 FF`, position 3, and node `$33`, then press A with no
+directional input. This is parallel to Rescue's auto-`OK` behavior but uses a different
+mode and node. See [BIG_MOAI.md](BIG_MOAI.md).
+
+## Big Moai control cursors use sprite-space Y coordinates
+
+**Failure:** the underline cursor was drawn through `DEL` and `OK` instead of beneath them.
+
+**Cause:** both mode-3 control records used Y `$31` / 49, which corresponds to the label's
+tile row after the Game Boy sprite-coordinate bias. Character cells already used the next
+working underline baseline.
+
+**Rule:** the English `DEL` and `OK` control records use Y `$39` / 57. Keep their reviewed
+X/width triples `(9,57,9)` and `(113,57,10)`, and require separate live framebuffers for
+both selected states; keyboard-map presence alone cannot detect cursor overlap.
+
+## Unlock a gated subsystem at its proven branch, not with broad flags
+
+**Tempting assumption:** Big Moai's “not ready” response requires a collection of town,
+NPC, or reward flags, so a test helper should copy a later save or set several plausible
+bits.
+
+**Measured behavior:** event `74:$5CEF` checks only whether `$C3EF >= $09`; the supplied
+state has active/shadow pair `$06/$06`. Native save/load code serializes `$C3EF-$C3F0`
+together.
+
+**Rule:** for the disposable fixture, set only `$C3EF-$C3F0` to `$09`, verify both writes,
+and leave reward-usage, inventory, and all unrelated story state untouched.
+
+## F8 template selectors are not ordinary English letters
+
+**Tempting assumption:** `<cF8>` is a renderer no-op, so a following lowercase letter can
+be encoded through the localized English font like ordinary prose.
+
+**Failure:** event and menu templates consume the following native 0-9/a-z byte run as a
+runtime selector before rendering. Big Moai's `<cF8>g` reward-item slot originally encoded
+as `F8 10`; the first English encoder changed it to `F8 36`. Fortune Grass entered the
+inventory, but the formatter then jumped into graphics data at `03:$4F0E`, freezing the
+CPU and audio. A regression that stopped at inventory insertion incorrectly passed.
+
+**Rule:** preserve every F8 selector run byte-for-byte. The English source codec owns this
+escape rule, translation lint compares the ordered selector runs, and live tests must prove
+the interaction returns to a later stable state—not merely that an intermediate side effect
+occurred.
+
 ## An apparently unused navigation type may belong to an ordinary menu
 
 **Tempting assumption:** type `$13` in the bank-16 navigation pointer table is unused by

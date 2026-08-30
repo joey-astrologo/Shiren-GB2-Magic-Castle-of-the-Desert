@@ -26,6 +26,8 @@ native dialogue slot; it is not visible text.
 
 - Keep every `<lookup:...>`, `<number:...>`, `<name>` and `<copy:...>` token
   exactly.
+- Keep each `<cF8>` and its immediately following lowercase/digit selector run exactly;
+  those characters identify runtime variables and are not editable prose.
 - Keep source `<page>` and `<box>` boundaries in order. Add `<page><box>` when a
   new readable box is needed; `<page>` alone waits but does not reset the line.
 - Keep exact `<delay:...>` and `<cF9:...>` effects.

@@ -74,6 +74,25 @@ class EnglishCodecTests(unittest.TestCase):
         source = "Hi, <name>!<br>Floor <number:34:12>.<page><box>"
         self.assertEqual(source, english.decode_source(english.encode_source(source)))
 
+    def test_f8_template_selectors_keep_the_native_byte_domain(self):
+        # Ordinary English lowercase uses the localized code page, while the
+        # same letters after F8 are native runtime-template selectors.
+        self.assertEqual(b"\x36", english.encode_source("g"))
+        self.assertEqual(
+            bytes.fromhex("F810"),
+            english.encode_source("<cF8>g"),
+        )
+        self.assertEqual(
+            bytes.fromhex("F80A0FF19A"),
+            english.encode_source("<cF8>af<quoteClose>"),
+        )
+        for source in ("<cF8>g", "<cF8>af<quoteClose>", "<cF8>9 Gitan"):
+            with self.subTest(source=source):
+                self.assertEqual(
+                    source,
+                    english.decode_source(english.encode_source(source)),
+                )
+
     def test_smoke_encoding_is_frozen(self):
         smoke = FIXTURE["smoke"]
         self.assertEqual(smoke["source"], english_smoke.SOURCE)

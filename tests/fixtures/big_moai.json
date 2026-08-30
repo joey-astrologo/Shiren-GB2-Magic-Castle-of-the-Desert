@@ -1,0 +1,30 @@
+{
+  "locked_state": {
+    "path": "SaveStates/big-moai-locked.mss",
+    "sha1": "df8c3d11bd92251ee9b76c3e7cde2106b3e0d211",
+    "active_stage": 6,
+    "stage_shadow": 6,
+    "mirrored_sram_stage_offsets": [9495, 17687]
+  },
+  "unlock": {
+    "minimum_stage": 9,
+    "work_ram_offsets": [1007, 1008],
+    "locked_dialogue": {"group": 106, "index": 13},
+    "prompt_screen_fnv1a": "B8D7C4B0"
+  },
+  "wish_route": {
+    "runtime_index": 93,
+    "code": "WISH",
+    "encoded_hex": "20121C11",
+    "prompt_dialogue": {"group": 106, "index": 15},
+    "valid_dialogue": {"group": 106, "index": 17},
+    "reward_dialogue": {"group": 106, "index": 18},
+    "post_reward_dialogue": {"group": 106, "index": 26},
+    "editor_screen_fnv1a": "A9C014AD",
+    "delete_screen_fnv1a": "482B9456",
+    "ok_screen_fnv1a": "DDFA4A20",
+    "reward_screen_fnv1a": "CFE031E8",
+    "reward_item_id": 112,
+    "reward_item": "Fortune Grass"
+  }
+}

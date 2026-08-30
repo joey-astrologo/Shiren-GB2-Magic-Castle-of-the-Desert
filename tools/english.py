@@ -38,13 +38,29 @@ def _encode(text, source):
     out = bytearray()
     position = 0
     encoder = codec.encode_source if source else codec.encode
+    native_template_run = False
     while position < len(text):
         token = _TOKEN.match(text, position)
         if token:
             out += encoder(token.group())
+            native_template_run = source and token.group() == "<cF8>"
             position = token.end()
             continue
         character = text[position]
+        # F8 is a renderer no-op, but event/menu templates use it as an
+        # escape before runs of native Latin variable selectors.  Those
+        # selector bytes are consumed before ordinary rendering (for example
+        # ``<cF8>g`` is Big Moai's dynamic reward-item name).  Re-encoding the
+        # visible letter through the English code page changes $10 to $36 and
+        # sends the native formatter through an invalid path.  Preserve the
+        # original 0-9/a-z selector byte domain until the run ends.
+        if source and native_template_run and (
+            "0" <= character <= "9" or "a" <= character <= "z"
+        ):
+            out += codec.encode_source(character)
+            position += 1
+            continue
+        native_template_run = False
         try:
             out.append(ENGLISH_CODES[character])
         except KeyError:
@@ -69,11 +85,21 @@ def _decode(data, source):
     parser = codec.parse_source if source else codec.parse
     fallback = codec.decode_source if source else codec.decode
     out = []
+    native_template_run = False
     for token in parser(data):
+        if source and native_template_run and token.kind == "glyph":
+            native = codec.decode_source(token.raw)
+            if len(native) == 1 and (
+                "0" <= native <= "9" or "a" <= native <= "z"
+            ):
+                out.append(native)
+                continue
+            native_template_run = False
         if token.kind == "glyph" and token.code in CODE_TO_ENGLISH:
             out.append(CODE_TO_ENGLISH[token.code])
         else:
             out.append(fallback(token.raw))
+        native_template_run = source and token.code == 0xF8
     return "".join(out)
 
 

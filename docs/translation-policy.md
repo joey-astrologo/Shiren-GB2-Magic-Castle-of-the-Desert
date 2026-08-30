@@ -62,6 +62,9 @@ The dialogue controls are not interchangeable:
 - `<page>` waits for player input but does not reset the physical box or line cursor.
 - `<box>` resets the dialogue surface but does not itself guarantee a reader-controlled
   wait.
+- `<cF8>` introduces a native runtime-template selector run. Keep the following lowercase
+  letters/digits exactly as extracted; they are variable IDs, not prose. The build encodes
+  them in the native byte domain and lint rejects changed selectors.
 
 Count visible lines cumulatively from one `<box>` boundary to the next. If English would
 push a three-line box onto a fourth cumulative line, use `<page><box>` and repeat the

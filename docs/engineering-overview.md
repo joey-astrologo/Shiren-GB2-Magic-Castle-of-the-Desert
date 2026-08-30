@@ -74,10 +74,22 @@ only a launched replay does.
 The game calls these promotional/reward passwords "spells." Chunsoft published codes on
 cards and in publications; players enter them at Big Moai to receive rewards. This is
 independent of Wanderer Rescue. The native comparison contract is exactly four bytes.
-Mode 3 is localized as a compact A-Z/0-9 editor; it cannot be expanded to arbitrary-length
-prose without changing the runtime contract. Bank 252 holds the localized keyboard/logic
+Mode 3 is localized as the approved four-row A-Z/0-9 editor with below-label `DEL`/`OK`
+cursors; it cannot be expanded to arbitrary-length prose without changing the runtime contract.
+Bank 252 holds the localized keyboard/logic
 and all 100 English runtime codes. Matching internal diagnostic labels and the seven story
 clues are generated from the same mapping so they cannot drift.
+
+The user-supplied locked NPC state proved the availability mechanism: event
+`74:$5CEF` enters group `$6A` index `$0D` while story stage `$C3EF < $09` and reaches the
+spell route at stage 9. `$C3F0` is the serialized stage shadow. The narrow Mesen helper
+changes only that pair. A live controller fixture now starts from the locked state, runs
+the production helper, visits the corrected `DEL` cursor, enters `WISH`, freezes the native
+auto-selection of the corrected `OK` cursor, and
+asserts that item `$70` (Fortune Grass) is added. It also freezes the rendered reward and
+re-enters conversation to prove the event returned safely. F8-prefixed template selectors
+remain in their native byte domain even inside English source; ordinary lowercase encoding
+would corrupt the dynamic reward slot. See [BIG_MOAI.md](BIG_MOAI.md).
 
 ## Wanderer Rescue passwords
 

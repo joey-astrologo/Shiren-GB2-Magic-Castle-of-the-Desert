@@ -115,7 +115,8 @@ rescue codebook. The stronger local evidence does **not** support that conclusio
 Therefore, do not restore or freeze group 23 as rescue data. It remains owned by the Big
 Moai promotional gift-code system unless a direct rescue decoder reference is later
 proven. The rescue encoder/decoder must be traced from modes 5-8 and their callers rather
-than inferred from an extracted category label.
+than inferred from an extracted category label. Its independent gate, `WISH` reward route,
+and manual fixture are documented in [BIG_MOAI.md](BIG_MOAI.md).
 
 ## Password sizes and encoded data
 

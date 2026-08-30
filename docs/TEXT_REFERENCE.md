@@ -102,7 +102,7 @@ player-facing production text and are classified by the internal audit.
 |---|---:|---|
 | `<cF3>` | `$F3` | Composer soft-wrap checkpoint; renderer no-op when unused |
 | `<hspace:NN>` | `$F7 NN` | Add horizontal renderer space; composer does not count it |
-| `<cF8>` | `$F8` | Named no-op retained losslessly |
+| `<cF8>` | `$F8` | Renderer no-op and ROM-template escape; following native 0-9/a-z selector bytes must remain byte-exact |
 | `<cF9:LL:HH>` | `$F9 LL HH` | Pass a two-byte effect argument to the native handler |
 | `<delay:NN>` | `$FA NN` | Set native character/timing delay |
 | `<page>` | `$FB` | Wait for fresh input; does not reset pen or physical line count |
@@ -122,6 +122,10 @@ The controls are not interchangeable:
   dialogue box, use `<page><box>`.
 - A native `<page><br>` means wait and then advance a line. Preserve both while the
   cumulative box remains safe.
+- Do not edit lowercase/digit selector runs immediately following `<cF8>`. The English
+  source codec deliberately keeps those bytes in the native Latin domain rather than the
+  localized font domain. For example, `<cF8>g` must encode as `F8 10`, not `F8 36`; Big
+  Moai's reward formatter consumes that selector before ordinary rendering.
 - Controls have zero horizontal width. Write `?<page> Next` or `!<page> Next`, not
   `?<page>Next` or `!<page>Next`.
 

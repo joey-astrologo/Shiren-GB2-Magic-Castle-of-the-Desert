@@ -235,6 +235,60 @@ def check_runtime_tokens(record, translation):
     return tuple(issues)
 
 
+def _native_template_selectors(raw):
+    """Return ordered native 0-9/a-z selector runs introduced by F8.
+
+    F8 itself is a renderer no-op, but the surrounding event/menu template
+    code treats the following native Latin bytes as variable selectors before
+    ordinary rendering.  Their byte identities therefore belong to the
+    runtime contract even though they look like editable Latin text.
+    """
+    runs = []
+    current = None
+    for token in codec.parse_source(raw):
+        if token.kind == "control" and token.code == 0xF8:
+            if current is not None:
+                runs.append("".join(current))
+            current = []
+            continue
+        if current is not None and token.kind == "glyph":
+            native = codec.decode_source(token.raw)
+            if len(native) == 1 and (
+                "0" <= native <= "9" or "a" <= native <= "z"
+            ):
+                current.append(native)
+                continue
+        if current is not None:
+            runs.append("".join(current))
+            current = None
+    if current is not None:
+        runs.append("".join(current))
+    return tuple(runs)
+
+
+def check_native_template_selectors(record, translation):
+    """Require F8-prefixed runtime selectors to remain byte-exact."""
+    wanted = _native_template_selectors(record.raw)
+    if not wanted:
+        return ()
+    got = (
+        ()
+        if translation.explicit_empty
+        else _native_template_selectors(translation.encoded)
+    )
+    if got == wanted:
+        return ()
+    return (
+        Issue(
+            record.id,
+            "template_selector_changed",
+            "",
+            "native F8 selector run(s) changed from %r to %r"
+            % (wanted, got),
+        ),
+    )
+
+
 def _control_count(raw, code):
     return sum(
         token.kind == "control" and token.code == code
@@ -461,6 +515,7 @@ def check(result, translated, exceptions=()):
     for key, translation in translated.items():
         record = by_record[key]
         issues.extend(check_runtime_tokens(record, translation))
+        issues.extend(check_native_template_selectors(record, translation))
         issues.extend(check_native_soft_wrap(record, translation))
         issues.extend(check_sentence_spacing(record, translation))
         if record.id not in definition_ids:

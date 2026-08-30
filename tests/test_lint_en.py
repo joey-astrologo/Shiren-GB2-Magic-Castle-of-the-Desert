@@ -91,6 +91,29 @@ class OriginalRomTranslationLintTests(unittest.TestCase):
             (), lint_en.check_runtime_tokens(record, next(iter(exact.values())))
         )
 
+    def test_f8_native_template_selector_bytes_cannot_change(self):
+        record = self.by_id["199:$4558"]
+        exact = self._translated(
+            ((record.id, "<name> received<br><cF8>g!<page><box>"),)
+        )
+        translation = next(iter(exact.values()))
+        self.assertEqual(bytes.fromhex("F810"), translation.encoded[-5:-3])
+        self.assertEqual(
+            (), lint_en.check_native_template_selectors(record, translation)
+        )
+
+        changed = self._translated(
+            ((record.id, "<name> received<br><cF8>x!<page><box>"),)
+        )
+        issues = lint_en.check_native_template_selectors(
+            record, next(iter(changed.values()))
+        )
+        self.assertEqual(
+            ["template_selector_changed"], [issue.kind for issue in issues]
+        )
+        self.assertIn("('g',)", issues[0].detail)
+        self.assertIn("('x',)", issues[0].detail)
+
     def test_native_soft_wrap_checkpoint_cannot_be_dropped(self):
         record = self.by_id["193:$45A9"]
         missing = self._translated(((record.id, "Stole 100 Gitan!"),))

@@ -39,9 +39,13 @@ edited through the ordinary catalog workflow.
 - Six-character player names, default name `Shiren`, save compatibility metadata,
   expanded ranking-result name storage, and localized names in all fourteen embedded
   title/demo and Wanderer's Secrets replay diaries.
-- Four-character A-Z/0-9 Big Moai promotional gift-code entry, with all 100 runtime
+- Four-character A-Z/0-9 Big Moai promotional gift-code entry, with the approved four-row
+  keyboard, corrected below-label `DEL`/`OK` cursors, and all 100 runtime
   codes and story clues synchronized. The game calls these codes "spells"; they are
-  independent of Wanderer Rescue passwords.
+  independent of Wanderer Rescue passwords. The supplied locked NPC state proves the
+  `$C3EF/$C3F0` stage-9 gate; the production helper changes only that pair, and a live
+  controller route enters `WISH`, verifies the localized Fortune Grass reward, and reaches
+  a fresh post-reward conversation without freezing.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
   hyphen, and the original notebook rule. The supplied live confirmation state is retained
   as a no-reset, no-inventory-damage Mesen regression.
@@ -69,7 +73,7 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 416-test fixture suite covering translation, layout, save data, menu/input
+- A passing 427-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 

@@ -48,6 +48,17 @@ state's SHA-1/SHA-256, forces a fresh Items redraw in Mesen, and freezes the loc
 framebuffer. Its static companion proves the replacement remains inside the original
 14-pixel advance and every translated item-name shape remains within the 144-pixel row.
 
+`SaveStates/big-moai-locked.mss` freezes the real NPC before his spell system becomes
+available. `tests/fixtures/big_moai.json` records the state hash, active/shadow stage pair,
+both observed native SRAM mirrors, dialogue selectors, reviewed localized prompt/editor
+framebuffers, `WISH` bytes, and Fortune Grass item ID. `tests.test_big_moai` preserves the
+locked route, proves the distributable helper changes only the two measured progression
+bytes, and replays the accepted code through controller input. The fixture freezes the
+approved four-row keyboard plus separate `DEL`-selected and auto-`OK` framebuffers, proving
+both underlines remain below their labels. It also freezes the two-line Fortune Grass reward
+framebuffer and requires a subsequent group `$6A`/`$1A` conversation, preventing inventory
+insertion from masking a post-reward engine lock.
+
 `tests/fixtures/rescue_requester.json` freezes the Rankings and generated-SOS requester
 states. `tests/fixtures/rescue_entry.json` freezes
 `SaveStates/rescue-entry-menu.mss`, the localized mode-8 keyboard, the published

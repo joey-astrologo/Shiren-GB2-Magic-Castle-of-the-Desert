@@ -1089,7 +1089,7 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 67	town_npcs_early	town_dialogue	Early-game town NPC states	16	199:$44D8	Big Moai: Come on, tell me a spell!<page><box>Big Moai: Something good might happen.<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	17	199:$451A	Big Moai: Shwoosh, shwoosh... I don't know that spell.<page>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	18	199:$4542	Big Moai: Hnnngh...<delay:1E> Hah!!!
-67	town_npcs_early	town_dialogue	Early-game town NPC states	19	199:$4558	<name> received <cF8>g!<page><box>
+67	town_npcs_early	town_dialogue	Early-game town NPC states	19	199:$4558	<name> received<br><cF8>g!<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	20	199:$4569	Big Moai: We'll meet again somewhere.<page><box>Big Moai: Until then, farewell.<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	21	199:$4596	Big Moai: Incredible!!<page><box>Big Moai: You've completed every spell!<page><box>Big Moai: I'm retiring now.<page><box>Big Moai: From now on, tell your spells to my son.<page><box>Big Moai: Adios. This is farewell forever. Don't cry, baby.<page>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	22	199:$4640	Big Moai: I'm growing tired of listening to spells.<page><box>Big Moai: So I've decided to travel.<page><box>Big Moai: Don't come looking for me.<page><box>Big Moai: Adios. Farewell.<page><box>

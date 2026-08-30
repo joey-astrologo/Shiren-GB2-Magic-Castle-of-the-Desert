@@ -47,6 +47,15 @@ class SpellInputTests(unittest.TestCase):
         self.assertEqual(4, spell_input.MAXIMUM_CHARACTERS)
 
     def test_keyboard_map_contains_every_character_and_both_controls(self):
+        self.assertEqual(
+            (
+                ((0, "ABCDE"), (7, "UVWXY")),
+                ((0, "FGHIJ"), (7, "Z")),
+                ((0, "KLMNO"), (7, "01234")),
+                ((0, "PQRST"), (7, "56789")),
+            ),
+            spell_input.DISPLAY_ROWS,
+        )
         raw = spell_input.english_keyboard_map(self.rom)
         rows = [raw[offset:offset + 20] for offset in range(0, len(raw), 20)]
         for display_row, blocks in enumerate(spell_input.DISPLAY_ROWS):
@@ -58,6 +67,15 @@ class SpellInputTests(unittest.TestCase):
                 )
         self.assertEqual(english.encode("DEL"), rows[4][2:5])
         self.assertEqual(english.encode("OK"), rows[4][15:17])
+
+    def test_control_cursors_sit_below_del_and_ok(self):
+        raw = spell_input.english_navigation_table(self.rom)
+        records = [
+            raw[offset:offset + spell_input.NAVIGATION_RECORD_SIZE]
+            for offset in range(0, len(raw), spell_input.NAVIGATION_RECORD_SIZE)
+        ]
+        self.assertEqual((9, 57, 9), tuple(records[spell_input.BACKSPACE_NODE][4:]))
+        self.assertEqual((113, 57, 10), tuple(records[spell_input.CONFIRM_NODE][4:]))
 
     def test_navigation_graph_reaches_only_displayed_cells_and_controls(self):
         raw = spell_input.english_navigation_table(self.rom)

@@ -39,6 +39,21 @@ Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O patches
 `tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_mesen_unidentified_item`.
 
+The Big Moai NPC gate and first accepted-code route have their own focused family:
+
+```sh
+python3 -m unittest tests.test_big_moai -v
+```
+
+It hash-freezes `SaveStates/big-moai-locked.mss`, replays the native “not ready” branch,
+requires `tools/mesen_unlock_big_moai.lua` to change only `$C3EF-$C3F0`, then enters
+`WISH` through the real localized mode-3 editor and requires item `$70` (Fortune Grass)
+in inventory. The route visits `DEL` first and freezes both its corrected below-label cursor
+and the native auto-selected `OK` cursor. It then freezes the localized reward framebuffer
+and starts a second Big Moai conversation, requiring group `$6A` index `$1A`; this would be
+unreachable if the reward formatter were still frozen. Manual use and the complete gate are in
+[BIG_MOAI.md](BIG_MOAI.md).
+
 The read-only native Wanderer Rescue audit can be run independently:
 
 ```sh
@@ -123,7 +138,7 @@ python3 -m unittest \
 ```
 
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
-widths, wrapping, menus, save/name expansion, Big Moai promotional-code input, Blank Scroll input,
+widths, wrapping, menus, save/name expansion, Big Moai promotional-code input and live NPC reward, Blank Scroll input,
 unidentified-item free/history naming, runtime text domains, scene ownership, internal
 classification, and deterministic production builds.
 User-reported regressions should receive a focused fixture or behavioral test whenever the
@@ -134,7 +149,7 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **416 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **427 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 

@@ -60,6 +60,8 @@ text growth.
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
 | 4 | `$4CF6-$4CFD` | Mode-3 Big Moai gift-code input screen redirect | `spell_input.py` only |
 | 4 | `$660E-$6787` | 126-entry script group directory | Rewritten only by `insert.py` |
+| 5 | `$4553-$459F` | Native `$C3EF-$C3F0` story-stage save/load pair | Preserve; Big Moai availability fixture traces this serializer and loader |
+| 5 | `$591D-$5930` | Native event opcode `$60`: branch when `$C3EF` meets its operand threshold | Preserve; Big Moai uses threshold `$09` |
 | 7 | `$4A87-$4B53` | Native actor Max-HP/current-HP accessors; offset `$15` is doubled/halved Max HP and offset `$16` is current HP | Preserved and guarded by `rescue_password.py` |
 | 11 | `$518A-$5287` | Loaded-diary Training/SOS/Revival/Thank-You record read/write dispatchers | Preserved and guarded by `rescue_password.py`; records are relative to `$C23C + diary * $6A` |
 | 11 | `$42EB-$4301` | Default-name routine | `name6.py` only |
@@ -100,6 +102,7 @@ text growth.
 | 18 | `$5310-$5340` | Mode-3 Big Moai gift-code selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
 | 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
+| 116 | `$5CEF-$5CF5` | Big Moai event gate: stage `$09` branch or group `$6A` index `$0D` locked dialogue | Preserve and fixture-test; ROM bank `$74` is decimal 116 |
 | 120 | `$484A-$484B` | Equipment negative-sign producer | `item_formatting.py` only |
 | 120 | `$6474-$647A` | Arrow counter/separator producer | `item_formatting.py` only |
 | 120 | `$6889-$688A`, `$6891-$6892` | Pot capacity brackets | `item_formatting.py` only |
@@ -204,6 +207,19 @@ active actor index at `$FFFC`.
 all 32 backing/cache bytes match. It then changes only both current-HP views to 1 and
 rolls back if either verified write fails. These addresses are test-fixture ownership,
 not free WRAM or a production localization patch.
+
+## Big Moai progression fixture
+
+CPU `$C3EF` is the active story stage and `$C3F0` is the serialized shadow. The supplied
+Big Moai state contains `$06 $06`; his event requires stage `$09`. In Mesen's flat Work
+RAM domain these are offsets `$03EF-$03F0`. `tools/mesen_unlock_big_moai.lua` owns those
+two bytes only during an explicit disposable test and never writes SRAM directly.
+
+Native save/load code persists the pair. In `SaveStates/big-moai-locked.mss`, the two
+observed native `cartRam` mirrors contain the pair at flat offsets `$2517-$2518` and
+`$4517-$4518`, with checksum `$0C` immediately after each. Those offsets describe this
+hash-frozen fixture; they are not a license to edit arbitrary SRAM files. See
+[BIG_MOAI.md](BIG_MOAI.md).
 
 ## Live dungeon inventory and item formatting
 

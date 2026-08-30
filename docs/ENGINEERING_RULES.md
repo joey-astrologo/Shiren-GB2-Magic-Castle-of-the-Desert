@@ -39,7 +39,7 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete discovered suite (416 tests at the current snapshot) with the matching
+6. Run the complete discovered suite (427 tests at the current snapshot) with the matching
    source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
@@ -77,8 +77,9 @@ Examples already in the suite include:
 - stairs-popup width and teardown on both floor and Status routes;
 - status-menu overlay ownership without mutating the shared Japanese template;
 - six-character diary and ranking-name persistence;
-- the four-character Big Moai promotional gift-code keyboard, navigation graph, and
-  synchronized code tables;
+- the four-character Big Moai promotional gift-code keyboard, approved four-row layout,
+  `DEL`/`OK` cursor framebuffers, navigation graph, synchronized code tables, dynamic
+  reward selector, and stable post-reward return;
 - the native Training/SOS/Revival/Thank-You packet codec and public exchange vector;
 - Adventure -> save-file navigation retaining native type `$13`, with all four cursor
   positions and a stable cursor-masked framebuffer;
