@@ -25,8 +25,8 @@
     "localized": "OEN936H9n!FVv",
     "native_hex": "3E343D76707337765778354568",
     "entered_screen_checksum": "7E0D8817",
-    "validation_response_screen_checksum": "6BD66D67",
-    "post_validation_buffer_hex": "3E343D76707337765778354572FF",
-    "fixture_result": "submitted_to_native_validator; request is not rescuable by this diary"
+    "validation_response_screen_checksum": "997A2FD1",
+    "post_validation_buffer_hex": "455F6F356D576A376D67343D3EFF",
+    "fixture_result": "submitted_to_native_validator; Abyssal Depths is not unlocked for this diary"
   }
 }

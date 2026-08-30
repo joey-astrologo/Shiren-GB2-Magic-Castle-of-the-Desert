@@ -75,11 +75,11 @@ def _input_sequences(rom, text):
         characters.extend(_shortest_buttons(records, node, target))
         characters.append("a")
         node = target
-    confirm = list(
-        _shortest_buttons(records, node, rescue_presentation.OK_NODE)
-    )
-    confirm.append("a")
-    return characters, confirm
+    # The native full-field handler moves the navigation node to OK as soon as
+    # the final password cell is filled. Moving from the last character's
+    # keyboard node here would instead land on another control (usually DEL)
+    # and could make a route appear to submit while actually erasing input.
+    return characters, ["a"]
 
 
 class RescuePresentationTests(unittest.TestCase):
@@ -573,6 +573,62 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
         )
         self.assertIn(
             "PASS rescue input submitted",
+            output,
+        )
+
+    def test_revival_response_resumes_requester_and_generates_thank_you_code(self):
+        state = self._checked_state(REQUESTER_FIXTURE["sos_state"])
+        row = REQUESTER_FIXTURE["revival_response_test"]
+        revival = row["revival"]
+        thank_you = row["thank_you"]
+        characters, confirm = _input_sequences(
+            self.localized.read_bytes(), revival["localized_password"]
+        )
+        env = os.environ.copy()
+        env.update(
+            {
+                "GB2_REVIVAL_REQUESTER_MSS": str(state),
+                "GB2_REVIVAL_EXPECTED_NATIVE": revival["native_hex"],
+                "GB2_REVIVAL_CHARACTER_INPUTS": ",".join(characters),
+                "GB2_REVIVAL_CONFIRM_INPUTS": ",".join(confirm),
+                "GB2_REVIVAL_EXPECTED_EDITOR_SCREEN": row[
+                    "editor_screen_checksum"
+                ],
+                "GB2_REVIVAL_EXPECTED_ENTERED_SCREEN": revival[
+                    "entered_screen_checksum"
+                ],
+                "GB2_REVIVAL_EXPECTED_SUCCESS_SCREEN": revival[
+                    "success_screen_checksum"
+                ],
+                "GB2_REVIVAL_EXPECTED_THANK_YOU_SCREEN": thank_you[
+                    "screen_checksum"
+                ],
+                "GB2_REVIVAL_EXPECTED_THANK_YOU_NATIVE": thank_you[
+                    "native_hex"
+                ],
+            }
+        )
+        result = subprocess.run(
+            [
+                str(self.mesen),
+                "--testrunner",
+                "--enablestdout",
+                "--novideo",
+                "--noaudio",
+                str(self.localized),
+                str(ROOT / "tests" / "mesen_rescue_revival_route.lua"),
+            ],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+            timeout=40,
+        )
+        output = result.stdout + result.stderr
+        self.assertEqual(0, result.returncode, output[-8000:])
+        self.assertIn("Revival code entered", output)
+        self.assertIn(
+            "PASS Revival response accepted and Thank-You Password generated",
             output,
         )
 

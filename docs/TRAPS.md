@@ -231,6 +231,21 @@ Rescue regression now restores all 320 captured Japanese map tiles and C=`$02`; 
 loads its required mode from WRAM and must replace the complete map plus navigation graph.
 Keep the working constructor route as separate coverage, not as a substitute.
 
+## A full password field is already positioned on OK
+
+**Tempting assumption:** after entering the final password character, a controller replay
+must navigate from that character's keyboard node to `OK`.
+
+**Failure:** the native full-field handler automatically changes node `$C14F` to `$4D`
+(`OK`). The old rescue replay computed directions from the last character anyway, moved
+onto `DEL`, erased the last symbol, and then treated the resulting native response as proof
+of submission. The test stayed green while it was not confirming the intended code.
+
+**Rule:** after the final cell is filled, assert the exact input buffer, final position, and
+node `$4D`, then press A without directional input. Successful SOS validation must assert
+the actual inaccessible-dungeon response; successful Revival validation must assert
+`Revival complete!` and the linked generated Thank-You Password.
+
 ## A preserved composite glyph may still contain Japanese text
 
 **Tempting assumption:** a named prefixed token is a language-neutral status icon, so

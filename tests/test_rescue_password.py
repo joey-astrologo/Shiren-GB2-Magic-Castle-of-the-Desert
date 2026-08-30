@@ -513,6 +513,41 @@ class RescueRequesterCaptureTests(unittest.TestCase):
         self.assertEqual(expected["internal_floor"], fields.internal_floor)
         self.assertEqual("accepted_in_localized_rescue_editor", row["result"])
 
+    def test_revival_response_fixture_is_linked_to_the_captured_request(self):
+        row = REQUESTER_FIXTURE["revival_response_test"]
+        sos_raw = rescue_password.delocalize_password(row["matching_sos"])
+        revival_raw = rescue_password.delocalize_password(
+            row["revival"]["localized_password"]
+        )
+        thank_you_raw = rescue_password.delocalize_password(
+            row["thank_you"]["localized_password"]
+        )
+        self.assertEqual(bytes.fromhex(row["revival"]["native_hex"]), revival_raw)
+        self.assertEqual(
+            bytes.fromhex(row["revival"]["payload_hex"]),
+            rescue_password.decode_password(revival_raw),
+        )
+        self.assertEqual(
+            bytes.fromhex(row["thank_you"]["native_hex"]),
+            thank_you_raw,
+        )
+        self.assertEqual(
+            bytes.fromhex(row["thank_you"]["payload_hex"]),
+            rescue_password.decode_password(thank_you_raw),
+        )
+        _sos, revival = rescue_password.validate_exchange(
+            sos_raw, revival_raw, thank_you_raw
+        )
+        self.assertEqual(
+            int(row["revival"]["rescuer_diary_checksum"].removeprefix("$"), 16),
+            revival.rescuer_diary_checksum,
+        )
+        self.assertEqual(bytes.fromhex(row["revival"]["gift_hex"]), revival.gift_bytes)
+        self.assertEqual(
+            "accepted_and_generated_thank_you_password",
+            row["result"],
+        )
+
     def test_rankings_capture_precedes_sos_generation(self):
         row, work_ram = self._load_capture("ranking_state")
         self.assertEqual(row["mode"], work_ram[self.MODE_OFFSET])

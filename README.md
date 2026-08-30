@@ -32,8 +32,11 @@ reproduce a real published three-password exchange. The captured Rankings -> Awa
 route now renders its generated SOS code through a frozen 64-symbol English alphabet while
 restoring the native buffer and preserving the matching diary record byte-for-byte. Rescue
 input modes 5-8 now share a fixture-tested English keyboard that maps every visible choice
-back to its native six-bit value. The complete live two-diary emulator fixture remains in
-progress.
+back to its native six-bit value. A requester-side controller replay accepts a linked
+15-character Revival response, displays the native success message, and generates its
+12-character Thank-You Password. Physical Rescue Gate traversal and capture of the
+rescuer diary's own generated response remain in progress for the complete two-diary
+emulator fixture.
 Editorial review, full playthrough testing, and graphics localization remain active
 project work.
 
@@ -49,7 +52,7 @@ project work.
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture the rescuer/Revival/resume/Thank-You routes and complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **413-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **416-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.

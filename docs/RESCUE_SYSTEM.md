@@ -325,8 +325,9 @@ Team Cable / Password / Quit menu. `tests/mesen_rescue_entry_route.lua` advances
 dialogue, requires English editor checksum `$028789EC`, enters the published
 `OEN936H9n!FVv` code through controller navigation, and freezes native input
 `3E343D76707337765778354568FF` before choosing `OK`. The old public request cannot be
-rescued by this diary; its deterministic return screen proves native validation was reached
-and did not freeze, not that a complete rescue was accepted.
+entered because this diary has not unlocked the Abyssal Depths; its deterministic
+`You cannot enter that dungeon yet!` response proves native validation was reached and did
+not freeze, not that a complete rescue was accepted.
 
 Manual testing on 2026-08-29 supplied the generated localized code
 `I3CqdGY6iuyws` through the repaired English editor and the game accepted it. The code
@@ -336,6 +337,35 @@ check that applies to the requester capture's `$7F8F` diary. This proves the loc
 13-character input and native codec work together for an accessible dungeon. The code and
 fields are frozen in `tests/fixtures/rescue_requester.json`; automated controller replay
 of the complete accepted route remains a separate coverage improvement.
+
+### Deterministic Revival response fixture
+
+The captured requester SOS `26pCdewCg2640` now has a deterministic no-gift Revival
+response: `SVgaVwAhmUmoM3u`. Its native bytes are
+`42 45 50 4A 45 69 30 51 56 44 56 58 3C 70 67`, its rescuer diary checksum is `$A9`,
+and its gift record is eight zero bytes. The response is bound to the requester's saved SOS
+checksums; it is not a free-standing password.
+
+The controller regression loads `SaveStates/rescue-requester-sos.mss`, follows
+**Adventure -> Revive! -> Password**, enters all 15 localized characters, and requires:
+
+1. the cursor to move to `OK` automatically after the fifteenth character;
+2. the native `Revival complete!` result;
+3. generation of Thank-You Password `EkWsMPtHHOEE`; and
+4. exact English/native bytes, payloads, and framebuffer checksums for both codes.
+
+For a manual check, load that requester state in Mesen with a current English build, press
+A to close the SOS guide, choose **Adventure**, choose the diary, then choose
+**Revive! -> Password**. Enter `SVgaVwAhmUmoM3u` exactly, including capitalization, and
+select `OK`. The game must say `Revival complete! Select Continue to resume the game.`
+Press A once more and confirm the displayed Thank-You Password is `EkWsMPtHHOEE`.
+
+This fixture is distinct from the manually accepted `I3CqdGY6iuyws` rescue request. To
+capture the response produced by that live rescuer diary, complete its Ancient Ruins 1F
+Rescue Gate, return to Good, decline the optional gift for the first pass, and save both a
+Mesen state and SRAM while the 15-character Revival Password is visible. That generated
+code will let the fixture replace the fixed `$A9` test identity with a full two-diary
+exchange.
 
 That successful constructor route did not cover the production failure reported during
 manual testing. The exact running state was recovered from Mesen as

@@ -69,7 +69,7 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 413-test fixture suite covering translation, layout, save data, menu/input
+- A passing 416-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -89,8 +89,11 @@ edited through the ordinary catalog workflow.
   regression also loads that broken state and requires the installed loop hook to fire
   naturally, without calling the repair routine from the test. Manual testing also accepted
   `I3CqdGY6iuyws`, an Ancient Ruins 1F SOS with a distinct diary ID; its exact native
-  bytes, payload, and semantic fields are now fixture-frozen. Add the second-diary
-  emulator/SRAM completion fixture and preserve cable compatibility; see
+  bytes, payload, and semantic fields are now fixture-frozen. A requester-side controller
+  replay also accepts 15-character Revival response `SVgaVwAhmUmoM3u`, displays the
+  native success result, and generates linked Thank-You Password `EkWsMPtHHOEE`. Add the
+  physical Rescue Gate/two-diary emulator and SRAM completion fixture and preserve cable
+  compatibility; see
   [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 - Editorial read-through of the complete scene document for voice, continuity, and
   natural English.

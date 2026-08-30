@@ -70,6 +70,13 @@ test rescuer diary, and was accepted through the localized 13-character editor o
 and semantic fields. This is evidence of an accepted SOS input, but it is not yet a
 controller-replayed end-to-end rescue completion fixture.
 
+The same fixture freezes requester-side Revival response `SVgaVwAhmUmoM3u`, which is
+bound to captured SOS `26pCdewCg2640`. The Mesen route reaches the mode-7 English editor
+without direct memory writes, enters all 15 characters, confirms the native success
+message, and freezes generated Thank-You Password `EkWsMPtHHOEE`. This closes the
+requester response-input/presentation loop; physically traversing a Rescue Gate and
+capturing the rescuer's own generated response remains the next two-diary fixture.
+
 `tests/fixtures/item_formatting.json` freezes the native producer anchors, English
 punctuation bytes, exhaustive family-width maxima, the twenty exact object records injected
 from `SaveStates/Mamel.mss`, and two reviewed Mesen framebuffers. Unlike ordinary category

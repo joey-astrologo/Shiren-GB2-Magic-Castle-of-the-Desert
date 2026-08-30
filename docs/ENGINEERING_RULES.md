@@ -39,7 +39,7 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete discovered suite (413 tests at the current snapshot) with the matching
+6. Run the complete discovered suite (416 tests at the current snapshot) with the matching
    source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
@@ -159,6 +159,12 @@ values in packets, diary records, `$C16D`, and Link Cable data. The English alph
 exist only at the renderer/input boundary. Output hooks must restore `$C16D` after caching;
 input hooks must map each English glyph back to the corresponding native value before any
 native validator or persistence path runs.
+
+The graphical password handler owns one more state transition: filling the final allowed
+cell automatically moves navigation node `$C14F` to `OK` (`$4D`). Controller tests must
+assert that node before confirmation and press A directly. They must not calculate a path
+from the last selected keyboard character after the field is full; doing so can move from
+`OK` to `DEL`, erase a character, and falsely report that validation was exercised.
 
 ## Documentation changes
 
