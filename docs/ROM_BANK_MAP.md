@@ -47,6 +47,8 @@ text growth.
 
 | Bank | CPU range | Owner / contents | Rule |
 |---:|:---|---|---|
+| 0 | `$03C9-$046B` | Native actor-record/cache pointer and copy route; actor 0 begins at bank 1 `$D000` and its active cache begins at `$FF90` | Preserved and guarded by `rescue_password.py` for requester fixtures |
+| 0 | `$046F-$0484` | Native current-HP subtract/zero route using actor offset `$16` / `$FFA6` | Preserved and guarded by `rescue_password.py` |
 | 0 | `$1F8C-$1F8E` | `far_text.py`: source selector call | Guarded patch |
 | 0 | `$1FD3-$1FD5` | `far_text.py`: direct selector call | Guarded patch |
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
@@ -58,6 +60,8 @@ text growth.
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
 | 4 | `$4CF6-$4CFD` | Mode-3 Big Moai gift-code input screen redirect | `spell_input.py` only |
 | 4 | `$660E-$6787` | 126-entry script group directory | Rewritten only by `insert.py` |
+| 7 | `$4A87-$4B53` | Native actor Max-HP/current-HP accessors; offset `$15` is doubled/halved Max HP and offset `$16` is current HP | Preserved and guarded by `rescue_password.py` |
+| 11 | `$518A-$5287` | Loaded-diary Training/SOS/Revival/Thank-You record read/write dispatchers | Preserved and guarded by `rescue_password.py`; records are relative to `$C23C + diary * $6A` |
 | 11 | `$42EB-$4301` | Default-name routine | `name6.py` only |
 | 11 | `$4B2F-$4B5C` | Compatible player-name getter/setter | `name6.py` only |
 | 11 | `$5639-$5654` | Ranking-name load | `name6.py` only |
@@ -65,26 +69,34 @@ text growth.
 | 11 | `$5F1C-$5F2E` | Ranking-name write | `name6.py` only |
 | 11 | `$5FB3-$5FDC` | Fourteen-entry replay diary pointer table | Preserved byte-exact and guarded by `name6.py`; event IDs 0-3 are non-Secrets demos and 4-13 are Secrets |
 | 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
-| 11 | `$76B2-$7D8B` | Native Training/SOS/Revival/Thank-You payload builders, packet codec, checksum, and bit transforms | Preserve while `rescue_password.py` freezes and reproduces the protocol; do not overlay before the two-diary fixture passes |
+| 17 | `$76B2-$7D8B` | Native Training/SOS/Revival/Thank-You payload builders, packet codec, checksum, and bit transforms | Preserve while `rescue_password.py` freezes and reproduces the protocol; do not overlay before the two-diary fixture passes |
+| 17 | `$792D-$797A` | SOS semantic builder: seed, diary-ID low word, actor position, dungeon, floor, diary record, and bit packing | Preserved and guarded by `rescue_password.py` |
+| 17 | `$4747-$474E` | Generated communication-code dynamic-text cache call | `rescue_presentation.py` redirects this call only; native `$C16D` bytes are restored after the localized cache copy |
+| 16 | `$68DF-$6953` | Revival decoder success route and immediate Thank-You generator | Preserved and guarded by `rescue_password.py` |
+| 16 | `$7B8A-$7BD1` | SOS generation route | Preserved and guarded by `rescue_password.py` |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
-| 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, then mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlays |
+| 16 | `$5AD2-$5AD4` | Common graphical-input loop call redirected through the Rescue active-editor repair | `rescue_presentation.py` only; displaced native call `$4375` is preserved |
+| 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, mode-1 `blank_scroll.py`, mode-0 `unidentified_names.py`, then rescue modes 5-8 `rescue_presentation.py`; every layer delegates modes it does not own |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
 | 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
 | 16 | `$5F9A-$5F9B` | Native navigation type `$13` pointer to `$6625` | Preserve; shared nine-row list used by Adventure -> Continue/Secrets/Reset/Recap |
-| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615D` are then overlaid by `unidentified_names.py` as private type `$F4` -> WRAM `$C800` |
+| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615F` then hold the two private `$C800` graph pointers below |
 | 16 | `$615C-$615D` | Private mode-0 navigation pointer `$C800` | `unidentified_names.py` only; overlaps the proven-unreachable Down/Up pair of English name-entry node 64 |
+| 16 | `$615E-$615F` | Private rescue navigation pointer `$C800` | `rescue_presentation.py` only; type `$F5`, overlapping the proven-unreachable Left/Right pair of English name-entry node 64 |
 | 16 | `$64B9-$6624` | Mode-3 Big Moai gift-code navigation graph | Replaced by `spell_input.py` |
 | 16 | `$6625-$6663` | Native nine-node vertical-list graph | Preserve; seven-byte records with fixed x `$36` and y `$17,$22,...,$6F` |
 | 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
 | 16 | `$6A33-$6A3A` | Mode-0 history-return screen redirect | `unidentified_names.py` only |
 | 16 | `$6A4C-$6A53` | Blank Scroll screen redirect | `blank_scroll.py` only |
 | 16 | `$6B98-$6B9F` | Mode-0 secondary screen redirect | `unidentified_names.py` only |
+| 16 | `$7A49-$7A50` | Modes 5-8 rescue-password screen redirect | `rescue_presentation.py` only; all other modes delegate to the native bank-244 constructor |
+| 16 | `$7FF3-$7FFE` | Guarded Rescue active-editor trampoline and preserved native input-loop call | Exclusive verified twelve-byte zero tail for `rescue_presentation.py` |
 | 16 | `$7859-$7860` | Create-name screen redirect | `name6.py` only |
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
 | 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
-| 18 | `$502D-$5072` | Shared graphical-input mode-to-maximum dispatcher; modes 5-8 select 12/9/15/13 password characters | Preserve until the localized rescue input overlay owns explicit guarded hooks |
+| 18 | `$502D-$5072` | Shared graphical-input mode-to-maximum dispatcher; modes 5-8 select 12/9/15/13 password characters | Preserved and guarded; the localized rescue overlay intercepts explicit shared calls without changing this table |
 | 18 | `$5310-$5340` | Mode-3 Big Moai gift-code selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
 | 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
@@ -109,6 +121,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
+| 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, active-editor repair, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$4255`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, glyphs | Exclusive |
@@ -174,6 +187,23 @@ Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall st
 through the translated root-name table, so names such as `Windblade` are not truncated and
 the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
+
+## Rescue requester live actor state
+
+The requester setup helper changes transient live state only. Actor records are 32 bytes
+in WRAM bank 1; actor 0 begins at CPU `$D000` and flat Mesen Work RAM `$1000`. When actor 0
+is active, the engine mirrors the complete record at High RAM `$FF90-$FFAF` and stores the
+active actor index at `$FFFC`.
+
+| Actor location | Offset | Meaning |
+|:---|---:|---|
+| bank 1 `$D015` / flat `$1015` / cache `$FFA5` | `$15` | Max HP |
+| bank 1 `$D016` / flat `$1016` / cache `$FFA6` | `$16` | Current HP |
+
+`tools/mesen_prepare_rescue_request.lua` refuses to write unless `$FFFC` is actor 0 and
+all 32 backing/cache bytes match. It then changes only both current-HP views to 1 and
+rolls back if either verified write fails. These addresses are test-fixture ownership,
+not free WRAM or a production localization patch.
 
 ## Live dungeon inventory and item formatting
 

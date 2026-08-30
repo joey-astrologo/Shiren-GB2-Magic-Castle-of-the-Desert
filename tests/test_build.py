@@ -27,6 +27,7 @@ import layout
 import menu_graphics
 import name6
 import blank_scroll
+import rescue_presentation
 import spell_input
 import stairs_menu
 import translations
@@ -206,6 +207,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in unidentified_names.owned_ranges()
             for offset in range(start, end)
         }
+        rescue_presentation_offsets = {
+            offset
+            for start, end in rescue_presentation.owned_ranges()
+            for offset in range(start, end)
+        }
         pacing_start, pacing_end = dialogue_pacing.owned_range()
         pacing_offsets = set(range(pacing_start, pacing_end))
         allowed = (
@@ -221,6 +227,7 @@ class TranslationBuildTests(unittest.TestCase):
             | blank_scroll_offsets
             | spell_input_offsets
             | unidentified_name_offsets
+            | rescue_presentation_offsets
             | pacing_offsets
             | checksum_offsets
         )

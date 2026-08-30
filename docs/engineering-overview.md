@@ -79,6 +79,29 @@ prose without changing the runtime contract. Bank 252 holds the localized keyboa
 and all 100 English runtime codes. Matching internal diagnostic labels and the seven story
 clues are generated from the same mapping so they cannot drift.
 
+## Wanderer Rescue passwords
+
+Wanderer Rescue is a separate 64-symbol native protocol with 13-character SOS,
+15-character Revival, and 12-character Thank-You stages. `rescue_password.py` reproduces
+the packet transform, checksum, SOS fields, seed-masked gift record, rescuer diary-ID
+checksum, and acknowledgement relationship. A surviving three-code exchange validates
+end to end and is frozen as a fixture. The output presentation maps all 64 native values
+one-to-one to `A-Z a-z 0-9 ? !` only while the dynamic text cache consumes a password;
+it then restores `$C16D`, so packets, diary records, and Link Cable transport remain native.
+The supplied Rankings route is replayed through the confirmation prompt and freezes both
+the English SOS framebuffer and unchanged native protocol bytes. Modes 5-8 reuse the
+approved English name-entry layout plus `?` and `!`, but use private navigation type `$F5`
+and convert every selected node back to its native six-bit value before confirmation. A
+live Mesen route enters the published `OEN936H9n!FVv` SOS vector through that keyboard and
+returns safely from the native validator. A captured production failure showed that mode 8
+can enter the shared input loop without the localized constructor having installed its map.
+The common input-loop guard now reconstructs only rescue modes 5-8 whose private navigation
+type is missing; its regression starts from the exact captured Japanese VRAM, WRAM, and CPU
+state and requires the complete English map. A live Mesen companion also resumes that state
+and requires the installed loop hook to fire naturally. The second-diary handshake remains the next
+engineering gate. See
+[RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
+
 ## Blank Scroll writing
 
 Mode 1 uses the English graphical keyboard and a bank-251 history-filtered full-name matcher.

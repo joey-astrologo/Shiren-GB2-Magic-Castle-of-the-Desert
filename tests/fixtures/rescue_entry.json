@@ -1,0 +1,32 @@
+{
+  "schema": "shiren-gb2-rescue-entry-capture-v1",
+  "password_menu_state": {
+    "path": "SaveStates/rescue-entry-menu.mss",
+    "sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
+    "selected_option": "Password"
+  },
+  "japanese_editor_state": {
+    "path": "SaveStates/rescue-entry-japanese-editor.mss",
+    "sha1": "2bdc7e36809867af31089a610aac9fd10217297a",
+    "source": "Mesen RecentGames capture of the user-reported production failure",
+    "mode": 8,
+    "navigation_type": 0,
+    "maximum": 13
+  },
+  "localized_editor": {
+    "mode": 8,
+    "maximum": 13,
+    "navigation_type": 245,
+    "screen_checksum": "028789EC",
+    "empty_buffer_hex": "D5D5D5D5D5D5D5D5D5D5D5D5D5FF"
+  },
+  "public_sos_vector": {
+    "native": "そおせばぞづくばりぶかにぎ",
+    "localized": "OEN936H9n!FVv",
+    "native_hex": "3E343D76707337765778354568",
+    "entered_screen_checksum": "7E0D8817",
+    "validation_response_screen_checksum": "6BD66D67",
+    "post_validation_buffer_hex": "3E343D76707337765778354572FF",
+    "fixture_result": "submitted_to_native_validator; request is not rescuable by this diary"
+  }
+}

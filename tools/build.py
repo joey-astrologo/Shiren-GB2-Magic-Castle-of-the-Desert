@@ -8,6 +8,7 @@ units are resized and repacked, all directory rows are rewritten, Thin Pixel-7 i
 and every output reference is validated against either its override or original bytes.
 """
 import argparse
+from hashlib import sha1
 from pathlib import Path
 import sys
 
@@ -23,6 +24,7 @@ import layout
 import lint_en
 import menu_graphics
 import name6
+import rescue_presentation
 import runtime_widths
 import spell_input
 import stairs_menu
@@ -237,6 +239,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = blank_scroll.install(output)
     output = spell_input.install(output)
     output = unidentified_names.install(output)
+    output = rescue_presentation.install(output)
     layout.validate_overrides(
         output, overrides, runtime_contract=runtime_contract
     )
@@ -376,6 +379,7 @@ def main(argv=None):
         "checksums    : header $%s global $%s"
         % (validation["header_checksum"], validation["global_checksum"])
     )
+    print("sha1         : %s" % sha1(output).hexdigest())
     print("output       : %s" % destination)
     return 0
 

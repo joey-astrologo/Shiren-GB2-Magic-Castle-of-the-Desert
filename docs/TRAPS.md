@@ -214,6 +214,23 @@ cursor, sprite, clear region, timing interval, or sentence still feels wrong.
 behavioral assertion when the failure is reproducible, but retain human review as a separate
 gate.
 
+## A passing constructor route is not a regression for an already-active editor
+
+**Tempting assumption:** if a controller test opens a localized graphical editor and can
+submit a password, it covers every path into that editor.
+
+**Failure:** the Rescue password controller route passed while a production mode-8 editor
+still displayed the complete Japanese keyboard. The live capture was already inside the
+shared input loop with navigation type `$00`; the tested route had run the localized
+constructor and installed private type `$F5`. They were different machine states. A first
+repair test also forced CPU C=`$08`, although the captured failure had C=`$02`, making the
+test artificially favorable.
+
+**Rule:** preserve and replay the exact failing WRAM, VRAM, and relevant CPU registers. The
+Rescue regression now restores all 320 captured Japanese map tiles and C=`$02`; the repair
+loads its required mode from WRAM and must replace the complete map plus navigation graph.
+Keep the working constructor route as separate coverage, not as a substitute.
+
 ## A preserved composite glyph may still contain Japanese text
 
 **Tempting assumption:** a named prefixed token is a language-neutral status icon, so

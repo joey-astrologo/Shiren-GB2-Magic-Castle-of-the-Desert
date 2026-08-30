@@ -150,8 +150,9 @@ The graphical input dispatcher has independent modes and consumers:
 | Mode 3 | Big Moai promotional gift codes ("spells") | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime; independent of Wanderer Rescue |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
+| Modes 5-8 | Wanderer Rescue passwords | 12/9/15/13 native cells; player-name layout without SPACE plus `?`/`!`; private type `$F5` graph in `$C800`; English nodes convert to native six-bit symbols in bank 249 before validation; the common input loop repairs a live rescue editor if it arrived without type `$F5` |
 
-The English build treats all four modes as independent consumers even where the native game
+The English build treats these modes as independent consumers even where the native game
 shares graphical resources. Each installer owns its map, graph, maximum, and mode-specific
 logic. A change to one must prove that the others remain unchanged. In particular, removing
 unused player-name controls from mode 4 must not disconnect mode 0's native `FILL IN`
@@ -169,6 +170,7 @@ history node.
 | Big Moai gift-code input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
 | Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_mesen_unidentified_item.py` |
+| Wanderer Rescue password input/output | `rescue_presentation.py`, `rescue_password.py` | `test_rescue_password.py`, `test_rescue_presentation.py` |
 | Main-menu proof route | build/surface contracts | `test_poc_dungeon1.py`, `test_build.py` |
 
 ## Rules for menu changes

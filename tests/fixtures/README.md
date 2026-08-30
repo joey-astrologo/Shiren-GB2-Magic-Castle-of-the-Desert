@@ -48,6 +48,21 @@ state's SHA-1/SHA-256, forces a fresh Items redraw in Mesen, and freezes the loc
 framebuffer. Its static companion proves the replacement remains inside the original
 14-pixel advance and every translated item-name shape remains within the 144-pixel row.
 
+`tests/fixtures/rescue_requester.json` freezes the Rankings and generated-SOS requester
+states. `tests/fixtures/rescue_entry.json` freezes
+`SaveStates/rescue-entry-menu.mss`, the localized mode-8 keyboard, the published
+`OEN936H9n!FVv` vector, its exact native input bytes, and the deterministic native-validator
+return for this nonmatching diary. It also freezes
+`SaveStates/rescue-entry-japanese-editor.mss`, the exact user-reported production failure:
+mode 8, navigation type 0, and the complete Japanese 320-tile editor map. Its PyBoy
+regression invokes the production active-editor guard with the captured CPU register state
+and requires private navigation type `$F5` plus the complete English map. The menu route
+alone was insufficient because it covered only a constructor path that already worked.
+Its Mesen companion resumes the broken fixture and requires the production input-loop hook
+to repair it naturally, without a test-side call to the repair routine.
+The native-validator result is an input/submission regression, not a complete accepted
+rescue; the two-diary Revival/Thank-You fixture remains separate work.
+
 `tests/fixtures/item_formatting.json` freezes the native producer anchors, English
 punctuation bytes, exhaustive family-width maxima, the twenty exact object records injected
 from `SaveStates/Mamel.mss`, and two reviewed Mesen framebuffers. Unlike ordinary category

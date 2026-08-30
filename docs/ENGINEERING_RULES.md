@@ -39,7 +39,7 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete discovered suite (380 tests at the current snapshot) with the matching
+6. Run the complete discovered suite (413 tests at the current snapshot) with the matching
    source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
@@ -150,6 +150,15 @@ python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
 
 A state that loads is not proof that it represents the intended route. Tests must assert
 the relevant WRAM payload, hook, screen, actor, or control-flow event after loading it.
+Likewise, a passing route through a constructor is not a regression for a failure captured
+after that constructor was bypassed. Preserve the exact failing WRAM, VRAM, and relevant CPU
+registers, and start the behavioral test from those values.
+
+Password presentation is not password storage. Wanderer Rescue keeps native six-bit symbol
+values in packets, diary records, `$C16D`, and Link Cable data. The English alphabet may
+exist only at the renderer/input boundary. Output hooks must restore `$C16D` after caching;
+input hooks must map each English glyph back to the corresponding native value before any
+native validator or persistence path runs.
 
 ## Documentation changes
 

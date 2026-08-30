@@ -34,10 +34,37 @@ python3 tools/menu_text.py "$ROM"
 ```
 
 The production build installs and validates the player-name, Big Moai promotional-code,
-Blank Scroll, and unidentified-item naming patches. Their focused contracts can also be run directly through
+Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O patches. Their focused contracts can also be run directly through
 `tests.test_name6`, `tests.test_spell_input`, `tests.test_blank_scroll`,
 `tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_mesen_unidentified_item`.
+
+The read-only native Wanderer Rescue audit can be run independently:
+
+```sh
+python3 tools/rescue_password.py "$ROM" --json
+python3 -m unittest tests.test_rescue_password tests.test_rescue_presentation -v
+```
+
+It freezes the native input limits, protocol code, loaded-diary record dispatchers, stage
+callers, SOS field layout, native actor Max/current-HP paths, a one-HP requester setup
+helper, and a real linked SOS/Revival/Thank-You exchange. The presentation test builds the
+ROM, replays the supplied Rankings state through **Await Rescue**, requires the English SOS
+framebuffer, and asserts the restored native buffer and matching diary record. A second
+Mesen route loads `SaveStates/rescue-entry-menu.mss`, opens Password, freezes the English
+64-symbol keyboard, enters the published `OEN936H9n!FVv` vector, requires its exact native
+bytes before confirmation, and submits it to the original validator. That route proved a
+working constructor path but did not reproduce the manually observed Japanese editor.
+`SaveStates/rescue-entry-japanese-editor.mss` freezes that exact production failure,
+including mode 8, navigation type 0, CPU C=`$02`, and all 320 Japanese map tiles. A PyBoy
+regression restores those fields, invokes the installed active-editor repair, and requires
+navigation `$F5` plus the complete English map. A separate live Mesen regression loads the
+same broken state and requires the installed common input-loop hook to reach the reviewed
+English framebuffer naturally; it does not call or inject the repair routine. The suite does not
+yet claim a complete live two-diary emulator pass. Each route hash-checks its committed
+`.mss`, builds a ROM at a new temporary path, launches a fresh Mesen test-runner process,
+and never saves over the fixture. It therefore cannot reuse a ROM image cached by an
+interactive Mesen session or create a stale fixture.
 
 When their owned files change, also run the relevant family check before applying:
 
@@ -61,7 +88,7 @@ python3 tools/build.py "$ROM" script/en build/shiren-gb2-english.gbc
 
 The production builder reruns required safety checks before writing the output. Text is
 relocated through far pointers, so storage growth does not justify shortening visible
-English.
+English. The builder prints the SHA-1 of the exact output artifact.
 
 ## Tests
 
@@ -81,6 +108,7 @@ python3 -m unittest \
   tests.test_unidentified_names \
   tests.test_mesen_unidentified_item \
   tests.test_rescue_password \
+  tests.test_rescue_presentation \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_item_terminology \
@@ -99,7 +127,7 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **380 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **413 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -156,6 +184,31 @@ python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
 `mesen_state.py` extracts Mesen 2's named `cartRam` field as an ordinary 32 KiB battery
 SRAM file that PyBoy can reuse. This is the supported bridge for reproducing a live route
 from a Mesen save state.
+
+### Wanderer Rescue requester capture
+
+`tools/mesen_prepare_rescue_request.lua` provides the first deterministic rescue-fixture
+step. Load the current English ROM and `SaveStates/Mamel.mss`, pause, run the helper through
+**Debug > Script Window**, and resume. It verifies that actor 0 is active and that the full
+32-byte bank-1 actor record matches the `$FF90-$FFAF` cache before changing both current-HP
+views from 40 to 1. It never writes Max HP, story/rescue flags, inventory, SRAM, or ROM.
+
+Dismiss the existing message if necessary, then let the adjacent Mamel hit Shiren once;
+do not attack it first. On the resulting Rankings screen, press `Select` and choose
+**Await Rescue**. The reviewed captures are `SaveStates/rescue-requester-rankings.mss` and
+`SaveStates/rescue-requester-sos.mss`; the matching SRAM remains ignored. The focused tests
+freeze both state hashes, decode the 13 native symbols, prove they match diary offset
+`+$41`, replay the complete Rankings confirmation route, and require English output with
+the native bytes restored. `SaveStates/rescue-entry-menu.mss` and
+`tests/fixtures/rescue_entry.json` add the rescuer-side Password-menu/editor boundary: the
+route uses only controller input, verifies private navigation type `$F5`, writes all 13
+published SOS symbols as native bytes, and returns from native validation without a hang.
+The same fixture also owns `SaveStates/rescue-entry-japanese-editor.mss`; its separate
+PyBoy regression starts from the exact captured Japanese editor state rather than replaying
+the already-working constructor route. Its Mesen companion resumes the same broken state
+and proves the installed input-loop hook executes without test-side invocation.
+That historical request is not rescuable by the supplied diary, so acceptance, rescue
+dungeon traversal, Revival, and Thank-You remain in the broader two-diary handshake.
 
 ### Dynamic item-row gallery
 

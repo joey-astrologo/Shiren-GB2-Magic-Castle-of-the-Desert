@@ -69,15 +69,27 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 380-test fixture suite covering translation, layout, save data, menu/input
+- A passing 413-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
 ## Remaining project work
 
-- Wanderer Rescue protocol engineering: trace the dedicated password modes and codec,
-  preserve native/cable compatibility, add a two-diary SOS -> Revival -> Thank-You fixture,
-  and localize the password presentation; see [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
+- Wanderer Rescue protocol engineering: the native packet codec and semantic
+  SOS -> Revival/gift -> Thank-You chain reproduce a real published exchange. The supplied
+  Rankings and SOS states are hash-frozen, and their generated SOS code exactly matches the
+  saved diary record. The live Rankings -> Await Rescue route now renders the frozen
+  `A-Z a-z 0-9 ? !` mapping while restoring `$C16D` to its native bytes and leaving the
+  diary record untouched. Modes 5-8 now use a private English name-layout keyboard with
+  `?` and `!`; each selection is converted back to the corresponding native password byte
+  before validation. The supplied Password-menu state and published SOS vector exercise
+  the full controller route, all thirteen cells, and native-validator return. A separate
+  captured failure fixture starts inside the Japanese mode-8 editor and proves the common
+  input-loop repair replaces its complete 320-tile map and navigation graph. A live Mesen
+  regression also loads that broken state and requires the installed loop hook to fire
+  naturally, without calling the repair routine from the test. Add the
+  second-diary emulator/SRAM fixture and preserve cable compatibility; see
+  [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 - Editorial read-through of the complete scene document for voice, continuity, and
   natural English.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
@@ -93,5 +105,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`9a12855adbebaf6864803d768823d99787dbd77f`; always rebuild and verify locally rather
+`5363954192bdd29a97dc151aea36b26051a2c66d`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

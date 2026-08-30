@@ -27,6 +27,13 @@ to a compact `(Cr)` marker and replayed from the supplied failure state. Native 
 item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
 and spaced Gitan amounts; a two-page Mesen gallery covers their status-symbol combinations,
 and a native Synthesis Pot lab provides a repeatable transferred-seal visual route.
+The native Wanderer Rescue codec and semantic SOS -> Revival/gift -> Thank-You chain also
+reproduce a real published three-password exchange. The captured Rankings -> Await Rescue
+route now renders its generated SOS code through a frozen 64-symbol English alphabet while
+restoring the native buffer and preserving the matching diary record byte-for-byte. Rescue
+input modes 5-8 now share a fixture-tested English keyboard that maps every visible choice
+back to its native six-bit value. The complete live two-diary emulator fixture remains in
+progress.
 Editorial review, full playthrough testing, and graphics localization remain active
 project work.
 
@@ -40,8 +47,9 @@ project work.
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
+| Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture the rescuer/Revival/resume/Thank-You routes and complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **380-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **413-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -55,8 +63,8 @@ editorial and gameplay pass, and graphical assets still require full localizatio
 - PyBoy is optional but recommended for emulator-backed integration tests.
 - Pillow is optional for font and graphics inspection tools.
 - RGBDS is optional; when installed, the tests reassemble the name, Big Moai gift-code, Blank
-  Scroll, and unidentified-name patches and compare them byte-for-byte with the embedded
-  production payloads.
+  Scroll, unidentified-name, and Wanderer Rescue presentation patches and compare them
+  byte-for-byte with the embedded production payloads.
 
 The normal production build uses only Python's standard library. Optional Python
 dependencies can be installed with:
@@ -94,7 +102,8 @@ python3 tools/build.py \
 The output is `build/shiren-gb2-english.gbc`. The builder automatically validates the
 source ROM, translation controls and terminology, runtime-value widths, positioned text,
 far-pointer allocation, installed font and patches, all 7,163 logical text references,
-and both cartridge checksums before writing the ROM.
+and both cartridge checksums before writing the ROM. It also prints the output SHA-1 so a
+manually tested artifact can be identified unambiguously.
 
 Neither the source ROM nor generated ROMs belong in Git; both are covered by
 `.gitignore`.
