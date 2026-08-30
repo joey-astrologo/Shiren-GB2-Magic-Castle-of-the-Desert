@@ -87,8 +87,10 @@ edited through the ordinary catalog workflow.
   captured failure fixture starts inside the Japanese mode-8 editor and proves the common
   input-loop repair replaces its complete 320-tile map and navigation graph. A live Mesen
   regression also loads that broken state and requires the installed loop hook to fire
-  naturally, without calling the repair routine from the test. Add the
-  second-diary emulator/SRAM fixture and preserve cable compatibility; see
+  naturally, without calling the repair routine from the test. Manual testing also accepted
+  `I3CqdGY6iuyws`, an Ancient Ruins 1F SOS with a distinct diary ID; its exact native
+  bytes, payload, and semantic fields are now fixture-frozen. Add the second-diary
+  emulator/SRAM completion fixture and preserve cable compatibility; see
   [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 - Editorial read-through of the complete scene document for voice, continuity, and
   natural English.

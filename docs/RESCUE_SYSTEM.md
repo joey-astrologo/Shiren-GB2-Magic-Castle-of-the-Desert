@@ -328,6 +328,15 @@ dialogue, requires English editor checksum `$028789EC`, enters the published
 rescued by this diary; its deterministic return screen proves native validation was reached
 and did not freeze, not that a complete rescue was accepted.
 
+Manual testing on 2026-08-29 supplied the generated localized code
+`I3CqdGY6iuyws` through the repaired English editor and the game accepted it. The code
+decodes to seed `$C4C2C13E`, diary ID low word `$1234`, position `(9,8)`, dungeon ID 2
+(Ancient Ruins), and internal floor 1. Its distinct diary ID avoids the native self-rescue
+check that applies to the requester capture's `$7F8F` diary. This proves the localized
+13-character input and native codec work together for an accessible dungeon. The code and
+fields are frozen in `tests/fixtures/rescue_requester.json`; automated controller replay
+of the complete accepted route remains a separate coverage improvement.
+
 That successful constructor route did not cover the production failure reported during
 manual testing. The exact running state was recovered from Mesen as
 `SaveStates/rescue-entry-japanese-editor.mss` (SHA-1

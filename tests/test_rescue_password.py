@@ -489,6 +489,30 @@ class RescueRequesterCaptureTests(unittest.TestCase):
         self.assertEqual(row["sha1"], sha1(state.read_bytes()).hexdigest())
         return row, mesen_state.load_fields(state)["workRam"]
 
+    def test_manually_accepted_localized_sos_is_a_stable_semantic_fixture(self):
+        row = REQUESTER_FIXTURE["manual_accepted_sos"]
+        raw = rescue_password.delocalize_password(row["localized_password"])
+        self.assertEqual(bytes.fromhex(row["native_hex"]), raw)
+        self.assertEqual(
+            bytes.fromhex(row["payload_hex"]),
+            rescue_password.decode_password(raw),
+        )
+        fields = rescue_password.decode_sos(raw)
+        expected = row["semantic_fields"]
+        self.assertEqual(
+            int(expected["dungeon_seed"].removeprefix("$"), 16),
+            fields.dungeon_seed,
+        )
+        self.assertEqual(
+            int(expected["diary_id_low16"].removeprefix("$"), 16),
+            fields.diary_id_low16,
+        )
+        self.assertEqual(expected["x"], fields.x)
+        self.assertEqual(expected["y"], fields.y)
+        self.assertEqual(expected["dungeon_id"], fields.dungeon_id)
+        self.assertEqual(expected["internal_floor"], fields.internal_floor)
+        self.assertEqual("accepted_in_localized_rescue_editor", row["result"])
+
     def test_rankings_capture_precedes_sos_generation(self):
         row, work_ram = self._load_capture("ranking_state")
         self.assertEqual(row["mode"], work_ram[self.MODE_OFFSET])

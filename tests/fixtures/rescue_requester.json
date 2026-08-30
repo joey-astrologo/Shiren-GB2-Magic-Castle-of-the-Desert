@@ -8,6 +8,21 @@
     "sha1": "478d96bcb625b7f54a3639e66c8b3c13e10cc10d",
     "sos_diary_record_hex": "00000000000000000000"
   },
+  "manual_accepted_sos": {
+    "localized_password": "I3CqdGY6iuyws",
+    "native_hex": "3870325A4D36487352676B695C",
+    "payload_hex": "3EC1C2C43412094900",
+    "result": "accepted_in_localized_rescue_editor",
+    "semantic_fields": {
+      "diary_id_low16": "$1234",
+      "dungeon_id": 2,
+      "dungeon_seed": "$C4C2C13E",
+      "internal_floor": 1,
+      "x": 9,
+      "y": 8
+    },
+    "tested_on": "2026-08-29"
+  },
   "schema": "shiren-gb2-rescue-requester-captures-v1",
   "sos_state": {
     "buffer_hex": "6F7359324D4E6932506F73716DFF",

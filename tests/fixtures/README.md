@@ -63,6 +63,13 @@ to repair it naturally, without a test-side call to the repair routine.
 The native-validator result is an input/submission regression, not a complete accepted
 rescue; the two-diary Revival/Thank-You fixture remains separate work.
 
+The requester fixture also records the manually accepted localized SOS
+`I3CqdGY6iuyws`. It decodes to Ancient Ruins 1F with diary ID `$1234`, distinct from the
+test rescuer diary, and was accepted through the localized 13-character editor on
+2026-08-29. The static regression freezes the English/native mapping, payload, checksum,
+and semantic fields. This is evidence of an accepted SOS input, but it is not yet a
+controller-replayed end-to-end rescue completion fixture.
+
 `tests/fixtures/item_formatting.json` freezes the native producer anchors, English
 punctuation bytes, exhaustive family-width maxima, the twenty exact object records injected
 from `SaveStates/Mamel.mss`, and two reviewed Mesen framebuffers. Unlike ordinary category
