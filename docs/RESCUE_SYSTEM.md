@@ -359,6 +359,7 @@ A to close the SOS guide, choose **Adventure**, choose the diary, then choose
 **Revive! -> Password**. Enter `SVgaVwAhmUmoM3u` exactly, including capitalization, and
 select `OK`. The game must say `Revival complete! Select Continue to resume the game.`
 Press A once more and confirm the displayed Thank-You Password is `EkWsMPtHHOEE`.
+This complete manual route was confirmed in Mesen on 2026-08-30.
 
 This fixture is distinct from the manually accepted `I3CqdGY6iuyws` rescue request. To
 capture the response produced by that live rescuer diary, complete its Ancient Ruins 1F

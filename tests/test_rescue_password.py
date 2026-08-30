@@ -547,6 +547,10 @@ class RescueRequesterCaptureTests(unittest.TestCase):
             "accepted_and_generated_thank_you_password",
             row["result"],
         )
+        self.assertEqual(
+            "revival_and_thank_you_password_confirmed_in_mesen",
+            row["manual_result"],
+        )
 
     def test_rankings_capture_precedes_sos_generation(self):
         row, work_ram = self._load_capture("ranking_state")

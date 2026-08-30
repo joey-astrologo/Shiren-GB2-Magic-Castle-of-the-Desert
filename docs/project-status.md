@@ -91,7 +91,8 @@ edited through the ordinary catalog workflow.
   `I3CqdGY6iuyws`, an Ancient Ruins 1F SOS with a distinct diary ID; its exact native
   bytes, payload, and semantic fields are now fixture-frozen. A requester-side controller
   replay also accepts 15-character Revival response `SVgaVwAhmUmoM3u`, displays the
-  native success result, and generates linked Thank-You Password `EkWsMPtHHOEE`. Add the
+  native success result, and generates linked Thank-You Password `EkWsMPtHHOEE`; the same
+  complete route was manually confirmed in Mesen. Add the
   physical Rescue Gate/two-diary emulator and SRAM completion fixture and preserve cable
   compatibility; see
   [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).

@@ -25,6 +25,8 @@
   },
   "revival_response_test": {
     "editor_screen_checksum": "B5494D65",
+    "manual_result": "revival_and_thank_you_password_confirmed_in_mesen",
+    "manual_tested_on": "2026-08-30",
     "matching_sos": "26pCdewCg2640",
     "result": "accepted_and_generated_thank_you_password",
     "revival": {
