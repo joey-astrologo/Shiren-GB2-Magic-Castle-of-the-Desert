@@ -98,11 +98,13 @@ regressions.
 
 The ordinary bank-3 service-menu frame has five interior tiles, or 40 pixels. That is too
 narrow for `Password`, `Withdraw`, `Deposit`, `Balance`, and `Synthesis`.
-`tools/service_menus.py` chains after the stairs installer and gives only four exact group-7
+`tools/service_menus.py` chains after the stairs installer and gives only five exact group-7
 selector sequences a seven-tile/56-pixel interior. The selector reserves the first 8 pixels,
 leaving 48 pixels for each label:
 
 - Rescue Team: `$80/$07`, `$7F/$07`, `$87/$07` (`Cable`, `Password`, `Quit`);
+- completed-rescue delivery: `$80/$07`, `$7F/$07`, `$92/$07`, `$9E/$07`
+  (`Cable`, `Password`, `Cancel`, `Later`);
 - warehouse: `$85/$07`, `$86/$07`, `$90/$07`, `$87/$07` (`Deposit`, `Withdraw`,
   `Trash`, `Quit`);
 - Bank Teller: `$85/$07`, `$93/$07`, `$56/$07`, `$87/$07` (`Deposit`, `Withdraw`,
@@ -117,7 +119,7 @@ the service owner saves the added ninth BG column from both CGB VRAM banks befor
 The shared controller-exit cleanup restores it for B/A dismissals; a post-town-refresh
 cleanup covers transitions such as selecting `Password`. Bank-7 scratch `$D8C0-$D8DA`
 holds the packed column, destination, height, two-byte live marker, and Blacksmith
-suffix-tile bank/marker. Warehouse rows cross the BG-map boundary and explicitly wrap
+or completed-rescue suffix-tile bank/marker. Warehouse rows cross the BG-map boundary and explicitly wrap
 `$9BFF -> $9800`. The Rescue route opens a native Yes/No prompt
 immediately before the service popup and can leave the dynamic tiles in VRAM bank 1. The
 widened bottom row lies beyond the native renderer's 140-byte attribute footprint, so the
@@ -128,20 +130,32 @@ bottom border renders stale graphics.
 The label renderer owns only six sequential dynamic tile IDs per physical row. The seventh
 interior map cell cannot use `row_base + 6` indiscriminately: that value aliases the first tile
 of another row, so moving the selector can redraw a second cursor on the right. Warehouse
-and Bank map every spill cell to reviewed stable tile `$B3`. Rescue selects a separate
-template whose two `Password` spill cells use `$A8/$BA`, exposing the final `d` column
-already rendered into the otherwise off-screen lower rows; all its other spill cells remain
-`$B3`. Blacksmith Info cannot expose `Synthesis`'s aliased `$9C` overflow tile directly
+and Bank map every spill cell to reviewed stable tile `$B3`. The three-entry Rescue selector
+uses a separate template whose two `Password` spill cells use `$A8/$BA`, exposing the final
+`d` column already rendered into rows outside that shorter frame; all its other spill cells
+remain `$B3`. The four-entry completed-rescue selector makes those rows visible and cursor-
+owned, so it first copies the two suffix fragments to off-frame tiles `$9C/$AE`, blanks
+`$A8/$BA`, and references only the staged copies plus `$B3`. Blacksmith Info cannot expose
+`Synthesis`'s aliased `$9C` overflow tile directly
 because the same tile owns the visible Quit row. Its copy helper stages that suffix in stable
 tile `$B3`, blanks `$9C` for unselected Quit, maps every other spill to reviewed blank `$B9`,
 and synchronizes every displayed spill attribute to the renderer-selected VRAM bank before
-restoring `$B3` on exit. The live regressions visit every entry in all four menus, verify
-those exact tile IDs and bank bits, and freeze each resulting framebuffer. Hash-independent
-pixel assertions check the complete final `d`, the complete 45x8 `Synthesis` raster, and
-blank cells on both sides of unselected `Quit`. They also freeze the Yes/No prompt, B-button
-teardown, and the `Password` selection transition separately. Each added-column tile and
-attribute is compared with its captured pre-popup value; hashes remain secondary
-presentation fixtures.
+restoring `$B3` on exit. Existing service routes traverse the original four menus, verify
+their exact tile IDs and bank bits, and freeze each resulting framebuffer. The completed-
+rescue route independently rebuilds the fifth menu from `at-rescue.mss`, checks its full
+right border in both VRAM banks, overwrites the cursor-owned source tiles after the approved
+render, and then uses real Down inputs through all four cursor positions. It requires the
+final `d` at every stop, exactly one cursor in the left column, and no graphic in the right
+spill column.
+Hash-independent pixel assertions check both `Password` paths' complete final `d`, the
+complete 45x8 `Synthesis` raster, and blank cells on both sides of unselected `Quit`. The
+shared tests also freeze the Yes/No prompt, B-button teardown, and the initial `Password`
+selection transition separately. Each cleanup-covered added-column tile and attribute is
+compared with its captured pre-popup value; hashes remain secondary presentation fixtures.
+
+The complete native event-choice inventory and current overflow list are maintained in
+[MENU_ACTION_AUDIT.md](MENU_ACTION_AUDIT.md). Its ROM scan covers every literal opcode `$1E`
+choice record, including menus that do not yet have a convenient save-state route.
 
 ## Front-end diary hub
 

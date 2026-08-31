@@ -111,7 +111,7 @@ id	sections	english
 192:$6F33	menus_and_system_labels	Lose all items and Gitan,<br>then return to town?<br><hspace:18>Yes<hspace:40>No
 192:$6F61	menus_and_system_labels	Lose all items and Gitan,<br>then return to jail?<br><hspace:18>Yes<hspace:40>No
 192:$6F90	menus_and_system_labels	Send
-192:$6F94	menus_and_system_labels	Receive
+192:$6F94	menus_and_system_labels	Get
 192:$6F99	menus_and_system_labels	Controls
 192:$6F9D	menus_and_system_labels	Tech
 192:$6FA3	menus_and_system_labels	Secrets
@@ -144,15 +144,15 @@ id	sections	english
 192:$712A	menus_and_system_labels	Sell
 192:$712D	menus_and_system_labels	Discard
 192:$7131	menus_and_system_labels	Trash
-192:$7136	menus_and_system_labels	Caution
+192:$7136	menus_and_system_labels	Info
 192:$713B	menus_and_system_labels	Cancel
 192:$7140	menus_and_system_labels	Withdraw
 192:$7145	menus_and_system_labels	Forge
 192:$714A	menus_and_system_labels	Repair
 192:$714F	menus_and_system_labels	Remove
 192:$7153	menus_and_system_labels	Synthesis
-192:$7158	menus_and_system_labels	Training
-192:$715D	menus_and_system_labels	Intensive Training
+192:$7158	menus_and_system_labels	Train
+192:$715D	menus_and_system_labels	Train+
 192:$7162	menus_and_system_labels	<passwordLeft><passwordRight>
 192:$7167	menus_and_system_labels	OK
 192:$716C	menus_and_system_labels	Input
@@ -160,8 +160,8 @@ id	sections	english
 192:$7175	menus_and_system_labels	Later
 192:$7179	menus_and_system_labels	Next
 192:$717D	menus_and_system_labels	SOS
-192:$7181	menus_and_system_labels	Revival
-192:$7186	menus_and_system_labels	Thank-You
+192:$7181	menus_and_system_labels	Revive
+192:$7186	menus_and_system_labels	Thanks
 192:$718A	menus_and_system_labels	Adventure History
 192:$7193	menus_and_system_labels	Clear Campaign
 192:$719D	menus_and_system_labels	True Wanderer

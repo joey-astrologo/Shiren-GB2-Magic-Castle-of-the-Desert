@@ -28,6 +28,12 @@ SERVICE_EXIT_HELPER_LENGTH = 7
 DETECTOR_ADDRESS = SERVICE_EXIT_HELPER_ADDRESS + SERVICE_EXIT_HELPER_LENGTH
 
 RESCUE_RECORDS = ((0x80, 0x07), (0x7F, 0x07), (0x87, 0x07))
+RESCUE_DELIVERY_RECORDS = (
+    (0x80, 0x07),
+    (0x7F, 0x07),
+    (0x92, 0x07),
+    (0x9E, 0x07),
+)
 WAREHOUSE_RECORDS = (
     (0x85, 0x07),
     (0x86, 0x07),
@@ -49,6 +55,7 @@ BLACKSMITH_INFO_RECORDS = (
 )
 SERVICE_RECORD_SETS = (
     RESCUE_RECORDS,
+    RESCUE_DELIVERY_RECORDS,
     WAREHOUSE_RECORDS,
     BANK_RECORDS,
     BLACKSMITH_INFO_RECORDS,
@@ -56,6 +63,8 @@ SERVICE_RECORD_SETS = (
 SERVICE_GROUP = 7
 RESCUE_INDICES = (128, 127, 135)
 RESCUE_LABELS = ("Cable", "Password", "Quit")
+RESCUE_DELIVERY_INDICES = (128, 127, 146, 158)
+RESCUE_DELIVERY_LABELS = ("Cable", "Password", "Cancel", "Later")
 WAREHOUSE_INDICES = (133, 134, 144, 135)
 WAREHOUSE_LABELS = ("Deposit", "Withdraw", "Trash", "Quit")
 BANK_INDICES = (133, 147, 86, 135)
@@ -64,6 +73,11 @@ BLACKSMITH_INFO_INDICES = (148, 149, 151, 150, 135)
 BLACKSMITH_INFO_LABELS = ("Forge", "Repair", "Synthesis", "Remove", "Quit")
 SERVICE_LABEL_SETS = (
     ("rescue", RESCUE_INDICES, RESCUE_LABELS),
+    (
+        "rescue_delivery",
+        RESCUE_DELIVERY_INDICES,
+        RESCUE_DELIVERY_LABELS,
+    ),
     ("warehouse", WAREHOUSE_INDICES, WAREHOUSE_LABELS),
     ("bank", BANK_INDICES, BANK_LABELS),
     ("blacksmith_info", BLACKSMITH_INFO_INDICES, BLACKSMITH_INFO_LABELS),
@@ -81,18 +95,22 @@ TEXT_RIGHT_EDGE = ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS
 # every ``base + 6`` aliases lower cursor rows. Warehouse and Bank keep the
 # reviewed blank tile $B3 in every spill cell. Blacksmith Info copies its
 # Synthesis suffix to stable tile $B3 and uses reviewed blank $B9 elsewhere.
-# Rescue alone exposes the two overflow tiles that contain `Password`'s final
-# column; its shorter three-entry frame never displays the aliased lower rows.
+# The three-entry Rescue selector can expose Password's two overflow tiles
+# because their cursor-owned rows are outside its frame. The four-entry
+# post-rescue selector cannot: it stages both halves in its two off-frame rows,
+# then blanks the live aliases before the frame is copied.
 SERVICE_BLANK_TILE = 0xB3
 BLACKSMITH_BLANK_TILE = 0xB9
 BLACKSMITH_SUFFIX_SOURCE_TILE = 0x9C
 BLACKSMITH_SUFFIX_TILE = 0xB3
+RESCUE_DELIVERY_SUFFIX_SOURCE_TILES = (0xA8, 0xBA)
+RESCUE_DELIVERY_SUFFIX_TILES = (0x9C, 0xAE)
 
 ORIGINAL_INSTALLED_LOAD = stairs_menu._load_helper()
 ORIGINAL_INSTALLED_COPY = stairs_menu._copy_helper()
 ORIGINAL_INSTALLED_EXIT = stairs_menu._status_exit_helper_bytes()
-LOAD_SUPPORT_LENGTH = 43
-COPY_SUPPORT_LENGTH = 69
+LOAD_SUPPORT_LENGTH = 51
+COPY_SUPPORT_LENGTH = 77
 
 SERVICE_LOOP_BANK = 6
 SERVICE_LOOP_CALL_ADDRESS = 0x6268
@@ -115,6 +133,7 @@ SAVED_FLAG_END_VALUE = 0x5A
 BLACKSMITH_TILE_BANK_ADDRESS = 0xD8D9
 BLACKSMITH_TILE_FLAG_ADDRESS = 0xD8DA
 BLACKSMITH_TILE_FLAG_VALUE = 0xA6
+RESCUE_DELIVERY_TILE_FLAG_VALUE = 0xA7
 MAXIMUM_SERVICE_ROWS = 10
 
 
@@ -198,6 +217,11 @@ def rescue_detector_address():
     return exact_detector_address(RESCUE_RECORDS)
 
 
+def rescue_delivery_detector_address():
+    """Return the completed-rescue delivery predicate after the dispatcher."""
+    return exact_detector_address(RESCUE_DELIVERY_RECORDS)
+
+
 def blacksmith_info_detector_address():
     """Return the exact Blacksmith Info predicate after the dispatcher."""
     return exact_detector_address(BLACKSMITH_INFO_RECORDS)
@@ -211,6 +235,7 @@ def _load_support_bytes():
     """Load the exact service template or delegate to the native copy."""
     standard = service_template_address()
     rescue = rescue_template_address()
+    rescue_delivery = rescue_delivery_template_address()
     blacksmith = blacksmith_info_template_address()
     native = stairs_menu.NATIVE_TEMPLATE_ADDRESS
     service_body = (
@@ -222,6 +247,13 @@ def _load_support_bytes():
         ))
         + bytes.fromhex("2003")
         + bytes((0x21, rescue & 0xFF, rescue >> 8))
+        + bytes((
+            0xCD,
+            rescue_delivery_detector_address() & 0xFF,
+            rescue_delivery_detector_address() >> 8,
+        ))
+        + bytes.fromhex("2003")
+        + bytes((0x21, rescue_delivery & 0xFF, rescue_delivery >> 8))
         + bytes((
             0xCD,
             blacksmith_info_detector_address() & 0xFF,
@@ -273,8 +305,20 @@ def _copy_support_bytes():
     )
     save = service_save_address()
     stage_blacksmith = blacksmith_tile_support_address()
+    stage_rescue_delivery = rescue_delivery_tile_support_address()
     service_copy = (
         bytes((0xCD, save & 0xFF, save >> 8))
+        + bytes((
+            0xCD,
+            rescue_delivery_detector_address() & 0xFF,
+            rescue_delivery_detector_address() >> 8,
+        ))
+        + bytes.fromhex("2003")
+        + bytes((
+            0xCD,
+            stage_rescue_delivery & 0xFF,
+            stage_rescue_delivery >> 8,
+        ))
         + bytes((
             0xCD,
             blacksmith_info_detector_address() & 0xFF,
@@ -442,8 +486,26 @@ def _restore_support_bytes():
         "11308B"            # staged suffix tile $B3
         "011000CD6B0A"      # copy one 16-byte tile
     )
+    blacksmith_done = len(raw)
+    raw += bytearray.fromhex("1800")
+    rescue_delivery = len(raw)
+    _patch_relative(raw, no_blacksmith_tile, rescue_delivery)
+    raw += bytearray.fromhex("FEA7")
+    no_rescue_delivery_tile = len(raw)
+    raw += bytearray.fromhex("2000")
+    raw += bytearray.fromhex(
+        "AFEADAD8"          # consume delivery suffix marker before VRAM
+        "FAD9D8E04F"        # select the renderer's recorded VRAM bank
+        "21308B"            # stable blank tile $B3
+        "11C089"            # first staged suffix tile $9C
+        "011000CD6B0A"      # clear one 16-byte staged tile
+        "21308B"            # stable blank tile $B3
+        "11E08A"            # second staged suffix tile $AE
+        "011000CD6B0A"      # clear one 16-byte staged tile
+    )
     tile_done = len(raw)
-    _patch_relative(raw, no_blacksmith_tile, tile_done)
+    _patch_relative(raw, blacksmith_done, tile_done)
+    _patch_relative(raw, no_rescue_delivery_tile, tile_done)
     done = len(raw)
     done_address = service_restore_address() + done
     for branch in (no_saved, no_saved_end, still_open):
@@ -497,6 +559,49 @@ def _blacksmith_tile_support_bytes():
     )
 
 
+def rescue_delivery_tile_support_address():
+    return blacksmith_tile_support_address() + len(_blacksmith_tile_support_bytes())
+
+
+def _rescue_delivery_tile_support_bytes():
+    """Stage Password's suffix away from the four-entry cursor tile rows."""
+    blank = 0x8000 + SERVICE_BLANK_TILE * 16
+    sources = tuple(
+        0x8000 + tile * 16 for tile in RESCUE_DELIVERY_SUFFIX_SOURCE_TILES
+    )
+    destinations = tuple(
+        0x8000 + tile * 16 for tile in RESCUE_DELIVERY_SUFFIX_TILES
+    )
+    raw = bytearray.fromhex(
+        "F5C5D5E5"        # preserve AF/BC/DE/HL
+        "F04FF5F070F5"    # preserve VBK and SVBK
+        "3E07E070"        # select WRAM bank 7
+        "FA03D8E608"      # renderer-selected VRAM bank bit
+        "0F0F0F"          # move bit 3 into bit 0
+        "EAD9D8E04F"      # record and select that VRAM bank
+    )
+    for source, destination in zip(sources, destinations):
+        raw += bytes((0x21, source & 0xFF, source >> 8))
+        raw += bytes((0x11, destination & 0xFF, destination >> 8))
+        raw += bytes.fromhex("011000CD6B0A")
+    for source in sources:
+        raw += bytes((0x21, blank & 0xFF, blank >> 8))
+        raw += bytes((0x11, source & 0xFF, source >> 8))
+        raw += bytes.fromhex("011000CD6B0A")
+    raw += bytearray.fromhex(
+        "FAD9D80707074F"  # selected bank 0/1 -> attribute bit 3 in C
+        "2121D8"          # first displayed spill-cell attribute
+        "111200"          # one widened template row is $12 bytes
+        "0607"            # seven possible displayed content rows
+        "7EE6F7B1771905"  # replace bank bit and advance one row
+        "20F7"            # loop over every displayed spill cell
+        "3EA7EADAD8"      # mark both staged suffix tiles live
+        "F1E070F1E04F"    # restore SVBK and VBK
+        "E1D1C1F1C9"      # restore registers
+    )
+    return bytes(raw)
+
+
 def _service_loop_trampoline():
     """Run guarded cleanup after the native town BG refresh.
 
@@ -516,15 +621,25 @@ def _service_loop_trampoline():
 
 
 def service_template_address():
-    return blacksmith_tile_support_address() + len(_blacksmith_tile_support_bytes())
+    return (
+        rescue_delivery_tile_support_address()
+        + len(_rescue_delivery_tile_support_bytes())
+    )
 
 
 def rescue_template_address():
     return service_template_address() + len(service_template_bytes())
 
 
-def blacksmith_info_template_address():
+def rescue_delivery_template_address():
     return rescue_template_address() + len(rescue_template_bytes())
+
+
+def blacksmith_info_template_address():
+    return (
+        rescue_delivery_template_address()
+        + len(rescue_delivery_template_bytes())
+    )
 
 
 def _patched_load_helper():
@@ -616,6 +731,15 @@ def rescue_template_bytes():
     return _service_template_bytes((0xA2, 0xB4))
 
 
+def rescue_delivery_template_bytes():
+    """Use off-frame staged tiles for the four-entry Password suffix."""
+    return _service_template_bytes(
+        spill_overrides=dict(zip(
+            (0xA2, 0xB4), RESCUE_DELIVERY_SUFFIX_TILES
+        )),
+    )
+
+
 def blacksmith_info_template_bytes():
     """Use a staged stable suffix tile only on Synthesis's spill row."""
     return _service_template_bytes(
@@ -633,8 +757,10 @@ def runtime_payload():
         + _save_support_bytes()
         + _restore_support_bytes()
         + _blacksmith_tile_support_bytes()
+        + _rescue_delivery_tile_support_bytes()
         + service_template_bytes()
         + rescue_template_bytes()
+        + rescue_delivery_template_bytes()
         + blacksmith_info_template_bytes()
     )
 
@@ -793,9 +919,15 @@ def summary(rom, approved=None):
         "blacksmith_tile_helper": extract.location(
             RUNTIME_BANK, blacksmith_tile_support_address()
         ),
+        "rescue_delivery_tile_helper": extract.location(
+            RUNTIME_BANK, rescue_delivery_tile_support_address()
+        ),
         "template": extract.location(RUNTIME_BANK, service_template_address()),
         "rescue_template": extract.location(
             RUNTIME_BANK, rescue_template_address()
+        ),
+        "rescue_delivery_template": extract.location(
+            RUNTIME_BANK, rescue_delivery_template_address()
         ),
         "blacksmith_info_template": extract.location(
             RUNTIME_BANK, blacksmith_info_template_address()
@@ -818,6 +950,9 @@ def summary(rom, approved=None):
         "blacksmith_tile_support_sha1": sha1(
             _blacksmith_tile_support_bytes()
         ).hexdigest(),
+        "rescue_delivery_tile_support_sha1": sha1(
+            _rescue_delivery_tile_support_bytes()
+        ).hexdigest(),
         "town_refresh_trampoline_sha1": sha1(
             _service_loop_trampoline()
         ).hexdigest(),
@@ -832,6 +967,9 @@ def summary(rom, approved=None):
         "template_sha1": sha1(service_template_bytes()).hexdigest(),
         "rescue_template_sha1": sha1(
             rescue_template_bytes()
+        ).hexdigest(),
+        "rescue_delivery_template_sha1": sha1(
+            rescue_delivery_template_bytes()
         ).hexdigest(),
         "blacksmith_info_template_sha1": sha1(
             blacksmith_info_template_bytes()

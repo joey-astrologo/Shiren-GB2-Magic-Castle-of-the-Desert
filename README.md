@@ -56,7 +56,7 @@ project work.
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **442-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **459-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.

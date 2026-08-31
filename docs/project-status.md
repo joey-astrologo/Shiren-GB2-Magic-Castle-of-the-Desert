@@ -61,8 +61,8 @@ edited through the ordinary catalog workflow.
 - Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups use exact
   selector-set detection and a 56-pixel English interior with a measured 48-pixel
   post-cursor text budget, while
-  unrelated generic popups retain native geometry. All four
-  user-supplied routes are rebuilt and dismissed in Mesen regressions. The Rescue route
+  unrelated generic popups retain native geometry. All five
+  user-supplied routes are rebuilt in Mesen regressions. The initial Rescue route
   separately freezes its preceding Yes/No prompt and synchronizes the widened bottom
   border with the renderer-selected CGB VRAM bank, preventing the confirmation from
   leaking stale tiles into the later popup. Before drawing, both VRAM banks' added ninth
@@ -72,14 +72,18 @@ edited through the ordinary catalog workflow.
   enforce the native six-dynamic-tile row allocation. Warehouse and Bank keep stable tile
   `$B3` in every spill cell; Blacksmith stages `Synthesis`'s suffix in `$B3`, clears its
   `$9C` Quit-cursor alias, selects the active VRAM bank for `$B9` elsewhere, and restores the
-  tile on exit; Rescue exposes `$A8/$BA` only where the shorter
-  frame needs
-  `Password`'s final column, with `$B3` elsewhere. A hash-independent pixel regression
+  tile on exit; the shorter Rescue frame exposes `$A8/$BA` only where it needs
+  `Password`'s final column, with `$B3` elsewhere. The completed-rescue selector stages
+  those fragments in off-frame `$9C/$AE`, clears the source cursor aliases, and traverses
+  Cable, Password, Cancel, and Later while rejecting left- or right-column garbage. A hash-independent pixel regression
   requires the complete final `d`, the 45x8 `Synthesis` word, and blank cells on both sides
   of unselected `Quit`; a dedicated `Password`
   transition regression prevents
   the reported vertical strip. The rescue request Yes/No cursor and the
   save-summary `Awaiting Rescue`/run-count composition are also framebuffer-frozen.
+  Training Ground (`Train`), Training House (`Train+`), Pigeon Handler
+  (`SOS / Revive / Thanks / Quit`), and the rescued-player
+  (`Yes / No / Info / Later`) menus were manually accepted on 2026-08-31.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
@@ -95,7 +99,7 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 442-test fixture suite covering translation, layout, save data, menu/input
+- A passing 459-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -136,5 +140,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`5363954192bdd29a97dc151aea36b26051a2c66d`; always rebuild and verify locally rather
+`1aa1ee62e66b7e86f9a57fa032e8b4bac0c9b851`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

@@ -382,10 +382,16 @@ column of `Password` use the already-rendered overflow tiles `$A8/$BA`; every ot
 cell remains `$B3`. Those aliased lower rows are outside the shorter Rescue frame. A separate
 Mesen regression compares the final `d` against its literal approved 5x8 raster, while the
 live route visits Cable, Password, and Quit and freezes all three corrected frames.
+The completed-rescue Cable / Password / Cancel / Later selector is taller, so `$A8/$BA`
+are live cursor rows there. Its dedicated constructor copies the two `Password` fragments
+to off-frame `$9C/$AE`, clears the source aliases, and uses `$B3` for every other spill.
+The `at-rescue.mss` regression forces both aliases to change and then drives all four real
+cursor positions, requiring the same literal `d`, one left cursor, and a blank right spill
+at every stop.
 The native town redraw clears only eight columns, so it cannot erase the ninth column added
 for English. Before drawing a widened popup, the service owner saves that column from both
-CGB VRAM banks in bank-7 scratch `$D8C0-$D8DA` (the final two bytes belong to Blacksmith
-suffix staging). The shared controller-exit path restores it
+CGB VRAM banks in bank-7 scratch `$D8C0-$D8DA` (the final two bytes select and mark either
+Blacksmith or completed-rescue suffix staging). The shared controller-exit path restores it
 for ordinary dismissals, while a guarded post-town-refresh hook covers `Password`, whose
 transition leaves the town loop immediately. Both paths consume a two-byte `$A5/$5A` live
 marker so uninitialized scratch cannot trigger cleanup. Warehouse begins at added-column

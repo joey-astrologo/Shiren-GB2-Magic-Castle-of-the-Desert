@@ -161,7 +161,7 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **449 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **459 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -183,9 +183,13 @@ six dynamic tiles per row. Warehouse and Bank therefore require stable tile `$B3
 spill row. Blacksmith Info stages `Synthesis`'s suffix in `$B3`, clears the `$9C` alias from
 unselected Quit, maps other spills to stable blank `$B9` in the active VRAM bank, and
 restores `$B3` on close.
-Rescue requires `$A8/$BA` only for the two `Password` overflow rows and `$B3` elsewhere while
-visiting all three Rescue entries, four entries in Warehouse and Bank, and all five
-Blacksmith Info entries. This catches the
+The three-entry Rescue menu requires `$A8/$BA` only for the two `Password` overflow rows and
+`$B3` elsewhere. The completed-rescue four-entry menu stages those fragments in off-frame
+`$9C/$AE`, clears the cursor-owned sources, and keeps `$B3` in every other spill. Its
+`at-rescue.mss` regression overwrites the source aliases, then visits Cable, Password,
+Cancel, and Later with real input while checking the literal `d` and both cursor columns.
+The other routes visit all three initial Rescue entries, four entries in Warehouse and
+Bank, and all five Blacksmith Info entries. This catches the
 duplicate right-edge cursor that an open-only test missed. A separate test compares the
 final `d` with a literal approved 5x8 mask; another compares the complete 45x8 `Synthesis`
 raster and requires blank 8x8 cells on both sides of unselected `Quit`. Both are

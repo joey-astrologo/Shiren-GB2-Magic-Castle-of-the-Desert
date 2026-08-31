@@ -430,10 +430,11 @@ width; never assign a seventh sequential ID across all rows. Warehouse and Bank 
 stable tile `$B3` throughout. Blacksmith Info copies the aliased `Synthesis` suffix into
 stable `$B3`, clears `$9C` before that aliased tile can appear as an `s` beside Quit, assigns
 every spill the active VRAM bank, uses blank `$B9` for the other spills, and restores `$B3`
-on exit. The shorter
-Rescue frame may expose only `$A8/$BA`, the two aliased
+on exit. The shorter three-entry Rescue frame may expose only `$A8/$BA`, the two aliased
 off-screen-row tiles that already contain `Password`'s clipped final column, while keeping
-`$B3` elsewhere. A live regression must move through every option—not merely open and close
+`$B3` elsewhere. The four-entry completed-rescue frame must instead copy those fragments
+to off-frame `$9C/$AE`, blank the live `$A8/$BA` cursor aliases, and use only the staged
+tiles in its spill column. A live regression must move through every option—not merely open and close
 the menu—verify the exact spill-cell tile IDs alongside exact framebuffers, and independently
 assert any intended overflow glyph pixels. A stable copied suffix must also be checked at
 every cursor position and restored during teardown.

@@ -93,7 +93,7 @@ requester response-input/presentation loop; physically traversing a Rescue Gate 
 capturing the rescuer's own generated response remains the next two-diary fixture.
 
 `tests/fixtures/service_menus.json` freezes the ordered bank-254 service-menu extension,
-all label widths, and all four live menu routes. `SaveStates/rescue-entry-menu.mss` is backed
+all label widths, and all five live menu routes. `SaveStates/rescue-entry-menu.mss` is backed
 out and rebuilt before checking the native Yes/No confirmation, the clean 56-pixel Rescue
 Team interior (48 pixels of label space after its cursor column) in the
 confirmation-selected VRAM bank, and the dismissed framebuffer;
@@ -111,9 +111,11 @@ They also traverse every menu option and freeze every cursor framebuffer. Wareho
 keep tile `$B3` in every seventh interior cell. Blacksmith Info stages the last `Synthesis`
 tile in `$B3`, clears the aliased unselected Quit cursor tile, maps every spill through the
 active VRAM bank, keeps `$B9` blank in the other spills, and restores `$B3` after B. Rescue
-uses `$A8/$BA` only in the two physical
-rows containing `Password`'s final pixel column and keeps `$B3` elsewhere; its dedicated
-5x8 raster check requires the final `d` at the original coordinates; Blacksmith has an
+uses `$A8/$BA` only in the two physical rows containing `Password`'s final pixel column in
+its shorter three-entry frame. The completed-rescue selector instead stages those fragments
+in off-frame `$9C/$AE`, clears `$A8/$BA`, overwrites them in the regression, and then visits
+all four live cursor positions. Its dedicated 5x8 raster check requires the final `d` at the
+original coordinates and rejects cursor graphics in either wrong column; Blacksmith has an
 independent 45x8 raster check for `Synthesis` plus literal blank 8x8 cells to the left and
 right of unselected `Quit`. This specifically guards clipping, cursor aliasing, and a stale
 VRAM-bank attribute selecting garbage for the spill tile.

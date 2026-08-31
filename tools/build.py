@@ -97,7 +97,7 @@ STAIRS_MENU_START_X = stairs_menu.TEXT_START_X
 STAIRS_MENU_RIGHT_EDGE = stairs_menu.TEXT_RIGHT_EDGE
 
 # Ordinary service-menu labels reserve their first interior tile for the
-# cursor/indent.  ``service_menus`` widens only its two reviewed selectors to
+# cursor/indent.  ``service_menus`` widens only its reviewed exact selectors to
 # seven interior tiles, leaving 48 pixels for label glyphs after that indent.
 SERVICE_MENU_GROUP = service_menus.SERVICE_GROUP
 SERVICE_MENU_INDICES = tuple(sorted({

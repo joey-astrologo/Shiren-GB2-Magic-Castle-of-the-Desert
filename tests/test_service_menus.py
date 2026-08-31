@@ -113,6 +113,61 @@ class ServiceMenuInstallerTests(unittest.TestCase):
             service_menus.rescue_template_address(),
         )
 
+    def test_post_rescue_template_stages_password_away_from_cursor_tiles(self):
+        raw = service_menus.rescue_delivery_template_bytes()
+        cells = [tuple(raw[offset:offset + 2]) for offset in range(0, len(raw), 2)]
+        rows = [
+            cells[offset:offset + service_menus.ENGLISH_COLUMNS]
+            for offset in range(0, len(cells), service_menus.ENGLISH_COLUMNS)
+        ]
+        self.assertEqual(
+            [
+                service_menus.SERVICE_BLANK_TILE,
+                service_menus.RESCUE_DELIVERY_SUFFIX_TILES[0],
+                service_menus.RESCUE_DELIVERY_SUFFIX_TILES[1],
+                service_menus.SERVICE_BLANK_TILE,
+                service_menus.SERVICE_BLANK_TILE,
+                service_menus.SERVICE_BLANK_TILE,
+                service_menus.SERVICE_BLANK_TILE,
+                service_menus.SERVICE_BLANK_TILE,
+            ],
+            [row[-2][0] for row in rows[1:-1]],
+        )
+        self.assertTrue(
+            set(service_menus.RESCUE_DELIVERY_SUFFIX_SOURCE_TILES).isdisjoint(
+                service_menus.RESCUE_DELIVERY_SUFFIX_TILES
+            )
+        )
+        self.assertEqual(
+            service_menus.rescue_template_address()
+            + len(service_menus.rescue_template_bytes()),
+            service_menus.rescue_delivery_template_address(),
+        )
+        stage = service_menus._rescue_delivery_tile_support_bytes()
+        blank = 0x8000 + service_menus.SERVICE_BLANK_TILE * 16
+        for source_tile, destination_tile in zip(
+            service_menus.RESCUE_DELIVERY_SUFFIX_SOURCE_TILES,
+            service_menus.RESCUE_DELIVERY_SUFFIX_TILES,
+        ):
+            source = 0x8000 + source_tile * 16
+            destination = 0x8000 + destination_tile * 16
+            self.assertIn(
+                bytes((
+                    0x21, source & 0xFF, source >> 8,
+                    0x11, destination & 0xFF, destination >> 8,
+                    0x01, 0x10, 0x00, 0xCD, 0x6B, 0x0A,
+                )),
+                stage,
+            )
+            self.assertIn(
+                bytes((
+                    0x21, blank & 0xFF, blank >> 8,
+                    0x11, source & 0xFF, source >> 8,
+                    0x01, 0x10, 0x00, 0xCD, 0x6B, 0x0A,
+                )),
+                stage,
+            )
+
     def test_blacksmith_template_uses_one_staged_suffix_spill(self):
         raw = service_menus.blacksmith_info_template_bytes()
         cells = [tuple(raw[offset:offset + 2]) for offset in range(0, len(raw), 2)]
@@ -134,8 +189,8 @@ class ServiceMenuInstallerTests(unittest.TestCase):
             [row[-2][0] for row in rows[1:-1]],
         )
         self.assertEqual(
-            service_menus.rescue_template_address()
-            + len(service_menus.rescue_template_bytes()),
+            service_menus.rescue_delivery_template_address()
+            + len(service_menus.rescue_delivery_template_bytes()),
             service_menus.blacksmith_info_template_address(),
         )
 
@@ -539,6 +594,39 @@ class MesenServiceMenuTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, output[-8000:])
         self.assertIn(
             "PASS Rescue Password final d matches the approved raster",
+            output,
+        )
+
+    def test_post_rescue_password_is_wide_with_literal_pixels(self):
+        state = ROOT / "SaveStates" / "at-rescue.mss"
+        if not state.is_file():
+            self.skipTest("post-rescue menu fixture is unavailable")
+        self.assertEqual(
+            "9adf777f9f86a18ba025d32edf1c5fcae02ec326",
+            sha1(state.read_bytes()).hexdigest(),
+        )
+        env = os.environ.copy()
+        env["GB2_AT_RESCUE_MSS"] = str(state)
+        result = subprocess.run(
+            [
+                str(self.mesen),
+                "--testrunner",
+                "--enablestdout",
+                "--novideo",
+                "--noaudio",
+                str(self.localized),
+                str(ROOT / "tests" / "mesen_service_menu_post_rescue.lua"),
+            ],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+            timeout=90,
+        )
+        output = result.stdout + result.stderr
+        self.assertEqual(0, result.returncode, output[-8000:])
+        self.assertIn(
+            "PASS post-rescue popup survives every live cursor position",
             output,
         )
 
