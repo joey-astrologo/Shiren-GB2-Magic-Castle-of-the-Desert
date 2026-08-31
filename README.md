@@ -55,8 +55,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **459-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Graphics | **In progress** | Credit/title/32 arrival-card selectors are traced; create replacement art, capture both ending routes, insert, and visually approve |
+| Automated tests | **Fixture suite passing** | Six focused graphics-audit tests pass; run complete discovery for the current total and release gate |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -156,6 +156,9 @@ python3 -m unittest \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_synthesis_lab
+
+# Read-only graphical-text resource audit
+python3 -m unittest tests.test_graphics_audit
 ```
 
 ## Edit translated text
@@ -225,6 +228,7 @@ Start with the [documentation index](docs/README.md). In particular:
 - [Engineering rules](docs/ENGINEERING_RULES.md)
 - [Known traps](docs/TRAPS.md)
 - [Graphics localization](docs/GRAPHICS.md)
+- [Graphical-text audit](docs/GRAPHICS_AUDIT.md)
 
 Nothing under `docs/` is mandatory onboarding. This README plus
 [`script/README.md`](script/README.md) is enough to build and to edit text; the detailed

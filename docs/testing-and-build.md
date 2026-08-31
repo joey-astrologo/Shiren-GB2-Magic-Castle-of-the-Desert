@@ -149,6 +149,17 @@ python3 -m unittest \
   tests.test_synthesis_lab
 ```
 
+For the read-only graphical-text inventory:
+
+```sh
+python3 tools/graphics_audit.py "$ROM"
+python3 -m unittest tests.test_graphics_audit -v
+```
+
+This verifies native tile-plane headers, resource aliases, interleaved maps/attributes,
+palette provenance, all 32 arrival-card sequences, and the explicit ending-route gap. It does
+not write a ROM or update framebuffer hashes.
+
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
 widths, wrapping, menus, save/name expansion, Big Moai promotional-code input and live NPC reward, Blank Scroll input,
 unidentified-item free/history naming, runtime text domains, scene ownership, internal
@@ -161,9 +172,10 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **459 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
-available. Treat that number as a status snapshot; the required gate is always discovery
-of the complete `tests/` directory, not a hard-coded subset.
+The last complete run before the read-only graphics-audit family was **459 tests** with the
+matching ROM, PyBoy, RGBDS, and Mesen available. The six focused graphics-audit tests pass;
+the required gate is always discovery of the complete `tests/` directory, not a hard-coded
+count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
 with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four

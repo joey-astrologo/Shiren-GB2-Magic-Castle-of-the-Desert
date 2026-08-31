@@ -99,7 +99,7 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 459-test fixture suite covering translation, layout, save data, menu/input
+- A passing fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -129,8 +129,11 @@ edited through the ordinary catalog workflow.
   natural English.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
   traps, save/resume, rankings, and uncommon dynamic text combinations.
-- Full graphics localization: inventory, replacement art, insertion, and visual QA; see
-  [GRAPHICS.md](GRAPHICS.md).
+- Full graphics localization: the clean-boot copyright/composer card, main title, and all
+  32 arrival-card selectors now have exact tile, map, attribute, palette, sharing, and route
+  contracts in the [graphical-text audit](GRAPHICS_AUDIT.md). Replacement art and insertion
+  have not started. The ending staff roll still needs main-ending and true-ending save states
+  before its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
 - Iterative layout and font polish for issues discovered in playtesting.
 - Release packaging and final clean-ROM reproducibility checks.
 

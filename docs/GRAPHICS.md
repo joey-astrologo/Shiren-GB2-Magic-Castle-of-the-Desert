@@ -4,6 +4,12 @@ Full graphics localization is a project requirement and remains active work. Thi
 separates what is already engineered from what still needs an inventory, translation, and
 visual acceptance pass.
 
+The first whole-ROM graphical-text inventory is now recorded in
+[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). It fully traces the clean-boot copyright/composer
+card, main title, and all 32 town/dungeon/floor arrival selectors. The ending staff roll is
+proven by native scenario/BGM labels but remains unclassified until main-ending and true-ending
+save states are available. No replacement art has been installed yet.
+
 ## Proven storage model
 
 GB2 graphics are uncompressed. A clean PyBoy title-screen capture found 261 of 270 nonblank
@@ -33,14 +39,14 @@ Each asset still needs its producer and consumers mapped.
 These are not evidence that title art, story cards, ending art, or every graphical menu label
 is localized.
 
-## Inventory still required
+## Remaining inventory and implementation
 
-The graphics pass should explicitly audit at least:
+The graphics pass must still complete or visually verify:
 
-- publisher/copyright and boot cards;
-- title logo and title-state variants;
+- replacement art and visual acceptance for the now-traced publisher/copyright card;
+- replacement art and visual acceptance for the now-traced title logo;
 - opening chase/cinematic graphical text;
-- town, dungeon, floor, and arrival banners;
+- an English atlas/gallery for the now-traced 32-selector arrival-card renderer;
 - HUD abbreviations or labels not drawn through the localized text font;
 - menu icons, category art, status marks, and explanatory diagrams;
 - gift-code/name editor decorative labels outside generated maps;

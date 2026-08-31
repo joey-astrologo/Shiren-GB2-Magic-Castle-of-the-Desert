@@ -117,6 +117,28 @@ text growth.
 | 206 | `$6A58-$6A7F` | `F2 1E` cracked-Bracelet composite glyph | `item_status.py` replaces only this 40-byte bitmap with `(Cr)`; native width bytes `0F 06` remain unchanged |
 | 244 | `$4066-$406D` | Shared graphical-input maximum hook | `name6.py`, then `blank_scroll.py` mode-1 overlay |
 
+## Audited native graphical-text resources
+
+These are preserved source resources, not free space or installed English ownership. The
+read-only contracts are emitted by `graphics_audit.py` and explained in
+[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). A future graphics installer must exact-byte guard or
+clone every affected resource and account for the recorded aliases before changing it.
+
+| Bank | CPU range | Native contents | Audit rule |
+|---:|:---|---|---|
+| 0 | `$3CD3-$3CD5`, `$3E0B-$3E0D` | Title selector-0 and credit selector-104 tilemap descriptors | Preserve until their consumers are redirected together |
+| 5 | `$6F35-$6F37`, `$6FE3-$6FE5` | Title selector-0 and credit selector-58 `$8800` plane pointers | Preserve and keep selector identity explicit |
+| 17 | `$416F-$41AE`, `$58F6-$592D` | Title palettes 0-7 and credit base palettes 0-6 | Preserve native palette/fade behavior |
+| 28 | `$4000-$5421` | Title `$8800` plane header/data split across CGB VRAM banks 1 and 0 | Traced stored art; replacement pending |
+| 45 | `$4F12-$5583` | Credit-card main `$8800` plane header/data | Traced stored art; replacement pending |
+| 49 | `$4000-$4B01` | Title `$8000` plane header/data split across CGB VRAM banks 1 and 0 | Traced stored art; replacement pending |
+| 54 | `$614A-$626B` | Credit-card secondary `$8000` plane header/data | Shared by selectors 57 and 58; do not patch one consumer only |
+| 56 | `$4000-$42D1` | Title 20x18 interleaved tile/attribute map | Selector 0; replacement pending |
+| 59 | `$7980-$7E81` | Credit 20x32 interleaved tile/attribute map | Selector 104; preserve transition rows |
+| 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | Preserve both credit aliases |
+| 127 | `$4000-$62EE` | Arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | One shared family; selectors 30/31 alias |
+| 240 | `$409F-$40A6` | Credit-card BG palette-0 transition override | Preserve native fade behavior |
+
 The header checksum byte at `$014D` and global checksum at `$014E-$014F` are regenerated
 after every ROM writer. They are output metadata, not allocation space.
 
