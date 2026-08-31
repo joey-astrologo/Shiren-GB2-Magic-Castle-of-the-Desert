@@ -31,6 +31,9 @@ to a compact `(Cr)` marker and replayed from the supplied failure state. Native 
 item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
 and spaced Gitan amounts; a two-page Mesen gallery covers their status-symbol combinations,
 and a native Synthesis Pot lab provides a repeatable transferred-seal visual route.
+The clean-boot copyright/composer card now preserves its native `© 2001` rows and fade while
+rendering the approved `CHUNSOFT` and `Koichi Sugiyama` art from a guarded, reproducible Inter
+SemiBold source asset.
 The native Wanderer Rescue codec and semantic SOS -> Revival/gift -> Thank-You chain also
 reproduce a real published three-password exchange. The captured Rankings -> Await Rescue
 route now renders its generated SOS code through a frozen 64-symbol English alphabet while
@@ -55,8 +58,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit/title/32 arrival-card selectors are traced; create replacement art, capture both ending routes, insert, and visually approve |
-| Automated tests | **Fixture suite passing** | Six focused graphics-audit tests pass; run complete discovery for the current total and release gate |
+| Graphics | **In progress** | Credit card is installed and transition-tested; create and approve title/arrival art and capture both ending routes |
+| Automated tests | **473-test suite passing** | Complete discovery passed with the credit source, insertion, fade, and title-handoff regressions included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.

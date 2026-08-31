@@ -84,6 +84,10 @@ edited through the ordinary catalog workflow.
   Training Ground (`Train`), Training House (`Train+`), Pigeon Handler
   (`SOS / Revive / Thanks / Quit`), and the rescued-player
   (`Yes / No / Info / Later`) menus were manually accepted on 2026-08-31.
+- The clean-boot copyright/composer card preserves both native `© 2001` rows and replaces
+  only its two private 512-byte name strips with approved `CHUNSOFT` and `Koichi Sugiyama`
+  art. The editable Inter SemiBold 4.1 source, OFL provenance, exact source guards, native
+  fade stages, and unchanged title handoff are all fixture-tested without a framebuffer hash.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
@@ -129,11 +133,11 @@ edited through the ordinary catalog workflow.
   natural English.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
   traps, save/resume, rankings, and uncommon dynamic text combinations.
-- Full graphics localization: the clean-boot copyright/composer card, main title, and all
-  32 arrival-card selectors now have exact tile, map, attribute, palette, sharing, and route
-  contracts in the [graphical-text audit](GRAPHICS_AUDIT.md). Replacement art and insertion
-  have not started. The ending staff roll still needs main-ending and true-ending save states
-  before its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
+- Full graphics localization: the clean-boot copyright/composer card is installed from
+  approved source art and pixel-tested across its fade and title handoff. The main title and
+  all 32 arrival-card selectors have exact contracts but still need approved English art and
+  insertion. The ending staff roll still needs main-ending and true-ending save states before
+  its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
 - Iterative layout and font polish for issues discovered in playtesting.
 - Release packaging and final clean-ROM reproducibility checks.
 
@@ -143,5 +147,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`1aa1ee62e66b7e86f9a57fa032e8b4bac0c9b851`; always rebuild and verify locally rather
+`c4d523a8373e175cf890947c4db6a058bac7d271`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

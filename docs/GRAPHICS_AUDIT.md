@@ -1,9 +1,9 @@
 # Graphical-text audit
 
 This is the evidence-backed inventory for player-facing text drawn as graphics rather than
-ordinary translated script. It records native storage and consumers before any replacement
-art is designed. The audit does **not** modify the ROM, choose final fonts, or approve final
-English layouts.
+ordinary translated script. It records native storage, consumers, and the implementation
+state of each family. The audit command itself is read-only; design approval and insertion
+remain separate, guarded production steps.
 
 Run the machine-readable audit with:
 
@@ -33,25 +33,43 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 
 | Priority | Family | Storage | Variants / sharing | Audit state |
 |---:|---|---|---|---|
-| 1 | Post-Chunsoft copyright/credit card | Stored tiles plus interleaved tile/attribute map | `$8000` plane is aliased by resource selectors 57 and 58 | Fully traced; English art required |
+| 1 | Post-Chunsoft copyright/credit card | Verbatim foreground plane plus a generated tilemap; surrounding transition resources remain native | Two private 16x2-tile name strips inside `F3:$5D00-$64FF` | English art installed, transition-tested, and visually approved |
 | 1 | Main title screen logo | Stored multi-VRAM-bank tiles plus full-screen map | All three resources use title selector 0 | Fully traced; English art required |
 | 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors, 31 unique sequences; selectors 30/31 alias | Fully traced; English atlas/sequences required |
 | 3 | Ending staff roll | Unknown until the live route is captured | Native scenario and music identifiers prove the route exists | Needs main-ending and true-ending states |
 
-The title and credit wording shown below is a working content transcription, not approved
-replacement art. Font, capitalization, line division, and exact title treatment remain visual
+The title wording shown below remains a working content transcription rather than approved
+replacement art. The credit-card wording and Inter-based treatment have been approved and
+installed; the title's font, capitalization, line division, and exact treatment remain visual
 review decisions.
 
 ## Copyright and composer card
 
 ### Route and visible content
 
-A clean boot reaches this card immediately after the Chunsoft splash. The native screen reads
-as two copyright lines: `© 2001 CHUNSOFT` and a second `© 2001` credit for Koichi Sugiyama.
-Whether the English art adds a role such as `Music` must be approved separately; the Japanese
-card itself displays his name rather than an English role label.
+A clean boot reaches this card immediately after the Chunsoft splash. The approved English
+screen preserves both native `© 2001` rows byte-for-byte and replaces only the two name rows
+with `CHUNSOFT` and `Koichi Sugiyama`. It does not add a role such as `Music`, because the
+Japanese card displays his name rather than an English role label.
 
-### Native resources
+### Visible native foreground and map
+
+A live source-to-VRAM comparison corrected the initial static attribution: the stable visible
+lettering is the 2,048-byte foreground plane at `F3:$5D00-$64FF`, copied verbatim to VRAM bank
+1 at `$8800-$8FFF`. The boot code generates its map directly. The resource-selector family in
+the following table is still part of the surrounding transition, but it is not the stable
+name lettering and is not changed by the English installer.
+
+| Part | Native contract | Production treatment |
+|---|---|---|
+| Foreground plane | selector 24; pointer `F0:$40EF-$40F1`; length byte `F0:$410A`; `F3:$5D00-$64FF` -> VRAM bank 1 `$8800-$8FFF` | Preserve the complete plane except the two guarded name strips |
+| `CHUNSOFT` strip | tiles `$A0-$BF`; `F3:$5F00-$60FF`; screen rectangle `(16,56)-(143,71)` | Replace exactly 512 bytes |
+| `Koichi Sugiyama` strip | tiles `$E0-$FF`; `F3:$6300-$64FF`; screen rectangle `(16,88)-(143,103)` | Replace exactly 512 bytes |
+| Visible tilemap | producer `F0:$4057-$409E`; tile IDs `$80-$FF`; destination `$9800`; attribute fill `$08` selects VRAM bank 1 | Preserve |
+| Stable scroll | `SCX=$F0`, `SCY=$D8` | Preserve |
+| Palette-0 override | `F0:$409F-$40A6` | Preserve the native fade |
+
+### Surrounding transition resources
 
 | Part | Selector / table | ROM source | Runtime destination |
 |---|---|---|---|
@@ -62,9 +80,18 @@ card itself displays his name rather than an English role label.
 | Palette-0 override | credit transition | `F0:$409F-$40A6` | BG palette 0 |
 
 The 32-row map intentionally exceeds the 18 visible rows and participates in the native
-transition. Replacement work must retain the fade/scroll behavior instead of flattening only
-one captured frame. The secondary plane's duplicate selectors are a real alias; an installer
-must either preserve both consumers or prove that it redirects both.
+transition. These resources and the secondary plane's real selector alias remain byte-exact.
+The English installer does not flatten a captured frame or redirect them.
+
+### English asset and verification
+
+The editable four-level source is `assets/graphics/credit_screen_inter.json`, generated by
+`tools/credit_screen_mockup.py` from Inter SemiBold 4.1 under the SIL Open Font License 1.1.
+`tools/credit_screen.py` exact-hash guards both native strips, encodes the approved 128x16
+pixel rows to 2bpp tiles, and owns no other graphical bytes. The independent production
+regression first failed against the native ROM at 1,382 name-band pixels. It now compares
+actual pixels at fade frames 280, 300, 320, 440, and 480, preserves every pixel before the
+card and at the title handoff, and does not use or update a framebuffer hash.
 
 ## Title screen
 
@@ -174,10 +201,9 @@ remain unchanged by explicit project policy.
 
 ## Implementation order
 
-1. Credit/composer card: small, isolated, clean-boot route with exact resources.
-2. Main title: larger full-screen art with two VRAM planes and eight palettes.
-3. Arrival-card English atlas and 32-selector gallery.
-4. Ending credits after the two live states are available.
+1. Main title: larger full-screen art with two VRAM planes and eight palettes.
+2. Arrival-card English atlas and 32-selector gallery.
+3. Ending credits after the two live states are available.
 
 Each implementation remains subject to [GRAPHICS.md](GRAPHICS.md): editable source art,
 licensed font provenance, exact-byte guards, collision checks, static plane/map tests, a live

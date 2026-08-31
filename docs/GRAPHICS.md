@@ -8,7 +8,8 @@ The first whole-ROM graphical-text inventory is now recorded in
 [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). It fully traces the clean-boot copyright/composer
 card, main title, and all 32 town/dungeon/floor arrival selectors. The ending staff roll is
 proven by native scenario/BGM labels but remains unclassified until main-ending and true-ending
-save states are available. No replacement art has been installed yet.
+save states are available. The approved English copyright/composer card is now installed; the
+title, arrival cards, and ending staff roll remain active work.
 
 ## Proven storage model
 
@@ -35,6 +36,7 @@ Each asset still needs its producer and consumers mapped.
 | Rescue Team, completed-rescue delivery, warehouse, Bank Teller, and Blacksmith Info popup geometry | Exact-menu seven-interior-tile frames using six renderer-owned dynamic tiles; warehouse and Bank have stable `$B3` spill cells, Blacksmith stages the `Synthesis` suffix in `$B3`, the shorter Rescue menu exposes only off-frame `Password` overflow tiles `$A8/$BA`, and completed-rescue delivery stages those fragments in `$9C/$AE` before clearing their live cursor aliases; active-VRAM-bank bottom border, staged-tile cleanup, and two-bank save/restore of the added ninth BG column | `service_menus.py` |
 | Cracked-Bracelet marker | Stock Japanese `(hibi)` composite replaced by compact `(Cr)` at native token `F2 1E` | `item_status.py` |
 | Item-row status gallery | Equip, curse, blessing, plate, cracked, synthesis color, and combined states reproduced on demand | `mesen_item_formatting_gallery.lua` |
+| Copyright/composer card | Approved Inter SemiBold 4.1 `CHUNSOFT` and `Koichi Sugiyama` strips; native copyright rows, map, palettes, fade, scroll, and title handoff preserved | `credit_screen.py` |
 
 These are not evidence that title art, story cards, ending art, or every graphical menu label
 is localized.
@@ -43,7 +45,6 @@ is localized.
 
 The graphics pass must still complete or visually verify:
 
-- replacement art and visual acceptance for the now-traced publisher/copyright card;
 - replacement art and visual acceptance for the now-traced title logo;
 - opening chase/cinematic graphical text;
 - an English atlas/gallery for the now-traced 32-selector arrival-card renderer;

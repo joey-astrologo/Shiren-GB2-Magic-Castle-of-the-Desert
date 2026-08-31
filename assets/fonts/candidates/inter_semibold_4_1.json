@@ -1,0 +1,12 @@
+{
+  "family": "Inter",
+  "style": "SemiBold",
+  "version": "4.1",
+  "status": "approved font-shape source for the GB2 copyright and composer card",
+  "file": "assets/fonts/candidates/Inter-SemiBold-4.1.ttf",
+  "sha256": "78a843fade9d4612a5567302fb595b56976eb5fcebf4fea5a5912d638bafcde3",
+  "source": "https://github.com/rsms/inter/releases/tag/v4.1",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "licenses/OFL-1.1-Inter.txt",
+  "relationship": "Same font file used to bake the shiren-gb-public ending-credit asset; GB2 layout, grayscale levels, and rendering remain independent."
+}

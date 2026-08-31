@@ -14,6 +14,7 @@ import sys
 
 import allocate
 import blank_scroll
+import credit_screen
 import dialogue_pacing
 import english_font
 import extract
@@ -257,6 +258,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = english_font.install(relocated)
     output = item_formatting.install(output)
     output = item_status.install(output)
+    output = credit_screen.install(output)
     output = menu_graphics.install(output)
     output = stairs_menu.install(output)
     output = service_menus.install(output)
@@ -368,6 +370,7 @@ def main(argv=None):
         OSError,
         allocate.AllocationError,
         blank_scroll.BlankScrollError,
+        credit_screen.CreditScreenError,
         dialogue_pacing.DialoguePacingError,
         english_font.FontError,
         extract.ExtractError,

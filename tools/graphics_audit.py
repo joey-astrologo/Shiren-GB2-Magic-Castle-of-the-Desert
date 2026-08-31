@@ -308,6 +308,26 @@ def summary(rom):
             "© 2001 CHUNSOFT",
             "© 2001 Koichi Sugiyama credit",
         ],
+        "visible_foreground_plane": {
+            "selector": 24,
+            "pointer": "F0:$40EF-$40F1",
+            "length": "F0:$410A",
+            "source": "F3:$5D00-$64FF",
+            "destination": "$8800-$8FFF",
+            "vram_bank": 1,
+            "data_bytes": 2048,
+            "localized_strips": [
+                "F3:$5F00-$60FF",
+                "F3:$6300-$64FF",
+            ],
+        },
+        "visible_tilemap": {
+            "producer": "F0:$4057-$409E",
+            "destination": "$9800",
+            "tile_ids": "$80-$FF",
+            "attribute_fill": "$08 (VRAM bank 1)",
+            "stable_scroll": {"scx": "$F0", "scy": "$D8"},
+        },
         "tile_planes": [
             _plane(rom, GFX_8800_TABLE, 58, (0x2D, 0x4F12), 0x8800, 0x1000),
             _plane(
@@ -368,6 +388,9 @@ def summary(rom):
             ),
             "credit_palette_0_override": _source_sha1(
                 rom, 0xF0, 0x409F, 0x0008
+            ),
+            "credit_visible_foreground": _source_sha1(
+                rom, 0xF3, 0x5D00, 0x0800
             ),
             "title_8800_tiles": _source_sha1(rom, 0x1C, 0x4002, 0x1420),
             "title_8000_tiles": _source_sha1(rom, 0x31, 0x4002, 0x0B00),

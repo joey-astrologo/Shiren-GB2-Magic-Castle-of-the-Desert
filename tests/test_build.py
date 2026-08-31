@@ -27,6 +27,7 @@ import layout
 import menu_graphics
 import name6
 import blank_scroll
+import credit_screen
 import rescue_presentation
 import spell_input
 import stairs_menu
@@ -168,6 +169,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in item_formatting.owned_ranges()
             for offset in range(start, end)
         }
+        credit_screen_offsets = {
+            offset
+            for start, end in credit_screen.owned_ranges()
+            for offset in range(start, end)
+        }
         checksum_offsets = {
             cartridge.HEADER_CHECKSUM,
             cartridge.GLOBAL_CHECKSUM,
@@ -226,6 +232,7 @@ class TranslationBuildTests(unittest.TestCase):
             | font_offsets
             | item_formatting_offsets
             | item_status_offsets
+            | credit_screen_offsets
             | selector_offsets
             | menu_offsets
             | stairs_offsets

@@ -29,6 +29,32 @@ class GraphicsAuditTests(unittest.TestCase):
         credit = self.summary["clean_boot"]["credit_card"]
         self.assertEqual("stored_tiles_and_tilemap", credit["storage"])
         self.assertEqual(
+            {
+                "selector": 24,
+                "pointer": "F0:$40EF-$40F1",
+                "length": "F0:$410A",
+                "source": "F3:$5D00-$64FF",
+                "destination": "$8800-$8FFF",
+                "vram_bank": 1,
+                "data_bytes": 2048,
+                "localized_strips": [
+                    "F3:$5F00-$60FF",
+                    "F3:$6300-$64FF",
+                ],
+            },
+            credit["visible_foreground_plane"],
+        )
+        self.assertEqual(
+            {
+                "producer": "F0:$4057-$409E",
+                "destination": "$9800",
+                "tile_ids": "$80-$FF",
+                "attribute_fill": "$08 (VRAM bank 1)",
+                "stable_scroll": {"scx": "$F0", "scy": "$D8"},
+            },
+            credit["visible_tilemap"],
+        )
+        self.assertEqual(
             [
                 {
                     "selector": 58,
@@ -190,6 +216,7 @@ class GraphicsAuditTests(unittest.TestCase):
                 "credit_tilemap_attributes": "92356fb0b358fe154a5b78e24185b5113dbedde4",
                 "credit_base_palettes": "1e764e7dc526657480be9b561c6cd6b0e57115c0",
                 "credit_palette_0_override": "caee102534b925867f925b609ed271ca4d579384",
+                "credit_visible_foreground": "025a83d17948f406e2d0af06ee7c3fa37d876949",
                 "title_8800_tiles": "1aa928ad218524bf756a73887bd6f9c767831ff1",
                 "title_8000_tiles": "2f9d79349b2c0edf05115e5be7d908f24fe8218d",
                 "title_tilemap_attributes": "01352b6485c7769660030e5fdfacbf60b3d9d8a5",

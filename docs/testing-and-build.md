@@ -160,6 +160,19 @@ This verifies native tile-plane headers, resource aliases, interleaved maps/attr
 palette provenance, all 32 arrival-card sequences, and the explicit ending-route gap. It does
 not write a ROM or update framebuffer hashes.
 
+For the approved copyright/composer card source and production insertion:
+
+```sh
+python3 -m unittest \
+  tests.test_credit_screen_mockup \
+  tests.test_credit_screen -v
+```
+
+These tests freeze the licensed font provenance and editable four-level source, exact-hash
+guard both native name strips, confine production mutations to those ranges, and compare live
+pixels across the native fade and title handoff. They do not accept or refresh a framebuffer
+hash.
+
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
 widths, wrapping, menus, save/name expansion, Big Moai promotional-code input and live NPC reward, Blank Scroll input,
 unidentified-item free/history naming, runtime text domains, scene ownership, internal
@@ -172,10 +185,10 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The last complete run before the read-only graphics-audit family was **459 tests** with the
-matching ROM, PyBoy, RGBDS, and Mesen available. The six focused graphics-audit tests pass;
-the required gate is always discovery of the complete `tests/` directory, not a hard-coded
-count.
+The complete run on 2026-08-31 was **473 tests** with the matching ROM, PyBoy, RGBDS, and
+Mesen available. It includes the six graphics-audit tests and eight credit-source/insertion
+tests. The required gate is always discovery of the complete `tests/` directory, not a
+hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
 with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
