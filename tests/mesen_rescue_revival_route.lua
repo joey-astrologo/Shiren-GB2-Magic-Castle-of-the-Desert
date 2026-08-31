@@ -9,6 +9,7 @@ local loaded = false
 local editorAt = nil
 local enteredAt = nil
 local confirmAt = nil
+local finished = false
 local cpuMem = emu.memType.gameboyMemory
 local workMem = emu.memType.gbWorkRam or emu.memType.gameboyWorkRam
 local EXPECTED_NATIVE = assert(os.getenv("GB2_REVIVAL_EXPECTED_NATIVE"))
@@ -65,6 +66,14 @@ local function report(message)
   emu.log(message)
 end
 
+local function check(condition, message)
+  if condition then return true end
+  report("FAIL " .. message)
+  finished = true
+  emu.stop(1)
+  return false
+end
+
 local function loadOnce()
   if loaded then return end
   loaded = true
@@ -119,18 +128,20 @@ local function saveScreenshot(suffix)
 end
 
 local function afterFrame()
-  if not loaded then return end
+  if not loaded or finished then return end
 
   if editorAt == nil and
       emu.read(0xC195, cpuMem) == 0x07 and
       emu.read(0xC14E, cpuMem) == 0xF5 and
       emu.read(0xC152, cpuMem) == 0x00 then
     editorAt = frame
-    assert(checksum() == EXPECTED_EDITOR_SCREEN, "localized Revival editor changed")
+    saveScreenshot("editor")
+    if not check(checksum() == EXPECTED_EDITOR_SCREEN,
+      string.format("localized Revival editor changed: %08X", checksum()))
+      then return end
     report(string.format(
       "localized Revival editor reached frame=%d screen=%08X",
       frame, checksum()))
-    saveScreenshot("editor")
   end
 
   if editorAt ~= nil and enteredAt == nil then
@@ -138,18 +149,19 @@ local function afterFrame()
     if frame >= done then
       enteredAt = frame
       local buffer = hexBytes(0x016D, 16, workMem)
-      assert(
-        emu.read(0xC152, cpuMem) == 0x0E,
-        "localized Revival entry did not fill fifteen cells")
-      assert(
-        emu.read(0xC14F, cpuMem) == 0x4D,
-        "full Revival field did not move the cursor to OK")
-      assert(buffer == EXPECTED_NATIVE .. "FF", "native Revival input differs")
-      assert(checksum() == EXPECTED_ENTERED_SCREEN, "entered Revival screen changed")
+      if not check(emu.read(0xC152, cpuMem) == 0x0E,
+        "localized Revival entry did not fill fifteen cells") then return end
+      if not check(emu.read(0xC14F, cpuMem) == 0x4D,
+        "full Revival field did not move the cursor to OK") then return end
+      if not check(buffer == EXPECTED_NATIVE .. "FF",
+        "native Revival input differs") then return end
+      saveScreenshot("entered")
+      if not check(checksum() == EXPECTED_ENTERED_SCREEN,
+        string.format("entered Revival screen changed: %08X", checksum()))
+        then return end
       report(string.format(
         "Revival code entered frame=%d screen=%08X buffer=%s",
         frame, checksum(), buffer))
-      saveScreenshot("entered")
       confirmAt = frame + 60
     end
   end
@@ -158,29 +170,38 @@ local function afterFrame()
     local submitted = confirmAt + #confirmInputs * 15 + 300
     local thankYou = confirmAt + #confirmInputs * 15 + 780
     if frame == submitted then
-      assert(checksum() == EXPECTED_SUCCESS_SCREEN, "Revival success screen changed")
+      saveScreenshot("submitted")
+      if not check(checksum() == EXPECTED_SUCCESS_SCREEN,
+        string.format("Revival success screen changed: %08X", checksum()))
+        then return end
       report(string.format(
         "Revival submitted frame=%d screen=%08X mode=%02X buffer=%s",
         frame, checksum(), emu.read(0xC195, cpuMem),
         hexBytes(0x016D, 16, workMem)))
-      saveScreenshot("submitted")
     elseif frame == thankYou then
-      assert(
-        checksum() == EXPECTED_THANK_YOU_SCREEN,
-        "Thank-You Password screen changed")
-      assert(
-        hexBytes(0x016D, 13, workMem) == EXPECTED_THANK_YOU_NATIVE .. "FF",
-        "generated Thank-You Password changed")
+      saveScreenshot("result")
+      if not check(checksum() == EXPECTED_THANK_YOU_SCREEN,
+        string.format("Thank-You Password screen changed: %08X", checksum()))
+        then return end
+      if not check(
+          hexBytes(0x016D, 13, workMem) == EXPECTED_THANK_YOU_NATIVE .. "FF",
+        "generated Thank-You Password changed") then return end
       report(string.format(
         "Revival result frame=%d screen=%08X mode=%02X buffer=%s",
         frame, checksum(), emu.read(0xC195, cpuMem),
         hexBytes(0x016D, 16, workMem)))
-      saveScreenshot("result")
       report("PASS Revival response accepted and Thank-You Password generated")
+      finished = true
       emu.stop(0)
     end
-  elseif frame > 5000 then
-    error("timed out before entering the localized Revival editor")
+  end
+  if frame > 8000 then
+    saveScreenshot("timeout")
+    check(false, string.format(
+      "timed out during Revival route mode=%02X nav=%02X node=%02X pos=%02X",
+      emu.read(0xC195, cpuMem), emu.read(0xC14E, cpuMem),
+      emu.read(0xC14F, cpuMem), emu.read(0xC152, cpuMem)))
+    return
   end
   frame = frame + 1
 end

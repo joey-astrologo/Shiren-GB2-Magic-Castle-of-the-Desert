@@ -22,10 +22,13 @@ import translations
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
 SUMMARY_PREFIX_ID = "192:$6C1C"
+RESCUE_STATUS_ID = "193:$70E6"
 APPEND_BANK = 17
 APPEND_ADDRESS = 0x56B6
 NATIVE_APPEND = bytes.fromhex("545D1B3E0B212F4BCDAC09")
 STOCK_NAME = bytes.fromhex("8BA9ADFF")
+RESCUE_SRAM_SHA1 = "5e906c5f1356ef97633cd79f428c01b44e8b5a6c"
+RESCUE_SUMMARY_FRAME_SHA1 = "26978c63a763609ffc13dba0f058cc198b93da6b"
 
 
 class SaveSummaryNameTests(unittest.TestCase):
@@ -54,6 +57,18 @@ class SaveSummaryNameTests(unittest.TestCase):
     def test_native_saved_name_append_is_untouched(self):
         start = extract.file_offset(APPEND_BANK, APPEND_ADDRESS)
         self.assertEqual(NATIVE_APPEND, self.rom[start:start + len(NATIVE_APPEND)])
+
+    def test_rescue_status_is_the_short_save_summary_record(self):
+        record = next(
+            record for record in self.extracted["records"]
+            if record.id == RESCUE_STATUS_ID
+        )
+        entry = self.translated[(record.bank, record.address)]
+        self.assertEqual("Awaiting Rescue", entry.text)
+        self.assertEqual(
+            english.encode_source("Awaiting Rescue"),
+            entry.encoded,
+        )
 
 
 class LiveSaveSummaryNameTests(unittest.TestCase):
@@ -197,5 +212,35 @@ class LiveSaveSummaryNameTests(unittest.TestCase):
                 {"8f630df230639195d270536063432ce74c439e08"},
                 {row["masked_sha1"] for row in captures},
             )
+        finally:
+            pyboy.stop(save=False)
+
+    def test_awaiting_rescue_and_run_count_fit_as_separate_fields(self):
+        """Render the real SOS save summary and freeze its collision-free UI."""
+        sram_path = ROOT / "SaveStates" / "rescue-requester-sos.srm"
+        if not sram_path.is_file():
+            self.skipTest("requester SOS SRAM fixture is unavailable")
+        sram = sram_path.read_bytes()
+        self.assertEqual(RESCUE_SRAM_SHA1, sha1(sram).hexdigest())
+        pyboy = self.PyBoy(
+            str(self.localized_path),
+            window="null",
+            ram_file=io.BytesIO(sram),
+            sound_emulated=False,
+        )
+        pyboy.set_emulation_speed(0)
+        try:
+            for frame in range(271):
+                if frame in (120, 240):
+                    pyboy.button("a", capture_dialogue.PRESS_FRAMES)
+                if frame == 180:
+                    pyboy.button("start", capture_dialogue.PRESS_FRAMES)
+                pyboy.tick()
+            image = pyboy.screen.image.convert("RGB")
+            self.assertEqual(
+                RESCUE_SUMMARY_FRAME_SHA1,
+                sha1(image.tobytes()).hexdigest(),
+            )
+            self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
             pyboy.stop(save=False)

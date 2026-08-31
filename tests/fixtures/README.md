@@ -15,7 +15,7 @@ Fixture families include:
 | Item terminology | `item_terminology.json` |
 | Runtime layout | `text_layout.json`, `runtime_terms.json`, `runtime_widths.json`, `positioned_surfaces.json` |
 | Dialogue and messages | `prose_scenes.json`, `prose_wrap.json`, `item_message_wrap.json`, `combat_messages.json` |
-| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `name6.json`, `blank_scroll.json`; all fourteen embedded replay diaries plus live mode-0 and Adventure navigation contracts |
+| Menus and patches | `main_menu_graphics.json`, `menu_text.json`, `stairs_menu.json`, `service_menus.json`, `name6.json`, `blank_scroll.json`; all fourteen embedded replay diaries plus live mode-0 and Adventure navigation contracts |
 | Proof-of-concept route | `poc_dungeon1.json`, `prose_opening.json` |
 
 ROM integration tests skip when the clean source ROM is absent or has the wrong SHA-1.
@@ -64,13 +64,14 @@ states. `tests/fixtures/rescue_entry.json` freezes
 `SaveStates/rescue-entry-menu.mss`, the localized mode-8 keyboard, the published
 `OEN936H9n!FVv` vector, its exact native input bytes, and the deterministic native-validator
 return for this nonmatching diary. It also freezes
-`SaveStates/rescue-entry-japanese-editor.mss`, the exact user-reported production failure:
-mode 8, navigation type 0, and the complete Japanese 320-tile editor map. Its PyBoy
-regression invokes the production active-editor guard with the captured CPU register state
-and requires private navigation type `$F5` plus the complete English map. The menu route
-alone was insufficient because it covered only a constructor path that already worked.
-Its Mesen companion resumes the broken fixture and requires the production input-loop hook
-to repair it naturally, without a test-side call to the repair routine.
+the physical hardware-B path: the route enters `AB`, deletes `B`, and requires both native
+`30 D5...FF` and an unchanged uppercase-`A` glyph band. This covers the dedicated native
+event handler rather than inferring behavior from the on-screen `DEL` node. The obsolete
+already-active Japanese-editor repair state is not a test input.
+The captured state happens to retain `$C195=$08`; the controller route intentionally writes
+mode 0 to that previous-mode byte before opening Password. The actual constructor must use
+incoming register C and publish mode 8 itself. This prevents the fixture from making the
+old, production-broken `$C195`-based screen wrapper pass.
 The native-validator result is an input/submission regression, not a complete accepted
 rescue; the two-diary Revival/Thank-You fixture remains separate work.
 
@@ -84,9 +85,48 @@ controller-replayed end-to-end rescue completion fixture.
 The same fixture freezes requester-side Revival response `SVgaVwAhmUmoM3u`, which is
 bound to captured SOS `26pCdewCg2640`. The Mesen route reaches the mode-7 English editor
 without direct memory writes, enters all 15 characters, confirms the native success
-message, and freezes generated Thank-You Password `EkWsMPtHHOEE`. This closes the
+message, and freezes generated Thank-You Password `EkWsMPtHHOEE`. The route also freezes
+the early mode-7 constructor ordering: bank 16 calls its screen before native `$C195` is
+initialized, so the guarded English wrapper must consume and preserve incoming register C.
+This closes the
 requester response-input/presentation loop; physically traversing a Rescue Gate and
 capturing the rescuer's own generated response remains the next two-diary fixture.
+
+`tests/fixtures/service_menus.json` freezes the ordered bank-254 service-menu extension,
+all label widths, and all four live menu routes. `SaveStates/rescue-entry-menu.mss` is backed
+out and rebuilt before checking the native Yes/No confirmation, the clean 56-pixel Rescue
+Team interior (48 pixels of label space after its cursor column) in the
+confirmation-selected VRAM bank, and the dismissed framebuffer;
+`SaveStates/warehouse-menu.mss` (SHA-1
+`fffcb9be39418f23e85ae275de6cb86e898afec7`) opens the warehouse conversation and popup
+from gameplay. `SaveStates/bank-teller.mss` (SHA-1
+`6c3624401afda7107da79247ca6e67cf6a471e9a`) opens the Bank Teller conversation and its
+Deposit/Withdraw/Balance/Quit popup.
+`SaveStates/blacksmith-info.mss` (SHA-1
+`ca57bccc502776a878a1901c2ddfd8479ed0afc1`) opens the native Blacksmith menu, selects
+Info, and rebuilds the Forge/Repair/Synthesis/Remove/Quit submenu. All routes capture every
+original tile/attribute pair under the added right column, require each border cell while
+open, and require exact restoration after B.
+They also traverse every menu option and freeze every cursor framebuffer. Warehouse and Bank
+keep tile `$B3` in every seventh interior cell. Blacksmith Info stages the last `Synthesis`
+tile in `$B3`, clears the aliased unselected Quit cursor tile, maps every spill through the
+active VRAM bank, keeps `$B9` blank in the other spills, and restores `$B3` after B. Rescue
+uses `$A8/$BA` only in the two physical
+rows containing `Password`'s final pixel column and keeps `$B3` elsewhere; its dedicated
+5x8 raster check requires the final `d` at the original coordinates; Blacksmith has an
+independent 45x8 raster check for `Synthesis` plus literal blank 8x8 cells to the left and
+right of unselected `Quit`. This specifically guards clipping, cursor aliasing, and a stale
+VRAM-bank attribute selecting garbage for the spill tile.
+The warehouse route explicitly crosses the hardware BG-map boundary `$9BFF -> $9800`.
+Framebuffer hashes are secondary presentation checks. A third Rescue checkpoint selects
+`Password`, requires saved BG destination `$9950` and a consumed two-byte live marker, and
+freezes the immediate transition so the added ninth column cannot remain as a vertical
+strip.
+
+The Rescue entry fixture also freezes a hardware-B edit after entering `AB`: the rendered
+field must retain uppercase `A` and the native buffer must be `30 D5...FF`. This is separate
+from the on-screen `DEL` control because the physical button uses its own native event-table
+handler.
 
 `tests/fixtures/item_formatting.json` freezes the native producer anchors, English
 punctuation bytes, exhaustive family-width maxima, the twenty exact object records injected

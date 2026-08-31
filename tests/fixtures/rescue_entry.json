@@ -5,19 +5,12 @@
     "sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
     "selected_option": "Password"
   },
-  "japanese_editor_state": {
-    "path": "SaveStates/rescue-entry-japanese-editor.mss",
-    "sha1": "2bdc7e36809867af31089a610aac9fd10217297a",
-    "source": "Mesen RecentGames capture of the user-reported production failure",
-    "mode": 8,
-    "navigation_type": 0,
-    "maximum": 13
-  },
   "localized_editor": {
     "mode": 8,
     "maximum": 13,
     "navigation_type": 245,
-    "screen_checksum": "028789EC",
+    "screen_checksum": "B3CFD9B2",
+    "hardware_b_screen_checksum": "2B91433A",
     "empty_buffer_hex": "D5D5D5D5D5D5D5D5D5D5D5D5D5FF"
   },
   "public_sos_vector": {

@@ -39,7 +39,7 @@ template, or consumes a new ROM/SRAM range must also satisfy all of these:
 3. Add the new range to [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 4. Prove that no existing owner overlaps it.
 5. Add a semantic regression for the behavior at risk—not only a byte-difference test.
-6. Run the complete discovered suite (427 tests at the current snapshot) with the matching
+6. Run the complete discovered suite (449 tests at the current snapshot) with the matching
    source ROM, PyBoy, and RGBDS available.
 7. Exercise a real route in an emulator when the change affects rendering, input,
    banking, saving, rankings, or transitions.
@@ -75,6 +75,10 @@ Examples already in the suite include:
 - cumulative dialogue lines across `<page>` until `<box>` resets the surface;
 - question- and exclamation-mark spacing across zero-width controls;
 - stairs-popup width and teardown on both floor and Status routes;
+- Rescue, warehouse, Bank Teller, and Blacksmith Info cursor traversal across every option,
+  including the six-dynamic-tile
+  row limit, exact spill-tile/bank selection, a literal final-`d` pixel raster, and literal
+  blank cells on both sides of Blacksmith Info's unselected `Quit`;
 - status-menu overlay ownership without mutating the shared Japanese template;
 - six-character diary and ranking-name persistence;
 - the four-character Big Moai promotional gift-code keyboard, approved four-row layout,
@@ -153,13 +157,23 @@ A state that loads is not proof that it represents the intended route. Tests mus
 the relevant WRAM payload, hook, screen, actor, or control-flow event after loading it.
 Likewise, a passing route through a constructor is not a regression for a failure captured
 after that constructor was bypassed. Preserve the exact failing WRAM, VRAM, and relevant CPU
-registers, and start the behavioral test from those values.
+registers, and start the behavioral test from those values. A stable framebuffer checksum
+is only a fixture, not proof of correctness: visually inspect and approve the frame before
+freezing its hash, and use separate checkpoints when one interaction opens multiple popups.
 
 Password presentation is not password storage. Wanderer Rescue keeps native six-bit symbol
 values in packets, diary records, `$C16D`, and Link Cable data. The English alphabet may
 exist only at the renderer/input boundary. Output hooks must restore `$C16D` after caching;
 input hooks must map each English glyph back to the corresponding native value before any
 native validator or persistence path runs.
+
+Graphical editors may handle physical buttons before dispatching the selected on-screen
+node. A localized node overlay is therefore not sufficient coverage for hardware B. When a
+dedicated native handler mutates the field, wrap that narrow operation and redraw through
+the localized presentation layer only for the modes/navigation type owned by the patch.
+Do not redirect a broader common loop when the event-table handler is identifiable.
+Regression tests must exercise the physical button and assert both the visible field and
+native buffer; an on-screen `DEL` test covers a different path.
 
 The graphical password handler owns one more state transition: filling the final allowed
 cell automatically moves navigation node `$C14F` to `OK` (`$4D`). Controller tests must

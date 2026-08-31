@@ -30,6 +30,7 @@ import blank_scroll
 import rescue_presentation
 import spell_input
 import stairs_menu
+import service_menus
 import translations
 import unidentified_names
 
@@ -187,6 +188,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in stairs_menu.owned_ranges()
             for offset in range(start, end)
         }
+        service_menu_offsets = {
+            offset
+            for start, end in service_menus.owned_ranges()
+            for offset in range(start, end)
+        }
         name6_offsets = {
             offset
             for start, end in name6.owned_ranges()
@@ -223,6 +229,7 @@ class TranslationBuildTests(unittest.TestCase):
             | selector_offsets
             | menu_offsets
             | stairs_offsets
+            | service_menu_offsets
             | name6_offsets
             | blank_scroll_offsets
             | spell_input_offsets
@@ -410,6 +417,16 @@ class TranslationBuildTests(unittest.TestCase):
             translated_build.build_rom(
                 self.original,
                 {adventure_key: english.encode_source("Thank-You Password")},
+            )
+
+    def test_build_rejects_service_labels_that_cross_the_indented_edge(self):
+        password_key = (192, 0x70BC)
+        with self.assertRaisesRegex(
+            layout.LayoutError, r"192:\$70BC: positioned text"
+        ):
+            translated_build.build_rom(
+                self.original,
+                {password_key: english.encode_source("Password Too Long")},
             )
 
 

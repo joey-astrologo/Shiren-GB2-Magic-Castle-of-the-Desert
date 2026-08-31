@@ -24,25 +24,25 @@
     "tested_on": "2026-08-29"
   },
   "revival_response_test": {
-    "editor_screen_checksum": "B5494D65",
+    "editor_screen_checksum": "83FF24BD",
     "manual_result": "revival_and_thank_you_password_confirmed_in_mesen",
     "manual_tested_on": "2026-08-30",
     "matching_sos": "26pCdewCg2640",
     "result": "accepted_and_generated_thank_you_password",
     "revival": {
-      "entered_screen_checksum": "5426564D",
+      "entered_screen_checksum": "AFCFB5ED",
       "gift_hex": "0000000000000000",
       "localized_password": "SVgaVwAhmUmoM3u",
       "native_hex": "4245504A45693051564456583C7067",
       "payload_hex": "3EA9C2C43EC1C2C49A0C",
       "rescuer_diary_checksum": "$A9",
-      "success_screen_checksum": "8AEB1AF5"
+      "success_screen_checksum": "D598DA1D"
     },
     "thank_you": {
       "localized_password": "EkWsMPtHHOEE",
       "native_hex": "3454465C3C3F5D37373E3434",
       "payload_hex": "00A9000C0C9A3D3B",
-      "screen_checksum": "0A867E30"
+      "screen_checksum": "2D7D5518"
     }
   },
   "schema": "shiren-gb2-rescue-requester-captures-v1",

@@ -1,0 +1,241 @@
+{
+  "blacksmith_info": {
+    "closed_screen": "75EDB6E0",
+    "forge_screen": "7B8BE0CB",
+    "quit_screen": "C0534A1B",
+    "remove_screen": "09B2C893",
+    "repair_screen": "E569395B",
+    "state": "SaveStates/blacksmith-info.mss",
+    "state_sha1": "ca57bccc502776a878a1901c2ddfd8479ed0afc1",
+    "synthesis_screen": "905DCBFB"
+  },
+  "bank": {
+    "balance_screen": "0BF97D1B",
+    "closed_screen": "05C14ACB",
+    "deposit_screen": "814C595B",
+    "quit_screen": "57FAD9A3",
+    "state": "SaveStates/bank-teller.mss",
+    "state_sha1": "6c3624401afda7107da79247ca6e67cf6a471e9a",
+    "withdraw_screen": "F542D98B"
+  },
+  "rescue": {
+    "closed_screen": "7650F2D5",
+    "confirmation_screen": "B517AC52",
+    "selected_screen": "4CF2FFA1",
+    "state": "SaveStates/rescue-entry-menu.mss",
+    "state_sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
+    "password_screen": "B7014DA6",
+    "quit_screen": "472855F2",
+    "wide_screen": "BDF1093A"
+  },
+  "static": {
+    "blacksmith_info_template": "254:$467F",
+    "blacksmith_info_template_sha1": "dc8b4dd308763adac79b5e23565aeee8c4b57a13",
+    "blacksmith_tile_helper": "254:$44BC",
+    "blacksmith_tile_support_sha1": "b8ec205a55b5e81d259fb5770ecf8c79c3dd1cb3",
+    "copy_helper": "254:$4034",
+    "controller_exit_helper": "254:$425F",
+    "controller_exit_helper_sha1": "54117c40e19d6b88ae65bf2cb317e00f50c23d62",
+    "copy_helper_sha1": "3d8a4bc2b04fa22eae4ed95aae4f953b94aa0ffe",
+    "copy_support_sha1": "da969ae7acf61af78e5bd2a51767fe6e9c350c27",
+    "detector_sha1": "c10dd2944f4971b68b3650ff06c3a9cb0de91164",
+    "english_columns": 9,
+    "english_interior_pixels": 56,
+    "labels": [
+      {
+        "english_clearance_pixels": 23,
+        "group": 7,
+        "index": 128,
+        "menu": "rescue",
+        "native_clearance_pixels": 7,
+        "renderer_pixels": 25,
+        "text": "Cable",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 6,
+        "group": 7,
+        "index": 127,
+        "menu": "rescue",
+        "native_clearance_pixels": -10,
+        "renderer_pixels": 42,
+        "text": "Password",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "rescue",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 13,
+        "group": 7,
+        "index": 133,
+        "menu": "warehouse",
+        "native_clearance_pixels": -3,
+        "renderer_pixels": 35,
+        "text": "Deposit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 7,
+        "group": 7,
+        "index": 134,
+        "menu": "warehouse",
+        "native_clearance_pixels": -9,
+        "renderer_pixels": 41,
+        "text": "Withdraw",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 22,
+        "group": 7,
+        "index": 144,
+        "menu": "warehouse",
+        "native_clearance_pixels": 6,
+        "renderer_pixels": 26,
+        "text": "Trash",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "warehouse",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 13,
+        "group": 7,
+        "index": 133,
+        "menu": "bank",
+        "native_clearance_pixels": -3,
+        "renderer_pixels": 35,
+        "text": "Deposit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 7,
+        "group": 7,
+        "index": 147,
+        "menu": "bank",
+        "native_clearance_pixels": -9,
+        "renderer_pixels": 41,
+        "text": "Withdraw",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 13,
+        "group": 7,
+        "index": 86,
+        "menu": "bank",
+        "native_clearance_pixels": -3,
+        "renderer_pixels": 35,
+        "text": "Balance",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "bank",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 22,
+        "group": 7,
+        "index": 148,
+        "menu": "blacksmith_info",
+        "native_clearance_pixels": 6,
+        "renderer_pixels": 26,
+        "text": "Forge",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 18,
+        "group": 7,
+        "index": 149,
+        "menu": "blacksmith_info",
+        "native_clearance_pixels": 2,
+        "renderer_pixels": 30,
+        "text": "Repair",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 3,
+        "group": 7,
+        "index": 151,
+        "menu": "blacksmith_info",
+        "native_clearance_pixels": -13,
+        "renderer_pixels": 45,
+        "text": "Synthesis",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 16,
+        "group": 7,
+        "index": 150,
+        "menu": "blacksmith_info",
+        "native_clearance_pixels": 0,
+        "renderer_pixels": 32,
+        "text": "Remove",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "blacksmith_info",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
+      }
+    ],
+    "load_helper": "254:$4019",
+    "load_helper_sha1": "479871b88e9f2d3120277b003a2c374507044fa6",
+    "load_support_sha1": "ba4c0cd8fb10d4d39c498208d0322ae0410be642",
+    "native_columns": 7,
+    "native_interior_pixels": 40,
+    "rescue_template": "254:$45CB",
+    "rescue_template_sha1": "ed028b14628c195f9e3594ceee06bc19481ef575",
+    "restore_helper": "254:$440C",
+    "restore_support_sha1": "3c1760a464d6c2b9de632301f446e5d645ee4b46",
+    "runtime_bank": 254,
+    "runtime_end": "254:$4733",
+    "runtime_payload_bytes": 1224,
+    "runtime_payload_sha1": "c9a8a7e4a9fa9372d174bb2dac0303f9302b8881",
+    "save_helper": "254:$43A5",
+    "save_support_sha1": "6c98d4c88c169c3d5ae7bcfe47b0502b6c824c07",
+    "saved_column_scratch": "$D8C0-$D8DA",
+    "schema": "shiren-gb2-service-menus-v1",
+    "service_exit_helper": "254:$426B",
+    "service_exit_helper_sha1": "703d446cd78f4d76d565055d36d2dcc71e69c638",
+    "support": "254:$426B",
+    "template": "254:$4517",
+    "template_sha1": "1abc0c0bfa9f16b46baee417ae01bfb69d4b60dc",
+    "town_refresh_hook": "6:$6268",
+    "town_refresh_trampoline": "6:$7FF4",
+    "town_refresh_trampoline_sha1": "d8ffe283aeadb77b575fbbce1f590ac9ad7d5fc2"
+  },
+  "warehouse": {
+    "closed_screen": "3FC1957D",
+    "state": "SaveStates/warehouse-menu.mss",
+    "state_sha1": "fffcb9be39418f23e85ae275de6cb86e898afec7",
+    "withdraw_screen": "4DE1805A",
+    "trash_screen": "FBC4A2EA",
+    "quit_screen": "E27D173A",
+    "wide_screen": "061413EA"
+  }
+}

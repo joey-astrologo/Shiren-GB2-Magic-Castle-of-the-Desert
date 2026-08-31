@@ -188,7 +188,7 @@ id	sections	english
 192:$73D3	menus_and_system_labels	Enter the Wanado?<br><br><hspace:18>Yes<hspace:40>No
 192:$73EF	menus_and_system_labels	Enter Blacksmith's Furnace?<br><br><hspace:18>Yes<hspace:40>No
 192:$7407	menus_and_system_labels	Enter the Pot Cave?<br><br><hspace:18>Yes<hspace:40>No
-192:$7423	menus_and_system_labels	A friend can rescue you<br>with another cartridge and<br>revive you where you fell!<page><box>Wait for a friend's rescue?<br><hspace:18>Yes<hspace:40>No
+192:$7423	menus_and_system_labels	A friend can rescue you<br>with another cartridge and<br>revive you where you fell!<page><box>Wait for a friend to<br>rescue you?<br><hspace:18>Yes<hspace:40>No
 192:$746E	menus_and_system_labels	Enter the Rescue Gate?<br><br><hspace:18>Yes<hspace:40>No
 192:$748A	menus_and_system_labels	Rihipishi: Want to hear<br>something useful?<br><hspace:18>Yes<hspace:40>No
 192:$74AF	menus_and_system_labels	Give up the item?<br><br><hspace:18>Yes<hspace:40>No
@@ -313,7 +313,7 @@ id	sections	english
 193:$6F6B	dynamic_status_fields	Atk <27><br>Slots <hspace:01><27>  <hspace:05><25>
 193:$6F8F	dynamic_status_fields	Def <27><br>Slots <hspace:01><27>  <hspace:05><25>
 193:$6FB1	dynamic_status_fields	Slots <hspace:01><27>  <hspace:05><25>
-193:$70E6	adventure_and_miscellaneous_ui	Waiting for Rescue
+193:$70E6	adventure_and_miscellaneous_ui	Awaiting Rescue
 193:$70EF	adventure_and_miscellaneous_ui	New Game
 193:$70F5	adventure_and_miscellaneous_ui	Revive!
 193:$70FF	adventure_and_miscellaneous_ui	SOS!

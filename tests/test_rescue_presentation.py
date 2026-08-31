@@ -1,6 +1,5 @@
 from collections import deque
 from hashlib import sha1
-import io
 import json
 import os
 from pathlib import Path
@@ -15,10 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import blank_scroll
-import capture_dialogue
 import extract
 import name6
-import mesen_state
 import rescue_password
 import rescue_presentation
 import spell_input
@@ -177,6 +174,11 @@ class RescuePresentationTests(unittest.TestCase):
                 rescue_presentation.SCREEN_HOOK_ADDRESS,
                 rescue_presentation.SCREEN_ADDRESS,
             ),
+            (
+                rescue_presentation.SCREEN_HOOK_BANK,
+                rescue_presentation.PREMODE_SCREEN_HOOK_ADDRESS,
+                rescue_presentation.PREMODE_SCREEN_ADDRESS,
+            ),
         ):
             at = extract.file_offset(bank, address)
             self.assertEqual(
@@ -199,31 +201,26 @@ class RescuePresentationTests(unittest.TestCase):
         )
         payload = rescue_presentation.runtime_payload(output)
         self.assertEqual(payload, output[runtime_at:runtime_at + len(payload)])
-        loop_call = extract.file_offset(
-            rescue_presentation.INPUT_LOOP_BANK,
-            rescue_presentation.INPUT_LOOP_CALL_ADDRESS,
+        hardware_b = extract.file_offset(
+            rescue_presentation.HARDWARE_B_BANK,
+            rescue_presentation.HARDWARE_B_HOOK_ADDRESS,
         )
         self.assertEqual(
-            bytes(
-                (
-                    0xCD,
-                    rescue_presentation.INPUT_LOOP_TRAMPOLINE_ADDRESS & 0xFF,
-                    rescue_presentation.INPUT_LOOP_TRAMPOLINE_ADDRESS >> 8,
-                )
-            ),
-            output[loop_call:loop_call + 3],
-        )
-        trampoline = extract.file_offset(
-            rescue_presentation.INPUT_LOOP_BANK,
-            rescue_presentation.INPUT_LOOP_TRAMPOLINE_ADDRESS,
-        )
-        self.assertEqual(
-            rescue_presentation.INPUT_LOOP_TRAMPOLINE_PATCH,
+            rescue_presentation.HARDWARE_B_HOOK_PATCH,
             output[
-                trampoline:
-                trampoline + len(rescue_presentation.INPUT_LOOP_TRAMPOLINE_PATCH)
+                hardware_b:
+                hardware_b + len(rescue_presentation.HARDWARE_B_HOOK_PATCH)
             ],
         )
+
+    def test_primary_screen_wrapper_uses_incoming_mode_not_stale_wram(self):
+        start = (
+            rescue_presentation.SCREEN_ADDRESS
+            - rescue_presentation.RUNTIME_ADDRESS
+        )
+        wrapper = rescue_presentation.ASSEMBLED_CODE[start:start + 16]
+        self.assertEqual(0x79, wrapper[0])  # ld a,c
+        self.assertIn(bytes.fromhex("EA95C1C5"), wrapper)  # publish mode; push bc
 
     def test_install_is_idempotent(self):
         once = rescue_presentation.install(self.prerequisite)
@@ -245,12 +242,12 @@ class RescuePresentationTests(unittest.TestCase):
                 rescue_presentation.SCREEN_HOOK_ADDRESS,
             ),
             (
-                rescue_presentation.INPUT_LOOP_BANK,
-                rescue_presentation.INPUT_LOOP_CALL_ADDRESS,
+                rescue_presentation.SCREEN_HOOK_BANK,
+                rescue_presentation.PREMODE_SCREEN_HOOK_ADDRESS,
             ),
             (
-                rescue_presentation.INPUT_LOOP_BANK,
-                rescue_presentation.INPUT_LOOP_TRAMPOLINE_ADDRESS,
+                rescue_presentation.HARDWARE_B_BANK,
+                rescue_presentation.HARDWARE_B_HOOK_ADDRESS,
             ),
             (
                 rescue_presentation.NAVIGATION_BANK,
@@ -296,144 +293,6 @@ class RescuePresentationTests(unittest.TestCase):
             rescue_presentation.ASSEMBLED_CODE,
             raw[start:start + len(rescue_presentation.ASSEMBLED_CODE)],
         )
-
-
-class LiveRescueEditorRepairTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        source = ROOT / ROM_NAME
-        state = ROOT / ENTRY_FIXTURE["japanese_editor_state"]["path"]
-        if not source.is_file() or not state.is_file():
-            raise unittest.SkipTest("matching ROM and live Rescue failure are required")
-        if sha1(source.read_bytes()).hexdigest() != extract.ROM_SHA1:
-            raise unittest.SkipTest("ROM hash does not match the fixture")
-        cls.fields = mesen_state.load_fields(state)
-        cls.ram = cls.fields["cartRam"]
-        try:
-            cls.PyBoy = capture_dialogue._pyboy_class()
-        except RuntimeError as exc:
-            raise unittest.SkipTest(str(exc))
-        cls.temporary = tempfile.TemporaryDirectory()
-        cls.localized = Path(cls.temporary.name) / "rescue-repair.gbc"
-        built = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "tools" / "build.py"),
-                str(source),
-                str(ROOT / "script" / "en"),
-                str(cls.localized),
-            ],
-            cwd=ROOT,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        if built.returncode:
-            cls.temporary.cleanup()
-            raise AssertionError(
-                "could not build Rescue repair fixture:\n"
-                + built.stdout + built.stderr
-            )
-        cls.localized_rom = cls.localized.read_bytes()
-
-    @classmethod
-    def tearDownClass(cls):
-        if hasattr(cls, "temporary"):
-            cls.temporary.cleanup()
-
-    def _pyboy(self):
-        pyboy = self.PyBoy(
-            str(self.localized),
-            window="null",
-            ram_file=io.BytesIO(self.ram),
-            sound_emulated=False,
-        )
-        pyboy.set_emulation_speed(0)
-        for _frame in range(120):
-            pyboy.tick()
-        return pyboy
-
-    def _invoke(self, pyboy, bank, address, c=0):
-        trampoline = bytes(
-            (
-                0x3E, bank, 0x21, address & 0xFF, address >> 8,
-                0xCD, 0xAC, 0x09,
-                0x3E, 0x42, 0xEA, 0xFF, 0xC7,
-                0x18, 0xFE,
-            )
-        )
-        for offset, value in enumerate(trampoline):
-            pyboy.memory[0xC700 + offset] = value
-        pyboy.memory[0xC7FF] = 0
-        old_ie = pyboy.memory[0xFFFF]
-        pyboy.memory[0xFFFF] = old_ie | 1
-        pyboy.memory[0xFF0F] = 0
-        pyboy.register_file.B = 0
-        pyboy.register_file.C = c
-        pyboy.register_file.SP = 0xC6F0
-        pyboy.register_file.PC = 0xC700
-        for _frame in range(120):
-            pyboy.tick()
-            if pyboy.memory[0xC7FF] == 0x42:
-                break
-        pyboy.memory[0xFFFF] = old_ie
-        self.assertEqual(0x42, pyboy.memory[0xC7FF])
-
-    def test_exact_live_japanese_editor_state_repairs_to_full_english_map(self):
-        work_ram = self.fields["workRam"]
-        self.assertEqual(
-            (0x08, 0x00, 0x00, 0x00, 0x0D),
-            tuple(work_ram[index] for index in (0x195, 0x14E, 0x14F, 0x152, 0x153)),
-        )
-        video_ram = self.fields["videoRam"]
-        native_map = b"".join(
-            video_ram[0x1840 + row * 32:0x1840 + row * 32 + 20]
-            for row in range(16)
-        )
-        self.assertEqual(
-            "36a4d9d6488f0ee4be1b67467300db6c3dc9d7fb",
-            sha1(native_map).hexdigest(),
-        )
-
-        pyboy = self._pyboy()
-        try:
-            pyboy.memory[0xFF4F] = 0
-            for row in range(16):
-                for column in range(20):
-                    pyboy.memory[0x9840 + row * 32 + column] = native_map[
-                        row * 20 + column
-                    ]
-            for address, value in (
-                (0xC195, 0x08),
-                (0xC14E, 0x00),
-                (0xC14F, 0x00),
-                (0xC152, 0x00),
-                (0xC153, 0x0D),
-            ):
-                pyboy.memory[address] = value
-
-            self._invoke(
-                pyboy,
-                rescue_presentation.RUNTIME_BANK,
-                rescue_presentation.REPAIR_ACTIVE_EDITOR_ADDRESS,
-                c=self.fields["cpu.c"][0],
-            )
-
-            self.assertEqual(0x08, pyboy.memory[0xC195])
-            self.assertEqual(rescue_presentation.NAVIGATION_TYPE, pyboy.memory[0xC14E])
-            self.assertEqual(0x0D, pyboy.memory[0xC153])
-            pyboy.memory[0xFF4F] = 0
-            repaired_map = bytes(
-                pyboy.memory[0x9840 + row * 32 + column]
-                for row in range(16)
-                for column in range(20)
-            )
-            self.assertEqual(
-                rescue_presentation.english_keyboard_map(self.localized_rom),
-                repaired_map,
-            )
-        finally:
-            pyboy.stop(save=False)
 
 
 class MesenRescuePresentationRouteTests(unittest.TestCase):
@@ -534,6 +393,9 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
             {
                 "GB2_RESCUE_ENTRY_MSS": str(state),
                 "GB2_RESCUE_EXPECTED_EDITOR_SCREEN": editor["screen_checksum"],
+                "GB2_RESCUE_EXPECTED_HARDWARE_B_SCREEN": editor[
+                    "hardware_b_screen_checksum"
+                ],
                 "GB2_RESCUE_EXPECTED_NATIVE": vector["native_hex"],
                 "GB2_RESCUE_CHARACTER_INPUTS": ",".join(characters),
                 "GB2_RESCUE_CONFIRM_INPUTS": ",".join(confirm),
@@ -559,7 +421,7 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
             env=env,
             text=True,
             capture_output=True,
-            timeout=40,
+            timeout=60,
         )
         output = result.stdout + result.stderr
         self.assertEqual(0, result.returncode, output[-8000:])
@@ -622,48 +484,13 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
             env=env,
             text=True,
             capture_output=True,
-            timeout=40,
+            timeout=60,
         )
         output = result.stdout + result.stderr
         self.assertEqual(0, result.returncode, output[-8000:])
         self.assertIn("Revival code entered", output)
         self.assertIn(
             "PASS Revival response accepted and Thank-You Password generated",
-            output,
-        )
-
-    def test_captured_japanese_editor_is_repaired_by_live_input_loop(self):
-        state = self._checked_state(ENTRY_FIXTURE["japanese_editor_state"])
-        editor = ENTRY_FIXTURE["localized_editor"]
-        env = os.environ.copy()
-        env.update(
-            {
-                "GB2_RESCUE_FAILURE_MSS": str(state),
-                "GB2_RESCUE_EXPECTED_EDITOR_SCREEN": editor["screen_checksum"],
-            }
-        )
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_rescue_failure_repair.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn("captured Japanese rescue editor loaded", output)
-        self.assertIn("installed rescue loop repaired editor", output)
-        self.assertIn(
-            "PASS captured rescue editor repaired naturally",
             output,
         )
 

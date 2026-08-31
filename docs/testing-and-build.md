@@ -70,20 +70,31 @@ Mesen route loads `SaveStates/rescue-entry-menu.mss`, opens Password, freezes th
 64-symbol keyboard, enters the published `OEN936H9n!FVv` vector, requires its exact native
 bytes before confirmation, and submits it to the original validator. The expected result
 is the native inaccessible-dungeon response because that diary has not unlocked the
-Abyssal Depths. A requester-side route separately opens **Adventure -> Revive! ->
+Abyssal Depths. Before opening Password, this route deliberately changes the capture's
+accidentally retained previous-mode byte `$C195` from `$08` to mode 0. It leaves the mode
+requested by the game in register C alone. The old production wrapper therefore fails
+before reaching the English-editor checkpoint; the corrected constructor publishes mode 8
+and completes physical-B deletion, full entry, and native validation. A requester-side
+route separately opens **Adventure -> Revive! ->
 Password**, enters linked response `SVgaVwAhmUmoM3u` in the 15-character editor, requires
 `Revival complete!`, and freezes generated Thank-You Password `EkWsMPtHHOEE`. That route
 also guards the native behavior that moves a completely filled password to `OK`; previous
 test navigation could accidentally select `DEL` instead of submitting.
+It additionally covers the distinct bank-16 `$68E4` constructor ordering, where mode 7 is
+still carried in register C before native `$C195` is initialized; the English wrapper must
+publish that mode and preserve C before the controller begins.
+Before entering the public vector, the mode-8 route now enters `AB`, presses hardware B,
+and freezes both the rendered uppercase `A` and native `30 D5...FF` buffer. This catches the
+dedicated native hardware-B path bypassing the selected English keyboard-node overlay. It then
+clears that cell and continues the public-vector route in the same fresh process.
 The SOS route proved a working constructor path but did not reproduce the manually
-observed Japanese editor.
-`SaveStates/rescue-entry-japanese-editor.mss` freezes that exact production failure,
-including mode 8, navigation type 0, CPU C=`$02`, and all 320 Japanese map tiles. A PyBoy
-regression restores those fields, invokes the installed active-editor repair, and requires
-navigation `$F5` plus the complete English map. A separate live Mesen regression loads the
-same broken state and requires the installed common input-loop hook to reach the reviewed
-English framebuffer naturally; it does not call or inject the repair routine. The suite does not
-yet claim a complete live two-diary emulator pass. Each route hash-checks its committed
+observed hardware-B redraw until the test used that exact input path. The retained route
+constructs mode 8 from `rescue-entry-menu.mss`, enters `AB`, presses the physical B button,
+and requires native buffer `30 D5...FF` plus an unchanged visible uppercase-`A` glyph band.
+This exercises the dedicated event-table handler rather than the on-screen `DEL` node. The
+earlier already-active-editor repair fixture and common-loop hook were removed because they
+did not model this reproducible route. The suite does not yet claim a complete live
+two-diary emulator pass. Each route hash-checks its committed
 `.mss`, builds a ROM at a new temporary path, launches a fresh Mesen test-runner process,
 and never saves over the fixture. It therefore cannot reuse a ROM image cached by an
 interactive Mesen session or create a stale fixture.
@@ -131,6 +142,7 @@ python3 -m unittest \
   tests.test_mesen_unidentified_item \
   tests.test_rescue_password \
   tests.test_rescue_presentation \
+  tests.test_service_menus \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_item_terminology \
@@ -149,7 +161,7 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The current complete run is **427 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
+The current complete run is **449 tests** with the matching ROM, PyBoy, RGBDS, and Mesen
 available. Treat that number as a status snapshot; the required gate is always discovery
 of the complete `tests/` directory, not a hard-coded subset.
 
@@ -158,6 +170,36 @@ with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
 Continue/Secrets/Reset/Recap cursor positions, the cursor OAM coordinates, and a
 cursor-masked framebuffer hash. This guards against input-editor navigation patches
 stealing a live menu graph or corrupting the submenu during Up/Down movement.
+The supplied requester SOS SRAM adds a second live summary fixture: `Awaiting Rescue` and
+the independent run count must render together without collision.
+
+`tests.test_service_menus` chains its installer after the stairs-popup owner, measures all
+Rescue Team, warehouse, Bank Teller, and Blacksmith Info labels against the 48-pixel live
+text budget inside the new 56-pixel interior, and rejects any
+unexpected predecessor bytes or occupied reservation. Its Mesen routes rebuild the
+menus through controller input, require nine-column background copies, and freeze the
+open frame, every cursor position, and clean B-button teardown. The native renderer owns only
+six dynamic tiles per row. Warehouse and Bank therefore require stable tile `$B3` on every
+spill row. Blacksmith Info stages `Synthesis`'s suffix in `$B3`, clears the `$9C` alias from
+unselected Quit, maps other spills to stable blank `$B9` in the active VRAM bank, and
+restores `$B3` on close.
+Rescue requires `$A8/$BA` only for the two `Password` overflow rows and `$B3` elsewhere while
+visiting all three Rescue entries, four entries in Warehouse and Bank, and all five
+Blacksmith Info entries. This catches the
+duplicate right-edge cursor that an open-only test missed. A separate test compares the
+final `d` with a literal approved 5x8 mask; another compares the complete 45x8 `Synthesis`
+raster and requires blank 8x8 cells on both sides of unselected `Quit`. Both are
+independent of every framebuffer hash. The routes also capture the original tile
+and attribute in every added-column row, require the complete right border while open, and
+require exact restoration after dismissal. The warehouse assertion includes the hardware
+BG-map wrap from `$9BF0` to `$9810`. The Rescue route additionally freezes its
+preceding native Yes/No confirmation and verifies the widened bottom border inherits the
+renderer-selected CGB VRAM bank. This avoids accepting stale VRAM already embedded in a
+save state or a deterministic but visibly damaged popup. A separate Rescue selection route
+chooses `Password`, verifies the saved ninth-column destination is `$9950`, requires its
+two-byte live marker to be cleared, and freezes the immediate transition. That test owns
+the reported leftover vertical strip; eventual arrival at a stable editor is not accepted
+as a substitute.
 
 `tests.test_name6` freezes the title and Secrets event selectors, the complete fourteen-row
 replay pointer table, and the SHA-1 of every original 106-byte embedded diary. It proves
@@ -228,10 +270,9 @@ published SOS symbols as native bytes, and returns from native validation with t
 inaccessible-dungeon message. `tests/mesen_rescue_revival_route.lua` then reuses the
 requester SOS state without memory writes, enters a linked no-gift Revival response, and
 requires both native success and the exact generated Thank-You Password.
-The same fixture also owns `SaveStates/rescue-entry-japanese-editor.mss`; its separate
-PyBoy regression starts from the exact captured Japanese editor state rather than replaying
-the already-working constructor route. Its Mesen companion resumes the same broken state
-and proves the installed input-loop hook executes without test-side invocation.
+The same rescuer-side route enters `AB`, presses hardware B, and proves the remaining
+uppercase glyph, input position, and native buffer agree before it continues with the
+published SOS vector.
 The linked requester response is accepted, but physical Rescue Gate traversal and capture
 of a Revival Password generated by the rescuer diary remain in the broader two-diary
 handshake.

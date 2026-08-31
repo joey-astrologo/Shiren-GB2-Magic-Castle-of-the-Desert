@@ -58,6 +58,28 @@ edited through the ordinary catalog workflow.
 - Adventure -> save-file navigation retains its native nine-row graph; the complete
   Continue/Secrets/Reset/Recap cursor route is replayed from the Mamel fixture and its
   cursor state, sprite positions, and stable framebuffer are frozen.
+- Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups use exact
+  selector-set detection and a 56-pixel English interior with a measured 48-pixel
+  post-cursor text budget, while
+  unrelated generic popups retain native geometry. All four
+  user-supplied routes are rebuilt and dismissed in Mesen regressions. The Rescue route
+  separately freezes its preceding Yes/No prompt and synchronizes the widened bottom
+  border with the renderer-selected CGB VRAM bank, preventing the confirmation from
+  leaking stale tiles into the later popup. Before drawing, both VRAM banks' added ninth
+  column are saved and restored on either dismissal or selection. The warehouse route
+  explicitly handles the BG-map wrap `$9BFF -> $9800`; all routes compare every added
+  column tile and attribute before and after teardown. All routes traverse every option and
+  enforce the native six-dynamic-tile row allocation. Warehouse and Bank keep stable tile
+  `$B3` in every spill cell; Blacksmith stages `Synthesis`'s suffix in `$B3`, clears its
+  `$9C` Quit-cursor alias, selects the active VRAM bank for `$B9` elsewhere, and restores the
+  tile on exit; Rescue exposes `$A8/$BA` only where the shorter
+  frame needs
+  `Password`'s final column, with `$B3` elsewhere. A hash-independent pixel regression
+  requires the complete final `d`, the 45x8 `Synthesis` word, and blank cells on both sides
+  of unselected `Quit`; a dedicated `Password`
+  transition regression prevents
+  the reported vertical strip. The rescue request Yes/No cursor and the
+  save-summary `Awaiting Rescue`/run-count composition are also framebuffer-frozen.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
@@ -73,7 +95,7 @@ edited through the ordinary catalog workflow.
   synchronized every description heading and affected unidentified-item root, and freezes
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
-- A passing 427-test fixture suite covering translation, layout, save data, menu/input
+- A passing 442-test fixture suite covering translation, layout, save data, menu/input
   routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
   equivalence.
 
@@ -87,11 +109,10 @@ edited through the ordinary catalog workflow.
   diary record untouched. Modes 5-8 now use a private English name-layout keyboard with
   `?` and `!`; each selection is converted back to the corresponding native password byte
   before validation. The supplied Password-menu state and published SOS vector exercise
-  the full controller route, all thirteen cells, and native-validator return. A separate
-  captured failure fixture starts inside the Japanese mode-8 editor and proves the common
-  input-loop repair replaces its complete 320-tile map and navigation graph. A live Mesen
-  regression also loads that broken state and requires the installed loop hook to fire
-  naturally, without calling the repair routine from the test. Manual testing also accepted
+  the full controller route, all thirteen cells, and native-validator return. Hardware-B deletion is also
+  replayed after entering `AB`, with the uppercase rendered remainder and native buffer
+  frozen independently of the on-screen `DEL` path. The patch wraps only the dedicated
+  native delete far call and leaves the common input loop intact. Manual testing also accepted
   `I3CqdGY6iuyws`, an Ancient Ruins 1F SOS with a distinct diary ID; its exact native
   bytes, payload, and semantic fields are now fixture-frozen. A requester-side controller
   replay also accepts 15-character Revival response `SVgaVwAhmUmoM3u`, displays the

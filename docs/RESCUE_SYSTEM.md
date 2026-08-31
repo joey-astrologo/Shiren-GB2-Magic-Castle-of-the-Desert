@@ -231,9 +231,14 @@ Thank-You without changing their lengths or packet data. The captured SOS
 buffer remains `6F 73 59 32 4D 4E 69 32 50 6F 73 71 6D FF`.
 
 The input overlay intercepts the shared graphical-input call at `16:$5B66` only when
-`$C195` is mode 5, 6, 7, or 8. Its screen wrapper at `16:$7A49` reuses the approved
-player-name keyboard resources, removes `SPACE`, adds `?` and `!`, copies a dedicated
-81-node navigation graph to WRAM `$C800`, and selects private type `$F5`. Visible nodes
+`$C195` is mode 5, 6, 7, or 8. At both screen-constructor redirects the requested mode is
+authoritative in register C; `$C195` may still describe whichever editor ran previously.
+The ordinary wrapper at `16:$7A49` guards incoming C, publishes it to `$C195`, and reuses
+the approved player-name keyboard resources. Requester-side Revival is a distinct native
+path: `16:$68E4` invokes the screen constructor while mode 7 is still only in register C.
+Its guarded wrapper follows the same rule and preserves C for the native controller.
+Both routes remove `SPACE`, add `?` and `!`, copy a dedicated 81-node navigation graph to
+WRAM `$C800`, and select private type `$F5`. Visible nodes
 follow the same three-column layout as name entry; `OK`, left/right cursor controls, and
 `DEL` retain their native actions. Character nodes 0-63 write the corresponding native
 password byte from the frozen six-bit table. Screen refresh temporarily maps `$C16D` to
@@ -317,18 +322,82 @@ are `SaveStates/rescue-requester-rankings.mss` (SHA-1
 `478d96bcb625b7f54a3639e66c8b3c13e10cc10d`) and
 `SaveStates/rescue-requester-sos.mss` (SHA-1
 `a6267369052fdb33755d36d9dfaa5761f00f3c82`). `tests/mesen_rescue_requester_route.lua`
-replays `Select`, the explanation, confirmation, and generation; it freezes English screen
-checksum `$7F6D7FB9`, restored native `$C16D`, and the ten-byte SOS diary record.
+replays `Select`, the explanation, confirmation, and generation. The two-row question and
+native third-row Yes/No cursor are frozen at screen checksum `$17D77035`; the route then
+freezes English SOS checksum `$7F6D7FB9`, restored native `$C16D`, and the ten-byte SOS
+diary record. The SOS SRAM also drives the title-screen save-summary regression, where
+`Awaiting Rescue` must remain separate from the dynamic run count.
 
 `SaveStates/rescue-entry-menu.mss` (SHA-1
 `a7c4015c36d994b07599bfe617044d4ce0b9d593`) starts with Password selected in the Rescue
 Team Cable / Password / Quit menu. `tests/mesen_rescue_entry_route.lua` advances the native
-dialogue, requires English editor checksum `$028789EC`, enters the published
+dialogue, but first forces the retained previous-mode byte `$C195` to non-rescue mode 0.
+The constructor must still select mode 8 from incoming register C. This deliberately makes
+the pre-fix `$C195`-based wrapper fail before the editor checkpoint rather than letting the
+capture's accidentally retained mode 8 conceal the production route. The test then
+requires English editor checksum `$B3CFD9B2`, enters the published
 `OEN936H9n!FVv` code through controller navigation, and freezes native input
 `3E343D76707337765778354568FF` before choosing `OK`. The old public request cannot be
 entered because this diary has not unlocked the Abyssal Depths; its deterministic
 `You cannot enter that dungeon yet!` response proves native validation was reached and did
 not freeze, not that a complete rescue was accepted.
+
+The same route also enters `AB`, presses the hardware B button, and requires both the
+rendered field and the native buffer to retain uppercase `A`. Hardware B has a dedicated
+native event-table handler at `16:$5B0F`; its deletion call at `16:$5B22-$5B29` bypasses
+the selected keyboard-node dispatcher. The patch replaces only that far call with bank-249
+wrapper `$4260`, which runs native bank-18 `$53B0` first and then refreshes through the
+localized view only when mode is 5-8 and navigation type is `$F5`. The rest of the native
+handler remains byte-exact. This checkpoint is distinct from the on-screen `DEL` node and
+covers the user-reported lowercase-redraw failure directly.
+
+The requester-side Revival fixture independently traverses Adventure -> Revive! ->
+Password with controller input. It requires the mode-7 English editor, exact native bytes
+for all 15 symbols, the native `Revival complete!` result, and the generated 12-symbol
+Thank-You Password. This prevents the earlier mode-ordering bug from silently restoring
+the Japanese constructor on a rescue path that mode-8 SOS entry did not exercise.
+
+The editor intentionally recalls the last password entered on that save. Resetting or
+power-cycling does not blank it: the native game persists the retained length/buffer state
+around `$C491/$C493`, then preloads it on the next Password visit. Localization preserves
+that behavior. `DEL` or hardware B edits the recalled code; no patch should clear it merely
+because the English screen constructor ran.
+
+The connection popup itself is a separate geometry owner. The native five-interior-tile
+frame clips `Password`; `tools/service_menus.py` recognizes only the exact Cable / Password
+/ Quit selector sequence and uses a seven-interior-tile frame. Its 56-pixel interior leaves
+48 pixels after the fixed 8-pixel cursor column, enough for the 42-pixel label. Because the `.mss` already
+contains old menu pixels, `tests/mesen_service_menu_rescue.lua` first backs out, rebuilds
+the route, freezes the native Yes/No confirmation before proceeding, checks the clean
+nine-column service popup, and then dismisses it to prove the new right edge is removed.
+This sequence is intentional: the confirmation selects dynamic-text VRAM bank 1, while
+the warehouse normally uses bank 0. The widened service bottom row therefore copies the
+renderer-selected bank bit into its seven border attributes before the BG transfer; otherwise
+the Rescue popup alone displays stale tile graphics under `Quit`.
+The label renderer provides only six sequential dynamic tile IDs per row. A generic seventh
+sequential ID aliases another row's cursor and can produce a duplicate arrow when lower
+options are selected, so the shared warehouse/Bank Teller template uses stable tile `$B3`
+throughout. Rescue has a separate three-entry template: only the two physical spill cells containing the final
+column of `Password` use the already-rendered overflow tiles `$A8/$BA`; every other spill
+cell remains `$B3`. Those aliased lower rows are outside the shorter Rescue frame. A separate
+Mesen regression compares the final `d` against its literal approved 5x8 raster, while the
+live route visits Cable, Password, and Quit and freezes all three corrected frames.
+The native town redraw clears only eight columns, so it cannot erase the ninth column added
+for English. Before drawing a widened popup, the service owner saves that column from both
+CGB VRAM banks in bank-7 scratch `$D8C0-$D8DA` (the final two bytes belong to Blacksmith
+suffix staging). The shared controller-exit path restores it
+for ordinary dismissals, while a guarded post-town-refresh hook covers `Password`, whose
+transition leaves the town loop immediately. Both paths consume a two-byte `$A5/$5A` live
+marker so uninitialized scratch cannot trigger cleanup. Warehouse begins at added-column
+destination `$9B90`; row four crosses the Game Boy BG-map boundary and must wrap from
+`$9BF0` to `$9810`, not continue into `$9C10`.
+`tests/mesen_service_menu_rescue_select.lua` selects `Password` rather than merely backing
+out and freezes the transition with saved destination `$9950` and flag `$00`; this is the
+regression for the reported vertical white strip. The Rescue, warehouse, Bank Teller, and
+Blacksmith Info tests capture every original tile/attribute pair in the added column,
+require every widened border cell
+while open, and compare every pair after dismissal. Framebuffer hashes are supplementary,
+not the cleanup oracle.
 
 Manual testing on 2026-08-29 supplied the generated localized code
 `I3CqdGY6iuyws` through the repaired English editor and the game accepted it. The code
@@ -369,28 +438,13 @@ Mesen state and SRAM while the 15-character Revival Password is visible. That ge
 code will let the fixture replace the fixed `$A9` test identity with a full two-diary
 exchange.
 
-That successful constructor route did not cover the production failure reported during
-manual testing. The exact running state was recovered from Mesen as
-`SaveStates/rescue-entry-japanese-editor.mss` (SHA-1
-`2bdc7e36809867af31089a610aac9fd10217297a`). It is already inside mode 8 with maximum 13,
-but has native navigation type `$00`, CPU register C=`$02`, and the complete Japanese
-320-tile editor map (SHA-1 `36a4d9d6488f0ee4be1b67467300db6c3dc9d7fb`). This proves the
-localized constructor hook alone is not sufficient: the live route can arrive at the
-common graphical-input loop without the English resources installed.
+The first attempted regression used a state captured after the editor was already active
+and added a common-loop repair. That did not represent the reproducible menu route and was
+removed. The retained test always starts from `rescue-entry-menu.mss`, constructs the editor
+through controller input, and exercises the actual hardware-B event handler. Static tests
+freeze its single guarded hook and the RGBDS payload.
 
-`rescue_presentation.py` therefore redirects the common call at `16:$5AD2` through a
-twelve-byte guarded trampoline at `16:$7FF3`. Bank 249 routine `$4240` does nothing outside
-modes 5-8 and does nothing when private navigation type `$F5` is already active. Otherwise
-it loads the mode from `$C195` into C, reconstructs the English editor, and then returns to
-the displaced native `$4375` call. `LiveRescueEditorRepairTests` boots the production build
-with the captured SRAM, restores the exact captured WRAM/VRAM fields and captured C=`$02`,
-invokes that production routine, and requires mode 8, maximum 13, navigation `$F5`, and all
-320 English map bytes. A separate Mesen regression loads the same broken `.mss` and requires
-the installed common-loop hook to reach the reviewed English framebuffer naturally; that
-test never calls or injects the repair routine. Static tests separately freeze both hook
-ranges and the RGBDS payload.
-
-Both Mesen route tests hash-check their committed states, build the ROM at a fresh temporary
+The Mesen route tests hash-check their committed states, build the ROM at a fresh temporary
 path, start a new test-runner process, and never write a replacement state. This keeps the
 fixtures immutable and prevents the tests from retaining an earlier ROM build.
 

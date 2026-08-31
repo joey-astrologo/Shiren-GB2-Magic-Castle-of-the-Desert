@@ -94,6 +94,55 @@ Geometry and teardown are one feature. Widening only the visible box leaves the 
 right-hand column behind after dismissal, which is why both routes have explicit exit
 regressions.
 
+## Service popups
+
+The ordinary bank-3 service-menu frame has five interior tiles, or 40 pixels. That is too
+narrow for `Password`, `Withdraw`, `Deposit`, `Balance`, and `Synthesis`.
+`tools/service_menus.py` chains after the stairs installer and gives only four exact group-7
+selector sequences a seven-tile/56-pixel interior. The selector reserves the first 8 pixels,
+leaving 48 pixels for each label:
+
+- Rescue Team: `$80/$07`, `$7F/$07`, `$87/$07` (`Cable`, `Password`, `Quit`);
+- warehouse: `$85/$07`, `$86/$07`, `$90/$07`, `$87/$07` (`Deposit`, `Withdraw`,
+  `Trash`, `Quit`);
+- Bank Teller: `$85/$07`, `$93/$07`, `$56/$07`, `$87/$07` (`Deposit`, `Withdraw`,
+  `Balance`, `Quit`);
+- Blacksmith Info: `$94/$07`, `$95/$07`, `$97/$07`, `$96/$07`, `$87/$07` (`Forge`,
+  `Repair`, `Synthesis`, `Remove`, `Quit`).
+
+Every other consumer delegates to the original seven-column frame. This exact-set check
+prevents a shared label such as `Quit` from widening unrelated menus. The load and copy
+paths make the same decision. Because the native town redraw erases only eight columns,
+the service owner saves the added ninth BG column from both CGB VRAM banks before drawing.
+The shared controller-exit cleanup restores it for B/A dismissals; a post-town-refresh
+cleanup covers transitions such as selecting `Password`. Bank-7 scratch `$D8C0-$D8DA`
+holds the packed column, destination, height, two-byte live marker, and Blacksmith
+suffix-tile bank/marker. Warehouse rows cross the BG-map boundary and explicitly wrap
+`$9BFF -> $9800`. The Rescue route opens a native Yes/No prompt
+immediately before the service popup and can leave the dynamic tiles in VRAM bank 1. The
+widened bottom row lies beyond the native renderer's 140-byte attribute footprint, so the
+copy helper propagates the active bank bit from `$D803` to its seven horizontal border cells
+at `$D8A5,$D8A7,...,$D8B1`. Without that synchronization the labels are readable but the
+bottom border renders stale graphics.
+
+The label renderer owns only six sequential dynamic tile IDs per physical row. The seventh
+interior map cell cannot use `row_base + 6` indiscriminately: that value aliases the first tile
+of another row, so moving the selector can redraw a second cursor on the right. Warehouse
+and Bank map every spill cell to reviewed stable tile `$B3`. Rescue selects a separate
+template whose two `Password` spill cells use `$A8/$BA`, exposing the final `d` column
+already rendered into the otherwise off-screen lower rows; all its other spill cells remain
+`$B3`. Blacksmith Info cannot expose `Synthesis`'s aliased `$9C` overflow tile directly
+because the same tile owns the visible Quit row. Its copy helper stages that suffix in stable
+tile `$B3`, blanks `$9C` for unselected Quit, maps every other spill to reviewed blank `$B9`,
+and synchronizes every displayed spill attribute to the renderer-selected VRAM bank before
+restoring `$B3` on exit. The live regressions visit every entry in all four menus, verify
+those exact tile IDs and bank bits, and freeze each resulting framebuffer. Hash-independent
+pixel assertions check the complete final `d`, the complete 45x8 `Synthesis` raster, and
+blank cells on both sides of unselected `Quit`. They also freeze the Yes/No prompt, B-button
+teardown, and the `Password` selection transition separately. Each added-column tile and
+attribute is compared with its captured pre-popup value; hashes remain secondary
+presentation fixtures.
+
 ## Front-end diary hub
 
 GB2 has one native adventure diary, not three independent adventure files. The visible hub
@@ -119,7 +168,10 @@ published through `$FFB2-$FFB3` before the cursor sprite is emitted. Reading `$F
 there is a graph-ownership failure, not a font, label-width, or save-file problem.
 
 The save summary must display the persisted player name dynamically. Never hardcode
-`Shiren` into the summary merely because it is the default name.
+`Shiren` into the summary merely because it is the default name. Its rescue-state label is
+the independent record `193:$70E6`, now `Awaiting Rescue`; the run count is a separate
+dynamic field. `tests.test_save_summary` renders the supplied SOS SRAM and freezes the
+collision-free combination rather than testing either string in isolation.
 
 Title/demo and Secrets playback do not begin with that live diary. Their replay dispatcher
 copies one of fourteen embedded 106-byte diary snapshots into the same WRAM record. Events
@@ -150,7 +202,7 @@ The graphical input dispatcher has independent modes and consumers:
 | Mode 3 | Big Moai promotional gift codes ("spells") | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime; independent of Wanderer Rescue |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
-| Modes 5-8 | Wanderer Rescue passwords | 12/9/15/13 native cells; player-name layout without SPACE plus `?`/`!`; private type `$F5` graph in `$C800`; English nodes convert to native six-bit symbols in bank 249 before validation; the common input loop repairs a live rescue editor if it arrived without type `$F5` |
+| Modes 5-8 | Wanderer Rescue passwords | 12/9/15/13 native cells; player-name layout without SPACE plus `?`/`!`; private type `$F5` graph in `$C800`; English nodes convert to native six-bit symbols in bank 249 before validation; the dedicated hardware-B deletion call is wrapped so remaining native symbols are redrawn through the English view |
 
 The English build treats these modes as independent consumers even where the native game
 shares graphical resources. Each installer owns its map, graph, maximum, and mode-specific
@@ -166,6 +218,7 @@ history node.
 | Positioned call graph and budgets | `surfaces.py`, `layout.py` | `test_surfaces.py`, `test_layout.py` |
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
+| Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups | `service_menus.py` (chained after `stairs_menu.py`) | `test_service_menus.py` |
 | Six-character names, embedded replay diaries, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
 | Big Moai gift-code input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |

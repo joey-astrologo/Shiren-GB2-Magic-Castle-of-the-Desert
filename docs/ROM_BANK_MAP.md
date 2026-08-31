@@ -34,9 +34,9 @@ The complete current English script uses banks 215-233:
 | Unique records | 6,695 |
 | Pointer bytes | 20,531 |
 | Text bytes | 283,941 |
-| Total payload | 304,472 bytes |
+| Total payload | 304,481 bytes |
 | Used arena banks | 19 (`215-233`) |
-| Unused capacity inside used banks | 6,824 bytes |
+| Unused capacity inside used banks | 6,815 bytes |
 | Completely untouched arena banks | 6 (`234-239`) |
 
 Do not allocate a new subsystem in the text arena merely because the current translation
@@ -55,13 +55,14 @@ text growth.
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
 | 3 | `$4842-$5841` | Native one-byte font; Thin Pixel-7 English slots installed here | `english_font.py` only |
-| 3 | `$6A49-$6A53` | Floor stairs-popup load hook | `stairs_menu.py` only |
-| 3 | `$6A8F-$6A9F` | Floor stairs-popup copy/cleanup hook | `stairs_menu.py` only |
+| 3 | `$6A49-$6A53` | Shared floor-popup template load hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
+| 3 | `$6A8F-$6A9F` | Shared floor-popup copy/cleanup hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
 | 4 | `$4CF6-$4CFD` | Mode-3 Big Moai gift-code input screen redirect | `spell_input.py` only |
 | 4 | `$660E-$6787` | 126-entry script group directory | Rewritten only by `insert.py` |
 | 5 | `$4553-$459F` | Native `$C3EF-$C3F0` story-stage save/load pair | Preserve; Big Moai availability fixture traces this serializer and loader |
 | 5 | `$591D-$5930` | Native event opcode `$60`: branch when `$C3EF` meets its operand threshold | Preserve; Big Moai uses threshold `$09` |
+| 6 | `$6268-$626A`, `$7FF4-$7FFF` | Town-refresh call and service-popup cleanup trampoline | `service_menus.py` redirects the native `$69A1` call through guarded bank-254 ninth-column restoration, then resumes `$69A1` |
 | 7 | `$4A87-$4B53` | Native actor Max-HP/current-HP accessors; offset `$15` is doubled/halved Max HP and offset `$16` is current HP | Preserved and guarded by `rescue_password.py` |
 | 11 | `$518A-$5287` | Loaded-diary Training/SOS/Revival/Thank-You record read/write dispatchers | Preserved and guarded by `rescue_password.py`; records are relative to `$C23C + diary * $6A` |
 | 11 | `$42EB-$4301` | Default-name routine | `name6.py` only |
@@ -78,7 +79,7 @@ text growth.
 | 16 | `$7B8A-$7BD1` | SOS generation route | Preserved and guarded by `rescue_password.py` |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
-| 16 | `$5AD2-$5AD4` | Common graphical-input loop call redirected through the Rescue active-editor repair | `rescue_presentation.py` only; displaced native call `$4375` is preserved |
+| 16 | `$5B22-$5B29` | Rescue hardware-B native delete far-call wrapper | `rescue_presentation.py` only; calls native bank-18 `$53B0`, then redraws through the localized view only for modes 5-8 with private navigation `$F5` |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, mode-1 `blank_scroll.py`, mode-0 `unidentified_names.py`, then rescue modes 5-8 `rescue_presentation.py`; every layer delegates modes it does not own |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
 | 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
@@ -89,11 +90,11 @@ text growth.
 | 16 | `$64B9-$6624` | Mode-3 Big Moai gift-code navigation graph | Replaced by `spell_input.py` |
 | 16 | `$6625-$6663` | Native nine-node vertical-list graph | Preserve; seven-byte records with fixed x `$36` and y `$17,$22,...,$6F` |
 | 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
+| 16 | `$68E4-$68EB` | Requester-side mode-7 Revival screen redirect before `$C195` is initialized | `rescue_presentation.py` only; guarded by incoming C and preserves it for the native controller |
 | 16 | `$6A33-$6A3A` | Mode-0 history-return screen redirect | `unidentified_names.py` only |
 | 16 | `$6A4C-$6A53` | Blank Scroll screen redirect | `blank_scroll.py` only |
 | 16 | `$6B98-$6B9F` | Mode-0 secondary screen redirect | `unidentified_names.py` only |
-| 16 | `$7A49-$7A50` | Modes 5-8 rescue-password screen redirect | `rescue_presentation.py` only; all other modes delegate to the native bank-244 constructor |
-| 16 | `$7FF3-$7FFE` | Guarded Rescue active-editor trampoline and preserved native input-loop call | Exclusive verified twelve-byte zero tail for `rescue_presentation.py` |
+| 16 | `$7A49-$7A50` | Modes 5-8 rescue-password screen redirect before `$C195` is reliable | `rescue_presentation.py` only; guarded by incoming C, publishes that mode, and delegates all other modes to the native bank-244 constructor |
 | 16 | `$7859-$7860` | Create-name screen redirect | `name6.py` only |
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
@@ -124,12 +125,12 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
-| 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, active-editor repair, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$4255`, graph begins `$4300`, map begins `$4600` |
+| 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42A1`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, glyphs | Exclusive |
 | 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
-| 254 | `$4000-$426A` | `stairs_menu.py`: both popup templates and cleanup helpers | Exclusive |
+| 254 | `$4000-$4732` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
 
 Banks 250-255 were measured empty before these reservations. Their unused tails are not a
@@ -190,6 +191,17 @@ Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall st
 through the translated root-name table, so names such as `Windblade` are not truncated and
 the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
+
+## Service-popup transient scratch
+
+`service_menus.py` uses WRAM bank 7 `$D8C0-$D8DA` only while a reviewed widened service
+popup is live. `$D8C0-$D8D3` packs up to ten original tile/attribute pairs from its added
+rightmost BG column; `$D8D4-$D8D5` store the BG destination, `$D8D6` the row count, and
+`$D8D7-$D8D8` the two-byte `$A5/$5A` live marker, and `$D8D9-$D8DA` the Blacksmith
+suffix tile's VRAM bank and `$A6` marker. The widened frame template ends at
+`$D8B3`, so these ranges do not overlap. The two-byte marker prevents uninitialized WRAM
+from authorizing a restore. This is transient rendering state, not SRAM and not general
+free WRAM.
 
 ## Rescue requester live actor state
 

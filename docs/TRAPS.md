@@ -220,6 +220,24 @@ default breaks Rename and every future English name.
 
 **Rule:** translate only the `Name:` label and retain the runtime name producer.
 
+The rescue-state summary has the same composition risk: `Awaiting Rescue` and the run
+count are separate draws. Measure the combined live screen; do not fold an observed run
+number into the translated status record.
+
+## Save states can contain stale popup pixels
+
+A Mesen `.mss` contains already-rendered VRAM. Loading a state captured while a menu was
+open does not prove that the current ROM constructor drew those pixels. For popup
+regressions, back out and rebuild the menu through controller input before hashing or
+inspecting it.
+
+Widened shared popups also require matching teardown. The Rescue Team, warehouse, Bank
+Teller, and Blacksmith Info tests
+assert the exact selector set, a nine-column top and bottom copy, and every tile/attribute
+pair in the added right column while open and after dismissal. Framebuffer hashes remain
+secondary checks. Matching only a label, template hash, or later stable screen would miss
+both stale-state false positives and the leftover-edge failure.
+
 ## Replay characters can come from embedded diary snapshots
 
 **Tempting assumption:** once the create-name default is `Shiren`, every automated demo
@@ -269,22 +287,37 @@ cursor, sprite, clear region, timing interval, or sentence still feels wrong.
 behavioral assertion when the failure is reproducible, but retain human review as a separate
 gate.
 
-## A passing constructor route is not a regression for an already-active editor
+## A selected-node input test does not cover the physical B handler
 
-**Tempting assumption:** if a controller test opens a localized graphical editor and can
-submit a password, it covers every path into that editor.
+**Tempting assumption:** if the on-screen `DEL` node works, the physical B button must use
+the same localized input handler.
 
-**Failure:** the Rescue password controller route passed while a production mode-8 editor
-still displayed the complete Japanese keyboard. The live capture was already inside the
-shared input loop with navigation type `$00`; the tested route had run the localized
-constructor and installed private type `$F5`. They were different machine states. A first
-repair test also forced CPU C=`$08`, although the captured failure had C=`$02`, making the
-test artificially favorable.
+**Failure:** Rescue hardware B correctly deleted the last native byte but then redrew the
+remaining uppercase password symbols through the native lowercase-looking glyph table.
+The selected-node overlay never ran. A broad common-loop repair made synthetic state tests
+pass while changing unrelated input timing and was the wrong owner.
 
-**Rule:** preserve and replay the exact failing WRAM, VRAM, and relevant CPU registers. The
-Rescue regression now restores all 320 captured Japanese map tiles and C=`$02`; the repair
-loads its required mode from WRAM and must replace the complete map plus navigation graph.
-Keep the working constructor route as separate coverage, not as a substitute.
+**Rule:** replay the exact user action through the real menu route and hook the narrowest
+native owner. The Rescue test enters `AB`, presses physical B, then requires input position
+1, native buffer `30 D5...FF`, and an unchanged uppercase-`A` glyph band. The patch wraps
+only bank-16 `$5B22-$5B29`, the native delete far call; the common input loop stays native.
+
+## Graphical-input constructors receive the requested mode in C
+
+**Tempting assumption:** `$C195` is already the requested mode whenever the shared rescue
+screen constructor runs, and a save state that happens to contain mode 8 proves it.
+
+**Failure:** both the ordinary Password constructor at bank-16 `$7A49` and requester-side
+Revival at `$68E4` receive the requested mode in register C while `$C195` can still contain
+the previous editor. The original mode-8 fixture accidentally retained `$08`, so a broken
+wrapper passed automation but delegated to the Japanese screen during a normal visit.
+
+**Rule:** trace the owning caller's register and WRAM ordering. Both narrow wrappers accept
+only incoming C values 5-8, publish that mode before constructing the English screen, and
+preserve C for the native controller. The mode-8 live test deliberately overwrites the
+fixture's previous-mode byte with mode 0 before navigating normally; the old implementation
+must fail that test. The separate mode-7 route must enter all 15 Revival symbols and reach
+both native success and the linked Thank-You Password.
 
 ## A full password field is already positioned on OK
 
@@ -345,3 +378,62 @@ effect. Testing only the two insertion screens therefore gives a false pass.
 object state. The Minotaur Axe carries weapon rune bit 10 at object byte 6, mask `$04`.
 For a synthesis fixture, break the Pot and assert the released base record contains the
 expected rune; do not stop at donor consumption.
+
+## A widened template can extend beyond the native VRAM-bank update
+
+**Tempting assumption:** if a widened popup's tile IDs, dimensions, and BG map are correct,
+the native renderer will also prepare every new attribute cell.
+
+**Failure:** the Rescue Team service popup follows a Yes/No prompt that selects dynamic
+tile VRAM bank 1. The seven-tile service bottom row sits beyond the native seven-column
+template's 140-byte renderer footprint, so its horizontal attributes retained bank 0.
+`Cable`, `Password`, and `Quit` rendered, but the bottom border read stale bank-0 tiles and
+became a black line with repeated gray blocks. The warehouse route used bank 0 and looked
+clean, allowing a single-route test to hide the defect. A separate off-by-one `JR NZ`
+initially jumped into the native `LD HL` operand and also corrupted the preceding Yes/No
+popup. The first 8 interior pixels are occupied by the selector cursor, so a nominal
+48-pixel interior provides only 40 pixels for text and still clips the 42-pixel
+`Password`; positioned budgets must begin at the live text origin.
+
+**Rule:** prove every branch target lands on an instruction boundary, and explicitly
+propagate renderer-owned state into template cells outside the native footprint. For this
+popup, the copy helper takes bit 3 from `$D803` and applies it to
+`$D8A5,$D8A7,...,$D8B1`. The Mesen fixture must hash the Yes/No confirmation, the later
+Cable/Password/Quit popup, and teardown as three separate states; a stable hash of a
+damaged later frame is not a correctness test.
+
+## A BG tile-map row increment is not a linear `$20` past `$9BFF`
+
+**Tempting assumption:** advancing a popup column to its next row is always `address += $20`.
+
+**Failure:** the warehouse added column begins at `$9B90`. Its fourth increment reaches
+`$9BF0`; the next logical row is `$9810` because the selected 32x32 BG map wraps at
+`$9BFF`. Continuing to `$9C10` writes the other BG map, leaving the top-right border damaged
+and preventing the dismissed column from being restored.
+
+**Rule:** model the Game Boy tile map as a 32x32 ring. The service save and restore helpers
+explicitly wrap `$9Cxx` back to `$98xx`, and the Mesen route checks every tile and attribute
+on both sides of that boundary before and after Deposit.
+
+## A wider row does not create another dynamic tile
+
+**Tempting assumption:** after widening a menu from five to seven interior cells, assigning
+`row_base + 0` through `row_base + 6` gives each visible cell independent storage.
+
+**Failure:** the shared service renderer allocates only six sequential dynamic tile IDs per
+row. `row_base + 6` is another row's first tile. Selecting Warehouse `Trash`/`Quit` or Rescue
+`Quit` therefore redrew that aliased tile as a second cursor at the right edge of an earlier
+line, even though the menu geometry and primary cursor were correct.
+
+**Rule:** trace the renderer's dynamic-tile allocation independently from the visible tilemap
+width; never assign a seventh sequential ID across all rows. Warehouse and Bank use reviewed
+stable tile `$B3` throughout. Blacksmith Info copies the aliased `Synthesis` suffix into
+stable `$B3`, clears `$9C` before that aliased tile can appear as an `s` beside Quit, assigns
+every spill the active VRAM bank, uses blank `$B9` for the other spills, and restores `$B3`
+on exit. The shorter
+Rescue frame may expose only `$A8/$BA`, the two aliased
+off-screen-row tiles that already contain `Password`'s clipped final column, while keeping
+`$B3` elsewhere. A live regression must move through every option—not merely open and close
+the menu—verify the exact spill-cell tile IDs alongside exact framebuffers, and independently
+assert any intended overflow glyph pixels. A stable copied suffix must also be checked at
+every cursor position and restored during teardown.

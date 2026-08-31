@@ -54,9 +54,9 @@ project work.
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
-| Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture the rescuer/Revival/resume/Thank-You routes and complete the two-diary SRAM/emulator fixture without changing native payloads |
+| Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Cracked-Bracelet marker plus generated input/status assets are localized; complete the remaining graphical-Japanese inventory, replacement art, insertion, and visual QA |
-| Automated tests | **427-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
+| Automated tests | **442-test fixture suite passing** | Expand rare live routes and create a release-battery workflow comparable to GB1 |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -151,6 +151,8 @@ python3 -m unittest \
   tests.test_unidentified_names \
   tests.test_mesen_unidentified_item \
   tests.test_rescue_password \
+  tests.test_rescue_presentation \
+  tests.test_service_menus \
   tests.test_item_status \
   tests.test_item_formatting \
   tests.test_synthesis_lab

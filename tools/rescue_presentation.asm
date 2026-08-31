@@ -20,6 +20,7 @@ DEF NativeEmpty           EQU $D5
 DEF Mode0Input            EQU $4000 ; bank $FA; delegates every non-mode-0 mode
 DEF Name6ScreenClean      EQU $4232 ; bank $FD
 DEF NativeInsert          EQU $524C ; bank $12, character in B
+DEF NativeHardwareB       EQU $53B0 ; bank $12
 DEF NativeInputRefresh    EQU $4D51 ; bank $04
 DEF NativeScreen          EQU $4045 ; bank $F4
 
@@ -28,7 +29,8 @@ DEF RescueScreenAddress          EQU $4160
 DEF RefreshLocalizedInputAddress EQU $41B0
 DEF UploadNavigationAddress      EQU $41C0
 DEF NativeAlphabetCodesAddress   EQU $4200
-DEF RepairActiveEditorAddress    EQU $4240
+DEF RescueHardwareBAddress       EQU $4260
+DEF RescuePreModeScreenAddress   EQU $4280
 DEF RescueNavigation             EQU $4300
 DEF RescueKeyboardMap            EQU $4600
 
@@ -189,11 +191,16 @@ ASSERT @ <= RescueScreenAddress
 ; modes reuse the reviewed name-entry glyph upload, then install their own map
 ; and private WRAM navigation graph.
 RescueScreen::
-    ld a,[wInputMode]
+    ; The graphical-input caller carries the requested mode in C. Do not trust
+    ; wInputMode here: a retained-password visit can still contain whichever
+    ; editor ran previously until this constructor publishes the new mode.
+    ld a,c
     cp FirstRescueMode
     jr c,.native
     cp LastRescueModePlusOne
     jr nc,.native
+    ld [wInputMode],a
+    push bc
     ld a,$FD
     ld hl,Name6ScreenClean
     call FarDispatch
@@ -207,6 +214,7 @@ RescueScreen::
     xor a
     ldh [rVBK],a
     call RefreshLocalizedInput
+    pop bc
     ret
 .native
     ld a,$F4
@@ -253,25 +261,56 @@ NativeAlphabetCodes:
     db $50,$51,$52,$53,$54,$55,$56,$57,$58,$59,$5A,$5B,$5C,$5D
     db $67,$68,$69,$6A,$6B,$6C,$6D,$6E,$6F,$70,$71,$72,$73,$74,$75,$76,$77,$78
 
-ASSERT @ == RepairActiveEditorAddress
+ASSERT @ <= RescueHardwareBAddress
+    ds RescueHardwareBAddress-@
 
-; The graphical-input constructor is not guaranteed to run when an already
-; active editor is resumed. Repair only the observed invalid rescue state at
-; the common input-loop boundary; every other input mode remains untouched.
-RepairActiveRescueEditor::
+; Hardware B has a dedicated native table handler. Run that deletion first,
+; then refresh only an active Rescue editor so the remaining native password
+; symbols are presented through the English mapping. The rest of the native
+; handler, including its empty-field result and $FF return value, stays intact.
+RescueHardwareB::
+    ld a,$12
+    ld hl,NativeHardwareB
+    call FarDispatch
     ld a,[wInputMode]
     cp FirstRescueMode
-    ret c
+    jr c,.done
     cp LastRescueModePlusOne
-    ret nc
+    jr nc,.done
     ld a,[wNavigationType]
     cp RescueNavigationType
-    ret z
-    ; The constructor consumes the editor mode in C. Do not assume the common
-    ; input-loop caller still has it there: the captured failing state had C=2
-    ; while wInputMode correctly held mode 8.
-    ld a,[wInputMode]
-    ld c,a
-    jp RescueScreen
+    jr nz,.done
+    call RefreshLocalizedInput
+.done
+    ret
+
+ASSERT @ <= RescuePreModeScreenAddress
+    ds RescuePreModeScreenAddress-@
+
+; Some rescue routes call the shared constructor before copying C into
+; wInputMode. Guard those by the incoming mode in C instead. This covers the
+; requester-side Revival path without altering the common input loop or any
+; non-rescue constructor user.
+RescuePreModeScreen::
+    ld a,c
+    cp FirstRescueMode
+    jr c,.native
+    cp LastRescueModePlusOne
+    jr nc,.native
+    ; This call site precedes the native `ld [wInputMode],c`. Publish the
+    ; incoming mode before constructing the shared English screen so its
+    ; initialization and the first input tick agree about the active editor.
+    ld [wInputMode],a
+    push bc
+    ld a,$FD
+    ld hl,Name6ScreenClean
+    call FarDispatch
+    call UploadNavigation
+    pop bc
+    ret
+.native
+    ld a,$F4
+    ld hl,NativeScreen
+    jp FarDispatch
 
 RescuePresentationCodeEnd::

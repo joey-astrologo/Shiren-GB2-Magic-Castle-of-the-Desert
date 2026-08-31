@@ -28,6 +28,7 @@ import rescue_presentation
 import runtime_widths
 import spell_input
 import stairs_menu
+import service_menus
 import translations as translation_file
 import unidentified_names
 
@@ -94,6 +95,18 @@ STAIRS_MENU_GROUP = stairs_menu.STAIRS_GROUP
 STAIRS_MENU_INDICES = stairs_menu.STAIRS_INDICES
 STAIRS_MENU_START_X = stairs_menu.TEXT_START_X
 STAIRS_MENU_RIGHT_EDGE = stairs_menu.TEXT_RIGHT_EDGE
+
+# Ordinary service-menu labels reserve their first interior tile for the
+# cursor/indent.  ``service_menus`` widens only its two reviewed selectors to
+# seven interior tiles, leaving 48 pixels for label glyphs after that indent.
+SERVICE_MENU_GROUP = service_menus.SERVICE_GROUP
+SERVICE_MENU_INDICES = tuple(sorted({
+    index
+    for _menu, indices, _labels in service_menus.SERVICE_LABEL_SETS
+    for index in indices
+}))
+SERVICE_MENU_START_X = service_menus.TEXT_START_X
+SERVICE_MENU_RIGHT_EDGE = service_menus.TEXT_RIGHT_EDGE
 
 
 def _item_ability_positioned_contracts(rom):
@@ -223,6 +236,18 @@ def _stairs_menu_positioned_contracts(rom):
     }
 
 
+def _service_menu_positioned_contracts(rom):
+    by_reference = _record_keys_by_reference(rom)
+    return {
+        by_reference[(SERVICE_MENU_GROUP, index)]: (
+            SERVICE_MENU_START_X,
+            1,
+            SERVICE_MENU_RIGHT_EDGE,
+        )
+        for index in SERVICE_MENU_INDICES
+    }
+
+
 def build_rom(rom, record_overrides, runtime_contract=None):
     """Return ``(output, allocation, validation)`` for encoded record overrides."""
     rom = bytes(rom)
@@ -234,6 +259,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = item_status.install(output)
     output = menu_graphics.install(output)
     output = stairs_menu.install(output)
+    output = service_menus.install(output)
     output = dialogue_pacing.install(output)
     output = name6.install(output)
     output = blank_scroll.install(output)
@@ -257,6 +283,9 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     )
     layout.validate_positioned_overrides(
         output, overrides, _stairs_menu_positioned_contracts(rom)
+    )
+    layout.validate_positioned_overrides(
+        output, overrides, _service_menu_positioned_contracts(rom)
     )
     menu_left, menu_locations = _main_menu_positioned_contracts(rom)
     layout.validate_positioned_overrides(output, overrides, menu_left)

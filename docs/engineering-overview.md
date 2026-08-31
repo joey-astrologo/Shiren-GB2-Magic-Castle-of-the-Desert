@@ -51,6 +51,17 @@ runtime value domain. Menu, Help, Monster Notebook, combat, item-message, and it
 families each retain their own proven surface rules rather than sharing a guessed global
 character limit.
 
+Widened dynamic menus also retain the renderer's native tile-allocation limits. The reviewed
+Rescue Team, warehouse, Bank Teller, and Blacksmith Info frames have seven visible interior
+cells, but only six sequential dynamic tiles per row. Warehouse and Bank use stable tile
+`$B3` for every seventh cell. Blacksmith Info stages the final `Synthesis` tile in `$B3`,
+blanks its `$9C` alias in the unselected Quit cursor cell, and selects the renderer's VRAM
+bank for every stable `$B9` spill. Rescue uses a
+separate template exposing only the two off-screen-row overflow tiles needed by `Password`'s
+final `d`, with `$B3` everywhere else. Live Mesen routes traverse every option so cursor
+redraws, tile aliasing, VRAM-bank attributes, glyph pixels, staged-tile restoration, and
+teardown are tested as behavior rather than inferred from a single open frame.
+
 ## Save and name expansion
 
 The localized player-name editor accepts up to six visible characters and defaults to
@@ -100,17 +111,21 @@ checksum, and acknowledgement relationship. A surviving three-code exchange vali
 end to end and is frozen as a fixture. The output presentation maps all 64 native values
 one-to-one to `A-Z a-z 0-9 ? !` only while the dynamic text cache consumes a password;
 it then restores `$C16D`, so packets, diary records, and Link Cable transport remain native.
-The supplied Rankings route is replayed through the confirmation prompt and freezes both
-the English SOS framebuffer and unchanged native protocol bytes. Modes 5-8 reuse the
+The supplied Rankings route is replayed through the confirmation prompt and freezes the
+native third-row Yes/No cursor alignment, English SOS framebuffer, and unchanged native
+protocol bytes. Modes 5-8 reuse the
 approved English name-entry layout plus `?` and `!`, but use private navigation type `$F5`
 and convert every selected node back to its native six-bit value before confirmation. A
 live Mesen route enters the published `OEN936H9n!FVv` SOS vector through that keyboard and
-returns safely from the native validator. A captured production failure showed that mode 8
-can enter the shared input loop without the localized constructor having installed its map.
-The common input-loop guard now reconstructs only rescue modes 5-8 whose private navigation
-type is missing; its regression starts from the exact captured Japanese VRAM, WRAM, and CPU
-state and requires the complete English map. A live Mesen companion also resumes that state
-and requires the installed loop hook to fire naturally. The second-diary handshake remains the next
+returns safely from the native validator. The same route enters `AB`, presses hardware B,
+and requires that native `A` remains visibly uppercase. This uses the dedicated native
+hardware-B event handler; only its delete far call is wrapped, while the common input loop
+remains native. The mode-8 constructor test first forces the fixture's retained `$C195` to
+mode 0, proving the ordinary screen redirect consumes the requested mode from register C
+rather than stale WRAM. A second controller replay covers requester-side mode 7, whose
+constructor has the same register ordering, and verifies linked Revival
+acceptance and Thank-You generation. Physical Rescue Gate traversal and the rescuer
+diary's generated response remain the next
 engineering gate. See
 [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 
