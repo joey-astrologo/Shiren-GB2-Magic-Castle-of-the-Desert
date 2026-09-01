@@ -39,6 +39,15 @@ Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O patches
 `tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_mesen_unidentified_item`.
 
+Ranking score/floor suffixes have a hash-independent static pixel contract plus a live
+complete-production replay. Run both focused checks with:
+
+```sh
+python3 -m unittest \
+  tests.test_surfaces.OriginalRomPositionedSurfaceTests.test_production_ranking_score_and_floor_suffixes_are_unambiguous \
+  tests.test_surfaces.ProductionRankingSuffixTests -v
+```
+
 The Big Moai NPC gate and first accepted-code route have their own focused family:
 
 ```sh

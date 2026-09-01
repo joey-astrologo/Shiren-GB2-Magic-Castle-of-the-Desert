@@ -197,6 +197,9 @@ the create-name default cannot localize them.
 
 Adventure History is a paged 40-row domain selected by progression flags. Rankings use a
 32-byte native record plus separately loaded dynamic fields and the two-byte name extension.
+Its top row right-aligns the dynamic score before the fixed `G` at x=90 and the dynamic
+floor before the fixed `F` at x=137. These are independent fields (`11250G`, `9F`), not
+literal translations of the native suffix glyphs.
 
 The two adjacent pickers are different systems:
 

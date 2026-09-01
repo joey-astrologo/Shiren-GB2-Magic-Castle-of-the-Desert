@@ -84,6 +84,10 @@ edited through the ordinary catalog workflow.
   Training Ground (`Train`), Training House (`Train+`), Pigeon Handler
   (`SOS / Revive / Thanks / Quit`), and the rescued-player
   (`Yes / No / Info / Later`) menus were manually accepted on 2026-08-31.
+- Rankings renders its dynamic currency and floor fields as compact suffix forms:
+  `<amount>G` and `<floor>F`. The fixed score suffix at `192:$6B7D` is `G`, while the
+  separate floor suffix at `192:$6B2B` remains `F`; a production-ROM controller replay
+  independently guards `11250G` / `9F` and their native pixel boundaries.
 - The clean-boot copyright/composer card preserves both native `© 2001` rows and replaces
   only its two private 512-byte name strips with approved `CHUNSOFT` and `Koichi Sugiyama`
   art. The editable Inter SemiBold 4.1 source, OFL provenance, exact source guards, native

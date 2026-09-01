@@ -4,6 +4,7 @@ import io
 import json
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 
 
@@ -11,11 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import capture_dialogue
+import build as translated_build
 import codec
 import english
 import english_font
 import extract
 import layout
+import runtime_widths
 import surfaces
 import translations
 
@@ -447,6 +450,60 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             right_edge=130,
         )
         self.assertLessEqual(measured.final_x, 130)
+
+    def test_production_ranking_score_and_floor_suffixes_are_unambiguous(self):
+        result = extract.extract(self.rom)
+        translated = translations.load_path(
+            ROOT / "script" / "en", result["records"]
+        )
+        by_reference = {
+            (reference.group, reference.index): record
+            for record in result["records"]
+            for reference in record.references
+        }
+        score_suffix = by_reference[(7, 62)]
+        floor_suffix = by_reference[(7, 50)]
+
+        # These are independent fixed draws after the numeric score and floor.
+        # Freezing them separately prevents a long literal label from visually
+        # merging with either neighboring value as "11250Fan".
+        self.assertEqual(
+            "G",
+            translated[(score_suffix.bank, score_suffix.address)].text,
+        )
+        self.assertEqual(
+            "F",
+            translated[(floor_suffix.bank, floor_suffix.address)].text,
+        )
+
+        # Freeze the actual native-pixel pen geometry for the user's example.
+        # The amount and suffix are separate draws, as are the floor and F.
+        font_rom = english_font.install(self.rom)
+        draws = (
+            (codec.encode_source("11250"), 48, 90, 73),
+            (
+                translated[(score_suffix.bank, score_suffix.address)].encoded,
+                90,
+                125,
+                96,
+            ),
+            (codec.encode_source("9"), 125, 137, 130),
+            (
+                translated[(floor_suffix.bank, floor_suffix.address)].encoded,
+                137,
+                layout.CANVAS_WIDTH_PIXELS,
+                143,
+            ),
+        )
+        for raw, start_x, right_edge, expected_final_x in draws:
+            measured = layout.validate_direct_surface(
+                font_rom,
+                raw,
+                start_x=start_x,
+                start_y=1,
+                right_edge=right_edge,
+            )
+            self.assertEqual(expected_final_x, measured.final_x)
 
     def test_record_pickers_and_graphical_input_contracts_are_frozen(self):
         measured = surfaces.record_picker_and_graphical_input_summary(self.rom)
@@ -1317,6 +1374,168 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             self.assertEqual(
                 text, translated[(record.bank, record.address)].text
             )
+
+
+class ProductionRankingSuffixTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.source_path = ROOT / ROM_NAME
+        if not cls.source_path.exists():
+            raise unittest.SkipTest("original ROM not present")
+        original = cls.source_path.read_bytes()
+        if sha1(original).hexdigest() != capture_dialogue.ROM_SHA1:
+            raise unittest.SkipTest("ROM hash does not match the fixture")
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc))
+
+        extracted = extract.extract(original)
+        localized = translations.load_path(
+            ROOT / "script" / "en",
+            extracted["records"],
+        )
+        overrides = translations.encoded_overrides(localized)
+        width_analysis = runtime_widths.analyze(
+            english_font.install(original),
+            extracted,
+            localized,
+        )
+        production, _allocation, _validation = translated_build.build_rom(
+            original,
+            overrides,
+            runtime_contract=width_analysis.contract,
+        )
+        cls.temporary = tempfile.TemporaryDirectory()
+        cls.production_path = Path(cls.temporary.name) / "ranking-labels.gbc"
+        cls.production_path.write_bytes(production)
+
+        owner = cls.PyBoy(
+            str(cls.production_path),
+            window="null",
+            sound_emulated=False,
+        )
+        owner.set_emulation_speed(0)
+        try:
+            capture_dialogue.run_to_dialogue(owner)
+            for current in range(15000):
+                if current % 180 == 0:
+                    owner.button("a", capture_dialogue.PRESS_FRAMES)
+                owner.tick()
+            state = io.BytesIO()
+            owner.save_state(state)
+            cls.state_bytes = state.getvalue()
+        finally:
+            owner.stop(save=False)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temporary.cleanup()
+
+    def test_live_ranking_draws_11250g_and_9f_as_separate_bounded_fields(self):
+        pyboy = self.PyBoy(
+            str(self.production_path),
+            window="null",
+            sound_emulated=False,
+        )
+        pyboy.set_emulation_speed(0)
+        redirected = [False]
+        events = []
+
+        seeded = bytearray(surfaces.RANKING_SEEDED_RECORD)
+        seeded[9:13] = (11250).to_bytes(4, "little")
+        seeded[14] = 9
+
+        def write_record():
+            for offset, value in enumerate(seeded):
+                pyboy.memory[surfaces.RANKING_RECORD_ADDRESS + offset] = value
+
+        def at_dispatch(_context=None):
+            if redirected[0]:
+                return
+            redirected[0] = True
+            pyboy.register_file.A = surfaces.RANKING_SYNTHETIC_ROUTE["target_bank"]
+            pyboy.register_file.HL = surfaces.RANKING_SYNTHETIC_ROUTE["entries"][
+                "current_record_list"
+            ]
+            pyboy.register_file.C = 0
+
+        def at_rank_scan_return(_context=None):
+            pyboy.register_file.C = 0
+
+        def at_list_row(_context=None):
+            write_record()
+
+        def at_direct(_context=None):
+            pointer = (pyboy.register_file.D << 8) | pyboy.register_file.E
+            raw = bytearray()
+            for offset in range(0x100):
+                value = pyboy.memory[(pointer + offset) & 0xFFFF]
+                if value == 0xFF:
+                    break
+                raw.append(value)
+            events.append(
+                {
+                    "raw": bytes(raw),
+                    "text": codec.decode(bytes(raw)),
+                    "start_pen": (
+                        pyboy.memory[0xC4D6],
+                        pyboy.memory[0xC4D7],
+                    ),
+                }
+            )
+
+        try:
+            pyboy.load_state(io.BytesIO(self.state_bytes))
+            pyboy.hook_register(
+                *surfaces.RANKING_SYNTHETIC_ROUTE["dispatcher"],
+                at_dispatch,
+                None,
+            )
+            pyboy.hook_register(11, 0x5E32, at_rank_scan_return, None)
+            pyboy.hook_register(3, 0x60D4, at_list_row, None)
+            pyboy.hook_register(*surfaces.DIRECT_RENDERER, at_direct, None)
+            for _current in range(
+                surfaces.RANKING_SYNTHETIC_ROUTE["final_frame"] + 1
+            ):
+                pyboy.tick()
+
+            self.assertTrue(redirected[0])
+            top_row = {
+                event["start_pen"]: event
+                for event in events
+                if event["start_pen"][1] == 1
+            }
+            amount_events = [
+                event
+                for event in events
+                if event["start_pen"][1] == 1 and event["text"] == "11250"
+            ]
+            self.assertEqual(
+                1,
+                len(amount_events),
+                {pen: event["text"] for pen, event in top_row.items()},
+            )
+            self.assertLess(amount_events[0]["start_pen"][0], 90)
+            self.assertEqual(english.encode_source("G"), top_row[(90, 1)]["raw"])
+            floor_events = [
+                event
+                for event in events
+                if (
+                    event["start_pen"][1] == 1
+                    and event["raw"]
+                    == (b"\xFE" * 4) + codec.encode_source("9")
+                    and 90 < event["start_pen"][0] < 137
+                )
+            ]
+            self.assertEqual(
+                1,
+                len(floor_events),
+                {pen: event["text"] for pen, event in top_row.items()},
+            )
+            self.assertEqual(english.encode_source("F"), top_row[(137, 1)]["raw"])
+        finally:
+            pyboy.stop(save=False)
 
 
 class LiveOpeningPositionedSurfaceTests(unittest.TestCase):
