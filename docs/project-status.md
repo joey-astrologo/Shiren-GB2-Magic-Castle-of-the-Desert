@@ -88,6 +88,15 @@ edited through the ordinary catalog workflow.
   only its two private 512-byte name strips with approved `CHUNSOFT` and `Koichi Sugiyama`
   art. The editable Inter SemiBold 4.1 source, OFL provenance, exact source guards, native
   fade stages, and unchanged title handoff are all fixture-tested without a framebuffer hash.
+- All 32 town/dungeon/floor arrival selectors use approved Inter SemiBold 4.1 artwork from
+  an editable block source. The native nine-block alias was decoded as `Mystery Dungeon`;
+  no placeholder text ships. A guarded bank-$F8 clone retains native centering, ten byte-exact
+  Latin digit blocks and formatting, underline, palettes, fade, and handoff; its shared `F`
+  block is raised one pixel from the guarded native source for approved optical alignment. Every selector is independently
+  decoded from production bytes, all `1F`-`99F` combinations are exhaustively composed from
+  the production floor blocks, and natural Mamel stairs transitions match the approved
+  `Ancient Ruins` / `1F` and `2F` pixels. A separate live regression compares the `1` and `F`
+  bright caps directly; none of these checks uses a framebuffer hash.
 - The save/load wait sign is localized to `Please` / `wait...` from an editable Thin Pixel-7
   raster. Its two 256-byte sign blocks are exact-source guarded, both interleaved bird-art
   blocks remain byte-exact, and an independent decoded-pixel regression covers the full sign
@@ -138,12 +147,10 @@ edited through the ordinary catalog workflow.
   natural English.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
   traps, save/resume, rankings, and uncommon dynamic text combinations.
-- Full graphics localization: the clean-boot copyright/composer card is installed from
+- Full graphics localization: the clean-boot copyright/composer card and all 32 arrival cards are installed from
   approved source art and pixel-tested across its fade and title handoff. The save/load wait
   sign is installed and statically pixel-tested but still needs its live route captured. The
-  main title and
-  all 32 arrival-card selectors have exact contracts but still need approved English art and
-  insertion. The ending staff roll still needs main-ending and true-ending save states before
+  main title still needs approved English art and insertion. The ending staff roll still needs main-ending and true-ending save states before
   its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
 - Iterative layout and font polish for issues discovered in playtesting.
 - Release packaging and final clean-ROM reproducibility checks.
@@ -154,5 +161,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`78b40ffab41cd5ae733fbfa53ed50b2758bdab25`; always rebuild and verify locally rather
+`ac475d05668be691c5b4e46f1b0779699d226cec`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

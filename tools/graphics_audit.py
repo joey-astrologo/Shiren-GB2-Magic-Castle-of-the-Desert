@@ -35,8 +35,8 @@ ARRIVAL_SELECTOR_SLOTS = 32
 
 
 # C12C selector labels are aligned with the native history-location family.
-# Selectors 30 and 31 share one native sequence but have no corresponding
-# extracted location-name record, so the audit leaves their semantics open.
+# Selectors 30 and 31 share the nine-block ``不思議のダンジョン`` sequence,
+# independently decoded from the native atlas as ``Mystery Dungeon``.
 ARRIVAL_LABELS = (
     "Town of Ilpa",
     "Castle Dungeon",
@@ -68,8 +68,8 @@ ARRIVAL_LABELS = (
     "Road to Rescue",
     "Castle Prison",
     "Pot Cave",
-    "unresolved native selector 30",
-    "unresolved native selector 31",
+    "Mystery Dungeon",
+    "Mystery Dungeon",
 )
 
 

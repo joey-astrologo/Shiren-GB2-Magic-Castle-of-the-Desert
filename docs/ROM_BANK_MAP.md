@@ -141,7 +141,7 @@ aliases before changing it.
 | 59 | `$7980-$7E81` | Credit-transition 20x32 interleaved tile/attribute map | Selector 104; preserve transition rows |
 | 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | Preserve both credit aliases |
 | 86 | `$7A80-$7E7F` | Save/load wait sign and interleaved bird art | `wait_screen.py` owns only `$7A80-$7B7F` and `$7C80-$7D7F`; preserve both intervening bird blocks |
-| 127 | `$4000-$62EE` | Arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | One shared family; selectors 30/31 alias |
+| 127 | `$4000-$62EE` | Native arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | `arrival_cards.py` guards the family and replaces only `$4000-$4008` with a far-call wrapper; native assets remain source evidence |
 | 240 | `$4057-$409E`, `$40EF-$40F1`, `$410A` | Visible credit map generator, selector-24 pointer, and eight-page length | Preserve; generates tile IDs `$80-$FF` at `$9800` with VRAM-bank-1 attributes |
 | 240 | `$409F-$40A6` | Credit-card BG palette-0 transition override | Preserve native fade behavior |
 | 243 | `$5D00-$64FF` | Visible credit foreground copied verbatim to VRAM bank 1 `$8800-$8FFF` | `credit_screen.py` owns only the two ranges listed above; both copyright rows and all other bytes remain native |
@@ -154,6 +154,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
+| 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42A1`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
@@ -162,7 +163,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 254 | `$4000-$4732` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
 
-Banks 250-255 were measured empty before these reservations. Their unused tails are not a
+Banks 248-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
 deterministically.
 

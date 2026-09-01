@@ -9,8 +9,8 @@ The first whole-ROM graphical-text inventory is now recorded in
 main title, all 32 town/dungeon/floor arrival selectors, and the save/load wait sign. The
 ending staff roll is
 proven by native scenario/BGM labels but remains unclassified until main-ending and true-ending
-save states are available. The approved English copyright/composer card and wait sign are now
-installed; the title, arrival cards, and ending staff roll remain active work. Automated live
+save states are available. The approved English copyright/composer card, arrival cards, and
+wait sign are now installed; the title and ending staff roll remain active work. Automated live
 reproduction of the wait-sign route remains pending.
 
 ## Proven storage model
@@ -39,6 +39,7 @@ Each asset still needs its producer and consumers mapped.
 | Cracked-Bracelet marker | Stock Japanese `(hibi)` composite replaced by compact `(Cr)` at native token `F2 1E` | `item_status.py` |
 | Item-row status gallery | Equip, curse, blessing, plate, cracked, synthesis color, and combined states reproduced on demand | `mesen_item_formatting_gallery.lua` |
 | Copyright/composer card | Approved Inter SemiBold 4.1 `CHUNSOFT` and `Koichi Sugiyama` strips; native copyright rows, map, palettes, fade, scroll, and title handoff preserved | `credit_screen.py` |
+| Town/dungeon/floor arrival cards | Approved Inter SemiBold 4.1 location artwork for all 32 selectors, including the decoded `Mystery Dungeon` alias; native Latin digits plus an approved one-pixel-raised `F`, centering, floor formatter, underline, palette inheritance, fade, and transition preserved through a guarded bank-$F8 renderer clone | `arrival_cards.py` |
 | Save/load wait sign | Approved Thin Pixel-7 `Please` / `wait...` raster in two guarded sign blocks; both interleaved bird-art blocks preserved byte-for-byte | `wait_screen.py` |
 
 These are not evidence that title art, story cards, ending art, or every graphical menu label
@@ -50,7 +51,6 @@ The graphics pass must still complete or visually verify:
 
 - replacement art and visual acceptance for the now-traced title logo;
 - opening chase/cinematic graphical text;
-- an English atlas/gallery for the now-traced 32-selector arrival-card renderer;
 - HUD abbreviations or labels not drawn through the localized text font;
 - menu icons, category art, status marks, and explanatory diagrams;
 - gift-code/name editor decorative labels outside generated maps;

@@ -60,8 +60,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit card and wait sign are installed; create and approve title/arrival art, live-check the wait route, and capture both ending routes |
-| Automated tests | **479-test suite passing** | Complete discovery passed with the credit and wait-sign source/insertion regressions included |
+| Graphics | **In progress** | Credit card, arrival cards, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
+| Automated tests | **494-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, and wait-sign regressions included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -162,9 +162,42 @@ python3 -m unittest \
   tests.test_item_formatting \
   tests.test_synthesis_lab
 
-# Read-only graphical-text resource audit
-python3 -m unittest tests.test_graphics_audit
+# Graphical-text resource audit and arrival-card artwork
+python3 -m unittest \
+  tests.test_graphics_audit \
+  tests.test_arrival_card_audition \
+  tests.test_arrival_cards
 ```
+
+## Audition arrival-card fonts
+
+Render all 32 arrival selectors without changing the ROM:
+
+```sh
+# Bundled Inter comparison candidate
+python3 tools/arrival_card_audition.py
+
+# Any external TTF/OTF candidate
+python3 tools/arrival_card_audition.py \
+  --font "/path/to/Candidate.ttf" \
+  --output build/arrival_cards_candidate.png
+
+# Deliberately test a larger strike or a solid one-bit treatment
+python3 tools/arrival_card_audition.py \
+  --font "/path/to/Candidate.ttf" \
+  --cap-height 12 \
+  --style solid \
+  --output build/arrival_cards_candidate_12px.png
+```
+
+The sheet reproduces the measured native location/floor bands, red underline, 16-pixel
+block alignment, and 144-pixel label budget. It cycles representative floor numbers using
+the native Latin digits and the approved one-pixel-raised `F`, then ends with a magnified
+alignment proof covering one- and two-digit floors. It reports label overflows instead of
+clipping them. Native selectors 30/31 were independently decoded as the shared `Mystery Dungeon`
+card. The bundled Inter SemiBold 4.1 treatment and aligned floor suffix are approved art;
+`arrival_cards.py` installs its editable block source from
+`assets/graphics/arrival_cards_inter.json`.
 
 ## Edit translated text
 

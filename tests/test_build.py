@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import allocate
+import arrival_cards
 import build as translated_build
 import capture_dialogue
 import cartridge
@@ -180,6 +181,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in wait_screen.owned_ranges()
             for offset in range(start, end)
         }
+        arrival_card_offsets = {
+            offset
+            for start, end in arrival_cards.owned_ranges()
+            for offset in range(start, end)
+        }
         checksum_offsets = {
             cartridge.HEADER_CHECKSUM,
             cartridge.GLOBAL_CHECKSUM,
@@ -240,6 +246,7 @@ class TranslationBuildTests(unittest.TestCase):
             | item_status_offsets
             | credit_screen_offsets
             | wait_screen_offsets
+            | arrival_card_offsets
             | selector_offsets
             | menu_offsets
             | stairs_offsets

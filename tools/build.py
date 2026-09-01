@@ -13,6 +13,7 @@ from pathlib import Path
 import sys
 
 import allocate
+import arrival_cards
 import blank_scroll
 import credit_screen
 import dialogue_pacing
@@ -261,6 +262,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = item_status.install(output)
     output = credit_screen.install(output)
     output = wait_screen.install(output)
+    output = arrival_cards.install(output)
     output = menu_graphics.install(output)
     output = stairs_menu.install(output)
     output = service_menus.install(output)
@@ -371,6 +373,7 @@ def main(argv=None):
     except (
         OSError,
         allocate.AllocationError,
+        arrival_cards.ArrivalCardError,
         blank_scroll.BlankScrollError,
         credit_screen.CreditScreenError,
         dialogue_pacing.DialoguePacingError,

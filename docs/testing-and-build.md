@@ -160,6 +160,32 @@ This verifies native tile-plane headers, resource aliases, interleaved maps/attr
 palette provenance, all 32 arrival-card sequences, and the explicit ending-route gap. It does
 not write a ROM or update framebuffer hashes.
 
+For the ROM-independent 32-selector arrival-card font audition:
+
+```sh
+python3 -m unittest tests.test_arrival_card_audition -v
+python3 tools/arrival_card_audition.py
+```
+
+The tests freeze the measured native bands and palette, complete selector coverage,
+16-pixel underline alignment, 144-pixel fit enforcement, the decoded shared `Mystery
+Dungeon` label, and CLI contact-sheet generation. The sheet command writes only its requested
+PNG unless `--asset-output` is explicitly supplied.
+
+For the approved arrival-card source and production insertion:
+
+```sh
+python3 -m unittest tests.test_arrival_cards -v
+```
+
+This regenerates the approved location JSON in memory, independently decodes all 32 production
+selector sequences, proves all eleven native Latin floor source glyphs re-encode byte-for-byte,
+proves the ten production digit blocks stay native and the shared `F` receives only its approved
+one-pixel upward adjustment, and composes every floor from `1F` through `99F`. It guards the
+native entry and dedicated bank `$F8`, traverses the natural Mamel stairs route to compare
+`Ancient Ruins` / `1F` and `2F` pixels, and directly compares the live `1`/`F` bright-cap rows.
+It does not accept or refresh a framebuffer hash.
+
 For the approved copyright/composer card source and production insertion:
 
 ```sh

@@ -36,7 +36,7 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 | 1 | Post-Chunsoft copyright/credit card | Verbatim foreground plane plus a generated tilemap; surrounding transition resources remain native | Two private 16x2-tile name strips inside `F3:$5D00-$64FF` | English art installed, transition-tested, and visually approved |
 | 1 | Main title screen logo | Stored multi-VRAM-bank tiles plus full-screen map | All three resources use title selector 0 | Fully traced; English art required |
 | 1 | Save/load wait sign | Two stored 64x16 column-major 2bpp sign blocks | Two interleaved 256-byte bird-art blocks are separate and preserved | English art installed and statically pixel-tested; automated live route pending |
-| 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors, 31 unique sequences; selectors 30/31 alias | Fully traced; English atlas/sequences required |
+| 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors; duplicate Pot Cave and `Mystery Dungeon` pairs share sequences | Approved English atlas installed and live-pixel tested |
 | 3 | Ending staff roll | Unknown until the live route is captured | Native scenario and music identifiers prove the route exists | Needs main-ending and true-ending states |
 
 The title wording shown below remains a working content transcription rather than approved
@@ -143,6 +143,12 @@ additional textual variant. No alternate title-logo selector was observed: both 
 tables and the tilemap table use selector 0 for this family. Title-menu/save-summary text is a
 different ordinary/generated-text system and is already covered by its existing tests.
 
+`tools/title_animation_vignette.py` captures every emulator frame from 600 through 659 by
+default, producing a labeled 60-frame contact sheet and a nearest-neighbor one-second GIF.
+This replaces the earlier eight-frame still survey, which skipped too much motion for title-art
+mockups. GIF centisecond timing is distributed across frames so the full pass remains exactly
+one second even though the format cannot encode 60 Hz with one constant delay.
+
 ## Arrival cards
 
 ### Proven composition model
@@ -166,14 +172,63 @@ centers the generated row, formats the floor from `$C130`, and flashes the gener
 | Floor suffix | Generated from the same atlas | Zero-suppressed two digits plus native `F` block |
 
 Selectors 0-29 align with the translated history-location family from Town of Ilpa through
-the second Pot Cave entry. Selectors 30 and 31 point to the same nine-block sequence and have
-no matching extracted player-facing location record; they remain explicitly unresolved rather
-than being assigned guessed names.
+the second Pot Cave entry. Selectors 30 and 31 point to the same nine-block sequence. Direct
+2bpp decoding of those nine native blocks reads `不思議のダンジョン`, resolving both as
+`Mystery Dungeon` without guessing from an unrelated script record.
 
 The live Ancient Ruins trace proves selector 2 loads location blocks `11, 12, 13, 14`, then
 floor blocks `0, 2, 10` for `2F`. The complete selector/block list is emitted by
 `tools/graphics_audit.py` so future artwork can be generated without play-testing all 32
 locations.
+
+### Font audition sheet
+
+`tools/arrival_card_audition.py` renders every selector as a native-sized 160x144 card and
+assembles the results into a contact sheet. It accepts any TTF/OTF/TTC, a cap height, and
+either the native-style three-shade antialiasing treatment or a solid one-bit treatment. The
+layout comes from the captured Ancient Ruins 2F route: location band y=40-55, block-snapped
+red underline at y=57, floor band y=73-88, and a 144-pixel label maximum.
+
+The default command uses the bundled Inter SemiBold candidate at an 11-pixel cap only as an
+immediately runnable comparison. At 12 pixels, Inter genuinely needs 17 vertical pixels for
+several descender-bearing labels, and the tool flags those cells instead of clipping them.
+Representative floors cycle through `1F`, `2F`, `9F`, `10F`, `19F`, `50F`, and `99F` so all
+digit shapes are visible. The approved audition raises the native `F` one pixel for optical
+alignment, and the bottom of the sheet magnifies `1F`-`9F`, `10F`, `11F`, and `99F` so the
+shared suffix is easy to inspect. Selectors 30 and 31 both render their proven
+`Mystery Dungeon` label.
+
+```sh
+python3 tools/arrival_card_audition.py
+python3 tools/arrival_card_audition.py \
+  --font "/path/to/Candidate.ttf" \
+  --output build/arrival_cards_candidate.png
+python3 -m unittest tests.test_arrival_card_audition -v
+```
+
+The sheet itself does not modify the ROM. With `--asset-output`, the same renderer freezes the
+approved block-aligned JSON source consumed by `arrival_cards.py`; the committed production
+asset is `assets/graphics/arrival_cards_inter.json`.
+
+### Production insertion
+
+`arrival_cards.py` clones the guarded native `7F:$4000-$41E0` renderer at the same CPU
+address in dedicated bank `$F8`. Only its same-bank atlas, pointer, sequence, and palette
+operands are redirected. The native entry receives a nine-byte far-call wrapper, while
+centering, zero-suppressed floor formatting, red underline, inherited middle palette colors,
+fade, and new-floor handoff remain the original code.
+
+The private atlas contains 217 blocks: ten byte-exact native Latin digit blocks, the approved
+native-derived `F` raised one pixel, and 206 approved English label blocks. Thirty unique label records cover all 32 selectors; the two Pot Cave selectors and
+the two Mystery Dungeon selectors intentionally share their respective sequence pointers.
+Every runtime block is independently decoded back to the approved pixels, every floor from
+`1F` through `99F` is recomposed, and the natural Mamel stairs route compares live
+`Ancient Ruins` / `1F` and `2F` cards without a framebuffer hash. A separate live-pixel
+regression compares the `1` and `F` bright-cap rows directly. The floor source at
+`7F:$41E1-$44A0` is independently decoded into
+`assets/graphics/arrival_floor_native.json` and re-encodes byte-for-byte before the declared
+`F y=-1` production adjustment, preventing a location-font raster or neighboring digit from
+contaminating the shared suffix block.
 
 ### Palette behavior
 
@@ -183,13 +238,12 @@ sets its first color from `00:$3AE9-$3AEA` and its last from `7F:$61E7-$61E8`, w
 middle colors are inherited from the active route. A replacement must therefore be checked
 from more than one dungeon/town palette, not only the Mamel state.
 
-### Replacement implications
+### Replacement implementation
 
-English does not require widening a menu box here. A future generator can build a private
-English block atlas and selector sequences inside the existing 144-pixel maximum location
-row, then redirect or replace this exclusive family. It must retain centering, one- and
-two-digit floors, palette inheritance, and the flashing transition. Final abbreviations, if
-any location exceeds the art budget, require review before insertion.
+English does not require widening a menu box here. The installed private atlas keeps every
+label inside the existing 144-pixel maximum; `Training Dungeon` is widest at 131 pixels and
+uses the maximum nine blocks. Any later wording or font change must regenerate the editable
+asset and repeat the all-selector decoder plus live transition regression.
 
 ## Ending and credits
 
@@ -223,14 +277,13 @@ remain unchanged by explicit project policy.
 | HUD abbreviations | Observed dungeon HUD uses existing Latin `Lv`/`Hp` and numbers | No new localization target from current evidence |
 | Menus and graphical input | Status, name, gift-code, Blank Scroll, unidentified-name, Rescue, and service-menu owners already documented | Do not duplicate them in a new static-art patch |
 | Shop/store signs | Japanese characters are environmental signage | Preserve |
-| Postgame location cards | Covered structurally by the same 32-selector arrival renderer | Generate/test all selectors when the English atlas is implemented |
+| Postgame location cards | Covered by the installed 32-selector arrival renderer | Continue rare-route playtesting; all selectors are statically pixel-tested |
 | Ending `Fin` | Explicitly accepted in Japanese | Preserve |
 
 ## Implementation order
 
 1. Main title: larger full-screen art with two VRAM planes and eight palettes.
-2. Arrival-card English atlas and 32-selector gallery.
-3. Ending credits after the two live states are available.
+2. Ending credits after the two live states are available.
 
 Each implementation remains subject to [GRAPHICS.md](GRAPHICS.md): editable source art,
 licensed font provenance, exact-byte guards, collision checks, static plane/map tests, a live
