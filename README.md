@@ -61,7 +61,7 @@ project work.
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Credit card, arrival cards, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **496-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, wait-sign, and ranking-suffix regressions included |
+| Automated tests | **498-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, and warehouse horizontal-wrap regressions included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.

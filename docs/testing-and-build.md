@@ -232,10 +232,10 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The complete run on 2026-08-31 was **479 tests** with the matching ROM, PyBoy, RGBDS, and
-Mesen available. It includes the seven graphics-audit tests, eight credit-source/insertion
-tests, and five wait-sign source/insertion tests. The required gate is always discovery of
-the complete `tests/` directory, not a hard-coded count.
+The complete run on 2026-09-01 was **498 tests** with the matching ROM, PyBoy, RGBDS, and
+Mesen available. It includes the graphics-audit, credit-source/insertion, wait-sign,
+arrival-card, ranking-suffix, and warehouse horizontal-wrap regressions. The required gate
+is always discovery of the complete `tests/` directory, not a hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
 with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
@@ -276,6 +276,13 @@ chooses `Password`, verifies the saved ninth-column destination is `$9950`, requ
 two-byte live marker to be cleared, and freezes the immediate transition. That test owns
 the reported leftover vertical strip; eventual arrival at a stable editor is not accepted
 as a substitute.
+
+`SaveStates/warehouse-floor-items.mss` adds the camera-history case discovered after
+placing items without leaving the warehouse; its widened frame crosses x=31. The regression
+requires the added column at row 14/x4 (`$99C4`), checks the literal 8x64 right edge through
+all four options, and verifies teardown from saved tile/attribute pairs. The companion
+`warehouse-floor-items-reenter.mss` state proves the same check on the clean post-reentry
+camera position. These pixel checks are independent of the existing full-screen hashes.
 
 `tests.test_name6` freezes the title and Secrets event selectors, the complete fourteen-row
 replay pointer table, and the SHA-1 of every original 106-byte embedded diary. It proves

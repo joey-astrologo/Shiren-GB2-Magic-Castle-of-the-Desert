@@ -61,13 +61,15 @@ edited through the ordinary catalog workflow.
 - Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups use exact
   selector-set detection and a 56-pixel English interior with a measured 48-pixel
   post-cursor text budget, while
-  unrelated generic popups retain native geometry. All five
+  unrelated generic popups retain native geometry. All six
   user-supplied routes are rebuilt in Mesen regressions. The initial Rescue route
   separately freezes its preceding Yes/No prompt and synchronizes the widened bottom
   border with the renderer-selected CGB VRAM bank, preventing the confirmation from
   leaking stale tiles into the later popup. Before drawing, both VRAM banks' added ninth
-  column are saved and restored on either dismissal or selection. The warehouse route
-  explicitly handles the BG-map wrap `$9BFF -> $9800`; all routes compare every added
+  column are saved and restored on either dismissal or selection. The warehouse routes
+  explicitly handle vertical `$9BFF -> $9800` and horizontal x=31 -> x=0 BG-map wraps;
+  the same-room floor-items fixture guards the latter with a literal right-edge raster,
+  while its re-entered state is the clean control. All routes compare every added
   column tile and attribute before and after teardown. All routes traverse every option and
   enforce the native six-dynamic-tile row allocation. Warehouse and Bank keep stable tile
   `$B3` in every spill cell; Blacksmith stages `Synthesis`'s suffix in `$B3`, clears its

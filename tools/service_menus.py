@@ -367,8 +367,10 @@ def _save_support_bytes():
         "F04FF5F070F5"      # preserve VBK and SVBK
         "3E07E070"          # select WRAM bank 7
         "AFEADAD8"          # clear Blacksmith suffix-tile marker
-        "7BC608EAD4D86F"    # extra-column low destination and L
-        "7ACE00EAD5D867"    # carry into destination high and H
+        "7BE6E06F"          # preserve the BG row bits from E in L
+        "7BC608E61FB5"       # wrap x + 8 inside the same 32-tile row
+        "EAD4D86F"           # save extra-column low destination and L
+        "7AEAD5D867"         # keep the original BG row high byte in H
         "783CEAD6D84F"      # B + bottom row -> saved height and C
         "11C0D8"            # packed tile/attribute destination
     )
@@ -427,23 +429,19 @@ def _restore_support_bytes():
     raw += bytearray.fromhex(
         "AFE04F"            # inspect tile IDs in VRAM bank 0
         "FAD4D86FFAD5D867"  # saved extra-column destination
-        "7DD6086F"          # rewind from x+8 to popup top-left
+        "7DE6E05F"          # preserve the saved destination's BG row bits
+        "7DD608E61FB36F"    # wrap x - 8 to the popup top-left
     )
-    rewind_carry = len(raw)
-    raw += bytearray.fromhex("300125")  # JR NC,+1 / DEC H
-    if raw[rewind_carry + 1] != 1:
-        raise ServiceMenuError("service restore rewind branch changed")
     raw += bytearray.fromhex("7EFE7E")  # top-left corner
     frame_gone_corner = len(raw)
     raw += bytearray.fromhex("2000")
     raw += bytearray.fromhex("237EFEC0")  # first top interior
     frame_gone_first = len(raw)
     raw += bytearray.fromhex("2000")
-    raw += bytearray.fromhex("7DC6066F")  # seventh top interior
-    top_carry = len(raw)
-    raw += bytearray.fromhex("300124")  # JR NC,+1 / INC H
-    if raw[top_carry + 1] != 1:
-        raise ServiceMenuError("service restore signature branch changed")
+    raw += bytearray.fromhex(
+        "7DE6E05F"          # preserve the top row while crossing x = 31
+        "7DC606E61FB36F"    # wrap to the seventh top interior
+    )
     raw += bytearray.fromhex("7EFEC0")
     frame_gone_last = len(raw)
     raw += bytearray.fromhex("2000")

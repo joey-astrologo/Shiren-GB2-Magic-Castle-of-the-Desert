@@ -268,6 +268,27 @@ class ServiceMenuInstallerTests(unittest.TestCase):
             service_menus._restore_support_bytes(),
         )
 
+    def test_saved_column_wraps_horizontally_inside_one_bg_row(self):
+        # The floor-items fixture places the popup at row 14, x=28. Its added
+        # column is row 14, x=4 ($99C4), not row 15, x=4 ($99E4).
+        self.assertIn(
+            bytes.fromhex(
+                "7BE6E06F7BC608E61FB5EAD4D86F7AEAD5D867"
+            ),
+            service_menus._save_support_bytes(),
+        )
+        restore = service_menus._restore_support_bytes()
+        self.assertIn(
+            bytes.fromhex(
+                "FAD4D86FFAD5D8677DE6E05F7DD608E61FB36F"
+            ),
+            restore,
+        )
+        self.assertIn(
+            bytes.fromhex("7DE6E05F7DC606E61FB36F"),
+            restore,
+        )
+
     def test_controller_exit_chains_both_popup_cleanup_owners(self):
         raw = service_menus._service_exit_helper_bytes()
         floor = stairs_menu.floor_cleanup_address()
@@ -676,6 +697,60 @@ class MesenServiceMenuTests(unittest.TestCase):
         self.assertIn(
             "PASS Warehouse service popup widened and dismissed", output
         )
+
+    def test_warehouse_floor_items_keep_the_literal_right_border(self):
+        row = FIXTURE["warehouse"]
+        cases = (
+            (
+                row["floor_items_state"],
+                row["floor_items_state_sha1"],
+                "99C4",
+            ),
+            (
+                row["floor_items_reenter_state"],
+                row["floor_items_reenter_state_sha1"],
+                "9B90",
+            ),
+        )
+        for relative, expected_sha1, destination in cases:
+            with self.subTest(state=relative):
+                state = ROOT / relative
+                if not state.is_file():
+                    self.skipTest("warehouse floor-items fixture is unavailable")
+                self.assertEqual(
+                    expected_sha1,
+                    sha1(state.read_bytes()).hexdigest(),
+                )
+                env = os.environ.copy()
+                env["GB2_WAREHOUSE_ITEMS_MSS"] = str(state)
+                env["GB2_WAREHOUSE_EXPECTED_DESTINATION"] = destination
+                result = subprocess.run(
+                    [
+                        str(self.mesen),
+                        "--testrunner",
+                        "--enablestdout",
+                        "--novideo",
+                        "--noaudio",
+                        str(self.localized),
+                        str(
+                            ROOT
+                            / "tests"
+                            / "mesen_service_menu_warehouse_floor_items.lua"
+                        ),
+                    ],
+                    cwd=ROOT,
+                    env=env,
+                    text=True,
+                    capture_output=True,
+                    timeout=60,
+                )
+                output = result.stdout + result.stderr
+                self.assertEqual(0, result.returncode, output[-8000:])
+                self.assertIn(
+                    "PASS Warehouse floor-items popup keeps and restores "
+                    "its literal right edge",
+                    output,
+                )
 
     def test_bank_popup_is_widened_traversed_and_dismissed_cleanly(self):
         row = FIXTURE["bank"]

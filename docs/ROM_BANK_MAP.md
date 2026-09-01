@@ -160,7 +160,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, glyphs | Exclusive |
 | 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
-| 254 | `$4000-$4732` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
+| 254 | `$4000-$48CF` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and horizontally/vertically wrapped ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
 
 Banks 248-255 were measured empty before these reservations. Their unused tails are not a
@@ -230,8 +230,9 @@ rightmost BG column; `$D8D4-$D8D5` store the BG destination, `$D8D6` the row cou
 `$D8D7-$D8D8` the two-byte `$A5/$5A` live marker, and `$D8D9-$D8DA` the Blacksmith
 suffix tile's VRAM bank and `$A6` marker. The widened frame template ends at
 `$D8B3`, so these ranges do not overlap. The two-byte marker prevents uninitialized WRAM
-from authorizing a restore. This is transient rendering state, not SRAM and not general
-free WRAM.
+from authorizing a restore. Destination arithmetic preserves the current tile-map row while
+wrapping the low five x bits, then wraps vertical row traversal between `$9Bxx` and `$98xx`.
+This is transient rendering state, not SRAM and not general free WRAM.
 
 ## Rescue requester live actor state
 

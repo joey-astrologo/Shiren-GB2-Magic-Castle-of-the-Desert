@@ -120,6 +120,13 @@ independent 45x8 raster check for `Synthesis` plus literal blank 8x8 cells to th
 right of unselected `Quit`. This specifically guards clipping, cursor aliasing, and a stale
 VRAM-bank attribute selecting garbage for the spill tile.
 The warehouse route explicitly crosses the hardware BG-map boundary `$9BFF -> $9800`.
+`SaveStates/warehouse-floor-items.mss` (SHA-1
+`4822a0e49a0d85d597fb1337ddb4136131df7342`) preserves the reported same-room camera
+position after items were placed; its added right column wraps horizontally from row 14,
+x=28 to row 14, x=4. `SaveStates/warehouse-floor-items-reenter.mss` (SHA-1
+`145065ce2a940cf84229dcab17d326585e8a01d9`) is the clean re-entry control. Their shared
+pixel regression uses a literal right-edge raster rather than a framebuffer hash and
+requires exact column restoration after dismissal.
 Framebuffer hashes are secondary presentation checks. A third Rescue checkpoint selects
 `Password`, requires saved BG destination `$9950` and a consumed two-byte live marker, and
 freezes the immediate transition so the added ninth column cannot remain as a vertical

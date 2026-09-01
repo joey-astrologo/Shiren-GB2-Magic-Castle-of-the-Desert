@@ -415,6 +415,23 @@ and preventing the dismissed column from being restored.
 explicitly wrap `$9Cxx` back to `$98xx`, and the Mesen route checks every tile and attribute
 on both sides of that boundary before and after Deposit.
 
+## A BG tile-map column increment must wrap within the same row
+
+**Tempting assumption:** adding the widened frame's eight-tile offset directly to its
+top-left BG-map address always finds the added right column.
+
+**Failure:** after placing items in the warehouse without leaving, the camera positioned
+the popup at row 14, x=28. Linear `DE + 8` produced row 15, x=4 (`$99E4`) instead of
+wrapping horizontally to row 14, x=4 (`$99C4`). The cleanup guard made the same mistake
+when rewinding eight cells and sampling the seventh top-interior cell. It consequently
+declared the still-visible frame closed and restored scene tiles over its right border.
+Leaving and re-entering changed the camera position, hiding the defect.
+
+**Rule:** preserve address bits 5-9 while wrapping x arithmetic through the low five bits.
+The floor-items fixture checks the literal 8x64 right-edge raster through every cursor
+position, the live `$99C4` save marker, and exact tile/attribute restoration after closing;
+the re-entered state is a clean control. Neither route uses a framebuffer hash.
+
 ## A wider row does not create another dynamic tile
 
 **Tempting assumption:** after widening a menu from five to seven interior cells, assigning
