@@ -88,6 +88,11 @@ edited through the ordinary catalog workflow.
   only its two private 512-byte name strips with approved `CHUNSOFT` and `Koichi Sugiyama`
   art. The editable Inter SemiBold 4.1 source, OFL provenance, exact source guards, native
   fade stages, and unchanged title handoff are all fixture-tested without a framebuffer hash.
+- The save/load wait sign is localized to `Please` / `wait...` from an editable Thin Pixel-7
+  raster. Its two 256-byte sign blocks are exact-source guarded, both interleaved bird-art
+  blocks remain byte-exact, and an independent decoded-pixel regression covers the full sign
+  without changing a framebuffer hash. Automated live reproduction of the user-observed
+  suspend/reload route remains pending.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
@@ -134,7 +139,9 @@ edited through the ordinary catalog workflow.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
   traps, save/resume, rankings, and uncommon dynamic text combinations.
 - Full graphics localization: the clean-boot copyright/composer card is installed from
-  approved source art and pixel-tested across its fade and title handoff. The main title and
+  approved source art and pixel-tested across its fade and title handoff. The save/load wait
+  sign is installed and statically pixel-tested but still needs its live route captured. The
+  main title and
   all 32 arrival-card selectors have exact contracts but still need approved English art and
   insertion. The ending staff roll still needs main-ending and true-ending save states before
   its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
@@ -147,5 +154,5 @@ requirements.
 
 The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
 the time this status was consolidated was
-`c4d523a8373e175cf890947c4db6a058bac7d271`; always rebuild and verify locally rather
+`78b40ffab41cd5ae733fbfa53ed50b2758bdab25`; always rebuild and verify locally rather
 than treating that hash as a permanent release identifier.

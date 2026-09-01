@@ -35,6 +35,7 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 |---:|---|---|---|---|
 | 1 | Post-Chunsoft copyright/credit card | Verbatim foreground plane plus a generated tilemap; surrounding transition resources remain native | Two private 16x2-tile name strips inside `F3:$5D00-$64FF` | English art installed, transition-tested, and visually approved |
 | 1 | Main title screen logo | Stored multi-VRAM-bank tiles plus full-screen map | All three resources use title selector 0 | Fully traced; English art required |
+| 1 | Save/load wait sign | Two stored 64x16 column-major 2bpp sign blocks | Two interleaved 256-byte bird-art blocks are separate and preserved | English art installed and statically pixel-tested; automated live route pending |
 | 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors, 31 unique sequences; selectors 30/31 alias | Fully traced; English atlas/sequences required |
 | 3 | Ending staff roll | Unknown until the live route is captured | Native scenario and music identifiers prove the route exists | Needs main-ending and true-ending states |
 
@@ -92,6 +93,32 @@ pixel rows to 2bpp tiles, and owns no other graphical bytes. The independent pro
 regression first failed against the native ROM at 1,382 name-band pixels. It now compares
 actual pixels at fade frames 280, 300, 320, 440, and 480, preserves every pixel before the
 card and at the title handoff, and does not use or update a framebuffer hash.
+
+## Save/load wait sign
+
+The native sign reads `しばらく おまちください`, or “Please wait a moment.” The user-observed
+route loads an in-game state, chooses `Quit` to suspend, and then reloads that save. The
+existing automated `Mamel` route resumed directly instead of displaying the sign, so this
+audit does not claim an emulator reproduction that has not occurred.
+
+The supplied native screenshot nevertheless maps exactly to a stored 64x32 sign raster at
+screen rectangle `(33,74)-(96,105)`. Its tiles are split across two column-major 2bpp blocks:
+
+| Part | ROM source | Production treatment |
+|---|---|---|
+| Top sign rows | `56:$7A80-$7B7F` | Replace exactly 256 bytes |
+| Upper bird art | `56:$7B80-$7C7F` | Preserve and exact-hash guard |
+| Bottom sign rows | `56:$7C80-$7D7F` | Replace exactly 256 bytes |
+| Lower bird art | `56:$7D80-$7E7F` | Preserve and exact-hash guard |
+
+The editable four-level source is `assets/graphics/wait_screen.json`. It renders approved
+Thin Pixel-7 text as `Please` / `wait...` with the native-style one-pixel gray shadow while
+retaining all sign pixels outside the bounded text regions. `tools/wait_screen.py` owns only
+the two sign blocks and fails closed if either sign source or either preserved bird block
+changes. The independent production regression was written first and failed against the
+current ROM at 330 pixels; it now decodes production tiles independently and compares the
+complete sign raster without accepting or updating a framebuffer hash. A live route capture
+remains the final visual check.
 
 ## Title screen
 

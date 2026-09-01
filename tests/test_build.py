@@ -34,6 +34,7 @@ import stairs_menu
 import service_menus
 import translations
 import unidentified_names
+import wait_screen
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -174,6 +175,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in credit_screen.owned_ranges()
             for offset in range(start, end)
         }
+        wait_screen_offsets = {
+            offset
+            for start, end in wait_screen.owned_ranges()
+            for offset in range(start, end)
+        }
         checksum_offsets = {
             cartridge.HEADER_CHECKSUM,
             cartridge.GLOBAL_CHECKSUM,
@@ -233,6 +239,7 @@ class TranslationBuildTests(unittest.TestCase):
             | item_formatting_offsets
             | item_status_offsets
             | credit_screen_offsets
+            | wait_screen_offsets
             | selector_offsets
             | menu_offsets
             | stairs_offsets

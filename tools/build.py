@@ -32,6 +32,7 @@ import stairs_menu
 import service_menus
 import translations as translation_file
 import unidentified_names
+import wait_screen
 
 
 # Group 15 contains all synthesis-rune descriptions. The item-detail
@@ -259,6 +260,7 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     output = item_formatting.install(output)
     output = item_status.install(output)
     output = credit_screen.install(output)
+    output = wait_screen.install(output)
     output = menu_graphics.install(output)
     output = stairs_menu.install(output)
     output = service_menus.install(output)
@@ -383,6 +385,7 @@ def main(argv=None):
         runtime_widths.RuntimeWidthError,
         spell_input.SpellInputError,
         unidentified_names.UnidentifiedNameError,
+        wait_screen.WaitScreenError,
         stairs_menu.StairsMenuError,
         translation_file.TranslationError,
     ) as exc:

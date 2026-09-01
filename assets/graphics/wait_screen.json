@@ -1,0 +1,104 @@
+{
+  "format": "shiren-gb2-wait-screen-v1",
+  "status": "approved wording and production insertion source",
+  "content": [
+    "Please",
+    "wait..."
+  ],
+  "font": {
+    "name": "Thin Pixel-7 GB Compact",
+    "spec": "assets/fonts/thin_pixel_7_compact.json",
+    "spec_sha256": "0a951271246f402998f10d76ede332b726e59d599122949ac46a972a3cbd9efb",
+    "glyph_source": "assets/fonts/thin_pixel_7_compact_glyphs.json",
+    "glyph_source_sha256": "d496e4650e510f1ec5b16e5d51d3262a8ef0f17a8ee7c38225ad477996aaa6b0",
+    "license": "licenses/Thin-Pixel-7.txt",
+    "license_sha256": "4ce79ee1180477fb93bdd91596ac00e972a99341604ec53b745b392b4e87ca6c"
+  },
+  "layout": {
+    "screen_rect": [
+      33,
+      74,
+      97,
+      106
+    ],
+    "lines": [
+      {
+        "text": "Please",
+        "origin": [8, 8],
+        "advance": 30
+      },
+      {
+        "text": "wait...",
+        "origin": [8, 18],
+        "advance": 26
+      }
+    ],
+    "gray_drop_shadow": [1, 1]
+  },
+  "palette_symbols": {
+    ".": "color 0 / black background",
+    "l": "color 1 / light sign",
+    "g": "color 2 / gray shadow",
+    "#": "color 3 / dark ink"
+  },
+  "native_blocks": [
+    {
+      "name": "top",
+      "source": "56:$7A80-$7B7F",
+      "bytes": 256,
+      "original_sha256": "4c8b018b97475bb18ac952aaa0951006d2d749628733a590bedeec97c3af4192",
+      "localized_sha256": "8af82c6faeebc91d6cdbdc089b0af18b89da9e5597790d2d57826f8bf1491b38"
+    },
+    {
+      "name": "bottom",
+      "source": "56:$7C80-$7D7F",
+      "bytes": 256,
+      "original_sha256": "65d74b28ce217f454be340e6939dc323c0cff463cb18e58126b4dfd86867ff11",
+      "localized_sha256": "5f0e0691637e51f767c069f0e8b0b69ac322e89c4e08f86c8cdcdb6b0e8ab047"
+    }
+  ],
+  "preserved_interleaved_bird_blocks": [
+    {
+      "source": "56:$7B80-$7C7F",
+      "sha256": "d90084aa3116e657c49af91810adb0db5227551ee9ba92365027a335a8448383"
+    },
+    {
+      "source": "56:$7D80-$7E7F",
+      "sha256": "a47de45b2ca8abdea344d3afa08661b4c1e90119e25619a798ba261f4db59d24"
+    }
+  ],
+  "rows": [
+    "................................................................",
+    "................................................................",
+    "................................................................",
+    "................................................................",
+    "................................................................",
+    "..ggggggg.......................llgg............................",
+    "..lllllllllllllllllllggggg......lggg............................",
+    "..llllllllllllllllllllllllllllllllllllllllllggggggg.............",
+    "..llllll####ll##lllllllllllllllllllllllllllllllllllllllllllllll.",
+    "..llllll#ggg#ll#gllllllllllllllllllllllllllllllllllllllllllllll.",
+    "..glllll#gll#gl#gll##lll##lll###ll##llllllllllllllllllllllllllg.",
+    "....glll####lgl#gl#lg#lllg#l#lggg#lg#llllllllllllllllllllllg....",
+    ".gllllll#ggggll#gl####gl###gl##ll####gllllllllllllllg...........",
+    ".gllllll#glllll#gl#gggg#lg#gllg#l#ggggllllllllllllllllllgg......",
+    ".lllllll#gllll###ll###ll###g###lgl###lllllllllllllllllllllllggg.",
+    ".llllllllglllllgggllgggllggglggglllgggllllllllllllllllllllllllg.",
+    ".lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllg.",
+    ".lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll..",
+    ".lllllllllllllllllll#lll#lllllllllllllllllllllllllllllllllllll..",
+    ".llllllllllllllllllllgll#gllllllllllllllllllllllllllllllllllll..",
+    ".lllllll#lll#ll##ll##ll###llllllllllllllllllllllllllllllllllll..",
+    "ggglllll#g#l#gllg#ll#gll#gglllllllllllllllllllllllllllllllllll..",
+    "glllllll#g#g#gl###gl#gll#gllllllllllllllllllllllllllllllllllll..",
+    "glllllll#g#g#g#lg#gl#gll#gllllllllllllllllllllllllllllllllllll..",
+    "lllllllll#l#lgl###g###lll##l#l#l#llllllllllllllllllllllllllgg...",
+    "llllllllllglglllggglggglllgglglglglllllllllllllllllllllllllll...",
+    "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllg..",
+    "gllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllg..",
+    "gggggggggggggggggggggggllllllllllllllllllllllllllllllllllllll...",
+    "................gggggggggggggggggggggglllllllllllllllllllllll...",
+    ".............................gggggggggggggggggggggggglllllllg...",
+    "...............................g..............ggggggggggggggg..."
+  ]
+}

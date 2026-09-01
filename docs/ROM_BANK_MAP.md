@@ -103,6 +103,7 @@ text growth.
 | 18 | `$5310-$5340` | Mode-3 Big Moai gift-code selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
 | 78 | `$7E90-$7E9F` | Far resolver trampoline and preserved-slot wrapper | Exclusive verified cave for `unidentified_names.py` |
+| 86 | `$7A80-$7B7F`, `$7C80-$7D7F` | Approved `Please` / `wait...` save/load sign blocks | `wait_screen.py` only; exact-hash guard both 256-byte sign blocks and preserve the interleaved bird blocks byte-for-byte |
 | 116 | `$5CEF-$5CF5` | Big Moai event gate: stage `$09` branch or group `$6A` index `$0D` locked dialogue | Preserve and fixture-test; ROM bank `$74` is decimal 116 |
 | 120 | `$484A-$484B` | Equipment negative-sign producer | `item_formatting.py` only |
 | 120 | `$6474-$647A` | Arrow counter/separator producer | `item_formatting.py` only |
@@ -122,7 +123,8 @@ text growth.
 
 These are native source contracts, not free space. They are emitted by `graphics_audit.py`
 and explained in [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). All remain preserved except the two
-explicit bank-243 name-strip ranges already assigned to `credit_screen.py`. Any later graphics
+explicit bank-86 sign ranges assigned to `wait_screen.py` and the two bank-243 name-strip
+ranges assigned to `credit_screen.py`. Any later graphics
 installer must exact-byte guard or clone every affected resource and account for the recorded
 aliases before changing it.
 
@@ -138,6 +140,7 @@ aliases before changing it.
 | 56 | `$4000-$42D1` | Title 20x18 interleaved tile/attribute map | Selector 0; replacement pending |
 | 59 | `$7980-$7E81` | Credit-transition 20x32 interleaved tile/attribute map | Selector 104; preserve transition rows |
 | 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | Preserve both credit aliases |
+| 86 | `$7A80-$7E7F` | Save/load wait sign and interleaved bird art | `wait_screen.py` owns only `$7A80-$7B7F` and `$7C80-$7D7F`; preserve both intervening bird blocks |
 | 127 | `$4000-$62EE` | Arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | One shared family; selectors 30/31 alias |
 | 240 | `$4057-$409E`, `$40EF-$40F1`, `$410A` | Visible credit map generator, selector-24 pointer, and eight-page length | Preserve; generates tile IDs `$80-$FF` at `$9800` with VRAM-bank-1 attributes |
 | 240 | `$409F-$40A6` | Credit-card BG palette-0 transition override | Preserve native fade behavior |

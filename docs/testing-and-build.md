@@ -173,6 +173,18 @@ guard both native name strips, confine production mutations to those ranges, and
 pixels across the native fade and title handoff. They do not accept or refresh a framebuffer
 hash.
 
+For the approved save/load wait-sign source and production insertion:
+
+```sh
+python3 -m unittest tests.test_wait_screen -v
+```
+
+This independently decodes both 64x16 ROM blocks, compares the complete production sign to
+the approved `Please` / `wait...` raster, confines mutations to those blocks and checksum
+bytes, and proves both interleaved bird-art blocks remain byte-identical. It does not accept
+or refresh a framebuffer hash. The supplied screenshot is an exact static reference; an
+automated emulator trigger for this transient screen remains pending.
+
 The suite covers extraction and catalogs, translation fixtures, control preservation, VWF
 widths, wrapping, menus, save/name expansion, Big Moai promotional-code input and live NPC reward, Blank Scroll input,
 unidentified-item free/history naming, runtime text domains, scene ownership, internal
@@ -185,10 +197,10 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The complete run on 2026-08-31 was **473 tests** with the matching ROM, PyBoy, RGBDS, and
-Mesen available. It includes the six graphics-audit tests and eight credit-source/insertion
-tests. The required gate is always discovery of the complete `tests/` directory, not a
-hard-coded count.
+The complete run on 2026-08-31 was **479 tests** with the matching ROM, PyBoy, RGBDS, and
+Mesen available. It includes the seven graphics-audit tests, eight credit-source/insertion
+tests, and five wait-sign source/insertion tests. The required gate is always discovery of
+the complete `tests/` directory, not a hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
 with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four

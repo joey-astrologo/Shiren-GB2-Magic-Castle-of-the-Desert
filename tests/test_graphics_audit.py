@@ -183,6 +183,30 @@ class GraphicsAuditTests(unittest.TestCase):
             cards["live_mamel_route"],
         )
 
+    def test_save_load_wait_screen_is_traced_without_claiming_live_reproduction(self):
+        wait = self.summary["save_load_wait_screen"]
+        self.assertEqual("stored_column_major_2bpp_tiles", wait["storage"])
+        self.assertEqual([33, 74, 97, 106], wait["screen_rect"])
+        self.assertEqual(["Please", "wait..."], wait["localized_content"])
+        self.assertEqual(
+            [
+                "56:$7A80-$7B7F",
+                "56:$7C80-$7D7F",
+            ],
+            wait["localized_sign_blocks"],
+        )
+        self.assertEqual(
+            [
+                "56:$7B80-$7C7F",
+                "56:$7D80-$7E7F",
+            ],
+            wait["preserved_interleaved_bird_blocks"],
+        )
+        self.assertEqual(
+            "english_art_installed_static_pixel_tested_live_route_pending",
+            wait["status"],
+        )
+
     def test_audited_scope_keeps_environmental_signs_and_fin_out_of_scope(self):
         policy = self.summary["policy"]
         self.assertEqual("preserve_japanese", policy["environmental_shop_signs"])
@@ -224,6 +248,10 @@ class GraphicsAuditTests(unittest.TestCase):
                 "arrival_glyph_atlas": "08377199518119f4290b25e0c62f71b6af76f374",
                 "arrival_pointer_table": "d2c976aa5c1ffbe99523f6be58b1ead8f11fa64d",
                 "arrival_sequences": "ca7f741c24e9bb9870b824ca270b6d865b376a5f",
+                "wait_sign_top": "000f88a7bd6265370eae2555ba4943aaae1a6927",
+                "wait_bird_top": "ec18f6f6692207ff3c3929a64f04f1b7e827d39d",
+                "wait_sign_bottom": "3e4e53bdae6d3a7a4ca91eb85f41bf658ce4e30f",
+                "wait_bird_bottom": "5e239110a988b070fefd1d225f3db05f07ce53f4",
             },
             self.summary["native_source_sha1"],
         )

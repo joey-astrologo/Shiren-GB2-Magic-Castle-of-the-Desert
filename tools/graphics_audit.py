@@ -2,8 +2,9 @@
 """Report static ROM contracts for graphical Japanese text families.
 
 This is an inventory tool, not an installer.  It deliberately reads only the
-original ROM structures proved by live traces: the clean-boot credit card, the
-title screen, and the shared dungeon/town arrival-card renderer.
+original ROM structures proved by live traces or exact screenshot-to-ROM matches:
+the clean-boot credit card, title screen, shared dungeon/town arrival-card renderer,
+and save/load wait sign.
 
     graphics_audit.py ROM
 """
@@ -405,12 +406,37 @@ def summary(rom):
                 rom, 0x7F, 0x61E9, 0x0040
             ),
             "arrival_sequences": _source_sha1(rom, 0x7F, 0x6229, 0x00C6),
+            "wait_sign_top": _source_sha1(rom, 0x56, 0x7A80, 0x0100),
+            "wait_bird_top": _source_sha1(rom, 0x56, 0x7B80, 0x0100),
+            "wait_sign_bottom": _source_sha1(rom, 0x56, 0x7C80, 0x0100),
+            "wait_bird_bottom": _source_sha1(rom, 0x56, 0x7D80, 0x0100),
         },
         "clean_boot": {
             "credit_card": credit,
             "title_screen": title,
         },
         "arrival_cards": _arrival_summary(rom),
+        "save_load_wait_screen": {
+            "storage": "stored_column_major_2bpp_tiles",
+            "route": (
+                "user-observed after Quit suspends an in-game save and that save "
+                "is loaded; automated live reproduction remains pending"
+            ),
+            "native_content": "しばらく おまちください",
+            "localized_content": ["Please", "wait..."],
+            "screen_rect": [33, 74, 97, 106],
+            "localized_sign_blocks": [
+                "56:$7A80-$7B7F",
+                "56:$7C80-$7D7F",
+            ],
+            "preserved_interleaved_bird_blocks": [
+                "56:$7B80-$7C7F",
+                "56:$7D80-$7E7F",
+            ],
+            "status": (
+                "english_art_installed_static_pixel_tested_live_route_pending"
+            ),
+        },
         "routes_requiring_live_capture": {
             "ending_credits": {
                 "status": "live_route_required",

@@ -34,6 +34,8 @@ and a native Synthesis Pot lab provides a repeatable transferred-seal visual rou
 The clean-boot copyright/composer card now preserves its native `© 2001` rows and fade while
 rendering the approved `CHUNSOFT` and `Koichi Sugiyama` art from a guarded, reproducible Inter
 SemiBold source asset.
+The graphical save/load wait sign is also localized as `Please` / `wait...` from a guarded
+Thin Pixel-7 source raster while preserving its interleaved bird artwork byte-for-byte.
 The native Wanderer Rescue codec and semantic SOS -> Revival/gift -> Thank-You chain also
 reproduce a real published three-password exchange. The captured Rankings -> Await Rescue
 route now renders its generated SOS code through a frozen 64-symbol English alphabet while
@@ -58,8 +60,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit card is installed and transition-tested; create and approve title/arrival art and capture both ending routes |
-| Automated tests | **473-test suite passing** | Complete discovery passed with the credit source, insertion, fade, and title-handoff regressions included |
+| Graphics | **In progress** | Credit card and wait sign are installed; create and approve title/arrival art, live-check the wait route, and capture both ending routes |
+| Automated tests | **479-test suite passing** | Complete discovery passed with the credit and wait-sign source/insertion regressions included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
