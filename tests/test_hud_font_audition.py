@@ -1,0 +1,124 @@
+from hashlib import sha256
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+
+from PIL import Image
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+
+import hud_font_audition
+
+
+ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
+
+
+class HudFontAuditionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        path = ROOT / ROM_NAME
+        if not path.is_file():
+            raise unittest.SkipTest("matching original ROM is required")
+        cls.rom = path.read_bytes()
+
+    def test_complete_packed_hud_source_and_character_inventory_are_frozen(self):
+        source = hud_font_audition.read_source(self.rom)
+        self.assertEqual(0x100, len(source))
+        self.assertEqual(
+            "3ea78ca67f1364b85de7fe4971886ae3bc76bcd643837504cc22be5e839704a1",
+            sha256(source).hexdigest(),
+        )
+        self.assertEqual("0123456789ABCDEFLvHp", hud_font_audition.ALPHANUMERIC_GLYPHS)
+        self.assertEqual(("Lv", "Hp"), hud_font_audition.PRODUCTION_LABELS)
+        self.assertEqual(("/", "meter-fill", "meter-cap"), hud_font_audition.SYMBOLS)
+        self.assertEqual(16, hud_font_audition.SOURCE_TILE_COUNT)
+        self.assertEqual(4, hud_font_audition.SLOT_WIDTH)
+        self.assertEqual(8, hud_font_audition.GLYPH_HEIGHT)
+
+    def test_literal_native_rasters_include_the_reported_hud_letters(self):
+        expected = {
+            "F": (
+                "....", "###.", "#...", "###.",
+                "#...", "#...", "#...", "....",
+            ),
+            "L": (
+                "....", "#...", "#...", "#...",
+                "#...", "#...", "###.", "....",
+            ),
+            "v": (
+                "....", "....", "....", "#.#.",
+                "#.#.", "###.", ".#..", "....",
+            ),
+            "H": (
+                "....", "#.#.", "#.#.", "#.#.",
+                "###.", "#.#.", "#.#.", "....",
+            ),
+            "p": (
+                "....", "....", "....", "###.",
+                "#.#.", "###.", "#...", "....",
+            ),
+        }
+        for character, raster in expected.items():
+            with self.subTest(character=character):
+                self.assertEqual(raster, hud_font_audition.glyph_raster(self.rom, character))
+
+    def test_all_alphanumerics_are_distinct_nonempty_four_pixel_slots(self):
+        rasters = {
+            character: hud_font_audition.glyph_raster(self.rom, character)
+            for character in hud_font_audition.ALPHANUMERIC_GLYPHS
+        }
+        self.assertEqual(len(rasters), len(set(rasters.values())))
+        for character, rows in rasters.items():
+            with self.subTest(character=character):
+                self.assertEqual(8, len(rows))
+                self.assertTrue(all(len(row) == 4 for row in rows))
+                self.assertTrue(any("#" in row for row in rows))
+
+    def test_slash_and_maximum_layout_proof_use_the_native_slot_widths(self):
+        slash = hud_font_audition.glyph_raster(self.rom, "/")
+        self.assertEqual(8, len(slash))
+        self.assertTrue(all(len(row) == 8 for row in slash))
+        self.assertEqual(".....##.", slash[2])
+        self.assertEqual(".##.....", slash[6])
+
+        proof = hud_font_audition.render_hud_text(
+            self.rom, "99F Lv 99 Hp 999/999"
+        )
+        self.assertEqual((84, 8), proof.size)
+        self.assertEqual(
+            {hud_font_audition.HUD_BACKGROUND, hud_font_audition.HUD_INK},
+            set(proof.getdata()),
+        )
+
+    def test_contact_sheet_and_cli_render_every_source_group(self):
+        sheet, report = hud_font_audition.render_sheet(self.rom)
+        self.assertEqual((384, 256), sheet.size)
+        self.assertEqual(20, report["alphanumeric_count"])
+        self.assertEqual(list(hud_font_audition.PRODUCTION_LABELS), report["production_labels"])
+        self.assertEqual(list(hud_font_audition.SYMBOLS), report["symbols"])
+        self.assertEqual(hud_font_audition.HUD_SOURCE_SHA256, report["source_sha256"])
+
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "hud-font.png"
+            result = hud_font_audition.main(
+                [ROM_NAME, "--output", str(output), "--scale", "2"]
+            )
+            self.assertEqual(0, result)
+            with Image.open(output) as written:
+                self.assertEqual((768, 512), written.size)
+
+    def test_modified_source_fails_closed(self):
+        damaged = bytearray(self.rom)
+        damaged[hud_font_audition.HUD_SOURCE_OFFSET + 0x80] ^= 1
+        with self.assertRaisesRegex(
+            hud_font_audition.HudFontAuditionError,
+            "HUD font source SHA-256 mismatch",
+        ):
+            hud_font_audition.read_source(damaged)
+
+
+if __name__ == "__main__":
+    unittest.main()

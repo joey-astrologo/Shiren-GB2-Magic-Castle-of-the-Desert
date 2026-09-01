@@ -245,6 +245,38 @@ label inside the existing 144-pixel maximum; `Training Dungeon` is widest at 131
 uses the maximum nine blocks. Any later wording or font change must regenerate the editable
 asset and repeat the all-selector decoder plus live transition regression.
 
+## Dungeon HUD font
+
+The top dungeon status bar is a dedicated packed font, not the localized proportional text
+font and not a set of independent tilemap characters. The Mamel machine state shows window
+tile IDs `$10-$23` with VRAM-bank-1 attributes across the top row. The bank-3 compositor
+formats 40 four-pixel slots in `$C800-$C827`, expands them into the 20-tile strip at
+`$D100-$D23F`, and copies that strip to VRAM bank 1 `$9100-$923F`.
+
+The complete guarded source is 16 8x8 2bpp tiles at `3:$5742-$5841` (SHA-256
+`3ea78ca67f1364b85de7fe4971886ae3bc76bcd643837504cc22be5e839704a1`). Its first ten tiles
+pack two four-pixel slots each:
+
+- `0-9A-F` in slots `$00-$0F`;
+- `L`, `v`, `H`, and `p` in slots `$10-$13` for the literal `Lv` / `Hp` labels;
+- the two halves of `/` in slots `$14-$15`;
+- meter fill/cap art in tiles `$FB-$FC`;
+- reserved blank tiles `$FD-$FF`.
+
+Normal play has only demonstrated decimal numbers, `F`, `Lv`, and `Hp`; `A-E` are still
+included in the audition because they are real, distinct alphanumeric slots in the same
+native source. The read-only tool renders every slot, the symbols, and native-width status
+proofs without editing a ROM:
+
+```sh
+python3 -m unittest tests.test_hud_font_audition -v
+python3 tools/hud_font_audition.py
+```
+
+The default output is `build/hud_font_audition.png`. Tests freeze the source hash, literal
+`F/L/v/H/p` pixels, slash geometry, distinct nonempty alphanumeric slots, maximum proof width,
+sheet geometry, CLI output, and fail-closed behavior after any atlas mutation.
+
 ## Ending and credits
 
 The ROM provides two independent native clues:
@@ -274,7 +306,7 @@ remain unchanged by explicit project policy.
 | Candidate | Finding | Disposition |
 |---|---|---|
 | Opening chase/cinematics | Existing opening tests prove ordinary dialogue rendering, but do not constitute a frame-by-frame graphical-text inventory | Keep on the visual play-test watch list; no separate asset claimed yet |
-| HUD abbreviations | Observed dungeon HUD uses existing Latin `Lv`/`Hp` and numbers | No new localization target from current evidence |
+| HUD abbreviations | Dedicated packed atlas `3:$5742-$5841`; complete alphanumeric/symbol contact sheet and source guards now cover it | No localization target from current evidence; retain the read-only audition for review |
 | Menus and graphical input | Status, name, gift-code, Blank Scroll, unidentified-name, Rescue, and service-menu owners already documented | Do not duplicate them in a new static-art patch |
 | Shop/store signs | Japanese characters are environmental signage | Preserve |
 | Postgame location cards | Covered by the installed 32-selector arrival renderer | Continue rare-route playtesting; all selectors are statically pixel-tested |

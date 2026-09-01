@@ -162,12 +162,29 @@ python3 -m unittest \
   tests.test_item_formatting \
   tests.test_synthesis_lab
 
-# Graphical-text resource audit and arrival-card artwork
+# Graphical-text resource audit, HUD font, and arrival-card artwork
 python3 -m unittest \
   tests.test_graphics_audit \
+  tests.test_hud_font_audition \
   tests.test_arrival_card_audition \
   tests.test_arrival_cards
 ```
+
+## Audit the native HUD font
+
+Render every alphanumeric slot used by the top dungeon status bar, plus its slash and meter
+tiles, without changing the ROM:
+
+```sh
+python3 -m unittest tests.test_hud_font_audition -v
+python3 tools/hud_font_audition.py
+```
+
+The contact sheet at `build/hud_font_audition.png` comes directly from the guarded packed
+atlas at `3:$5742-$5841`. It includes `0-9A-F`, the production `Lv` / `Hp` letters, symbol
+tiles, and minimum/maximum layout proofs at native four-pixel slot widths. The ordinary HUD
+uses decimal values, `F` for Floor, and the `Lv` / `Hp` labels; `A-E` are present in the
+shared nibble source even though they have not been observed in normal status values.
 
 ## Audition arrival-card fonts
 

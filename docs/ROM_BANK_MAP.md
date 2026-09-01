@@ -54,7 +54,7 @@ text growth.
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
-| 3 | `$4842-$5841` | Native one-byte font; Thin Pixel-7 English slots installed here | `english_font.py` only |
+| 3 | `$4842-$5841` | Native one-byte font; Thin Pixel-7 English slots installed here. The untouched `$5742-$5841` suffix is also the packed top-HUD atlas (`0-9A-F`, `Lv`, `Hp`, slash, meter, blanks) audited read-only by `hud_font_audition.py` | `english_font.py` only; HUD audition is non-mutating |
 | 3 | `$6A49-$6A53` | Shared floor-popup template load hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 3 | `$6A8F-$6A9F` | Shared floor-popup copy/cleanup hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
