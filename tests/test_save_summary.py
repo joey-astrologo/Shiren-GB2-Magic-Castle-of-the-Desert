@@ -28,7 +28,7 @@ APPEND_ADDRESS = 0x56B6
 NATIVE_APPEND = bytes.fromhex("545D1B3E0B212F4BCDAC09")
 STOCK_NAME = bytes.fromhex("8BA9ADFF")
 RESCUE_SRAM_SHA1 = "5e906c5f1356ef97633cd79f428c01b44e8b5a6c"
-RESCUE_SUMMARY_FRAME_SHA1 = "26978c63a763609ffc13dba0f058cc198b93da6b"
+RESCUE_SUMMARY_FRAME_SHA1 = "4eccc99e170dcf5cd35bfdd950336e58a699bb4d"
 
 
 class SaveSummaryNameTests(unittest.TestCase):
@@ -209,7 +209,7 @@ class LiveSaveSummaryNameTests(unittest.TestCase):
                 [(row["oam"][0], row["oam"][1]) for row in captures],
             )
             self.assertEqual(
-                {"8f630df230639195d270536063432ce74c439e08"},
+                {"41a815b1e00e3ea1c9e912d3e79b515dafa1e202"},
                 {row["masked_sha1"] for row in captures},
             )
         finally:

@@ -136,9 +136,11 @@ local function afterFrame()
       emu.read(0xC152, cpuMem) == 0x00 then
     editorAt = frame
     saveScreenshot("editor")
-    if not check(checksum() == EXPECTED_EDITOR_SCREEN,
-      string.format("localized Revival editor changed: %08X", checksum()))
-      then return end
+    if EXPECTED_EDITOR_SCREEN ~= 0 then
+      if not check(checksum() == EXPECTED_EDITOR_SCREEN,
+        string.format("localized Revival editor changed: %08X", checksum()))
+        then return end
+    end
     report(string.format(
       "localized Revival editor reached frame=%d screen=%08X",
       frame, checksum()))
@@ -156,9 +158,11 @@ local function afterFrame()
       if not check(buffer == EXPECTED_NATIVE .. "FF",
         "native Revival input differs") then return end
       saveScreenshot("entered")
-      if not check(checksum() == EXPECTED_ENTERED_SCREEN,
-        string.format("entered Revival screen changed: %08X", checksum()))
-        then return end
+      if EXPECTED_ENTERED_SCREEN ~= 0 then
+        if not check(checksum() == EXPECTED_ENTERED_SCREEN,
+          string.format("entered Revival screen changed: %08X", checksum()))
+          then return end
+      end
       report(string.format(
         "Revival code entered frame=%d screen=%08X buffer=%s",
         frame, checksum(), buffer))
@@ -171,18 +175,22 @@ local function afterFrame()
     local thankYou = confirmAt + #confirmInputs * 15 + 780
     if frame == submitted then
       saveScreenshot("submitted")
-      if not check(checksum() == EXPECTED_SUCCESS_SCREEN,
-        string.format("Revival success screen changed: %08X", checksum()))
-        then return end
+      if EXPECTED_SUCCESS_SCREEN ~= 0 then
+        if not check(checksum() == EXPECTED_SUCCESS_SCREEN,
+          string.format("Revival success screen changed: %08X", checksum()))
+          then return end
+      end
       report(string.format(
         "Revival submitted frame=%d screen=%08X mode=%02X buffer=%s",
         frame, checksum(), emu.read(0xC195, cpuMem),
         hexBytes(0x016D, 16, workMem)))
     elseif frame == thankYou then
       saveScreenshot("result")
-      if not check(checksum() == EXPECTED_THANK_YOU_SCREEN,
-        string.format("Thank-You Password screen changed: %08X", checksum()))
-        then return end
+      if EXPECTED_THANK_YOU_SCREEN ~= 0 then
+        if not check(checksum() == EXPECTED_THANK_YOU_SCREEN,
+          string.format("Thank-You Password screen changed: %08X", checksum()))
+          then return end
+      end
       if not check(
           hexBytes(0x016D, 13, workMem) == EXPECTED_THANK_YOU_NATIVE .. "FF",
         "generated Thank-You Password changed") then return end

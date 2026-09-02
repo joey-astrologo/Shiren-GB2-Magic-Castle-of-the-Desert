@@ -162,20 +162,21 @@ class Name6InstallerTests(unittest.TestCase):
         glyphs = name6.keyboard_glyph_bytes(
             name6.GLYPH_HIGH_START, name6.GLYPH_HIGH_END
         )
-        for character in (
-            name6.LEFT_CURSOR_CHARACTER,
-            name6.RIGHT_CURSOR_CHARACTER,
-        ):
+        cursor_glyphs = {
+            name6.LEFT_CURSOR_CHARACTER: (
+                "101030387078F0F87078303810180008"
+            ),
+            name6.RIGHT_CURSOR_CHARACTER: (
+                "8080C0C0E0E0F0F0E0F8C0F080E00040"
+            ),
+        }
+        for character, encoded in cursor_glyphs.items():
             code = english.ENGLISH_CODES[character]
             start = (code - name6.GLYPH_HIGH_START) * name6.GLYPH_STRIDE
-            expected = bytes(
-                value
-                for row in name6.CURSOR_GLYPH_ROWS[character]
-                for value in (
-                    sum(0x80 >> x for x, pixel in enumerate(row) if pixel == "#"),
-                ) * 2
+            self.assertEqual(
+                bytes.fromhex(encoded),
+                glyphs[start:start + name6.GLYPH_STRIDE],
             )
-            self.assertEqual(expected, glyphs[start:start + name6.GLYPH_STRIDE])
 
         navigation = name6.english_navigation_table(self.rom)
         graph = [
@@ -219,6 +220,33 @@ class Name6InstallerTests(unittest.TestCase):
             navigation,
             self.output[navigation_at:navigation_at + name6.NAVIGATION_SIZE],
         )
+
+    def test_keyboard_atlas_contains_approved_literal_two_tone_glyphs(self):
+        expected = {
+            "A": "707088B888CCF8FC88FC88CC88CC0044",
+            "g": "00000000707090B890D8707810386070",
+            "0": "606090B090D890D890D890D860680030",
+            "[": "101030387078F0F87078303810180008",
+            "]": "8080C0C0E0E0F0F0E0F8C0F080E00040",
+        }
+        for character, encoded in expected.items():
+            code = english.ENGLISH_CODES[character]
+            if name6.GLYPH_LOW_START <= code < name6.GLYPH_LOW_END:
+                address = (
+                    name6.GLYPH_LOW_ADDRESS
+                    + (code - name6.GLYPH_LOW_START) * name6.GLYPH_STRIDE
+                )
+            else:
+                address = (
+                    name6.GLYPH_HIGH_ADDRESS
+                    + (code - name6.GLYPH_HIGH_START) * name6.GLYPH_STRIDE
+                )
+            glyph_at = extract.file_offset(name6.RUNTIME_BANK, address)
+            with self.subTest(character=character):
+                self.assertEqual(
+                    bytes.fromhex(encoded),
+                    self.output[glyph_at:glyph_at + name6.GLYPH_STRIDE],
+                )
 
     def test_diary_tail_and_ranking_tail_have_no_native_direct_consumer(self):
         # Immediate direct loads/stores/address loads are absent for all four
@@ -543,6 +571,33 @@ class LiveName6Tests(unittest.TestCase):
                 ),
             )
             pyboy.memory[0xFF4F] = old_vbk & 1
+
+            expected_a = (
+                "03330000",
+                "30223000",
+                "32003200",
+                "33333200",
+                "32223200",
+                "32003200",
+                "32003200",
+                "02000200",
+            )
+            palette = {
+                "0": (248, 248, 248),
+                "2": (168, 168, 168),
+                "3": (0, 0, 0),
+            }
+            image = pyboy.screen.image.convert("RGB")
+            self.assertEqual(
+                tuple(
+                    tuple(palette[color] for color in row)
+                    for row in expected_a
+                ),
+                tuple(
+                    tuple(image.getpixel((8 + x, 64 + y)) for x in range(8))
+                    for y in range(8)
+                ),
+            )
         finally:
             pyboy.stop(save=False)
 

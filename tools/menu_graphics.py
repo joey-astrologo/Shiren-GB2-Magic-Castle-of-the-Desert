@@ -31,6 +31,7 @@ CANVAS_WIDTH = CANVAS_COLUMNS * 8
 CANVAS_HEIGHT = CANVAS_ROWS * 8
 CANVAS_TILES = CANVAS_COLUMNS * CANVAS_ROWS
 BACKGROUND_COLOR = 0
+SHADOW_COLOR = 2
 INK_COLOR = 3
 
 
@@ -92,6 +93,7 @@ OVERLAY_BANK = 255
 OVERLAY_ADDRESS = 0x4000
 OVERLAY_LIMIT = 0x8000
 OVERLAY_ORIGINAL_BYTE = 0x00
+OVERLAY_PAYLOAD_SIZE = 2685
 
 def template_offset():
     return extract.file_offset(TEMPLATE_BANK, TEMPLATE_ADDRESS)
@@ -182,23 +184,37 @@ def _clear(pixels, label):
 
 def _draw(pixels, label, approved):
     pen = label.x
+    runs = []
     for character in label.text:
         try:
-            rows = approved.rows[character]
+            glyph = approved.glyphs[character]
             advance = approved.advances[character]
         except KeyError as exc:
             raise MenuGraphicsError(
                 "%s uses unsupported glyph %r" % (label.name, exc.args[0])
             ) from exc
-        for glyph_y, row in enumerate(rows):
-            y = label.y + glyph_y
-            for glyph_x, pixel in enumerate(row):
-                x = pen + glyph_x
-                if pixel == "#":
-                    if not (0 <= x < CANVAS_WIDTH and 0 <= y < CANVAS_HEIGHT):
-                        raise MenuGraphicsError("%s raster leaves the canvas" % label.name)
-                    pixels[y][x] = INK_COLOR
+        runs.append(
+            (pen, font.decode_2bpp_slices(glyph, height=english_font.CELL_SIZE[1]))
+        )
         pen += advance
+
+    # These status labels are a bitmap overlay rather than runtime strings.
+    # Paint the installed font's complete color-2 shadow plane first, then its
+    # color-3 ink plane, matching adjacent-glyph overlap in the approved font.
+    for color in (SHADOW_COLOR, INK_COLOR):
+        for run_x, raster in runs:
+            for glyph_y, row in enumerate(raster):
+                y = label.y + glyph_y
+                for glyph_x, pixel in enumerate(row):
+                    if pixel != color:
+                        continue
+                    x = run_x + glyph_x
+                    if 0 <= x < CANVAS_WIDTH and 0 <= y < CANVAS_HEIGHT:
+                        pixels[y][x] = color
+                    elif color == INK_COLOR:
+                        raise MenuGraphicsError(
+                            "%s ink raster leaves the canvas" % label.name
+                        )
     if pen > label.visual_right_edge:
         raise MenuGraphicsError(
             "%s advances to x=%d past exclusive edge x=%d"
@@ -285,6 +301,9 @@ def overlay_payload(rom, approved=None):
         table += offset.to_bytes(2, "little") + bytes((mask, target & mask))
     table += b"\x00\xFF"
     payload = bytes(code + table)
+    if len(payload) > OVERLAY_PAYLOAD_SIZE:
+        raise MenuGraphicsError("status-menu overlay payload size changed")
+    payload += bytes(OVERLAY_PAYLOAD_SIZE - len(payload))
     if OVERLAY_ADDRESS + len(payload) > OVERLAY_LIMIT:
         raise MenuGraphicsError("status-menu overlay exceeds its reserved bank")
     rows = []
@@ -300,7 +319,7 @@ def owned_ranges(approved=None):
     return tuple(
         (offset, offset + len(CALL_SITE_ORIGINAL))
         for _name, _bank, _address, offset in call_site_offsets()
-    ) + ((overlay, overlay + 2605),)
+    ) + ((overlay, overlay + OVERLAY_PAYLOAD_SIZE),)
 
 
 def install(rom, approved=None, verify_original=True, checksums=True):
@@ -316,7 +335,7 @@ def install(rom, approved=None, verify_original=True, checksums=True):
                 % (name, extract.location(bank, address))
             )
     payload, _rows = overlay_payload(out, approved)
-    if len(payload) != 2605:
+    if len(payload) != OVERLAY_PAYLOAD_SIZE:
         raise MenuGraphicsError("status-menu overlay payload size changed")
     cave = overlay_offset()
     if any(byte != OVERLAY_ORIGINAL_BYTE for byte in out[cave:cave + len(payload)]):
@@ -340,7 +359,7 @@ def summary(rom, approved=None):
     original = template_bytes(rom)
     payload, rows = overlay_payload(rom, approved)
     return {
-        "schema": "shiren-gb2-status-menu-overlay-v4",
+        "schema": "shiren-gb2-status-menu-overlay-v5",
         "source": {
             "location": extract.location(TEMPLATE_BANK, TEMPLATE_ADDRESS),
             "size": TEMPLATE_SIZE,

@@ -22,6 +22,10 @@ Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
 All fourteen title/demo and Wanderer's Secrets replay diaries also carry the localized
 six-character default name `Shiren`; they no longer fall back to their embedded Japanese
 snapshot name.
+In the shadowed variant, the shared player-name/Blank Scroll/unidentified-item/Rescue
+graphical keyboard and Big Moai's private copy use the same reviewed gray `+1,+1`
+treatment as the runtime English font, including lowercase tails, digits, and cursors.
+The classic variant keeps those same approved rasters black-only.
 The real Big Moai NPC route is fixture-tested from his locked story state through the
 localized `WISH` editor, the rendered Fortune Grass reward, and a stable follow-up
 conversation; a narrow Mesen helper changes only the two measured progression bytes needed
@@ -108,10 +112,18 @@ python3 tools/internal_audit.py "$ROM"
 python3 tools/build.py \
   "$ROM" \
   script/en \
-  build/shiren-gb2-english.gbc
+  build/shiren-gb2-english.gbc \
+  --font-style both
 ```
 
-The output is `build/shiren-gb2-english.gbc`. The builder automatically validates the
+The release build writes both `build/shiren-gb2-english-classic-font.gbc` (the original
+black-only Thin Pixel-7 adaptation) and `build/shiren-gb2-english-shadowed-font.gbc` (the
+new gray `+1,+1` drop shadow). A single development ROM can still be requested with
+`--font-style classic` or `--font-style shadowed`; shadowed remains the single-output
+default. Both variants include the matching style in the runtime font, fixed Status labels,
+shared graphical keyboard, and Big Moai's private keyboard copy.
+
+The builder automatically validates the
 source ROM, translation controls and terminology, runtime-value widths, positioned text,
 far-pointer allocation, installed font and patches, all 7,163 logical text references,
 and both cartridge checksums before writing the ROM. It also prints the output SHA-1 so a
@@ -165,7 +177,9 @@ python3 -m unittest \
 # Graphical-text resource audit, HUD font, and arrival-card artwork
 python3 -m unittest \
   tests.test_graphics_audit \
+  tests.test_font_shadow_audition \
   tests.test_hud_font_audition \
+  tests.test_shop_price_font_audition \
   tests.test_arrival_card_audition \
   tests.test_arrival_cards
 ```
@@ -185,6 +199,41 @@ atlas at `3:$5742-$5841`. It includes `0-9A-F`, the production `Lv` / `Hp` lette
 tiles, and minimum/maximum layout proofs at native four-pixel slot widths. The ordinary HUD
 uses decimal values, `F` for Floor, and the `Lv` / `Hp` labels; `A-E` are present in the
 shared nibble source even though they have not been observed in normal status values.
+
+## Audition the shop-price font
+
+Render all ten native shop-tag digits and representative packed prices without changing
+the ROM:
+
+```sh
+python3 -m unittest tests.test_shop_price_font_audition -v
+python3 tools/shop_price_font_audition.py
+```
+
+The sheet at `build/shop_price_font_audition.png` is decoded from the guarded ten-tile
+source at `3:$5642-$56E1`. Shop tags pack each tile's left five pixels at a five-pixel
+advance. The preview retains the captured shop palette roles: color 3 black, color 1 white,
+and color 2 gray (`#A8A8A8`). This is a read-only source audit, not a font installation.
+
+## Audit the installed shadowed dialogue font
+
+Compare the Thin Pixel-7 source raster with its installed one-pixel gray drop-shadow bake:
+
+```sh
+python3 -m unittest tests.test_font_shadow_audition -v
+python3 -m unittest tests.test_font_variants -v
+python3 tools/font_shadow_audition.py
+```
+
+The sheet at `build/font_shadow_audition.png` covers all 78 supported characters, magnifies
+the 8x8 edge cases (including the native-shadow `+` color proof), and shows source versus
+installed copy. The production encoder paints the captured palette color 2 (`#ACACAC`) at
+`(x+1,y+1)` before redrawing the unchanged color-3 black glyph. For the four disconnected
+bottom cutoff pixels in `,`, `g`, `j`, and `y`, it moves only that orphan one pixel left;
+connected cutoff shadows remain unchanged. It also reports the `%` shadow overhang. The
+audit command itself is read-only; `english_font.py` installs this reviewed treatment.
+`menu_graphics.py` also consumes the installed two-tone glyph bytes for the Status screen's
+14 fixed bitmap labels, which do not pass through the runtime text renderer.
 
 ## Audition arrival-card fonts
 

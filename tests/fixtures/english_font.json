@@ -17,20 +17,23 @@
   },
   "bake": {
     "background_color": 1,
+    "shadow_color": 2,
     "ink_color": 3,
+    "shadow_offset": [1, 1],
+    "bottom_orphan_adjusted_glyphs": [",", "g", "j", "y"],
     "advances_sha256": "fa7bb64048a40ebc295b051b716145cc36b87ae7eca082c3ec035a5a72af5c57",
-    "glyphs_2bpp_sha256": "73560e579375ea5e6641844d766d72582e967567e8e16354d92a0e6137f3b9ff",
+    "glyphs_2bpp_sha256": "42d7e0ca48a1cd3a45914d8f4d93507810b5a1d669d9556b2f9150a9da3f97d4",
     "installed_width_region_sha1": "9b8ad20873f469d6a83ef136dbf94e9ba0a80e4e",
-    "installed_single_font_region_sha1": "b6b0289290a829bb53eeec8d45b00e860dec7957",
-    "changed_bytes_including_checksum": 1136
+    "installed_single_font_region_sha1": "82ea7e77b9e5151bf4b7460d1e80980c2b14b984",
+    "changed_bytes_including_checksum": 1110
   },
   "anchors": [
-    {"character": "A", "code": 10, "advance": 6, "glyph": "FF70FF88FF88FFF8FF88FF88FF88FF00"},
-    {"character": "a", "code": 48, "advance": 5, "glyph": "FF00FF00FF60FF10FF70FF90FF70FF00"},
-    {"character": "g", "code": 54, "advance": 5, "glyph": "FF00FF00FF70FF90FF90FF70FF10FF60"},
-    {"character": "j", "code": 57, "advance": 4, "glyph": "FF40FF00FFE0FF20FF20FF20FF20FFC0"},
-    {"character": "?", "code": 78, "advance": 6, "glyph": "FF70FF88FF08FF10FF20FF00FF20FF00"},
-    {"character": "%", "code": 88, "advance": 7, "glyph": "FF62FF64FF08FF10FF26FF46FF00FF00"},
+    {"character": "A", "code": 10, "advance": 6, "glyph": "FF70CFB8BBCCFBFC8BFCBBCCBBCCBB44"},
+    {"character": "a", "code": 48, "advance": 5, "glyph": "FF00FF00FF60DF30F778D7B8F778C738"},
+    {"character": "g", "code": 54, "advance": 5, "glyph": "FF00FF00FF70D7B8B7D8F778D738EF70"},
+    {"character": "j", "code": 57, "advance": 4, "glyph": "FF40DF20FFE0AF70EF30EF30EF30DFE0"},
+    {"character": "?", "code": 78, "advance": 6, "glyph": "FF70CFB8BB4CFB14F728EF10FF20EF10"},
+    {"character": "%", "code": 88, "advance": 7, "glyph": "FF62EE75CD3AFB14F72EEE57DC23FF00"},
     {"character": " ", "code": 36, "advance": 4, "glyph": "FF00FF00FF00FF00FF00FF00FF00FF00"}
   ],
   "smoke": {

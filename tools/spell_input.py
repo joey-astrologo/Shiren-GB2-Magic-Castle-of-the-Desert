@@ -238,7 +238,7 @@ def english_navigation_table(rom):
     return result
 
 
-def runtime_payload(rom):
+def runtime_payload(rom, approved=None):
     if len(ASSEMBLED_CODE) != CODE_END - RUNTIME_ADDRESS:
         raise SpellInputError("assembled spell-input code length changed")
     payload = bytearray(PAYLOAD_END - RUNTIME_ADDRESS)
@@ -256,11 +256,15 @@ def runtime_payload(rom):
     place(KEYBOARD_MAP_ADDRESS, english_keyboard_map(rom))
     place(
         GLYPH_LOW_ADDRESS,
-        name6.keyboard_glyph_bytes(GLYPH_LOW_START, GLYPH_LOW_END),
+        name6.keyboard_glyph_bytes(
+            GLYPH_LOW_START, GLYPH_LOW_END, approved=approved
+        ),
     )
     place(
         GLYPH_HIGH_ADDRESS,
-        name6.keyboard_glyph_bytes(GLYPH_HIGH_START, GLYPH_HIGH_END),
+        name6.keyboard_glyph_bytes(
+            GLYPH_HIGH_START, GLYPH_HIGH_END, approved=approved
+        ),
     )
     return bytes(payload)
 
@@ -286,7 +290,7 @@ def owned_ranges():
     )
 
 
-def install(rom, verify_original=True, checksums=True):
+def install(rom, approved=None, verify_original=True, checksums=True):
     out = bytearray(rom)
     screen_at = _offset(SCREEN_BANK, SCREEN_ADDRESS)
     actual = bytes(out[screen_at:screen_at + len(ORIGINAL_SCREEN_HEAD)])
@@ -314,7 +318,7 @@ def install(rom, verify_original=True, checksums=True):
     navigation_at = _offset(NAVIGATION_BANK, NAVIGATION_ADDRESS)
     out[navigation_at:navigation_at + len(navigation)] = navigation
 
-    payload = runtime_payload(out)
+    payload = runtime_payload(out, approved=approved)
     runtime_at = _offset(RUNTIME_BANK, RUNTIME_ADDRESS)
     existing = bytes(out[runtime_at:runtime_at + len(payload)])
     if verify_original and any(existing) and existing != payload:

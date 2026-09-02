@@ -464,22 +464,30 @@ def install_replay_names(rom, verify_original=True):
     return bytes(out)
 
 
-def keyboard_glyph_bytes(start, end):
-    """Return approved glyphs in the raw keyboard's color-0/3 2bpp format."""
-    approved = english_font.load_approved()
+def keyboard_glyph_bytes(start, end, approved=None):
+    """Return approved glyphs in the keyboard's color-0/2/3 2bpp format."""
+    approved = approved or english_font.load_approved()
     characters = {code: character for character, code in english.ENGLISH_CODES.items()}
     try:
         raw = bytearray()
         for code in range(start, end):
             character = characters[code]
             rows = CURSOR_GLYPH_ROWS.get(character, approved.rows[character])
-            for row in rows:
+            for row in english_font.glyph_pixels(rows, style=approved.style):
                 ink = sum(
                     0x80 >> column
-                    for column, pixel in enumerate(row)
-                    if pixel == "#"
+                    for column, color in enumerate(row)
+                    if color == english_font.INK_COLOR
                 )
-                raw += bytes((ink, ink))
+                ink_and_shadow = sum(
+                    0x80 >> column
+                    for column, color in enumerate(row)
+                    if color in (
+                        english_font.SHADOW_COLOR,
+                        english_font.INK_COLOR,
+                    )
+                )
+                raw += bytes((ink, ink_and_shadow))
     except KeyError as exc:
         raise Name6Error("keyboard glyph span contains an unowned code") from exc
     if len(raw) != (end - start) * GLYPH_STRIDE:
@@ -648,7 +656,7 @@ def english_navigation_table(rom):
     return result
 
 
-def runtime_payload(rom):
+def runtime_payload(rom, approved=None):
     if len(ASSEMBLED_CODE) != CODE_END - RUNTIME_ADDRESS:
         raise Name6Error("assembled name6 code length changed")
     payload = bytearray(PAYLOAD_END - RUNTIME_ADDRESS)
@@ -669,11 +677,15 @@ def runtime_payload(rom):
     place(KEYBOARD_MAP_ADDRESS, english_keyboard_map(rom))
     place(
         GLYPH_LOW_ADDRESS,
-        keyboard_glyph_bytes(GLYPH_LOW_START, GLYPH_LOW_END),
+        keyboard_glyph_bytes(
+            GLYPH_LOW_START, GLYPH_LOW_END, approved=approved
+        ),
     )
     place(
         GLYPH_HIGH_ADDRESS,
-        keyboard_glyph_bytes(GLYPH_HIGH_START, GLYPH_HIGH_END),
+        keyboard_glyph_bytes(
+            GLYPH_HIGH_START, GLYPH_HIGH_END, approved=approved
+        ),
     )
     return bytes(payload)
 
@@ -718,7 +730,7 @@ def owned_ranges():
     )
 
 
-def install(rom, verify_original=True, checksums=True):
+def install(rom, approved=None, verify_original=True, checksums=True):
     """Return ``rom`` with six-character names and ranking suffixes installed."""
     out = bytearray(install_replay_names(rom, verify_original=verify_original))
     for name, bank, address, original, target in ROUTINE_PATCHES:
@@ -747,7 +759,8 @@ def install(rom, verify_original=True, checksums=True):
     navigation_at = _offset(NAVIGATION_BANK, NAVIGATION_ADDRESS)
     out[navigation_at:navigation_at + len(navigation)] = navigation
 
-    payload = runtime_payload(out)
+    approved = approved or english_font.load_approved()
+    payload = runtime_payload(out, approved=approved)
     runtime_at = _runtime_offset(RUNTIME_ADDRESS)
     existing = bytes(out[runtime_at:runtime_at + len(payload)])
     if verify_original and any(existing):
@@ -761,12 +774,17 @@ def install(rom, verify_original=True, checksums=True):
     return out
 
 
-def summary(rom):
+def summary(rom, approved=None):
+    approved = approved or english_font.load_approved()
     keyboard = english_keyboard_map(rom)
     navigation = english_navigation_table(rom)
     glyphs = (
-        keyboard_glyph_bytes(GLYPH_LOW_START, GLYPH_LOW_END)
-        + keyboard_glyph_bytes(GLYPH_HIGH_START, GLYPH_HIGH_END)
+        keyboard_glyph_bytes(
+            GLYPH_LOW_START, GLYPH_LOW_END, approved=approved
+        )
+        + keyboard_glyph_bytes(
+            GLYPH_HIGH_START, GLYPH_HIGH_END, approved=approved
+        )
     )
     replays = replay_records(rom)
     return {

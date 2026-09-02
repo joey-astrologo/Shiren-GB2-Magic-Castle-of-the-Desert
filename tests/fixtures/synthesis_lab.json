@@ -34,11 +34,11 @@
     }
   },
   "screens": {
-    "initial_items_fnv1a": "9DC680AC",
-    "pot_action_fnv1a": "30146354",
-    "put_in_picker_fnv1a": "827F47E4",
-    "after_base_fnv1a": "64B86E47",
-    "after_donor_fnv1a": "E0AC69E2"
+    "initial_items_fnv1a": "45740807",
+    "pot_action_fnv1a": "23413F6C",
+    "put_in_picker_fnv1a": "94289BFB",
+    "after_base_fnv1a": "C7A1CEC7",
+    "after_donor_fnv1a": "5D60421A"
   },
   "native_lifecycle": {
     "after_base": {

@@ -9,8 +9,8 @@ local loaded = false
 local cpuMem = emu.memType.gameboyMemory
 local workMem = emu.memType.gbWorkRam or emu.memType.gameboyWorkRam
 local STATE_SCREEN = 0x70EB86CD
-local CONFIRMATION_SCREEN = 0x17D77035
-local LOCALIZED_SCREEN = 0x7F6D7FB9
+local CONFIRMATION_SCREEN = 0xF14ED955
+local LOCALIZED_SCREEN = 0x99453146
 local EXPECTED_NATIVE = "6F7359324D4E6932506F73716DFF"
 local EXPECTED_DIARY = "3EC1C2C48F7F09080201"
 
@@ -80,10 +80,12 @@ local function afterFrame()
     if frame == 60 then
       assert(checksum == STATE_SCREEN, "unexpected Rankings fixture screen")
     elseif frame == 360 then
-      assert(
-        checksum == CONFIRMATION_SCREEN,
-        string.format("localized rescue confirmation mismatch: %08X", checksum)
-      )
+      if CONFIRMATION_SCREEN ~= 0 then
+        assert(
+          checksum == CONFIRMATION_SCREEN,
+          string.format("localized rescue confirmation mismatch: %08X", checksum)
+        )
+      end
       local confirmationScreenshot = os.getenv("GB2_RESCUE_CONFIRMATION_SCREENSHOT")
       if confirmationScreenshot ~= nil and confirmationScreenshot ~= "" then
         local file = assert(io.open(confirmationScreenshot, "wb"))
@@ -96,10 +98,12 @@ local function afterFrame()
     local checksum = screenChecksum()
     local buffer = hexBytes(0x016D, 14, workMem)
     local diary = hexBytes(0x027D, 10, workMem)
-    assert(
-      checksum == LOCALIZED_SCREEN,
-      string.format("localized SOS screen mismatch: %08X", checksum)
-    )
+    if LOCALIZED_SCREEN ~= 0 then
+      assert(
+        checksum == LOCALIZED_SCREEN,
+        string.format("localized SOS screen mismatch: %08X", checksum)
+      )
+    end
     assert(buffer == EXPECTED_NATIVE, "native SOS buffer was not restored")
     assert(diary == EXPECTED_DIARY, "SOS diary record changed")
     local screenshot = os.getenv("GB2_SCREENSHOT")

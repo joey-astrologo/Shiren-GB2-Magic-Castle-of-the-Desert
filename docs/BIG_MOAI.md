@@ -65,13 +65,13 @@ exact English bytes are `20 12 1C 11`. Its proven native route is:
 | Step | Contract |
 |---|---|
 | Available prompt | group `$6A`, index `$0F` |
-| Graphical editor | mode 3, four bytes, A-Z/0-9, framebuffer `A9C014AD` |
-| `DEL` cursor | framebuffer `482B9456`; underline sits below the label |
-| Auto-selected `OK` cursor | framebuffer `DDFA4A20`; underline sits below the label |
+| Graphical editor | mode 3, four bytes, shadowed A-Z/0-9 atlas, framebuffer `459513B9` |
+| `DEL` cursor | framebuffer `4F03BBAA`; underline sits below the label |
+| Auto-selected `OK` cursor | framebuffer `28BFAA00`; underline sits below the label |
 | Full field | buffer `20 12 1C 11 FF`, position 3, node `$33` (`OK`) |
 | Accepted effect | group `$6A`, index `$11` |
 | Reward message lookup | group `$6A`, index `$12` |
-| Reward framebuffer | `CFE031E8`: `<name> received` / `Fortune Grass!` |
+| Reward framebuffer | `7AEE87A8`: `<name> received` / `Fortune Grass!` |
 | Inventory result | item ID `$70` / 112, **Fortune Grass** |
 | Stable follow-up | group `$6A`, index `$1A` after starting a second conversation |
 

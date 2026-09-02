@@ -9,7 +9,7 @@ local frame = 0
 local loaded = false
 local cpuMem = emu.memType.gameboyMemory
 local FIXTURE_SCREEN = 0x8B2311E3
-local LOCALIZED_SCREEN = 0x406EBCD1
+local LOCALIZED_SCREEN = 0x415F5873
 local localizedChecksum = 0
 
 local function report(message)

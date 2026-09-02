@@ -187,11 +187,11 @@ else
   local frame = 0
   local loaded = false
   local objects = nil
-  local ITEM_LIST_SCREEN = 0x9DC680AC
-  local ACTION_SCREEN = 0x30146354
-  local PUT_PICKER_SCREEN = 0x827F47E4
-  local FIRST_PUT_SCREEN = 0x64B86E47
-  local SECOND_PUT_SCREEN = 0xE0AC69E2
+  local ITEM_LIST_SCREEN = 0x45740807
+  local ACTION_SCREEN = 0x23413F6C
+  local PUT_PICKER_SCREEN = 0x94289BFB
+  local FIRST_PUT_SCREEN = 0xC7A1CEC7
+  local SECOND_PUT_SCREEN = 0x5D60421A
   local actualScreens = { 0, 0, 0, 0, 0 }
 
   local function loadFile(path)

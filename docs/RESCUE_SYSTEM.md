@@ -335,7 +335,7 @@ dialogue, but first forces the retained previous-mode byte `$C195` to non-rescue
 The constructor must still select mode 8 from incoming register C. This deliberately makes
 the pre-fix `$C195`-based wrapper fail before the editor checkpoint rather than letting the
 capture's accidentally retained mode 8 conceal the production route. The test then
-requires English editor checksum `$B3CFD9B2`, enters the published
+requires settled English editor checksum `$58E436FE` with the shared shadowed atlas, enters the published
 `OEN936H9n!FVv` code through controller navigation, and freezes native input
 `3E343D76707337765778354568FF` before choosing `OK`. The old public request cannot be
 entered because this diary has not unlocked the Abyssal Depths; its deterministic

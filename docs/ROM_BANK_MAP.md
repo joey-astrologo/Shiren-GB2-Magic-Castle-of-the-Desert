@@ -54,7 +54,7 @@ text growth.
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
-| 3 | `$4842-$5841` | Native one-byte font; Thin Pixel-7 English slots installed here. The untouched `$5742-$5841` suffix is also the packed top-HUD atlas (`0-9A-F`, `Lv`, `Hp`, slash, meter, blanks) audited read-only by `hud_font_audition.py` | `english_font.py` only; HUD audition is non-mutating |
+| 3 | `$4842-$5841` | Native one-byte font; shadowed Thin Pixel-7 English slots installed here. The untouched `$5742-$5841` suffix is also the packed top-HUD atlas (`0-9A-F`, `Lv`, `Hp`, slash, meter, blanks) audited read-only by `hud_font_audition.py` | `english_font.py` only; HUD audition is non-mutating |
 | 3 | `$6A49-$6A53` | Shared floor-popup template load hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 3 | `$6A8F-$6A9F` | Shared floor-popup copy/cleanup hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |
@@ -158,10 +158,10 @@ after every ROM writer. They are output metadata, not allocation space.
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42A1`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
-| 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, glyphs | Exclusive |
-| 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, glyphs | Exclusive |
+| 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
+| 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, and shared graphical-input style-selected glyph atlas | Exclusive |
 | 254 | `$4000-$48CF` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and horizontally/vertically wrapped ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
-| 255 | `$4000-$4A2C` | `menu_graphics.py`: cloned English Status template and loader | Exclusive |
+| 255 | `$4000-$4A7C` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus loader | Exclusive |
 
 Banks 248-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
@@ -171,7 +171,18 @@ deterministically.
 
 GB2 already has a native proportional renderer. `english_font.py` changes only the
 English-owned one-byte code slots and their width entries, using the approved
-`assets/fonts/thin_pixel_7_compact.json` source. The prefixed font in bank 206 remains
+`assets/fonts/thin_pixel_7_compact.json` source. The selectable classic build retains its
+black-only source raster. The shadowed build bakes palette-color-2 pixels at `+1,+1`,
+redraws the unchanged color-3 source ink on top, and joins the four reviewed disconnected
+bottom cutoff pixels one position left. Both use identical advances. The
+Status screen's fixed English labels are not runtime strings: `menu_graphics.py` therefore
+copies the selected style into its private bitmap overlay. The graphical-input atlas in
+bank 253 uses the same selected style for player names, Blank Scroll, unidentified-item
+naming, and Rescue passwords. Big Moai's isolated bank-252 editor carries a guarded copy.
+Literal ROM-byte regressions freeze both classic and shadowed encodings, while the default
+shadowed build retains its live-RGB regression.
+The
+prefixed font in bank 206 remains
 byte-exact except for the exclusively owned `F2 1E` composite: its Japanese `(hibi)`
 bitmap is replaced by the reviewed `(Cr)` raster in
 `assets/graphics/item_status_symbols.json`. Its native 15-pixel width metadata and

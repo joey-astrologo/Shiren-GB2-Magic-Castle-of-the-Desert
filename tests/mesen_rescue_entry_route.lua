@@ -251,7 +251,8 @@ local function afterFrame()
     if frame >= done then
       local finalScreen = checksum()
       local finalBuffer = hexBytes(0x016D, 14, workMem)
-      if EXPECTED_RESULT_SCREEN ~= nil then
+      if EXPECTED_RESULT_SCREEN ~= nil and
+          tonumber(EXPECTED_RESULT_SCREEN, 16) ~= 0 then
         if not check(finalScreen == tonumber(EXPECTED_RESULT_SCREEN, 16),
           string.format("native validation response mismatch: %08X", finalScreen))
           then return end

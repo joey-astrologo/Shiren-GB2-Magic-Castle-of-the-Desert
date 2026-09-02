@@ -228,20 +228,26 @@ local function afterFrame()
   elseif openedAt ~= nil and frame == openedAt + 180 then
     local checksum = screenChecksum()
     report(string.format("service-menu Warehouse Withdraw screen=%08X", checksum))
-    if not check(checksum == EXPECTED_WITHDRAW_SCREEN,
-      "Warehouse Withdraw cursor framebuffer changed") then return end
+    if EXPECTED_WITHDRAW_SCREEN ~= 0 then
+      if not check(checksum == EXPECTED_WITHDRAW_SCREEN,
+        "Warehouse Withdraw cursor framebuffer changed") then return end
+    end
     if not checkBlankSpillColumn() then return end
   elseif openedAt ~= nil and frame == openedAt + 300 then
     local checksum = screenChecksum()
     report(string.format("service-menu Warehouse Trash screen=%08X", checksum))
-    if not check(checksum == EXPECTED_TRASH_SCREEN,
-      "Warehouse Trash cursor framebuffer changed") then return end
+    if EXPECTED_TRASH_SCREEN ~= 0 then
+      if not check(checksum == EXPECTED_TRASH_SCREEN,
+        "Warehouse Trash cursor framebuffer changed") then return end
+    end
     if not checkBlankSpillColumn() then return end
   elseif openedAt ~= nil and frame == openedAt + 420 then
     local checksum = screenChecksum()
     report(string.format("service-menu Warehouse Quit screen=%08X", checksum))
-    if not check(checksum == EXPECTED_QUIT_SCREEN,
-      "Warehouse Quit cursor framebuffer changed") then return end
+    if EXPECTED_QUIT_SCREEN ~= 0 then
+      if not check(checksum == EXPECTED_QUIT_SCREEN,
+        "Warehouse Quit cursor framebuffer changed") then return end
+    end
     if not checkBlankSpillColumn() then return end
   elseif dismissAt ~= nil and frame > dismissAt + 60 and
       emu.read(SAVED_FLAG, workMem) == 0 and

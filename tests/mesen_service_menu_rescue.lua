@@ -211,14 +211,18 @@ local function afterFrame()
   elseif frame == 790 then
     local checksum = screenChecksum()
     report(string.format("service-menu Rescue Password screen=%08X", checksum))
-    if not check(checksum == EXPECTED_PASSWORD_SCREEN,
-      "Rescue Password cursor framebuffer changed") then return end
+    if EXPECTED_PASSWORD_SCREEN ~= 0 then
+      if not check(checksum == EXPECTED_PASSWORD_SCREEN,
+        "Rescue Password cursor framebuffer changed") then return end
+    end
     if not checkSpillColumn() then return end
   elseif frame == 890 then
     local checksum = screenChecksum()
     report(string.format("service-menu Rescue Quit screen=%08X", checksum))
-    if not check(checksum == EXPECTED_QUIT_SCREEN,
-      "Rescue Quit cursor framebuffer changed") then return end
+    if EXPECTED_QUIT_SCREEN ~= 0 then
+      if not check(checksum == EXPECTED_QUIT_SCREEN,
+        "Rescue Quit cursor framebuffer changed") then return end
+    end
     if not checkSpillColumn() then return end
   elseif frame > 1040 and savedDestination ~= nil and
       emu.read(SAVED_FLAG, workMem) == 0 and

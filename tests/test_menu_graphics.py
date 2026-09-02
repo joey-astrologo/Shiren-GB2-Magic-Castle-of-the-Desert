@@ -61,6 +61,62 @@ class OriginalRomMainMenuGraphicsTests(unittest.TestCase):
             menu_graphics.template_bytes(self.output),
         )
 
+    def test_status_bitmap_labels_use_the_approved_literal_shadow_pixels(self):
+        localized, measurements = menu_graphics.localized_template(
+            self.rom, self.approved
+        )
+        pixels = menu_graphics.decode_canvas(localized)
+        actual = tuple(
+            "".join(str(color) for color in row[3:20])
+            for row in pixels[24:32]
+        )
+        self.assertEqual(
+            (
+                "30003000000000000",
+                "32003200000000000",
+                "33033203300333000",
+                "32303200230322300",
+                "32323203332320320",
+                "32023230232333020",
+                "32003203332322200",
+                "02000200222320000",
+            ),
+            actual,
+        )
+
+        expected_color_counts = {
+            "experience": (33, 40),
+            "location": (66, 81),
+            "map": (32, 41),
+            "hints": (47, 57),
+            "quit": (36, 46),
+            "attack": (31, 40),
+            "strength": (72, 92),
+            "strength_separator": (6, 6),
+            "defense": (33, 40),
+            "fullness": (73, 87),
+            "fullness_separator": (6, 6),
+            "fullness_suffix": (9, 14),
+            "money": (44, 56),
+            "money_suffix": (12, 15),
+        }
+        final_x = {row["name"]: row["final_x"] for row in measurements}
+        for label in menu_graphics.LABELS:
+            right = min(menu_graphics.CANVAS_WIDTH, final_x[label.name] + 1)
+            colors = [
+                color
+                for row in pixels[label.y:label.y + 8]
+                for color in row[label.x:right]
+            ]
+            with self.subTest(label=label.name):
+                self.assertEqual(
+                    expected_color_counts[label.name],
+                    (
+                        colors.count(menu_graphics.SHADOW_COLOR),
+                        colors.count(menu_graphics.INK_COLOR),
+                    ),
+                )
+
     def test_installer_changes_only_status_call_overlay_and_checksums(self):
         allowed = {
             offset
@@ -145,6 +201,32 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temporary.cleanup()
 
+    def _assert_live_map_shadow(self, image):
+        expected = (
+            "30003000000000000",
+            "32003200000000000",
+            "33033203300333000",
+            "32303200230322300",
+            "32323203332320320",
+            "32023230232333020",
+            "32003203332322200",
+            "02000200222320000",
+        )
+        palette = {
+            "0": (248, 248, 248),
+            "2": (168, 168, 168),
+            "3": (0, 0, 0),
+        }
+        actual = tuple(
+            tuple(image.getpixel((11 + x, 40 + y)) for x in range(17))
+            for y in range(8)
+        )
+        wanted = tuple(
+            tuple(palette[color] for color in row)
+            for row in expected
+        )
+        self.assertEqual(wanted, actual)
+
     def test_mamel_save_opens_complete_english_main_menu(self):
         expected = FIXTURE["live_mamel_menu"]
         pyboy = self.PyBoy(
@@ -182,7 +264,9 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
             for label in expected["dynamic_labels"]:
                 with self.subTest(label=label):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
-            screen = pyboy.screen.image.convert("RGB").tobytes()
+            image = pyboy.screen.image.convert("RGB")
+            self._assert_live_map_shadow(image)
+            screen = image.tobytes()
             self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
             self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
@@ -312,7 +396,9 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
             for label in expected["dynamic_labels"]:
                 with self.subTest(label=label):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
-            screen = pyboy.screen.image.convert("RGB").tobytes()
+            image = pyboy.screen.image.convert("RGB")
+            self._assert_live_map_shadow(image)
+            screen = image.tobytes()
             self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
         finally:
             pyboy.stop(save=False)

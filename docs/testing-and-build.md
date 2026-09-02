@@ -125,10 +125,13 @@ scene editor owns that workflow and invokes the measured wrapper itself.
 ## Build
 
 ```sh
-python3 tools/build.py "$ROM" script/en build/shiren-gb2-english.gbc
+python3 tools/build.py "$ROM" script/en build/shiren-gb2-english.gbc --font-style both
 ```
 
-The production builder reruns required safety checks before writing the output. Text is
+This writes `build/shiren-gb2-english-classic-font.gbc` and
+`build/shiren-gb2-english-shadowed-font.gbc`. Use `--font-style classic` or
+`--font-style shadowed` for one ROM at the exact output path; shadowed is the default.
+The production builder reruns required safety checks before writing each output. Text is
 relocated through far pointers, so storage growth does not justify shortening visible
 English. The builder prints the SHA-1 of the exact output artifact.
 
@@ -193,6 +196,42 @@ This reads the guarded 16-tile source at `3:$5742-$5841` and writes only
 slash, and meter source raster needed by the sheet, proves all 20 alphanumeric slots are
 distinct and nonempty, and checks a native-width `99F Lv 99 Hp 999/999` proof. It never
 updates framebuffer hashes or modifies the ROM.
+
+For the dedicated shop-price digit font:
+
+```sh
+python3 -m unittest tests.test_shop_price_font_audition -v
+python3 tools/shop_price_font_audition.py
+```
+
+This hash-verifies and decodes all ten 2bpp tiles at `3:$5642-$56E1`, crops the live
+five-pixel digit cells, and writes only `build/shop_price_font_audition.png`. The tests
+freeze representative literal color-index rasters, all ten distinct digits, five-pixel
+packing, the captured color-3 black / color-1 white / color-2 `#A8A8A8` shade mapping,
+maximum five-digit proofs, CLI rendering, and read-only behavior.
+
+For the installed Thin Pixel-7 dialogue-font shadow audit:
+
+```sh
+python3 -m unittest tests.test_font_shadow_audition -v
+python3 -m unittest tests.test_font_variants -v
+python3 tools/font_shadow_audition.py
+```
+
+This loads the approved font source, compares its raw glyphs against the installed captured
+palette-color-2 gray (`#ACACAC`) offset by `(1,1)` with the original black pixels redrawn on
+top, and writes only `build/font_shadow_audition.png`. The production encoder's cutoff
+cleanup moves a
+disconnected bottom shadow pixel left for `,`, `g`, `j`, and `y`; connected cutoff shadows
+are retained. Tests cover all 78 characters, the `+` palette-color proof, unchanged advances
+and black pixels, 8x8 bottom clipping, proportional-advance overhang, 2bpp round-tripping,
+production/audit equivalence, and CLI sheet generation. The audit command does not edit the
+font JSON, change layout contracts, or modify a ROM.
+
+`tests.test_menu_graphics` separately freezes a literal color-index raster and exact
+shadow/ink counts for all 14 fixed Status-screen labels. Those labels are a generated bitmap
+overlay rather than runtime strings, so this regression ensures they stay pixel-identical to
+the installed two-tone font across menu open, refresh, and Help-return routes.
 
 For the approved arrival-card source and production insertion:
 
@@ -302,6 +341,11 @@ replay pointer table, and the SHA-1 of every original 106-byte embedded diary. I
 that installation changes only each snapshot's five-byte native name field and four-byte
 suffix/marker tail. A PyBoy-backed getter check then loads the patched title-family event 0
 and the first/last Secrets events 4 and 13 and requires the complete `Shiren` result.
+It also freezes literal two-plane bytes for uppercase, lowercase-tail, digit, and cursor
+glyphs in the installed graphical-input atlas, then checks the live `A` tile pixel-for-pixel
+against black ink, gray shadow, and white background RGB values. `tests.test_spell_input`
+independently freezes the same literal `A` in Big Moai's private atlas; live editor routes
+cover Blank Scroll, unidentified items, Rescue entry/revival, and Big Moai `WISH`.
 
 `tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live

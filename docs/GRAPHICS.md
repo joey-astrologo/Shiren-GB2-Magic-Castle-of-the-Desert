@@ -29,12 +29,12 @@ Each asset still needs its producer and consumers mapped.
 
 | Area | State | Owner |
 |---|---|---|
-| In-game proportional font | Thin Pixel-7 installed in native one-byte font slots | `english_font.py` |
-| Core Status template labels | English clone generated without mutating shared native graphics | `menu_graphics.py` |
-| Player-name keyboard | English A-Z/a-z/0-9 map and glyph resources | `name6.py` |
-| Big Moai promotional gift-code keyboard ("spells") | Approved four-row A-Z/0-9 map, private navigation, and below-label `DEL`/`OK` cursors | `spell_input.py` |
-| Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, and mode-specific hyphen cell | `blank_scroll.py` |
-| Unidentified-item keyboard | English map, dedicated mode-0 navigation, `FILL IN` history control, and full canonical-name display aligned to the native seven-cell field | `unidentified_names.py` |
+| In-game proportional font | Selectable Thin Pixel-7 classic black-only or reviewed palette-color-2 `+1,+1` shadowed style in all 78 native one-byte English slots; both retain identical color-3 ink and advances | `english_font.py` |
+| Core Status template labels | English bitmap overlay generated from the selected font style; shared native graphics remain unchanged | `menu_graphics.py` |
+| Player-name keyboard | English A-Z/a-z/0-9 map and shared style-selected glyph atlas, including the private cursor symbols | `name6.py` |
+| Big Moai promotional gift-code keyboard ("spells") | Approved four-row A-Z/0-9 map, private navigation, below-label `DEL`/`OK` cursors, and its own guarded copy of the selected atlas style | `spell_input.py` |
+| Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, mode-specific hyphen cell, and shared style-selected atlas | `blank_scroll.py` |
+| Unidentified-item and Rescue keyboards | English maps over the shared style-selected atlas; dedicated mode-0 `FILL IN` history and full canonical-name display, plus modes 5-8 native password mapping | `unidentified_names.py`, `rescue_presentation.py` |
 | Stairs popup geometry | Widened templates and background teardown | `stairs_menu.py` |
 | Rescue Team, completed-rescue delivery, warehouse, Bank Teller, and Blacksmith Info popup geometry | Exact-menu seven-interior-tile frames using six renderer-owned dynamic tiles; warehouse and Bank have stable `$B3` spill cells, Blacksmith stages the `Synthesis` suffix in `$B3`, the shorter Rescue menu exposes only off-frame `Password` overflow tiles `$A8/$BA`, and completed-rescue delivery stages those fragments in `$9C/$AE` before clearing their live cursor aliases; active-VRAM-bank bottom border, staged-tile cleanup, and two-bank save/restore of the added ninth BG column | `service_menus.py` |
 | Cracked-Bracelet marker | Stock Japanese `(hibi)` composite replaced by compact `(Cr)` at native token `F2 1E` | `item_status.py` |
@@ -42,6 +42,7 @@ Each asset still needs its producer and consumers mapped.
 | Copyright/composer card | Approved Inter SemiBold 4.1 `CHUNSOFT` and `Koichi Sugiyama` strips; native copyright rows, map, palettes, fade, scroll, and title handoff preserved | `credit_screen.py` |
 | Town/dungeon/floor arrival cards | Approved Inter SemiBold 4.1 location artwork for all 32 selectors, including the decoded `Mystery Dungeon` alias; native Latin digits plus an approved one-pixel-raised `F`, centering, floor formatter, underline, palette inheritance, fade, and transition preserved through a guarded bank-$F8 renderer clone | `arrival_cards.py` |
 | Dungeon HUD font audit | All 20 alphanumeric four-pixel slots (`0-9A-F`, `L`, `v`, `H`, `p`), slash, meter tiles, reserved tiles, and maximum layout proof decoded from the guarded native atlas; read-only contact sheet writes no ROM changes | `hud_font_audition.py` |
+| Shop-price font audit | All ten native two-tone digits decoded from guarded source `3:$5642-$56E1`, cropped and packed at the observed five-pixel shop-tag advance with captured black/white/gray palette roles; read-only contact sheet writes no ROM changes | `shop_price_font_audition.py` |
 | Save/load wait sign | Approved Thin Pixel-7 `Please` / `wait...` raster in two guarded sign blocks; both interleaved bird-art blocks preserved byte-for-byte | `wait_screen.py` |
 
 These are not evidence that title art, story cards, ending art, or every graphical menu label

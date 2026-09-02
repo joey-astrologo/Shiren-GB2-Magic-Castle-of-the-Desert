@@ -639,13 +639,13 @@ class MesenUnidentifiedNameRouteTests(unittest.TestCase):
         self.assertIn(
             "PASS mode=00 node=01 nav=01 maximum=00", output
         )
-        self.assertIn("screen=B9D8C88C", output)
+        self.assertIn("screen=AC438159", output)
 
     def test_typing_after_fill_in_resets_then_confirms_a_free_name(self):
         output = self._run_route("type")
         self.assertIn(
             "type-after-fill reset frame=1136 pos=01 max=07 "
-            "screen=AD488C2F",
+            "screen=1D46725B",
             output,
         )
         self.assertIn("PASS route=type", output)
@@ -655,7 +655,7 @@ class MesenUnidentifiedNameRouteTests(unittest.TestCase):
         output = self._run_route("delete")
         self.assertIn(
             "delete-after-fill reset frame=1136 pos=00 max=07 "
-            "screen=29E03A85",
+            "screen=52CC5419",
             output,
         )
         self.assertIn(

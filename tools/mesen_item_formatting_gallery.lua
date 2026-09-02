@@ -129,8 +129,8 @@ if fixturePath == nil or fixturePath == "" then
 else
   local frame = 0
   local loaded = false
-  local PAGE_1_SCREEN = 0xB9899EFF
-  local PAGE_2_SCREEN = 0xEA1E7AC7
+  local PAGE_1_SCREEN = 0xF37D6EB7
+  local PAGE_2_SCREEN = 0x645AF4C6
   local page1Checksum = 0
 
   local function loadFile(path)

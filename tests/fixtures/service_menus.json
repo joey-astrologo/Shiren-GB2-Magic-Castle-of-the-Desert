@@ -1,32 +1,32 @@
 {
   "blacksmith_info": {
-    "closed_screen": "75EDB6E0",
-    "forge_screen": "7B8BE0CB",
-    "quit_screen": "C0534A1B",
-    "remove_screen": "09B2C893",
-    "repair_screen": "E569395B",
+    "closed_screen": "F04C37D0",
+    "forge_screen": "4D379F17",
+    "quit_screen": "8A749287",
+    "remove_screen": "E4FF259F",
+    "repair_screen": "C1B4CC97",
     "state": "SaveStates/blacksmith-info.mss",
     "state_sha1": "ca57bccc502776a878a1901c2ddfd8479ed0afc1",
-    "synthesis_screen": "905DCBFB"
+    "synthesis_screen": "1ADCBA37"
   },
   "bank": {
-    "balance_screen": "0BF97D1B",
-    "closed_screen": "05C14ACB",
-    "deposit_screen": "814C595B",
-    "quit_screen": "57FAD9A3",
+    "balance_screen": "9781AB07",
+    "closed_screen": "1D4B2087",
+    "deposit_screen": "0AC9E9E7",
+    "quit_screen": "625E127F",
     "state": "SaveStates/bank-teller.mss",
     "state_sha1": "6c3624401afda7107da79247ca6e67cf6a471e9a",
-    "withdraw_screen": "F542D98B"
+    "withdraw_screen": "5D7956D7"
   },
   "rescue": {
-    "closed_screen": "7650F2D5",
-    "confirmation_screen": "B517AC52",
-    "selected_screen": "4CF2FFA1",
+    "closed_screen": "9E76AD89",
+    "confirmation_screen": "1F6752FE",
+    "selected_screen": "941C145D",
     "state": "SaveStates/rescue-entry-menu.mss",
     "state_sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
-    "password_screen": "B7014DA6",
-    "quit_screen": "472855F2",
-    "wide_screen": "BDF1093A"
+    "password_screen": "B1F60A02",
+    "quit_screen": "19FAE386",
+    "wide_screen": "D05C830E"
   },
   "static": {
     "blacksmith_info_template": "254:$481B",
@@ -274,16 +274,16 @@
     "town_refresh_trampoline_sha1": "a9fbd25192528a364617096d9a6429f78b10639d"
   },
   "warehouse": {
-    "closed_screen": "3FC1957D",
+    "closed_screen": "AE0DAD35",
     "floor_items_reenter_state": "SaveStates/warehouse-floor-items-reenter.mss",
     "floor_items_reenter_state_sha1": "145065ce2a940cf84229dcab17d326585e8a01d9",
     "floor_items_state": "SaveStates/warehouse-floor-items.mss",
     "floor_items_state_sha1": "4822a0e49a0d85d597fb1337ddb4136131df7342",
     "state": "SaveStates/warehouse-menu.mss",
     "state_sha1": "fffcb9be39418f23e85ae275de6cb86e898afec7",
-    "withdraw_screen": "4DE1805A",
-    "trash_screen": "FBC4A2EA",
-    "quit_screen": "E27D173A",
-    "wide_screen": "061413EA"
+    "withdraw_screen": "CB979382",
+    "trash_screen": "CBB620B2",
+    "quit_screen": "9BCA6A92",
+    "wide_screen": "2A423142"
   }
 }

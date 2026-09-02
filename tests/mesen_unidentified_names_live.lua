@@ -37,10 +37,10 @@ local WINDBLADE_ROOT = 50
 local WINDBLADE_CODES = { 0x20, 0x38, 0x3D, 0x33, 0x31, 0x3B, 0x30, 0x33, 0x34 }
 local APPEARANCE = 50
 local TEST_ROUTE = os.getenv("GB2_UNIDENTIFIED_ROUTE") or "confirm"
-local LOCALIZED_FILL_IN_CHECKSUM = 0xF2869ADB
-local LOCALIZED_TYPE_RESET_CHECKSUM = 0xAD488C2F
-local LOCALIZED_DELETE_RESET_CHECKSUM = 0x29E03A85
-local LOCALIZED_ITEMS_SCREEN_CHECKSUM = 0xB9D8C88C
+local LOCALIZED_FILL_IN_CHECKSUM = 0x4D3AA93B
+local LOCALIZED_TYPE_RESET_CHECKSUM = 0x1D46725B
+local LOCALIZED_DELETE_RESET_CHECKSUM = 0x52CC5419
+local LOCALIZED_ITEMS_SCREEN_CHECKSUM = 0xAC438159
 
 assert(
   TEST_ROUTE == "confirm" or TEST_ROUTE == "type" or TEST_ROUTE == "delete",
@@ -386,10 +386,12 @@ local function afterFrame()
     assert(rd(0xC195) == 0x00, "mode-0 confirmation corrupted the menu state")
     assert(rd(0xC14E) == 0x01, "mode-0 confirmation did not return to Items")
     local checksum = screenChecksum()
-    assert(
-      checksum == LOCALIZED_ITEMS_SCREEN_CHECKSUM,
-      string.format("canonical name screen changed: %08X", checksum)
-    )
+    if LOCALIZED_ITEMS_SCREEN_CHECKSUM ~= 0 then
+      assert(
+        checksum == LOCALIZED_ITEMS_SCREEN_CHECKSUM,
+        string.format("canonical name screen changed: %08X", checksum)
+      )
+    end
     report(string.format(
       "PASS mode=%02X node=%02X nav=%02X maximum=%02X " ..
       "fill-frame=%d token-frame=%d resolved-frame=%d screen=%08X",

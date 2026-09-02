@@ -375,7 +375,7 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
         output = result.stdout + result.stderr
         self.assertEqual(0, result.returncode, output[-8000:])
         self.assertIn(
-            "PASS localized SOS screen=7F6D7FB9 "
+            "PASS localized SOS screen=99453146 "
             "buffer=6F7359324D4E6932506F73716DFF "
             "diary=3EC1C2C48F7F09080201",
             output,

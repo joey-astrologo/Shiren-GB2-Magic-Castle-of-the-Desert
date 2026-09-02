@@ -10,7 +10,7 @@
     "minimum_stage": 9,
     "work_ram_offsets": [1007, 1008],
     "locked_dialogue": {"group": 106, "index": 13},
-    "prompt_screen_fnv1a": "B8D7C4B0"
+    "prompt_screen_fnv1a": "F5DEF584"
   },
   "wish_route": {
     "runtime_index": 93,
@@ -20,10 +20,10 @@
     "valid_dialogue": {"group": 106, "index": 17},
     "reward_dialogue": {"group": 106, "index": 18},
     "post_reward_dialogue": {"group": 106, "index": 26},
-    "editor_screen_fnv1a": "A9C014AD",
-    "delete_screen_fnv1a": "482B9456",
-    "ok_screen_fnv1a": "DDFA4A20",
-    "reward_screen_fnv1a": "CFE031E8",
+    "editor_screen_fnv1a": "459513B9",
+    "delete_screen_fnv1a": "4F03BBAA",
+    "ok_screen_fnv1a": "28BFAA00",
+    "reward_screen_fnv1a": "7AEE87A8",
     "reward_item_id": 112,
     "reward_item": "Fortune Grass"
   }

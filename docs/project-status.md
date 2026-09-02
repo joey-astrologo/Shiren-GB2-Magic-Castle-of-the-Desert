@@ -165,7 +165,13 @@ The release gate is intentionally stricter than “all extracted text has Englis
 [ENGINEERING_RULES.md](ENGINEERING_RULES.md) for the missing route, graphics, and clean-build
 requirements.
 
-The latest verified production build is `build/shiren-gb2-english.gbc`. Its SHA-1 at
-the time this status was consolidated was
-`ac475d05668be691c5b4e46f1b0779699d226cec`; always rebuild and verify locally rather
-than treating that hash as a permanent release identifier.
+The latest verified production build produces two font variants from the same translation
+and engine patches:
+
+- `build/shiren-gb2-english-classic-font.gbc` — SHA-1
+  `e1548c22860e9baf39e1e1b2b053bef9a932196b`
+- `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
+  `88a470cbf679428b74929a9873adbac04f085edd`
+
+Always rebuild and verify locally rather than treating those hashes as permanent release
+identifiers.

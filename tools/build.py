@@ -251,25 +251,31 @@ def _service_menu_positioned_contracts(rom):
     }
 
 
-def build_rom(rom, record_overrides, runtime_contract=None):
+def build_rom(
+    rom,
+    record_overrides,
+    runtime_contract=None,
+    font_style=english_font.SHADOWED_STYLE,
+):
     """Return ``(output, allocation, validation)`` for encoded record overrides."""
     rom = bytes(rom)
     overrides = {key: bytes(raw) for key, raw in record_overrides.items()}
+    approved_font = english_font.load_approved(style=font_style)
     allocation = allocate.allocate(rom, record_overrides=overrides)
     relocated, _allocation = insert.write_relocated(rom, allocation)
-    output = english_font.install(relocated)
+    output = english_font.install(relocated, approved=approved_font)
     output = item_formatting.install(output)
     output = item_status.install(output)
     output = credit_screen.install(output)
     output = wait_screen.install(output)
     output = arrival_cards.install(output)
-    output = menu_graphics.install(output)
+    output = menu_graphics.install(output, approved=approved_font)
     output = stairs_menu.install(output)
     output = service_menus.install(output)
     output = dialogue_pacing.install(output)
-    output = name6.install(output)
+    output = name6.install(output, approved=approved_font)
     output = blank_scroll.install(output)
-    output = spell_input.install(output)
+    output = spell_input.install(output, approved=approved_font)
     output = unidentified_names.install(output)
     output = rescue_presentation.install(output)
     layout.validate_overrides(
@@ -300,6 +306,41 @@ def build_rom(rom, record_overrides, runtime_contract=None):
     )
     validation = insert.validate_relocated(rom, output, allocation, overrides)
     return output, allocation, validation
+
+
+def font_variant_output_paths(destination):
+    """Return stable release filenames for the classic and shadowed ROMs."""
+    destination = Path(destination)
+    suffix = destination.suffix
+    stem = destination.name[:-len(suffix)] if suffix else destination.name
+    return {
+        english_font.CLASSIC_STYLE: destination.with_name(
+            stem + "-classic-font" + suffix
+        ),
+        english_font.SHADOWED_STYLE: destination.with_name(
+            stem + "-shadowed-font" + suffix
+        ),
+    }
+
+
+def write_font_variant_outputs(destination, outputs):
+    """Write exactly one classic and one shadowed ROM beside each other."""
+    expected = set(english_font.FONT_STYLES)
+    if set(outputs) != expected:
+        raise ValueError(
+            "font variant outputs must contain exactly %s"
+            % ", ".join(english_font.FONT_STYLES)
+        )
+    paths = font_variant_output_paths(destination)
+    for style in english_font.FONT_STYLES:
+        raw = outputs[style]
+        if not isinstance(raw, bytes):
+            raise TypeError("%s font output is not bytes" % style)
+    for style in english_font.FONT_STYLES:
+        raw = outputs[style]
+        paths[style].parent.mkdir(parents=True, exist_ok=True)
+        paths[style].write_bytes(raw)
+    return paths
 
 
 def _validate_blank_scroll_catalog(extracted, translated):
@@ -345,7 +386,21 @@ def main(argv=None):
         "translations",
         help="full/compact English TSV or category directory",
     )
-    parser.add_argument("output", help="output translated development ROM")
+    parser.add_argument(
+        "output",
+        help=(
+            "output translated ROM, or basename for the two --font-style both ROMs"
+        ),
+    )
+    parser.add_argument(
+        "--font-style",
+        choices=english_font.FONT_STYLES + ("both",),
+        default=english_font.SHADOWED_STYLE,
+        help=(
+            "English visual font: classic black-only, shadowed gray drop shadow, "
+            "or both adjacent release ROMs (default: shadowed)"
+        ),
+    )
     args = parser.parse_args(argv)
     source = Path(args.rom).read_bytes()
     try:
@@ -365,9 +420,20 @@ def main(argv=None):
             english_font.install(source), extracted, translated
         )
         overrides = translation_file.encoded_overrides(translated)
-        output, allocation, validation = build_rom(
-            source, overrides, runtime_contract=width_analysis.contract
+        styles = (
+            english_font.FONT_STYLES
+            if args.font_style == "both"
+            else (args.font_style,)
         )
+        builds = {
+            style: build_rom(
+                source,
+                overrides,
+                runtime_contract=width_analysis.contract,
+                font_style=style,
+            )
+            for style in styles
+        }
         _validate_blank_scroll_catalog(extracted, translated)
         _validate_unidentified_name_catalog(extracted, translated)
     except (
@@ -394,9 +460,18 @@ def main(argv=None):
     ) as exc:
         parser.exit(1, "error: %s\n" % exc)
 
+    allocation = builds[styles[0]][1]
+    validation = builds[styles[0]][2]
     destination = Path(args.output)
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(output)
+    if args.font_style == "both":
+        destinations = write_font_variant_outputs(
+            destination,
+            {style: builds[style][0] for style in styles},
+        )
+    else:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(builds[args.font_style][0])
+        destinations = {args.font_style: destination}
     print(
         "%d translated record(s) / %d logical reference(s)"
         % (len(translated), validation["overridden_references"])
@@ -413,12 +488,19 @@ def main(argv=None):
         % (validation["exact_references"], validation["written_banks"])
     )
     print("script bytes : %d" % allocation.summary["payload_bytes"])
-    print(
-        "checksums    : header $%s global $%s"
-        % (validation["header_checksum"], validation["global_checksum"])
-    )
-    print("sha1         : %s" % sha1(output).hexdigest())
-    print("output       : %s" % destination)
+    for style in styles:
+        output, _allocation, style_validation = builds[style]
+        if len(styles) > 1:
+            print("font style   : %s" % style)
+        print(
+            "checksums    : header $%s global $%s"
+            % (
+                style_validation["header_checksum"],
+                style_validation["global_checksum"],
+            )
+        )
+        print("sha1         : %s" % sha1(output).hexdigest())
+        print("output       : %s" % destinations[style])
     return 0
 
 

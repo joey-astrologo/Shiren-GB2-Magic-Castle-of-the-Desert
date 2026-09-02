@@ -150,6 +150,19 @@ class SpellInputTests(unittest.TestCase):
         payload = spell_input.runtime_payload(self.rom)
         self.assertEqual(payload, output[runtime_at:runtime_at + len(payload)])
 
+    def test_private_gift_code_atlas_contains_the_literal_A_shadow(self):
+        output = spell_input.install(self.rom)
+        code = english.ENGLISH_CODES["A"]
+        glyph_at = extract.file_offset(
+            spell_input.RUNTIME_BANK,
+            spell_input.GLYPH_LOW_ADDRESS
+            + (code - spell_input.GLYPH_LOW_START) * spell_input.GLYPH_STRIDE,
+        )
+        self.assertEqual(
+            bytes.fromhex("707088B888CCF8FC88FC88CC88CC0044"),
+            output[glyph_at:glyph_at + spell_input.GLYPH_STRIDE],
+        )
+
     def test_spell_patch_does_not_mutate_player_name_navigation(self):
         output = spell_input.install(self.rom)
         start = extract.file_offset(name6.NAVIGATION_BANK, name6.NAVIGATION_ADDRESS)

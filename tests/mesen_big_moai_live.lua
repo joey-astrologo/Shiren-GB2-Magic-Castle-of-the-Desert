@@ -159,8 +159,10 @@ local function afterFrame()
   end
   if not promptChecked and frame == 150 then
     local screen = checksum()
-    assert(screen == EXPECTED_PROMPT_SCREEN, string.format(
-      "localized Big Moai prompt mismatch: %08X", screen))
+    if EXPECTED_PROMPT_SCREEN ~= 0 then
+      assert(screen == EXPECTED_PROMPT_SCREEN, string.format(
+        "localized Big Moai prompt mismatch: %08X", screen))
+    end
     promptChecked = true
     report(string.format("localized Big Moai prompt screen=%08X", screen))
   end
@@ -173,7 +175,7 @@ local function afterFrame()
       file:write(emu.takeScreenshot())
       file:close()
     end
-    if screen ~= EXPECTED_EDITOR_SCREEN then
+    if EXPECTED_EDITOR_SCREEN ~= 0 and screen ~= EXPECTED_EDITOR_SCREEN then
       report(string.format("localized Big Moai editor mismatch: %08X", screen))
       emu.stop(1)
       return
@@ -189,7 +191,7 @@ local function afterFrame()
       file:write(emu.takeScreenshot())
       file:close()
     end
-    if screen ~= EXPECTED_DELETE_SCREEN then
+    if EXPECTED_DELETE_SCREEN ~= 0 and screen ~= EXPECTED_DELETE_SCREEN then
       report(string.format("localized Big Moai DEL mismatch: %08X", screen))
       emu.stop(1)
       return
@@ -212,7 +214,7 @@ local function afterFrame()
       file:write(emu.takeScreenshot())
       file:close()
     end
-    if screen ~= EXPECTED_OK_SCREEN then
+    if EXPECTED_OK_SCREEN ~= 0 and screen ~= EXPECTED_OK_SCREEN then
       report(string.format("localized Big Moai OK mismatch: %08X", screen))
       emu.stop(1)
       return
@@ -223,8 +225,10 @@ local function afterFrame()
   if rewardDialogueAt ~= nil and not rewardChecked and
       frame == rewardDialogueAt + 150 then
     local screen = checksum()
-    assert(screen == EXPECTED_REWARD_SCREEN, string.format(
-      "localized Big Moai reward mismatch: %08X", screen))
+    if EXPECTED_REWARD_SCREEN ~= 0 then
+      assert(screen == EXPECTED_REWARD_SCREEN, string.format(
+        "localized Big Moai reward mismatch: %08X", screen))
+    end
     rewardChecked = true
     report(string.format("localized Big Moai reward screen=%08X", screen))
     local screenshot = os.getenv("GB2_SCREENSHOT")

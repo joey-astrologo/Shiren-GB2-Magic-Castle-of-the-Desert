@@ -146,18 +146,27 @@ class EnglishFontAssetTests(unittest.TestCase):
                 self.assertEqual(anchor["advance"], self.approved.advances[character])
                 self.assertEqual(anchor["glyph"], self.approved.glyphs[character].hex().upper())
 
-    def test_2bpp_conversion_uses_native_background_and_ink_colors(self):
+    def test_approved_shadow_contract_is_frozen(self):
+        bake = FIXTURE["bake"]
+        self.assertEqual(bake["background_color"], english_font.BACKGROUND_COLOR)
+        self.assertEqual(bake["shadow_color"], english_font.SHADOW_COLOR)
+        self.assertEqual(bake["ink_color"], english_font.INK_COLOR)
+        self.assertEqual(tuple(bake["shadow_offset"]), english_font.SHADOW_OFFSET)
+        self.assertEqual((1, 1), english_font.SHADOW_OFFSET)
+        self.assertEqual((-1, 0), english_font.BOTTOM_ORPHAN_SHIFT)
+        self.assertEqual(
+            [",", "g", "j", "y"],
+            bake["bottom_orphan_adjusted_glyphs"],
+        )
+
+    def test_2bpp_conversion_uses_native_background_shadow_and_ink_colors(self):
         for character in _ordered_characters():
             with self.subTest(character=character):
                 decoded = font.decode_2bpp_slices(
                     self.approved.glyphs[character], height=font.SINGLE_HEIGHT
                 )
-                expected = tuple(
-                    tuple(
-                        english_font.INK_COLOR if pixel == "#" else english_font.BACKGROUND_COLOR
-                        for pixel in row
-                    )
-                    for row in self.approved.rows[character]
+                expected = english_font.shadow_pixels(
+                    self.approved.rows[character]
                 )
                 self.assertEqual(expected, decoded)
 
@@ -223,11 +232,51 @@ class OriginalRomEnglishFontTests(unittest.TestCase):
             with self.subTest(character=character, code=code):
                 glyph = font.read_glyph(self.patched, bytes((code,)))
                 self.assertEqual(self.approved.advances[character], glyph.width)
-                expected = tuple(
-                    tuple(3 if pixel == "#" else 1 for pixel in row)
-                    for row in self.approved.rows[character]
+                expected = english_font.shadow_pixels(
+                    self.approved.rows[character]
                 )
                 self.assertEqual(expected, glyph.pixels)
+
+    def test_installed_tiles_contain_the_approved_two_tone_shadow_pixels(self):
+        expected_a = (
+            (1, 3, 3, 3, 1, 1, 1, 1),
+            (3, 1, 2, 2, 3, 1, 1, 1),
+            (3, 2, 1, 1, 3, 2, 1, 1),
+            (3, 3, 3, 3, 3, 2, 1, 1),
+            (3, 2, 2, 2, 3, 2, 1, 1),
+            (3, 2, 1, 1, 3, 2, 1, 1),
+            (3, 2, 1, 1, 3, 2, 1, 1),
+            (1, 2, 1, 1, 1, 2, 1, 1),
+        )
+        expected_plus = (
+            (1, 1, 1, 1, 1, 1, 1, 1),
+            (1, 1, 1, 1, 1, 1, 1, 1),
+            (1, 1, 3, 1, 1, 1, 1, 1),
+            (1, 3, 3, 3, 1, 1, 1, 1),
+            (1, 1, 3, 2, 2, 1, 1, 1),
+            (1, 1, 1, 2, 1, 1, 1, 1),
+            (1, 1, 1, 1, 1, 1, 1, 1),
+            (1, 1, 1, 1, 1, 1, 1, 1),
+        )
+        for character, expected in (("A", expected_a), ("+", expected_plus)):
+            with self.subTest(character=character):
+                glyph = font.read_glyph(
+                    self.patched, bytes((english.ENGLISH_CODES[character],))
+                )
+                self.assertEqual(expected, glyph.pixels)
+
+        expected_bottom_rows = {
+            ",": (3, 2, 1, 1, 1, 1, 1, 1),
+            "g": (1, 3, 3, 2, 1, 1, 1, 1),
+            "j": (3, 3, 2, 1, 1, 1, 1, 1),
+            "y": (1, 3, 3, 2, 1, 1, 1, 1),
+        }
+        for character, expected in expected_bottom_rows.items():
+            with self.subTest(character=character):
+                glyph = font.read_glyph(
+                    self.patched, bytes((english.ENGLISH_CODES[character],))
+                )
+                self.assertEqual(expected, glyph.pixels[-1])
 
     def test_unowned_ui_symbol_block_is_byte_exact(self):
         width_base = font.banked_offset(font.WIDTH_BANK, font.WIDTH_ADDRESS)
@@ -266,6 +315,15 @@ class NativeRendererEnglishSmokeTests(unittest.TestCase):
     def test_lowercase_english_renders_pixel_exact_through_native_vwf(self):
         smoke = FIXTURE["smoke"]
         patched, payload = english_smoke.build(self.rom)
+        # The opening dialogue palette maps native font color 1 to black,
+        # color 2 to gray, and color 3 to white.  Keep these literal so this
+        # remains an independent live-renderer proof rather than a screenshot
+        # hash regenerated from whatever the current ROM happens to draw.
+        live_palette = {
+            english_font.BACKGROUND_COLOR: (0, 0, 0),
+            english_font.SHADOW_COLOR: (64, 64, 64),
+            english_font.INK_COLOR: (248, 248, 248),
+        }
 
         with tempfile.TemporaryDirectory() as temporary:
             rom_path = Path(temporary) / "english-font-smoke.gbc"
@@ -285,6 +343,33 @@ class NativeRendererEnglishSmokeTests(unittest.TestCase):
                                 actual.add((x, y))
                     with self.subTest(text=line["text"]):
                         self.assertEqual(expected, actual)
+
+                    expected_colors = [
+                        [english_font.BACKGROUND_COLOR] * advance
+                        for _ in range(font.SINGLE_HEIGHT)
+                    ]
+                    pen = 0
+                    for character in line["text"]:
+                        glyph = english_font.shadow_pixels(
+                            self.approved.rows[character]
+                        )
+                        for y, row in enumerate(glyph):
+                            for x, color in enumerate(row):
+                                # Native VWF cells use color 1 transparently;
+                                # later glyphs may overlap an earlier shadow.
+                                if (
+                                    color != english_font.BACKGROUND_COLOR
+                                    and pen + x < advance
+                                ):
+                                    expected_colors[y][pen + x] = color
+                        pen += self.approved.advances[character]
+                    for y, row in enumerate(expected_colors):
+                        for x, color in enumerate(row):
+                            with self.subTest(text=line["text"], x=x, y=y):
+                                self.assertEqual(
+                                    live_palette[color],
+                                    image.getpixel((line["x"] + x, line["y"] + y)),
+                                )
                 self.assertEqual(smoke["lines"][-1]["advance"], pyboy.memory[0xC4D6])
             finally:
                 pyboy.stop(save=False)
