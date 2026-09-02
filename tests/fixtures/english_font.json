@@ -1,10 +1,10 @@
 {
-  "schema": "shiren-gb2-english-font-v1",
+  "schema": "shiren-gb2-english-font-v2",
   "font": "Thin Pixel-7 GB Compact",
-  "glyph_count": 78,
+  "glyph_count": 79,
   "assets": {
-    "spec_sha256": "0a951271246f402998f10d76ede332b726e59d599122949ac46a972a3cbd9efb",
-    "glyph_source_sha256": "d496e4650e510f1ec5b16e5d51d3262a8ef0f17a8ee7c38225ad477996aaa6b0",
+    "spec_sha256": "6a0a2bcf6ca497a4f226389302b481ebaa66095c781a98cd4244d3763a093eff",
+    "glyph_source_sha256": "e4d7154264cee0cd26680ae39c606916dbee7aee3db8c984d0e4659407d60aa7",
     "license_sha256": "4ce79ee1180477fb93bdd91596ac00e972a99341604ec53b745b392b4e87ca6c"
   },
   "code_page": {
@@ -12,8 +12,8 @@
     "capitals": [10, 35],
     "space": 36,
     "lowercase": [48, 73],
-    "punctuation": [74, 88],
-    "mapping_sha256": "76cbcccf5da1c55424a080c1db684be70de93c6ca2670a927930b1321eea5652"
+    "punctuation": [74, 89],
+    "mapping_sha256": "2225f6d54a9d98f8f1ce5c3c60dfe953ec92d872a9b2a781017efe282d726ad4"
   },
   "bake": {
     "background_color": 1,
@@ -21,11 +21,11 @@
     "ink_color": 3,
     "shadow_offset": [1, 1],
     "bottom_orphan_adjusted_glyphs": [",", "g", "j", "y"],
-    "advances_sha256": "fa7bb64048a40ebc295b051b716145cc36b87ae7eca082c3ec035a5a72af5c57",
-    "glyphs_2bpp_sha256": "42d7e0ca48a1cd3a45914d8f4d93507810b5a1d669d9556b2f9150a9da3f97d4",
-    "installed_width_region_sha1": "9b8ad20873f469d6a83ef136dbf94e9ba0a80e4e",
-    "installed_single_font_region_sha1": "82ea7e77b9e5151bf4b7460d1e80980c2b14b984",
-    "changed_bytes_including_checksum": 1110
+    "advances_sha256": "1b290bfaff830e055f5d8b0a2b99766ce5f8e433a36add86b1e4d178ecc3f105",
+    "glyphs_2bpp_sha256": "8b57869a6a892b71835794ff9e7ee0de96bc9b78336030c8bf678d125b30f7b2",
+    "installed_width_region_sha1": "bdff74e59b52a3f84626fd5703950d42c0b1bc94",
+    "installed_single_font_region_sha1": "909f9745ff87ec669ba8aac0bb63392d67a3a86a",
+    "changed_bytes_including_checksum": 1127
   },
   "anchors": [
     {"character": "A", "code": 10, "advance": 6, "glyph": "FF70CFB8BBCCFBFC8BFCBBCCBBCCBB44"},
@@ -34,6 +34,7 @@
     {"character": "j", "code": 57, "advance": 4, "glyph": "FF40DF20FFE0AF70EF30EF30EF30DFE0"},
     {"character": "?", "code": 78, "advance": 6, "glyph": "FF70CFB8BB4CFB14F728EF10FF20EF10"},
     {"character": "%", "code": 88, "advance": 7, "glyph": "FF62EE75CD3AFB14F72EEE57DC23FF00"},
+    {"character": "\"", "code": 89, "advance": 4, "glyph": "FFA0AFF0AFF0AF50FF00FF00FF00FF00"},
     {"character": " ", "code": 36, "advance": 4, "glyph": "FF00FF00FF00FF00FF00FF00FF00FF00"}
   ],
   "smoke": {

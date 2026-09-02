@@ -22,7 +22,7 @@ ENGLISH_CODES.update({chr(ord("A") + index): 0x0A + index for index in range(26)
 ENGLISH_CODES[" "] = 0x24
 ENGLISH_CODES.update({chr(ord("a") + index): 0x30 + index for index in range(26)})
 ENGLISH_CODES.update(
-    {character: 0x4A + index for index, character in enumerate(".,'-?!():/[]+~%")}
+    {character: 0x4A + index for index, character in enumerate(".,'-?!():/[]+~%\"")}
 )
 
 CODE_TO_ENGLISH = {code: character for character, code in ENGLISH_CODES.items()}

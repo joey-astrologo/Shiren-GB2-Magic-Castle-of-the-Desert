@@ -199,6 +199,7 @@ class MesenUnidentifiedItemHelperLiveTests(unittest.TestCase):
     def test_distributable_helper_prepares_the_mamel_fixture_in_mesen(self):
         env = os.environ.copy()
         env["GB2_UNIDENTIFIED_HELPER_FIXTURE"] = str(self.state)
+        env["GB2_UNIDENTIFIED_TARGET"] = "windblade_scroll"
         result = subprocess.run(
             [
                 str(self.mesen),

@@ -13,7 +13,9 @@ Fuurai no Shiren GB2 - Sabaku no Majou* from a user-supplied Japanese ROM.
 The extracted player-facing script is translated, the story is available in a
 scene-ordered editor, and the production ROM builds with the native variable-width
 font, six-character player names, a localized four-character Big Moai gift-code editor,
-and a fully English Blank Scroll writer. The unidentified-item Name screen and its cycling `FILL IN`
+the 13-character death-Rankings note editor, and a fully English Blank Scroll writer. The
+note editor gives its formerly empty selectable cells a real space action, and moving right
+at the end pads one space before advancing without changing player-name behavior. The unidentified-item Name screen and its cycling `FILL IN`
 history recall are also localized, including a 14-character preview and full display of
 canonical names longer than the native seven-character custom-label field. Recalled names
 show no star padding and reset safely to ordinary free entry on typing or `DEL`.
@@ -62,10 +64,10 @@ project work.
 | Story organization | **Complete** | 1,768 dialogue records in 72 scene families; complete editorial read-through remains |
 | Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
-| Graphical input | **Engineered** | Player names/rankings/replay snapshots, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
+| Graphical input | **Engineered** | Player names/rankings/replay snapshots, the death-Rankings note editor, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Credit card, arrival cards, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **498-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, and warehouse horizontal-wrap regressions included |
+| Automated tests | **541-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -225,7 +227,7 @@ python3 -m unittest tests.test_font_variants -v
 python3 tools/font_shadow_audition.py
 ```
 
-The sheet at `build/font_shadow_audition.png` covers all 78 supported characters, magnifies
+The sheet at `build/font_shadow_audition.png` covers all 79 supported characters, magnifies
 the 8x8 edge cases (including the native-shadow `+` color proof), and shows source versus
 installed copy. The production encoder paints the captured palette color 2 (`#ACACAC`) at
 `(x+1,y+1)` before redrawing the unchanged color-3 black glyph. For the four disconnected

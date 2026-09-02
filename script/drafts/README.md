@@ -99,8 +99,8 @@ marker is invisible for short values and becomes a native break only when necess
 The warning report exhausts actual translated-name width combinations and separates
 one-line, soft-wrapped and unsafe outcomes. Unsafe rows do not apply. The tool also
 preserves substitutions, source page/box order and timing effects. English character labels use
-`Name: `; unmatched Japanese `<speaker>` corner quotes are rejected. Paired
-`<speaker>...<speakerEnd>` tokens remain available only for an intentionally quoted label.
+`Name: `, and quoted text uses straight ASCII `"`. Japanese `<quoteOpen>`, `<quoteClose>`,
+`<speaker>`, and `<speakerEnd>` glyphs are rejected.
 `combat_messages.generated.json` protects its generated cells.
 
 The completed reviewed batches cover indices 0-200: damage, attack outcomes, experience,

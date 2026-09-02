@@ -47,6 +47,8 @@ Help/UI/dialogue references, and terminology fixture agree.
   explicitly transforms it.
 - Use visible speaker labels in the form `Name: dialogue`. Do not retain the unmatched
   Japanese corner-quote `<speaker>` separator in translated dialogue.
+- Use straight ASCII `"` for every quoted label or passage. Native `<quoteOpen>`,
+  `<quoteClose>`, `<speaker>`, and `<speakerEnd>` glyphs are forbidden in production English.
 - Measure names and lines with the installed Thin Pixel-7 advances, not character counts.
 - Keep distinct unidentified item appearances distinguishable.
 - Add a lint exception only when identical or divergent English is semantically required,

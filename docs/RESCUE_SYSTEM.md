@@ -66,8 +66,14 @@ The clean-ROM dispatcher at `12:$502D-$5072` and length table/routine at
 | 7 | 15 | Revival Password; directly selected by `10:$68DF-$68E7` |
 | 8 | 13 | SOS Password; live `rescue-entry-menu.mss` capture and controller replay confirmed |
 
-Mode 2 is a separate 13-character input route and must not be patched merely because its
-length matches SOS. Its caller and purpose remain a trace target.
+Mode 2 is the separate 13-character Rankings-note editor opened with Start on the death
+Rankings result. Its dedicated constructor call at `10:$7BD4` uses the approved English
+name keyboard through `name6.py`; its native maximum and storage remain independent from
+the 13-character SOS route. It selects a private type-`$F6` graph copied to `$C800`, where
+fourteen otherwise spare nodes make the first fourteen internal blank cells selectable
+space actions. On an empty message cell, the visual right-arrow action inserts one English
+space before advancing. Mode 4 player naming retains its original graph and empty-cell
+right-arrow no-op.
 
 The packet roles are additionally confirmed by their callers: `10:$7B8A-$7BD1` invokes
 type 0 to generate SOS, while `10:$68DF-$6953` explicitly opens mode 7, decodes type 1

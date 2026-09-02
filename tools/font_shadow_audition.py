@@ -6,7 +6,7 @@ advances, paints palette-color-2 gray one pixel right/down from every foreground
 pixel, then redraws the unchanged palette-color-3 black glyph on top.  On a
 bottom-clipped glyph, a disconnected bottom-right gray pixel moves one pixel left
 to join the visible stroke.  The output compares the source raster with the
-installed treatment for all 78 supported characters.
+installed treatment for all 79 supported characters.
 
 No font asset or ROM is modified.
 """
@@ -64,7 +64,7 @@ INVENTORY_ROWS = (
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "abcdefghijklmnopqrstuvwxyz",
     "0123456789",
-    ".,'-?!():/[]+~%",
+    ".,'-?!():/[]+~%\"",
 )
 EDGE_CASES = ("g", "j", "p", "q", "y", "Q", ",", "+", "%")
 SAMPLE_LINES = (

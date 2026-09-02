@@ -31,6 +31,10 @@ SCHEMA = "shiren-gb2-translation-lint-v1"
 EXCEPTION_SCHEMA = "shiren-gb2-lint-exceptions-v1"
 EXCEPTION_FILENAME = "lint_exceptions.json"
 MIN_SOURCE_TERM_LENGTH = 3
+JAPANESE_QUOTE_GLYPHS = frozenset(
+    (bytes.fromhex("F198"), bytes.fromhex("F19A"),
+     bytes.fromhex("F224"), bytes.fromhex("F226"))
+)
 
 # These sections define reusable terms.  Collision checks are scoped by family:
 # an actor and an item may intentionally share a rendering, while two distinct
@@ -361,6 +365,29 @@ def check_sentence_spacing(record, translation):
     return ()
 
 
+def check_japanese_quotes(record, translation):
+    """Reject native corner/speaker quote glyphs from localized text."""
+    if translation.explicit_empty:
+        return ()
+    found = tuple(
+        token.raw
+        for token in codec.parse_source(translation.encoded)
+        if token.raw in JAPANESE_QUOTE_GLYPHS
+    )
+    if not found:
+        return ()
+    names = tuple(codec.decode_source(raw) for raw in found)
+    return (
+        Issue(
+            record.id,
+            "japanese_quote_glyph",
+            "",
+            "%s use(s) native Japanese quote artwork; use straight ASCII \""
+            % ", ".join(names),
+        ),
+    )
+
+
 def _plain_search_source(source):
     return (
         "<" not in source
@@ -518,6 +545,7 @@ def check(result, translated, exceptions=()):
         issues.extend(check_native_template_selectors(record, translation))
         issues.extend(check_native_soft_wrap(record, translation))
         issues.extend(check_sentence_spacing(record, translation))
+        issues.extend(check_japanese_quotes(record, translation))
         if record.id not in definition_ids:
             issues.extend(check_terms(record, translation, terms))
     unique = {issue.key: issue for issue in issues}

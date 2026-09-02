@@ -20,6 +20,42 @@ SMOKE_ID = "195:$562F"
 SMOKE_TEXT = "Hello, Shiren!<br>Native VWF works.<page><box>"
 
 
+class ProductionEnglishPunctuationTests(unittest.TestCase):
+    def test_production_text_contains_no_japanese_quote_glyphs(self):
+        forbidden = (
+            "<quoteOpen>",
+            "<quoteClose>",
+            "<speaker>",
+            "<speakerEnd>",
+            "「",
+            "」",
+            "『",
+            "』",
+        )
+        offenders = []
+        quoted_records = []
+        unbalanced = []
+        for path in sorted((ROOT / "script" / "en").glob("*.tsv")):
+            with path.open(encoding="utf-8", newline="") as handle:
+                for row in csv.DictReader(handle, delimiter="\t"):
+                    text = row.get("english", "")
+                    if any(marker in text for marker in forbidden):
+                        offenders.append("%s:%s" % (path.name, row.get("id", "?")))
+                    quotes = text.count('"')
+                    if quotes:
+                        quoted_records.append((path.name, row.get("id", "?"), quotes))
+                    if quotes % 2:
+                        unbalanced.append("%s:%s" % (path.name, row.get("id", "?")))
+        self.assertFalse(
+            offenders,
+            "%d production English record(s) still use Japanese quote glyphs: %s"
+            % (len(offenders), ", ".join(offenders[:10])),
+        )
+        self.assertFalse(unbalanced, "unbalanced ASCII quotes: %s" % unbalanced)
+        self.assertEqual(48, len(quoted_records))
+        self.assertEqual(150, sum(row[2] for row in quoted_records))
+
+
 class OriginalRomTranslationFileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

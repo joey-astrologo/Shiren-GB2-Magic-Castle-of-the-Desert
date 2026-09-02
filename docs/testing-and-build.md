@@ -33,9 +33,10 @@ python3 tools/runtime_widths.py "$ROM"
 python3 tools/menu_text.py "$ROM"
 ```
 
-The production build installs and validates the player-name, Big Moai promotional-code,
-Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O patches. Their focused contracts can also be run directly through
-`tests.test_name6`, `tests.test_spell_input`, `tests.test_blank_scroll`,
+The production build installs and validates the player-name, death-Rankings note, Big Moai
+promotional-code, Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O
+patches. Their focused contracts can also be run directly through
+`tests.test_name6`, `tests.test_ranking_note_input`, `tests.test_spell_input`, `tests.test_blank_scroll`,
 `tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_mesen_unidentified_item`.
 
@@ -223,7 +224,7 @@ palette-color-2 gray (`#ACACAC`) offset by `(1,1)` with the original black pixel
 top, and writes only `build/font_shadow_audition.png`. The production encoder's cutoff
 cleanup moves a
 disconnected bottom shadow pixel left for `,`, `g`, `j`, and `y`; connected cutoff shadows
-are retained. Tests cover all 78 characters, the `+` palette-color proof, unchanged advances
+are retained. Tests cover all 79 characters, the `+` palette-color proof, unchanged advances
 and black pixels, 8x8 bottom clipping, proportional-advance overhang, 2bpp round-tripping,
 production/audit equivalence, and CLI sheet generation. The audit command does not edit the
 font JSON, change layout contracts, or modify a ROM.
@@ -284,9 +285,9 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The complete run on 2026-09-01 was **498 tests** with the matching ROM, PyBoy, RGBDS, and
+The complete run on 2026-09-02 was **541 tests** with the matching ROM, PyBoy, RGBDS, and
 Mesen available. It includes the graphics-audit, credit-source/insertion, wait-sign,
-arrival-card, ranking-suffix, and warehouse horizontal-wrap regressions. The required gate
+arrival-card, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions. The required gate
 is always discovery of the complete `tests/` directory, not a hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
@@ -346,6 +347,14 @@ glyphs in the installed graphical-input atlas, then checks the live `A` tile pix
 against black ink, gray shadow, and white background RGB values. `tests.test_spell_input`
 independently freezes the same literal `A` in Big Moai's private atlas; live editor routes
 cover Blank Scroll, unidentified items, Rescue entry/revival, and Big Moai `WISH`.
+`tests.test_ranking_note_input` attacks the adjacent Mamel from the frozen one-HP state,
+reaches the death Rankings result, presses Start, requires mode 2 with its native
+13-character maximum, and compares the live editor against independently synthesized
+English keyboard pixels without adopting a framebuffer hash. A second controller-only
+route selects a formerly empty cell and exercises the visual right arrow at an empty
+message end; both must write English space `$24` and advance exactly one position. Static
+and live PyBoy checks cover every one of the fourteen available space nodes and prove the
+same right-arrow operation remains a no-op in player-name mode 4.
 
 `tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live

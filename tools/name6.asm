@@ -21,6 +21,7 @@ DEF wInputMaximum        EQU $C153
 DEF wInputPosition       EQU $C152
 DEF wInputBuffer         EQU $C16D
 DEF wInputDirty          EQU $C196
+DEF wNavigationType      EQU $C14E
 DEF wRankingRecord       EQU $CF00
 DEF wRankingSuffix       EQU $CFA5 ; first byte after the native $85-byte companion
 
@@ -34,6 +35,11 @@ DEF RankHeader           EQU $4360
 DEF EnglishKeyboardMap   EQU $4400
 DEF EnglishGlyphsLow     EQU $4600
 DEF EnglishGlyphsHigh    EQU $4850
+DEF RankingNoteNavigation EQU $4B00
+
+DEF RankingNoteMode           EQU $02
+DEF RankingNoteNavigationType EQU $F6
+DEF NavigationScratch         EQU $C800
 
 DEF NameMarkerA          EQU $A5
 DEF NameMarkerB          EQU $5A
@@ -142,9 +148,10 @@ Name6Maximum::
     ld [wInputMaximum],a
     ret
 
-; Wrapper for the two mode-4 screen call sites.  Construct the native screen
-; first (including its attribute map), then replace only its tile IDs with the
-; English keyboard.  Mode 3 and Blank Scroll retain the shared Japanese map.
+; Wrapper for the mode-4 name and mode-2 Rankings-note screen call sites.
+; Construct the native screen first (including its mode-specific field and
+; attribute map), then replace only its tile IDs with the English keyboard.
+; Mode 3 and Blank Scroll retain their independently owned maps.
 Name6Screen::
     ld a,$F4
     ld hl,$4045
@@ -159,7 +166,8 @@ Name6Screen::
     ldh [rVBK],a
     ret
 
-; Replacement for the mode-4 character/action far call at 16:$5B66.
+; Replacement for the shared mode-2/mode-4 character/action far call at
+; 16:$5B66.
 ; Nodes $00-$4C are English characters.  Confirm and the three editing actions
 ; at $4D-$50 retain their native behavior.
 Name6Input::
@@ -384,23 +392,38 @@ Name6GetCompat::
     ld e,l
     ret
 
-; Polished mode-4 input wrapper.  Grid nodes $00-$3D contain both alphabets and
-; the digits in the exact three-column mockup.  $3E-$4A and the removed
-; $4C control are deliberately unreachable blanks.  $4B inserts a space, and
-; $4E/$4F are swapped so their left-to-right symbols move the caret left/right.
+; Shared name/message input wrapper. Grid nodes $00-$3D contain both alphabets
+; and the digits. Mode 4 keeps $3E-$4A/$4C unreachable; mode 2 treats those
+; fourteen empty cells as spaces. $4B is the labeled SPACE action. $4E/$4F
+; are swapped so their left-to-right symbols move the caret left/right. At the
+; end of a mode-2 message, right pads a space instead of refusing to advance.
 Name6InputClean::
     ld a,c
     cp $3E
     jp c,Name6Input
     cp $4B
-    ret c
+    jr c,.mode2_space
     jr z,.space
-    cp $4D
-    ret c
+    cp $4C
+    jr z,.mode2_space
     cp $4E
     jr z,.buffer_left
     cp $4F
     jr nz,.native_action
+    ld a,[wInputMode]
+    cp RankingNoteMode
+    jr nz,.buffer_right
+    push bc
+    ld a,[wInputPosition]
+    ld e,a
+    ld d,0
+    ld hl,wInputBuffer
+    add hl,de
+    ld a,[hl]
+    pop bc
+    cp $D5
+    jr z,.space
+.buffer_right
     ld c,$4E
     jr .native_action
 .buffer_left
@@ -409,6 +432,10 @@ Name6InputClean::
     ld a,$12
     ld hl,$5215
     jp FarDispatch
+.mode2_space
+    ld a,[wInputMode]
+    cp RankingNoteMode
+    ret nz
 .space
     ld b,$24
     ld a,$12
@@ -424,6 +451,7 @@ ASSERT @ <= $4232
 ; font loader.  Restore the two English code-page spans actually used here,
 ; then retain Name6Screen's exact English tile-ID map.
 Name6ScreenClean::
+    push bc
     call Name6Screen
     xor a
     ldh [rVBK],a
@@ -434,6 +462,27 @@ Name6ScreenClean::
     ld hl,EnglishGlyphsHigh
     ld de,$9300
     ld bc,$0280
-    jp CopyLinearVRAM
+    call CopyLinearVRAM
+    pop bc
+    ld a,c
+    cp RankingNoteMode
+    ret nz
+    ld hl,RankingNoteNavigation
+    ld de,NavigationScratch
+    ld bc,$0237
+.copy_navigation
+    ld a,[hl+]
+    ld [de],a
+    inc de
+    dec bc
+    ld a,b
+    or c
+    jr nz,.copy_navigation
+    ld a,RankingNoteNavigationType
+    ld [wNavigationType],a
+    ret
+
+ASSERT @ <= $4280
+    ds $4280-@
 
 ASSERT @ <= EnglishCharacters

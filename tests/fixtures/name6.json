@@ -136,7 +136,7 @@
     "map_sha1": "f42ddaad9e8d94888f97050d77a80e3ca4417d21",
     "mode": 4,
     "navigation_bytes": 567,
-    "navigation_sha1": "9471dcd6aae7a3735319ca9a9f7d3e6276ce6acf",
+    "navigation_sha1": "03f5fa84f58bb28f92d405c6fc1ca6c47caf6ace",
     "removed_characters": ".,'-?!():/[]+~%",
     "removed_clear_control_node": 76,
     "right_cursor_control_node": 79,
@@ -144,6 +144,47 @@
     "space_control_node": 75
   },
   "maximum_visible_characters": 6,
+  "ranking_note": {
+    "mode": 2,
+    "native_maximum": 13,
+    "navigation_bytes": 567,
+    "navigation_scratch": "$C800",
+    "navigation_sha1": "b9cb12742f1ffeb22d5260c6afdc488b8755546b",
+    "navigation_type": 246,
+    "right_at_end_pads_space": true,
+    "space_cell_nodes": [
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      76
+    ],
+    "space_cell_positions": [
+      [0, 7],
+      [0, 8],
+      [0, 9],
+      [0, 10],
+      [0, 17],
+      [1, 13],
+      [1, 14],
+      [1, 15],
+      [1, 16],
+      [1, 17],
+      [3, 16],
+      [3, 17],
+      [4, 12],
+      [4, 13]
+    ]
+  },
   "rankings": {
     "categories": 5,
     "end_exclusive": "$BED0",
@@ -158,8 +199,8 @@
   },
   "runtime": {
     "bank": 253,
-    "end_exclusive": "253:$4AD0",
-    "payload_bytes": 2768,
+    "end_exclusive": "253:$4D40",
+    "payload_bytes": 3392,
     "start": "253:$4000"
   }
 }

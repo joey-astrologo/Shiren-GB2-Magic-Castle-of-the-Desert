@@ -87,6 +87,14 @@ closed; the Status version had an independent too-small constructor.
 **Rule:** own the constructor and exit cleanup for both floor and Status routes. Regression
 tests must open, cancel/confirm, and inspect the restored background.
 
+The floor underlay scratch must also remain outside every popup staging buffer. A previous
+implementation stored it at `$D85A-$D871`, inside the generic `$D800-$D88B` template copy.
+An unrelated popup wrote `$8F` over the one-byte live flag, so later controller cleanup
+could restore window cells onto the dungeon map even when Shiren had not stepped on stairs.
+The regression now derives the largest popup staging range from the production template and
+rejects every stairs-runtime operand that aliases it; cleanup additionally requires a
+two-byte marker.
+
 ## The Items corner triangle is a page marker
 
 **Tempting assumption:** a triangle at the upper-right corner after closing an action menu is
@@ -104,7 +112,7 @@ artifact.
 entry screen.
 
 **Failure risk:** mode 3 has a hard four-byte Big Moai promotional gift-code contract,
-mode 4 needs six-character
+mode 2 is a 13-character Rankings note despite sharing its maximum with SOS, mode 4 needs six-character
 player names, mode 1 Blank Scroll needs its own 11-character full-name field plus a hyphen,
 and mode 0 unidentified-item naming needs a seven-character free-name field plus its native
 `FILL IN` history node. Reusing the reduced player-name graph disconnected that mode-0
@@ -121,7 +129,14 @@ off-screen cursors, and a trapped delete/confirmation path.
 **Rule:** generate and test each input mode independently. Freeze maximums, maps, connected
 navigation, history/control reachability, confirmation, return paths, presentation-only
 extensions, canonical-preview-to-free-entry transitions, and any persistent encoding
-specific to that consumer.
+specific to that consumer. The Rankings-note regression must traverse death from the
+one-HP fixture, press Start on the result, require mode 2 and maximum 13, and compare the
+live keyboard pixels to the independently generated approved map. Patch its dedicated
+`16:$7BD4` constructor; do not infer ownership from another identical native screen call.
+Mode 2 also needs its own graph: fourteen spare nodes may turn blank cells into space
+actions, while mode 4 must continue skipping those cells. Controller regressions must prove
+both a blank-cell space and right-arrow padding at an empty message end, plus the unchanged
+mode-4 right-arrow no-op.
 
 ## Big Moai gift codes are not rescue passwords
 

@@ -139,11 +139,11 @@ def load_asset(path=DEFAULT_ASSET):
         "name": "Thin Pixel-7 GB Compact",
         "spec": "assets/fonts/thin_pixel_7_compact.json",
         "spec_sha256": (
-            "0a951271246f402998f10d76ede332b726e59d599122949ac46a972a3cbd9efb"
+            "6a0a2bcf6ca497a4f226389302b481ebaa66095c781a98cd4244d3763a093eff"
         ),
         "glyph_source": "assets/fonts/thin_pixel_7_compact_glyphs.json",
         "glyph_source_sha256": (
-            "d496e4650e510f1ec5b16e5d51d3262a8ef0f17a8ee7c38225ad477996aaa6b0"
+            "e4d7154264cee0cd26680ae39c606916dbee7aee3db8c984d0e4659407d60aa7"
         ),
         "license": "licenses/Thin-Pixel-7.txt",
         "license_sha256": (

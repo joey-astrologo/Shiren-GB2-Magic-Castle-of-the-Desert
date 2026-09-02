@@ -221,6 +221,46 @@ class Name6InstallerTests(unittest.TestCase):
             self.output[navigation_at:navigation_at + name6.NAVIGATION_SIZE],
         )
 
+    def test_ranking_note_uses_every_available_blank_node_as_space(self):
+        positions = name6.ranking_note_space_positions()
+        self.assertEqual(14, len(positions))
+        self.assertEqual(14, len(set(positions)))
+        rows = tuple(zip(*[iter(name6.english_keyboard_map(self.rom))] * 20))
+        blank = english.ENGLISH_CODES[" "]
+        graph = name6.ranking_note_navigation_table(self.rom)
+        records = tuple(
+            graph[offset:offset + name6.NAVIGATION_RECORD_SIZE]
+            for offset in range(0, len(graph), name6.NAVIGATION_RECORD_SIZE)
+        )
+        for node, (row, column) in zip(
+            name6.RANKING_NOTE_SPACE_NODES, positions
+        ):
+            with self.subTest(node=node):
+                self.assertEqual(blank, rows[6 + row * 2][1 + column])
+                self.assertEqual(
+                    bytes((9 + column * 8, 73 + row * 16, 8)),
+                    records[node][4:],
+                )
+        self.assertEqual(name6.RANKING_NOTE_SPACE_NODES[0], records[25][3])
+        reached = {0}
+        pending = [0]
+        while pending:
+            node = pending.pop()
+            for target in records[node][:4]:
+                if target not in reached:
+                    reached.add(target)
+                    pending.append(target)
+        self.assertEqual(set(range(name6.NAVIGATION_NODES)), reached)
+        pointer = extract.file_offset(
+            name6.NAVIGATION_BANK,
+            name6.RANKING_NOTE_NAVIGATION_POINTER_ADDRESS,
+        )
+        self.assertEqual(bytes.fromhex("00C8"), self.output[pointer:pointer + 2])
+        runtime = extract.file_offset(
+            name6.RUNTIME_BANK, name6.RANKING_NOTE_NAVIGATION_ADDRESS
+        )
+        self.assertEqual(graph, self.output[runtime:runtime + len(graph)])
+
     def test_keyboard_atlas_contains_approved_literal_two_tone_glyphs(self):
         expected = {
             "A": "707088B888CCF8FC88FC88CC88CC0044",
@@ -696,6 +736,56 @@ class LiveName6Tests(unittest.TestCase):
                 allow_interrupts=True,
             )
             self.assertEqual(blank, bytes(pyboy.memory[0xC16D:0xC174]))
+            self.assertEqual(0, pyboy.memory[0xC152])
+        finally:
+            pyboy.stop(save=False)
+
+    def test_mode2_blank_cells_and_right_at_end_insert_spaces(self):
+        pyboy = self._pyboy()
+        try:
+            pyboy.memory[0xC195] = 2
+            pyboy.memory[0xC153] = 13
+
+            def reset():
+                for offset in range(13):
+                    pyboy.memory[0xC16D + offset] = 0xD5
+                pyboy.memory[0xC17A] = 0xFF
+                pyboy.memory[0xC152] = 0
+
+            for node in name6.RANKING_NOTE_SPACE_NODES:
+                reset()
+                self._set_bc(pyboy, node)
+                self._invoke(
+                    pyboy,
+                    name6.RUNTIME_BANK,
+                    name6.INPUT_ADDRESS,
+                    allow_interrupts=True,
+                )
+                with self.subTest(node=node):
+                    self.assertEqual(english.encode(" "), bytes(
+                        pyboy.memory[0xC16D:0xC16E]
+                    ))
+                    self.assertEqual(1, pyboy.memory[0xC152])
+
+            reset()
+            self._set_bc(pyboy, 0x4F)
+            self._invoke(
+                pyboy,
+                name6.RUNTIME_BANK,
+                name6.INPUT_ADDRESS,
+                allow_interrupts=True,
+            )
+            self.assertEqual(
+                english.encode(" "), bytes(pyboy.memory[0xC16D:0xC16E])
+            )
+            self.assertEqual(1, pyboy.memory[0xC152])
+
+            # The player-name editor retains its existing empty-right no-op.
+            reset()
+            pyboy.memory[0xC195] = 4
+            self._set_bc(pyboy, 0x4F)
+            self._invoke(pyboy, name6.RUNTIME_BANK, name6.INPUT_ADDRESS)
+            self.assertEqual(0xD5, pyboy.memory[0xC16D])
             self.assertEqual(0, pyboy.memory[0xC152])
         finally:
             pyboy.stop(save=False)

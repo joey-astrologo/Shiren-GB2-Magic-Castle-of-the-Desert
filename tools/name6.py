@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install six-character English player names without changing native records.
+"""Install English name/ranking-note entry without changing native records.
 
 The original diary stores four visible name bytes plus a terminator at offsets
 ``$16..$1A``.  Its final four bytes (offsets ``$66..$69``) have no native
@@ -32,7 +32,7 @@ INPUT_ADDRESS = 0x41D9
 RANK_WRITE_ADDRESS = 0x4110
 RANK_LOAD_ADDRESS = 0x4155
 RANK_RENDER_ADDRESS = 0x41A0
-CODE_END = 0x4250
+CODE_END = 0x4280
 
 CHARACTER_TABLE_ADDRESS = 0x4300
 DEFAULT_NAME_ADDRESS = 0x4350
@@ -46,7 +46,12 @@ GLYPH_HIGH_ADDRESS = 0x4850
 GLYPH_HIGH_START = 0x30
 GLYPH_HIGH_END = 0x58
 GLYPH_STRIDE = 16
-PAYLOAD_END = 0x4AD0
+RANKING_NOTE_NAVIGATION_ADDRESS = 0x4B00
+RANKING_NOTE_NAVIGATION_TYPE = 0xF6
+RANKING_NOTE_NAVIGATION_POINTER_ADDRESS = 0x6160
+RANKING_NOTE_NAVIGATION_SCRATCH = 0xC800
+RANKING_NOTE_SPACE_NODES = tuple(range(62, 75)) + (76,)
+PAYLOAD_END = 0x4D40
 
 DIARY_PREFIX_ADDRESS = 0xC252
 DIARY_SUFFIX_ADDRESS = 0xC2A2
@@ -174,30 +179,14 @@ class Name6Error(ValueError):
 # Assembled from tools/name6.asm at $FD:$4000.  Keeping the bytes here avoids
 # adding RGBDS as a build-time dependency; the test suite reassembles the source
 # when RGBDS is available and requires an exact match.
-ASSEMBLED_CODE = bytes.fromhex(
-    "2152C206042AFEFF282212130520F6FAA4C2FEA52016FAA5C2FE5A200F"
-    "21A2C206022AFEFF280512130520F63EFF12C93EFF2152C20605220520FC"
-    "21A2C20602220520FC3EA5EAA4C23E5AEAA5C22152C206041AFEFF281C"
-    "FED5281822130520F221A2C206021AFEFF2809FED5280522130520F2C9"
-    "115043C330403E12212D50CDAC09FA95C1FE04C03E06EA53C1C93EF4"
-    "214540CDAC09AFE04F210044114098011410CDCC0AAFE04FC979FE4D30"
-    "0F060021004309463E12214C52C3AC093E12211552C3AC0921D8BC1160"
-    "4306041ABEC013230520F8AFC9CDC640C821DCBC01F40116FF7A220B78"
-    "B120F921D8BC11604306041A22130520FAAFC921DCBC78A72807016400"
-    "093D20FC7B875F160019C9C5D53E0B21575FCDAC09AFEA0041545D2100"
-    "DD0620CD5B0AD1C13E03EA0041C5D5CDD840D1C1CDFB40FAA4C2FEA5"
-    "2010FAA5C2FE5A2009FAA2C222FAA3C277C93EFF2277C93EFFEAA5CF"
-    "EAA6CFC53E0B212555CDAC09C17BFEFFC8C5D53E0B21575FCDAC09AF"
-    "EA00411100CF0620CD5B0AD1C13E03EA0041C5D5CDC640D1C1C0C5D5"
-    "CDFB402AEAA5CF7EEAA6CFD1C1C9210FCF06042AFEFF281412130520F6"
-    "21A5CF06022AFEFF280512130520F63EFF12C9D5CD0040E101FFFF2A03"
-    "3C20FB2152C22A3C20FC545DC979FE3EDAAA40FE4BD82819FE4DD8FE4E"
-    "2808FE4F20060E4E18020E4F3E12211552C3AC0906243E12214C52C3AC"
-    "09"
-) + bytes(43) + bytes.fromhex(
-    "CD8F40AFE04F21"
-    "0046110090015002CD6B0A215048110093018002C36B0A"
-)
+ASSEMBLED_CODE = bytes.fromhex("""
+2152c206042afeff282212130520f6faa4c2fea52016faa5c2fe5a200f21a2c206022afeff280512130520f63eff12c93eff2152c20605220520fc21a2c20602220520fc3ea5eaa4c23e5aeaa5c22152c206041afeff281cfed5281822130520f221a2c206021afeff2809fed5280522130520f2c9115043
+c330403e12212d50cdac09fa95c1fe04c03e06ea53c1c93ef4214540cdac09afe04f210044114098011410cdcc0aafe04fc979fe4d300f060021004309463e12214c52c3ac093e12211552c3ac0921d8bc11604306041abec013230520f8afc9cdc640c821dcbc01f40116ff7a220b78b120f921d8bc1160
+4306041a22130520faafc921dcbc78a72807016400093d20fc7b875f160019c9c5d53e0b21575fcdac09afea0041545d2100dd0620cd5b0ad1c13e03ea0041c5d5cdd840d1c1cdfb40faa4c2fea52010faa5c2fe5a2009faa2c222faa3c277c93eff2277c93effeaa5cfeaa6cfc53e0b212555cdac09c17b
+feffc8c5d53e0b21575fcdac09afea00411100cf0620cd5b0ad1c13e03ea0041c5d5cdc640d1c1c0c5d5cdfb402aeaa5cf7eeaa6cfd1c1c9210fcf06042afeff281412130520f621a5cf06022afeff280512130520f63eff12c9d5cd0040e101ffff2a033c20fb2152c22a3c20fc545dc979fe3edaaa40fe
+4b38342838fe4c282efe4e2820fe4f201efa95c1fe022011c5fa52c15f1600216dc1197ec1fed528140e4e18020e4f3e12211552c3ac09fa95c1fe02c006243e12214c52c3ac090000000000000000000000c5cd8f40afe04f210046110090015002cd6b0a215048110093018002cd6b0ac179fe02c02100
+4b1100c80137022a12130b78b120f83ef6ea4ec1c900000000000000000000000000000000000000
+""")
 
 
 ROUTINE_PATCHES = (
@@ -274,6 +263,13 @@ CALL_PATCHES = (
         bytes.fromhex("3EF4214540CDAC09"),
         SCREEN_ADDRESS,
     ),
+    (
+        "ranking_note_screen",
+        16,
+        0x7BD4,
+        bytes.fromhex("3EF4214540CDAC09"),
+        SCREEN_ADDRESS,
+    ),
 )
 
 
@@ -338,6 +334,23 @@ def character_positions():
     if set(positions) != set(KEYBOARD_CHARACTERS):
         raise Name6Error("English name-entry layout does not match its character table")
     return tuple(positions[character] for character in KEYBOARD_CHARACTERS)
+
+
+def ranking_note_space_positions():
+    """Return the fourteen blank character cells usable as message spaces."""
+    positions = []
+    for block_index, block in enumerate(KEYBOARD_BLOCKS):
+        for row, text in enumerate(block):
+            for column, character in enumerate(text):
+                if character == " ":
+                    positions.append(
+                        (row, KEYBOARD_BLOCK_COLUMNS[block_index] + column)
+                    )
+    if len(positions) < len(RANKING_NOTE_SPACE_NODES):
+        raise Name6Error("ranking-note does not have enough blank space cells")
+    # Fourteen formerly inert node IDs are available. Prefer the four blanks
+    # immediately after Z, then fill the right-hand block in reading order.
+    return tuple(positions[:len(RANKING_NOTE_SPACE_NODES)])
 
 
 def default_name_bytes():
@@ -510,7 +523,7 @@ def _source_keyboard_map(rom):
 
 
 def english_keyboard_map(rom):
-    """Return the mode-4-only 20x16 English tile-ID map."""
+    """Return the shared mode-2/mode-4 20x16 English tile-ID map."""
     rows = [
         bytearray(row)
         for row in zip(*[iter(_source_keyboard_map(rom))] * 20)
@@ -563,8 +576,8 @@ def _source_navigation_table(rom):
     return raw
 
 
-def english_navigation_table(rom):
-    """Return mode 4's navigation graph with all blank controls skipped."""
+def _navigation_table(rom, positioned_nodes):
+    """Build the shared five-row grid for an exact node-to-cell mapping."""
     records = [
         bytearray(raw)
         for raw in zip(
@@ -574,11 +587,13 @@ def english_navigation_table(rom):
 
     # The first four bytes are Down, Up, Left and Right.  Rebuild those edges
     # and cursor coordinates from the exact five/five/six-column mockup.
-    positions = character_positions()
-    node_at = {position: node for node, position in enumerate(positions)}
+    positions = dict(positioned_nodes)
+    if len(positions) != len(set(positions.values())):
+        raise Name6Error("English navigation assigns two nodes to one cell")
+    node_at = {position: node for node, position in positions.items()}
     rows = {row: [] for row in range(KEYBOARD_GRID_ROWS)}
     columns = {column: [] for column in range(18)}
-    for node, (row, column) in enumerate(positions):
+    for node, (row, column) in positions.items():
         rows[row].append(node)
         columns[column].append(node)
         records[node][4] = 9 + column * 8
@@ -628,8 +643,8 @@ def english_navigation_table(rom):
     for node, neighbors in controls.items():
         records[node][:4] = bytes(neighbors)
 
-    active = set(range(len(KEYBOARD_CHARACTERS))) | {75, 77, 78, 79, 80}
-    blanks = set(range(len(KEYBOARD_CHARACTERS), 75)) | {76}
+    active = set(positions) | {75, 77, 78, 79, 80}
+    blanks = set(range(NAVIGATION_NODES)) - active
     for node in active:
         leaked = set(records[node][:4]) & blanks
         if leaked:
@@ -653,6 +668,39 @@ def english_navigation_table(rom):
     result = bytes(value for record in records for value in record)
     if len(result) != NAVIGATION_SIZE:
         raise Name6Error("English navigation table changed size")
+    return result
+
+
+def english_navigation_table(rom):
+    """Return mode 4's navigation graph with all blank controls skipped."""
+    result = bytearray(
+        _navigation_table(rom, enumerate(character_positions()))
+    )
+    # Generic navigation types are pointer-table indices without a bounds
+    # check. Type $F6 reads this otherwise unreachable mode-4 node-64 pair.
+    pointer = RANKING_NOTE_NAVIGATION_POINTER_ADDRESS - NAVIGATION_ADDRESS
+    result[pointer:pointer + 2] = bytes(
+        (
+            RANKING_NOTE_NAVIGATION_SCRATCH & 0xFF,
+            RANKING_NOTE_NAVIGATION_SCRATCH >> 8,
+        )
+    )
+    return bytes(result)
+
+
+def ranking_note_navigation_table(rom):
+    """Return mode 2's graph with every internal blank acting as SPACE."""
+    positioned = list(enumerate(character_positions()))
+    positioned.extend(
+        zip(RANKING_NOTE_SPACE_NODES, ranking_note_space_positions())
+    )
+    result = _navigation_table(rom, positioned)
+    if set(range(NAVIGATION_NODES)) != (
+        set(range(len(KEYBOARD_CHARACTERS)))
+        | set(RANKING_NOTE_SPACE_NODES)
+        | {75, 77, 78, 79, 80}
+    ):
+        raise Name6Error("ranking-note navigation does not own every node")
     return result
 
 
@@ -686,6 +734,10 @@ def runtime_payload(rom, approved=None):
         keyboard_glyph_bytes(
             GLYPH_HIGH_START, GLYPH_HIGH_END, approved=approved
         ),
+    )
+    place(
+        RANKING_NOTE_NAVIGATION_ADDRESS,
+        ranking_note_navigation_table(rom),
     )
     return bytes(payload)
 
@@ -755,12 +807,12 @@ def install(rom, approved=None, verify_original=True, checksums=True):
             target, len(original), tail=False
         )
 
+    approved = approved or english_font.load_approved()
+    payload = runtime_payload(out, approved=approved)
     navigation = english_navigation_table(out)
     navigation_at = _offset(NAVIGATION_BANK, NAVIGATION_ADDRESS)
     out[navigation_at:navigation_at + len(navigation)] = navigation
 
-    approved = approved or english_font.load_approved()
-    payload = runtime_payload(out, approved=approved)
     runtime_at = _runtime_offset(RUNTIME_ADDRESS)
     existing = bytes(out[runtime_at:runtime_at + len(payload)])
     if verify_original and any(existing):
@@ -778,6 +830,7 @@ def summary(rom, approved=None):
     approved = approved or english_font.load_approved()
     keyboard = english_keyboard_map(rom)
     navigation = english_navigation_table(rom)
+    ranking_navigation = ranking_note_navigation_table(rom)
     glyphs = (
         keyboard_glyph_bytes(
             GLYPH_LOW_START, GLYPH_LOW_END, approved=approved
@@ -862,5 +915,19 @@ def summary(rom, approved=None):
             "glyph_bytes": len(glyphs),
             "glyph_sha1": sha1(glyphs).hexdigest(),
             "shared_mode3_source_unchanged": True,
+        },
+        "ranking_note": {
+            "mode": 2,
+            "native_maximum": 13,
+            "navigation_type": RANKING_NOTE_NAVIGATION_TYPE,
+            "navigation_scratch": "$%04X"
+            % RANKING_NOTE_NAVIGATION_SCRATCH,
+            "space_cell_nodes": list(RANKING_NOTE_SPACE_NODES),
+            "space_cell_positions": [
+                list(position) for position in ranking_note_space_positions()
+            ],
+            "navigation_bytes": len(ranking_navigation),
+            "navigation_sha1": sha1(ranking_navigation).hexdigest(),
+            "right_at_end_pads_space": True,
         },
     }

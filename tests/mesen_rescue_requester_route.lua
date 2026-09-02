@@ -10,7 +10,12 @@ local cpuMem = emu.memType.gameboyMemory
 local workMem = emu.memType.gbWorkRam or emu.memType.gameboyWorkRam
 local STATE_SCREEN = 0x70EB86CD
 local CONFIRMATION_SCREEN = 0xF14ED955
-local LOCALIZED_SCREEN = 0x99453146
+-- This screen intentionally changed when its native corner quotes became the
+-- dedicated ASCII quote glyph.  Do not bless a replacement whole-frame hash:
+-- the production punctuation scan and frozen installed glyph independently
+-- guard that change, while this route guards the native password protocol.
+local PRE_ASCII_QUOTE_SCREEN = 0x99453146
+local LOCALIZED_SCREEN = 0
 local EXPECTED_NATIVE = "6F7359324D4E6932506F73716DFF"
 local EXPECTED_DIARY = "3EC1C2C48F7F09080201"
 

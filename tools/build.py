@@ -28,6 +28,7 @@ import menu_graphics
 import name6
 import rescue_presentation
 import runtime_widths
+import shop_sale_count
 import spell_input
 import stairs_menu
 import service_menus
@@ -265,6 +266,7 @@ def build_rom(
     relocated, _allocation = insert.write_relocated(rom, allocation)
     output = english_font.install(relocated, approved=approved_font)
     output = item_formatting.install(output)
+    output = shop_sale_count.install(output)
     output = item_status.install(output)
     output = credit_screen.install(output)
     output = wait_screen.install(output)
@@ -452,6 +454,7 @@ def main(argv=None):
         menu_graphics.MenuGraphicsError,
         name6.Name6Error,
         runtime_widths.RuntimeWidthError,
+        shop_sale_count.ShopSaleCountError,
         spell_input.SpellInputError,
         unidentified_names.UnidentifiedNameError,
         wait_screen.WaitScreenError,

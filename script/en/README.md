@@ -10,8 +10,9 @@ row contains only a stable record `id`, one or more semantic `sections`, and an
 
 Edit only `english`. A blank cell means untranslated. Use `<empty>` only when the
 finished English record must intentionally contain zero bytes. Preserve renderer
-tokens such as `<lookup:...>`, `<number:...>`, `<name>`, `<speaker>`, `<br>`,
-`<page>` and `<box>`.
+tokens such as `<lookup:...>`, `<number:...>`, `<name>`, `<br>`, `<page>` and `<box>`.
+Use straight ASCII `"` for quotation; Japanese `<quoteOpen>`, `<quoteClose>`,
+`<speaker>`, and `<speakerEnd>` glyphs fail production lint.
 
 Three families have stricter owners. Author `story_and_event_dialogue` in the
 scene-ordered `../editing/prose.tsv`, and group-11 dungeon item/action results in

@@ -30,7 +30,7 @@ The production English code page contains digits, uppercase, lowercase, space, a
 punctuation:
 
 ```text
-.,'-?!():/[]+~%
+.,'-?!():/[]+~%"
 ```
 
 The mapping is intentionally separate from the Japanese source codec. Codes `$30-$49`,
@@ -39,8 +39,10 @@ font is installed. Keeping separate codecs prevents extraction from misreading J
 bytes through the localized font mapping.
 
 Unencodable characters are errors; the tools never silently replace them. Use straight
-ASCII apostrophes and punctuation. Visible dialogue attribution is `Name: dialogue`, not
-Japanese corner quotes.
+ASCII apostrophes, double quotes, and punctuation. Visible dialogue attribution is
+`Name: dialogue`, not Japanese corner quotes. Quoted speech, labels, passwords, and menu
+names use the one-byte ASCII `"` glyph at `$59`; production lint rejects the native
+`<quoteOpen>`, `<quoteClose>`, `<speaker>`, and `<speakerEnd>` artwork.
 
 The Japanese source also contains two-byte prefixed glyphs beginning with `$F0-$F2`.
 `data/kanji.tsv` maps all 281 referenced valid glyphs: 270 kanji, four symbols, and seven
@@ -154,6 +156,10 @@ amounts, monster-meat roots, and status decorators. `item_formatting.py` changes
 language-bearing producer punctuation to `N Name`, `Name[N]`, and the English `-`; it does
 not encode those additions into group-4 translations. The exact object fields, row budget,
 and visual gallery are documented in [ITEM_FORMATTING.md](ITEM_FORMATTING.md).
+
+The town shop's multiple-sale count is another runtime-produced value. Native code appends
+the Japanese item counter `ko` to the decimal count; `shop_sale_count.py` terminates that
+cached value after its digits so the translated `<cF8>5 items` sentence supplies the noun.
 
 ## 7. Storage model
 

@@ -92,7 +92,10 @@ uses 36 pixels and `Stay Here` 46.
 
 Geometry and teardown are one feature. Widening only the visible box leaves the added
 right-hand column behind after dismissal, which is why both routes have explicit exit
-regressions.
+regressions. The floor route stores its ten covered BG cells and destination in bank-7
+scratch `$D8E0-$D8F7`, beyond every generic/localized popup template and the service-popup
+scratch block. Cleanup requires the exact two-byte `$53/$AC` live marker; ordinary popup
+staging therefore cannot accidentally authorize a stale stairs restore.
 
 ## Service popups
 
@@ -216,6 +219,7 @@ The graphical input dispatcher has independent modes and consumers:
 | Mode/path | Purpose | Contract |
 |---|---|---|
 | Mode 0 | Unidentified item Name / Fill In | Seven-character free-name field; each `FILL IN` press cycles notebook/history roots into a 14-cell canonical preview aligned to the original field origin; dedicated bank-250 map/navigation; confirmation saves a canonical token that renders the full translated root |
+| Mode 2 | Rankings note after death | 13-character native field and storage; dedicated screen call at `16:$7BD4`; approved English name-keyboard map/input in bank 253; private type `$F6` graph in `$C800` makes fourteen blank slots enter spaces, and right at the empty message end pads one space before advancing |
 | Mode 3 | Big Moai promotional gift codes ("spells") | Four bytes; A-Z/0-9; dedicated bank-252 map/navigation/runtime; independent of Wanderer Rescue |
 | Mode 4 | Player name | Six visible characters; A-Z/a-z/0-9 plus space and editing controls; bank 253 |
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |

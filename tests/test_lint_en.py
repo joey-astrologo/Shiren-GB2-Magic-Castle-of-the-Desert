@@ -181,6 +181,29 @@ class OriginalRomTranslationLintTests(unittest.TestCase):
             ),
         )
 
+    def test_japanese_quote_glyphs_are_rejected_from_english(self):
+        record = self.by_id["195:$5D43"]
+        for marker in ("<quoteOpen>", "<quoteClose>", "<speaker>", "<speakerEnd>"):
+            with self.subTest(marker=marker):
+                translated = self._translated(
+                    ((record.id, "Koppa: %sNo.%s<page><box>" % (marker, marker)),)
+                )
+                issues = lint_en.check_japanese_quotes(
+                    record, next(iter(translated.values()))
+                )
+                self.assertEqual(
+                    ["japanese_quote_glyph"],
+                    [issue.kind for issue in issues],
+                )
+
+        translated = self._translated(
+            ((record.id, 'Koppa: "No."<page><box>'),)
+        )
+        self.assertEqual(
+            (),
+            lint_en.check_japanese_quotes(record, next(iter(translated.values()))),
+        )
+
     def test_glossary_splits_and_within_family_collisions_fail(self):
         translated = self._translated(
             (

@@ -30,6 +30,7 @@ import name6
 import blank_scroll
 import credit_screen
 import rescue_presentation
+import shop_sale_count
 import spell_input
 import stairs_menu
 import service_menus
@@ -171,6 +172,8 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in item_formatting.owned_ranges()
             for offset in range(start, end)
         }
+        sale_count_start, sale_count_end = shop_sale_count.owned_range()
+        sale_count_offsets = set(range(sale_count_start, sale_count_end))
         credit_screen_offsets = {
             offset
             for start, end in credit_screen.owned_ranges()
@@ -243,6 +246,7 @@ class TranslationBuildTests(unittest.TestCase):
             | script_offsets
             | font_offsets
             | item_formatting_offsets
+            | sale_count_offsets
             | item_status_offsets
             | credit_screen_offsets
             | wait_screen_offsets

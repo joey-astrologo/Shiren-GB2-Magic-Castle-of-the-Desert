@@ -3,7 +3,7 @@
   "status": "approved third-party font; installed by default in the English ROM",
   "design": {
     "source": "Thin Pixel-7 version 1.0 by Sizenko Alexander / Style-7",
-    "fit": "Thin Pixel-7's exact 20ppem binary letter and punctuation pixels, with playtest-reviewed comma, question-mark, colon, plus, minus and compact percent refinements; g/p/q/y retain their normal lowercase baseline and complete two-row tails while one repeated bowl/stem row is omitted; one repeated lowercase-j stem row is removed to fit 8px. Numerals use playtest-reviewed compact drawings with uniform 5px tabular advances.",
+    "fit": "Thin Pixel-7's exact 20ppem binary letter and punctuation pixels, with playtest-reviewed comma, question-mark, colon, plus, minus, compact percent, and straight double-quote refinements; g/p/q/y retain their normal lowercase baseline and complete two-row tails while one repeated bowl/stem row is omitted; one repeated lowercase-j stem row is removed to fit 8px. Numerals use playtest-reviewed compact drawings with uniform 5px tabular advances.",
     "license": "Bundled EULA permits use in freeware software with credit; commercial or business use requires a separate license. See licenses/Thin-Pixel-7.txt.",
     "credit": "Thin Pixel-7 by Sizenko Alexander (Style-7), adapted to the Game Boy cell for the Shiren GB English patch.",
     "upstream_ttf_sha256": "40c895c0762ecd1cea0082cbd05c169becbe065f6b7ae6b939162337d49f0fb8"
@@ -12,7 +12,7 @@
     "name": "Thin Pixel-7 GB Compact 8x8 glyph rows",
     "file": "assets/fonts/thin_pixel_7_compact_glyphs.json",
     "format": "shiren-gb-8x8-rows-v1",
-    "sha256": "d496e4650e510f1ec5b16e5d51d3262a8ef0f17a8ee7c38225ad477996aaa6b0",
+    "sha256": "e4d7154264cee0cd26680ae39c606916dbee7aee3db8c984d0e4659407d60aa7",
     "provenance": "Generated from the upstream Thin Pixel-7 20ppem binary strike, with the project-reviewed digit and symbol adaptations declared in design.fit. The third-party TTF is not redistributed; the adapted raster rows and required attribution are retained here."
   },
   "advances": {
@@ -28,6 +28,6 @@
     "0": 5, "1": 5, "2": 5, "3": 5, "4": 5, "5": 5,
     "6": 5, "7": 5, "8": 5, "9": 5,
     "?": 6, "!": 2, "(": 4, ")": 4, ":": 2, "/": 7,
-    "[": 4, "]": 4, "+": 5, "~": 6, "%": 7
+    "[": 4, "]": 4, "+": 5, "~": 6, "%": 7, "\"": 4
   }
 }

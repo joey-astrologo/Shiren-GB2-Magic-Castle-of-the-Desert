@@ -58,7 +58,7 @@ class EnglishCodecTests(unittest.TestCase):
         self.assertEqual(page["space"], english.ENGLISH_CODES[" "])
         self.assertEqual(list(range(page["lowercase"][0], page["lowercase"][1] + 1)),
                          [english.ENGLISH_CODES[chr(ord("a") + index)] for index in range(26)])
-        punctuation = ".,'-?!():/[]+~%"
+        punctuation = ".,'-?!():/[]+~%\""
         self.assertEqual(list(range(page["punctuation"][0], page["punctuation"][1] + 1)),
                          [english.ENGLISH_CODES[ch] for ch in punctuation])
 
@@ -73,6 +73,11 @@ class EnglishCodecTests(unittest.TestCase):
         self.assertEqual(renderer, english.decode(english.encode(renderer)))
         source = "Hi, <name>!<br>Floor <number:34:12>.<page><box>"
         self.assertEqual(source, english.decode_source(english.encode_source(source)))
+
+    def test_ascii_double_quote_has_a_dedicated_english_slot(self):
+        self.assertEqual(0x59, english.ENGLISH_CODES['"'])
+        quoted = 'Select "Adventure".<page><box>'
+        self.assertEqual(quoted, english.decode_source(english.encode_source(quoted)))
 
     def test_f8_template_selectors_keep_the_native_byte_domain(self):
         # Ordinary English lowercase uses the localized code page, while the

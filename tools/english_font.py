@@ -3,7 +3,7 @@
 
 GB2 already has the renderer we need.  Its one-byte font stores 8x8 2bpp cells at
 3:$4842 and reads the horizontal advance from the first page of the table at 3:$4442.
-This installer changes only the 78 slots owned by ``english.ENGLISH_CODES``, then fixes
+This installer changes only the 79 slots owned by ``english.ENGLISH_CODES``, then fixes
 the cartridge checksums. The classic style retains the original black-only adapted
 raster. The shadowed style adds the approved color-2 shadow at ``+1,+1`` before its
 unchanged color-3 ink is redrawn on top. A disconnected visible bottom shadow pixel moves

@@ -16,7 +16,7 @@ import wait_screen
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
 ASSET_PATH = ROOT / "assets" / "graphics" / "wait_screen.json"
-ASSET_SHA256 = "a17d8847a382c5d1303570238fee5f1d50b4de53971467eb24fe9ae9cc6dee28"
+ASSET_SHA256 = "d38cf756b5a9742575a1e281d261e7bd83164455289d1b6f5e13c23c82ea165b"
 SYMBOLS = ".lg#"
 BANK = 0x56
 TOP_ADDRESS = 0x7A80

@@ -28,7 +28,7 @@ class FontShadowAuditionTests(unittest.TestCase):
         self.assertEqual(3, font_shadow_audition.INK_COLOR)
         self.assertEqual((172, 172, 172), font_shadow_audition.PREVIEW_SHADOW)
         self.assertIn("+", font_shadow_audition.EDGE_CASES)
-        self.assertEqual(78, len(font_shadow_audition.ORDERED_CHARACTERS))
+        self.assertEqual(79, len(font_shadow_audition.ORDERED_CHARACTERS))
         self.assertEqual(
             set(self.approved.rows), set(font_shadow_audition.ORDERED_CHARACTERS)
         )
@@ -167,7 +167,7 @@ class FontShadowAuditionTests(unittest.TestCase):
     def test_report_exposes_cell_clipping_and_metric_overhangs(self):
         report = font_shadow_audition.analyze(self.approved)
         self.assertEqual([1, 1], report["shadow_offset"])
-        self.assertEqual(78, report["glyph_count"])
+        self.assertEqual(79, report["glyph_count"])
         self.assertEqual(
             [",", "Q", "g", "j", "p", "q", "y"],
             report["bottom_clipped_glyphs"],
@@ -185,7 +185,7 @@ class FontShadowAuditionTests(unittest.TestCase):
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                 "abcdefghijklmnopqrstuvwxyz",
                 "0123456789",
-                ".,'-?!():/[]+~%",
+                ".,'-?!():/[]+~%\"",
             ],
             report["inventory_rows"],
         )

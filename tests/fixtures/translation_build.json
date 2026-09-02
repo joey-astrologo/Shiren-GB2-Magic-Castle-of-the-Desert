@@ -36,25 +36,25 @@
     "exact_references": 7163,
     "written_banks": 13,
     "header_checksum": "CB",
-    "global_checksum": "5B00",
+    "global_checksum": "FBC7",
     "overridden_records": 1,
     "overridden_references": 1
   },
   "output": {
     "size": 4194304,
-    "sha1": "0f8f0912ab45c59f1d61427aaef764ab8cf5dc24",
-    "sha256": "696b9cc8ae47c15a0eb6a57baa0d878645ef85ac9b2c05d5aba54a8e0f2679f6",
-    "md5": "432cf1b9d3325c249662eb04b3533267",
+    "sha1": "41d03d759474f4da9a826f3547f429087b89be03",
+    "sha256": "fa7d410ea4a9bd0dadedebddc3813511827bec5482d976cf4ac08b45ec4336a6",
+    "md5": "7ac2df1bd0f24157bbbb987bb4d3b9a3",
     "header_checksum": "CB",
-    "global_checksum": "5B00",
-    "changed_bytes": 236953,
-    "mutation_offsets_sha256": "0e0df8991bd1b3fe35ac6be63f8de392a4619e93791c00d4581619b651312301",
+    "global_checksum": "FBC7",
+    "changed_bytes": 237623,
+    "mutation_offsets_sha256": "c3c2a060e7fc4e6ad3fdf37323aa9b4933f1b2f3c1a703b0cdcb26b66e42a8c0",
     "directory_sha1": "6fba5b254857f219c468665a9ee82638d28e1e3f",
     "written_banks_sha1": "634f0751458bad74851a24c03ee3a67c02b1993f"
   },
   "font_regions": {
-    "widths": "9b8ad20873f469d6a83ef136dbf94e9ba0a80e4e",
-    "single": "82ea7e77b9e5151bf4b7460d1e80980c2b14b984",
+    "widths": "bdff74e59b52a3f84626fd5703950d42c0b1bc94",
+    "single": "909f9745ff87ec669ba8aac0bb63392d67a3a86a",
     "kanji": "0d23ea9a4ac0772bcfb524e84ea582e9e24c52bc"
   },
   "allocation_manifest": {

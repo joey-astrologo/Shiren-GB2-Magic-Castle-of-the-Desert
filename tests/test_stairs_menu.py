@@ -18,6 +18,7 @@ import english_font
 import extract
 import mesen_state
 import runtime_widths
+import service_menus
 import stairs_menu
 import surfaces
 import translations
@@ -73,6 +74,35 @@ class StairsMenuInstallerTests(unittest.TestCase):
         self.assertEqual([(0x25 + index, 0x08) for index in range(7)], rows[1][1:-1])
         self.assertEqual((0x7C, 0x40), rows[-1][0])
         self.assertEqual((0x7C, 0x60), rows[-1][-1])
+
+    def test_floor_scratch_does_not_alias_any_popup_staging_cell(self):
+        """A non-stairs popup must not be able to arm stairs cleanup.
+
+        Test the installed machine code rather than implementation constants:
+        every staged popup byte is live from D800 through the largest localized
+        template, so none of those addresses may occur as a floor-runtime
+        memory operand.
+        """
+        floor_runtime = stairs_menu.floor_runtime_bytes()
+        popup_staging = range(
+            0xD800,
+            0xD800 + len(service_menus.service_template_bytes()),
+        )
+        aliased = [
+            address
+            for address in popup_staging
+            if address.to_bytes(2, "little") in floor_runtime
+        ]
+        self.assertEqual([], aliased)
+        self.assertLess(
+            service_menus.BLACKSMITH_TILE_FLAG_ADDRESS,
+            stairs_menu.FLOOR_SAVED_CELLS_ADDRESS,
+        )
+        self.assertEqual(
+            0xFF,
+            stairs_menu.FLOOR_SAVED_FLAG_VALUE
+            ^ stairs_menu.FLOOR_SAVED_FLAG_END_VALUE,
+        )
 
     def test_installer_changes_only_reviewed_code_padding_and_checksums(self):
         allowed = {

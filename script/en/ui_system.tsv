@@ -123,7 +123,7 @@ id	sections	english
 192:$6FF2	menus_and_system_labels	Congratulations!!<page><box>Return to the Rescue Team<br>and report your success!
 192:$7019	menus_and_system_labels	Analysis failed.
 192:$7028	menus_and_system_labels	Revival complete!<br>Select Continue<br>to resume the game.
-192:$7052	menus_and_system_labels	Thank-You Password:<br><quoteOpen><cF8>2<quoteClose><br>Give it to your rescuer.
+192:$7052	menus_and_system_labels	"Thank-You Password:<br>""<cF8>2""<br>Give it to your rescuer."
 192:$707A	menus_and_system_labels	You will no longer be rescued.<br>Are you sure?<br><hspace:18>Yes<hspace:40>No
 192:$709C	menus_and_system_labels	You cannot call for help<br>right now.
 192:$70BC	menus_and_system_labels	Password
@@ -323,7 +323,7 @@ id	sections	english
 193:$7118	adventure_and_miscellaneous_ui	Reset
 193:$711D	adventure_and_miscellaneous_ui	Recap
 193:$7122	adventure_and_miscellaneous_ui	Thank-You Spell
-193:$712B	adventure_and_miscellaneous_ui	  <EC><quoteOpen>SOS Password<quoteClose><EC><br><cF8>0<br><br>Give the password to a friend<br>so they can rescue you.<br>You can also view it from<br><quoteOpen>Adventure<quoteClose><2E><quoteOpen>SOS!<quoteClose><br>on the Game Menu.<br>You may also request rescue<br>using a Link Cable.
+193:$712B	adventure_and_miscellaneous_ui	"  <EC>""SOS Password""<EC><br><cF8>0<br><br>Give the password to a friend<br>so they can rescue you.<br>You can also view it from<br>""Adventure""<2E>""SOS!""<br>on the Game Menu.<br>You may also request rescue<br>using a Link Cable."
 193:$71B4	adventure_and_miscellaneous_ui	Lottery Results
 193:$71BC	adventure_and_miscellaneous_ui	1st Prize<br>    081536<br>2nd Prize<br>    092215<br>    111109<br>    151326<br>    141873<br>    201895<br>    229534
 193:$7211	adventure_and_miscellaneous_ui	3rd Prize<br>    003466<br>    007628<br>    052101<br>    088092<br>    123744<br>    139127<br>    174048<br>    191335<br>    200053
@@ -373,7 +373,7 @@ id	sections	english
 193:$7583	adventure_history_labels	Filled the bank with Gitan
 193:$7594	adventure_history_labels	<hspace:16>Clear Campaign!<br><br>Wanderer Points<hspace:05><27> <cF8>e<br>Diary ID<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>d
 193:$75CC	adventure_history_labels	Congratulations!!<br>Shiren goods will be sent<br>to the first 100 applicants.<br>On a postcard, clearly write:<br><D2>Postal Code<D2>Address<D2>Name<D2>Age<br><D2>Phone<D2>Wanderer Points<br><D2>ID Number<D2>Password<br>Send it to:<br>160-0022 Tokyo, Shinjuku-ku,<br>Shinjuku 6-24-20,<br>Sigma Higashi-Shinjuku, 10F
-193:$7678	adventure_history_labels	Chunsoft Co., Ltd.<br><quoteOpen>True Wanderer<quoteClose> Department<br>Send it to the address above.<br>No inquiries by phone.<br>Thank you for understanding.<br>Wanderer Points<hspace:05><27> <cF8>c<br>ID Number<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>b
+193:$7678	adventure_history_labels	"Chunsoft Co., Ltd.<br>""True Wanderer"" Department<br>Send it to the address above.<br>No inquiries by phone.<br>Thank you for understanding.<br>Wanderer Points<hspace:05><27> <cF8>c<br>ID Number<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>b"
 193:$7764	condition_labels	Asleep
 193:$7769	condition_labels	Paralyzed
 193:$776F	condition_labels	Onigiri
@@ -472,10 +472,10 @@ id	sections	english
 194:$4EDE	ranking_outcomes_and_labels	Smith's Forge cleared!
 194:$4EED	ranking_outcomes_and_labels	Pot Cave cleared!
 194:$4EF9	ranking_outcomes_and_labels	Bamboo
-194:$4EFC	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Select<27>Await Rescue<br>Start<hspace:05><27>Leave Ranking Note
-194:$4F2D	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Select<27>Await Rescue
-194:$4F4A	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town<br>Start<hspace:05><27>Leave Ranking Note
-194:$4F6C	ranking_outcomes_and_labels	A Button<hspace:07><27>Return to Town
+194:$4EFC	ranking_outcomes_and_labels	A Button: Return to Town<br>Select: Await Rescue<br>Start: Leave Ranking Note
+194:$4F2D	ranking_outcomes_and_labels	A Button: Return to Town<br>Select: Await Rescue
+194:$4F4A	ranking_outcomes_and_labels	A Button: Return to Town<br>Start: Leave Ranking Note
+194:$4F6C	ranking_outcomes_and_labels	A Button: Return to Town
 194:$4F7A	ranking_outcomes_and_labels	Lv
 194:$4F7D	ranking_outcomes_and_labels	<EC>
 194:$4F7F	ranking_outcomes_and_labels	SOS

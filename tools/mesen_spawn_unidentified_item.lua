@@ -1,4 +1,4 @@
--- mesen_spawn_unidentified_item.lua
+﻿-- mesen_spawn_unidentified_item.lua
 -- Prepare one deterministic unidentified-item Name / Fill In test in Shiren GB2.
 --
 -- HOW TO USE
@@ -8,9 +8,10 @@
 --   4. Choose Name to test free entry. Reload the state and rerun this helper before
 --      separately testing Name > Fill In.
 --
--- The default probe is a real Windblade Scroll presented as an unidentified Rabbit
--- Scroll. Only Windblade's notebook/history bit is enabled by the helper. This makes
--- Fill In deterministic without identifying the item or populating unrelated history.
+-- The target probe is presented as an unidentified item. Only its notebook/history bit
+-- is enabled by the helper. This makes Fill In deterministic without identifying the
+-- item or populating unrelated history. Set GB2_UNIDENTIFIED_TARGET for an automated
+-- category-specific run; otherwise the interactive default below is used.
 --
 -- To exercise another category, change TARGET_KEY to one of:
 --   passage_bracelet, herb, windblade_scroll, knockback_staff, preservation_pot
@@ -19,7 +20,7 @@
 -- state, and this helper deliberately refuses to overwrite an existing custom mapping.
 -- It modifies live WRAM, not the ROM. Mesen may later persist those changes to SRAM.
 
-local TARGET_KEY = "windblade_scroll"
+local TARGET_KEY = os.getenv("GB2_UNIDENTIFIED_TARGET") or "preservation_pot"
 
 local INVENTORY_BANK = 1
 local INVENTORY_BASE = 0xD2C1

@@ -75,6 +75,7 @@ text growth.
 | 17 | `$76B2-$7D8B` | Native Training/SOS/Revival/Thank-You payload builders, packet codec, checksum, and bit transforms | Preserve while `rescue_password.py` freezes and reproduces the protocol; do not overlay before the two-diary fixture passes |
 | 17 | `$792D-$797A` | SOS semantic builder: seed, diary-ID low word, actor position, dungeon, floor, diary record, and bit packing | Preserved and guarded by `rescue_password.py` |
 | 17 | `$4747-$474E` | Generated communication-code dynamic-text cache call | `rescue_presentation.py` redirects this call only; native `$C16D` bytes are restored after the localized cache copy |
+| 17 | `$4309-$430E` | Multiple-item town-shop count suffix | `shop_sale_count.py` terminates the cached decimal value instead of appending Japanese `ko` |
 | 16 | `$68DF-$6953` | Revival decoder success route and immediate Thank-You generator | Preserved and guarded by `rescue_password.py` |
 | 16 | `$7B8A-$7BD1` | SOS generation route | Preserved and guarded by `rescue_password.py` |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
@@ -84,9 +85,10 @@ text growth.
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
 | 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
 | 16 | `$5F9A-$5F9B` | Native navigation type `$13` pointer to `$6625` | Preserve; shared nine-row list used by Adventure -> Continue/Secrets/Reset/Recap |
-| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$615F` then hold the two private `$C800` graph pointers below |
+| 16 | `$5F9C-$61D2` | Mode-4 name navigation graph | Replaced by `name6.py`; dead node-64 bytes `$615C-$6161` then hold the three private `$C800` graph pointers below |
 | 16 | `$615C-$615D` | Private mode-0 navigation pointer `$C800` | `unidentified_names.py` only; overlaps the proven-unreachable Down/Up pair of English name-entry node 64 |
 | 16 | `$615E-$615F` | Private rescue navigation pointer `$C800` | `rescue_presentation.py` only; type `$F5`, overlapping the proven-unreachable Left/Right pair of English name-entry node 64 |
+| 16 | `$6160-$6161` | Private mode-2 Rankings-note navigation pointer `$C800` | `name6.py` only; type `$F6`, overlapping the proven-unreachable x/y pair of English name-entry node 64 |
 | 16 | `$64B9-$6624` | Mode-3 Big Moai gift-code navigation graph | Replaced by `spell_input.py` |
 | 16 | `$6625-$6663` | Native nine-node vertical-list graph | Preserve; seven-byte records with fixed x `$36` and y `$17,$22,...,$6F` |
 | 16 | `$681B-$6822` | Mode-0 item-name screen redirect | `unidentified_names.py` only |
@@ -97,6 +99,7 @@ text growth.
 | 16 | `$7A49-$7A50` | Modes 5-8 rescue-password screen redirect before `$C195` is reliable | `rescue_presentation.py` only; guarded by incoming C, publishes that mode, and delegates all other modes to the native bank-244 constructor |
 | 16 | `$7859-$7860` | Create-name screen redirect | `name6.py` only |
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
+| 16 | `$7BD4-$7BDB` | Mode-2 death-Rankings note screen redirect | `name6.py` only; preserves the native 13-character field/backend and replaces only the keyboard presentation |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
 | 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
 | 18 | `$502D-$5072` | Shared graphical-input mode-to-maximum dispatcher; modes 5-8 select 12/9/15/13 password characters | Preserved and guarded; the localized rescue overlay intercepts explicit shared calls without changing this table |
@@ -159,8 +162,8 @@ after every ROM writer. They are output metadata, not allocation space.
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
-| 253 | `$4000-$4ACF` | `name6.py`: name/ranking code, map, and shared graphical-input style-selected glyph atlas | Exclusive |
-| 254 | `$4000-$48CF` | `stairs_menu.py` base through `$426A`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and horizontally/vertically wrapped ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
+| 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |
+| 254 | `$4000-$48E7` | `stairs_menu.py` base through `$4283`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and horizontally/vertically wrapped ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A7C` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus loader | Exclusive |
 
 Banks 248-255 were measured empty before these reservations. Their unused tails are not a
@@ -233,7 +236,7 @@ through the translated root-name table, so names such as `Windblade` are not tru
 the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
 
-## Service-popup transient scratch
+## Popup transient scratch
 
 `service_menus.py` uses WRAM bank 7 `$D8C0-$D8DA` only while a reviewed widened service
 popup is live. `$D8C0-$D8D3` packs up to ten original tile/attribute pairs from its added
@@ -244,6 +247,13 @@ suffix tile's VRAM bank and `$A6` marker. The widened frame template ends at
 from authorizing a restore. Destination arithmetic preserves the current tile-map row while
 wrapping the low five x bits, then wraps vertical row traversal between `$9Bxx` and `$98xx`.
 This is transient rendering state, not SRAM and not general free WRAM.
+
+`stairs_menu.py` separately uses bank-7 `$D8E0-$D8F7`: `$D8E0-$D8F3` holds ten
+tile/attribute pairs covered by the widened floor frame, `$D8F4-$D8F5` holds their BG
+destination, and `$D8F6-$D8F7` is the complementary `$53/$AC` live marker. This range is
+beyond both the largest popup template ending at `$D8B3` and the service scratch ending at
+`$D8DA`. Both marker bytes are cleared before a restore, and a non-stairs popup cannot
+authorize cleanup by staging ordinary window data.
 
 ## Rescue requester live actor state
 
@@ -309,13 +319,13 @@ cursor metadata.
 
 | Address | Meaning | Observed/owned contract |
 |:---|---|---|
-| `$C14E` | Navigation type | `$13` on Adventure -> Continue; `$F4` only inside the localized mode-0 item-name editor |
+| `$C14E` | Navigation type | `$13` on Adventure -> Continue; private `$F4`, `$F5`, and `$F6` select the localized mode-0, Rescue, and Rankings-note graphs respectively |
 | `$C14F` | Current node/selection | Adventure submenu visits `0,1,2,3` for Continue, Secrets, Reset, Recap |
 | `$C150` | Previously rendered node | Tracks `$C14F`; used to erase/redraw the cursor safely |
 | `$C151` | Maximum selectable index | `3` for the four-row Adventure submenu |
 | `$C152` | Graphical-input character position | Separate from menu selection; zero-based input cursor cell |
 | `$C153` | Graphical-input maximum | `7` for free unidentified labels and `14` only for canonical preview presentation |
-| `$C800-$CA36` | Mode-0 navigation scratch in fixed WRAM bank 0 | 81 records x 7 bytes (`$0237`); uploaded on screen entry and after native `FILL IN` cycling |
+| `$C800-$CA36` | Private navigation scratch in fixed WRAM bank 0 | 81 records x 7 bytes (`$0237`); uploaded by localized mode 0, Rescue modes 5-8, or Rankings-note mode 2 while its editor is active |
 | `$FFB2-$FFB3` | Resolved cursor x/y | Adventure row 0 is `$36,$17`; rows 1-3 use y `$22,$2D,$38` |
 | `$FE00-$FE03` | First OAM cursor sprite | Diagnostic output, not owned storage; Adventure rows produce OAM y/x `$1F/$3E`, `$2A/$3E`, `$35/$3E`, `$40/$3E` |
 

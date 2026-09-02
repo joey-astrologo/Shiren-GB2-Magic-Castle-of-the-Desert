@@ -29,12 +29,23 @@ CONTROLLER_EXIT_PATCH_ADDRESS = 0x4130
 RUNTIME_BANK = 254
 HELPER_ADDRESS = 0x4000
 FLOOR_SAVE_ADDRESS = 0x405E
-TEMPLATE_ADDRESS = 0x40F5
-NATIVE_TEMPLATE_ADDRESS = 0x414F
-STATUS_HELPER_ADDRESS = 0x41DB
-STATUS_TEMPLATE_ADDRESS = 0x4205
-STATUS_EXIT_HELPER_ADDRESS = 0x425F
-RUNTIME_END = 0x426B
+TEMPLATE_ADDRESS = 0x410E
+NATIVE_TEMPLATE_ADDRESS = 0x4168
+STATUS_HELPER_ADDRESS = 0x41F4
+STATUS_TEMPLATE_ADDRESS = 0x421E
+STATUS_EXIT_HELPER_ADDRESS = 0x4278
+RUNTIME_END = 0x4284
+
+# Generic popups stage tile/attribute templates from $D800 through $D8B3.
+# Keep the stairs-only underlay and its metadata outside that arena so an
+# unrelated popup cannot look like a live stairs restore.  The two-byte magic
+# is committed only after all ten covered cells have been saved.
+FLOOR_SAVED_CELLS_ADDRESS = 0xD8E0
+FLOOR_SAVED_DESTINATION_ADDRESS = 0xD8F4
+FLOOR_SAVED_FLAG_ADDRESS = 0xD8F6
+FLOOR_SAVED_FLAG_END_ADDRESS = 0xD8F7
+FLOOR_SAVED_FLAG_VALUE = 0x53
+FLOOR_SAVED_FLAG_END_VALUE = 0xAC
 
 ORIGINAL_LOAD = bytes.fromhex("21B36A1100D8068CCD5B0A")
 ORIGINAL_COPY = bytes.fromhex("0E072100D8CDEA0A217ED8010701CDEA0A")
@@ -124,40 +135,125 @@ def helper_bytes():
 
 def _floor_save_bytes():
     """Save the ten BG cells covered only by the English floor frame."""
-    return bytes.fromhex(
-        "C5D5E5"
-        "7BEA6FD87AEA70D8"
-        "626B01070009"
-        "115AD80E05"
+    raw = bytearray.fromhex("C5D5E5AF")
+    raw += bytes((
+        0xEA,
+        FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_ADDRESS >> 8,
+        0xEA,
+        FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
+        0x7B,
+        0xEA,
+        FLOOR_SAVED_DESTINATION_ADDRESS & 0xFF,
+        FLOOR_SAVED_DESTINATION_ADDRESS >> 8,
+        0x7A,
+        0xEA,
+        (FLOOR_SAVED_DESTINATION_ADDRESS + 1) & 0xFF,
+        (FLOOR_SAVED_DESTINATION_ADDRESS + 1) >> 8,
+    ))
+    raw += bytes.fromhex("626B01070009")
+    raw += bytes((
+        0x11,
+        FLOOR_SAVED_CELLS_ADDRESS & 0xFF,
+        FLOOR_SAVED_CELLS_ADDRESS >> 8,
+        0x0E,
+        0x05,
+    ))
+    raw += bytes.fromhex(
         "C5E5AFE04F010200CD6B0A"
         "E13E01E04F010200CD6B0A"
         "7DC61E6F300124C10D20DF"
-        "3E01E04FEA71D8E1D1C1C9"
+        "3E01E04F"
     )
+    raw += bytes((
+        0x3E,
+        FLOOR_SAVED_FLAG_VALUE,
+        0xEA,
+        FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_ADDRESS >> 8,
+        0x3E,
+        FLOOR_SAVED_FLAG_END_VALUE,
+        0xEA,
+        FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
+    ))
+    raw += bytes.fromhex("E1D1C1C9")
+    return bytes(raw)
 
 
 def _floor_restore_bytes():
     """Restore the saved two columns after the native dungeon redraw."""
-    return bytes.fromhex(
-        "C5D5E5"
-        "FA6FD8C6075FFA70D8CE0057"
-        "215AD80E05"
+    raw = bytearray.fromhex("C5D5E5")
+    raw += bytes((
+        0xFA,
+        FLOOR_SAVED_DESTINATION_ADDRESS & 0xFF,
+        FLOOR_SAVED_DESTINATION_ADDRESS >> 8,
+    ))
+    raw += bytes.fromhex("C6075F")
+    raw += bytes((
+        0xFA,
+        (FLOOR_SAVED_DESTINATION_ADDRESS + 1) & 0xFF,
+        (FLOOR_SAVED_DESTINATION_ADDRESS + 1) >> 8,
+    ))
+    raw += bytes.fromhex("CE0057")
+    raw += bytes((
+        0x21,
+        FLOOR_SAVED_CELLS_ADDRESS & 0xFF,
+        FLOOR_SAVED_CELLS_ADDRESS >> 8,
+        0x0E,
+        0x05,
+    ))
+    raw += bytes.fromhex(
         "C5D5AFE04F010200CD6B0A"
         "D13E01E04F010200CD6B0A"
         "7BC61E5F300114C10D20DF"
         "3E01E04FE1D1C1C9"
     )
+    return bytes(raw)
 
 
 def _floor_cleanup_bytes():
     restore = FLOOR_SAVE_ADDRESS + len(_floor_save_bytes())
-    return bytes.fromhex(
-        "F070F53E07E070"
-        "FA71D8A72807"
-        "AFEA71D8"
-    ) + bytes(
-        (0xCD, restore & 0xFF, restore >> 8)
-    ) + bytes.fromhex("F1E070C9")
+    raw = bytearray.fromhex("F070F53E07E070")
+    raw += bytes((
+        0xFA,
+        FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_ADDRESS >> 8,
+        0xFE,
+        FLOOR_SAVED_FLAG_VALUE,
+    ))
+    no_saved = len(raw)
+    raw += bytearray.fromhex("2000")
+    raw += bytes((
+        0xFA,
+        FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
+        0xFE,
+        FLOOR_SAVED_FLAG_END_VALUE,
+    ))
+    no_saved_end = len(raw)
+    raw += bytearray.fromhex("2000")
+    raw += bytes((
+        0xAF,
+        0xEA,
+        FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_ADDRESS >> 8,
+        0xEA,
+        FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
+        FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
+        0xCD,
+        restore & 0xFF,
+        restore >> 8,
+    ))
+    done = len(raw)
+    for branch in (no_saved, no_saved_end):
+        distance = done - (branch + 2)
+        if not 0 <= distance <= 0x7F:
+            raise StairsMenuError("floor cleanup branch is out of range")
+        raw[branch + 1] = distance
+    raw += bytes.fromhex("F1E070C9")
+    return bytes(raw)
 
 
 def floor_runtime_bytes():
@@ -166,7 +262,7 @@ def floor_runtime_bytes():
         + _floor_restore_bytes()
         + _floor_cleanup_bytes()
     )
-    if len(result) != 151:
+    if len(result) != 176:
         raise StairsMenuError("generated floor cleanup layout changed unexpectedly")
     return result
 
@@ -384,7 +480,7 @@ def summary(rom, approved=None):
             }
         )
     return {
-        "schema": "shiren-gb2-stairs-menu-v3",
+        "schema": "shiren-gb2-stairs-menu-v4",
         "bank": BANK,
         "runtime_bank": RUNTIME_BANK,
         "load_patch": extract.location(BANK, LOAD_PATCH_ADDRESS),
@@ -395,6 +491,14 @@ def summary(rom, approved=None):
             RUNTIME_BANK, NATIVE_TEMPLATE_ADDRESS
         ),
         "floor_cleanup": extract.location(RUNTIME_BANK, floor_cleanup_address()),
+        "floor_saved_scratch": "$%04X-$%04X" % (
+            FLOOR_SAVED_CELLS_ADDRESS,
+            FLOOR_SAVED_FLAG_END_ADDRESS,
+        ),
+        "floor_live_marker": "$%02X/$%02X" % (
+            FLOOR_SAVED_FLAG_VALUE,
+            FLOOR_SAVED_FLAG_END_VALUE,
+        ),
         "status_patch": extract.location(STATUS_BANK, STATUS_PATCH_ADDRESS),
         "status_detector": extract.location(RUNTIME_BANK, HELPER_ADDRESS),
         "status_helper": extract.location(RUNTIME_BANK, status_helper_address()),
