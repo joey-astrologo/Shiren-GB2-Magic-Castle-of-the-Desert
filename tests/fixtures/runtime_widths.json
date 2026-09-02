@@ -83,10 +83,10 @@
       "missing_records": 0,
       "complete": true,
       "maximum": {
-        "composer_pixels": 105,
-        "renderer_pixels": 105,
-        "composer_evidence": "192:$6594",
-        "renderer_evidence": "192:$6594"
+        "composer_pixels": 95,
+        "renderer_pixels": 95,
+        "composer_evidence": "192:$64EE",
+        "renderer_evidence": "192:$64EE"
       }
     },
     {
@@ -233,8 +233,8 @@
       "maximum": {
         "composer_pixels": 105,
         "renderer_pixels": 105,
-        "composer_evidence": "192:$6594",
-        "renderer_evidence": "192:$6594"
+        "composer_evidence": "192:$5E4B",
+        "renderer_evidence": "192:$5E4B"
       }
     },
     {

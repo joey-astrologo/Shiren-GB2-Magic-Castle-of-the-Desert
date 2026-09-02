@@ -677,7 +677,7 @@ id	sections	english
 192:$6489	unidentified_item_appearances	Jade Bracelet
 192:$6492	unidentified_item_appearances	Amber Bracelet
 192:$649B	unidentified_item_appearances	Topaz Bracelet
-192:$64A5	unidentified_item_appearances	Banded Agate Bracelet
+192:$64A5	unidentified_item_appearances	Onyx Bracelet
 192:$64AE	unidentified_item_appearances	Zirconia Bracelet
 192:$64B9	unidentified_item_appearances	Garnet Bracelet
 192:$64C4	unidentified_item_appearances	Cattleya Bracelet
@@ -685,7 +685,7 @@ id	sections	english
 192:$64D8	unidentified_item_appearances	Crystal Bracelet
 192:$64E3	unidentified_item_appearances	Peridot Bracelet
 192:$64EE	unidentified_item_appearances	Aquamarine Bracelet
-192:$64FA	unidentified_item_appearances	Pearlescent Bracelet
+192:$64FA	unidentified_item_appearances	Nacre Bracelet
 192:$6504	unidentified_item_appearances	Apatite Bracelet
 192:$650F	unidentified_item_appearances	Agate Bracelet
 192:$6519	unidentified_item_appearances	Citrine Bracelet
@@ -703,7 +703,7 @@ id	sections	english
 192:$657D	unidentified_item_appearances	Aqua Grass
 192:$6585	unidentified_item_appearances	Rose Grass
 192:$658D	unidentified_item_appearances	Pink Grass
-192:$6594	unidentified_item_appearances	Black-and-White Grass
+192:$6594	unidentified_item_appearances	Panda Grass
 192:$659C	unidentified_item_appearances	Peppermint Grass
 192:$65A4	unidentified_item_appearances	Peach Grass
 192:$65AC	unidentified_item_appearances	Golden Grass
@@ -748,10 +748,10 @@ id	sections	english
 192:$66F9	unidentified_item_appearances	Reindeer Scroll
 192:$6703	unidentified_item_appearances	Cherry Staff
 192:$670A	unidentified_item_appearances	Plum Staff
-192:$6710	unidentified_item_appearances	Pinyon Staff
+192:$6710	unidentified_item_appearances	Pine Staff
 192:$6716	unidentified_item_appearances	Bamboo Staff
 192:$671C	unidentified_item_appearances	Cedar Staff
-192:$6722	unidentified_item_appearances	Sallows Staff
+192:$6722	unidentified_item_appearances	Willow Staff
 192:$6729	unidentified_item_appearances	Chestnut Staff
 192:$672F	unidentified_item_appearances	Zelkova Staff
 192:$6736	unidentified_item_appearances	Deutzia Staff
@@ -766,12 +766,12 @@ id	sections	english
 192:$6777	unidentified_item_appearances	Oak Staff
 192:$677D	unidentified_item_appearances	Ginkgo Staff
 192:$6785	unidentified_item_appearances	Loquat Staff
-192:$678B	unidentified_item_appearances	Red Maple Staff
+192:$678B	unidentified_item_appearances	Maple Staff
 192:$6792	unidentified_item_appearances	Udo Staff
-192:$6798	unidentified_item_appearances	Bush Clover Staff
+192:$6798	unidentified_item_appearances	Clover Staff
 192:$679E	unidentified_item_appearances	Sawtooth Oak Staff
 192:$67A5	unidentified_item_appearances	Kumquat Staff
-192:$67AD	unidentified_item_appearances	Japanese Aralia Staff
+192:$67AD	unidentified_item_appearances	Aralia Staff
 192:$67B4	unidentified_item_appearances	Round Pot
 192:$67BA	unidentified_item_appearances	Square Pot
 192:$67C1	unidentified_item_appearances	Angular Pot
@@ -782,7 +782,7 @@ id	sections	english
 192:$67E3	unidentified_item_appearances	Shallow Pot
 192:$67E9	unidentified_item_appearances	Deep Pot
 192:$67EF	unidentified_item_appearances	Heavy Pot
-192:$67F5	unidentified_item_appearances	Slender Pot
+192:$67F5	unidentified_item_appearances	Light Pot
 192:$67FB	unidentified_item_appearances	Small Pot
 192:$6802	unidentified_item_appearances	Large Pot
 192:$6809	unidentified_item_appearances	Sharp Pot

@@ -56,6 +56,41 @@ class ProductionEnglishPunctuationTests(unittest.TestCase):
         self.assertEqual(150, sum(row[2] for row in quoted_records))
 
 
+class ProductionUnidentifiedAppearanceTests(unittest.TestCase):
+    def test_approved_short_names_and_deliberate_unchanged_names_are_frozen(self):
+        with (ROOT / "script" / "en" / "glossary.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            rows = {
+                row["id"]: row
+                for row in csv.DictReader(handle, delimiter="\t")
+            }
+
+        expected = {
+            "192:$64A5": "Onyx Bracelet",
+            "192:$64FA": "Nacre Bracelet",
+            "192:$6594": "Panda Grass",
+            "192:$659C": "Peppermint Grass",
+            "192:$66E7": "Marmot Scroll",
+            "192:$6710": "Pine Staff",
+            "192:$6722": "Willow Staff",
+            "192:$6777": "Oak Staff",
+            "192:$678B": "Maple Staff",
+            "192:$6798": "Clover Staff",
+            "192:$679E": "Sawtooth Oak Staff",
+            "192:$67AD": "Aralia Staff",
+            "192:$67F5": "Light Pot",
+        }
+        self.assertEqual(expected, {key: rows[key]["english"] for key in expected})
+        self.assertTrue(
+            all(
+                rows[key]["sections"] == "unidentified_item_appearances"
+                for key in expected
+            )
+        )
+        self.assertNotEqual(rows["192:$6777"]["english"], rows["192:$679E"]["english"])
+
+
 class OriginalRomTranslationFileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

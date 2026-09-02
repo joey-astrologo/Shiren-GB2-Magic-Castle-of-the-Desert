@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5667,
   "explicit_empty_records": 54,
-  "workspace_sha1": "60e1dda8cca7042012396f7b9d1192c27e3338c5",
+  "workspace_sha1": "9416917fc685a1823dd8b3a5a7a5216e3f225835",
   "categories": [
     {
       "name": "glossary",
@@ -26,7 +26,7 @@
         "trap_names": 22,
         "unidentified_item_appearances": 123
       },
-      "overlay_sha1": "0e437eea367a45e3aa6397a6e01970fbc226bb96"
+      "overlay_sha1": "77ff4a9bd0a3465a89002ed365e73e0c995e38d9"
     },
     {
       "name": "items",

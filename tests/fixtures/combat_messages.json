@@ -126,13 +126,13 @@
   "source_free": true,
   "warning_records": 201,
   "warning_totals": {
-    "layout_distinct_combinations": 30570,
-    "layout_one_line": 15850,
-    "layout_soft_wrap": 14720,
+    "layout_distinct_combinations": 30511,
+    "layout_one_line": 15849,
+    "layout_soft_wrap": 14662,
     "layout_unsafe": 0,
-    "one_line": 351803,
+    "one_line": 351915,
     "runtime_value_combinations": 741656,
-    "soft_wrap": 389853,
+    "soft_wrap": 389741,
     "unsafe": 0
   }
 }
