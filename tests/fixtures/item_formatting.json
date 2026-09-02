@@ -4,6 +4,7 @@
   "formatter": {
     "english_codes": {
       "space": "24",
+      "plus": "56",
       "minus": "4D",
       "open_bracket": "54",
       "close_bracket": "55"
@@ -15,6 +16,13 @@
         "original": "3ED7",
         "localized": "3E4D",
         "purpose": "negative weapon/shield modifier"
+      },
+      {
+        "name": "equipment_positive_sign",
+        "location": "120:$4843",
+        "original": "3E2D",
+        "localized": "3E56",
+        "purpose": "positive weapon/shield modifier"
       },
       {
         "name": "arrow_counter_separator",

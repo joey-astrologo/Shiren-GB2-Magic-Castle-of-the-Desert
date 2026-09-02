@@ -10,6 +10,7 @@ owns the old hiragana range those fragments become mixed-language or corrupt.
 This installer changes only the immediate producer instructions:
 
 * arrow stacks become ``N Name``;
+* weapon/shield positives use the style-selected English plus;
 * weapon/shield and depleted-staff negatives use the English hyphen;
 * staff charges and Pot capacity use ``[N]``.
 * Gitan objects become ``N Gitan``.
@@ -46,6 +47,7 @@ class ItemFormattingError(ValueError):
 
 
 EN_SPACE = english.ENGLISH_CODES[" "]
+EN_PLUS = english.ENGLISH_CODES["+"]
 EN_MINUS = english.ENGLISH_CODES["-"]
 EN_OPEN = english.ENGLISH_CODES["["]
 EN_CLOSE = english.ENGLISH_CODES["]"]
@@ -59,6 +61,14 @@ PATCHES = (
         bytes.fromhex("3ED7"),
         bytes((0x3E, EN_MINUS)),
         "negative weapon/shield modifier",
+    ),
+    FormatterPatch(
+        "equipment_positive_sign",
+        120,
+        0x4843,
+        bytes.fromhex("3E2D"),
+        bytes((0x3E, EN_PLUS)),
+        "positive weapon/shield modifier",
     ),
     FormatterPatch(
         "arrow_counter_separator",
@@ -155,6 +165,7 @@ def summary():
     return {
         "english_codes": {
             "space": "%02X" % EN_SPACE,
+            "plus": "%02X" % EN_PLUS,
             "minus": "%02X" % EN_MINUS,
             "open_bracket": "%02X" % EN_OPEN,
             "close_bracket": "%02X" % EN_CLOSE,

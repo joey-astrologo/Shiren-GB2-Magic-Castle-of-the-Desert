@@ -30,8 +30,11 @@ and equip + curse + plate rather than testing each flag only in isolation.
 
 `tools/item_formatting.py` owns the formatter punctuation. It changes the original
 Japanese arrow counter suffix to one English space, changes staff/Pot corner brackets to
-`[` and `]`, and changes dynamic negative signs to the English hyphen. It does not change
-the object record, item IDs, numeric conversion, translated names, or terminators.
+`[` and `]`, changes dynamic negative signs to the English hyphen, and routes positive
+weapon/shield modifiers through the style-selected English `+`. The classic build therefore
+uses the black-only Thin Pixel-7 plus while the shadowed build uses its matching shadowed
+variant. It does not change the object record, item IDs, numeric conversion, translated
+names, or terminators.
 
 The cracked marker is a separate bitmap concern: `tools/item_status.py` retains native
 token `F2 1E` and its 14-pixel advance while replacing the Japanese `(hibi)` pixels with

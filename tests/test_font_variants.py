@@ -222,6 +222,24 @@ class ProductionFontVariantTests(unittest.TestCase):
             with self.subTest(status_label=label.name):
                 self.assertTrue(colors <= {0, 3})
 
+    def test_classic_equipment_plus_uses_the_black_only_english_glyph(self):
+        # Bank 120:$4843 is the positive equipment-modifier producer:
+        # ``ld a, sign`` followed by ``ldi [hl], a``.  Follow the byte it
+        # actually emits and compare that glyph's decoded pixels, so this
+        # catches a formatter that still selects the native Japanese plus
+        # even when the approved English font asset itself is correct.
+        producer = font.banked_offset(120, 0x4843)
+        self.assertEqual(0x3E, self.classic[producer])
+        emitted_code = self.classic[producer + 1]
+        emitted = font.read_glyph(self.classic, bytes((emitted_code,)))
+        approved = english_font.load_approved(style="classic")
+        expected = font.decode_2bpp_slices(
+            approved.glyphs["+"], height=font.SINGLE_HEIGHT
+        )
+
+        self.assertEqual(expected, emitted.pixels)
+        self.assertNotIn(2, (pixel for row in emitted.pixels for pixel in row))
+
     def test_variants_differ_only_in_visual_font_owners_and_checksums(self):
         changed = {
             offset
