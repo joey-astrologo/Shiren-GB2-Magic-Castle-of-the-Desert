@@ -1,118 +1,58 @@
-# Shiren GB2 English localization
+# Shiren GB2 — English translation
 
 **Made with AI assistance.**
 
-This is an unofficial fan project and is not affiliated with or endorsed by the original
-developers or publishers. It exists to make *Fushigi no Dungeon: Fuurai no Shiren GB2 -
-Sabaku no Majou* playable in English and to document the engineering behind that work.
-Third-party components remain subject to the notices under [`licenses/`](licenses/).
+This is a personal, unofficial English localization of *Fushigi no Dungeon:
+Fuurai no Shiren GB2 — Sabaku no Majou* (Chunsoft, Game Boy Color, 2001). It is not
+affiliated with or endorsed by the original developers or publishers.
 
-This repository builds an English localization of *Fushigi no Dungeon:
-Fuurai no Shiren GB2 - Sabaku no Majou* from a user-supplied Japanese ROM.
+This repository contains the translation, graphics assets, build tools, and tests. It does
+not contain the game ROM or complete extracted Japanese script. You must supply your own
+matching Japanese cartridge dump.
 
-The extracted player-facing script is translated, the story is available in a
-scene-ordered editor, and the production ROM builds with the native variable-width
-font, six-character player names, a localized four-character Big Moai gift-code editor,
-the 13-character death-Rankings note editor, and a fully English Blank Scroll writer. The
-note editor gives its formerly empty selectable cells a real space action, and moving right
-at the end pads one space before advancing without changing player-name behavior. The unidentified-item Name screen and its cycling `FILL IN`
-history recall are also localized, including a 14-character preview and full display of
-canonical names longer than the native seven-character custom-label field. Recalled names
-show no star padding and reset safely to ordinary free entry on typing or `DEL`.
-Each confirmed recall owns a distinct native custom-name slot, so naming another
-unidentified item cannot rename the first one.
-Its private navigation graph is isolated from the native Adventure submenu, whose
-Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
-All fourteen title/demo and Wanderer's Secrets replay diaries also carry the localized
-six-character default name `Shiren`; they no longer fall back to their embedded Japanese
-snapshot name.
-In the shadowed variant, the shared player-name/Blank Scroll/unidentified-item/Rescue
-graphical keyboard and Big Moai's private copy use the same reviewed gray `+1,+1`
-treatment as the runtime English font, including lowercase tails, digits, and cursors.
-The classic variant keeps those same approved rasters black-only.
-The real Big Moai NPC route is fixture-tested from his locked story state through the
-localized `WISH` editor, the rendered Fortune Grass reward, and a stable follow-up
-conversation; a narrow PyBoy fixture helper changes only the two measured progression bytes
-needed to exercise it.
-The cracked-Bracelet suffix is also localized from the stock Japanese `(hibi)` composite
-to a compact `(Cr)` marker and replayed from the supplied failure state. Native dynamic
-item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
-and spaced Gitan amounts; a two-page PyBoy gallery covers their status-symbol combinations,
-and a native Synthesis Pot lab provides a repeatable transferred-seal visual route.
-The clean-boot copyright/composer card now preserves its native `© 2001` rows and fade while
-rendering the approved `CHUNSOFT` and `Koichi Sugiyama` art from a guarded, reproducible Inter
-SemiBold source asset.
-The graphical save/load wait sign is also localized as `Please` / `wait...` from a guarded
-Thin Pixel-7 source raster while preserving its interleaved bird artwork byte-for-byte.
-The native Wanderer Rescue codec and semantic SOS -> Revival/gift -> Thank-You chain also
-reproduce a real published three-password exchange. The captured Rankings -> Await Rescue
-route now renders its generated SOS code through a frozen 64-symbol English alphabet while
-restoring the native buffer and preserving the matching diary record byte-for-byte. Rescue
-input modes 5-8 now share a fixture-tested English keyboard that maps every visible choice
-back to its native six-bit value. A requester-side controller replay accepts a linked
-15-character Revival response, displays the native success message, and generates its
-12-character Thank-You Password. Physical Rescue Gate traversal and capture of the
-rescuer diary's own generated response remain in progress for the complete two-diary
-emulator fixture.
-Editorial review, full playthrough testing, and graphics localization remain active
-project work.
-
-## Current state
+## Project status
 
 | Area | State | Remaining work |
 |---|---|---|
-| Extracted player-facing text | **Translation pass complete** | All 5,467 records have explicit English/empty values; continue editorial and route review |
-| Internal runtime text | **Complete** | 200 Big Moai promotional-code records translated; 1,028 engine-only identifiers deliberately native |
-| Story organization | **Complete** | 1,768 dialogue records in 72 scene families; complete editorial read-through remains |
-| Font and text storage | **Engineered** | Thin Pixel-7 native VWF and 19-bank far-pointer payload pass current contracts |
-| Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
-| Graphical input | **Engineered** | Player names/rankings/replay snapshots, the death-Rankings note editor, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
-| Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit card, arrival cards, dungeon-HUD digits/slash, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **560-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, localized HUD digits/slash, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
+| Text | **Translation pass complete** | All 5,667 production records have explicit English or intentional empty values; editorial review and playtesting continue |
+| Menus and input | **Complete for known routes** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and known system screens are localized and fixture-tested |
+| Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
+| Graphics | **In progress** | Copyright card, arrival cards, save/load sign, and dungeon-HUD digits/slash are installed; the title and ending credits remain |
+| Wanderer Rescue | **Protocol and English I/O tested** | The complete physical Rescue Gate and two-diary route still needs capture |
+| Automated tests | **560 tests passing — 2026-09-02** | Continue adding focused regressions for issues found during playtesting |
 
-Translation completion is not release completion. The script still needs a complete
-editorial and gameplay pass, and graphical assets still require full localization.
+Translation completion is not release completion. Optional events, endings, postgame
+states, uncommon save histories, and rare visual interactions still need manual testing.
+See [project status](docs/project-status.md) for the detailed coverage and current artifact
+hashes.
 
 ## Requirements
 
 - Python 3.9 or newer.
-- A legally obtained clean Japanese ROM matching:
+- A clean Japanese ROM matching:
+  - Size: `4194304` bytes
   - SHA-1: `5264f6d0c4f12c9144de1d12fddadbadd82b3e33`
   - MD5: `9e3d4ff0ba3d6deec5080f6dbed4fef8`
-- PyBoy is optional but recommended for emulator-backed integration tests.
-- Pillow is optional for font and graphics inspection tools.
-- RGBDS is optional; when installed, the tests reassemble the name, Big Moai gift-code, Blank
-  Scroll, unidentified-name, and Wanderer Rescue presentation patches and compare them
-  byte-for-byte with the embedded production payloads.
+- [PyBoy](https://github.com/Baekalfen/PyBoy) and Pillow for the complete emulator and
+  graphics test suite.
+- RGBDS for optional assembly-source equivalence tests.
 
-The normal production build uses only Python's standard library. Optional Python
-dependencies can be installed with:
+Install the Python dependencies with:
 
 ```sh
 python3 -m pip install pyboy pillow
 ```
 
-## Build the English ROM
+The normal ROM build itself uses only Python's standard library.
 
-From the repository root, point `ROM` at the clean Japanese game. The expected filename
-is shown here for convenience, but the tool accepts any path:
+## Build
+
+From the repository root, point `ROM` at the clean Japanese game and run the production
+builder:
 
 ```sh
 ROM="Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
-```
 
-On macOS, verify the source ROM with:
-
-```sh
-shasum -a 1 "$ROM"
-md5 "$ROM"
-```
-
-Audit the intentionally untranslated internal identifiers, then build:
-
-```sh
-python3 tools/internal_audit.py "$ROM"
 python3 tools/build.py \
   "$ROM" \
   script/en \
@@ -120,30 +60,66 @@ python3 tools/build.py \
   --font-style both
 ```
 
-The release build writes both ROMs and their distribution patches:
+This validates the source, translation, runtime substitutions, layouts, ROM ownership,
+installed graphics, relocated text, and cartridge checksums before writing:
 
-- `build/shiren-gb2-english-classic-font.gbc`
-- `build/shiren-gb2-english-classic-font.ips`
-- `build/shiren-gb2-english-shadowed-font.gbc`
-- `build/shiren-gb2-english-shadowed-font.ips`
+| Output | Font style |
+|---|---|
+| `build/shiren-gb2-english-classic-font.gbc` | Black-only Thin Pixel-7 |
+| `build/shiren-gb2-english-classic-font.ips` | IPS patch for the classic build |
+| `build/shiren-gb2-english-shadowed-font.gbc` | Gray `+1,+1` shadowed Thin Pixel-7 |
+| `build/shiren-gb2-english-shadowed-font.ips` | IPS patch for the shadowed build |
 
-Each IPS is made against the verified original Japanese ROM and is reapplied in memory
-before it is written; the reconstructed bytes must exactly match the paired ROM. The
-classic variant uses the original black-only Thin Pixel-7 adaptation, while shadowed uses
-the gray `+1,+1` drop shadow. A single development ROM can still be requested with
-`--font-style classic` or `--font-style shadowed`; shadowed remains the single-output
-default, and its matching `.ips` is written beside it. Both variants include the matching
-style in the runtime font, fixed Status labels, shared graphical keyboard, and Big Moai's
-private keyboard copy.
+Use `--font-style classic` or `--font-style shadowed` to produce only one variant. The
+single-output default is `shadowed`. Every generated IPS is reapplied in memory and must
+reconstruct its paired ROM exactly before it is written.
 
-The builder automatically validates the
-source ROM, translation controls and terminology, runtime-value widths, positioned text,
-far-pointer allocation, installed font and patches, all 7,163 logical text references,
-and both cartridge checksums before writing the ROM. It prints SHA-1 identifiers for every
-ROM and IPS so manually tested release artifacts can be identified unambiguously.
+To use a release patch, apply the desired `.ips` to an untouched ROM with the hashes above
+using an IPS-compatible patcher. Do not apply both font patches to the same ROM.
 
-Neither the source ROM nor generated ROMs or IPS files belong in Git; all are covered by
-`.gitignore`.
+ROMs, patches, saves, and generated files under `build/` are ignored by Git.
+
+## Edit the translation
+
+Generate or refresh the ignored source-rich reference catalogs from your own ROM with:
+
+```sh
+python3 tools/extract.py "$ROM" --out script
+python3 tools/organize.py "$ROM"
+python3 tools/overlays.py "$ROM"
+```
+
+`overlays.py` synchronizes English cells between `script/organized/` and the tracked
+`script/en/` workspace. It stops on conflicting nonblank values instead of choosing one.
+
+Story and event dialogue is authored in the scene-ordered
+[`script/editing/prose.tsv`](script/editing/prose.tsv):
+
+```sh
+python3 tools/prose_editor.py "$ROM"          # validate without writing
+python3 tools/prose_editor.py "$ROM" --apply  # wrap and synchronize approved edits
+```
+
+Other text families have separate owners:
+
+| Text | Authoritative file | Validation or synchronization tool |
+|---|---|---|
+| Names and terminology | `script/en/glossary.tsv` | `tools/overlays.py` and `tools/lint_en.py` |
+| Story and event dialogue | `script/editing/prose.tsv` | `tools/prose_editor.py` |
+| Dungeon item/action messages | `script/drafts/item_messages.tsv` | `tools/wrap_item_messages.py` |
+| Combat and gameplay messages | `script/drafts/combat_messages.tsv` | `tools/combat_messages.py` |
+| Item descriptions | `script/en/items.tsv` | `tools/wrap_items.py` |
+| Menus, Help, monsters, and other labels | Matching `script/en/*.tsv` | `tools/overlays.py` and the production build |
+
+The source-rich files under `script/organized/` are generated references. It is safe to edit
+their `english` cells while consulting Japanese context, but run `tools/overlays.py` to copy
+those changes into the tracked `script/en/` workspace. Story prose is the exception: edit it
+only through `script/editing/prose.tsv`.
+
+Do not remove or casually reorder controls such as `<lookup:...>`, `<number:...>`, `<name>`,
+`<speaker>`, `<br>`, `<page>`, or `<box>`. They carry runtime behavior. Read the
+[translator guide](script/README.md) and [translation policy](docs/translation-policy.md)
+before changing them.
 
 ## Run the tests
 
@@ -153,237 +129,83 @@ Run the complete suite from the repository root:
 python3 -m unittest discover -s tests -v
 ```
 
-ROM-dependent tests skip automatically when the matching source ROM is absent. PyBoy
-tests likewise skip when PyBoy is unavailable, and RGBDS source-equivalence tests skip
-when `rgbasm` or `rgblink` is unavailable. Every emulator-backed test uses a native PyBoy
-`.state` fixture; Mesen is not required. For the strongest validation, install those
-optional tools and keep the verified source ROM at the filename shown above.
+ROM-dependent tests skip when the matching source ROM is absent. PyBoy and RGBDS checks
+also skip when their dependencies are unavailable. All automated emulator routes use native
+PyBoy `.state` fixtures; Mesen is not required.
 
-Useful focused runs include:
+Useful focused checks:
 
 ```sh
-# Production builder and relocated text
-python3 -m unittest tests.test_build tests.test_insert
+# Production build and relocated text
+python3 -m unittest tests.test_build tests.test_insert -v
 
-# Scene editor, translation boundary, and runtime text
-python3 -m unittest \
-  tests.test_prose_editor \
-  tests.test_internal_audit \
-  tests.test_runtime_widths
+# Translation, terminology, and layout checks
+python3 tools/internal_audit.py "$ROM"
+python3 tools/lint_en.py "$ROM"
+python3 tools/runtime_widths.py "$ROM"
 
-# Graphical input: names, Big Moai gift codes, Blank Scroll writing, and unidentified items
-python3 -m unittest \
-  tests.test_save_summary \
-  tests.test_name6 \
-  tests.test_spell_input \
-  tests.test_big_moai \
-  tests.test_blank_scroll \
-  tests.test_pyboy_blank_scroll \
-  tests.test_unidentified_names \
-  tests.test_pyboy_unidentified_item \
-  tests.test_pyboy_state_fixtures \
-  tests.test_rescue_password \
-  tests.test_rescue_presentation \
-  tests.test_service_menus \
-  tests.test_item_status \
-  tests.test_item_formatting \
-  tests.test_synthesis_lab
-
-# Graphical-text resource audit, HUD font, and arrival-card artwork
-python3 -m unittest \
-  tests.test_graphics_audit \
-  tests.test_font_shadow_audition \
-  tests.test_hud_font_audition \
-  tests.test_shop_price_font_audition \
-  tests.test_arrival_card_audition \
-  tests.test_arrival_cards
-```
-
-## Audit the dungeon HUD font
-
-Render every alphanumeric slot used by the top dungeon status bar, plus its slash and meter
-tiles, without changing the input ROM:
-
-```sh
-python3 -m unittest tests.test_hud_font_audition -v
+# Graphics inventory and audition tools
+python3 tools/graphics_audit.py "$ROM"
+python3 tools/font_shadow_audition.py
+python3 tools/arrival_card_audition.py
 python3 tools/hud_font_audition.py
-```
-
-The contact sheet at `build/hud_font_audition.png` comes directly from the guarded packed
-atlas at `3:$5742-$5841`. Production builds replace its first five tiles with the ten
-approved 4x8 decimal rasters in `assets/fonts/hud_digits.json` and replace the discontiguous
-slash tile at `$57E2-$57F1` with the approved 8x8 raster from the same source image. `A-F`,
-the production `Lv` / `Hp` letters, meter, and reserved tiles remain byte-exact native
-graphics. The audition accepts either the verified original atlas or this exact localized
-digit/slash form and includes minimum/maximum layout proofs at the unchanged widths.
-
-## Audition the shop-price font
-
-Render all ten native shop-tag digits and representative packed prices without changing
-the ROM:
-
-```sh
-python3 -m unittest tests.test_shop_price_font_audition -v
 python3 tools/shop_price_font_audition.py
 ```
 
-The sheet at `build/shop_price_font_audition.png` is decoded from the guarded ten-tile
-source at `3:$5642-$56E1`. Shop tags pack each tile's left five pixels at a five-pixel
-advance. The preview retains the captured shop palette roles: color 3 black, color 1 white,
-and color 2 gray (`#A8A8A8`). This is a read-only source audit, not a font installation.
+The audition commands write review images under `build/` and do not modify the input ROM.
+See the [build and test guide](docs/testing-and-build.md) for feature-specific tests,
+fixture routes, and every diagnostic command.
 
-## Audit the installed shadowed dialogue font
-
-Compare the Thin Pixel-7 source raster with its installed one-pixel gray drop-shadow bake:
-
-```sh
-python3 -m unittest tests.test_font_shadow_audition -v
-python3 -m unittest tests.test_font_variants -v
-python3 tools/font_shadow_audition.py
-```
-
-The sheet at `build/font_shadow_audition.png` covers all 79 supported characters, magnifies
-the 8x8 edge cases (including the native-shadow `+` color proof), and shows source versus
-installed copy. The production encoder paints the captured palette color 2 (`#ACACAC`) at
-`(x+1,y+1)` before redrawing the unchanged color-3 black glyph. For the four disconnected
-bottom cutoff pixels in `,`, `g`, `j`, and `y`, it moves only that orphan one pixel left;
-connected cutoff shadows remain unchanged. It also reports the `%` shadow overhang. The
-audit command itself is read-only; `english_font.py` installs this reviewed treatment.
-`menu_graphics.py` also consumes the installed two-tone glyph bytes for the Status screen's
-14 fixed bitmap labels, which do not pass through the runtime text renderer.
-
-## Audition arrival-card fonts
-
-Render all 32 arrival selectors without changing the ROM:
-
-```sh
-# Bundled Inter comparison candidate
-python3 tools/arrival_card_audition.py
-
-# Any external TTF/OTF candidate
-python3 tools/arrival_card_audition.py \
-  --font "/path/to/Candidate.ttf" \
-  --output build/arrival_cards_candidate.png
-
-# Deliberately test a larger strike or a solid one-bit treatment
-python3 tools/arrival_card_audition.py \
-  --font "/path/to/Candidate.ttf" \
-  --cap-height 12 \
-  --style solid \
-  --output build/arrival_cards_candidate_12px.png
-```
-
-The sheet reproduces the measured native location/floor bands, red underline, 16-pixel
-block alignment, and 144-pixel label budget. It cycles representative floor numbers using
-the native Latin digits and the approved one-pixel-raised `F`, then ends with a magnified
-alignment proof covering one- and two-digit floors. It reports label overflows instead of
-clipping them. Native selectors 30/31 were independently decoded as the shared `Mystery Dungeon`
-card. The bundled Inter SemiBold 4.1 treatment and aligned floor suffix are approved art;
-`arrival_cards.py` installs its editable block source from
-`assets/graphics/arrival_cards_inter.json`.
-
-## Edit translated text
-
-Story and event dialogue must be edited in `script/editing/prose.tsv`, not in its
-generated catalog copies. Check an edit without changing generated files:
-
-```sh
-python3 tools/prose_editor.py "$ROM"
-```
-
-After the check succeeds, synchronize and wrap it:
-
-```sh
-python3 tools/prose_editor.py "$ROM" --apply
-```
-
-Other families have separate owners:
-
-| Text | Authoritative file | Tool |
-|---|---|---|
-| Story/event dialogue | `script/editing/prose.tsv` | `tools/prose_editor.py` |
-| Dungeon item/action messages | `script/drafts/item_messages.tsv` | `tools/wrap_item_messages.py` |
-| Combat/gameplay messages | `script/drafts/combat_messages.tsv` | `tools/combat_messages.py` |
-| Item descriptions | `script/en/items.tsv` | `tools/wrap_items.py` |
-| Other names, menus, Help, monsters, and labels | matching `script/en/*.tsv` | `tools/overlays.py` and validation tools |
-
-Do not shorten English to save ROM storage. Relocation handles storage; visible line
-length and runtime substitutions are checked separately. Read the
-[translation policy](docs/translation-policy.md) before changing control tokens such as
-`<cF3>`, `<br>`, `<page>`, or `<box>`.
-
-## Repository layout
+## Repository map
 
 | Path | Contents |
 |---|---|
-| `tools/` | Extraction, localization, insertion, validation, and diagnostic tools |
-| `script/en/` | Tracked source-free production translation catalogs |
+| `tools/` | Extraction, editing, insertion, validation, graphics, and diagnostic tools |
+| `script/en/` | Tracked source-free production English catalogs |
 | `script/editing/` | Authoritative scene-ordered story editor |
-| `script/drafts/` | Specialized item/combat drafts and generated prose input |
+| `script/drafts/` | Specialized item, combat, and generated prose worksheets |
 | `script/organized/` | Generated source-rich catalogs; ignored by Git |
-| `tests/` | Unit, fixture, ROM-integration, and emulator tests |
-| `assets/` | Font and future localization assets |
-| `docs/` | Canonical project, engineering, translation, and workflow documentation |
-| `build/` | Generated output; ignored by Git |
+| `assets/` | Approved font and graphics sources |
+| `SaveStates/` | Reviewed fixture states and conversion provenance |
+| `tests/` | Unit, ROM-integration, pixel, and PyBoy route tests |
+| `docs/` | Detailed project, translation, graphics, and engineering references |
+| `build/` | Generated ROMs, IPS patches, and audition images; ignored by Git |
 
 ## Documentation
 
-Start with the [documentation index](docs/README.md). In particular:
+Start with the [documentation index](docs/README.md). The most commonly needed references
+are:
 
-- [Current project status](docs/project-status.md)
-- [Translation policy](docs/translation-policy.md)
-- [Item terminology audit and review catalogue](docs/ITEM_TERMINOLOGY.md)
-- [Story editing workflow](docs/editing-workflow.md)
+- [Detailed project status](docs/project-status.md)
 - [Build and test guide](docs/testing-and-build.md)
-- [Engineering overview](docs/engineering-overview.md)
-- [Internal-text audit](docs/internal-text-audit.md)
-- [Text/control reference](docs/TEXT_REFERENCE.md)
-- [VWF budget register](docs/VWF_BUDGETS.md)
-- [ROM and persistent-memory map](docs/ROM_BANK_MAP.md)
-- [Menu architecture](docs/MENU_STRUCTURE.md)
-- [Blank Scroll writing system](docs/BLANK_SCROLL.md)
-- [Big Moai spell system and manual unlock route](docs/BIG_MOAI.md)
-- [Wanderer Rescue password system](docs/RESCUE_SYSTEM.md)
-- [Unidentified item naming and manual test route](docs/UNIDENTIFIED_ITEM_NAMING.md)
-- [Dynamic item rows and visual gallery](docs/ITEM_FORMATTING.md)
+- [Translation policy](docs/translation-policy.md)
+- [Text and control reference](docs/TEXT_REFERENCE.md)
+- [VWF and surface budgets](docs/VWF_BUDGETS.md)
+- [Graphics localization](docs/GRAPHICS.md)
+- [ROM ownership map](docs/ROM_BANK_MAP.md)
 - [Engineering rules](docs/ENGINEERING_RULES.md)
 - [Known traps](docs/TRAPS.md)
-- [Graphics localization](docs/GRAPHICS.md)
-- [Graphical-text audit](docs/GRAPHICS_AUDIT.md)
 
-Nothing under `docs/` is mandatory onboarding. This README plus
-[`script/README.md`](script/README.md) is enough to build and to edit text; the detailed
-files are references for the moment a measured rule or architecture decision matters.
-
-## Known limits
-
-- Extracted-reference completeness is not the same as full route coverage. Optional events,
-  endings, postgame states, and navigation-history interactions still need playtesting.
-- The current suite has strong static and focused emulator coverage but not GB1's mature
-  release-battery matrix.
-- Graphics localization is incomplete even though ordinary text and several generated menu
-  templates are English.
-- The six-character player-name extension preserves known Japanese saves, but uncommon save
-  histories and every ranking category still deserve real-world testing.
-- Automated layout checks cannot judge character voice, sentence rhythm, or visual taste.
+The root README and [`script/README.md`](script/README.md) are enough to build and edit the
+project. The detailed documents are references for the feature or subsystem being changed.
 
 ## Contributing
 
-Before changing text, read [`script/README.md`](script/README.md) and the
-[translation policy](docs/translation-policy.md). Before changing ROM layout, renderers,
-menus, input, fonts, or persistent data, read the [engineering rules](docs/ENGINEERING_RULES.md)
-and [ownership map](docs/ROM_BANK_MAP.md).
+Add the narrowest useful regression for every reproducible bug. Run the focused test while
+iterating and the complete suite before handing off a player-visible or ROM-layout change.
+Visual changes should include an audition image or screenshot when practical.
 
-Keep ROMs, generated ROMs, ordinary saves, unreviewed emulator states, credentials, and
-extracted Japanese catalogs out of commits. The deliberately reviewed source `.mss` files
-and converted PyBoy `.state` files under `SaveStates/` are exceptions, not a precedent for
-committing personal states. Tests consume only `.state`; `.mss` is retained as conversion
-provenance.
-Add a focused regression for every reproducible bug and run the complete suite before
-handing off a change.
+Before changing ROM layout, renderers, menus, fonts, input, or persistent data, read the
+[engineering rules](docs/ENGINEERING_RULES.md) and [ROM ownership map](docs/ROM_BANK_MAP.md).
+
+Do not commit ROMs, generated patches, personal saves, credentials, or complete extracted
+Japanese catalogs. The reviewed fixture states under `SaveStates/` are deliberate project
+test data, not a precedent for committing unrelated emulator states.
 
 ## Licensing and ROM policy
 
 Thin Pixel-7 licensing information is preserved in
-[`licenses/Thin-Pixel-7.txt`](licenses/Thin-Pixel-7.txt). This repository does not
-distribute the game ROM or complete extracted Japanese script catalogs.
+[`licenses/Thin-Pixel-7.txt`](licenses/Thin-Pixel-7.txt). Other third-party components remain
+subject to the notices under [`licenses/`](licenses/). This project is distributed as tools,
+translation data, and original localization assets only; you must supply your own original
+game dump.
