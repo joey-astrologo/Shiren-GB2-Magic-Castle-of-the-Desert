@@ -11,9 +11,25 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import hud_font_audition
+import build as translated_build
+import cartridge
+import hud_font
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
+
+APPROVED_DIGIT_RASTERS = {
+    "0": ("....", "###.", "#.#.", "#.#.", "#.#.", "#.#.", "###.", "...."),
+    "1": ("....", ".#..", "##..", ".#..", ".#..", ".#..", "###.", "...."),
+    "2": ("....", "##..", "..#.", "..#.", ".#..", "#...", "###.", "...."),
+    "3": ("....", "###.", "..#.", ".##.", "..#.", "..#.", "###.", "...."),
+    "4": ("....", "#.#.", "#.#.", "#.#.", "###.", "..#.", "..#.", "...."),
+    "5": ("....", "###.", "#...", "##..", "..#.", "..#.", "##..", "...."),
+    "6": ("....", ".##.", "#...", "###.", "#.#.", "#.#.", "###.", "...."),
+    "7": ("....", "###.", "..#.", "..#.", ".#..", ".#..", ".#..", "...."),
+    "8": ("....", "###.", "#.#.", "###.", "#.#.", "#.#.", "###.", "...."),
+    "9": ("....", "###.", "#.#.", "#.#.", "###.", "..#.", "##..", "...."),
+}
 
 
 class HudFontAuditionTests(unittest.TestCase):
@@ -118,6 +134,61 @@ class HudFontAuditionTests(unittest.TestCase):
             "HUD font source SHA-256 mismatch",
         ):
             hud_font_audition.read_source(damaged)
+
+    def test_production_build_installs_only_the_approved_hud_digits(self):
+        output, _allocation, _validation = translated_build.build_rom(self.rom, {})
+        for character, expected in APPROVED_DIGIT_RASTERS.items():
+            with self.subTest(character=character):
+                self.assertEqual(
+                    expected,
+                    hud_font_audition.glyph_raster(output, character),
+                )
+
+        first_non_digit = (
+            hud_font_audition.HUD_SOURCE_OFFSET
+            + 5 * hud_font_audition.SOURCE_TILE_BYTES
+        )
+        end = (
+            hud_font_audition.HUD_SOURCE_OFFSET
+            + hud_font_audition.HUD_SOURCE_SIZE
+        )
+        self.assertEqual(self.rom[first_non_digit:end], output[first_non_digit:end])
+
+    def test_digit_installer_is_asset_backed_guarded_and_confined(self):
+        spec = hud_font.load_approved()
+        self.assertEqual(
+            hud_font.APPROVED_SOURCE_SHA256,
+            spec["source"]["sha256"],
+        )
+        self.assertEqual(
+            APPROVED_DIGIT_RASTERS,
+            {character: tuple(rows) for character, rows in spec["glyphs"].items()},
+        )
+        packed = hud_font.approved_digit_bytes(spec)
+        self.assertEqual(5 * 16, len(packed))
+
+        output = hud_font.install(self.rom)
+        start, end = hud_font.owned_range()
+        changed = {
+            offset
+            for offset, (before, after) in enumerate(zip(self.rom, output))
+            if before != after
+        }
+        checksums = {
+            cartridge.HEADER_CHECKSUM,
+            cartridge.GLOBAL_CHECKSUM,
+            cartridge.GLOBAL_CHECKSUM + 1,
+        }
+        self.assertTrue(changed - checksums)
+        self.assertTrue(changed <= set(range(start, end)) | checksums)
+        self.assertEqual(packed, output[start:end])
+        self.assertEqual(output, hud_font.install(output))
+        cartridge.verify_checksums(output)
+
+        damaged = bytearray(self.rom)
+        damaged[start] ^= 1
+        with self.assertRaisesRegex(hud_font.HudFontError, "unexpected HUD digit"):
+            hud_font.install(damaged)
 
 
 if __name__ == "__main__":

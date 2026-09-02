@@ -263,19 +263,25 @@ pack two four-pixel slots each:
 - meter fill/cap art in tiles `$FB-$FC`;
 - reserved blank tiles `$FD-$FF`.
 
-Normal play has only demonstrated decimal numbers, `F`, `Lv`, and `Hp`; `A-E` are still
+Production installs the approved player-supplied decimal raster from
+`assets/fonts/hud_digits.json` into only the first five tiles. The asset freezes the SHA-256
+of `hud edits.webp` and its ten-cell crop (`1234567890` at x=1, y=0); pixels below row 7 are
+outside the digit crop. The remaining eleven tiles are required to stay byte-exact native.
+
+Normal play has only demonstrated decimal numbers, `F`, `Lv`, and `Hp`; `A-E` remain
 included in the audition because they are real, distinct alphanumeric slots in the same
-native source. The read-only tool renders every slot, the symbols, and native-width status
-proofs without editing a ROM:
+source. The read-only tool accepts either the verified native atlas or the exact installed
+digit/native-tail combination and renders every slot, symbol, and native-width status proof:
 
 ```sh
 python3 -m unittest tests.test_hud_font_audition -v
 python3 tools/hud_font_audition.py
 ```
 
-The default output is `build/hud_font_audition.png`. Tests freeze the source hash, literal
-`F/L/v/H/p` pixels, slash geometry, distinct nonempty alphanumeric slots, maximum proof width,
-sheet geometry, CLI output, and fail-closed behavior after any atlas mutation.
+The default output is `build/hud_font_audition.png`. Tests freeze the source-image identity,
+all ten approved digit rasters, literal `F/L/v/H/p` pixels, slash geometry, distinct nonempty
+alphanumeric slots, maximum proof width, sheet geometry, CLI output, exact five-tile ownership,
+and fail-closed behavior after any unapproved atlas mutation.
 
 ## Ending and credits
 
@@ -306,7 +312,7 @@ remain unchanged by explicit project policy.
 | Candidate | Finding | Disposition |
 |---|---|---|
 | Opening chase/cinematics | Existing opening tests prove ordinary dialogue rendering, but do not constitute a frame-by-frame graphical-text inventory | Keep on the visual play-test watch list; no separate asset claimed yet |
-| HUD abbreviations | Dedicated packed atlas `3:$5742-$5841`; complete alphanumeric/symbol contact sheet and source guards now cover it | No localization target from current evidence; retain the read-only audition for review |
+| HUD abbreviations | Dedicated packed atlas `3:$5742-$5841`; approved decimal digits are installed while native labels/symbols remain guarded | Digit localization complete; retain the read-only audition for source and production review |
 | Menus and graphical input | Status, name, gift-code, Blank Scroll, unidentified-name, Rescue, and service-menu owners already documented | Do not duplicate them in a new static-art patch |
 | Shop/store signs | Japanese characters are environmental signage | Preserve |
 | Postgame location cards | Covered by the installed 32-selector arrival renderer | Continue rare-route playtesting; all selectors are statically pixel-tested |

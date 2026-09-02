@@ -21,6 +21,8 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 
+import hud_font
+
 try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError as exc:  # pragma: no cover - only exercised without Pillow
@@ -45,6 +47,9 @@ SOURCE_TILE_BYTES = 16
 HUD_SOURCE_SIZE = SOURCE_TILE_COUNT * SOURCE_TILE_BYTES
 HUD_SOURCE_SHA256 = (
     "3ea78ca67f1364b85de7fe4971886ae3bc76bcd643837504cc22be5e839704a1"
+)
+HUD_NATIVE_TAIL_SHA256 = (
+    "90ff02ccae6a6c4c71cbe34e5f6cd90cbfeb2c3f4e20db4b163cf699da09787e"
 )
 HUD_SOURCE_LOCATION = "3:$5742-$5841"
 
@@ -86,10 +91,16 @@ def read_source(rom):
             "ROM is too small for HUD font source at %s" % HUD_SOURCE_LOCATION
         )
     actual = sha256(source).hexdigest()
-    if actual != HUD_SOURCE_SHA256:
+    approved_digits = hud_font.approved_digit_bytes()
+    installed = (
+        source[:hud_font.DIGIT_BYTES] == approved_digits
+        and sha256(source[hud_font.DIGIT_BYTES:]).hexdigest()
+        == HUD_NATIVE_TAIL_SHA256
+    )
+    if actual != HUD_SOURCE_SHA256 and not installed:
         raise HudFontAuditionError(
-            "HUD font source SHA-256 mismatch: got %s, expected %s"
-            % (actual, HUD_SOURCE_SHA256)
+            "HUD font source SHA-256 mismatch: got %s; expected native source "
+            "or approved digits with an unchanged native tail" % actual
         )
     return source
 
@@ -194,7 +205,7 @@ def _centered_text(draw, box, text, fill, font):
 
 def render_sheet(rom):
     """Return the native-size HUD-font contact sheet and a provenance report."""
-    read_source(rom)
+    source_sha256 = sha256(read_source(rom)).hexdigest()
     image = Image.new("RGB", SHEET_SIZE, SHEET_BACKGROUND)
     draw = ImageDraw.Draw(image)
     font = ImageFont.load_default()
@@ -207,7 +218,7 @@ def render_sheet(rom):
         font=font,
     )
     draw.rectangle((12, 31, 371, 32), fill=ACCENT)
-    draw.text((12, 36), "ALL ALPHANUMERIC SOURCE SLOTS", fill=CAPTION, font=font)
+    draw.text((12, 36), "ALL HUD ALPHANUMERIC SLOTS", fill=CAPTION, font=font)
 
     cell_width = 36
     cell_height = 36
@@ -251,7 +262,7 @@ def render_sheet(rom):
             (box[2] - glyph.width - 8, box[1] + (box[3] - box[1] - glyph.height) // 2),
         )
 
-    draw.text((12, 184), "NATIVE LAYOUT PROOFS", fill=CAPTION, font=font)
+    draw.text((12, 184), "HUD LAYOUT PROOFS", fill=CAPTION, font=font)
     for row, proof in enumerate(PROOFS):
         top = 197 + row * 24
         draw.rectangle((12, top, 371, top + 19), fill=PANEL_BACKGROUND)
@@ -261,14 +272,14 @@ def render_sheet(rom):
 
     draw.text(
         (12, 246),
-        "SHA-256 " + HUD_SOURCE_SHA256[:24] + "...",
+        "SHA-256 " + source_sha256[:24] + "...",
         fill=MUTED_CAPTION,
         font=font,
     )
 
     report = {
         "source": HUD_SOURCE_LOCATION,
-        "source_sha256": HUD_SOURCE_SHA256,
+        "source_sha256": source_sha256,
         "source_tiles": SOURCE_TILE_COUNT,
         "alphanumeric_count": len(ALPHANUMERIC_GLYPHS),
         "alphanumeric_glyphs": ALPHANUMERIC_GLYPHS,

@@ -188,18 +188,20 @@ The tests freeze the measured native bands and palette, complete selector covera
 Dungeon` label, and CLI contact-sheet generation. The sheet command writes only its requested
 PNG unless `--asset-output` is explicitly supplied.
 
-For the native top-status-bar font audit:
+For the top-status-bar font audit:
 
 ```sh
 python3 -m unittest tests.test_hud_font_audition -v
 python3 tools/hud_font_audition.py
 ```
 
-This reads the guarded 16-tile source at `3:$5742-$5841` and writes only
-`build/hud_font_audition.png` by default. The regression freezes every `0-9A-F`, `L/v/H/p`,
-slash, and meter source raster needed by the sheet, proves all 20 alphanumeric slots are
-distinct and nonempty, and checks a native-width `99F Lv 99 Hp 999/999` proof. It never
-updates framebuffer hashes or modifies the ROM.
+This reads either the guarded native 16-tile source at `3:$5742-$5841` or a production atlas
+whose first five tiles contain the approved decimal rasters and whose remaining eleven tiles
+are byte-exact native. It writes only `build/hud_font_audition.png` by default. The regression
+freezes every installed `0-9` raster, native `A-F`, `L/v/H/p`, slash, and meter source raster,
+proves all 20 alphanumeric slots are distinct and nonempty, checks a native-width
+`99F Lv 99 Hp 999/999` proof, and confines installation to the digit tiles. It never updates
+framebuffer hashes; the audition command does not modify the ROM.
 
 For the dedicated shop-price digit font:
 

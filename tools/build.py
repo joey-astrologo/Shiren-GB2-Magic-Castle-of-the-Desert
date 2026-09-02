@@ -19,6 +19,7 @@ import credit_screen
 import dialogue_pacing
 import english_font
 import extract
+import hud_font
 import insert
 import item_formatting
 import item_status
@@ -266,6 +267,7 @@ def build_rom(
     allocation = allocate.allocate(rom, record_overrides=overrides)
     relocated, _allocation = insert.write_relocated(rom, allocation)
     output = english_font.install(relocated, approved=approved_font)
+    output = hud_font.install(output)
     output = item_formatting.install(output)
     output = shop_sale_count.install(output)
     output = item_status.install(output)
@@ -481,6 +483,7 @@ def main(argv=None):
         dialogue_pacing.DialoguePacingError,
         english_font.FontError,
         extract.ExtractError,
+        hud_font.HudFontError,
         insert.InsertError,
         item_formatting.ItemFormattingError,
         ips.IpsError,

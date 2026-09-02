@@ -21,6 +21,7 @@ import english_smoke
 import extract
 import far_text
 import font
+import hud_font
 import insert
 import item_formatting
 import item_status
@@ -172,6 +173,8 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in item_formatting.owned_ranges()
             for offset in range(start, end)
         }
+        hud_start, hud_end = hud_font.owned_range()
+        hud_font_offsets = set(range(hud_start, hud_end))
         sale_count_start, sale_count_end = shop_sale_count.owned_range()
         sale_count_offsets = set(range(sale_count_start, sale_count_end))
         credit_screen_offsets = {
@@ -246,6 +249,7 @@ class TranslationBuildTests(unittest.TestCase):
             | script_offsets
             | font_offsets
             | item_formatting_offsets
+            | hud_font_offsets
             | sale_count_offsets
             | item_status_offsets
             | credit_screen_offsets

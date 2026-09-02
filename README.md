@@ -68,8 +68,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, the death-Rankings note editor, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit card, arrival cards, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **558-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
+| Graphics | **In progress** | Credit card, arrival cards, decimal dungeon-HUD digits, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
+| Automated tests | **560-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, localized HUD digits, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -199,10 +199,10 @@ python3 -m unittest \
   tests.test_arrival_cards
 ```
 
-## Audit the native HUD font
+## Audit the dungeon HUD font
 
 Render every alphanumeric slot used by the top dungeon status bar, plus its slash and meter
-tiles, without changing the ROM:
+tiles, without changing the input ROM:
 
 ```sh
 python3 -m unittest tests.test_hud_font_audition -v
@@ -210,10 +210,11 @@ python3 tools/hud_font_audition.py
 ```
 
 The contact sheet at `build/hud_font_audition.png` comes directly from the guarded packed
-atlas at `3:$5742-$5841`. It includes `0-9A-F`, the production `Lv` / `Hp` letters, symbol
-tiles, and minimum/maximum layout proofs at native four-pixel slot widths. The ordinary HUD
-uses decimal values, `F` for Floor, and the `Lv` / `Hp` labels; `A-E` are present in the
-shared nibble source even though they have not been observed in normal status values.
+atlas at `3:$5742-$5841`. Production builds replace only its first five tiles with the ten
+approved 4x8 decimal rasters in `assets/fonts/hud_digits.json`; `A-F`, the production
+`Lv` / `Hp` letters, slash, meter, and reserved tiles remain byte-exact native graphics.
+The audition accepts either the verified original atlas or this exact localized-digit/native-tail
+combination and includes minimum/maximum layout proofs at the unchanged four-pixel widths.
 
 ## Audition the shop-price font
 

@@ -162,6 +162,11 @@ One important exception to blanket prefixed-font preservation is the `F2 1E` cra
 composite: its stock pixels spell Japanese `(hibi)`. `item_status.py` replaces only that
 40-byte raster with `(Cr)`, preserving the native token and width contract.
 
+The dungeon HUD uses another independent packed atlas. `hud_font.py` replaces only its five
+decimal digit tiles with the approved ten 4x8 rasters; hexadecimal letters, `Lv` / `Hp`, the
+slash, meter art, and reserved cells remain byte-exact native. `hud_font_audition.py` renders
+both the verified source atlas and this exact localized production form.
+
 ## Dynamic item rows
 
 Group 4 supplies translated item roots, but the inventory list is not stored as complete

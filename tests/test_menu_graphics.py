@@ -16,6 +16,7 @@ import build as translation_build
 import english
 import english_font
 import extract
+import hud_font
 import menu_graphics
 import pyboy_state
 import runtime_widths
@@ -195,6 +196,12 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "localized.gbc"
         cls.localized_path.write_bytes(output)
+        native_hud = bytearray(output)
+        hud_start, hud_end = hud_font.owned_range()
+        native_hud[hud_start:hud_end] = hud_font.ORIGINAL_DIGIT_BYTES
+        cartridge.fix_checksums(native_hud)
+        cls.native_hud_path = Path(cls.temporary.name) / "native-hud-control.gbc"
+        cls.native_hud_path.write_bytes(native_hud)
         cls.ram = pyboy_state.cart_ram(state_path)
 
     @classmethod
@@ -227,8 +234,41 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
         )
         self.assertEqual(wanted, actual)
 
+    def _assert_only_hud_changed(self, localized, expected_sha1, events, settled_frame):
+        """Keep the old full-frame hash and isolate the approved HUD delta."""
+        pyboy = self.PyBoy(
+            str(self.native_hud_path),
+            window="null",
+            ram_file=io.BytesIO(self.ram),
+            sound_emulated=False,
+        )
+        pyboy.set_emulation_speed(0)
+        try:
+            for frame in range(settled_frame + 1):
+                button = events.get(frame)
+                if button is not None:
+                    pyboy.button(button, capture_dialogue.PRESS_FRAMES)
+                pyboy.tick()
+            native = pyboy.screen.image.convert("RGB")
+        finally:
+            pyboy.stop(save=False)
+
+        self.assertEqual(expected_sha1, sha1(native.tobytes()).hexdigest())
+        differences = {
+            (x, y)
+            for y in range(localized.height)
+            for x in range(localized.width)
+            if localized.getpixel((x, y)) != native.getpixel((x, y))
+        }
+        self.assertTrue(differences)
+        self.assertTrue(all(y < 8 for _x, y in differences))
+
     def test_mamel_save_opens_complete_english_main_menu(self):
         expected = FIXTURE["live_mamel_menu"]
+        events = {
+            120: "a", 180: "start", 240: "a", 360: "start",
+            420: "a", 600: "a", 780: "a", 1000: "b",
+        }
         pyboy = self.PyBoy(
             str(self.localized_path),
             window="null",
@@ -266,8 +306,12 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
             image = pyboy.screen.image.convert("RGB")
             self._assert_live_map_shadow(image)
-            screen = image.tobytes()
-            self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
+            self._assert_only_hud_changed(
+                image,
+                expected["screen_rgb_sha1"],
+                events,
+                expected["settled_frame"],
+            )
             self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
             pyboy.stop(save=False)
@@ -312,6 +356,11 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
 
     def test_mamel_hints_popup_titles_are_english_and_bounded(self):
         expected = FIXTURE["live_mamel_hints_popup"]
+        events = {
+            120: "a", 180: "start", 240: "a", 360: "start",
+            420: "a", 600: "a", 780: "a", 1000: "b",
+            1060: "down", 1090: "down", 1120: "down", 1160: "a",
+        }
         pyboy = self.PyBoy(
             str(self.localized_path),
             window="null",
@@ -349,14 +398,25 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
             for label in expected["labels"]:
                 with self.subTest(label=label):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
-            screen = pyboy.screen.image.convert("RGB").tobytes()
-            self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
+            image = pyboy.screen.image.convert("RGB")
+            self._assert_only_hud_changed(
+                image,
+                expected["screen_rgb_sha1"],
+                events,
+                expected["settled_frame"],
+            )
         finally:
             pyboy.stop(save=False)
 
     def test_selected_hint_returns_to_complete_english_status_menu(self):
         """Reproduce the reported Hint -> Controls -> Back redraw regression."""
         expected = FIXTURE["live_mamel_hints_return"]
+        events = {
+            120: "a", 180: "start", 240: "a", 360: "start",
+            420: "a", 600: "a", 780: "a", 1000: "b",
+            1060: "down", 1090: "down", 1120: "down", 1160: "a",
+            1280: "a", 1400: "b",
+        }
         pyboy = self.PyBoy(
             str(self.localized_path),
             window="null",
@@ -398,8 +458,12 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
             image = pyboy.screen.image.convert("RGB")
             self._assert_live_map_shadow(image)
-            screen = image.tobytes()
-            self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
+            self._assert_only_hud_changed(
+                image,
+                expected["screen_rgb_sha1"],
+                events,
+                expected["settled_frame"],
+            )
         finally:
             pyboy.stop(save=False)
 
