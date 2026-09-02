@@ -30,6 +30,16 @@ APPROVED_DIGIT_RASTERS = {
     "8": ("....", "###.", "#.#.", "###.", "#.#.", "#.#.", "###.", "...."),
     "9": ("....", "###.", "#.#.", "#.#.", "###.", "..#.", "##..", "...."),
 }
+APPROVED_SLASH_RASTER = (
+    "........",
+    "......#.",
+    ".....#..",
+    "....#...",
+    "...#....",
+    "..#.....",
+    ".#......",
+    "........",
+)
 
 
 class HudFontAuditionTests(unittest.TestCase):
@@ -135,7 +145,7 @@ class HudFontAuditionTests(unittest.TestCase):
         ):
             hud_font_audition.read_source(damaged)
 
-    def test_production_build_installs_only_the_approved_hud_digits(self):
+    def test_production_build_installs_the_approved_hud_digits_and_slash(self):
         output, _allocation, _validation = translated_build.build_rom(self.rom, {})
         for character, expected in APPROVED_DIGIT_RASTERS.items():
             with self.subTest(character=character):
@@ -143,16 +153,19 @@ class HudFontAuditionTests(unittest.TestCase):
                     expected,
                     hud_font_audition.glyph_raster(output, character),
                 )
-
-        first_non_digit = (
-            hud_font_audition.HUD_SOURCE_OFFSET
-            + 5 * hud_font_audition.SOURCE_TILE_BYTES
+        self.assertEqual(
+            APPROVED_SLASH_RASTER,
+            hud_font_audition.glyph_raster(output, "/"),
         )
-        end = (
+
+        digit_start, digit_end = hud_font.digit_range()
+        slash_start, slash_end = hud_font.slash_range()
+        atlas_end = (
             hud_font_audition.HUD_SOURCE_OFFSET
             + hud_font_audition.HUD_SOURCE_SIZE
         )
-        self.assertEqual(self.rom[first_non_digit:end], output[first_non_digit:end])
+        self.assertEqual(self.rom[digit_end:slash_start], output[digit_end:slash_start])
+        self.assertEqual(self.rom[slash_end:atlas_end], output[slash_end:atlas_end])
 
     def test_digit_installer_is_asset_backed_guarded_and_confined(self):
         spec = hud_font.load_approved()
@@ -164,11 +177,15 @@ class HudFontAuditionTests(unittest.TestCase):
             APPROVED_DIGIT_RASTERS,
             {character: tuple(rows) for character, rows in spec["glyphs"].items()},
         )
+        self.assertEqual(APPROVED_SLASH_RASTER, tuple(spec["slash"]))
         packed = hud_font.approved_digit_bytes(spec)
+        slash = hud_font.approved_slash_bytes(spec)
         self.assertEqual(5 * 16, len(packed))
+        self.assertEqual(16, len(slash))
 
         output = hud_font.install(self.rom)
-        start, end = hud_font.owned_range()
+        digit_start, digit_end = hud_font.digit_range()
+        slash_start, slash_end = hud_font.slash_range()
         changed = {
             offset
             for offset, (before, after) in enumerate(zip(self.rom, output))
@@ -180,14 +197,25 @@ class HudFontAuditionTests(unittest.TestCase):
             cartridge.GLOBAL_CHECKSUM + 1,
         }
         self.assertTrue(changed - checksums)
-        self.assertTrue(changed <= set(range(start, end)) | checksums)
-        self.assertEqual(packed, output[start:end])
+        owned = {
+            offset
+            for start, end in hud_font.owned_ranges()
+            for offset in range(start, end)
+        }
+        self.assertTrue(changed <= owned | checksums)
+        self.assertEqual(packed, output[digit_start:digit_end])
+        self.assertEqual(slash, output[slash_start:slash_end])
         self.assertEqual(output, hud_font.install(output))
         cartridge.verify_checksums(output)
 
         damaged = bytearray(self.rom)
-        damaged[start] ^= 1
+        damaged[digit_start] ^= 1
         with self.assertRaisesRegex(hud_font.HudFontError, "unexpected HUD digit"):
+            hud_font.install(damaged)
+
+        damaged = bytearray(self.rom)
+        damaged[slash_start] ^= 1
+        with self.assertRaisesRegex(hud_font.HudFontError, "unexpected HUD slash"):
             hud_font.install(damaged)
 
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Install the approved decimal digits in GB2's dedicated dungeon HUD atlas.
+"""Install the approved decimal digits and slash in GB2's dungeon HUD atlas.
 
 The top status bar packs two four-pixel glyphs into each 8x8 2bpp tile. Decimal
-digits 0-9 occupy the first five tiles at bank 3:$5742. This patch replaces only
-those cells; hexadecimal A-F, Lv/Hp, the slash, meter artwork, and reserved tiles
-remain native.
+digits 0-9 occupy the first five tiles at bank 3:$5742, while the slash occupies
+tile ten. This patch replaces only those discontiguous cells; hexadecimal A-F,
+Lv/Hp, meter artwork, and reserved tiles remain native.
 """
 import argparse
 import json
@@ -25,6 +25,8 @@ TILE_BYTES = 16
 DIGIT_TILES = 5
 DIGIT_BYTES = DIGIT_TILES * TILE_BYTES
 DIGITS = "0123456789"
+SLASH_TILE = 10
+SLASH_OFFSET = HUD_OFFSET + SLASH_TILE * TILE_BYTES
 BACKGROUND_COLOR = 1
 INK_COLOR = 3
 APPROVED_SOURCE_SHA256 = (
@@ -37,6 +39,7 @@ ORIGINAL_DIGIT_BYTES = bytes.fromhex(
     "ff00ffeeff82ffe2ffa2ffa2ffe2ff00"
     "ff00ffeeffaaffeaffaeffa2ffeeff00"
 )
+ORIGINAL_SLASH_BYTES = bytes.fromhex("ff00ff00ff06ff0cff18ff30ff60ff00")
 
 
 class HudFontError(ValueError):
@@ -70,6 +73,18 @@ def load_approved(path=DEFAULT_SPEC):
             )
         ):
             raise HudFontError("HUD digit %s must contain eight 4-column .# rows" % character)
+    slash = spec.get("slash")
+    if (
+        not isinstance(slash, list)
+        or len(slash) != 8
+        or any(
+            not isinstance(row, str)
+            or len(row) != 8
+            or set(row) - {".", "#"}
+            for row in slash
+        )
+    ):
+        raise HudFontError("HUD slash must contain eight 8-column .# rows")
     return spec
 
 
@@ -90,22 +105,49 @@ def approved_digit_bytes(spec=None):
     return bytes(out)
 
 
-def owned_range():
-    """Return the exclusive ROM range owned by the digit installer."""
+def approved_slash_bytes(spec=None):
+    """Encode the approved 8x8 slash in the native background/ink palette."""
+    rows = (spec or load_approved())["slash"]
+    out = bytearray()
+    for row in rows:
+        low = high = 0
+        for x, pixel in enumerate(row):
+            color = INK_COLOR if pixel == "#" else BACKGROUND_COLOR
+            bit = 7 - x
+            low |= (color & 1) << bit
+            high |= ((color >> 1) & 1) << bit
+        out += bytes((low, high))
+    return bytes(out)
+
+
+def digit_range():
+    """Return the exclusive ROM range occupied by decimal digit tiles."""
     return HUD_OFFSET, HUD_OFFSET + DIGIT_BYTES
 
 
+def slash_range():
+    """Return the exclusive ROM range occupied by the slash tile."""
+    return SLASH_OFFSET, SLASH_OFFSET + TILE_BYTES
+
+
+def owned_ranges():
+    """Return the two discontiguous HUD ranges owned by this installer."""
+    return digit_range(), slash_range()
+
+
 def install(rom, spec=None, checksums=True):
-    """Return ``rom`` with only the approved packed HUD digit tiles changed."""
-    replacement = approved_digit_bytes(spec)
+    """Return ``rom`` with only the approved HUD digits and slash changed."""
+    spec = spec or load_approved()
     out = bytearray(rom)
-    start, end = owned_range()
-    current = bytes(out[start:end])
-    if current not in (ORIGINAL_DIGIT_BYTES, replacement):
-        raise HudFontError(
-            "unexpected HUD digit bytes at %d:$%04X" % (HUD_BANK, HUD_ADDRESS)
-        )
-    out[start:end] = replacement
+    targets = (
+        ("digit", digit_range(), ORIGINAL_DIGIT_BYTES, approved_digit_bytes(spec)),
+        ("slash", slash_range(), ORIGINAL_SLASH_BYTES, approved_slash_bytes(spec)),
+    )
+    for name, (start, end), original, replacement in targets:
+        current = bytes(out[start:end])
+        if current not in (original, replacement):
+            raise HudFontError("unexpected HUD %s bytes" % name)
+        out[start:end] = replacement
     if checksums:
         fix_checksums(out)
     return bytes(out)
@@ -125,7 +167,7 @@ def main(argv=None):
     destination = Path(args.output)
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(output)
-    print("HUD digits : 0-9 (%d packed tiles)" % DIGIT_TILES)
+    print("HUD glyphs : 0-9 and slash (%d packed digit tiles)" % DIGIT_TILES)
     print("output     : %s" % destination)
     return 0
 

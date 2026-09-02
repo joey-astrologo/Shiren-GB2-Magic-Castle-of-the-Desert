@@ -68,8 +68,8 @@ project work.
 | Menus and system text | **Complete for mapped text routes** | Continue discovering transition-history and rare-route visual issues in playtesting |
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, the death-Rankings note editor, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
-| Graphics | **In progress** | Credit card, arrival cards, decimal dungeon-HUD digits, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **560-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, localized HUD digits, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
+| Graphics | **In progress** | Credit card, arrival cards, dungeon-HUD digits/slash, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
+| Automated tests | **560-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, localized HUD digits/slash, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -210,11 +210,12 @@ python3 tools/hud_font_audition.py
 ```
 
 The contact sheet at `build/hud_font_audition.png` comes directly from the guarded packed
-atlas at `3:$5742-$5841`. Production builds replace only its first five tiles with the ten
-approved 4x8 decimal rasters in `assets/fonts/hud_digits.json`; `A-F`, the production
-`Lv` / `Hp` letters, slash, meter, and reserved tiles remain byte-exact native graphics.
-The audition accepts either the verified original atlas or this exact localized-digit/native-tail
-combination and includes minimum/maximum layout proofs at the unchanged four-pixel widths.
+atlas at `3:$5742-$5841`. Production builds replace its first five tiles with the ten
+approved 4x8 decimal rasters in `assets/fonts/hud_digits.json` and replace the discontiguous
+slash tile at `$57E2-$57F1` with the approved 8x8 raster from the same source image. `A-F`,
+the production `Lv` / `Hp` letters, meter, and reserved tiles remain byte-exact native
+graphics. The audition accepts either the verified original atlas or this exact localized
+digit/slash form and includes minimum/maximum layout proofs at the unchanged widths.
 
 ## Audition the shop-price font
 

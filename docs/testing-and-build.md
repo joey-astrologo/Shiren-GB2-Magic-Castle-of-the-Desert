@@ -196,12 +196,13 @@ python3 tools/hud_font_audition.py
 ```
 
 This reads either the guarded native 16-tile source at `3:$5742-$5841` or a production atlas
-whose first five tiles contain the approved decimal rasters and whose remaining eleven tiles
-are byte-exact native. It writes only `build/hud_font_audition.png` by default. The regression
-freezes every installed `0-9` raster, native `A-F`, `L/v/H/p`, slash, and meter source raster,
-proves all 20 alphanumeric slots are distinct and nonempty, checks a native-width
-`99F Lv 99 Hp 999/999` proof, and confines installation to the digit tiles. It never updates
-framebuffer hashes; the audition command does not modify the ROM.
+whose first five tiles contain the approved decimal rasters, whose tile ten contains the
+approved slash, and whose other ten tiles are byte-exact native. It writes only
+`build/hud_font_audition.png` by default. The regression freezes every installed `0-9` raster
+and slash, native `A-F`, `L/v/H/p`, and meter source rasters, proves all 20 alphanumeric slots
+are distinct and nonempty, checks a native-width `99F Lv 99 Hp 999/999` proof, and confines
+installation to the two approved ranges. It never updates framebuffer hashes; the audition
+command does not modify the ROM.
 
 For the dedicated shop-price digit font:
 
