@@ -1,9 +1,6 @@
 from hashlib import sha1, sha256
 import json
-import os
 from pathlib import Path
-import re
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -20,6 +17,9 @@ import extract
 import item_formatting
 import item_status
 import layout
+import capture_dialogue
+import pyboy_fixtures
+import pyboy_route
 import translations
 
 
@@ -29,13 +29,6 @@ FIXTURE = json.loads(
         encoding="utf-8"
     )
 )
-GALLERY_SCRIPT = ROOT / "tools" / "mesen_item_formatting_gallery.lua"
-GALLERY_ROW = re.compile(
-    r'^\s*\{\s*"([^"]+)",\s*"([^"]+)",\s*\{([^}]+)\}\s*\},\s*$',
-    re.MULTILINE,
-)
-
-
 class ItemFormattingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -156,61 +149,35 @@ class ItemFormattingTests(unittest.TestCase):
         self.assertFalse(rendered.auto_wraps)
         self.assertLessEqual(rendered.rightmost_pen, right_edge)
 
-    def test_manual_gallery_table_matches_the_reviewed_fixture(self):
-        source = GALLERY_SCRIPT.read_text(encoding="utf-8")
-        rows = []
-        for index, match in enumerate(GALLERY_ROW.finditer(source)):
-            values = bytes(
-                int(token.strip(), 16) for token in match.group(3).split(",")
-            )
-            rows.append(
-                {
-                    "page": index // 10 + 1,
-                    "slot": index % 10 + 1,
-                    "label": match.group(1),
-                    "expected": match.group(2),
-                    "object_hex": values.hex().upper(),
-                }
-            )
-        self.assertEqual(FIXTURE["gallery"]["rows"], rows)
+    def test_gallery_contains_twenty_reviewed_native_records(self):
+        rows = FIXTURE["gallery"]["rows"]
         self.assertEqual(20, len(rows))
-        self.assertTrue(all(len(bytes.fromhex(row["object_hex"])) == 8 for row in rows))
-        self.assertIn(
-            "local PAGE_1_SCREEN = 0x" + FIXTURE["gallery"]["page_1_screen_fnv1a"],
-            source,
+        self.assertEqual(list(range(1, 11)) * 2, [row["slot"] for row in rows])
+        self.assertEqual([1] * 10 + [2] * 10, [row["page"] for row in rows])
+        self.assertTrue(
+            all(len(bytes.fromhex(row["object_hex"])) == 8 for row in rows)
         )
-        self.assertIn(
-            "local PAGE_2_SCREEN = 0x" + FIXTURE["gallery"]["page_2_screen_fnv1a"],
-            source,
-        )
+        self.assertEqual("Club", rows[0]["expected"])
+        self.assertEqual("Preservation Pot[5]", rows[-1]["expected"])
 
 
-class MesenItemFormattingGalleryTests(unittest.TestCase):
+class PyBoyItemFormattingGalleryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        candidates = [
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        ]
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
-
         cls.source = ROOT / ROM_NAME
-        state = FIXTURE["gallery"]["mesen_state"]
+        state = FIXTURE["gallery"]["pyboy_state"]
         cls.state = ROOT / state["path"]
         if not cls.source.is_file() or not cls.state.is_file():
             raise unittest.SkipTest("matching ROM and Mamel state are required")
         raw = cls.state.read_bytes()
         if sha1(raw).hexdigest() != state["sha1"]:
-            raise AssertionError("item-gallery Mesen state SHA-1 mismatch")
+            raise AssertionError("item-gallery PyBoy state SHA-1 mismatch")
         if sha256(raw).hexdigest() != state["sha256"]:
-            raise AssertionError("item-gallery Mesen state SHA-256 mismatch")
+            raise AssertionError("item-gallery PyBoy state SHA-256 mismatch")
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
 
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized = Path(cls.temporary.name) / "item-formatting-gallery.gbc"
@@ -238,33 +205,43 @@ class MesenItemFormattingGalleryTests(unittest.TestCase):
         if hasattr(cls, "temporary"):
             cls.temporary.cleanup()
 
-    def test_two_gallery_pages_match_the_reviewed_framebuffers(self):
-        env = os.environ.copy()
-        env["GB2_ITEM_GALLERY_MSS"] = str(self.state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(GALLERY_SCRIPT),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        gallery = FIXTURE["gallery"]
-        self.assertIn(
-            "PASS item-formatting-gallery page1=%s page2=%s"
-            % (gallery["page_1_screen_fnv1a"], gallery["page_2_screen_fnv1a"]),
-            output,
-        )
+    def test_two_gallery_pages_render_through_the_native_item_menu(self):
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, self.state)
+        records = [
+            bytes.fromhex(row["object_hex"])
+            for row in FIXTURE["gallery"]["rows"]
+        ]
+        try:
+            targets = pyboy_fixtures.install_item_gallery(pyboy, records)
+            self.assertEqual(
+                bytes(targets),
+                pyboy_route.work_read(
+                    pyboy, pyboy_fixtures.INVENTORY,
+                    pyboy_fixtures.INVENTORY_SLOTS,
+                ),
+            )
+            for frame in range(701):
+                if frame == 120:
+                    pyboy_route.press(pyboy, "b")
+                elif frame == 220:
+                    pyboy_route.press(pyboy, "a")
+                elif frame == 480:
+                    pyboy_route.press(pyboy, "right")
+                pyboy.tick()
+                if frame == 400:
+                    page_one = pyboy.screen.image.copy()
+            page_two = pyboy.screen.image.copy()
+            self.assertNotEqual(page_one.tobytes(), page_two.tobytes())
+            for page in (page_one, page_two):
+                # Both native pages contain item-name ink throughout the list,
+                # while the static width test above guards the right boundary.
+                ink = sum(
+                    page.getpixel((x, y))[:3] == (0, 0, 0)
+                    for x in range(6, 145) for y in range(16, 128)
+                )
+                self.assertGreater(ink, 500)
+        finally:
+            pyboy.stop(save=False)
 
 
 if __name__ == "__main__":

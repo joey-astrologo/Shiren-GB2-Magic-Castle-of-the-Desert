@@ -14,12 +14,12 @@ import arrival_cards
 import capture_dialogue
 import cartridge
 import english_smoke
-import mesen_state
+import pyboy_state
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
 FONT = ROOT / "assets" / "fonts" / "candidates" / "Inter-SemiBold-4.1.ttf"
-STATE = ROOT / "SaveStates" / "Mamel.mss"
+STATE = ROOT / "SaveStates" / "Mamel.state"
 
 
 class ArrivalCardInstallerTests(unittest.TestCase):
@@ -223,7 +223,7 @@ class ProductionArrivalCardPixelTests(unittest.TestCase):
         if sha1(original).hexdigest() != capture_dialogue.ROM_SHA1:
             raise unittest.SkipTest("ROM hash does not match the fixture")
         if not STATE.exists():
-            raise unittest.SkipTest("Mamel Mesen state is required")
+            raise unittest.SkipTest("Mamel native PyBoy state is required")
         try:
             cls.PyBoy = capture_dialogue._pyboy_class()
         except RuntimeError as exc:
@@ -233,7 +233,7 @@ class ProductionArrivalCardPixelTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.production_path = Path(cls.temporary.name) / "arrival-production.gbc"
         cls.production_path.write_bytes(production)
-        cls.ram = mesen_state.cart_ram(STATE)
+        cls.ram = pyboy_state.cart_ram(STATE)
 
     @classmethod
     def tearDownClass(cls):

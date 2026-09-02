@@ -1,7 +1,6 @@
 from hashlib import sha1
 import os
 from pathlib import Path
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -11,30 +10,32 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import build
+import capture_dialogue
 import extract
+import pyboy_route
 import runtime_widths
 import shop_sale_count
 import translations
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
-STATE = ROOT / "SaveStates" / "selling-multiple-item.mss"
-STATE_SHA1 = "f95f9ff9e3475bc740975a5608c9349949bf0df4"
+STATE = ROOT / "SaveStates" / "selling-multiple-item.state"
+STATE_SHA1 = "420d2945ded0a0f7ad147f44710ba12c35be6912"
 
 
 class MultipleItemSaleTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        mesen = Path("/Applications/Mesen.app/Contents/MacOS/Mesen")
-        if not mesen.is_file():
-            raise unittest.SkipTest("Mesen is unavailable")
         source = ROOT / ROM_NAME
         if not source.is_file() or not STATE.is_file():
             raise unittest.SkipTest("source ROM and multiple-sale state are required")
         original = source.read_bytes()
         if sha1(original).hexdigest() != extract.ROM_SHA1:
             raise unittest.SkipTest("ROM hash does not match the fixture")
-        cls.mesen = mesen
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
         cls.original = original
         cls.result = extract.extract(original)
         cls.translated = translations.load_path(
@@ -105,27 +106,23 @@ class MultipleItemSaleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             rom = Path(temporary) / "multiple-sale.gbc"
             rom.write_bytes(self.localized)
-            env = os.environ.copy()
-            env["GB2_MULTIPLE_SALE_MSS"] = str(STATE)
-            result = subprocess.run(
-                [
-                    str(self.mesen),
-                    "--testrunner",
-                    "--enablestdout",
-                    "--novideo",
-                    "--noaudio",
-                    str(rom),
-                    str(ROOT / "tests" / "mesen_shop_sale_count.lua"),
-                ],
-                cwd=ROOT,
-                env=env,
-                text=True,
-                capture_output=True,
-                timeout=60,
-            )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn("PASS multiple sale renders 4 items, right?", output)
+            pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+            try:
+                english = bytes.fromhex(
+                    "04 24 38 43 34 3c 42 4b 24 41 38 36 37 43 4e"
+                )
+                leaked = bytes.fromhex("04 39 4f")
+                pyboy_route.run_frames(pyboy, 60)
+                pyboy_route.press(pyboy, "a")
+                _frame, address = pyboy_route.wait_until(
+                    pyboy,
+                    lambda: pyboy_route.find_work_ram(pyboy, english),
+                    840,
+                )
+                self.assertIsNotNone(address)
+                self.assertIsNone(pyboy_route.find_work_ram(pyboy, leaked))
+            finally:
+                pyboy.stop(save=False)
 
 
 if __name__ == "__main__":

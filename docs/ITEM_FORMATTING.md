@@ -78,9 +78,10 @@ records, and marks Strength Bracelet, Knockback Staff, and Preservation Pot iden
 Use only with this disposable state. It modifies WRAM, not the ROM, but later in-game saves
 may persist the modified run.
 
-The same script has a noninteractive test-runner mode. The fixture freezes both reviewed
-framebuffers (`B9899EFF` and `EA1E7AC7`, FNV-1a) and the exact eight-byte object records in
-`tests/fixtures/item_formatting.json`.
+The automated test uses the same twenty reviewed eight-byte object records from
+`tests/fixtures/item_formatting.json`, injects them with a guarded Python helper, and opens
+both inventory pages in native PyBoy. Static pixel-layout checks independently prove that
+every localized dynamic family fits the item row.
 
 ## Synthesis-seal manual route
 
@@ -112,9 +113,9 @@ The helper resolves three cleared object records before writing, reserves an eig
 cleared runway for the Pot's sparse native contents structure, and intentionally replaces
 all twenty inventory pointers. Therefore every pre-existing inventory item disappears when
 the helper runs; use only with the disposable Mamel state and do not save the injected run.
-Its Mesen regression freezes the initial list, action menu, Put In picker, both
-post-insertion screens, contained-object pointer, donor consumption, native Pot state, Pot
-break, and the released weapon's critical-hit rune in `tests/fixtures/synthesis_lab.json`.
+Its PyBoy regression drives the list, action menu, Put In picker, and both insertions, then
+asserts the contained-object pointer, donor consumption, native Pot state, Pot break, and
+the released weapon's critical-hit rune from `tests/fixtures/synthesis_lab.json`.
 
 ## What is outside this gallery
 

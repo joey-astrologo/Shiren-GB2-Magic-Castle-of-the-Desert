@@ -280,7 +280,7 @@ Big Moai state contains `$06 $06`; his event requires stage `$09`. In Mesen's fl
 RAM domain these are offsets `$03EF-$03F0`. `tools/mesen_unlock_big_moai.lua` owns those
 two bytes only during an explicit disposable test and never writes SRAM directly.
 
-Native save/load code persists the pair. In `SaveStates/big-moai-locked.mss`, the two
+Native save/load code persists the pair. In `SaveStates/big-moai-locked.state`, the two
 observed native `cartRam` mirrors contain the pair at flat offsets `$2517-$2518` and
 `$4517-$4518`, with checksum `$0C` immediately after each. Those offsets describe this
 hash-frozen fixture; they are not a license to edit arbitrary SRAM files. See
@@ -289,7 +289,7 @@ hash-frozen fixture; they are not a license to edit arbitrary SRAM files. See
 ## Live dungeon inventory and item formatting
 
 These are transient WRAM structures, not allocation space. The deterministic visual helper
-uses only cleared object records in the disposable `Mamel.mss` state and resolves all
+uses only cleared object records in the disposable `Mamel.state` fixture and resolves all
 twenty targets before writing any of them.
 
 | Flat Mesen Work RAM / CPU view | Meaning |

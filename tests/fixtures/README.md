@@ -23,32 +23,44 @@ Emulator tests skip when PyBoy is unavailable. RGBDS source-equivalence tests sk
 `rgbasm`/`rgblink` are unavailable. A release-strength run should install all optional
 dependencies so those skips disappear.
 
-The committed `SaveStates/Mamel.mss` is the Mesen reproduction input for the nested-combat
-route. Its extracted `SaveStates/Mamel.srm` is ignored. Recreate it with:
+Every reviewed Mesen source in `SaveStates/*.mss` has a same-named native PyBoy `.state`.
+Tests use only the native files; the Mesen originals remain immutable provenance. Recreate
+the derived fixtures with the sibling converter and verified source ROM:
 
 ```sh
-python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
+python3 ../mesen-to-pyboy/mss_to_pyboy.py SaveStates/ \
+  --rom "$ROM" --output-dir SaveStates --verify-frames 12 --force
 ```
 
-`SaveStates/blank-scroll.mss` is the self-contained, exact populated-inventory confirmation
-state for the Blank Scroll restart regression. `tests.test_mesen_blank_scroll` verifies its
-SHA-1, confirms `Windblade` through Mesen, and requires conversion without a reset or
+`tests.test_pyboy_state_fixtures` requires every archived source to have a native partner,
+rejects Mesen references in Python tests and JSON manifests, rejects Mesen-only route
+scripts, and proves that every `.state` loads and advances in PyBoy. The converter validates
+CPU registers, memory banks, cartridge RAM, VRAM, and supported hardware state before
+writing; route tests still rebuild and assert the behavior they own.
+
+The committed `SaveStates/Mamel.state` is the native reproduction input for the
+nested-combat route. Separate `.srm` sidecars are not required because cartridge RAM is
+embedded in each PyBoy state.
+
+`SaveStates/blank-scroll.state` is the self-contained, exact populated-inventory confirmation
+state for the Blank Scroll restart regression. `tests.test_pyboy_blank_scroll` verifies its
+SHA-1, confirms `Windblade` through PyBoy, and requires conversion without a reset or
 inventory damage. When the user-supplied ignored `blank-scroll.srm` sidecar is present, the
 test also verifies its SHA-1 and loads it; the immediate regression does not depend on it.
 
-`SaveStates/unidentified-item-naming.mss` freezes the Rabbit Scroll Name / `FILL IN`
+`SaveStates/unidentified-item-naming.state` freezes the Rabbit Scroll Name / `FILL IN`
 editor route. `tests.test_unidentified_names` verifies its SHA-1, the private type `$F4`
 navigation graph, canonical preview/free-entry transitions, and return to Items. The
-separate Adventure submenu regression reuses `Mamel.mss` so the same patch must also prove
+separate Adventure submenu regression reuses `Mamel.state` so the same patch must also prove
 that native type `$13` still drives Continue/Secrets/Reset/Recap.
 
-`SaveStates/broken-bracelet.mss` freezes the item-list report where the native `F2 1E`
+`SaveStates/broken-bracelet.state` freezes the item-list report where the native `F2 1E`
 suffix appeared as corrupt mixed-language graphics. `tests.test_item_status` verifies the
-state's SHA-1/SHA-256, forces a fresh Items redraw in Mesen, and freezes the localized `(Cr)`
+state's SHA-1/SHA-256, forces a fresh Items redraw in PyBoy, and freezes the localized `(Cr)`
 framebuffer. Its static companion proves the replacement remains inside the original
 14-pixel advance and every translated item-name shape remains within the 144-pixel row.
 
-`SaveStates/big-moai-locked.mss` freezes the real NPC before his spell system becomes
+`SaveStates/big-moai-locked.state` freezes the real NPC before his spell system becomes
 available. `tests/fixtures/big_moai.json` records the state hash, active/shadow stage pair,
 both observed native SRAM mirrors, dialogue selectors, reviewed localized prompt/editor
 framebuffers, `WISH` bytes, and Fortune Grass item ID. `tests.test_big_moai` preserves the
@@ -61,7 +73,7 @@ insertion from masking a post-reward engine lock.
 
 `tests/fixtures/rescue_requester.json` freezes the Rankings and generated-SOS requester
 states. `tests/fixtures/rescue_entry.json` freezes
-`SaveStates/rescue-entry-menu.mss`, the localized mode-8 keyboard, the published
+`SaveStates/rescue-entry-menu.state`, the localized mode-8 keyboard, the published
 `OEN936H9n!FVv` vector, its exact native input bytes, and the deterministic native-validator
 return for this nonmatching diary. It also freezes
 the physical hardware-B path: the route enters `AB`, deletes `B`, and requires both native
@@ -83,7 +95,7 @@ and semantic fields. This is evidence of an accepted SOS input, but it is not ye
 controller-replayed end-to-end rescue completion fixture.
 
 The same fixture freezes requester-side Revival response `SVgaVwAhmUmoM3u`, which is
-bound to captured SOS `26pCdewCg2640`. The Mesen route reaches the mode-7 English editor
+bound to captured SOS `26pCdewCg2640`. The PyBoy route reaches the mode-7 English editor
 without direct memory writes, enters all 15 characters, confirms the native success
 message, and freezes generated Thank-You Password `EkWsMPtHHOEE`. The route also freezes
 the early mode-7 constructor ordering: bank 16 calls its screen before native `$C195` is
@@ -93,21 +105,21 @@ requester response-input/presentation loop; physically traversing a Rescue Gate 
 capturing the rescuer's own generated response remains the next two-diary fixture.
 
 `tests/fixtures/service_menus.json` freezes the ordered bank-254 service-menu extension,
-all label widths, and all five live menu routes. `SaveStates/rescue-entry-menu.mss` is backed
+all label widths, and all five live menu routes. `SaveStates/rescue-entry-menu.state` is backed
 out and rebuilt before checking the native Yes/No confirmation, the clean 56-pixel Rescue
 Team interior (48 pixels of label space after its cursor column) in the
-confirmation-selected VRAM bank, and the dismissed framebuffer;
-`SaveStates/warehouse-menu.mss` (SHA-1
-`fffcb9be39418f23e85ae275de6cb86e898afec7`) opens the warehouse conversation and popup
-from gameplay. `SaveStates/bank-teller.mss` (SHA-1
-`6c3624401afda7107da79247ca6e67cf6a471e9a`) opens the Bank Teller conversation and its
+confirmation-selected VRAM bank, and clean column restoration after dismissal;
+`SaveStates/warehouse-menu.state` (SHA-1
+`2b6c2c0c899d5dc1b9b24be9078e4059d695edd7`) opens the warehouse conversation and popup
+from gameplay. `SaveStates/bank-teller.state` (SHA-1
+`194e0e531259f16bf8700560ef91fcf3eef176e9`) opens the Bank Teller conversation and its
 Deposit/Withdraw/Balance/Quit popup.
-`SaveStates/blacksmith-info.mss` (SHA-1
-`ca57bccc502776a878a1901c2ddfd8479ed0afc1`) opens the native Blacksmith menu, selects
+`SaveStates/blacksmith-info.state` (SHA-1
+`bf1fc2df7baf0e94f074c83390086343265c6028`) opens the native Blacksmith menu, selects
 Info, and rebuilds the Forge/Repair/Synthesis/Remove/Quit submenu. All routes capture every
 original tile/attribute pair under the added right column, require each border cell while
 open, and require exact restoration after B.
-They also traverse every menu option and freeze every cursor framebuffer. Warehouse and Bank
+They also traverse every menu option and require a distinct cursor frame. Warehouse and Bank
 keep tile `$B3` in every seventh interior cell. Blacksmith Info stages the last `Synthesis`
 tile in `$B3`, clears the aliased unselected Quit cursor tile, maps every spill through the
 active VRAM bank, keeps `$B9` blank in the other spills, and restores `$B3` after B. Rescue
@@ -120,11 +132,11 @@ independent 45x8 raster check for `Synthesis` plus literal blank 8x8 cells to th
 right of unselected `Quit`. This specifically guards clipping, cursor aliasing, and a stale
 VRAM-bank attribute selecting garbage for the spill tile.
 The warehouse route explicitly crosses the hardware BG-map boundary `$9BFF -> $9800`.
-`SaveStates/warehouse-floor-items.mss` (SHA-1
-`4822a0e49a0d85d597fb1337ddb4136131df7342`) preserves the reported same-room camera
+`SaveStates/warehouse-floor-items.state` (SHA-1
+`3ed8b57207b25280a42169c4aa9df0aba92d7aa2`) preserves the reported same-room camera
 position after items were placed; its added right column wraps horizontally from row 14,
-x=28 to row 14, x=4. `SaveStates/warehouse-floor-items-reenter.mss` (SHA-1
-`145065ce2a940cf84229dcab17d326585e8a01d9`) is the clean re-entry control. Their shared
+x=28 to row 14, x=4. `SaveStates/warehouse-floor-items-reenter.state` (SHA-1
+`588bb6e79621ef851948312f6a88ac9468be6240`) is the clean re-entry control. Their shared
 pixel regression uses a literal right-edge raster rather than a framebuffer hash and
 requires exact column restoration after dismissal.
 Framebuffer hashes are secondary presentation checks. A third Rescue checkpoint selects
@@ -138,13 +150,14 @@ from the on-screen `DEL` control because the physical button uses its own native
 handler.
 
 `tests/fixtures/item_formatting.json` freezes the native producer anchors, English
-punctuation bytes, exhaustive family-width maxima, the twenty exact object records injected
-from `SaveStates/Mamel.mss`, and two reviewed Mesen framebuffers. Unlike ordinary category
+punctuation bytes, exhaustive family-width maxima, and the twenty exact object records
+injected from `SaveStates/Mamel.state`. The PyBoy route opens both native inventory pages;
+unlike ordinary category
 fixtures, its arrow, staff, and Pot rows deliberately carry nonzero dynamic values.
 
 `tests/fixtures/synthesis_lab.json` freezes the complementary native Pot lifecycle. It
 records the Club base, explicitly seeded critical-hit rune on the Minotaur Axe donor,
-five sparse Pot cell offsets, five Mesen framebuffers, post-insertion capacities, retained
+five sparse Pot cell offsets, post-insertion capacities, retained
 base pointer, consumed donor record, and released Club rune bit after the Pot breaks.
 The final Info-screen reading remains the explicit manual visual check.
 

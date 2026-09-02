@@ -249,7 +249,7 @@ Records: `199:$6F39` and `199:$6F85`
 Widths before: `123 / 130 / 139`  
 Widths after: `123 / 142 / 110`
 
-This is the text reproduced by `SaveStates/long-text-in-window-rescue.mss`.
+This is the text reproduced by `SaveStates/long-text-in-window-rescue.state`.
 
 Before:
 

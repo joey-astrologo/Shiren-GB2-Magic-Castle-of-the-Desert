@@ -16,7 +16,7 @@ import cartridge
 import english
 import english_font
 import extract
-import mesen_state
+import pyboy_state
 import runtime_widths
 import service_menus
 import stairs_menu
@@ -146,9 +146,9 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.path, cls.rom = _original_rom()
-        state_path = ROOT / "SaveStates" / "Mamel.mss"
+        state_path = ROOT / "SaveStates" / "Mamel.state"
         if not state_path.exists():
-            raise unittest.SkipTest("Mamel Mesen state is required")
+            raise unittest.SkipTest("Mamel native PyBoy state is required")
         try:
             cls.PyBoy = capture_dialogue._pyboy_class()
         except RuntimeError as exc:
@@ -167,7 +167,7 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "localized.gbc"
         cls.localized_path.write_bytes(output)
-        cls.ram = mesen_state.cart_ram(state_path)
+        cls.ram = pyboy_state.cart_ram(state_path)
 
     @classmethod
     def tearDownClass(cls):

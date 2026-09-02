@@ -126,7 +126,7 @@ are recorded in [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
 For automated coverage:
 
 ```sh
-python3 -m unittest tests.test_blank_scroll tests.test_mesen_blank_scroll
+python3 -m unittest tests.test_blank_scroll tests.test_pyboy_blank_scroll
 ```
 
 The catalog fixture freezes all 32 accepted roots and complete inputs, including a byte-for-
@@ -136,9 +136,9 @@ the expected ID, and places canaries around the legacy scratch field to prove ne
 input mode nor adjacent state is overwritten. It also tests history-off and inexact input,
 the live English tilemap, hyphen entry, the longest roots, and unchanged mode-3/mode-4 limits.
 
-Two Mesen routes cover emulator-level behavior. The synthetic route enters `Windblade`
-through the physical keyboard. The exact failure regression loads the self-contained,
-user-supplied `blank-scroll.mss` at the populated inventory and confirmation screen where
+PyBoy covers emulator-level behavior. The catalog route enters accepted names through the
+physical keyboard. The exact failure regression loads the self-contained,
+user-supplied `blank-scroll.state` at the populated inventory and confirmation screen where
 the restart occurred, presses OK, and requires the same object to become a Windblade Scroll
 without a reset or inventory damage. If the supplied `blank-scroll.srm` sidecar is present,
 its hash is also verified and it is loaded; the immediate regression does not depend on it.

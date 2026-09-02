@@ -16,7 +16,7 @@ import english
 import english_font
 import extract
 import layout
-import mesen_state
+import pyboy_state
 import runtime_widths
 import surfaces
 import translations
@@ -398,10 +398,10 @@ class LiveLocalizedItemMessageTests(unittest.TestCase):
                     pyboy.stop(save=False)
 
     def test_live_mamel_attack_expands_relocated_english_actor_name(self):
-        state_path = ROOT / "SaveStates" / "Mamel.mss"
+        state_path = ROOT / "SaveStates" / "Mamel.state"
         if not state_path.exists():
-            raise unittest.SkipTest("Mamel Mesen state is not present")
-        ram = mesen_state.cart_ram(state_path)
+            raise unittest.SkipTest("Mamel native PyBoy state is not present")
+        ram = pyboy_state.cart_ram(state_path)
         pyboy = self.PyBoy(
             str(self.localized_path),
             window="null",

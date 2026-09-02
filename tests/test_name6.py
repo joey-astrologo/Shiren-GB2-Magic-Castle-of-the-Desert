@@ -17,7 +17,7 @@ import cartridge
 import english
 import english_font
 import extract
-import mesen_state
+import pyboy_state
 import name6
 
 
@@ -399,14 +399,14 @@ class LiveName6Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         _path, cls.rom = _original_rom()
-        state_path = ROOT / "SaveStates" / "Mamel.mss"
+        state_path = ROOT / "SaveStates" / "Mamel.state"
         if not state_path.exists():
-            raise unittest.SkipTest("Mamel Mesen state is required")
+            raise unittest.SkipTest("Mamel native PyBoy state is required")
         try:
             cls.PyBoy = capture_dialogue._pyboy_class()
         except RuntimeError as exc:
             raise unittest.SkipTest(str(exc))
-        cls.ram = mesen_state.cart_ram(state_path)
+        cls.ram = pyboy_state.cart_ram(state_path)
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "name6.gbc"
         cls.localized_rom = name6.install(english_font.install(cls.rom))

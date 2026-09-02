@@ -37,8 +37,8 @@ The production build installs and validates the player-name, death-Rankings note
 promotional-code, Blank Scroll, unidentified-item naming, and Wanderer Rescue password I/O
 patches. Their focused contracts can also be run directly through
 `tests.test_name6`, `tests.test_ranking_note_input`, `tests.test_spell_input`, `tests.test_blank_scroll`,
-`tests.test_mesen_blank_scroll`, `tests.test_unidentified_names`, and
-`tests.test_mesen_unidentified_item`.
+`tests.test_pyboy_blank_scroll`, `tests.test_unidentified_names`, and
+`tests.test_pyboy_unidentified_item`.
 
 Ranking score/floor suffixes have a hash-independent static pixel contract plus a live
 complete-production replay. Run both focused checks with:
@@ -55,8 +55,8 @@ The Big Moai NPC gate and first accepted-code route have their own focused famil
 python3 -m unittest tests.test_big_moai -v
 ```
 
-It hash-freezes `SaveStates/big-moai-locked.mss`, replays the native “not ready” branch,
-requires `tools/mesen_unlock_big_moai.lua` to change only `$C3EF-$C3F0`, then enters
+It hash-freezes `SaveStates/big-moai-locked.state`, replays the native “not ready” branch,
+requires `pyboy_fixtures.unlock_big_moai` to change only `$C3EF-$C3F0`, then enters
 `WISH` through the real localized mode-3 editor and requires item `$70` (Fortune Grass)
 in inventory. The route visits `DEL` first and freezes both its corrected below-label cursor
 and the native auto-selected `OK` cursor. It then freezes the localized reward framebuffer
@@ -76,7 +76,7 @@ callers, SOS field layout, native actor Max/current-HP paths, a one-HP requester
 helper, and a real linked SOS/Revival/Thank-You exchange. The presentation test builds the
 ROM, replays the supplied Rankings state through **Await Rescue**, requires the English SOS
 framebuffer, and asserts the restored native buffer and matching diary record. A second
-Mesen route loads `SaveStates/rescue-entry-menu.mss`, opens Password, freezes the English
+PyBoy route loads `SaveStates/rescue-entry-menu.state`, opens Password, freezes the English
 64-symbol keyboard, enters the published `OEN936H9n!FVv` vector, requires its exact native
 bytes before confirmation, and submits it to the original validator. The expected result
 is the native inaccessible-dungeon response because that diary has not unlocked the
@@ -99,15 +99,14 @@ dedicated native hardware-B path bypassing the selected English keyboard-node ov
 clears that cell and continues the public-vector route in the same fresh process.
 The SOS route proved a working constructor path but did not reproduce the manually
 observed hardware-B redraw until the test used that exact input path. The retained route
-constructs mode 8 from `rescue-entry-menu.mss`, enters `AB`, presses the physical B button,
+constructs mode 8 from `rescue-entry-menu.state`, enters `AB`, presses the physical B button,
 and requires native buffer `30 D5...FF` plus an unchanged visible uppercase-`A` glyph band.
 This exercises the dedicated event-table handler rather than the on-screen `DEL` node. The
 earlier already-active-editor repair fixture and common-loop hook were removed because they
 did not model this reproducible route. The suite does not yet claim a complete live
-two-diary emulator pass. Each route hash-checks its committed
-`.mss`, builds a ROM at a new temporary path, launches a fresh Mesen test-runner process,
-and never saves over the fixture. It therefore cannot reuse a ROM image cached by an
-interactive Mesen session or create a stale fixture.
+two-diary emulator pass. Each route hash-checks its committed native `.state`, builds a ROM
+at a new temporary path, launches a fresh headless PyBoy instance, and stops without saving
+over the fixture. It therefore cannot reuse cached ROM or emulator state.
 
 When their owned files change, also run the relevant family check before applying:
 
@@ -153,9 +152,10 @@ python3 -m unittest \
   tests.test_name6 \
   tests.test_spell_input \
   tests.test_blank_scroll \
-  tests.test_mesen_blank_scroll \
+  tests.test_pyboy_blank_scroll \
   tests.test_unidentified_names \
-  tests.test_mesen_unidentified_item \
+  tests.test_pyboy_unidentified_item \
+  tests.test_pyboy_state_fixtures \
   tests.test_rescue_password \
   tests.test_rescue_presentation \
   tests.test_service_menus \
@@ -288,13 +288,13 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The complete run on 2026-09-02 was **541 tests** with the matching ROM, PyBoy, RGBDS, and
-Mesen available. It includes the graphics-audit, credit-source/insertion, wait-sign,
+The complete run on 2026-09-02 used the matching ROM, PyBoy, and RGBDS. Mesen is not a test
+dependency. It includes the graphics-audit, credit-source/insertion, wait-sign,
 arrival-card, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions. The required gate
 is always discovery of the complete `tests/` directory, not a hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
-with `SaveStates/Mamel.mss`. It freezes native navigation type `$13`, all four
+with `SaveStates/Mamel.state`. It freezes native navigation type `$13`, all four
 Continue/Secrets/Reset/Recap cursor positions, the cursor OAM coordinates, and a
 cursor-masked framebuffer hash. This guards against input-editor navigation patches
 stealing a live menu graph or corrupting the submenu during Up/Down movement.
@@ -304,9 +304,9 @@ the independent run count must render together without collision.
 `tests.test_service_menus` chains its installer after the stairs-popup owner, measures all
 Rescue Team, warehouse, Bank Teller, and Blacksmith Info labels against the 48-pixel live
 text budget inside the new 56-pixel interior, and rejects any
-unexpected predecessor bytes or occupied reservation. Its Mesen routes rebuild the
-menus through controller input, require nine-column background copies, and freeze the
-open frame, every cursor position, and clean B-button teardown. The native renderer owns only
+unexpected predecessor bytes or occupied reservation. Its PyBoy routes rebuild the menus
+through controller input, require nine-column background copies, traverse every cursor
+position, and require clean B-button teardown. The native renderer owns only
 six dynamic tiles per row. Warehouse and Bank therefore require stable tile `$B3` on every
 spill row. Blacksmith Info stages `Synthesis`'s suffix in `$B3`, clears the `$9C` alias from
 unselected Quit, maps other spills to stable blank `$B9` in the active VRAM bank, and
@@ -314,7 +314,7 @@ restores `$B3` on close.
 The three-entry Rescue menu requires `$A8/$BA` only for the two `Password` overflow rows and
 `$B3` elsewhere. The completed-rescue four-entry menu stages those fragments in off-frame
 `$9C/$AE`, clears the cursor-owned sources, and keeps `$B3` in every other spill. Its
-`at-rescue.mss` regression overwrites the source aliases, then visits Cable, Password,
+`at-rescue.state` regression visits Cable, Password,
 Cancel, and Later with real input while checking the literal `d` and both cursor columns.
 The other routes visit all three initial Rescue entries, four entries in Warehouse and
 Bank, and all five Blacksmith Info entries. This catches the
@@ -333,11 +333,11 @@ two-byte live marker to be cleared, and freezes the immediate transition. That t
 the reported leftover vertical strip; eventual arrival at a stable editor is not accepted
 as a substitute.
 
-`SaveStates/warehouse-floor-items.mss` adds the camera-history case discovered after
+`SaveStates/warehouse-floor-items.state` adds the camera-history case discovered after
 placing items without leaving the warehouse; its widened frame crosses x=31. The regression
 requires the added column at row 14/x4 (`$99C4`), checks the literal 8x64 right edge through
 all four options, and verifies teardown from saved tile/attribute pairs. The companion
-`warehouse-floor-items-reenter.mss` state proves the same check on the clean post-reentry
+`warehouse-floor-items-reenter.state` proves the same check on the clean post-reentry
 camera position. These pixel checks are independent of the existing full-screen hashes.
 
 `tests.test_name6` freezes the title and Secrets event selectors, the complete fourteen-row
@@ -360,25 +360,25 @@ and live PyBoy checks cover every one of the fourteen available space nodes and 
 same right-arrow operation remains a no-op in player-name mode 4.
 
 `tests.test_multiple_unidentified_names` loads
-`SaveStates/multiple-unidentified-items.mss`, names the Pot `Preservation`, then names the
+`SaveStates/multiple-unidentified-items.state`, names the Pot `Preservation`, then names the
 Rabbit Scroll `Escape` entirely through controller input. It requires distinct native
 custom-name slots containing roots 107 and 67. A live PyBoy check separately proves that
 both current `FE FF` and legacy `FF FE` canonical tokens resolve.
 
-`tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
+`tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.state` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live
-Mesen route closes and reopens Items before asserting the `(Cr)` screen. Static checks also
+PyBoy route closes and reopens Items before asserting the `(Cr)` screen. Static checks also
 guard the original 40-byte `F2 1E` bitmap, native `0F 06` width pair, reviewed replacement
 raster, exclusive ROM ownership, and the 18-pixel worst-case item-row margin.
 
 `tests.test_item_formatting` guards all nine native producer/cave patches, measures every
 translated weapon/shield/arrow/staff/Pot dynamic row, and replays the two-page item gallery
-from `SaveStates/Mamel.mss`. Its widest combined status row ends at x=132 against the
+from `SaveStates/Mamel.state`. Its widest combined status row ends at x=132 against the
 x=144 item-list edge. Manual gallery instructions and the twenty expected rows are in
 [ITEM_FORMATTING.md](ITEM_FORMATTING.md).
 
 `tests.test_synthesis_lab` drives a real Synthesis Pot through both `Put In` operations
-from the same disposable state. It freezes all five intervening screens and asserts that
+from the same disposable state. It drives every intervening native menu and asserts that
 the Club becomes the contained base, the Axe donor is consumed, the sparse Pot sentinels
 remain valid, and the native deferred-synthesis state is reached. It then throws and breaks
 the Pot and asserts that the released Club carries weapon rune bit 10. The manual route
@@ -400,12 +400,14 @@ python3 tools/font.py "$ROM" --info
 python3 tools/allocate.py "$ROM" --output build/script-allocation.json
 python3 tools/layout.py "$ROM"
 python3 tools/surfaces.py "$ROM"
-python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
+python3 ../mesen-to-pyboy/mss_to_pyboy.py SaveStates/ \
+  --rom "$ROM" --output-dir SaveStates --verify-frames 12 --force
 ```
 
-`mesen_state.py` extracts Mesen 2's named `cartRam` field as an ordinary 32 KiB battery
-SRAM file that PyBoy can reuse. This is the supported bridge for reproducing a live route
-from a Mesen save state.
+The converter keeps the original `.mss` inputs untouched, writes native `.state` files,
+reloads and compares the supported machine state, and advances each result. Automated
+tests consume only `.state`; `tests.test_pyboy_state_fixtures` enforces the pairing and
+rejects Mesen-only test routes.
 
 ### Wanderer Rescue requester capture
 
@@ -417,16 +419,17 @@ views from 40 to 1. It never writes Max HP, story/rescue flags, inventory, SRAM,
 
 Dismiss the existing message if necessary, then let the adjacent Mamel hit Shiren once;
 do not attack it first. On the resulting Rankings screen, press `Select` and choose
-**Await Rescue**. The reviewed captures are `SaveStates/rescue-requester-rankings.mss` and
-`SaveStates/rescue-requester-sos.mss`; the matching SRAM remains ignored. The focused tests
+**Await Rescue**. The reviewed test fixtures are
+`SaveStates/rescue-requester-rankings.state` and
+`SaveStates/rescue-requester-sos.state`; the matching SRAM remains ignored. The focused tests
 freeze both state hashes, decode the 13 native symbols, prove they match diary offset
 `+$41`, replay the complete Rankings confirmation route, and require English output with
-the native bytes restored. `SaveStates/rescue-entry-menu.mss` and
+the native bytes restored. `SaveStates/rescue-entry-menu.state` and
 `tests/fixtures/rescue_entry.json` add the rescuer-side Password-menu/editor boundary: the
 route uses only controller input, verifies private navigation type `$F5`, writes all 13
 published SOS symbols as native bytes, and returns from native validation with the expected
-inaccessible-dungeon message. `tests/mesen_rescue_revival_route.lua` then reuses the
-requester SOS state without memory writes, enters a linked no-gift Revival response, and
+inaccessible-dungeon message. `tests.test_rescue_presentation` also reuses the requester
+SOS state without memory writes, enters a linked no-gift Revival response, and
 requires both native success and the exact generated Thank-You Password.
 The same rescuer-side route enters `AB`, presses hardware B, and proves the remaining
 uppercase glyph, input position, and native buffer agree before it continues with the
@@ -469,7 +472,7 @@ after the live WRAM injection.
 
 ### Unidentified item naming manual route
 
-`SaveStates/unidentified-item-naming.mss` freezes the exact reported Rabbit Scroll route.
+`SaveStates/unidentified-item-naming.state` freezes the exact reported Rabbit Scroll route.
 Because it was captured after the old screen was drawn, back out and reopen **Name** after
 loading it with the latest ROM. From the initial `A` cell, **Up, Right, Up** reaches the
 localized `FILL IN` history control. Each activation cycles to the next learned name; it

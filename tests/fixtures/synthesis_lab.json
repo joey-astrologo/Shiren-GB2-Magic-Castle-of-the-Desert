@@ -1,10 +1,10 @@
 {
   "schema": "shiren-gb2-synthesis-lab-v1",
   "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
-  "mesen_state": {
-    "path": "SaveStates/Mamel.mss",
-    "sha1": "bf961091090ac690e6950f3cf58dff9f9639cf0d",
-    "sha256": "42c44b909008409cfaff7d45e0f833f00e9538407bfdce8280292fbcd58672bc"
+  "pyboy_state": {
+    "path": "SaveStates/Mamel.state",
+    "sha1": "f03f9ed6e5a9562789903e1360892caff68382be",
+    "sha256": "7d55fc7f5ab3462b20a8278e0e7ffebb67097bc64377cf4fc6661b2fbdb12081"
   },
   "objects": {
     "base": {
@@ -32,13 +32,6 @@
       "record_hex": "BE09050000FFFFFF",
       "cell_offsets": [5, 6, 7, 10, 11]
     }
-  },
-  "screens": {
-    "initial_items_fnv1a": "45740807",
-    "pot_action_fnv1a": "23413F6C",
-    "put_in_picker_fnv1a": "94289BFB",
-    "after_base_fnv1a": "C7A1CEC7",
-    "after_donor_fnv1a": "5D60421A"
   },
   "native_lifecycle": {
     "after_base": {

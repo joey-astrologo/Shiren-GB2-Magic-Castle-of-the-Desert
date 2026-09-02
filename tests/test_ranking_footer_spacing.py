@@ -15,8 +15,8 @@ import translations
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
-STATE = ROOT / "SaveStates" / "ranking-screen-on-death.mss"
-STATE_SHA1 = "ac76a1b2f5f5c5207308e39e8438ab4dc37bdd5c"
+STATE = ROOT / "SaveStates" / "ranking-screen-on-death.state"
+STATE_SHA1 = "f928661f76c975625beddbc70aad223d4ec3cbd0"
 EXPECTED = {
     "194:$4EFC": (
         "A Button: Return to Town<br>"

@@ -153,7 +153,7 @@ one second even though the format cannot encode 60 Hz with one constant delay.
 
 ### Proven composition model
 
-The supplied `SaveStates/Mamel.mss` route can be made deterministic with the existing stairs
+The supplied `SaveStates/Mamel.state` route can be made deterministic with the existing stairs
 setup: clear the nearby Mamel, place Shiren beside the generated stairs, choose `Proceed`, and
 capture the transition. The next floor flashes `Ancient Ruins` and `2F` in Japanese before the
 new floor appears.

@@ -48,7 +48,7 @@ edited through the ordinary catalog workflow.
   a fresh post-reward conversation without freezing.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
   hyphen, and the original notebook rule. The supplied live confirmation state is retained
-  as a no-reset, no-inventory-damage Mesen regression.
+  as a no-reset, no-inventory-damage PyBoy regression.
 - Localized unidentified-item Name screen with a reachable cycling `FILL IN` history
   control, seven-character free labels, 14-character canonical previews, and tokens that
   display complete English names without changing the native persistent slot layout.
@@ -62,7 +62,7 @@ edited through the ordinary catalog workflow.
   selector-set detection and a 56-pixel English interior with a measured 48-pixel
   post-cursor text budget, while
   unrelated generic popups retain native geometry. All six
-  user-supplied routes are rebuilt in Mesen regressions. The initial Rescue route
+  user-supplied routes are rebuilt in PyBoy regressions. The initial Rescue route
   separately freezes its preceding Yes/No prompt and synchronizes the widened bottom
   border with the renderer-selected CGB VRAM bank, preventing the confirmation from
   leaking stale tiles into the later popup. Before drawing, both VRAM banks' added ninth
@@ -111,12 +111,12 @@ edited through the ordinary catalog workflow.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
-  Mesen after closing and reopening Items.
+  PyBoy after closing and reopening Items.
 - Dynamic inventory producers now emit English arrow quantities, signed equipment values,
   staff/Pot brackets, and spaced Gitan amounts. Every translated family maximum fits; the widest equip + curse +
-  plate combination ends at x=132 against the x=144 edge. A two-page Mesen gallery freezes
+  plate combination ends at x=132 against the x=144 edge. A two-page PyBoy gallery renders
   all twenty representative rows for visual review. A separate native Synthesis Pot route
-  inserts a Club base and correctly seeded Minotaur Axe donor, freezes both insertion
+  inserts a Club base and correctly seeded Minotaur Axe donor, asserts both insertion
   transitions, breaks the Pot, asserts the released critical-hit rune, and leaves the seal
   description available for manual visual review.
 - The complete 198-item terminology pass corrected 50 names to established series usage,
@@ -124,7 +124,7 @@ edited through the ordinary catalog workflow.
   three precedent-free GB2 names in an explicit review catalogue.
 - Scene-ordered prose editing and generated-cell ownership checks.
 - A passing fixture suite covering translation, layout, save data, menu/input
-  routes, production builds, PyBoy behavior, Mesen reproduction paths, and RGBDS payload
+  routes, production builds, native PyBoy state behavior, and RGBDS payload
   equivalence.
 
 ## Remaining project work

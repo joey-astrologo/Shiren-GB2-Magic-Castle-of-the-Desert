@@ -58,7 +58,7 @@ cells, but only six sequential dynamic tiles per row. Warehouse and Bank use sta
 blanks its `$9C` alias in the unselected Quit cursor cell, and selects the renderer's VRAM
 bank for every stable `$B9` spill. Rescue uses a
 separate template exposing only the two off-screen-row overflow tiles needed by `Password`'s
-final `d`, with `$B3` everywhere else. Live Mesen routes traverse every option so cursor
+final `d`, with `$B3` everywhere else. Live PyBoy routes traverse every option so cursor
 redraws, tile aliasing, VRAM-bank attributes, glyph pixels, staged-tile restoration, and
 teardown are tested as behavior rather than inferred from a single open frame.
 
@@ -93,7 +93,7 @@ clues are generated from the same mapping so they cannot drift.
 
 The user-supplied locked NPC state proved the availability mechanism: event
 `74:$5CEF` enters group `$6A` index `$0D` while story stage `$C3EF < $09` and reaches the
-spell route at stage 9. `$C3F0` is the serialized stage shadow. The narrow Mesen helper
+spell route at stage 9. `$C3F0` is the serialized stage shadow. The narrow PyBoy helper
 changes only that pair. A live controller fixture now starts from the locked state, runs
 the production helper, visits the corrected `DEL` cursor, enters `WISH`, freezes the native
 auto-selection of the corrected `OK` cursor, and
@@ -116,7 +116,7 @@ native third-row Yes/No cursor alignment, English SOS framebuffer, and unchanged
 protocol bytes. Modes 5-8 reuse the
 approved English name-entry layout plus `?` and `!`, but use private navigation type `$F5`
 and convert every selected node back to its native six-bit value before confirmation. A
-live Mesen route enters the published `OEN936H9n!FVv` SOS vector through that keyboard and
+live PyBoy route enters the published `OEN936H9n!FVv` SOS vector through that keyboard and
 returns safely from the native validator. The same route enters `AB`, presses hardware B,
 and requires that native `A` remains visibly uppercase. This uses the dedicated native
 hardware-B event handler; only its delete far call is wrapped, while the common input loop
@@ -169,15 +169,15 @@ strings. Native bank-120 and bank-122 routines append equipment signs, arrow qua
 staff charges, and Pot capacities; the shared status decorator adds equip, curse, blessing,
 and plate glyphs. `item_formatting.py` localizes only those punctuation producers, while
 `item_status.py` owns the cracked-Bracelet composite bitmap. Exhaustive width checks and a
-two-page live Mesen gallery cover the combined result. See
+two-page live PyBoy gallery cover the combined result. See
 [ITEM_FORMATTING.md](ITEM_FORMATTING.md).
 
 ## Emulator state recovery
 
-`tools/mesen_state.py` reads Mesen 2's named-field save-state container and extracts its
-`cartRam` member as a normal 32 KiB `.srm` file for PyBoy. That route was used to reproduce
-the Mamel combat freeze that exposed nested far-pointer bank publication, and it remains the
-preferred way to turn a user-provided Mesen state into a deterministic PyBoy fixture.
+`../mesen-to-pyboy/mss_to_pyboy.py` converts the supported portable machine state from a
+Mesen 2 container into a native PyBoy `.state`, reloads it, compares preserved registers and
+memory banks, and advances a smoke test. The reviewed `.mss` sources remain beside the
+generated native fixtures as provenance; automated tests consume only `.state`.
 
 ## Validation philosophy
 

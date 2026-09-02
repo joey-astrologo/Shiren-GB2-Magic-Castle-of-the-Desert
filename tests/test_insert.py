@@ -17,7 +17,7 @@ import extract
 import far_text
 import font
 import insert
-import mesen_state
+import pyboy_state
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -244,7 +244,7 @@ class IdentityInsertPyBoyTests(unittest.TestCase):
         pyboy.hook_register(0, 0x35ED, at_full_renderer, None)
         pyboy.hook_register(0, 0x33B9, after_f6_lookup, None)
         try:
-            # The battery save extracted from Mamel.mss resumes at the file
+            # The battery save extracted from Mamel.state resumes at the file
             # menu.  This fixed input route selects Continue, reaches the
             # adjacent Mamel and attacks it at frame 960.
             for frame in range(1001):
@@ -282,10 +282,10 @@ class IdentityInsertPyBoyTests(unittest.TestCase):
         self.assertEqual(opening["screen_rgba_sha1"], sha1(output_screen).hexdigest())
 
     def test_nested_mamel_lookup_preserves_outer_combat_record_bank(self):
-        state_path = ROOT / "SaveStates" / "Mamel.mss"
+        state_path = ROOT / "SaveStates" / "Mamel.state"
         if not state_path.exists():
-            raise unittest.SkipTest("Mamel Mesen state is not present")
-        ram = mesen_state.cart_ram(state_path)
+            raise unittest.SkipTest("Mamel native PyBoy state is not present")
+        ram = pyboy_state.cart_ram(state_path)
         outer = self._allocation.record_placements[(193, 0x4192)].output_bank
         actor = self._allocation.record_placements[(192, 0x4BD7)].output_bank
         self.assertNotEqual(outer, actor)

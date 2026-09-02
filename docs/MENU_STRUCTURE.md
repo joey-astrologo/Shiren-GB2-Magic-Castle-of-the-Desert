@@ -145,7 +145,7 @@ tile `$B3`, blanks `$9C` for unselected Quit, maps every other spill to reviewed
 and synchronizes every displayed spill attribute to the renderer-selected VRAM bank before
 restoring `$B3` on exit. Existing service routes traverse the original four menus, verify
 their exact tile IDs and bank bits, and freeze each resulting framebuffer. The completed-
-rescue route independently rebuilds the fifth menu from `at-rescue.mss`, checks its full
+rescue route independently rebuilds the fifth menu from `at-rescue.state`, checks its full
 right border in both VRAM banks, overwrites the cursor-owned source tiles after the approved
 render, and then uses real Down inputs through all four cursor positions. It requires the
 final `d` at every stop, exactly one cursor in the left column, and no graphic in the right
@@ -242,8 +242,8 @@ history node.
 | Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups | `service_menus.py` (chained after `stairs_menu.py`) | `test_service_menus.py` |
 | Six-character names, embedded replay diaries, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
 | Big Moai gift-code input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
-| Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_mesen_blank_scroll.py` |
-| Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_mesen_unidentified_item.py` |
+| Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_pyboy_blank_scroll.py` |
+| Unidentified item naming | `unidentified_names.py`; manual WRAM helper | `test_unidentified_names.py`, `test_pyboy_unidentified_item.py` |
 | Wanderer Rescue password input/output | `rescue_presentation.py`, `rescue_password.py` | `test_rescue_password.py`, `test_rescue_presentation.py` |
 | Main-menu proof route | build/surface contracts | `test_poc_dungeon1.py`, `test_build.py` |
 

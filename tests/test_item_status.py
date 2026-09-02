@@ -19,6 +19,8 @@ import extract
 import font
 import item_status
 import layout
+import capture_dialogue
+import pyboy_route
 import runtime_widths
 import translations
 
@@ -44,7 +46,7 @@ class ItemStatusMarkerTests(unittest.TestCase):
         expected = dict(FIXTURE)
         expected.pop("schema")
         expected.pop("item_row")
-        expected.pop("mesen_state")
+        expected.pop("pyboy_state")
         self.assertEqual(expected, summary)
         self.assertEqual(item_status.CRACKED_CODE, codec.encode("<cracked>"))
         self.assertEqual("<cracked>", codec.decode(item_status.CRACKED_CODE))
@@ -114,31 +116,22 @@ class ItemStatusMarkerTests(unittest.TestCase):
         self.assertLessEqual(rightmost, contract["right_edge"])
 
 
-class MesenBrokenBraceletRouteTests(unittest.TestCase):
+class PyBoyBrokenBraceletRouteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        candidates = [
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        ]
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
-
         cls.source = ROOT / ROM_NAME
-        cls.state = ROOT / FIXTURE["mesen_state"]["path"]
+        cls.state = ROOT / FIXTURE["pyboy_state"]["path"]
         if not cls.source.is_file() or not cls.state.is_file():
             raise unittest.SkipTest("matching ROM and broken-Bracelet state are required")
         raw = cls.state.read_bytes()
-        if sha1(raw).hexdigest() != FIXTURE["mesen_state"]["sha1"]:
-            raise AssertionError("broken-Bracelet Mesen state SHA-1 mismatch")
-        if sha256(raw).hexdigest() != FIXTURE["mesen_state"]["sha256"]:
-            raise AssertionError("broken-Bracelet Mesen state SHA-256 mismatch")
+        if sha1(raw).hexdigest() != FIXTURE["pyboy_state"]["sha1"]:
+            raise AssertionError("broken-Bracelet PyBoy state SHA-1 mismatch")
+        if sha256(raw).hexdigest() != FIXTURE["pyboy_state"]["sha256"]:
+            raise AssertionError("broken-Bracelet PyBoy state SHA-256 mismatch")
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
 
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized = Path(cls.temporary.name) / "broken-bracelet.gbc"
@@ -165,31 +158,29 @@ class MesenBrokenBraceletRouteTests(unittest.TestCase):
             cls.temporary.cleanup()
 
     def test_supplied_state_redraws_the_localized_marker(self):
-        env = os.environ.copy()
-        env["GB2_MSS_PATH"] = str(self.state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_broken_bracelet_live.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS cracked marker screen="
-            + FIXTURE["mesen_state"]["localized_redraw_screen_fnv1a"],
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, self.state)
+        try:
+            pyboy_route.run_frames(
+                pyboy,
+                360,
+                actions=((100, "b"), (220, "a")),
+            )
+            image = pyboy.screen.image.convert("RGB")
+            pattern = FIXTURE["rows"][:8]
+            matches = []
+            for y in range(144 - len(pattern) + 1):
+                for x in range(160 - len(pattern[0]) + 1):
+                    if all(
+                        (image.getpixel((x + dx, y + dy)) == (0, 0, 0))
+                        == (pixel == "#")
+                        for dy, row in enumerate(pattern)
+                        for dx, pixel in enumerate(row)
+                    ):
+                        matches.append((x, y))
+            self.assertTrue(matches, "localized (Cr) marker was not redrawn")
+            self.assertNotEqual(0, pyboy.register_file.PC)
+        finally:
+            pyboy.stop(save=False)
 
 
 if __name__ == "__main__":

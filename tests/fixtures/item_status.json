@@ -29,10 +29,10 @@
     "rightmost_pixel": 126,
     "remaining_pixels": 18
   },
-  "mesen_state": {
-    "path": "SaveStates/broken-bracelet.mss",
-    "sha1": "959d8a22878906a035b9c1c3966de2c63ac933d6",
-    "sha256": "f211e10e5fd0443b364cf93ce2f6f4edec1f931ef080ccef5de11db350589f41",
+  "pyboy_state": {
+    "path": "SaveStates/broken-bracelet.state",
+    "sha1": "45abfaddd59b86fa1b30496b89af3c49c5c008d1",
+    "sha256": "5a07f7a2fffff4463cd716c91e01c3acbad966543299306279245b658aa95db3",
     "initial_screen_fnv1a": "8B2311E3",
     "localized_redraw_screen_fnv1a": "415F5873"
   }

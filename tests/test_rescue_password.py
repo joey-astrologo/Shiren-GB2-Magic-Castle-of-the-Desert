@@ -13,8 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import codec
+import capture_dialogue
 import extract
-import mesen_state
+import pyboy_fixtures
+import pyboy_route
+import pyboy_state
 import rescue_password
 
 
@@ -391,77 +394,56 @@ class OriginalRomRescuePasswordTests(unittest.TestCase):
 
 
 class RescueRequesterPrepHelperTests(unittest.TestCase):
-    MAMEL_STATE_SHA1 = "bf961091090ac690e6950f3cf58dff9f9639cf0d"
+    MAMEL_STATE_SHA1 = "f03f9ed6e5a9562789903e1360892caff68382be"
 
     @classmethod
     def setUpClass(cls):
-        cls.source_path = ROOT / "tools" / "mesen_prepare_rescue_request.lua"
-        cls.source = cls.source_path.read_text(encoding="utf-8")
-        cls.state = ROOT / "SaveStates" / "Mamel.mss"
+        cls.state = ROOT / "SaveStates" / "Mamel.state"
         if not cls.state.is_file():
-            raise unittest.SkipTest("Mamel Mesen state fixture is unavailable")
-
-    def _constant(self, name):
-        match = re.search(
-            r"^local %s = (0x[0-9A-F]+|[0-9]+)$" % re.escape(name),
-            self.source,
-            re.MULTILINE,
-        )
-        self.assertIsNotNone(match, name)
-        return int(match.group(1), 0)
+            raise unittest.SkipTest("Mamel PyBoy state fixture is unavailable")
 
     def test_helper_addresses_match_the_guarded_native_actor_contract(self):
         self.assertEqual(
             rescue_password.PLAYER_ACTOR_WRAM_BANK,
-            self._constant("PLAYER_ACTOR_BANK"),
+            pyboy_fixtures.PLAYER_ACTOR_BANK,
         )
         self.assertEqual(
             rescue_password.PLAYER_ACTOR_ADDRESS,
-            self._constant("PLAYER_ACTOR_BASE"),
+            pyboy_fixtures.PLAYER_ACTOR_ADDRESS,
         )
         self.assertEqual(
             rescue_password.PLAYER_ACTOR_FLAT_ADDRESS,
-            self._constant("PLAYER_ACTOR_WRAM"),
-        )
-        self.assertEqual(
-            self._constant("PLAYER_ACTOR_BANK") * 0x1000
-            + self._constant("PLAYER_ACTOR_BASE")
-            - 0xD000,
-            self._constant("PLAYER_ACTOR_WRAM"),
+            pyboy_fixtures.PLAYER_ACTOR_BANK * 0x1000
+            + pyboy_fixtures.PLAYER_ACTOR_ADDRESS - 0xD000,
         )
         self.assertEqual(
             rescue_password.ACTOR_RECORD_SIZE,
-            self._constant("ACTOR_SIZE"),
+            pyboy_fixtures.ACTOR_RECORD_SIZE,
         )
         self.assertEqual(
             rescue_password.ACTOR_CACHE_ADDRESS,
-            self._constant("ACTOR_CACHE"),
+            pyboy_fixtures.PLAYER_ACTOR_CACHE_ADDRESS,
         )
         self.assertEqual(
             rescue_password.ACTIVE_ACTOR_ADDRESS,
-            self._constant("ACTIVE_ACTOR"),
+            pyboy_fixtures.ACTIVE_ACTOR_ADDRESS,
         )
         self.assertEqual(
             rescue_password.MAX_HP_OFFSET,
-            self._constant("MAX_HP_OFFSET"),
+            pyboy_fixtures.MAX_HP_OFFSET,
         )
         self.assertEqual(
             rescue_password.CURRENT_HP_OFFSET,
-            self._constant("CURRENT_HP_OFFSET"),
+            pyboy_fixtures.CURRENT_HP_OFFSET,
         )
-        self.assertEqual(1, self._constant("TARGET_HP"))
-        self.assertIn('{ "gbWorkRam", "gameboyWorkRam" }', self.source)
-        self.assertIn('{ "gbHighRam", "gameboyHighRam" }', self.source)
-        self.assertNotIn("cartRam", self.source)
 
     def test_mamel_fixture_has_a_synchronized_live_player_record(self):
         self.assertEqual(
             self.MAMEL_STATE_SHA1,
             sha1(self.state.read_bytes()).hexdigest(),
         )
-        fields = mesen_state.load_fields(self.state)
-        work_ram = fields["workRam"]
-        high_ram = fields["highRam"]
+        work_ram = pyboy_state.work_ram(self.state)
+        high_ram = pyboy_state.high_ram(self.state)
         actor_at = rescue_password.PLAYER_ACTOR_FLAT_ADDRESS
         cache_at = rescue_password.ACTOR_CACHE_ADDRESS - 0xFF80
         active_at = rescue_password.ACTIVE_ACTOR_ADDRESS - 0xFF80
@@ -487,7 +469,7 @@ class RescueRequesterCaptureTests(unittest.TestCase):
         if not state.is_file():
             self.skipTest("%s fixture is unavailable" % row["path"])
         self.assertEqual(row["sha1"], sha1(state.read_bytes()).hexdigest())
-        return row, mesen_state.load_fields(state)["workRam"]
+        return row, pyboy_state.work_ram(state)
 
     def test_manually_accepted_localized_sos_is_a_stable_semantic_fixture(self):
         row = REQUESTER_FIXTURE["manual_accepted_sos"]
@@ -613,61 +595,60 @@ class RescueRequesterCaptureTests(unittest.TestCase):
         self.assertEqual(row["sram_sha1"], sha1(sram.read_bytes()).hexdigest())
 
     def test_read_only_capture_probe_does_not_write_emulated_memory(self):
-        source = (ROOT / "tests" / "mesen_rescue_requester_probe.lua").read_text(
-            encoding="utf-8"
-        )
-        self.assertNotIn("emu.write", source)
-        self.assertNotIn("emu.setInput", source)
-        self.assertIn("GB2_RESCUE_REQUESTER_MSS", source)
+        state = ROOT / REQUESTER_FIXTURE["sos_state"]["path"]
+        before = state.read_bytes()
+        pyboy_state.work_ram(state)
+        self.assertEqual(before, state.read_bytes())
 
 
 class RescueRequesterPrepLiveTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        candidates = [
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        ]
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
         cls.rom = ROOT / ROM_NAME
-        cls.state = ROOT / "SaveStates" / "Mamel.mss"
+        cls.state = ROOT / "SaveStates" / "Mamel.state"
         if not cls.rom.is_file() or not cls.state.is_file():
             raise unittest.SkipTest("original ROM and Mamel state are required")
         if sha1(cls.rom.read_bytes()).hexdigest() != extract.ROM_SHA1:
             raise unittest.SkipTest("ROM hash does not match the fixture")
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
 
     def test_helper_updates_both_current_hp_views_and_preserves_max_hp(self):
-        env = os.environ.copy()
-        env["GB2_RESCUE_PREP_MSS"] = str(self.state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.rom),
-                str(ROOT / "tools" / "mesen_prepare_rescue_request.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS rescue-requester-prep max=40 current=1 active=0",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.rom, self.state)
+        try:
+            before = pyboy_route.flat_work_ram(pyboy)
+            maximum = pyboy_fixtures.prepare_rescue_request(pyboy)
+            after = pyboy_route.flat_work_ram(pyboy)
+            differences = [
+                index for index, pair in enumerate(zip(before, after))
+                if pair[0] != pair[1]
+            ]
+            self.assertEqual(40, maximum)
+            self.assertEqual(
+                [
+                    rescue_password.PLAYER_ACTOR_FLAT_ADDRESS
+                    + rescue_password.CURRENT_HP_OFFSET
+                ],
+                differences,
+            )
+            self.assertEqual(
+                1,
+                pyboy.memory[
+                    rescue_password.ACTOR_CACHE_ADDRESS
+                    + rescue_password.CURRENT_HP_OFFSET
+                ],
+            )
+            self.assertEqual(
+                40,
+                pyboy.memory[
+                    rescue_password.ACTOR_CACHE_ADDRESS
+                    + rescue_password.MAX_HP_OFFSET
+                ],
+            )
+        finally:
+            pyboy.stop(save=False)
 
 
 if __name__ == "__main__":

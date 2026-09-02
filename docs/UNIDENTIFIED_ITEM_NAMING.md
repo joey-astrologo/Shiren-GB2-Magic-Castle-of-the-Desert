@@ -27,7 +27,7 @@ mode-0 graph.
 
 ## Manual Mesen test route
 
-The user-supplied fixture `SaveStates/unidentified-item-naming.mss` contains a Rabbit Scroll
+The user-supplied fixture `SaveStates/unidentified-item-naming.state` contains a Rabbit Scroll
 in inventory and freezes the exact reported route. Its SHA-1 is
 `2db915b2283fb9e0d831df2a0fe0d3e5beaf3c76`.
 
@@ -150,7 +150,7 @@ Run both the patch/route fixture and the distributable helper fixture:
 python3 -m unittest \
   tests.test_multiple_unidentified_names \
   tests.test_unidentified_names \
-  tests.test_mesen_unidentified_item -v
+  tests.test_pyboy_unidentified_item -v
 ```
 
 The coverage includes exact-state hashing, RGBDS source equivalence, owned-range and

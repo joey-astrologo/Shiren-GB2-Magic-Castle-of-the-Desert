@@ -14,7 +14,7 @@ import capture_dialogue
 import english
 import english_font
 import extract
-import mesen_state
+import pyboy_state
 import runtime_widths
 import surfaces
 import translations
@@ -75,7 +75,7 @@ class LiveSaveSummaryNameTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         rom_path = ROOT / ROM_NAME
-        state_path = ROOT / "SaveStates" / "Mamel.mss"
+        state_path = ROOT / "SaveStates" / "Mamel.state"
         if not rom_path.exists() or not state_path.exists():
             raise unittest.SkipTest("matching ROM and Mamel state are required")
         cls.rom = rom_path.read_bytes()
@@ -104,7 +104,7 @@ class LiveSaveSummaryNameTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "localized.gbc"
         cls.localized_path.write_bytes(output)
-        cls.ram = mesen_state.cart_ram(state_path)
+        cls.ram = pyboy_state.cart_ram(state_path)
 
     @classmethod
     def tearDownClass(cls):

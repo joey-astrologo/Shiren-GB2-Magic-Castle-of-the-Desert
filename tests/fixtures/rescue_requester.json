@@ -3,9 +3,9 @@
     "buffer_hex": "8BA9ADFFFF000000000000000000",
     "maximum": 1,
     "mode": 4,
-    "path": "SaveStates/rescue-requester-rankings.mss",
+    "path": "SaveStates/rescue-requester-rankings.state",
     "position": 0,
-    "sha1": "478d96bcb625b7f54a3639e66c8b3c13e10cc10d",
+    "sha1": "fa7097cb14db7c7b668923b562f7388a3114b999",
     "sos_diary_record_hex": "00000000000000000000"
   },
   "manual_accepted_sos": {
@@ -52,7 +52,7 @@
     "mode": 4,
     "localized_password": "26pCdewCg2640",
     "native_password": "ぜづれうほまぐうむぜづだじ",
-    "path": "SaveStates/rescue-requester-sos.mss",
+    "path": "SaveStates/rescue-requester-sos.state",
     "payload_hex": "3EC1C2C48F7F094900",
     "position": 0,
     "semantic_fields": {
@@ -63,7 +63,7 @@
       "x": 9,
       "y": 8
     },
-    "sha1": "a6267369052fdb33755d36d9dfaa5761f00f3c82",
+    "sha1": "2937fd35b62e8d9cd72fdc3a0f439235dc672458",
     "sos_diary_record_hex": "3EC1C2C48F7F09080201",
     "sram_path": "SaveStates/rescue-requester-sos.srm",
     "sram_sha1": "5e906c5f1356ef97633cd79f428c01b44e8b5a6c"

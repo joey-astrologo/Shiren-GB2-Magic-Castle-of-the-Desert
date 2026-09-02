@@ -64,7 +64,7 @@ The clean-ROM dispatcher at `12:$502D-$5072` and length table/routine at
 | 5 | 12 | Thank-You Password; role inferred from unique protocol length, live capture pending |
 | 6 | 9 | Training Dungeon password; role inferred from unique protocol length, live capture pending |
 | 7 | 15 | Revival Password; directly selected by `10:$68DF-$68E7` |
-| 8 | 13 | SOS Password; live `rescue-entry-menu.mss` capture and controller replay confirmed |
+| 8 | 13 | SOS Password; live `rescue-entry-menu.state` capture and controller replay confirmed |
 
 Mode 2 is the separate 13-character Rankings-note editor opened with Start on the death
 Rankings result. Its dedicated constructor call at `10:$7BD4` uses the approved English
@@ -82,7 +82,7 @@ captures before their inferred role names become stage-specific fixture contract
 
 ## Deterministic requester-state preparation
 
-The committed `SaveStates/Mamel.mss` state has actor 0 active, a synchronized 32-byte
+The committed `SaveStates/Mamel.state` state has actor 0 active, a synchronized 32-byte
 actor record/cache, Max HP 40, current HP 40, and a Mamel beside Shiren. Native code proves
 the relevant fields rather than relying on state-file correlation:
 
@@ -93,9 +93,9 @@ the relevant fields rather than relying on state-file correlation:
 - `00:$046F-$0484` subtracts damage from `$FFA6`, confirming active actor offset `$16` as
   current HP.
 
-Actor 0 begins at bank 1 `$D000` (flat Mesen Work RAM `$1000`). Max HP is bank 1 `$D015`
+Actor 0 begins at bank 1 `$D000` (flat WRAM offset `$1000`). Max HP is bank 1 `$D015`
 / cache `$FFA5`; current HP is bank 1 `$D016` / cache `$FFA6`; `$FFFC` is the active actor
-index. `tools/mesen_prepare_rescue_request.lua` compares every backing/cache byte, requires
+index. `pyboy_fixtures.prepare_rescue_request` compares every backing/cache byte, requires
 actor 0, validates `0 < current HP <= Max HP`, and changes only the two current-HP views to
 1. Any mismatch or failed verified write aborts or rolls back. No ROM, SRAM, inventory,
 Max HP, story flag, or rescue flag is written.
@@ -321,22 +321,22 @@ Create reviewed save states at:
 7. requester at Revival input and resumed floor; and
 8. Thank-You display and Pigeon Handler input.
 
-The first capture starts with `tools/mesen_prepare_rescue_request.lua` and
-`SaveStates/Mamel.mss`. Its Mesen regression requires both current-HP views to become 1,
+The automated route starts with `pyboy_fixtures.prepare_rescue_request` and
+`SaveStates/Mamel.state`. Its PyBoy regression requires both current-HP views to become 1,
 Max HP to remain 40, and active actor 0 to remain selected. The reviewed requester captures
-are `SaveStates/rescue-requester-rankings.mss` (SHA-1
-`478d96bcb625b7f54a3639e66c8b3c13e10cc10d`) and
-`SaveStates/rescue-requester-sos.mss` (SHA-1
-`a6267369052fdb33755d36d9dfaa5761f00f3c82`). `tests/mesen_rescue_requester_route.lua`
+are `SaveStates/rescue-requester-rankings.state` (SHA-1
+`fa7097cb14db7c7b668923b562f7388a3114b999`) and
+`SaveStates/rescue-requester-sos.state` (SHA-1
+`2937fd35b62e8d9cd72fdc3a0f439235dc672458`). `tests.test_rescue_presentation`
 replays `Select`, the explanation, confirmation, and generation. The two-row question and
 native third-row Yes/No cursor are frozen at screen checksum `$17D77035`; the route then
 freezes English SOS checksum `$7F6D7FB9`, restored native `$C16D`, and the ten-byte SOS
 diary record. The SOS SRAM also drives the title-screen save-summary regression, where
 `Awaiting Rescue` must remain separate from the dynamic run count.
 
-`SaveStates/rescue-entry-menu.mss` (SHA-1
-`a7c4015c36d994b07599bfe617044d4ce0b9d593`) starts with Password selected in the Rescue
-Team Cable / Password / Quit menu. `tests/mesen_rescue_entry_route.lua` advances the native
+`SaveStates/rescue-entry-menu.state` (SHA-1
+`8c79794a9ae28857dd51ebe343191e1796007164`) starts with Password selected in the Rescue
+Team Cable / Password / Quit menu. `tests.test_rescue_presentation` advances the native
 dialogue, but first forces the retained previous-mode byte `$C195` to non-rescue mode 0.
 The constructor must still select mode 8 from incoming register C. This deliberately makes
 the pre-fix `$C195`-based wrapper fail before the editor checkpoint rather than letting the
@@ -372,9 +372,9 @@ because the English screen constructor ran.
 The connection popup itself is a separate geometry owner. The native five-interior-tile
 frame clips `Password`; `tools/service_menus.py` recognizes only the exact Cable / Password
 / Quit selector sequence and uses a seven-interior-tile frame. Its 56-pixel interior leaves
-48 pixels after the fixed 8-pixel cursor column, enough for the 42-pixel label. Because the `.mss` already
-contains old menu pixels, `tests/mesen_service_menu_rescue.lua` first backs out, rebuilds
-the route, freezes the native Yes/No confirmation before proceeding, checks the clean
+48 pixels after the fixed 8-pixel cursor column, enough for the 42-pixel label. Because the
+state already contains old menu pixels, `tests.test_service_menus` first backs out, rebuilds
+the route, checks the clean
 nine-column service popup, and then dismisses it to prove the new right edge is removed.
 This sequence is intentional: the confirmation selects dynamic-text VRAM bank 1, while
 the warehouse normally uses bank 0. The widened service bottom row therefore copies the
@@ -386,12 +386,12 @@ options are selected, so the shared warehouse/Bank Teller template uses stable t
 throughout. Rescue has a separate three-entry template: only the two physical spill cells containing the final
 column of `Password` use the already-rendered overflow tiles `$A8/$BA`; every other spill
 cell remains `$B3`. Those aliased lower rows are outside the shorter Rescue frame. A separate
-Mesen regression compares the final `d` against its literal approved 5x8 raster, while the
-live route visits Cable, Password, and Quit and freezes all three corrected frames.
+PyBoy regression compares the final `d` against its literal approved 5x8 raster, while the
+live route visits Cable, Password, and Quit and requires distinct corrected frames.
 The completed-rescue Cable / Password / Cancel / Later selector is taller, so `$A8/$BA`
 are live cursor rows there. Its dedicated constructor copies the two `Password` fragments
 to off-frame `$9C/$AE`, clears the source aliases, and uses `$B3` for every other spill.
-The `at-rescue.mss` regression forces both aliases to change and then drives all four real
+The `at-rescue.state` regression drives all four real
 cursor positions, requiring the same literal `d`, one left cursor, and a blank right spill
 at every stop.
 The native town redraw clears only eight columns, so it cannot erase the ninth column added
@@ -403,7 +403,7 @@ transition leaves the town loop immediately. Both paths consume a two-byte `$A5/
 marker so uninitialized scratch cannot trigger cleanup. Warehouse begins at added-column
 destination `$9B90`; row four crosses the Game Boy BG-map boundary and must wrap from
 `$9BF0` to `$9810`, not continue into `$9C10`.
-`tests/mesen_service_menu_rescue_select.lua` selects `Password` rather than merely backing
+`tests.test_service_menus` selects `Password` rather than merely backing
 out and freezes the transition with saved destination `$9950` and flag `$00`; this is the
 regression for the reported vertical white strip. The Rescue, warehouse, Bank Teller, and
 Blacksmith Info tests capture every original tile/attribute pair in the added column,
@@ -428,7 +428,7 @@ response: `SVgaVwAhmUmoM3u`. Its native bytes are
 and its gift record is eight zero bytes. The response is bound to the requester's saved SOS
 checksums; it is not a free-standing password.
 
-The controller regression loads `SaveStates/rescue-requester-sos.mss`, follows
+The controller regression loads `SaveStates/rescue-requester-sos.state`, follows
 **Adventure -> Revive! -> Password**, enters all 15 localized characters, and requires:
 
 1. the cursor to move to `OK` automatically after the fifteenth character;
@@ -452,13 +452,13 @@ exchange.
 
 The first attempted regression used a state captured after the editor was already active
 and added a common-loop repair. That did not represent the reproducible menu route and was
-removed. The retained test always starts from `rescue-entry-menu.mss`, constructs the editor
+removed. The retained test always starts from `rescue-entry-menu.state`, constructs the editor
 through controller input, and exercises the actual hardware-B event handler. Static tests
 freeze its single guarded hook and the RGBDS payload.
 
-The Mesen route tests hash-check their committed states, build the ROM at a fresh temporary
-path, start a new test-runner process, and never write a replacement state. This keeps the
-fixtures immutable and prevents the tests from retaining an earlier ROM build.
+The PyBoy route tests hash-check their committed states, build the ROM at a fresh temporary
+path, start a new headless emulator instance, and stop without saving. This keeps the
+fixtures immutable and prevents a route from retaining an earlier ROM build.
 
 The route must assert inventory/equipment restoration, floor and position, cleared rescue
 room state, rescue history/count/reward updates, and stable SRAM on save/reload. Screen

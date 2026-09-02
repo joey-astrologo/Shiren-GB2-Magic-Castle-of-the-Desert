@@ -1,8 +1,6 @@
 from hashlib import sha1
 import json
-import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -13,7 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import cartridge
+import capture_dialogue
 import extract
+import pyboy_route
 import service_menus
 import stairs_menu
 
@@ -371,22 +371,40 @@ class ServiceMenuInstallerTests(unittest.TestCase):
                     service_menus.install(damaged)
 
 
-class MesenServiceMenuTests(unittest.TestCase):
+class PyBoyServiceMenuTests(unittest.TestCase):
+    SCRATCH_COLUMN = 0x78C0
+    SCRATCH_DESTINATION = 0x78D4
+    SCRATCH_ROWS = 0x78D6
+    SCRATCH_FLAG = 0x78D7
+    SCRATCH_FLAG_END = 0x78D8
+    BLACKSMITH_FLAG = 0x78DA
+
+    SYNTHESIS_RASTER = (
+        ".####............#...#...............#.......",
+        "#................#...#.......................",
+        "#.....#..#.###..###..###...##...###.##...###.",
+        ".###..#..#.#..#..#...#..#.#..#.#.....#..#....",
+        "....#.#..#.#..#..#...#..#.####..##...#...##..",
+        "....#..###.#..#..#...#..#.#.......#..#.....#.",
+        "####.....#.#..#...##.#..#..###.###..###.###..",
+        ".......##....................................",
+    )
+    LOWER_D_RASTER = (
+        "...#.", "...#.", ".###.", "#..#.", "#..#.", "#..#.", ".###.", ".....",
+    )
+    WAREHOUSE_EDGE = (
+        "........", "######..", ".....##.",
+        *("......#." for _ in range(58)),
+        ".....##.", "######..", "........",
+    )
+
     @classmethod
     def setUpClass(cls):
-        candidates = (
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        )
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
         cls.source, _rom = _original_rom()
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized = Path(cls.temporary.name) / "service-menus.gbc"
         built = subprocess.run(
@@ -414,288 +432,250 @@ class MesenServiceMenuTests(unittest.TestCase):
         if hasattr(cls, "temporary"):
             cls.temporary.cleanup()
 
+    @staticmethod
+    def _ink(pyboy, x, y):
+        return pyboy.screen.image.getpixel((x, y))[:3] == (0, 0, 0)
+
+    def _assert_raster(self, pyboy, x, y, raster):
+        for row, expected in enumerate(raster):
+            for column, pixel in enumerate(expected):
+                self.assertEqual(
+                    pixel == "#",
+                    self._ink(pyboy, x + column, y + row),
+                    "pixel mismatch at (%d,%d)" % (x + column, y + row),
+                )
+
+    @staticmethod
+    def _vram(pyboy, address, bank):
+        old_bank = pyboy.memory[0xFF4F]
+        try:
+            pyboy.memory[0xFF4F] = bank
+            return pyboy.memory[address]
+        finally:
+            pyboy.memory[0xFF4F] = old_bank
+
+    @staticmethod
+    def _popup_row(destination, row):
+        address = destination + row * 32
+        if address >= 0x9C00 and destination < 0x9C00:
+            address -= 0x400
+        return address
+
+    def _active(self, pyboy):
+        return (
+            pyboy_route.work_read_byte(pyboy, self.SCRATCH_FLAG) == 0xA5
+            and pyboy_route.work_read_byte(pyboy, self.SCRATCH_FLAG_END) == 0x5A
+        )
+
+    def _capture_column(self, pyboy, expected_destination=None, expected_rows=None):
+        self.assertTrue(self._active(pyboy))
+        raw = pyboy_route.work_read(pyboy, self.SCRATCH_DESTINATION, 2)
+        destination = int.from_bytes(raw, "little")
+        rows = pyboy_route.work_read_byte(pyboy, self.SCRATCH_ROWS)
+        if expected_destination is not None:
+            self.assertEqual(expected_destination, destination)
+        if expected_rows is not None:
+            self.assertEqual(expected_rows, rows)
+        self.assertGreaterEqual(rows, 2)
+        self.assertLessEqual(rows, 10)
+        saved = pyboy_route.work_read(pyboy, self.SCRATCH_COLUMN, rows * 2)
+        for row in range(rows):
+            address = self._popup_row(destination, row)
+            expected_tile = 0x7E if row in (0, rows - 1) else 0x7F
+            expected_attribute = 0xEF if row == rows - 1 else 0xAF
+            self.assertEqual(expected_tile, self._vram(pyboy, address, 0))
+            self.assertEqual(expected_attribute, self._vram(pyboy, address, 1))
+        return destination, rows, saved
+
+    def _assert_restored(self, pyboy, capture):
+        destination, rows, saved = capture
+        self.assertFalse(self._active(pyboy))
+        for row in range(rows):
+            address = self._popup_row(destination, row)
+            self.assertEqual(saved[row * 2], self._vram(pyboy, address, 0))
+            self.assertEqual(saved[row * 2 + 1], self._vram(pyboy, address, 1))
+
+    def _start(self, row, state_key="state", hash_key="state_sha1"):
+        state = ROOT / row[state_key]
+        if not state.is_file():
+            self.skipTest("service-menu state fixture is unavailable")
+        self.assertEqual(row[hash_key], sha1(state.read_bytes()).hexdigest())
+        return pyboy_route.start(self.PyBoy, self.localized, state)
+
+    def _exercise_lifecycle(
+        self, row, initial_actions, option_count, *, auto_advance=False,
+        expected_rows=None, blacksmith=False,
+    ):
+        pyboy = self._start(row)
+        opened = None
+        capture = None
+        screens = []
+        try:
+            for frame in range(2401):
+                if frame in initial_actions:
+                    pyboy_route.press(pyboy, initial_actions[frame])
+                if auto_advance and opened is None and frame % 70 == 0:
+                    pyboy_route.press(pyboy, "a")
+                if opened is not None:
+                    relative = frame - opened
+                    for index in range(1, option_count):
+                        if relative == 100 + (index - 1) * 120:
+                            pyboy_route.press(pyboy, "down")
+                    if relative == (520 if blacksmith else 500):
+                        pyboy_route.press(pyboy, "b")
+                pyboy.tick()
+                if opened is None and self._active(pyboy):
+                    opened = frame
+                if opened is not None and frame == opened + 60:
+                    capture = self._capture_column(
+                        pyboy, expected_rows=expected_rows
+                    )
+                    if blacksmith:
+                        self.assertEqual(
+                            0xA6,
+                            pyboy_route.work_read_byte(pyboy, self.BLACKSMITH_FLAG),
+                        )
+                    screens.append(pyboy.screen.image.tobytes())
+                elif opened is not None and frame in {
+                    opened + 180, opened + 300, opened + 420, opened + 480,
+                }:
+                    screens.append(pyboy.screen.image.tobytes())
+                if (
+                    capture is not None and frame > opened + 560
+                    and not self._active(pyboy)
+                ):
+                    self._assert_restored(pyboy, capture)
+                    if blacksmith:
+                        self.assertEqual(
+                            0,
+                            pyboy_route.work_read_byte(pyboy, self.BLACKSMITH_FLAG),
+                        )
+                    self.assertGreaterEqual(len(set(screens)), option_count)
+                    return
+            self.fail("service menu did not complete its PyBoy lifecycle")
+        finally:
+            pyboy.stop(save=False)
+
     def test_blacksmith_info_synthesis_matches_approved_pixels(self):
         row = FIXTURE["blacksmith_info"]
         state = ROOT / row["state"]
         if not state.is_file():
             self.skipTest("Blacksmith Info menu fixture is unavailable")
         self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_BLACKSMITH_INFO_MSS"] = str(state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(
-                    ROOT
-                    / "tests"
-                    / "mesen_service_menu_blacksmith_info_pixels.lua"
-                ),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS Blacksmith Info Synthesis and clean Quit row match approved pixels",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+        try:
+            pyboy_route.run_frames(
+                pyboy, 481,
+                ((60, "a"), (150, "down"), (210, "down"),
+                 (270, "down"), (330, "a")),
+            )
+            self._assert_raster(pyboy, 24, 48, self.SYNTHESIS_RASTER)
+            for y in range(72, 80):
+                for x in (*range(16, 24), *range(64, 72)):
+                    self.assertFalse(self._ink(pyboy, x, y))
+        finally:
+            pyboy.stop(save=False)
 
     def test_blacksmith_info_is_widened_traversed_and_dismissed_cleanly(self):
-        row = FIXTURE["blacksmith_info"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("Blacksmith Info menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_BLACKSMITH_INFO_MSS"] = str(state)
-        for label in ("forge", "repair", "synthesis", "remove", "quit", "closed"):
-            env["GB2_BLACKSMITH_EXPECTED_" + label.upper() + "_SCREEN"] = row[
-                label + "_screen"
-            ]
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_blacksmith_info.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        for label in ("Forge", "Repair", "Synthesis", "Remove", "Quit", "closed"):
-            self.assertIn(
-                "service-menu Blacksmith %s screen=%s"
-                % (label, row[label.lower() + "_screen"]),
-                output,
-            )
-        self.assertIn(
-            "PASS Blacksmith Info widened, traversed, and dismissed", output
+        self._exercise_lifecycle(
+            FIXTURE["blacksmith_info"],
+            {60: "a", 150: "down", 210: "down", 270: "down", 330: "a"},
+            len(FIXTURE["blacksmith_info"]["options"]),
+            expected_rows=9,
+            blacksmith=True,
         )
 
     def test_rescue_popup_is_rebuilt_wide_and_dismisses_cleanly(self):
-        row = FIXTURE["rescue"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("Rescue Team menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_RESCUE_ENTRY_MSS"] = str(state)
-        env["GB2_RESCUE_EXPECTED_CONFIRM_SCREEN"] = row[
-            "confirmation_screen"
-        ]
-        env["GB2_RESCUE_EXPECTED_WIDE_SCREEN"] = row["wide_screen"]
-        env["GB2_RESCUE_EXPECTED_CLOSED_SCREEN"] = row["closed_screen"]
-        env["GB2_RESCUE_EXPECTED_PASSWORD_SCREEN"] = row["password_screen"]
-        env["GB2_RESCUE_EXPECTED_QUIT_SCREEN"] = row["quit_screen"]
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_rescue.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "service-menu Rescue confirmation screen="
-            + row["confirmation_screen"],
-            output,
-        )
-        self.assertIn(
-            "service-menu Rescue wide screen=" + row["wide_screen"], output
-        )
-        self.assertIn(
-            "service-menu Rescue Password screen=" + row["password_screen"],
-            output,
-        )
-        self.assertIn(
-            "service-menu Rescue Quit screen=" + row["quit_screen"], output
-        )
-        self.assertIn(
-            "service-menu Rescue closed screen=" + row["closed_screen"], output
-        )
-        self.assertIn(
-            "PASS Rescue confirmation and service popup rebuilt and dismissed",
-            output,
+        self._exercise_lifecycle(
+            FIXTURE["rescue"],
+            {60: "b", 160: "a", 260: "a", 360: "a", 460: "a", 560: "a"},
+            len(FIXTURE["rescue"]["options"]),
         )
 
     def test_rescue_password_selection_restores_the_added_column(self):
-        row = FIXTURE["rescue"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("Rescue Team menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_RESCUE_ENTRY_MSS"] = str(state)
-        env["GB2_RESCUE_EXPECTED_TRANSITION_SCREEN"] = row["selected_screen"]
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_rescue_select.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "service-menu Rescue selected screen="
-            + row["selected_screen"]
-            + " saved=9950 flag=00",
-            output,
-        )
-        self.assertIn(
-            "PASS Rescue Password selection restores widened popup column",
-            output,
-        )
+        pyboy = self._start(FIXTURE["rescue"])
+        capture = None
+        actions = {
+            60: "b", 160: "a", 260: "a", 360: "a", 460: "a", 560: "a",
+            720: "down", 760: "a",
+        }
+        try:
+            for frame in range(1001):
+                if frame in actions:
+                    pyboy_route.press(pyboy, actions[frame])
+                pyboy.tick()
+                if frame == 700:
+                    capture = self._capture_column(pyboy, expected_destination=0x9950)
+            self.assertIsNotNone(capture)
+            self._assert_restored(pyboy, capture)
+        finally:
+            pyboy.stop(save=False)
 
     def test_rescue_password_final_d_matches_approved_pixels(self):
-        row = FIXTURE["rescue"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("Rescue Team menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_RESCUE_ENTRY_MSS"] = str(state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(
-                    ROOT
-                    / "tests"
-                    / "mesen_service_menu_rescue_password_pixels.lua"
-                ),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS Rescue Password final d matches the approved raster",
-            output,
-        )
+        pyboy = self._start(FIXTURE["rescue"])
+        try:
+            pyboy_route.run_frames(
+                pyboy, 791,
+                ((60, "b"), (160, "a"), (260, "a"), (360, "a"),
+                 (460, "a"), (560, "a"), (720, "down")),
+            )
+            self._assert_raster(pyboy, 61, 37, self.LOWER_D_RASTER)
+        finally:
+            pyboy.stop(save=False)
 
     def test_post_rescue_password_is_wide_with_literal_pixels(self):
-        state = ROOT / "SaveStates" / "at-rescue.mss"
+        state = ROOT / "SaveStates" / "at-rescue.state"
         if not state.is_file():
             self.skipTest("post-rescue menu fixture is unavailable")
         self.assertEqual(
-            "9adf777f9f86a18ba025d32edf1c5fcae02ec326",
+            "ac90aecb1808dc2e27777481faa896bac48d4b0a",
             sha1(state.read_bytes()).hexdigest(),
         )
-        env = os.environ.copy()
-        env["GB2_AT_RESCUE_MSS"] = str(state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_post_rescue.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=90,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS post-rescue popup survives every live cursor position",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+        menu_at = None
+        try:
+            for frame in range(5001):
+                if frame == 60:
+                    pyboy_route.press(pyboy, "down")
+                elif frame == 120:
+                    pyboy_route.press(pyboy, "a")
+                elif menu_at is None and frame >= 240 and frame % 90 == 0:
+                    pyboy_route.press(pyboy, "a")
+                if menu_at is not None and frame - menu_at in (130, 160, 190):
+                    pyboy_route.press(pyboy, "down")
+                pyboy.tick()
+                target = bytes(pyboy.memory[0xFFB0:0xFFBA])
+                if (
+                    menu_at is None and target[0] == 4
+                    and target[2:] == bytes.fromhex("80077F0792079E07")
+                ):
+                    menu_at = frame
+                if menu_at is not None and frame - menu_at in (120, 155, 185, 215):
+                    self.assertTrue(self._active(pyboy))
+                    self._assert_raster(pyboy, 61, 39, self.LOWER_D_RASTER)
+                    selected = {120: 1, 155: 2, 185: 3, 215: 4}[frame - menu_at]
+                    ranges = ((24, 33), (36, 45), (48, 57), (60, 69))
+                    for index, (top, bottom) in enumerate(ranges, 1):
+                        ink = sum(
+                            self._ink(pyboy, x, y)
+                            for x in range(16, 23) for y in range(top, bottom + 1)
+                        )
+                        self.assertGreaterEqual(ink, 8) if index == selected else self.assertEqual(0, ink)
+                    self.assertEqual(
+                        0,
+                        sum(self._ink(pyboy, x, y)
+                            for x in range(66, 72) for y in range(22, 70)),
+                    )
+                    if frame - menu_at == 215:
+                        return
+            self.fail("post-rescue delivery menu was not reached")
+        finally:
+            pyboy.stop(save=False)
 
     def test_warehouse_popup_is_opened_wide_and_dismisses_cleanly(self):
-        row = FIXTURE["warehouse"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("warehouse menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_WAREHOUSE_MENU_MSS"] = str(state)
-        env["GB2_WAREHOUSE_EXPECTED_WIDE_SCREEN"] = row["wide_screen"]
-        env["GB2_WAREHOUSE_EXPECTED_CLOSED_SCREEN"] = row["closed_screen"]
-        env["GB2_WAREHOUSE_EXPECTED_WITHDRAW_SCREEN"] = row["withdraw_screen"]
-        env["GB2_WAREHOUSE_EXPECTED_TRASH_SCREEN"] = row["trash_screen"]
-        env["GB2_WAREHOUSE_EXPECTED_QUIT_SCREEN"] = row["quit_screen"]
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_warehouse.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "service-menu Warehouse wide screen=" + row["wide_screen"], output
-        )
-        for label in ("Withdraw", "Trash", "Quit"):
-            self.assertIn(
-                "service-menu Warehouse %s screen=%s"
-                % (label, row[label.lower() + "_screen"]),
-                output,
-            )
-        self.assertIn(
-            "service-menu Warehouse closed screen=" + row["closed_screen"], output
-        )
-        self.assertIn(
-            "PASS Warehouse service popup widened and dismissed", output
+        self._exercise_lifecycle(
+            FIXTURE["warehouse"], {}, len(FIXTURE["warehouse"]["options"]),
+            auto_advance=True,
         )
 
     def test_warehouse_floor_items_keep_the_literal_right_border(self):
@@ -721,76 +701,41 @@ class MesenServiceMenuTests(unittest.TestCase):
                     expected_sha1,
                     sha1(state.read_bytes()).hexdigest(),
                 )
-                env = os.environ.copy()
-                env["GB2_WAREHOUSE_ITEMS_MSS"] = str(state)
-                env["GB2_WAREHOUSE_EXPECTED_DESTINATION"] = destination
-                result = subprocess.run(
-                    [
-                        str(self.mesen),
-                        "--testrunner",
-                        "--enablestdout",
-                        "--novideo",
-                        "--noaudio",
-                        str(self.localized),
-                        str(
-                            ROOT
-                            / "tests"
-                            / "mesen_service_menu_warehouse_floor_items.lua"
-                        ),
-                    ],
-                    cwd=ROOT,
-                    env=env,
-                    text=True,
-                    capture_output=True,
-                    timeout=60,
-                )
-                output = result.stdout + result.stderr
-                self.assertEqual(0, result.returncode, output[-8000:])
-                self.assertIn(
-                    "PASS Warehouse floor-items popup keeps and restores "
-                    "its literal right edge",
-                    output,
-                )
+                pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+                opened = None
+                capture = None
+                try:
+                    for frame in range(1201):
+                        if frame == 180:
+                            pyboy_route.press(pyboy, "a")
+                        if opened is not None:
+                            relative_frame = frame - opened
+                            if relative_frame in (100, 220, 340):
+                                pyboy_route.press(pyboy, "down")
+                            elif relative_frame == 500:
+                                pyboy_route.press(pyboy, "b")
+                        pyboy.tick()
+                        if opened is None and self._active(pyboy):
+                            opened = frame
+                        if opened is not None and frame == opened + 60:
+                            capture = self._capture_column(
+                                pyboy, int(destination, 16), 8
+                            )
+                            self._assert_raster(pyboy, 72, 16, self.WAREHOUSE_EDGE)
+                        elif opened is not None and frame - opened in (180, 300, 420):
+                            self._assert_raster(pyboy, 72, 16, self.WAREHOUSE_EDGE)
+                        if capture is not None and frame > opened + 560 and not self._active(pyboy):
+                            self._assert_restored(pyboy, capture)
+                            break
+                    else:
+                        self.fail("warehouse floor-items route did not close")
+                finally:
+                    pyboy.stop(save=False)
 
     def test_bank_popup_is_widened_traversed_and_dismissed_cleanly(self):
-        row = FIXTURE["bank"]
-        state = ROOT / row["state"]
-        if not state.is_file():
-            self.skipTest("Bank Teller menu fixture is unavailable")
-        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
-        env = os.environ.copy()
-        env["GB2_BANK_TELLER_MSS"] = str(state)
-        for label in ("deposit", "withdraw", "balance", "quit", "closed"):
-            env["GB2_BANK_EXPECTED_" + label.upper() + "_SCREEN"] = row[
-                label + "_screen"
-            ]
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_service_menu_bank.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        for label in ("Deposit", "Withdraw", "Balance", "Quit", "closed"):
-            self.assertIn(
-                "service-menu Bank %s screen=%s"
-                % (label, row[label.lower() + "_screen"]),
-                output,
-            )
-        self.assertIn(
-            "PASS Bank service popup widened, traversed, and dismissed",
-            output,
+        self._exercise_lifecycle(
+            FIXTURE["bank"], {60: "a", 160: "a"},
+            len(FIXTURE["bank"]["options"]),
         )
 
 

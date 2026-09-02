@@ -145,13 +145,19 @@ contracts are in [VWF_BUDGETS.md](VWF_BUDGETS.md).
 
 ## Save-state handling
 
-ROMs, ordinary SRAM files, PyBoy states, and personal saves stay untracked. The explicitly
-reviewed Mesen reproduction states are project fixtures; extracted `.srm` files remain
-ignored. Convert Mesen 2's named `cartRam` field with:
+ROMs, ordinary SRAM files, and personal saves stay untracked. The explicitly reviewed
+Mesen source states and their native PyBoy conversions under `SaveStates/` are project
+fixtures; extracted `.srm` files remain ignored. Tests must load `.state` and must not
+require Mesen. Recreate the native fixtures with the sibling converter:
 
 ```sh
-python3 tools/mesen_state.py SaveStates/Mamel.mss SaveStates/Mamel.srm
+python3 ../mesen-to-pyboy/mss_to_pyboy.py SaveStates/ \
+  --rom "$ROM" --output-dir SaveStates --verify-frames 12 --force
 ```
+
+Keep each original `.mss` beside its generated `.state` as provenance. A conversion is a
+reviewed fixture update: inspect it, update its recorded digest deliberately, and run
+`tests.test_pyboy_state_fixtures` plus the owning route test.
 
 A state that loads is not proof that it represents the intended route. Tests must assert
 the relevant WRAM payload, hook, screen, actor, or control-flow event after loading it.

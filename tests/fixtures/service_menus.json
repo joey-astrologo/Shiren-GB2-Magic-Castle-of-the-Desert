@@ -1,32 +1,18 @@
 {
   "blacksmith_info": {
-    "closed_screen": "F04C37D0",
-    "forge_screen": "4D379F17",
-    "quit_screen": "8A749287",
-    "remove_screen": "E4FF259F",
-    "repair_screen": "C1B4CC97",
-    "state": "SaveStates/blacksmith-info.mss",
-    "state_sha1": "ca57bccc502776a878a1901c2ddfd8479ed0afc1",
-    "synthesis_screen": "1ADCBA37"
+    "state": "SaveStates/blacksmith-info.state",
+    "state_sha1": "bf1fc2df7baf0e94f074c83390086343265c6028",
+    "options": ["Forge", "Repair", "Synthesis", "Remove", "Quit"]
   },
   "bank": {
-    "balance_screen": "9781AB07",
-    "closed_screen": "1D4B2087",
-    "deposit_screen": "0AC9E9E7",
-    "quit_screen": "625E127F",
-    "state": "SaveStates/bank-teller.mss",
-    "state_sha1": "6c3624401afda7107da79247ca6e67cf6a471e9a",
-    "withdraw_screen": "5D7956D7"
+    "state": "SaveStates/bank-teller.state",
+    "state_sha1": "194e0e531259f16bf8700560ef91fcf3eef176e9",
+    "options": ["Deposit", "Withdraw", "Balance", "Quit"]
   },
   "rescue": {
-    "closed_screen": "9E76AD89",
-    "confirmation_screen": "1F6752FE",
-    "selected_screen": "941C145D",
-    "state": "SaveStates/rescue-entry-menu.mss",
-    "state_sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
-    "password_screen": "B1F60A02",
-    "quit_screen": "19FAE386",
-    "wide_screen": "D05C830E"
+    "state": "SaveStates/rescue-entry-menu.state",
+    "state_sha1": "8c79794a9ae28857dd51ebe343191e1796007164",
+    "options": ["Cable", "Password", "Quit"]
   },
   "static": {
     "blacksmith_info_template": "254:$4834",
@@ -274,16 +260,12 @@
     "town_refresh_trampoline_sha1": "5cf99c7c354cf8f8abf00e6a75047c747f0e7e5e"
   },
   "warehouse": {
-    "closed_screen": "AE0DAD35",
-    "floor_items_reenter_state": "SaveStates/warehouse-floor-items-reenter.mss",
-    "floor_items_reenter_state_sha1": "145065ce2a940cf84229dcab17d326585e8a01d9",
-    "floor_items_state": "SaveStates/warehouse-floor-items.mss",
-    "floor_items_state_sha1": "4822a0e49a0d85d597fb1337ddb4136131df7342",
-    "state": "SaveStates/warehouse-menu.mss",
-    "state_sha1": "fffcb9be39418f23e85ae275de6cb86e898afec7",
-    "withdraw_screen": "CB979382",
-    "trash_screen": "CBB620B2",
-    "quit_screen": "9BCA6A92",
-    "wide_screen": "2A423142"
+    "floor_items_reenter_state": "SaveStates/warehouse-floor-items-reenter.state",
+    "floor_items_reenter_state_sha1": "588bb6e79621ef851948312f6a88ac9468be6240",
+    "floor_items_state": "SaveStates/warehouse-floor-items.state",
+    "floor_items_state_sha1": "3ed8b57207b25280a42169c4aa9df0aba92d7aa2",
+    "state": "SaveStates/warehouse-menu.state",
+    "state_sha1": "2b6c2c0c899d5dc1b9b24be9078e4059d695edd7",
+    "options": ["Deposit", "Withdraw", "Trash", "Quit"]
   }
 }

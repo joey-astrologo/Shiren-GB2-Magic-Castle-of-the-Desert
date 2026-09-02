@@ -1,7 +1,6 @@
 from hashlib import sha1
 import os
 from pathlib import Path
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -13,17 +12,19 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import build
+import capture_dialogue
 import english
 import english_font
 import extract
 import name6
+import pyboy_route
 import runtime_widths
 import translations
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
-STATE = ROOT / "SaveStates" / "ranking-screen-on-death.mss"
-STATE_SHA1 = "ac76a1b2f5f5c5207308e39e8438ab4dc37bdd5c"
+STATE = ROOT / "SaveStates" / "ranking-screen-on-death.state"
+STATE_SHA1 = "f928661f76c975625beddbc70aad223d4ec3cbd0"
 
 
 def expected_keyboard_ink(original):
@@ -52,10 +53,7 @@ def expected_keyboard_ink(original):
 class RankingNoteInputTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.mesen = Path("/Applications/Mesen.app/Contents/MacOS/Mesen")
         source = ROOT / ROM_NAME
-        if not cls.mesen.is_file():
-            raise unittest.SkipTest("Mesen is unavailable")
         if not source.is_file() or not STATE.is_file():
             raise unittest.SkipTest("source ROM and death-Rankings state are required")
         cls.original = source.read_bytes()
@@ -73,6 +71,33 @@ class RankingNoteInputTests(unittest.TestCase):
             translations.encoded_overrides(cls.translated),
             runtime_contract=widths.contract,
         )[0]
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
+
+    def _open_editor(self, pyboy):
+        footer = bytes.fromhex("0a 24 0b 44 43 43 3e 3d")
+        ranking_at = None
+        for frame in range(1201):
+            if ranking_at is None:
+                if pyboy_route.find_work_ram(pyboy, footer) is not None:
+                    ranking_at = frame
+            elif (
+                pyboy.memory[0xC195] == 2
+                and pyboy.memory[0xC153] == 13
+            ):
+                return frame
+
+            if frame == 60:
+                pyboy_route.press(pyboy, "a")
+            elif ranking_at is None and frame >= 180 and frame % 120 == 0:
+                pyboy_route.press(pyboy, "a")
+            elif ranking_at is not None and frame >= ranking_at + 30:
+                if (frame - ranking_at - 30) % 120 == 0:
+                    pyboy_route.press(pyboy, "start")
+            pyboy.tick()
+        self.fail("ranking-note editor did not open")
 
     def test_user_fixture_is_frozen(self):
         self.assertEqual(STATE_SHA1, sha1(STATE.read_bytes()).hexdigest())
@@ -91,36 +116,14 @@ class RankingNoteInputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             temporary = Path(temporary)
             rom = temporary / "ranking-note.gbc"
-            screenshot = temporary / "ranking-note.png"
             rom.write_bytes(self.localized)
-            env = os.environ.copy()
-            env["GB2_DEATH_RANKINGS_MSS"] = str(STATE)
-            env["GB2_RANKING_NOTE_SCREENSHOT"] = str(screenshot)
-            result = subprocess.run(
-                [
-                    str(self.mesen),
-                    "--testrunner",
-                    "--enablestdout",
-                    "--novideo",
-                    "--noaudio",
-                    str(rom),
-                    str(ROOT / "tests" / "mesen_ranking_note_input.lua"),
-                ],
-                cwd=ROOT,
-                env=env,
-                text=True,
-                capture_output=True,
-                timeout=60,
-            )
-            output = result.stdout + result.stderr
-            self.assertEqual(0, result.returncode, output[-8000:])
-            self.assertIn(
-                "ranking-note input mode 2 found at frame 476 "
-                "with 13-character maximum",
-                output,
-            )
-            self.assertTrue(screenshot.is_file(), output[-8000:])
-            image = Image.open(screenshot).convert("RGB")
+            pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+            try:
+                self._open_editor(pyboy)
+                pyboy_route.run_frames(pyboy, 120)
+                image = pyboy.screen.image.convert("RGB")
+            finally:
+                pyboy.stop(save=False)
             self.assertEqual((160, 144), image.size)
 
             expected = expected_keyboard_ink(self.original)
@@ -148,32 +151,23 @@ class RankingNoteInputTests(unittest.TestCase):
             rom.write_bytes(self.localized)
             for scenario in ("right", "space"):
                 with self.subTest(scenario=scenario):
-                    env = os.environ.copy()
-                    env["GB2_DEATH_RANKINGS_MSS"] = str(STATE)
-                    env["GB2_RANKING_NOTE_SCENARIO"] = scenario
-                    result = subprocess.run(
-                        [
-                            str(self.mesen),
-                            "--testrunner",
-                            "--enablestdout",
-                            "--novideo",
-                            "--noaudio",
-                            str(rom),
-                            str(
-                                ROOT
-                                / "tests"
-                                / "mesen_ranking_note_editing.lua"
-                            ),
-                        ],
-                        cwd=ROOT,
-                        env=env,
-                        text=True,
-                        capture_output=True,
-                        timeout=60,
-                    )
-                    output = result.stdout + result.stderr
-                    self.assertEqual(0, result.returncode, output[-8000:])
-                    self.assertIn("PASS mode-2", output)
+                    pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+                    try:
+                        self._open_editor(pyboy)
+                        sequence = (
+                            ("up", "right", "a")
+                            if scenario == "right"
+                            else ("up", "right", "down", "right", "a")
+                        )
+                        pyboy_route.run_frames(pyboy, 60)
+                        for button in sequence:
+                            pyboy_route.press(pyboy, button)
+                            pyboy_route.run_frames(pyboy, 30)
+                        self.assertEqual(1, pyboy.memory[0xC152])
+                        self.assertEqual(0x24, pyboy.memory[0xC16D])
+                        self.assertEqual(2, pyboy.memory[0xC195])
+                    finally:
+                        pyboy.stop(save=False)
 
 
 if __name__ == "__main__":

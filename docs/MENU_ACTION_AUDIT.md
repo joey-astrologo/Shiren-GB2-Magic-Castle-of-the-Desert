@@ -61,7 +61,7 @@ The localized SOS password `I3CqdGY6iuyws` was accepted by the game and is froze
 semantic regression fixture. It targets Ancient Ruins 1F with diary ID `$1234`, avoiding
 the native self-rescue check in the supplied Rescue Team state.
 
-The shorter `SaveStates/at-rescue.mss` fixture starts immediately before completion. The
+The shorter `SaveStates/at-rescue.state` fixture starts immediately before completion. The
 live regression faces down, completes the rescue, advances Good's dialogue, and detects
 the exact four-record selector without relying on timing alone. It requires a nine-column
 copy and the complete right border in both CGB VRAM tile and attribute banks. The

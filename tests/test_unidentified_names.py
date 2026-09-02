@@ -18,7 +18,7 @@ import cartridge
 import english
 import english_font
 import extract
-import mesen_state
+import pyboy_state
 import name6
 import spell_input
 import surfaces
@@ -27,8 +27,8 @@ import unidentified_names
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
-STATE_NAME = "unidentified-item-naming.mss"
-STATE_SHA1 = "2db915b2283fb9e0d831df2a0fe0d3e5beaf3c76"
+STATE_NAME = "unidentified-item-naming.state"
+STATE_SHA1 = "537c360d4a7745700e7d8864b4c2fb0389a701f0"
 
 
 def _original_rom():
@@ -324,7 +324,7 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
             cls.PyBoy = capture_dialogue._pyboy_class()
         except RuntimeError as exc:
             raise unittest.SkipTest(str(exc))
-        cls.ram = mesen_state.cart_ram(state)
+        cls.ram = pyboy_state.cart_ram(state)
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "unidentified-names.gbc"
         cls.localized_path.write_bytes(
@@ -592,120 +592,6 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
             )
         finally:
             pyboy.stop(save=False)
-
-
-class MesenUnidentifiedNameRouteTests(unittest.TestCase):
-    """Exercise Name -> Fill In -> full canonical display in the real menus."""
-
-    @classmethod
-    def setUpClass(cls):
-        candidates = [
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        ]
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
-        cls.source, rom = _original_rom()
-        cls.state = ROOT / "SaveStates" / "Mamel.mss"
-        if not cls.state.is_file():
-            raise unittest.SkipTest("Mamel Mesen state fixture is unavailable")
-
-        cls.temporary = tempfile.TemporaryDirectory()
-        cls.localized = Path(cls.temporary.name) / "unidentified-names-mesen.gbc"
-        built = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "tools" / "build.py"),
-                str(cls.source),
-                str(ROOT / "script" / "en"),
-                str(cls.localized),
-            ],
-            cwd=ROOT,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        if built.returncode:
-            cls.temporary.cleanup()
-            raise AssertionError(
-                "could not build unidentified-name fixture:\n"
-                + built.stdout + built.stderr
-            )
-
-    @classmethod
-    def tearDownClass(cls):
-        if hasattr(cls, "temporary"):
-            cls.temporary.cleanup()
-
-    def _run_route(self, route):
-        env = os.environ.copy()
-        env["GB2_MSS_PATH"] = str(self.state)
-        env["GB2_UNIDENTIFIED_ROUTE"] = route
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_unidentified_names_live.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=30,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        return output
-
-    def test_fill_in_stores_a_token_and_renders_full_windblade(self):
-        output = self._run_route("confirm")
-        self.assertIn("localized mode-0 constructor reached", output)
-        self.assertIn("native Fill In cycle reached", output)
-        self.assertIn(
-            "full Windblade Fill In preview retained in fourteen-cell field",
-            output,
-        )
-        self.assertIn(
-            "canonical preview aligned to native seven-cell origin", output
-        )
-        self.assertIn("canonical token stored", output)
-        self.assertIn("canonical token resolver returned", output)
-        self.assertIn(
-            "PASS mode=00 node=01 nav=01 maximum=00", output
-        )
-        self.assertIn("screen=AC438159", output)
-
-    def test_typing_after_fill_in_resets_then_confirms_a_free_name(self):
-        output = self._run_route("type")
-        self.assertIn(
-            "type-after-fill reset frame=1136 pos=01 max=07 "
-            "screen=1D46725B",
-            output,
-        )
-        self.assertIn("PASS route=type", output)
-        self.assertIn("node=01 nav=01", output)
-
-    def test_delete_after_fill_in_resets_then_accepts_a_free_name(self):
-        output = self._run_route("delete")
-        self.assertIn(
-            "delete-after-fill reset frame=1136 pos=00 max=07 "
-            "screen=52CC5419",
-            output,
-        )
-        self.assertIn(
-            "empty free field aligned to native seven-cell origin", output
-        )
-        self.assertIn("PASS route=delete", output)
-        self.assertIn("node=01 nav=01", output)
 
 
 if __name__ == "__main__":

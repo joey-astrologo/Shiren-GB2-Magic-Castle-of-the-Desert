@@ -32,12 +32,12 @@ treatment as the runtime English font, including lowercase tails, digits, and cu
 The classic variant keeps those same approved rasters black-only.
 The real Big Moai NPC route is fixture-tested from his locked story state through the
 localized `WISH` editor, the rendered Fortune Grass reward, and a stable follow-up
-conversation; a narrow Mesen helper changes only the two measured progression bytes needed
-to exercise it.
+conversation; a narrow PyBoy fixture helper changes only the two measured progression bytes
+needed to exercise it.
 The cracked-Bracelet suffix is also localized from the stock Japanese `(hibi)` composite
 to a compact `(Cr)` marker and replayed from the supplied failure state. Native dynamic
 item rows now emit English arrow quantities, signed equipment modifiers, staff/Pot brackets,
-and spaced Gitan amounts; a two-page Mesen gallery covers their status-symbol combinations,
+and spaced Gitan amounts; a two-page PyBoy gallery covers their status-symbol combinations,
 and a native Synthesis Pot lab provides a repeatable transferred-seal visual route.
 The clean-boot copyright/composer card now preserves its native `© 2001` rows and fade while
 rendering the approved `CHUNSOFT` and `Koichi Sugiyama` art from a guarded, reproducible Inter
@@ -69,7 +69,7 @@ project work.
 | Graphical input | **Engineered** | Player names/rankings/replay snapshots, the death-Rankings note editor, Big Moai gift codes and real-NPC reward route, Blank Scroll writing, and unidentified-item Name / `FILL IN` are fixture-tested |
 | Wanderer Rescue | **Native protocol and English password I/O fixture-tested** | Capture physical Rescue Gate traversal, the rescuer diary's generated Revival response, and requester floor resumption to complete the two-diary SRAM/emulator fixture without changing native payloads |
 | Graphics | **In progress** | Credit card, arrival cards, and wait sign are installed; create and approve title art, live-check the wait route, and capture both ending routes |
-| Automated tests | **541-test suite passing** | Complete discovery passed with credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions included |
+| Automated tests | **557-test suite passing** | Complete discovery passed with all emulator-backed routes using native PyBoy states; credit, aligned arrival-card, title-vignette, wait-sign, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions are included |
 
 Translation completion is not release completion. The script still needs a complete
 editorial and gameplay pass, and graphical assets still require full localization.
@@ -155,7 +155,8 @@ python3 -m unittest discover -s tests -v
 
 ROM-dependent tests skip automatically when the matching source ROM is absent. PyBoy
 tests likewise skip when PyBoy is unavailable, and RGBDS source-equivalence tests skip
-when `rgbasm` or `rgblink` is unavailable. For the strongest validation, install those
+when `rgbasm` or `rgblink` is unavailable. Every emulator-backed test uses a native PyBoy
+`.state` fixture; Mesen is not required. For the strongest validation, install those
 optional tools and keep the verified source ROM at the filename shown above.
 
 Useful focused runs include:
@@ -177,9 +178,10 @@ python3 -m unittest \
   tests.test_spell_input \
   tests.test_big_moai \
   tests.test_blank_scroll \
-  tests.test_mesen_blank_scroll \
+  tests.test_pyboy_blank_scroll \
   tests.test_unidentified_names \
-  tests.test_mesen_unidentified_item \
+  tests.test_pyboy_unidentified_item \
+  tests.test_pyboy_state_fixtures \
   tests.test_rescue_password \
   tests.test_rescue_presentation \
   tests.test_service_menus \
@@ -371,9 +373,10 @@ menus, input, fonts, or persistent data, read the [engineering rules](docs/ENGIN
 and [ownership map](docs/ROM_BANK_MAP.md).
 
 Keep ROMs, generated ROMs, ordinary saves, unreviewed emulator states, credentials, and
-extracted Japanese catalogs out of commits. A deliberately reviewed regression fixture such
-as the explicitly reviewed `.mss` files under `SaveStates/` are exceptions, not a precedent
-for committing personal states.
+extracted Japanese catalogs out of commits. The deliberately reviewed source `.mss` files
+and converted PyBoy `.state` files under `SaveStates/` are exceptions, not a precedent for
+committing personal states. Tests consume only `.state`; `.mss` is retained as conversion
+provenance.
 Add a focused regression for every reproducible bug and run the complete suite before
 handing off a change.
 

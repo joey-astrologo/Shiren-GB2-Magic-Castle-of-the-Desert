@@ -246,7 +246,7 @@ number into the translated status record.
 
 ## Save states can contain stale popup pixels
 
-A Mesen `.mss` contains already-rendered VRAM. Loading a state captured while a menu was
+A machine state contains already-rendered VRAM. Loading a state captured while a menu was
 open does not prove that the current ROM constructor drew those pixels. For popup
 regressions, back out and rebuild the menu through controller input before hashing or
 inspecting it.
@@ -275,17 +275,20 @@ and write `en A5 5A` in the proven diary tail. Freeze the event pointer order, t
 Secrets selectors, every source-record hash, and live getter results from both replay
 families.
 
-## A Mesen machine state is not a PyBoy state
+## Convert Mesen machine states before using them in tests
 
 **Tempting assumption:** load the `.mss` directly in PyBoy or treat the whole container as an
 SRAM file.
 
-**Measured behavior:** Mesen 2 stores named fields. `tools/mesen_state.py` extracts its
-`cartRam` member as ordinary 32 KiB battery SRAM; PyBoy then boots the matching ROM with that
-save.
+**Measured behavior:** Mesen 2 and PyBoy serialize different emulator internals. The sibling
+`../mesen-to-pyboy/mss_to_pyboy.py` converter validates the supported CGB/MBC5 state,
+restores its portable CPU, memory, and hardware state in PyBoy, writes native `.state`
+bytes, reloads them, compares preserved state, and advances a smoke-test route.
 
-**Rule:** extract the named field and assert the intended route after boot. A loadable save
-does not prove the actor/screen state is correct.
+**Rule:** retain `.mss` only as source provenance. Automated tests load the paired `.state`
+directly and assert the intended route after controller-driven redraw. A loadable state does
+not prove the actor/screen state is correct. The migration guard requires every archived
+source to have a native fixture and rejects Mesen-only test runners.
 
 ## Static extraction is not complete route coverage
 
@@ -418,9 +421,9 @@ popup. The first 8 interior pixels are occupied by the selector cursor, so a nom
 **Rule:** prove every branch target lands on an instruction boundary, and explicitly
 propagate renderer-owned state into template cells outside the native footprint. For this
 popup, the copy helper takes bit 3 from `$D803` and applies it to
-`$D8A5,$D8A7,...,$D8B1`. The Mesen fixture must hash the Yes/No confirmation, the later
-Cable/Password/Quit popup, and teardown as three separate states; a stable hash of a
-damaged later frame is not a correctness test.
+`$D8A5,$D8A7,...,$D8B1`. The PyBoy fixture must rebuild the confirmation and later
+Cable/Password/Quit popup, then assert the widened geometry and teardown independently; a
+stable hash of a damaged later frame is not a correctness test.
 
 ## A BG tile-map row increment is not a linear `$20` past `$9BFF`
 
@@ -432,7 +435,7 @@ damaged later frame is not a correctness test.
 and preventing the dismissed column from being restored.
 
 **Rule:** model the Game Boy tile map as a 32x32 ring. The service save and restore helpers
-explicitly wrap `$9Cxx` back to `$98xx`, and the Mesen route checks every tile and attribute
+explicitly wrap `$9Cxx` back to `$98xx`, and the PyBoy route checks every tile and attribute
 on both sides of that boundary before and after Deposit.
 
 ## A BG tile-map column increment must wrap within the same row

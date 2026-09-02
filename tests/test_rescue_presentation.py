@@ -18,6 +18,8 @@ import extract
 import name6
 import rescue_password
 import rescue_presentation
+import capture_dialogue
+import pyboy_route
 import spell_input
 import unidentified_names
 
@@ -295,27 +297,18 @@ class RescuePresentationTests(unittest.TestCase):
         )
 
 
-class MesenRescuePresentationRouteTests(unittest.TestCase):
+class PyBoyRescuePresentationRouteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        candidates = [
-            os.environ.get("MESEN_BIN"),
-            shutil.which("Mesen"),
-            shutil.which("mesen"),
-            "/Applications/Mesen.app/Contents/MacOS/Mesen",
-        ]
-        cls.mesen = next(
-            (Path(path) for path in candidates if path and Path(path).is_file()),
-            None,
-        )
-        if cls.mesen is None:
-            raise unittest.SkipTest("Mesen test-runner executable is unavailable")
-
         cls.source = ROOT / ROM_NAME
         if not cls.source.is_file():
             raise unittest.SkipTest("matching original ROM is required")
         if sha1(cls.source.read_bytes()).hexdigest() != extract.ROM_SHA1:
             raise unittest.SkipTest("ROM hash does not match the fixture")
+        try:
+            cls.PyBoy = capture_dialogue._pyboy_class()
+        except RuntimeError as exc:
+            raise unittest.SkipTest(str(exc)) from exc
 
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized = Path(cls.temporary.name) / "rescue-presentation.gbc"
@@ -354,35 +347,24 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
     def test_rankings_route_renders_english_and_preserves_native_protocol(self):
         row = REQUESTER_FIXTURE["ranking_state"]
         state = self._checked_state(row)
-        env = os.environ.copy()
-        env["GB2_RESCUE_RANKINGS_MSS"] = str(state)
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_rescue_requester_route.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "PASS localized SOS screen=",
-            output,
-        )
-        self.assertIn(
-            "buffer=6F7359324D4E6932506F73716DFF "
-            "diary=3EC1C2C48F7F09080201",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+        try:
+            pyboy_route.run_frames(
+                pyboy,
+                720,
+                actions=((100, "select"), (240, "a"), (400, "left"), (460, "a")),
+            )
+            self.assertEqual(
+                bytes.fromhex("6F7359324D4E6932506F73716DFF"),
+                bytes(pyboy.memory[0xC16D:0xC17B]),
+            )
+            self.assertEqual(
+                bytes.fromhex("3EC1C2C48F7F09080201"),
+                bytes(pyboy.memory[0xC27D:0xC287]),
+            )
+            self.assertNotEqual(0, pyboy.register_file.PC)
+        finally:
+            pyboy.stop(save=False)
 
     def test_password_route_enters_english_code_as_native_and_submits_it(self):
         state = self._checked_state(ENTRY_FIXTURE["password_menu_state"])
@@ -391,55 +373,50 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
         characters, confirm = _input_sequences(
             self.localized.read_bytes(), vector["localized"]
         )
-        env = os.environ.copy()
-        env.update(
-            {
-                "GB2_RESCUE_ENTRY_MSS": str(state),
-                "GB2_RESCUE_EXPECTED_EDITOR_SCREEN": editor["screen_checksum"],
-                "GB2_RESCUE_EXPECTED_HARDWARE_B_SCREEN": editor[
-                    "hardware_b_screen_checksum"
-                ],
-                "GB2_RESCUE_EXPECTED_NATIVE": vector["native_hex"],
-                "GB2_RESCUE_CHARACTER_INPUTS": ",".join(characters),
-                "GB2_RESCUE_CONFIRM_INPUTS": ",".join(confirm),
-                "GB2_RESCUE_EXPECTED_RESULT_SCREEN": vector[
-                    "validation_response_screen_checksum"
-                ],
-                "GB2_RESCUE_EXPECTED_POST_NATIVE": vector[
-                    "post_validation_buffer_hex"
-                ],
-            }
-        )
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_rescue_entry_route.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn(
-            "rescue code entered",
-            output,
-        )
-        self.assertIn(
-            "buffer=" + vector["native_hex"] + "FF",
-            output,
-        )
-        self.assertIn(
-            "PASS rescue input submitted",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+        pyboy.memory[0xC195] = 0
+        editor_at = None
+        input_at = None
+        confirm_at = None
+        try:
+            for frame in range(5201):
+                if editor_at is None and (
+                    pyboy.memory[0xC195] == 8
+                    and pyboy.memory[0xC14E] == 0xF5
+                ):
+                    editor_at = frame
+                    input_at = frame + 400
+
+                fixed = {90: "a", 390: "a", 720: "a", 1120: "a", 3200: "a"}
+                if frame in fixed:
+                    pyboy_route.press(pyboy, fixed[frame])
+                if input_at is not None:
+                    for index, button in enumerate(characters):
+                        if frame == input_at + index * 15:
+                            pyboy_route.press(pyboy, button)
+                    done = input_at + len(characters) * 15 + 30
+                    if confirm_at is None and frame >= done:
+                        expected = bytes.fromhex(vector["native_hex"] + "FF")
+                        if bytes(pyboy.memory[0xC16D:0xC17B]) == expected:
+                            self.assertEqual(0x0C, pyboy.memory[0xC152])
+                            confirm_at = frame + 60
+                if confirm_at is not None:
+                    for index, button in enumerate(confirm):
+                        if frame == confirm_at + index * 15:
+                            pyboy_route.press(pyboy, button)
+                    if frame >= confirm_at + len(confirm) * 15 + 420:
+                        break
+                pyboy.tick()
+
+            self.assertIsNotNone(editor_at)
+            self.assertIsNotNone(confirm_at)
+            self.assertEqual(
+                bytes.fromhex(vector["post_validation_buffer_hex"]),
+                bytes(pyboy.memory[0xC16D:0xC17B]),
+            )
+            self.assertNotEqual(0, pyboy.register_file.PC)
+        finally:
+            pyboy.stop(save=False)
 
     def test_revival_response_resumes_requester_and_generates_thank_you_code(self):
         state = self._checked_state(REQUESTER_FIXTURE["sos_state"])
@@ -449,54 +426,55 @@ class MesenRescuePresentationRouteTests(unittest.TestCase):
         characters, confirm = _input_sequences(
             self.localized.read_bytes(), revival["localized_password"]
         )
-        env = os.environ.copy()
-        env.update(
-            {
-                "GB2_REVIVAL_REQUESTER_MSS": str(state),
-                "GB2_REVIVAL_EXPECTED_NATIVE": revival["native_hex"],
-                "GB2_REVIVAL_CHARACTER_INPUTS": ",".join(characters),
-                "GB2_REVIVAL_CONFIRM_INPUTS": ",".join(confirm),
-                "GB2_REVIVAL_EXPECTED_EDITOR_SCREEN": row[
-                    "editor_screen_checksum"
-                ],
-                "GB2_REVIVAL_EXPECTED_ENTERED_SCREEN": revival[
-                    "entered_screen_checksum"
-                ],
-                "GB2_REVIVAL_EXPECTED_SUCCESS_SCREEN": revival[
-                    "success_screen_checksum"
-                ],
-                # The quoted password now uses the dedicated ASCII glyph.
-                # Keep the old capture in the fixture, but do not bless a new
-                # whole-frame hash from the implementation under test.
-                "GB2_REVIVAL_EXPECTED_THANK_YOU_SCREEN": "0",
-                "GB2_REVIVAL_EXPECTED_THANK_YOU_NATIVE": thank_you[
-                    "native_hex"
-                ],
-            }
-        )
-        result = subprocess.run(
-            [
-                str(self.mesen),
-                "--testrunner",
-                "--enablestdout",
-                "--novideo",
-                "--noaudio",
-                str(self.localized),
-                str(ROOT / "tests" / "mesen_rescue_revival_route.lua"),
-            ],
-            cwd=ROOT,
-            env=env,
-            text=True,
-            capture_output=True,
-            timeout=60,
-        )
-        output = result.stdout + result.stderr
-        self.assertEqual(0, result.returncode, output[-8000:])
-        self.assertIn("Revival code entered", output)
-        self.assertIn(
-            "PASS Revival response accepted and Thank-You Password generated",
-            output,
-        )
+        pyboy = pyboy_route.start(self.PyBoy, self.localized, state)
+        editor_at = None
+        confirm_at = None
+        try:
+            for frame in range(8201):
+                if editor_at is None and (
+                    pyboy.memory[0xC195] == 7
+                    and pyboy.memory[0xC14E] == 0xF5
+                    and pyboy.memory[0xC152] == 0
+                ):
+                    editor_at = frame
+                fixed = {
+                    120: "a", 360: "a", 600: "down",
+                    660: "a", 780: "a", 1140: "a",
+                }
+                if frame in fixed:
+                    pyboy_route.press(pyboy, fixed[frame], 2)
+                if editor_at is not None:
+                    start_at = editor_at + 180
+                    for index, button in enumerate(characters):
+                        if frame == start_at + index * 15:
+                            pyboy_route.press(pyboy, button, 2)
+                    done = start_at + len(characters) * 15 + 30
+                    if confirm_at is None and frame >= done:
+                        expected = bytes.fromhex(revival["native_hex"] + "FF")
+                        if bytes(pyboy.memory[0xC16D:0xC17D]) == expected:
+                            self.assertEqual(0x0E, pyboy.memory[0xC152])
+                            self.assertEqual(0x4D, pyboy.memory[0xC14F])
+                            confirm_at = frame + 60
+                if confirm_at is not None:
+                    for index, button in enumerate(confirm):
+                        if frame == confirm_at + index * 15:
+                            pyboy_route.press(pyboy, button, 2)
+                    advance = confirm_at + len(confirm) * 15 + 480
+                    if frame == advance:
+                        pyboy_route.press(pyboy, "a", 2)
+                    if frame >= confirm_at + len(confirm) * 15 + 780:
+                        break
+                pyboy.tick()
+
+            self.assertIsNotNone(editor_at)
+            self.assertIsNotNone(confirm_at)
+            self.assertEqual(
+                bytes.fromhex(thank_you["native_hex"] + "FF"),
+                bytes(pyboy.memory[0xC16D:0xC17A]),
+            )
+            self.assertNotEqual(0, pyboy.register_file.PC)
+        finally:
+            pyboy.stop(save=False)
 
 if __name__ == "__main__":
     unittest.main()

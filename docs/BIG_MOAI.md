@@ -11,7 +11,7 @@ user from reaching the editor, and the safe manual test route.
 
 ## Native availability gate
 
-The supplied `SaveStates/big-moai-locked.mss` is a direct reproduction of Big Moai saying
+The supplied `SaveStates/big-moai-locked.state` is the native PyBoy reproduction of Big Moai saying
 he is not ready. Its SHA-1 is
 `df8c3d11bd92251ee9b76c3e7cde2106b3e0d211`.
 

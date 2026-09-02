@@ -1,7 +1,7 @@
 {
   "locked_state": {
-    "path": "SaveStates/big-moai-locked.mss",
-    "sha1": "df8c3d11bd92251ee9b76c3e7cde2106b3e0d211",
+    "path": "SaveStates/big-moai-locked.state",
+    "sha1": "779078d852c578e2c3af253912eb27ec4a4ea2b0",
     "active_stage": 6,
     "stage_shadow": 6,
     "mirrored_sram_stage_offsets": [9495, 17687]

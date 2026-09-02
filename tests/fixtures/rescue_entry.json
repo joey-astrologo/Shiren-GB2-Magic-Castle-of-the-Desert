@@ -1,8 +1,8 @@
 {
   "schema": "shiren-gb2-rescue-entry-capture-v1",
   "password_menu_state": {
-    "path": "SaveStates/rescue-entry-menu.mss",
-    "sha1": "a7c4015c36d994b07599bfe617044d4ce0b9d593",
+    "path": "SaveStates/rescue-entry-menu.state",
+    "sha1": "8c79794a9ae28857dd51ebe343191e1796007164",
     "selected_option": "Password"
   },
   "localized_editor": {
