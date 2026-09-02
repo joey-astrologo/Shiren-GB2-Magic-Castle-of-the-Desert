@@ -206,7 +206,7 @@ class OriginalRomProseWrapTests(unittest.TestCase):
             ROOT / "script" / "drafts" / "prose.tsv", self.eligible
         )
         expected = {
-            "195:$5893": (2, 2, 2),
+            "195:$5893": (2, 3, 2),
             "195:$58E9": (3, 2),
         }
         continuations = {
@@ -231,7 +231,7 @@ class OriginalRomProseWrapTests(unittest.TestCase):
                 self.assertLessEqual(max(counts), wrap_en.DIALOGUE_LINE_LIMIT)
 
     def test_page_scroll_can_preserve_an_inter_sentence_space(self):
-        draft = "Pekeji: Well?<page> Tempting, right?<page><box>"
+        draft = "Pekeji: Well?<page> Tempting,<br>right?<page><box>"
         wrapped = wrap_en.wrap_record(
             self.font_rom,
             self.by_id["195:$5D43"],

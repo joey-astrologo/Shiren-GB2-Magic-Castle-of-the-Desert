@@ -634,12 +634,12 @@ class CombatMessageTests(unittest.TestCase):
 
     def test_reviewed_robot_condition_chatter_is_present(self):
         expected = {
-            161: "<lookup:19:C5>: BWOFFO!<page>",
-            162: "<lookup:19:C5>: BWOFFO!<page>",
+            161: "<lookup:19:C5>:<br>BWOFFO!<page>",
+            162: "<lookup:19:C5>:<br>BWOFFO!<page>",
             163: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>",
             164: "<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>",
             165: "<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>",
-            166: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... TOUGH!!<page>",
+            166: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>",
             167: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>",
             168: "<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>",
             169: "<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>",
@@ -658,8 +658,8 @@ class CombatMessageTests(unittest.TestCase):
         reports = {row["index"]: row for row in self.warnings}
         double_actor = {163, 166, 167}
         max_renderer_pixels = {
-            161: 139,
-            162: 139,
+            161: 97,
+            162: 97,
             163: 139,
             164: 139,
             165: 139,

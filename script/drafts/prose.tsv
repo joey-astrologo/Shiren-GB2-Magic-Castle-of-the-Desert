@@ -18,7 +18,7 @@ id	sections	draft
 195:$5814	story_and_event_dialogue	Koppa: If we reach it, we might be able to get away.<page><br>Let's go, <name>.<page><box>
 195:$5848	story_and_event_dialogue	Rai: The Lord seems like a different man lately...<page><box>
 195:$5877	story_and_event_dialogue	Mekerere: He used to be a good man...<page><box>
-195:$5893	story_and_event_dialogue	Wanda: It was after the Lord changed.<page><box>Wanda: That's when monsters began moving into the castle...<page><box><delay:3C>Rai: You don't think the Lord is behind the monsters...?<page><box>
+195:$5893	story_and_event_dialogue	Wanda: It was after the Lord changed.<page><box>Wanda: That's when monsters began moving into the<br>castle...<page><box><delay:3C>Rai: You don't think the Lord is behind the monsters...?<page><box>
 195:$58E9	story_and_event_dialogue	Mekerere: There's even a rumor that the Princess is summoning the monsters.<page><box>Mekerere: But can that really be true?<page>
 195:$595C	story_and_event_dialogue	Pekeji: Bro?<page><box>
 195:$5968	story_and_event_dialogue	Pekeji: Bro! It really is you! What are you doing here?!<page><box>
@@ -32,15 +32,15 @@ id	sections	draft
 195:$5AE7	story_and_event_dialogue	Sachi: Aww, you're cute.<page><box>
 195:$5AF9	story_and_event_dialogue	Sachi: I'm Sachi.<page><br>I help my mom here.<page><br>Nice to meet you.<page><box>
 195:$5B2F	story_and_event_dialogue	Sachi: Well, I should get back to work.<page><box>
-195:$5B4A	story_and_event_dialogue	Sachi: You two take your time.<page><box>
+195:$5B4A	story_and_event_dialogue	Sachi: You two take your<br>time.<page><box>
 195:$5B63	story_and_event_dialogue	Pekeji: Still, I never expected to find you in this town, Bro...<page><box>
 195:$5B85	story_and_event_dialogue	Pekeji: But man, Bro... You always treat me like dirt!<page><box>
-195:$5BA8	story_and_event_dialogue	Pekeji: You always leave me behind and run off somewhere!<page><box><delay:1E>Koppa: Tch. You're the one who can't keep up!<page><box>Koppa: 'Bro! I'm hungry!' That's all you ever say.<page><box>Koppa: So what brought you here, Pekeji?<page><box>
+195:$5BA8	story_and_event_dialogue	Pekeji: You always leave me behind and run off<br>somewhere!<page><box><delay:1E>Koppa: Tch. You're the one who can't keep up!<page><box>Koppa: 'Bro! I'm hungry!' That's all you ever say.<page><box>Koppa: So what brought you here, Pekeji?<page><box>
 195:$5C2B	story_and_event_dialogue	Pekeji: Heh heh... The truth is...<page><box>Pekeji: There's a rumor about some treasure in this town.<page><box><delay:1E>Koppa: Treasure?<page><box><delay:1E>Pekeji: Yeah.<page><br>You saw the Magic Castle on your way here, right, Bro?<page><box>
 195:$5CA0	story_and_event_dialogue	Pekeji: There are some ruins beneath that Magic Castle.<page><box>
 195:$5CC0	story_and_event_dialogue	Pekeji: They say an incredible treasure lies buried deep underground.<page><box>
 195:$5CF0	story_and_event_dialogue	Pekeji: Everyone's too scared to go near the place now.<page><box>Pekeji: But you and me, Bro? We could waltz in and swipe that treasure!<page><box>
-195:$5D43	story_and_event_dialogue	Pekeji: Well?<page> Tempting, right?<page><box>
+195:$5D43	story_and_event_dialogue	Pekeji: Well?<page> Tempting,<br>right?<page><box>
 195:$5D58	story_and_event_dialogue	Pekeji: Don't look at me like that... Come on, Bro. Please?<page><box>
 195:$5D7B	story_and_event_dialogue	Koppa: Sounds fishy.<page><br>How do we even get in?<page><box><delay:1E>Pekeji: Through the Magic Castle.<page><box><delay:1E>Koppa: Huh?<page> Back in there?!<page><br>You've gotta be kidding!<page><box><delay:1E>Koppa: We were lucky someone helped us escape...<page><box>
 195:$5DFE	story_and_event_dialogue	???: Hurry... Run...<page><box>
@@ -63,11 +63,11 @@ id	sections	draft
 195:$61C1	story_and_event_dialogue	Koppa: Oh! You're awake!<page><box>
 195:$61D1	story_and_event_dialogue	Sachi: You really scared me.<page><box>Sachi: You were both lying unconscious at the town entrance.<page><box>Koppa: Looks like some townspeople carried us here.<page><box>Koppa: Actually, I just woke up myself, so I only found out a minute ago...<page><box>Sachi: Well, you both seem okay, at least...<page><box>
 195:$6274	story_and_event_dialogue	Sachi: What exactly were you two doing?<page><box>
-195:$6290	story_and_event_dialogue	Koppa: Huh?<page><br>Uh, well...<page><box>Koppa: Um... What was it?<page><br>M-Maybe five-in-a-row?<page><box>Sachi: You passed out playing five-in-a-row in the desert?<page><br>That's weird.<page><box>Sachi: And where's Pekeji?<page><br>Wasn't he with you?<page><box>Koppa: Huh? Pekeji?<page><box>
+195:$6290	story_and_event_dialogue	Koppa: Huh?<page><br>Uh, well...<page><box>Koppa: Um... What was it?<page><br>M-Maybe five-in-a-row?<page><box>Sachi: You passed out playing five-in-a-row in a desert?<page><br>That's weird.<page><box>Sachi: And where's Pekeji?<page><br>Wasn't he with you?<page><box>Koppa: Huh? Pekeji?<page><box>
 195:$631B	story_and_event_dialogue	Koppa: ...O-Oh, you're right.<br>W-Where could he have gone?<page><box>Koppa: Thanks! Bye!<br><name>! Come with me!
 195:$635F	story_and_event_dialogue	Sachi: Something's fishy...<page>
-195:$6370	story_and_event_dialogue	Koppa: Pant, pant...<br>Man, that scared me!<page><box>Koppa: She caught me off guard, so I blurted out a lie.<page><box>Koppa: But it looks like Pekeji is still under the Magic Castle.<page><box>Koppa: Let's wait for the right time, then head back under the Magic Castle.<page><box>
-195:$640C	story_and_event_dialogue	Koppa: <name>, wait a sec.<page><box>Koppa: If we leave now, we'll draw attention.<page><box>Koppa: Let's wait until night, then go.<page><box>
+195:$6370	story_and_event_dialogue	Koppa: Pant, pant...<br>Man, that scared me!<page><box>Koppa: She caught me off guard, so I blurted out a<br>lie.<page><box>Koppa: But it looks like Pekeji is still under the Magic Castle.<page><box>Koppa: Let's wait for the right time, then head back under the Magic Castle.<page><box>
+195:$640C	story_and_event_dialogue	Koppa: <name>, wait a<br>sec.<page><box>Koppa: If we leave now, we'll draw attention.<page><box>Koppa: Let's wait until night, then go.<page><box>
 195:$645A	story_and_event_dialogue	Koppa: No one's around now.<br>Let's go.<page><box>
 195:$64A3	story_and_event_dialogue	Pekeji: Brooo!<page><box>
 195:$64B3	story_and_event_dialogue	Pekeji: Huff, huff...<page><br>You just got here too, Bro?<br>Perfect timing.<page><box>
@@ -76,7 +76,7 @@ id	sections	draft
 195:$658A	story_and_event_dialogue	???: Don't take it...<page><box>
 195:$6598	story_and_event_dialogue	Koppa: <name>! That girl!<page><box>
 195:$65A8	story_and_event_dialogue	Pekeji: ...<page><br>Forget it. Just take it!<page><box>
-195:$65BE	story_and_event_dialogue	Pekeji: W-Whoa! I-It's shaking!<page><box>
+195:$65BE	story_and_event_dialogue	Pekeji: W-Whoa! I-It's<br>shaking!<page><box>
 195:$65D2	story_and_event_dialogue	Koppa: Hurry! Get outside!<page><box>
 195:$65E2	story_and_event_dialogue	Pekeji: Yes! There's the exit!
 195:$65F5	story_and_event_dialogue	<box>
@@ -85,7 +85,7 @@ id	sections	draft
 195:$6674	story_and_event_dialogue	Pekeji: Y-You?!<page><box>
 195:$6684	story_and_event_dialogue	Hooded Man: Well done.<page><br>I have no more use for you.<page><box>
 195:$66A9	story_and_event_dialogue	Pekeji: Y-You tricked me!
-195:$66BA	story_and_event_dialogue	Pekeji: Ugh...<page><box><delay:1E>Hooded Man: Heh heh.<br>The Lord will be most pleased.<page><br>Ha ha ha ha ha!<page><box>
+195:$66BA	story_and_event_dialogue	Pekeji: Ugh...<page><box><delay:1E>Hooded Man: Heh heh.<br>The Lord will be so pleased.<page><br>Ha ha ha ha ha!<page><box>
 195:$6705	story_and_event_dialogue	Koppa: <name:00>-<name>!<page> Pekeji!<page><box>
 195:$671A	story_and_event_dialogue	Pekeji: Ugh...<page><box>
 195:$6728	story_and_event_dialogue	Koppa: Pekeji!<page> Hang in there!<page>
@@ -93,16 +93,16 @@ id	sections	draft
 195:$676A	story_and_event_dialogue	Pekeji: Ugh...<page><box>
 195:$6777	story_and_event_dialogue	Pekeji: Wh-What...?<page><box><delay:1E>Sachi: You were unconscious.<page><box>
 195:$679D	story_and_event_dialogue	Sachi: And you two...<page><br>Just what did you do?<page><box><delay:1E>Koppa: That's what we'd like to know.<page><box>
-195:$67DF	story_and_event_dialogue	Koppa: Hey, Pekeji!<page><box><delay:1E>Pekeji: ...<page> This is all his fault.<page><box>Pekeji: He lured me in with talk of treasure, then betrayed me in the end.<page><box>Pekeji: That hooded guy...<page><box>
-195:$6854	story_and_event_dialogue	Oro: A hooded man?<page><br>Could that have been Zagan...?<page><box><delay:1E>Koppa: Zagan?<page><box>
+195:$67DF	story_and_event_dialogue	Koppa: Hey, Pekeji!<page><box><delay:1E>Pekeji: ...<page> This is all his<br>fault.<page><box>Pekeji: He lured me in with talk of treasure, then betrayed me in the end.<page><box>Pekeji: That hooded guy...<page><box>
+195:$6854	story_and_event_dialogue	Oro: A hooded man?<page><br>Could that have been<br>Zagan...?<page><box><delay:1E>Koppa: Zagan?<page><box>
 195:$688C	story_and_event_dialogue	Sachi: He's the Lord's chief retainer.<page> But why would someone like him...?<page><box>
 195:$68BA	story_and_event_dialogue	Nuwanko: Hey! Big trouble!!<page><box>Nuwanko: The desert...<page><br>It suddenly spread all the way around town!<page><box>
 195:$6904	story_and_event_dialogue	Oro: Suddenly...?<page><br>Why?!<page><box><delay:1E>Wanda: No idea...<page><box>Wanda: But at this rate, before long even Ilpa will be swallowed by the desert...<page><box>
 195:$694F	story_and_event_dialogue	Oro: All right! Let's go take a look!<page><box>
 195:$6961	story_and_event_dialogue	Sachi: What's going on...?<page><br>The desert has never suddenly spread before...<page><box>
-195:$6996	story_and_event_dialogue	Pekeji: C-Could taking that statue be what caused this...?<page><box><delay:1E>Koppa: No way...<page><br>It must be a coincidence.<page><box><delay:1E>Pekeji: But that hooded guy...<page><br>Didn't he say something about 'the seal being broken'?<page><box>Pekeji: And I saw that... before I took the statue...<page>
+195:$6996	story_and_event_dialogue	Pekeji: C-Could taking that statue be what caused<br>this...?<page><box><delay:1E>Koppa: No way...<page><br>It must be a coincidence.<page><box><delay:1E>Pekeji: But that hooded guy...<page><br>Didn't he say something about 'the seal being broken'?<page><box>Pekeji: And I saw that... before I took the statue...<page>
 195:$6A3C	story_and_event_dialogue	???: Don't take it...<page>
-195:$6A49	story_and_event_dialogue	Pekeji: ...But I took it anyway.<page><br>And then this happened...<page><box><delay:1E>Pekeji: We never should've taken that thing!!<page><box>Pekeji: We have to get it back fast, or this town will be swallowed by the desert too!!<page><box>
+195:$6A49	story_and_event_dialogue	Pekeji: ...But I took it.<page><br>And then this happened...<page><box><delay:1E>Pekeji: We never should've taken that thing!!<page><box>Pekeji: We have to get it back fast, or this town will be swallowed by the desert too!!<page><box>
 195:$6AC0	story_and_event_dialogue	Koppa: <name>!<page><box>
 195:$6ACC	story_and_event_dialogue	Sachi: Zagan is inside the Magic Castle...<page><br>In the eastern keep.<page><box>
 195:$6AF4	story_and_event_dialogue	Pekeji: B-Bro! I'm coming too!
@@ -120,16 +120,16 @@ id	sections	draft
 195:$6C9B	story_and_event_dialogue	Wanda: Hey!<br>Look at the Magic Castle!!<page><box>
 195:$6CB4	story_and_event_dialogue	Nuwanko: What in the world is happening?!<page><box>
 195:$6CD1	story_and_event_dialogue	Wanda: Is this connected to the spreading desert?!<page><box>
-195:$6CF2	story_and_event_dialogue	Koppa: <name>...<page><box>Koppa: It really was the Evil God Statue that caused this...<page><box>
+195:$6CF2	story_and_event_dialogue	Koppa: <name>...<page><box>Koppa: It really was the Evil God Statue that caused<br>this...<page><box>
 195:$6D1E	story_and_event_dialogue	Koppa: Let's go to the Magic Castle!<page><box>Koppa: We have to get the Evil God Statue back!<page><box>
 195:$6D57	story_and_event_dialogue	Lord: At last, I have it!<br>The Evil God Statue!<page><br>Fine work, Zagan!<page><box>Zagan: Yes, my Lord!<page><box>Lord: How is the Princess?<page><box>Zagan: No change in her condition.<page><box>
 195:$6DB3	story_and_event_dialogue	Lord: Intruders must never be allowed to escape.<page><box>Zagan: Understood.<br>If you'll excuse me.<page><box>
 195:$6DEC	story_and_event_dialogue	Attendant: My Lord...<br>Just what is this statue...?<page><box>Lord: It will make my dream come true...<page><box>Attendant: Your dream...?<page><box>Lord: Heh heh... All that remains is to await the night of the full moon.<page><box>Lord: The day of resurrection draws near...<page><box>
-195:$6E7D	story_and_event_dialogue	???: ...That is...<page><br>Yes... I understand...<page><box>Princess: Then...<page><box>???: Shh... Someone is coming.<page><br>We will continue later...<page><box>
+195:$6E7D	story_and_event_dialogue	???: ...That is...<page><br>Yes... I understand...<page><box>Princess: Then...<page><box>???: Shh... Someone's coming.<page><br>We will continue later...<page><box>
 195:$6EC1	story_and_event_dialogue	Princess: Who is it?<page><box>
 195:$6ECB	story_and_event_dialogue	Zagan: It is Zagan, Princess.<page><box>Princess: Enter...<page><box>
 195:$6EF3	story_and_event_dialogue	Princess: What is it?<page><box>Zagan: The Lord summons you.<page><box>Princess: Mother...?<page><box>Zagan: Yes.<page> She asks that you come shortly...<page><box>Princess: Understood.<br>You may go.<page><box>Zagan: ...Princess Ateka.<page><box>Ateka: What is it?<page><box>Zagan: I hear it was you who allowed those people to escape...<page><box>
-195:$6FA8	story_and_event_dialogue	Ateka: That is none of your concern.<page><box>Zagan: Oh...?<page><box>Zagan: By the way, how has the Lord been feeling lately?<page><box>
+195:$6FA8	story_and_event_dialogue	Ateka: That is none of your concern.<page><box>Zagan: Oh...?<page><box>Zagan: By the way, how has the Lord been feeling<br>lately?<page><box>
 195:$6FF2	story_and_event_dialogue	Ateka: Y-You...<page><box>Ateka: You and the others should know that better than I do!<page><box>Zagan: Heh heh... The Lord's health is most precious...<page><box>Zagan: Be especially careful in your actions.<page><br>Farewell.<page><box>
 195:$705F	story_and_event_dialogue	Ateka: Mother...<delay:78><box>
 195:$7075	story_and_event_dialogue	Sachi: Are you okay?<page><box>
@@ -143,7 +143,7 @@ id	sections	draft
 195:$71AA	story_and_event_dialogue	Ateka: I'm almost finished, so hold still.<page><box><delay:3C>Koppa: ...That's better.<page><br>I knew you didn't seem like a bad person.<page><box><delay:1E>Ateka: What?<page><box><delay:1E>
 195:$7202	story_and_event_dialogue	Koppa: All kinds of rumors are going around Ilpa, but they can't be true.<page><box>Koppa: You helped us escape before too...<page><box>
 195:$724F	story_and_event_dialogue	Ateka: Drink this Herb and you'll be all right.<page><box>Ateka: You should be able to move again soon.<page><br>And one more thing...<page><box>
-195:$7297	story_and_event_dialogue	Ateka: As soon as you can move, get out of here.<page><box>Ateka: This place is extremely dangerous...<page> Please.<page><box>
+195:$7297	story_and_event_dialogue	Ateka: As soon as you can move, get out of here.<page><box>Ateka: This place is extremely dangerous...<page><br>Please.<page><box>
 195:$72DC	story_and_event_dialogue	Koppa: Ah, wait...
 195:$72EA	story_and_event_dialogue	<box>
 195:$72EC	story_and_event_dialogue	Koppa: Right... We can't turn back now.<page><box>Koppa: We have to get that statue back somehow.<page><box>
@@ -168,7 +168,7 @@ id	sections	draft
 195:$768E	story_and_event_dialogue	Koppa: Like heck we'll return it!<page><box><delay:1E>Lord: Then I have no choice...<page><box><delay:1E>
 195:$76BB	story_and_event_dialogue	Koppa: <name:00>-<name>!!<page><box>
 195:$76CA	story_and_event_dialogue	Lord: Do you think I am no stronger than Zagan?!<page><box>Koppa: <name>!!<br>A-Are you okay?<page><box>
-195:$76FD	story_and_event_dialogue	Koppa: ...!<page><box>Koppa: Come on, move! Please!!<page><box>
+195:$76FD	story_and_event_dialogue	Koppa: ...!<page><box>Koppa: Come on, move!<br>Please!!<page><box>
 195:$771E	story_and_event_dialogue	Koppa: D-Damn it!<page><box>
 195:$772D	story_and_event_dialogue	Koppa: Aaaagh!!<page><box><delay:1E>Lord: Ha ha... You fool!<page><box>Lord: You would not have been hurt if you had simply handed it over...<page><box><delay:1E>
 195:$776D	story_and_event_dialogue	Koppa: Ugh...<page><box>
@@ -205,10 +205,10 @@ id	sections	draft
 196:$43CB	story_and_event_dialogue	Goto: How does the desert look?<page><box>
 196:$43E0	story_and_event_dialogue	Wanda: Bad.<br>It's definitely spreading.<page><box><delay:1E>Goto: Hmm...<br>This could be serious.<page><box>
 196:$4424	story_and_event_dialogue	Amokachi: Will this town eventually be swallowed by the desert too...?<page><box>
-196:$444D	story_and_event_dialogue	Mekerere: What do we do?<br>Should we move away?<page><box><delay:1E>Shizu: There's nowhere to run.<page><box>
+196:$444D	story_and_event_dialogue	Mekerere: What do we do?<br>Should we move away?<page><box><delay:1E>Shizu: There's nowhere to<br>run.<page><box>
 196:$4482	story_and_event_dialogue	Nuwanko: How did things ever get this bad?!<page><box><delay:1E>Rai: It must be the Lord...<page><box>
-196:$44B8	story_and_event_dialogue	Shizu: No, it's that Princess.<page><br>Princess Ateka must be behind this.<page><box>Shizu: I heard something once.<page><box>Shizu: The Lord's sacred blood has been passed down for generations.<page><box>Shizu: Sometimes someone with a mysterious power was born into the bloodline.<page><box>Shizu: Long ago, one of them apparently used that power for evil.<page><box>Shizu: They used their strange power to summon darkness.<page><box>Shizu: They turned the castle into a den of monsters.<page><box>Shizu: So I'm sure that's what's happening now.<page><box><delay:1E>Nuwanko: What are you saying?<page><box>Nuwanko: If we do something about Princess Ateka, Ilpa will return to normal?<page><box>
-196:$45F2	story_and_event_dialogue	Amokachi: You say 'do something,' but what exactly?<page><box>Amokachi: Are we going to the Magic Castle?<page><box>Amokachi: Count me out.<br>That place is dangerous.<page><box>
+196:$44B8	story_and_event_dialogue	Shizu: No, it's that Princess.<page><br>Princess Ateka must be behind this.<page><box>Shizu: I heard something<br>once.<page><box>Shizu: The Lord's sacred blood has been passed down for generations.<page><box>Shizu: Sometimes someone with a mysterious power was born into the bloodline.<page><box>Shizu: Long ago, one of them apparently used that power for evil.<page><box>Shizu: They used their strange power to summon darkness.<page><box>Shizu: They turned the castle into a den of monsters.<page><box>Shizu: So I'm sure that's what's happening now.<page><box><delay:1E>Nuwanko: What are you<br>saying?<page><box>Nuwanko: If we do something about Princess Ateka, Ilpa will return to normal?<page><box>
+196:$45F2	story_and_event_dialogue	Amokachi: You say 'do something,' but what<br>exactly?<page><box>Amokachi: Are we going to the Magic Castle?<page><box>Amokachi: Count me out.<br>That place is dangerous.<page><box>
 196:$463E	story_and_event_dialogue	Mekerere: Me too...<page> No thanks.<page><box><delay:1E>Nuwanko: What do we do...?<page><box><delay:1E>Rai: ...<page><box>
 196:$468A	story_and_event_dialogue	Oryu: Everything is...
 196:$4697	story_and_event_dialogue	Oryu: Everything is about to begin...<page><box>
@@ -220,15 +220,15 @@ id	sections	draft
 196:$482E	story_and_event_dialogue	Oryu: But please.<page><br>Believe in her...<page><box>
 196:$4851	story_and_event_dialogue	Oryu: Well...<page><br>I have to go...<page><box>
 196:$486B	story_and_event_dialogue	Lord: On the night of the next full moon, we will finally perform the ritual.<page><box>Lord: It will take place in the Castle Keep!<page><box>Lord: Make certain no one interferes during the ritual!<page><box>
-196:$48E4	story_and_event_dialogue	Lord: Heh heh... The time has finally come.<page><box>Lord: The time of resurrection is upon us...<page><box>Lord: Princess.<page><br>You understand your role in the ritual, do you not?<page><box><delay:1E>Ateka: ...<page><box>Lord: Heh heh... I know you are waiting for that moment too...<page><box>Lord: But will your plan succeed?<page><box><delay:1E>Ateka: ...<page><box>Lord: Heh heh... My life is also at stake in this ritual.<br>Do your part well.<page><box>
+196:$48E4	story_and_event_dialogue	Lord: Heh heh... The time has finally come.<page><box>Lord: The time of resurrection is upon us...<page><box>Lord: Princess.<page><br>You understand your role in the ritual, do you not?<page><box><delay:1E>Ateka: ...<page><box>Lord: Heh heh... I know you are waiting for that moment<br>too...<page><box>Lord: But will your plan succeed?<page><box><delay:1E>Ateka: ...<page><box>Lord: Heh heh... My life is also at stake in this ritual.<br>Do your part well.<page><box>
 196:$49D7	story_and_event_dialogue	Lord: Ha ha ha ha ha ha!!<page>
 196:$4A00	story_and_event_dialogue	Pekeji: Brooo!!
 196:$4A10	story_and_event_dialogue	Pekeji: Pant, pant, pant...<page><br>Going alone without telling me? That's cold, Bro...<page><box>
-196:$4A40	story_and_event_dialogue	Pekeji: I'm coming too, Bro.<page><br>My injuries are all better now.<page><box>Pekeji: Besides, I can't forgive them!<page><box>Pekeji: Not after what they did to Koppa!<page><box>Pekeji: That's why I'm coming!<page><box>
+196:$4A40	story_and_event_dialogue	Pekeji: I'm coming too, Bro.<page><br>My injuries are all better now.<page><box>Pekeji: Besides, I can't forgive them!<page><box>Pekeji: Not after what they did to Koppa!<page><box>Pekeji: That's why I'm<br>coming!<page><box>
 196:$4AA0	story_and_event_dialogue	Pekeji: Come on! Let's quit wasting time and go, Bro!<page><box>
 196:$4AC7	story_and_event_dialogue	Pekeji: Listen, Bro.<page><box>Pekeji: I don't think we should stay together here.<page><box>
 196:$4AF9	story_and_event_dialogue	Pekeji: I'll act as the decoy.<page><br>When you see an opening, go on ahead.<page><box>
-196:$4B29	story_and_event_dialogue	Pekeji: Don't worry.<br>I'll be fine!<page><box>Pekeji: I may not look it, but I'm built tough! See you later!<page><box>Pekeji: The monsters in this castle will be a piece of cake.<page><box>
+196:$4B29	story_and_event_dialogue	Pekeji: Don't worry.<br>I'll be fine!<page><box>Pekeji: I may not look it, but I'm built tough! See you<br>later!<page><box>Pekeji: The monsters in this castle will be a piece of<br>cake.<page><box>
 196:$4B91	story_and_event_dialogue	Pekeji: Gwah!<page><box><delay:1E>Pekeji: That was nothing!<page><box>
 196:$4BB1	story_and_event_dialogue	Pekeji: Eek!<page><box>
 196:$4BBD	story_and_event_dialogue	Pekeji: Aaaah!<delay:05><page><box>
@@ -237,9 +237,9 @@ id	sections	draft
 196:$4BFF	story_and_event_dialogue	Rookie Guard: Good. Nothing has changed.<page><box>
 196:$4C14	story_and_event_dialogue	Rookie Guard: Still, doesn't this castle have too many secret passages?<page><box>Rookie Guard: It's enough to get anyone lost.<page><box>
 196:$4C58	story_and_event_dialogue	Rookie Guard: Quit complaining.<br>Let's keep moving.<page><box>
-196:$4C76	story_and_event_dialogue	Ateka: Once the ritual begins, I think I will lose my memory.<page><box>Ateka: So...<page><box>Oryu: It will be all right.<page><box>Oryu: I promise to save both you and your mother...<page><box>Oryu: Besides...<page><box>Oryu: <name> will surely come too...<page><box>Ateka: <name>...?<page><br>He will come...?<page><box>Oryu: Yes. He may not look it, but you can rely on him.<page><box>Oryu: When it matters most, he has incredible determination.<page><box>Ateka: Oryu...<page><box>Oryu: Yes?<page><box>Ateka: If <name> is ever in danger...<page><br>Please give him this...<page><box>
+196:$4C76	story_and_event_dialogue	Ateka: Once the ritual begins, I think I will lose my<br>memory.<page><box>Ateka: So...<page><box>Oryu: It will be all right.<page><box>Oryu: I promise to save both you and your mother...<page><box>Oryu: Besides...<page><box>Oryu: <name> will surely come too...<page><box>Ateka: <name>...?<page><br>He will come...?<page><box>Oryu: Yes. He may not look it, but you can rely on him.<page><box>Oryu: When it matters most, he has incredible<br>determination.<page><box>Ateka: Oryu...<page><box>Oryu: Yes?<page><box>Ateka: If <name> is ever in danger...<page><br>Please give him this...<page><box>
 196:$4D99	story_and_event_dialogue	Oryu: This is...<page><br>A Jewel?<page><box>Ateka: It is a talisman passed down through our family.<page><box>Oryu: You want me to give this to <name>. Understood.<page><box>
-196:$4DF6	story_and_event_dialogue	Ateka: Ah... Someone is coming!<page><box>
+196:$4DF6	story_and_event_dialogue	Ateka: Ah... Someone is<br>coming!<page><box>
 196:$4E0B	story_and_event_dialogue	Ateka: Oryu, hurry!<page><box>Oryu: It's all right.<br>There's no need to panic.<page><box>
 196:$4E35	story_and_event_dialogue	Oryu: Remember.<page><box>Oryu: You are never alone.<page><box>Oryu: Don't give up.<br>We'll get through this.<page><box>Oryu: See you soon.<page><box>
 196:$4E6D	story_and_event_dialogue	Rookie Guard: Forgive us, Princess.<page><box>Rookie Guard: The Lord ordered us to inspect this room as well...<page><box>
@@ -257,7 +257,7 @@ id	sections	draft
 196:$5175	story_and_event_dialogue	Lord: I will burn you away so thoroughly that you never return.<page><box>Lord: Just like your partner!!
 196:$51AC	story_and_event_dialogue	Oryu: <name>! Catch!!<page><box>
 196:$51BD	story_and_event_dialogue	Lord: What...?<page><box>
-196:$51CC	story_and_event_dialogue	Lord: That Jewel you possess...<page><box>
+196:$51CC	story_and_event_dialogue	Lord: That Jewel you<br>possess...<page><box>
 196:$51F3	story_and_event_dialogue	Lord: So that is your plan...<br>What an insolent trick.<page><box>
 196:$5213	story_and_event_dialogue	Lord: Do not think that was the full extent of my power.<page><br>Here I come!!<page><box>
 196:$5241	story_and_event_dialogue	Lord: I will permit no interference.<page><br>No matter who it is.<page><box>
@@ -296,11 +296,11 @@ id	sections	draft
 196:$5869	story_and_event_dialogue	Oryu: Tell me, <name>.<page><box>Oryu: What do you think was happening inside that Magic Castle?<page><box>
 196:$5894	story_and_event_dialogue	Oryu: Why were the monsters after the Evil God Statue...?<page><box>Oryu: Why was Princess Ateka obeying the monsters...?<page><box>Oryu: And why did I come to this town...?<page><box>Oryu: I'll explain why.<page><br>First...<page><box>
 196:$5920	story_and_event_dialogue	Ateka: The monster Curas had one goal.<page><box>Ateka: To resurrect the Evil God sleeping beneath this region.<page><box>Ateka: The Evil God was sealed away by a certain object.<page><box>Ateka: The Evil God Statue.<page><box>
-196:$5988	story_and_event_dialogue	Ateka: But recently, the seal had begun to weaken...<page><box>Ateka: That was turning the surrounding land into desert.<page><box>
+196:$5988	story_and_event_dialogue	Ateka: But recently, the seal had begun to weaken...<page><box>Ateka: That was turning the surrounding land into<br>desert.<page><box>
 196:$59D2	story_and_event_dialogue	Oryu: That also drew the monsters to the castle...<page><box>Oryu: Then Pekeji took the Evil God Statue, making the desert spread even faster...<page><box>
 196:$5A35	story_and_event_dialogue	Ateka: But that alone was not enough for Curas to resurrect the Evil God.<page><box>
 196:$5A68	story_and_event_dialogue	Ateka: Curas did not know where the Evil God slept...<page><box>
-196:$5A8F	story_and_event_dialogue	Oryu: The Evil God's resting place...<page><box>Oryu: To discover it...<page><box>Oryu: Curas needed Princess Ateka's power as a priestess.<page><box>Oryu: The full-moon ritual was his way of finding the Evil God.<page><box>Oryu: But the ritual was also a tremendous gamble for Curas...<page><box>
+196:$5A8F	story_and_event_dialogue	Oryu: The Evil God's resting place...<page><box>Oryu: To discover it...<page><box>Oryu: Curas needed Princess Ateka's power as a<br>priestess.<page><box>Oryu: The full-moon ritual was his way of finding the Evil God.<page><box>Oryu: But the ritual was also a tremendous gamble for Curas...<page><box>
 196:$5B2A	story_and_event_dialogue	Ateka: Curas first approached me.<page><box>Ateka: And then...<page><box>Ateka: When Mother discovered this, she tried to save me...<page><box>Ateka: But she was defeated in the battle...<page><box>Ateka: And Curas possessed her instead...<page><box>
 196:$5BC3	story_and_event_dialogue	Oryu: My mission...<page><br>Was to stop the Evil God's resurrection.<page><box>Oryu: I came to this town under those orders...<page><box>
 196:$5C17	story_and_event_dialogue	Oryu: I disguised myself as an attendant and entered the Magic Castle.<page><box>Oryu: There, I gathered information.<page><box>Oryu: The more I learned, the more I wanted to save them both too.<page><box>
@@ -336,11 +336,11 @@ id	sections	draft
 196:$6278	story_and_event_dialogue	Rai: I-I'll do my best too!!<page><box>
 196:$628E	story_and_event_dialogue	Oro: All right!<page><br>We'll protect the town together!!<page><box>
 196:$62AB	story_and_event_dialogue	Ateka: <name>.<page><br>Curas possesses tremendous magical power.<page><box>Ateka: I wish I could defeat him, but I do not have the strength.<page><box>Ateka: Only <name> can defeat Curas.<page><box>Ateka: Please.<br>You must defeat Curas...<page><box>
-196:$6333	story_and_event_dialogue	Oro: I ask this of you as well.<page><br>We will protect the castle town together.<page><box>Oro: While we hold it back...<page><box>Oro: You must find a way to defeat him!<page><box>Oro: Defeat Curas!!<page><box>
+196:$6333	story_and_event_dialogue	Oro: I ask this of you too.<page><br>We will protect the castle town together.<page><box>Oro: While we hold it back...<page><box>Oro: You must find a way to defeat him!<page><box>Oro: Defeat Curas!!<page><box>
 196:$638D	story_and_event_dialogue	Oryu: <name>!<page><br>I'm coming too!!<page><box>
 196:$63A5	story_and_event_dialogue	Pekeji: Bro! I'm coming too!!<page><br>Take me with you!!<page><box><delay:3C>Koppa: I'm going too.<page><box>
 196:$63D8	story_and_event_dialogue	Sachi: Koppa...<page><box>
-196:$63E5	story_and_event_dialogue	Koppa: Princess, I'm sorry.<page><br>I'm ashamed of myself.<page><box>Koppa: I doubted you for a moment because of the Evil God Statue...<page><box>Koppa: It was pathetic of me.<page><box><delay:1E>Ateka: No. I am the one who should apologize...<page><box>Ateka: More importantly, your injuries?<page><box>Ateka: Are you all right?<page><box><delay:1E>Koppa: I can't stay in bed while everyone else is ready to fight.<page><box>Koppa: Besides...<page><box>Koppa: Curas is the one monster I will never forgive!<page><box>
+196:$63E5	story_and_event_dialogue	Koppa: Princess, I'm sorry.<page><br>I'm ashamed of myself.<page><box>Koppa: I doubted you for a moment because of the Evil God Statue...<page><box>Koppa: It was pathetic of<br>me.<page><box><delay:1E>Ateka: No. I am the one who should apologize...<page><box>Ateka: More importantly, your injuries?<page><box>Ateka: Are you all right?<page><box><delay:1E>Koppa: I can't stay in bed while everyone else is ready to fight.<page><box>Koppa: Besides...<page><box>Koppa: Curas is the one monster I will never<br>forgive!<page><box>
 196:$64C3	story_and_event_dialogue	Koppa: <name>! Let's go!!<page><br>We're going to defeat Curas!!<page><box>
 196:$64E4	story_and_event_dialogue	Oro: All right!<page><box>Oro: Everyone, go home and prepare for battle!!<page><box>
 196:$6507	story_and_event_dialogue	Everyone: Yeah!!<page><box>
@@ -407,7 +407,7 @@ id	sections	draft
 196:$6CD6	story_and_event_dialogue	<cF8>h<cF8>i Unit joined you!<delay:96><page>
 196:$6CE9	story_and_event_dialogue	<cF8>h<cF8>i Unit: Bwo-ho!<br>Bwo! Bwo! Bwo-hoooo!<page>
 196:$6D0D	story_and_event_dialogue	Gaibara: ...<page>
-196:$6D18	story_and_event_dialogue	Gaibara: Until I am satisfied!!<page><box>Gaibara: And of course, I am not satisfiiiiied!!<page>
+196:$6D18	story_and_event_dialogue	Gaibara: Until I am<br>satisfied!!<page><box>Gaibara: And of course, I am not satisfiiiiied!!<page>
 196:$6D54	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: I have decided we will make jars in this house!!<page>
 196:$6D7E	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: I have decided we will make jars in this house!!<page>
 196:$6DA8	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: Is dinner not ready yet?!!<page>
@@ -444,7 +444,7 @@ id	sections	draft
 196:$71BA	story_and_event_dialogue	Koppa: Hurry!<br>Let's get out of here, <name>!<page>
 196:$71D0	story_and_event_dialogue	Koppa: Even if they tell us not to escape,<page><box>Koppa: staying here looks even more dangerous.<page><box>Koppa: Let's get out of here, fast.<page>
 196:$721C	story_and_event_dialogue	Koppa: This town is pretty lively.<page>
-196:$7234	story_and_event_dialogue	Koppa: You saw the Magic Castle too, right, <name>?<page><box>Koppa: Ugh... I've got a bad feeling about this...<page><box>Koppa: <name>! Let's hurry and take back the Evil God Statue!!<page>
+196:$7234	story_and_event_dialogue	Koppa: You saw the Magic Castle too, right,<br><name>?<page><box>Koppa: Ugh... I've got a bad feeling about this...<page><box>Koppa: <name>! Let's hurry and take back the Evil God Statue!!<page>
 196:$7292	story_and_event_dialogue	Koppa: Once we defeat Zagan, we can take back the Evil God Statue!<page><box>Koppa: Let's do this, <name>!<page>
 196:$72C2	story_and_event_dialogue	Koppa: <name>! Let's go!!<page><box>Koppa: We have to defeat Curas!!<page>
 196:$72E2	story_and_event_dialogue	Koppa: I wonder if Oryu and Pekeji are already on their way...<page><box>Koppa: We should hurry to Jahannam's Gate too!<page>
@@ -452,7 +452,7 @@ id	sections	draft
 196:$7355	story_and_event_dialogue	Koppa: This time, let's finish Curas for good!<page>
 196:$7371	story_and_event_dialogue	Koppa: This is the final battle!<page><box>Koppa: Let's do this, <name>!!<page>
 196:$7392	story_and_event_dialogue	Koppa: Nfuu looks happy.<page>
-196:$73AB	story_and_event_dialogue	Koppa: Okay, today's pun.<page><box>Koppa: Tonfan put up flowers.<page><box>Koppa: Now the place is really blooming...<page><box>Koppa: Funny?<br>Hey, was it funny?<page>
+196:$73AB	story_and_event_dialogue	Koppa: Okay, today's pun.<page><box>Koppa: Tonfan put up<br>flowers.<page><box>Koppa: Now the place is really blooming...<page><box>Koppa: Funny?<br>Hey, was it funny?<page>
 196:$73F9	story_and_event_dialogue	Koppa: Yesterday was a real thrill!<page><box>Koppa: What a comeback we made right at the very end!!<page>
 196:$7439	story_and_event_dialogue	Koppa: Let's go, <name>!<br>To the Abyssal Depths!!<page>
 196:$7455	story_and_event_dialogue	Koppa: Let's go, <name>!<br>To the Abyssal Depths!<page><box>Koppa: We have to save the Princess from Zagan!<page>
@@ -461,7 +461,7 @@ id	sections	draft
 196:$74AC	story_and_event_dialogue	Mamo: Mamo-ry, roger!<page>
 196:$74C3	story_and_event_dialogue	Mamo: Mamo-ry, which one?<page>
 196:$74D7	story_and_event_dialogue	Mamo: Mamo-ry, STORE!<page><box>Mamo: Storage complete.<page>
-196:$74FA	story_and_event_dialogue	Mamo: Mamo-ry, store it?<page><box>Mamo: Take it off! Take it off!<page>
+196:$74FA	story_and_event_dialogue	Mamo: Mamo-ry, store it?<page><box>Mamo: Take it off! Take it<br>off!<page>
 196:$751A	story_and_event_dialogue	Mamo: Mamo-ry, FULL!<br>I can't hold any more.<page>
 196:$753A	story_and_event_dialogue	Cursed items cannot be removed!<page>
 196:$754D	story_and_event_dialogue	Mamo: Mamo-ry, ZERO!<br>Then I can't store anything.<page>
@@ -515,7 +515,7 @@ id	sections	draft
 196:$7C24	story_and_event_dialogue	Saruyama: Cooking the meals and everything else is exhausting.<page>
 196:$7C44	story_and_event_dialogue	Saruyama: I have tried my best many times, but...<page><box>Saruyama: Your record is simply incredible, Master.<page>
 196:$7C80	story_and_event_dialogue	Saruyama: Master!<page><box>Saruyama: What is the Ultimate Soil?! Ooooooh!!<page>
-196:$7CB1	story_and_event_dialogue	Nfuu: Nfuu! I want to explore other dungeons now, fu!<page><box>Nfuu: Will you take me on your adventures, <name>?<page><box>
+196:$7CB1	story_and_event_dialogue	Nfuu: Nfuu! I want to explore other dungeons now, fu!<page><box>Nfuu: Will you take me on your adventures,<br><name>?<page><box>
 196:$7CFC	story_and_event_dialogue	Nfuu: Hooray! I'm so happy, fu!<br>Nfuu! Let's set out!!<page><box>
 196:$7D20	story_and_event_dialogue	Nfuu joined you!<delay:96><page>
 196:$7D31	story_and_event_dialogue	Nfuu: I'm disappointed, fu.<page>
@@ -534,14 +534,14 @@ id	sections	draft
 197:$42A5	story_and_event_dialogue	Curas: Your efforts are useless.<page><br>You are facing me!!<page><box>
 197:$42E5	story_and_event_dialogue	Curas: Gyaaaaaah!!!<delay:78><box>
 197:$42FA	story_and_event_dialogue	Koppa: We did it, <name>!<br>At last!!<page><box>
-197:$4312	story_and_event_dialogue	Koppa: Curas...<page><box>Koppa: He was a dangerous one...<page><box>Koppa: Because of him, Ilpa nearly got wiped out...<page><box>Koppa: And the Evil God was on the verge of resurrection...<page><box>Koppa: But it's finally over.<page><box>
+197:$4312	story_and_event_dialogue	Koppa: Curas...<page><box>Koppa: He was a dangerous one...<page><box>Koppa: Because of him, Ilpa nearly got wiped out...<page><box>Koppa: And the Evil God was on the verge of<br>resurrection...<page><box>Koppa: But it's finally over.<page><box>
 197:$438E	story_and_event_dialogue	Koppa: Let's go home.<br>Back to Ilpa.<page><br>Everyone is waiting.<page><box>
 197:$43B5	story_and_event_dialogue	Koppa: Hm...?<page><br>What's wrong, <name>?<page><box>
 197:$43CF	story_and_event_dialogue	Koppa: Ah! The Evil God Statue!<page><box>
 197:$43E3	story_and_event_dialogue	Mekerere: I-It's...<page><box>Mekerere: It's coming!!<page><box>
 197:$43F4	story_and_event_dialogue	Wanda: I-It broke through the barrier!!<page><box>
 197:$440D	story_and_event_dialogue	Oro: Everyone! Get ready to fight!!<page><br>Understood?!<page><box>
-197:$4429	story_and_event_dialogue	Nuwanko: Whoa!!<page><box>Tao: Th-The ground is shaking!!<page><box>
+197:$4429	story_and_event_dialogue	Nuwanko: Whoa!!<page><box>Tao: Th-The ground is<br>shaking!!<page><box>
 197:$444D	story_and_event_dialogue	Oro: Don't falter, everyone!!<page><box>
 197:$4462	story_and_event_dialogue	Ateka: It cannot be...<page><box>
 197:$4470	story_and_event_dialogue	Koppa: Why...?<page><box>Koppa: We defeated Curas.<page><box>Koppa: So why...?<page><br>No! This can't be happening!!<page><box>
@@ -554,7 +554,7 @@ id	sections	draft
 197:$45E0	story_and_event_dialogue	Rai: My Lord!<page><box>
 197:$45EE	story_and_event_dialogue	Lord: The force covering the land and the curse upon me have both vanished.<page><box>Lord: The Evil God has been defeated.<page><box>Rai: Then that means...<page><box>Mekerere: <name>...<br><name> finally defeated the Evil God.<page><box>Shizu: The town is saved!<page><box>
 197:$467C	story_and_event_dialogue	Tao: We did it! Hooray!!
-197:$468E	story_and_event_dialogue	Lord: Ateka...<br>I have caused you such worry.<page><box>Ateka: Mother!
+197:$468E	story_and_event_dialogue	Lord: Ateka...<br>I have caused you such<br>worry.<page><box>Ateka: Mother!
 197:$46B1	story_and_event_dialogue	<box>
 197:$46B3	story_and_event_dialogue	Wanda: Hey! It's <name>!<page><box>
 197:$46C3	story_and_event_dialogue	Wanda: Everyone!<br><name> is back!<page><box>
@@ -569,7 +569,7 @@ id	sections	draft
 197:$47B4	story_and_event_dialogue	Lord: In the end, Curas escaped my control...<page><box>Lord: I lacked the strength to stop him.<page><box>Lord: Because of that, I made Ateka suffer too...<page><box>Lord: Ilpa itself was nearly buried beneath the desert.<page><box>Lord: After all of that, am I truly fit to...?<page><box>
 197:$4854	story_and_event_dialogue	Oro: Don't say that, my Lord.<page><box>Oro: You're the only one who can rebuild Ilpa.<page><box>
 197:$4890	story_and_event_dialogue	Oro: Right, everyone?<page><box>
-197:$489E	story_and_event_dialogue	Goto: That's right.<delay:0D><page><box>Rai: We still need you to lead us, my Lord.<page><box>Wanda: No one else could do it.<page><box>Lord: Everyone...<page><box>
+197:$489E	story_and_event_dialogue	Goto: That's right.<delay:0D><page><box>Rai: We still need you to lead us, my Lord.<page><box>Wanda: No one else could do<br>it.<page><box>Lord: Everyone...<page><box>
 197:$48FD	story_and_event_dialogue	Lord: This is not something I can accomplish alone...<page><box>Lord: Let us all join forces!<page><box>
 197:$493B	story_and_event_dialogue	Mekerere: Yeah!<br>That's right!<page><box>Rai: We'll all work together, my Lord!!<page><box>
 197:$4972	story_and_event_dialogue	Everyone: Yeah!!
@@ -577,7 +577,7 @@ id	sections	draft
 197:$49C1	story_and_event_dialogue	Sachi: We're having a feast today!<br>So you can look forward to...<page><box>Sachi: Huh? Are you going somewhere?<page><box>
 197:$49F2	story_and_event_dialogue	Sachi: ...!<page> You cannot mean...<page><box>
 197:$4A04	story_and_event_dialogue	Koppa: I stopped by Tonfan's place a moment ago...<page><box>
-197:$4A25	story_and_event_dialogue	Koppa: The Lord has recovered, and everyone in town is ready to work.<page><box>Koppa: It really is wonderful.<page><box>
+197:$4A25	story_and_event_dialogue	Koppa: The Lord has recovered, and everyone in town is ready to work.<page><box>Koppa: It really is<br>wonderful.<page><box>
 197:$4A6C	story_and_event_dialogue	Ateka: Yes... But the hardest work begins now.<page><br>I must do my best too!<page><box>
 197:$4A9D	story_and_event_dialogue	Ateka: This is my Jewel...<page><box>
 197:$4AB4	story_and_event_dialogue	Ateka: You came to return it...?<page><box>
@@ -604,11 +604,11 @@ id	sections	draft
 197:$4E4A	story_and_event_dialogue	Ateka: May fair winds blow upon your next adventure...<delay:78><box>
 197:$4E70	story_and_event_dialogue	May Kron, god of travelers, grant you fair winds!!
 197:$4EEB	story_and_event_dialogue	Koppa: ...<page><box>Koppa: ......<page><box>
-197:$4F02	story_and_event_dialogue	Koppa: The sandstorm's getting worse. I can't see a thing...<page><box>Koppa: This wind is brutal.<page><box>Koppa: <name>! Keep going!!<page><box>Koppa: ...<page><box>Koppa: ......<page><box>Koppa: Huh?<page><box>Koppa: Where is everyone?<page><box>Koppa: Where did Oryu and Pekeji go?<page><box>Koppa: Hey! Answer me!!<page><box>
+197:$4F02	story_and_event_dialogue	Koppa: The sandstorm's getting worse. I can't see a thing...<page><box>Koppa: This wind is brutal.<page><box>Koppa: <name>! Keep<br>going!!<page><box>Koppa: ...<page><box>Koppa: ......<page><box>Koppa: Huh?<page><box>Koppa: Where is everyone?<page><box>Koppa: Where did Oryu and Pekeji go?<page><box>Koppa: Hey! Answer me!!<page><box>
 197:$4FAD	story_and_event_dialogue	Koppa: Ow! This is awful!<page><box>Koppa: The sand stings!<page><box>
 197:$4FD0	story_and_event_dialogue	Koppa: One stronger gust and we'll be blown away.<page><box>
 197:$4FF4	story_and_event_dialogue	Koppa: Whoaaaa!
-197:$5002	story_and_event_dialogue	Koppa: Huh...?<page><box>Koppa: Where are we?!<page><box>Koppa: This is Ilpa, isn't it?!<page><box>
+197:$5002	story_and_event_dialogue	Koppa: Huh...?<page><box>Koppa: Where are we?!<page><box>Koppa: This is Ilpa, isn't<br>it?!<page><box>
 197:$5028	story_and_event_dialogue	Koppa: Looks like we...<page><box>Koppa: got sent back here...<page><box>
 197:$5048	story_and_event_dialogue	Koppa: Oryu! Pekeji!<page><box>Koppa: Did the same thing happen to you two?<page><box>
 197:$506E	story_and_event_dialogue	Oryu: Yeah. Looks like we got sent back...<page><box>
@@ -619,35 +619,35 @@ id	sections	draft
 197:$517F	story_and_event_dialogue	Koppa: we can't leave town for the time being?<page><box>
 197:$51A3	story_and_event_dialogue	Pekeji: What the heck?!<page><box>Pekeji: I finally made a heroic exit, and now it's completely ruined!<page><box>
 197:$51DA	story_and_event_dialogue	Oryu: Don't worry. No one thought you looked heroic.<page><box>
-197:$5207	story_and_event_dialogue	Koppa: What will you do, Oryu?<page><box>
+197:$5207	story_and_event_dialogue	Koppa: What will you do,<br>Oryu?<page><box>
 197:$5218	story_and_event_dialogue	Oryu: If we can't leave, we don't have much choice...<page><box>Oryu: We'll have to stay in Ilpa for a while.<page><box>Sachi: You're more than welcome here!<page><box>Sachi: You saved the whole town, after all!<page><box>
-197:$5287	story_and_event_dialogue	Sachi: Besides, someone will be happy if <name> stays.<page><box>
+197:$5287	story_and_event_dialogue	Sachi: Besides, someone will be happy if <name><br>stays.<page><box>
 197:$52B0	story_and_event_dialogue	Sachi: Right, Ateka?<page><box>Ateka: I-I...<page><box>
 197:$52CE	story_and_event_dialogue	Sachi: Ha! It's settled!<page><box>Sachi: Take it easy and stay a while.<page><box>
 197:$52EB	story_and_event_dialogue	Koppa: Sheesh. Well, I guess we'll stay here for a while.<page><box>Koppa: Right, <name>?<page><box>
 197:$5315	story_and_event_dialogue	Rai: I'm surprised there've been so many Collapsed Wanderers here lately.<page><box>
 197:$5347	story_and_event_dialogue	Koppa: Huh? You found someone besides us?<page><box>
-197:$536C	story_and_event_dialogue	Oro: Yeah. Yesterday we found two men buried in the desert.<page><box>
-197:$5391	story_and_event_dialogue	Oro: They were unconscious, so we carried them upstairs...<page><box>
+197:$536C	story_and_event_dialogue	Oro: Yeah. Yesterday we found two men buried in the<br>desert.<page><box>
+197:$5391	story_and_event_dialogue	Oro: They were unconscious, so we carried them<br>upstairs...<page><box>
 197:$53BA	story_and_event_dialogue	???: UN...<page><box>???: ACCEPTABLE!!!<page><box>
-197:$53E8	story_and_event_dialogue	Rai: That came from upstairs!!<page><box>
+197:$53E8	story_and_event_dialogue	Rai: That came from<br>upstairs!!<page><box>
 197:$53F8	story_and_event_dialogue	???: Whoa!<page><box>???: Whoaaaa!!<page><box>
 197:$5413	story_and_event_dialogue	???: Master!<page><box>???: Maaaster!!<page><box>Rai: What happened?!<page><box>Oro: Let's go see!<page><box>
 197:$544B	story_and_event_dialogue	???: UNACCEPTABLE!!
 197:$545C	story_and_event_dialogue	Rihipishi: What the hell are you doing, you idiot?!
 197:$5472	story_and_event_dialogue	Oro: What happened?<page><box>
-197:$5480	story_and_event_dialogue	Rihipishi: What do you think?!<page><box>Rihipishi: That old man saw my pot and smashed it without permission!<page><box>Rihipishi: Who the hell is that geezer?!<page><box>
+197:$5480	story_and_event_dialogue	Rihipishi: What do you<br>think?!<page><box>Rihipishi: That old man saw my pot and smashed it without permission!<page><box>Rihipishi: Who the hell is that geezer?!<page><box>
 197:$54D7	story_and_event_dialogue	Koppa: <name>! Hurry!<page><box>
 197:$54E8	story_and_event_dialogue	???: Master Gaibara!<page><box>
 197:$54F8	story_and_event_dialogue	Gaibara: Saruyama...<page><box>
 197:$5509	story_and_event_dialogue	Gaibara: Not here...<page><box>Gaibara: The clay I seek isn't here either...<page><box>Gaibara: This clay is UNACCEPTABLE!!<page><box>
 197:$5551	story_and_event_dialogue	Saruyama: M-Master...<page><box>Saruyama: You and I have traveled far together.<page><box>Saruyama: We've been searching for the clay you need to make your pots.<page><box>Saruyama: Yet everywhere you go, we somehow find nothing but bad clay...<page><box>Saruyama: It's almost as if...<page><box>Saruyama: you're drawn to bad clay, Master...<page><box>
-197:$55F1	story_and_event_dialogue	Gaibara: Wh-What did you say?!<page><box>Gaibara: Say that again, Saruyama!!<page><box>
+197:$55F1	story_and_event_dialogue	Gaibara: Wh-What did you<br>say?!<page><box>Gaibara: Say that again, Saruyama!!<page><box>
 197:$561C	story_and_event_dialogue	Koppa: Hold it right there!<page><box>
 197:$562E	story_and_event_dialogue	Oryu: Long time no see, Gaibara.<page><box>
 197:$5643	story_and_event_dialogue	Gaibara: Hrm?! You lot?!<page><box>Pekeji: I think Saruyama has a point.<page><box>
 197:$5674	story_and_event_dialogue	Gaibara: Wh-What?!<page><box>Koppa: You say there's no good clay, but...<page><box>Koppa: isn't that obvious?<page><box>
-197:$56AE	story_and_event_dialogue	Koppa: Look around. There's nothing but sand.<page><box>Gaibara: Hrrrm?!<page><box>Koppa: Searching for clay here doesn't make much sense.<page><box>Gaibara: Why, you! Do you know who I am?!<page><box>Gaibara: I am Gaibara!!<page><box>
+197:$56AE	story_and_event_dialogue	Koppa: Look around. There's nothing but sand.<page><box>Gaibara: Hrrrm?!<page><box>Koppa: Searching for clay here doesn't make much<br>sense.<page><box>Gaibara: Why, you! Do you know who I am?!<page><box>Gaibara: I am Gaibara!!<page><box>
 197:$5734	story_and_event_dialogue	Gaibara: Saruyama! We're leaving! Onward to the next land!!<page><box>Saruyama: Y-Yes, Master!<page><box>
 197:$576A	story_and_event_dialogue	Oryu: You can't leave town right now.<page><box>Oryu: We tried, and even we couldn't get out.<page><box>
 197:$57A8	story_and_event_dialogue	Gaibara: I...<page><box>Gaibara: Do you know who I am?!<page><box>Gaibara: I am GAIBARA!!<page><box>
@@ -657,20 +657,20 @@ id	sections	draft
 197:$58DA	story_and_event_dialogue	
 197:$58DB	story_and_event_dialogue	Pekeji: Hey, Bro! Morning!<page><box>Koppa: You're never up this early. Is it going to snow?<page><box>Pekeji: Oh, come on. What are you talking about?<page><box>Pekeji: Rise early and eat a good breakfast.<page><box>Pekeji: A healthy life is the best life.<page><box>Koppa: Liar. You're here to see Sachi, aren't you?<page><box>Koppa: I know what you're up to.<page><box>
 197:$598F	story_and_event_dialogue	Sachi: Good morning, you two!<page><box>Koppa: Morning!<page><box>
-197:$59AD	story_and_event_dialogue	Koppa: Huh? Where's your dad?<page><box>Sachi: He was called away to help with a town project.<page><box>Sachi: So it's just me today.<page><box>
+197:$59AD	story_and_event_dialogue	Koppa: Huh? Where's your<br>dad?<page><box>Sachi: He was called away to help with a town project.<page><box>Sachi: So it's just me today.<page><box>
 197:$59F0	story_and_event_dialogue	Pekeji: Sachi! Is my refill ready yet?<page><box>
 197:$5A0B	story_and_event_dialogue	Sachi: You really are unbelievable.<page><box>
 197:$5A1F	story_and_event_dialogue	Sachi: Everyone else is rebuilding the town, while you sit here eating.<page><box>
 197:$5A52	story_and_event_dialogue	Pekeji: I can't help it.<page><box>Pekeji: Your cooking is just too delicious!<page><box>Pekeji: Besides, food before flowers, right? Heh heh.<page><box>
 197:$5AA5	story_and_event_dialogue	Sachi: Oh? I love flowers.<page><box>
-197:$5AC0	story_and_event_dialogue	Sachi: Flowers are precious in this town, so they're hard to find...<page><box>Sachi: I wish I had even a few to decorate the restaurant...<page><box>Pekeji: Leave that to me! I'll bring you armfuls of flowers.<page><box>
+197:$5AC0	story_and_event_dialogue	Sachi: Flowers are precious in this town, so they're hard to find...<page><box>Sachi: I wish I had even a few to decorate the restaurant...<page><box>Pekeji: Leave that to me! I'll bring you armfuls of<br>flowers.<page><box>
 197:$5B46	story_and_event_dialogue	Pekeji: But first, food!!<page><box>
 197:$5B5B	story_and_event_dialogue	Pekeji: Munch! Munch! Munch! Munch!<page><box>Pekeji: Munch! Munch! Munch! Munch!<page><box>Pekeji: Munch! Munch! Munch! Munch!<page><box>
 197:$5B88	story_and_event_dialogue	Pekeji: Another helping!<page><box>
 197:$5B98	story_and_event_dialogue	Sachi: Whatever you do, food always comes first... Sigh.<page><box>
 197:$5BBD	story_and_event_dialogue	Pekeji: It's your fault for making such delicious food.<page><box>
 197:$5BE3	story_and_event_dialogue	Pekeji: Heh heh. That purple egg over there looks delicious too...<page><box>
-197:$5C10	story_and_event_dialogue	Sachi: Egg?<page><box>Sachi: I didn't serve any eggs.<page><box>
+197:$5C10	story_and_event_dialogue	Sachi: Egg?<page><box>Sachi: I didn't serve any<br>eggs.<page><box>
 197:$5C32	story_and_event_dialogue	Pekeji: Huh?<page><box>Pekeji: Then what's this?<page><box>
 197:$5C47	story_and_event_dialogue	Pekeji: Whoa! The egg is...?!<page><box>
 197:$5C5A	story_and_event_dialogue	Sachi: That's no egg! Look!<page><box>
@@ -681,7 +681,7 @@ id	sections	draft
 197:$5D0D	story_and_event_dialogue	Pekeji: Wh-Whaaat?!<page><box>
 197:$5D1C	story_and_event_dialogue	Koppa: Hey, Pekeji!<page><box>Koppa: You didn't bring back something you shouldn't have again, did you?!<page><box>Pekeji: Of course not!<page><box>Pekeji: I've had more than enough of that!<page><box>
 197:$5D73	story_and_event_dialogue	Pekeji: Whoaaaa!<page><box>
-197:$5D86	story_and_event_dialogue	???: Nfuuuu!!<page><box>Koppa: ......<page><box>Koppa: Wh-What is this thing?!<page><box>Pekeji: Is it a dog? Or maybe a cat...?<page><box>Sachi: It's adorable!<page><box>
+197:$5D86	story_and_event_dialogue	???: Nfuuuu!!<page><box>Koppa: ......<page><box>Koppa: Wh-What is this<br>thing?!<page><box>Pekeji: Is it a dog? Or maybe a cat...?<page><box>Sachi: It's adorable!<page><box>
 197:$5DE0	story_and_event_dialogue	Koppa: Don't get close! It could be dangerous!<page><box>
 197:$5DF5	story_and_event_dialogue	Sachi: I'm sure it's fine.<page><box>Sachi: Just look how cute it is.<page><box>
 197:$5E1D	story_and_event_dialogue	???: Nfuu!<page><box>Sachi: What's wrong? Are you hungry?<page><box>Sachi: Here, have some food.<page><box>
@@ -704,7 +704,7 @@ id	sections	draft
 197:$6058	story_and_event_dialogue	Sachi: If you have nowhere to go, you can stay here.<page><box>
 197:$6078	story_and_event_dialogue	???: Nfuu?! Really?!<page><box>Sachi: Yes, really.<page><box>Sachi: Welcome! Um...<page><box>
 197:$60A7	story_and_event_dialogue	Koppa: Oh, right. We can't call you anything if you don't have a name.<page><box>
-197:$60CA	story_and_event_dialogue	"Koppa: Then how about ""Nfuu""?<page><box>Koppa: That's the sound you've been making.<page><box>Pekeji: Pfft! What a weird name.<page><box>"
+197:$60CA	story_and_event_dialogue	"Koppa: Then how about<br>""Nfuu""?<page><box>Koppa: That's the sound you've been making.<page><box>Pekeji: Pfft! What a weird name.<page><box>"
 197:$6112	story_and_event_dialogue	Sachi: I don't think so. It's cute.<page><box>
 197:$612C	story_and_event_dialogue	Sachi: Welcome, Nfuu.<page><box>Nfuu: Oh, I'm so moved!!<page><box>Nfuu: I'm so moved that...<page><box>Nfuu: I'm hungry again, fu!!<page><box>
 197:$6172	story_and_event_dialogue	Pekeji: Hey! That's my food!!<page><box>Koppa: You're tiny, but you sure can eat...<page><box>
@@ -728,7 +728,7 @@ id	sections	draft
 197:$689E	story_and_event_dialogue	Koppa: Is what you want really down here?<page><box>
 197:$68C3	story_and_event_dialogue	Nfuu: It's over there, fu.<page><box>
 197:$68D1	story_and_event_dialogue	Koppa: A flower, this deep underground...?<page><box>Nfuu: Before I was born,<page><box>Nfuu: I had a dream, fu...<page><box>
-197:$690C	story_and_event_dialogue	Nfuu: It was an awful dream where the desert kept spreading...<page><box>Nfuu: It spread underground and was about to wither this flower...<page><box>Nfuu: Then I heard the flower's voice, fu.<page><box>Flower: Pick me and take me to someone who loves flowers.<page><box>Flower: Then I shall bloom brightly once more...<page><box>
+197:$690C	story_and_event_dialogue	Nfuu: It was an awful dream where the desert kept spreading...<page><box>Nfuu: It spread underground and was about to wither this flower...<page><box>Nfuu: Then I heard the flower's voice, fu.<page><box>Flower: Pick me and take me to someone who loves<br>flowers.<page><box>Flower: Then I shall bloom brightly once more...<page><box>
 197:$69E0	story_and_event_dialogue	Koppa: I see...<page><box>Koppa: Come to think of it, I've heard of this.<page><box>Koppa: There's a rare flower that can bloom underground in a dungeon...<page><box>Koppa: Picking it doesn't kill it. It makes new flowers bloom even farther below.<page><box>
 197:$6A62	story_and_event_dialogue	Nfuu: I only made it here thanks to you, <name>.<page><box>Nfuu: Thank you so much, <name>!!<page><box>Koppa: All right, let's head back to Tonfan!<page><box>
 197:$6AB4	story_and_event_dialogue	Sachi: What a beautiful flower! Is this for me?<page><box>Nfuu: Yes. It's a present, fu.<page><box>Sachi: But wasn't it hard to get?<page><box>Nfuu: Oh, it was nothing, fu.<page><box>Sachi: I'm so happy!<page><box>Sachi: I'll display it in the restaurant! Thank you, Nfuu!!<page><box>
@@ -742,14 +742,14 @@ id	sections	draft
 197:$6C13	story_and_event_dialogue	Sachi: You two helped Nfuu, didn't you?<page><box>Sachi: It would've been hard for him alone.<page><box>
 197:$6C54	story_and_event_dialogue	Sachi: This is just a little thank-you...<page><box>
 197:$6C69	story_and_event_dialogue	Sachi: Thank you both. This means so much to me.<page><box>Sachi: See you!<page><box>
-197:$6C8F	story_and_event_dialogue	Koppa: <name:00>-<name>!<page><box>Koppa: I'm so happy!<page><box>Koppa: What a time to be alive!<page><box>
+197:$6C8F	story_and_event_dialogue	Koppa: <name:00>-<name>!<page><box>Koppa: I'm so happy!<page><box>Koppa: What a time to be<br>alive!<page><box>
 197:$6CC3	story_and_event_dialogue	Nfuu: Nfuu! This is the deepest part of the dungeon, fu!!<page><box>Koppa: We did it! Hard work really does pay off!<page><box>
 197:$6D0B	story_and_event_dialogue	Nfuu: Ah! There it is, fu!<page><box>
-197:$6D1C	story_and_event_dialogue	Koppa: It really was blooming in the depths!<page><box>Nfuu: It's blooming beautifully. What a relief, fu.<page><box>Koppa: Let's leave the flower here this time.<page><box>Koppa: All right, let's head back.<page><box>
+197:$6D1C	story_and_event_dialogue	Koppa: It really was blooming in the depths!<page><box>Nfuu: It's blooming beautifully. What a relief,<br>fu.<page><box>Koppa: Let's leave the flower here this time.<page><box>Koppa: All right, let's head back.<page><box>
 197:$6D86	story_and_event_dialogue	Koppa: It really was blooming in the depths!<page><box>Koppa: It's beautiful every time I see it...<page><box>Koppa: Let's leave the flower here this time.<page><box>Koppa: All right, let's head back.<page><box>
 197:$6DEC	story_and_event_dialogue	Nfuu: I-I can't go on, fu...<page>
 197:$6DFE	story_and_event_dialogue	<box>
-197:$6E00	story_and_event_dialogue	Koppa: We'll go with you again.<page><box>Koppa: Don't let it get you down.<page><box><delay:1E>Nfuu: I'm okay, fu. I'll try even harder next time.<page><box>
+197:$6E00	story_and_event_dialogue	Koppa: We'll go with you<br>again.<page><box>Koppa: Don't let it get you down.<page><box><delay:1E>Nfuu: I'm okay, fu. I'll try even harder next time.<page><box>
 197:$6E50	story_and_event_dialogue	Nfuu: Please help me again, <name>.<page><box>
 197:$6EAD	story_and_event_dialogue	Wanda: Hey! It looks like the town event has finally started!<page><box>
 197:$6ED1	story_and_event_dialogue	<box>
@@ -768,7 +768,7 @@ id	sections	draft
 197:$7031	story_and_event_dialogue	Crowd: YEAH!!<page><box>
 197:$7040	story_and_event_dialogue	Oro: Many challengers have already made attempt after attempt!<page><box>
 197:$7069	story_and_event_dialogue	Oro: Our current leader is Saruyama! Yeah!!<page><box>
-197:$708B	story_and_event_dialogue	Oro: But!<page><box>Oro: The champion has not been decided yet!<page><box>Oro: You still have a chance!<page><box>Oro: Keep challenging and give it everything you've got!<page><box>Oro: And the winner will receive a prize from Princess Ateka herself!<page><box>Oro: Give it your all, baby!!<page><box>
+197:$708B	story_and_event_dialogue	Oro: But!<page><box>Oro: The champion has not been decided yet!<page><box>Oro: You still have a chance!<page><box>Oro: Keep challenging and give it everything you've<br>got!<page><box>Oro: And the winner will receive a prize from Princess Ateka herself!<page><box>Oro: Give it your all, baby!!<page><box>
 197:$7116	story_and_event_dialogue	Crowd: Woohoo! Yeah!<page><box><delay:64>Koppa: I have a question!
 197:$713E	story_and_event_dialogue	Koppa: What exactly are people attempting?<page><box>Oro: Oh, that's easy.<page><box>Oro: Just reach Floor 15 of that dungeon.<page><box>Oro: But!<page><box>Oro: It's a time attack, so you must clear it as quickly as possible!<page><box>Oro: And right now, Saruyama has the best time.<page><box>
 197:$71E8	story_and_event_dialogue	???: No!<delay:14> No!<delay:14> No!<delay:14><br>No!<delay:14> No!<delay:14> No!<delay:14><br>No!<delay:14> No!<delay:14> No!<page><box>
@@ -779,16 +779,16 @@ id	sections	draft
 197:$72E8	story_and_event_dialogue	Koppa: <name>! Let's give it a try too!<page><box>
 197:$7304	story_and_event_dialogue	Oro: Our next challenger is...<page><box>Oro: The one who defeated the Evil God: <name>! Yeah!<page><box>
 197:$733E	story_and_event_dialogue	Gaibara: Hmph! Think you can do it?<page><box>Gaibara: This isn't like the trap arts you know.<page><box>
-197:$7371	story_and_event_dialogue	"Oro: In this dungeon, traps catch monsters instead of you.<page><box>Oro: You can also pick traps up.<page><box>Oro: A trap you pick up becomes Trap Parts, which you can set as another trap.<page><box>Oro: Stand on a trap you've set and select ""Modify"" to improve it.<page><box>Oro: But once you set a trap, you can't pick it up again. Be careful.<page><box>Oro: That's the gist of it.<page><box>"
+197:$7371	story_and_event_dialogue	"Oro: In this dungeon, traps catch monsters instead of<br>you.<page><box>Oro: You can also pick traps up.<page><box>Oro: A trap you pick up becomes Trap Parts, which you can set as another trap.<page><box>Oro: Stand on a trap you've set and select ""Modify"" to improve it.<page><box>Oro: But once you set a trap, you can't pick it up again. Be careful.<page><box>Oro: That's the gist of it.<page><box>"
 197:$7465	story_and_event_dialogue	Oro: Oh! One last thing.<page><box>Oro: You can't bring any items into this dungeon.<page><box>Oro: Store or discard your items first.<page><box>
 197:$74CA	story_and_event_dialogue	Oro: All right. It's finally time to start, baby!<page><box>
 197:$74E6	story_and_event_dialogue	Oro: And now...<page><box>Oro: May Kakaroo, god of traps, smile upon you!<page><box>Oro: Ready...<page><box>Oro: GO!!<page><box>
 197:$751B	story_and_event_dialogue	Oro: Oh, too bad. Come back if you change your mind.<page>
 197:$753D	story_and_event_dialogue	Oro: Oh, you can't bring items into this dungeon.<page><box>Oro: Store them in the warehouse, then come back.<page><box>Oro: I'll be waiting. Yeah!<page>
 197:$75A3	story_and_event_dialogue	Oro: And now...<page><box>Oro: May Kakaroo, god of traps, smile upon you!<page><box>Oro: Ready...<page><box>Oro: GO!!<page><box>
-197:$75F2	story_and_event_dialogue	Koppa: Wh-What's the record?!<page><box>Tao: Let's see...<page><box>Tao: No. You didn't beat Master Gaibara's record.<page><box>
+197:$75F2	story_and_event_dialogue	Koppa: Wh-What's the<br>record?!<page><box>Tao: Let's see...<page><box>Tao: No. You didn't beat Master Gaibara's record.<page><box>
 197:$762E	story_and_event_dialogue	Oro: Oh, so close!<page><box>Oro: Master Gaibara remains in the lead!<page><box>Oro: Will Master Gaibara win it all?!<page><box>
-197:$7683	story_and_event_dialogue	Koppa: Wh-What's the record?!<page><box>Tao: Let's see...<page><box>Tao: Oh! C-Could it be?!<page><box>
+197:$7683	story_and_event_dialogue	Koppa: Wh-What's the<br>record?!<page><box>Tao: Let's see...<page><box>Tao: Oh! C-Could it be?!<page><box>
 197:$76AD	story_and_event_dialogue	Tao: I-It's a new record!!<page><box>
 197:$76C0	story_and_event_dialogue	Oro: Oh, yeah! <name> has finally beaten Master Gaibara's record!<page><box>
 197:$76F2	story_and_event_dialogue	Rihipishi: That's time!<page><box>Rihipishi: The Wanado Tournament is now over.<page><box>Oro: Which means...<page><box>
@@ -796,7 +796,7 @@ id	sections	draft
 197:$7753	story_and_event_dialogue	Oro: The champion is...<page><box>Oro: <name>! Yeah!!<page><box>
 197:$7779	story_and_event_dialogue	Oro: What a thrilling comeback victory!<page><box>Oro: Now it's time for the awards ceremony.<page><box>
 197:$77BF	story_and_event_dialogue	Oro: Princess Ateka and the Lord will present the prize!<page><box>Oro: Come on out!!<page><box>
-197:$77F0	story_and_event_dialogue	Ateka: Congratulations, <name>!<page><box>Ateka: This is our gift to you.<page><box>
+197:$77F0	story_and_event_dialogue	Ateka: Congratulations, <name>!<page><box>Ateka: This is our gift to<br>you.<page><box>
 197:$7822	story_and_event_dialogue	Lord: This treasure has been passed down through our family for generations.<page><box>Lord: Take good care of it.<page><box>
 197:$7856	story_and_event_dialogue	Your inventory is full, so you cannot accept it.<page><box>Please choose one item to discard.<page><box>
 197:$7885	story_and_event_dialogue	<name> received the Kajin Fuuma!!<page><box>
@@ -805,12 +805,12 @@ id	sections	draft
 198:$403C	story_and_event_dialogue	Saruyama: Um...<page><box>
 198:$404B	story_and_event_dialogue	Koppa: Huh? Saruyama?<page><box>Koppa: What's wrong?<page><box>
 198:$406C	story_and_event_dialogue	Saruyama: Have you seen Master Gaibara?<page><box>
-198:$408D	story_and_event_dialogue	"Koppa: No, I haven't.<page><box>Saruyama: I see...<page><box>Koppa: Did something happen?<page><box>Saruyama: Master suddenly ran off.<page><box>Saruyama: He was talking to Obaba, and then...<page><box>Saruyama: ""I found the Ultimate Clay!<page><box>Saruyama: Raaaaaaaaah!!""<page><box>Saruyama: That's what he shouted...<page><box>"
+198:$408D	story_and_event_dialogue	"Koppa: No, I haven't.<page><box>Saruyama: I see...<page><box>Koppa: Did something<br>happen?<page><box>Saruyama: Master suddenly ran off.<page><box>Saruyama: He was talking to Obaba, and then...<page><box>Saruyama: ""I found the Ultimate Clay!<page><box>Saruyama: Raaaaaaaaah!!""<page><box>Saruyama: That's what he shouted...<page><box>"
 198:$4150	story_and_event_dialogue	Nuwanko: Hey! Do something about your master!<page><box>Saruyama: What did he do?<page><box>Nuwanko: What didn't he do?<page><box>Nuwanko: He barged into my house without permission!<page><box>Nuwanko: Now he's shouting and tearing the place apart!<page><box>Nuwanko: I can't do anything with him!<page><box>
 198:$41DE	story_and_event_dialogue	Koppa: Let's go see!<page><box>
 198:$41EE	story_and_event_dialogue	Gaibara: You are certain it is here?<page><box>
 198:$4207	story_and_event_dialogue	Obaba: Without a doubt.<page><box>Obaba: What you seek lies within.<page><box>
-198:$4236	story_and_event_dialogue	Nuwanko: Hey, you! You're still helping yourself to my house?!<page><box>Gaibara: Silence! Stand back and watch!!<page><box>
+198:$4236	story_and_event_dialogue	Nuwanko: Hey, you! You're still helping yourself to my<br>house?!<page><box>Gaibara: Silence! Stand back and watch!!<page><box>
 198:$4272	story_and_event_dialogue	Nuwanko: Wh-Whaaat?!<page><box>Koppa: There's a hole back here?!<page><box>Nuwanko: I've lived here for years and never noticed it!!<page><box>
 198:$42BE	story_and_event_dialogue	Gaibara: Hardly surprising.<page><box>Gaibara: No one would expect a cave behind a hanging scroll.<page><box>
 198:$42F0	story_and_event_dialogue	Saruyama: Master! Is it really in there?<page><box>
@@ -822,7 +822,7 @@ id	sections	draft
 198:$43B4	story_and_event_dialogue	Gaibara: Nooo!<page><box>
 198:$43C3	story_and_event_dialogue	Gaibara: UNACCEPTABLE!!<page><box>
 198:$43D9	story_and_event_dialogue	Saruyama: M-Master!!<page><box>
-198:$43EB	story_and_event_dialogue	"Gaibara: Ugh... I thought it would be easy...<page><box>Gaibara: I let my guard down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you suffered such a fate...<page><box>Saruyama: What kind of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters does not raise your level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something even more important...<page><box>Gaibara: This dungeon is conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find ""Imprison Pots"" inside.<page><box>Gaibara: Throw one at a monster to seal it inside.<page><box>Gaibara: Ugh... Traps are my specialty, but...<page><box>Gaibara: this dungeon does not seem to suit me...<page><box>Saruyama: You do smash every Pot you see, Master.<page><box>"
+198:$43EB	story_and_event_dialogue	"Gaibara: Ugh... I thought it would be easy...<page><box>Gaibara: I let my guard<br>down...<page><box>Gaibara: Gah!!<page><box>Saruyama: Master! Are you all right?! Master!!<page><box>Gaibara: Ugh... Somehow...<page><box>Gaibara: I still live...<page><box>Saruyama: If even you suffered such a fate...<page><box>Saruyama: What kind of dungeon is this?<page><box>Gaibara: First...<page><box>Gaibara: Defeating monsters does not raise your level. That is difficult.<page><box>Gaibara: But...<page><box>Gaibara: there is something even more important...<page><box>Gaibara: This dungeon is conquered with Pots...<page><box>Koppa: A Pot...<page><box>Koppa: dungeon?<page><box>Gaibara: Indeed.<page><box>Gaibara: You will find ""Imprison Pots"" inside.<page><box>Gaibara: Throw one at a monster to seal it inside.<page><box>Gaibara: Ugh... Traps are my specialty, but...<page><box>Gaibara: this dungeon does not seem to suit me...<page><box>Saruyama: You do smash every Pot you see, Master.<page><box>"
 198:$45E5	story_and_event_dialogue	Gaibara: Silence!!
 198:$45F6	story_and_event_dialogue	Saruyama: Gah!!
 198:$4602	story_and_event_dialogue	Gaibara: <name>...<page><box>Gaibara: I beg you.<page><box>Gaibara: Will you retrieve the Ultimate Clay in my stead?<page><box>
@@ -837,20 +837,20 @@ id	sections	draft
 198:$47A1	story_and_event_dialogue	Gaibara: This luster... This elasticity...<page><box>Gaibara: Magnificent.<page><box>Gaibara: This is truly the Ultimate Clay.<page><box>Gaibara: At last, I can devote myself to making the Pot of my dreams.<page><box>Gaibara: You have my thanks, <name>! Truly!!<page><box>Gaibara: Take this small token of my gratitude. Use it well.<page><box>
 198:$485F	story_and_event_dialogue	Your inventory is full, so you cannot accept it.<page><box>Please choose one item to discard.<page><box>
 198:$488E	story_and_event_dialogue	<name> received the Wonder Pick from Gaibara!<delay:F0><delay:C0><page><box>
-198:$48B4	story_and_event_dialogue	Gaibara: Good! Now I shall use this clay to make my Pot.<page><box>
-198:$48DB	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: We are going home!<page><box>Gaibara: Back to my workshop!<page><box>
+198:$48B4	story_and_event_dialogue	Gaibara: Good! Now I shall use this clay to make my<br>Pot.<page><box>
+198:$48DB	story_and_event_dialogue	Gaibara: Saruyama!<page><box>Gaibara: We are going home!<page><box>Gaibara: Back to my<br>workshop!<page><box>
 198:$48FB	story_and_event_dialogue	Saruyama: Y-Yes, Master!<page><box>
 198:$4909	story_and_event_dialogue	Koppa: W-Wait a second!<page><box>
 198:$491F	story_and_event_dialogue	Gaibara and Saruyama: Aaaaaaaah!!
 198:$4941	story_and_event_dialogue	Koppa: Looks like they forgot we can't leave town...<page><box>
 198:$498B	story_and_event_dialogue	Pekeji: Pant, pant... Hey, take a look at this.<page><box>Blacksmith: Hm?<page><box>Blacksmith: What's that old scrap of paper?<page><box>Pekeji: It looks like a piece of a journal...<page><box>
-198:$49F0	story_and_event_dialogue	"Koppa: I'll read it. Let's see...<page><box>""What?!<page><box>I never imagined such a method...""<page><box>""I have done it. At last, I have discovered it!""<page><box>""Behold its brilliance. Behold its beauty.""<page><box>""There is nothing finer in all the world!!""<page><box>""But...<page><box>what if it were to fall into the hands of evil?""<page><box>""It chooses its owner.<page><box>Therefore, I shall hide it in secret.""<page><box>""In the Town of Ilpa...<page><box>beneath the blacksmith's forge...<page><box>deep underground...<page><box>lies my treasure.""<page><box>"
+198:$49F0	story_and_event_dialogue	"Koppa: I'll read it. Let's<br>see...<page><box>""What?!<page><box>I never imagined such a method...""<page><box>""I have done it. At last, I have discovered it!""<page><box>""Behold its brilliance. Behold its beauty.""<page><box>""There is nothing finer in all the world!!""<page><box>""But...<page><box>what if it were to fall into the hands of evil?""<page><box>""It chooses its owner.<page><box>Therefore, I shall hide it in secret.""<page><box>""In the Town of Ilpa...<page><box>beneath the blacksmith's forge...<page><box>deep underground...<page><box>lies my treasure.""<page><box>"
 198:$4B23	story_and_event_dialogue	Koppa: Whoa! This tells us where treasure is hidden, doesn't it?!<page><box>
 198:$4B4F	story_and_event_dialogue	Koppa: Hey, Pekeji!<page><box>Koppa: Where did you find this?<page><box>
 198:$4B75	story_and_event_dialogue	Pekeji: In the middle of the desert.<page><box>Pekeji: I suddenly couldn't hold it anymore while I was walking...<page><box>Pekeji: I was looking for some paper when I happened to find this.<page><box>Koppa: Ugh! Y-You didn't wipe yourself with this, did you?!<page><box>Pekeji: Don't worry. I haven't wiped yet.<page><box>Koppa: What?! You pulled up your pants without wiping?!<page><box>Pekeji: No! I mean I'm still holding it!<page><box>
 198:$4C53	story_and_event_dialogue	Pekeji: Anyway, Bro!<page><box>Pekeji: This time it's the real thing! Treasure!!<page><box>Oryu: I can't ignore talk of treasure.<page><box>
 198:$4C9D	story_and_event_dialogue	Koppa: O-Oryu!<page><box>
-198:$4CAB	story_and_event_dialogue	Oryu: I want to hear the details too.<page><box>Oryu: So where is this forge?<page><box>
+198:$4CAB	story_and_event_dialogue	Oryu: I want to hear the details too.<page><box>Oryu: So where is this<br>forge?<page><box>
 198:$4CDB	story_and_event_dialogue	Blacksmith: You mean this one?<page><box>Blacksmith: It's the only forge here, but...<page><box>Blacksmith: Hm...?<page><box>Blacksmith: Come to think of it...<page><box>Oryu: What is it?<page><box>
 198:$4D29	story_and_event_dialogue	Blacksmith: I heard a story a long time ago...<page><box>Blacksmith: Back in my grandfather's day, this place was a dungeon.<page><box>
 198:$4D72	story_and_event_dialogue	Pekeji: Whaaat?!<page><box>Blacksmith: My grandfather was a famous smith and a great lover of adventure.<page><box>Blacksmith: He forged mighty<br>swords and shields, then<br>challenged it himself.<page><box>Blacksmith: But its monsters were so strong that he never stood a chance...<page><box>Blacksmith: In the end, he gave up and sealed the dungeon.<page><box>
@@ -860,20 +860,20 @@ id	sections	draft
 198:$4F0C	story_and_event_dialogue	Oryu: You'll take me instead of that tubby guy, right?<page><box>Oryu: Let's go together.<page><box>Oryu: Okay?<page><box>
 198:$4F34	story_and_event_dialogue	???: Treasure! Treasure!!<page><box>
 198:$4F4A	story_and_event_dialogue	Nfuu: Nfuu! It sounds like treasure, fu!<page><box>
-198:$4F60	story_and_event_dialogue	Mamo: I want to store the treasure too!<page><box>Mamo: Let's de-part together!<page><box>
+198:$4F60	story_and_event_dialogue	Mamo: I want to store the treasure too!<page><box>Mamo: Let's de-part<br>together!<page><box>
 198:$4F8F	story_and_event_dialogue	<cF8>h<cF8>i Unit: Clank... Treasure... Treasure...<page><box>
 198:$4FAD	story_and_event_dialogue	Koppa: <name>, it sounds like we can bring plenty of items.<page><box>Koppa: Let's prepare properly before we head in.<page><box>
-198:$500E	story_and_event_dialogue	Koppa: <name>! Isn't that a treasure chest over there?<page><box>
+198:$500E	story_and_event_dialogue	Koppa: <name>! Isn't that a treasure chest over<br>there?<page><box>
 198:$502E	story_and_event_dialogue	Koppa: It is!<page><box>Koppa: I wonder what's inside. Come on, open it!<page><box>
 198:$5062	story_and_event_dialogue	Koppa: <name>!<page><box>Koppa: This is...<delay:80><page><box>
 198:$5077	story_and_event_dialogue	Blacksmith: Th-This is the legendary...<page><box>Blacksmith: It was in the depths of the dungeon...?<page><box>
 198:$50AB	story_and_event_dialogue	Blacksmith: I see. My grandfather wrote that journal page.<page><box>Blacksmith: He was a brilliant smith, and he succeeded in forging this...<page><box>Blacksmith: Then he sealed it in the dungeon to keep it hidden.<page><box>
-198:$5126	story_and_event_dialogue	Blacksmith: Though I don't know how it ended up so deep.<page><box>Blacksmith: My grandfather wasn't a Wanderer.<page><box>Blacksmith: He couldn't possibly have reached those depths.<page><box>
-198:$518E	story_and_event_dialogue	Blacksmith: <name>, I'd like you to have this shield...<page><box>Blacksmith: But your inventory is full.<page><box>Blacksmith: Please make room for one item.<page><box>
+198:$5126	story_and_event_dialogue	Blacksmith: Though I don't know how it ended up so<br>deep.<page><box>Blacksmith: My grandfather wasn't a Wanderer.<page><box>Blacksmith: He couldn't possibly have reached those depths.<page><box>
+198:$518E	story_and_event_dialogue	Blacksmith: <name>, I'd like you to have this<br>shield...<page><box>Blacksmith: But your inventory is full.<page><box>Blacksmith: Please make room for one item.<page><box>
 198:$51E8	story_and_event_dialogue	Blacksmith: You don't want it...?<page><box>
 198:$51FC	story_and_event_dialogue	Blacksmith: <name>...<page><box>Blacksmith: You're a true Wanderer.<page><box>Blacksmith: This shield belongs in your hands.<page><box>Blacksmith: Please, take it.<page><box>
 198:$5257	story_and_event_dialogue	<name> obtained the Rasen Fuuma!<delay:F0><delay:C0><page>
-198:$527D	story_and_event_dialogue	Koppa: <name>! Isn't that a treasure chest over there?<page><box>
+198:$527D	story_and_event_dialogue	Koppa: <name>! Isn't that a treasure chest over<br>there?<page><box>
 198:$529D	story_and_event_dialogue	Koppa: You need to discard something before you can take it!<page><box>
 198:$52B8	story_and_event_dialogue	Koppa: Let's head back.<page>
 198:$52C8	story_and_event_dialogue	<name> obtained the Rasen Fuuma!<delay:F0><delay:C0><page>
@@ -886,7 +886,7 @@ id	sections	draft
 198:$54A8	story_and_event_dialogue	Lord: I understand the situation now.<page><box>Lord: Let us return to Ilpa.<page><box>
 198:$54CF	story_and_event_dialogue	???: Heh heh heh...<page><box>
 198:$54DC	story_and_event_dialogue	Lord: What is it, Ateka?<page><box>Ateka: I thought I heard... a voice...<page><box>
-198:$5504	story_and_event_dialogue	Pekeji: I didn't hear anything.<page><box>Pekeji: Maybe you imagined it...<page><box>
+198:$5504	story_and_event_dialogue	Pekeji: I didn't hear<br>anything.<page><box>Pekeji: Maybe you imagined<br>it...<page><box>
 198:$5521	story_and_event_dialogue	???: Heh heh heh...<page><box>???: L...<page><box>???: Lord...<page><box>???: LORD!!<page><box>
 198:$5546	story_and_event_dialogue	Lord: Wh-Who are you?!<page><box>???: Heh heh... So Curas is dead...<page><box>???: It seems he was the greater fool.<page><box>
 198:$558A	story_and_event_dialogue	Pekeji: I don't know what you are, but you won't lay a finger on the Lord!<page><box>???: Heh heh heh...<page><box>???: I have no use for that empty shell.<page><box>???: What I seek is...<page><box>???: Heh heh! It has been too long, Princess!!<page><box>Pekeji: Y-You are...?!<page><box>
@@ -907,12 +907,12 @@ id	sections	draft
 198:$5951	story_and_event_dialogue	Goto: Hey! The Lord has collapsed at the town entrance!<page><box>
 198:$597B	story_and_event_dialogue	Oro: Let's go!<page><box>
 198:$5989	story_and_event_dialogue	Minai: My Lord, are you all right?<page><box>Lord: Yes. I am fine now.<page><box>Lord: Forgive me for worrying you.<page><box>
-198:$59CD	story_and_event_dialogue	Pekeji: My Lord, you're safe! Thank goodness!<page><box>Oryu: What happened to Ateka?<page><box>
+198:$59CD	story_and_event_dialogue	Pekeji: My Lord, you're safe! Thank goodness!<page><box>Oryu: What happened to<br>Ateka?<page><box>
 198:$5A01	story_and_event_dialogue	Lord: Hm? Ateka?<page><box>Lord: Ateka is...<page><box>
 198:$5A1D	story_and_event_dialogue	Pekeji: Wh-Whaaat?!<page><box>Koppa: You!<page><box>Koppa: You're not the Lord!!<page><box>Oryu: Who are you?!<page><box>
 198:$5A57	story_and_event_dialogue	Lord: Heh heh...<page><box>Lord: Have you forgotten?<page><box>Lord: I am Zagan!!<page><box>Pekeji: What?! The Lord is Zagan?!<page><box>Pekeji: What in the world is going on?!<page><box>Obaba: That is not Zagan!<page><box>Obaba: It is all that remains of him...<page><box>Obaba: Zagan's evil spirit.<page><box>Obaba: It has possessed the Lord!<page><box>Lord: Heh heh... The Princess is mine.<page><box>Lord: She can no longer return.<page><box>
 198:$5B56	story_and_event_dialogue	Oryu: Ateka?!<page><box>Oryu: Where is Ateka?!<page><box>
-198:$5B72	story_and_event_dialogue	Lord: Heh heh... In the labyrinth beneath the desert...<page><box>Lord: The land of my demon clan...<page><box>
+198:$5B72	story_and_event_dialogue	Lord: Heh heh... In the labyrinth beneath the<br>desert...<page><box>Lord: The land of my demon clan...<page><box>
 198:$5BA6	story_and_event_dialogue	"Lord: The ""Abyssal Depths""...<page><box>"
 198:$5BCC	story_and_event_dialogue	Lord: The Princess's blood as a shrine maiden shall empower my demon clan!<page><box>Lord: Gwah ha ha ha ha!!
 198:$5C04	story_and_event_dialogue	<box>
@@ -920,11 +920,11 @@ id	sections	draft
 198:$5C14	story_and_event_dialogue	Lord: Ugh... What happened to me...?<page><box>
 198:$5C30	story_and_event_dialogue	"Obaba: You intend to go after her?<page><box>Koppa: Of course. We can't just leave her there!<page><box>Koppa: Tell us anything you know about the ""Abyssal Depths"".<page><box>Obaba: Beyond the desert outside the town entrance...<page><box>Obaba: I hear it lies far beyond Jahannam's Gate.<page><box>Obaba: You can take neither items nor companions.<page><box>Obaba: This will be your most grueling journey yet.<page><box>Koppa: Bring it on.<page><box>"
 198:$5D49	story_and_event_dialogue	Koppa: <name>! This is the last one!<page><box>Koppa: Let's give it everything we've got!!<page><box>
-198:$5D9B	story_and_event_dialogue	Zagan: I-Impossible... A human reached the Abyssal Depths...?<page><box>Zagan: Ugh... It hurts...<page><box>Zagan: The demon miasma is fading...<page><box>Zagan: No... I don't want to disappear!<page><box>Zagan: I am not ready to vanish...<page><box>Zagan: I... still...<page><box>Zagan: don't want...<page><box>Zagan: to...<page><box>Zagan: Gwaaaaaah!<page>
+198:$5D9B	story_and_event_dialogue	Zagan: I-Impossible... A human reached the Abyssal<br>Depths...?<page><box>Zagan: Ugh... It hurts...<page><box>Zagan: The demon miasma is fading...<page><box>Zagan: No... I don't want to disappear!<page><box>Zagan: I am not ready to vanish...<page><box>Zagan: I... still...<page><box>Zagan: don't want...<page><box>Zagan: to...<page><box>Zagan: Gwaaaaaah!<page>
 198:$5E40	story_and_event_dialogue	Koppa: Are you all right, Princess?<page><box>Ateka: Ah...<page><box>
 198:$5E64	story_and_event_dialogue	Koppa: <name>! Thank goodness! She's safe!<page><box>
 198:$5E80	story_and_event_dialogue	Ateka: Wh-What happened to me...?<page><box>
-198:$5E94	story_and_event_dialogue	Koppa: These are the Abyssal Depths.<page><box>Koppa: We came to rescue you.<page><box>Ateka: ...!<page><box>Koppa: Hm? What's wrong?<page><box>Ateka: Nothing. I'm fine.<page><box>Koppa: All right. Let's return to the Town of Ilpa.<page><box>
+198:$5E94	story_and_event_dialogue	Koppa: These are the Abyssal Depths.<page><box>Koppa: We came to rescue<br>you.<page><box>Ateka: ...!<page><box>Koppa: Hm? What's wrong?<page><box>Ateka: Nothing. I'm fine.<page><box>Koppa: All right. Let's return to the Town of Ilpa.<page><box>
 198:$5F06	story_and_event_dialogue	Oro: For a while, I feared the worst. I'm truly glad you're safe, Princess.<page><box>
 198:$5F3C	story_and_event_dialogue	Lord: First the Evil God, and now this...<page><box>Lord: I cannot begin to express my gratitude.<page><box>
 198:$5F86	story_and_event_dialogue	Koppa: Don't mention it. That was nothing!<page><box>
@@ -937,14 +937,14 @@ id	sections	draft
 198:$610E	story_and_event_dialogue	Everyone: Ha ha ha ha!<page><box>
 198:$611C	story_and_event_dialogue	Koppa: Why, you!<page><box>Koppa: This whole mess was Pekeji's fault to begin with!<page><box><delay:1E>Everyone: Ha ha ha ha!<page><box><delay:1E>Pekeji: What did you say?!<page><box><delay:1E>Koppa: You wanna go, punk?!<page><box>
 198:$6176	story_and_event_dialogue	Lord: To think you conquered even the Abyssal Depths...<page><box>Lord: You may well be a true Wanderer.<page><box>
-198:$61BA	story_and_event_dialogue	Ateka: Oh! I just remembered!<page><box>Ateka: While Zagan held me captive...<page><box>Ateka: I had a dream.<page><box>Ateka: Someone appeared before me...<page><box>Ateka: and spoke these words.<page><box>Ateka: A true Wanderer shall soon come to rescue you.<page><box>Ateka: When that time comes, give this to him...<page><box>
+198:$61BA	story_and_event_dialogue	Ateka: Oh! I just<br>remembered!<page><box>Ateka: While Zagan held me captive...<page><box>Ateka: I had a dream.<page><box>Ateka: Someone appeared before me...<page><box>Ateka: and spoke these<br>words.<page><box>Ateka: A true Wanderer shall soon come to rescue you.<page><box>Ateka: When that time comes, give this to him...<page><box>
 198:$6263	story_and_event_dialogue	Ateka: Then <name> came, and I awoke...<page><box>Ateka: with this in my hand.<page><box>Ateka: Thinking back, the person in my dream...<page><box>Ateka: may have been Kron, god of travelers.<page><box>Ateka: <name>, please take this.<page><box>
 198:$62F7	story_and_event_dialogue	<name> obtained the Wanderer's Mark!!<delay:F0><delay:C0><page><box>
 198:$631D	story_and_event_dialogue	Pekeji: What's your problem?!<page><box><delay:1E>Koppa: What's yours?!<page><box>
 198:$6344	story_and_event_dialogue	Sachi: You two can keep this up until sunset.<page><box>
 198:$6363	story_and_event_dialogue	Everyone: Ha ha ha ha!
 198:$6371	story_and_event_dialogue	<name> obtained the Wanderer's Mark!!<delay:F0><delay:C0><page><box>
-198:$639F	story_and_event_dialogue	Wanda: Hey, old man! You here?<page><box>
+198:$639F	story_and_event_dialogue	Wanda: Hey, old man! You<br>here?<page><box>
 198:$63B9	story_and_event_dialogue	Blacksmith: Yes? What is it?<page><box>
 198:$63CA	story_and_event_dialogue	Nuwanko: We want you to hold on to this.<page><box>
 198:$63E6	story_and_event_dialogue	Blacksmith: This thing is awfully dirty...<page><box>Wanda: It was buried in the desert.<page><box>Nuwanko: We aren't sure what it is, but it might be valuable.<page><box>Wanda: If we repair it, we might sell it for a lot of Gitan.<page><box>
@@ -960,7 +960,7 @@ id	sections	draft
 198:$65F9	story_and_event_dialogue	Oro: I-I definitely heard it growl. Terrifying...<page><box>
 198:$661D	story_and_event_dialogue	Blacksmith: We hear it every night.<page><box>Blacksmith: It's impossible to sleep...<page><box>
 198:$664A	story_and_event_dialogue	Koppa: What are you all so scared of? Pathetic!<page><box>Koppa: Compared to a monster, this is nothing.<page><box>
-198:$668B	story_and_event_dialogue	???: Grrrr... Wh-Where am I...?<page><box>
+198:$668B	story_and_event_dialogue	???: Grrrr... Wh-Where am<br>I...?<page><box>
 198:$66A9	story_and_event_dialogue	Oro: I-It spoke?!<page><box>
 198:$66BB	story_and_event_dialogue	Koppa: H-Hey!<page><box>Koppa: What are you?! Show yourself!<page><box>???: Grrrr...<page><box>???: I will store anyone who annoys me...<page><box>
 198:$6702	story_and_event_dialogue	Koppa: S...<page><box>Koppa: Store?!<page><box>Koppa: What's that supposed to mean?<page><box>???: MAMO-RY STORAGE!!
@@ -977,20 +977,20 @@ id	sections	draft
 198:$6949	story_and_event_dialogue	???: Could it be...?<page><box>???: <name>?<page><box>???: It is you, <name>!<page><box>
 198:$6968	story_and_event_dialogue	???: It's been so long!<page><box>???: It's me! Mamo the Wardrobe!!<page><box>
 198:$698B	story_and_event_dialogue	Koppa: Who are you?<page><box>
-198:$699C	story_and_event_dialogue	Mamo: What?!<page><box>Mamo: You don't remember me?!<page><box>Mamo: How heartless!<page><box>Mamo: But I suppose it makes sense. <name> was still a child back then.<page><box>
+198:$699C	story_and_event_dialogue	Mamo: What?!<page><box>Mamo: You don't remember<br>me?!<page><box>Mamo: How heartless!<page><box>Mamo: But I suppose it makes sense. <name> was still a child back then.<page><box>
 198:$69F5	story_and_event_dialogue	Mamo: And now you've grown into such a fine Wanderer... Mamo-ry sniffle...<page><box>
 198:$6A26	story_and_event_dialogue	Koppa: Hmm... I still don't really remember you.<page><box>
 198:$6A51	story_and_event_dialogue	Mamo: Shall I force you to remember?<page><box>Mamo: Mamo-ry SUCK...<page><box>
 198:$6A7E	story_and_event_dialogue	Koppa: Whoa! Wait!<page><box>Koppa: Please don't do that again.<page><box>Koppa: Huh... I feel like I've said that before...<page><box>
 198:$6ACC	story_and_event_dialogue	Mamo: Now that we've met again, let's be friends!<page><box>
-198:$6AEB	story_and_event_dialogue	Mamo the Wardrobe joined you!<delay:96><page><box>
+198:$6AEB	story_and_event_dialogue	Mamo the Wardrobe joined<br>you!<delay:96><page><box>
 198:$6B01	story_and_event_dialogue	Mamo: You may have forgotten, so I'll remind you...<page><box>Mamo: I can store lots of items.<page><box>Mamo: You can put them in and take them out freely. Handy, right?<page><box>Mamo: But I'll be empty when you return from a dungeon, so remember that.<page><box>Mamo: Let's go! Mamo-ry, roll out!<page><box>
 198:$6BC8	story_and_event_dialogue	Mamo: Hey, <name>! Mamo-ry reunion?<page><box>
 198:$6BE4	story_and_event_dialogue	Mamo: That's what I wanted to hear!<page><box>Mamo: I can store lots of items.<page><box>Mamo: You can put them in and take them out freely. Handy, right?<page><box>Mamo: But I'll be empty when you return from a dungeon, so remember that.<page><box>Mamo: Let's go! Mamo-ry, roll out!<page><box>
 198:$6C8A	story_and_event_dialogue	Mamo joined you!<delay:96><page><box>
 198:$6C9C	story_and_event_dialogue	Mamo: You could store items if I came along...<page><box>Mamo: Mamo-ry disappointed!<page><box>
 198:$6CDD	story_and_event_dialogue	Ohagi and Kinako: Welcome!<page><box>Ohagi: Oh my! What a handsome man!<page><box>Kinako: Just my type!<page><box>Ohagi: Where are you from?<page><box>Kinako: How old are you?<page><box>Ohagi: What do you do?<page><box>Kinako: Where do you live?<page><box>
-198:$6D4E	story_and_event_dialogue	Ohagi: Oh my!<page><box>Ohagi: How could we forget the most important question?!<page><box>
+198:$6D4E	story_and_event_dialogue	Ohagi: Oh my!<page><box>Ohagi: How could we forget the most important<br>question?!<page><box>
 198:$6D76	story_and_event_dialogue	Ohagi and Kinako: What<delay:14><D2>is<delay:14><D2>your<delay:14><D2>name<delay:14><D2>?<page><box>
 198:$6D94	story_and_event_dialogue	Ohagi and Kinako: <name>!<page><box>Ohagi: <name>...<delay:3C> Mmm, what a lovely name!<page><box>Ohagi: So cute! Eek!!<page><box>
 198:$6DCF	story_and_event_dialogue	Kinako: And such a cute face!<page><box>Kinako: Just my type! Eek!!<page><box>
@@ -998,8 +998,8 @@ id	sections	draft
 198:$6EB4	story_and_event_dialogue	Kinako: Hey! You're telling him about that already?!<page><box>
 198:$6ED7	story_and_event_dialogue	Ohagi: Why not?<page><box>Ohagi: <name> is so cute that I want to tell him.<page><box>Kinako: Hmm...<page><box>Kinako: Fine, then...<page><box>Kinako: But only a little.<page><box>
 198:$6F2A	story_and_event_dialogue	Ohagi: The truth is, right now...<page><box>Ohagi: we're creating something unlike anything anyone has ever seen.<page><box>Kinako: But for now, this stays a secret between us and <name>.<page><box>
-198:$6F89	story_and_event_dialogue	Ohagi: It's almost finished, so come visit us often.<page><box>Ohagi: Tee-hee.<page><box>Ohagi: That's all for now!<page><box>Ohagi and Kinako: Come again!<page><box>
-198:$6FF1	story_and_event_dialogue	Ohagi: Eek!<page><box>Ohagi: <name>!!<page><box>Kinako: It's done! We finished it!<page><box>Kinako: We really did it!<page><box>Ohagi: Yes! At last, it's complete!<page><box>Ohagi: Our masterpiece!!<page><box>Kinako: It's incredible!<page><box>Kinako: Prepare to be amazed!!<page><box>
+198:$6F89	story_and_event_dialogue	Ohagi: It's almost finished, so come visit us often.<page><box>Ohagi: Tee-hee.<page><box>Ohagi: That's all for now!<page><box>Ohagi and Kinako: Come<br>again!<page><box>
+198:$6FF1	story_and_event_dialogue	Ohagi: Eek!<page><box>Ohagi: <name>!!<page><box>Kinako: It's done! We finished it!<page><box>Kinako: We really did it!<page><box>Ohagi: Yes! At last, it's complete!<page><box>Ohagi: Our masterpiece!!<page><box>Kinako: It's incredible!<page><box>Kinako: Prepare to be<br>amazed!!<page><box>
 198:$705F	story_and_event_dialogue	Ohagi and Kinako: Ta-daaa!!<page><box>
 198:$7073	story_and_event_dialogue	Kinako: Well? Well? Well?<page><box>Kinako: Are you amazed? Are you?!<page><box>Ohagi: This doll can move!<page><box>Ohagi: It even shoots arrows and fights beside you!!<page><box>Kinako: Those nasty monsters won't stand a chance now!<page><box>
 198:$70F1	story_and_event_dialogue	Ohagi: Well? Isn't it fabulous?<page><box>Ohagi: Would you like to try it, <name>?<page><box>Ohagi: Five hundred Gitan.<page><box>Ohagi: You won't regret it.
@@ -1009,12 +1009,12 @@ id	sections	draft
 198:$7213	story_and_event_dialogue	Kinako: You're a young man, <name>.<page><box>Kinako: Sometimes you'll want to go somewhere alone. Tee-hee.<page><box>Ohagi and Kinako: Aren't we thoughtful?!<page><box>
 198:$7264	story_and_event_dialogue	Kinako: When the doll returns, we'll look after it.<page><box>Ohagi: So whenever you want to take it into a dungeon, stop by our shop!<page><box>Ohagi and Kinako: We'll be waiting!<page>
 198:$72D7	story_and_event_dialogue	Ohagi: <name>...<page><box>Ohagi: Nothing in life comes free.<page>
-198:$72F8	story_and_event_dialogue	Ohagi: Oh my! What a shame!<page><box>Ohagi: You won't find a doll this glamorous anywhere else!<page><box>Kinako: You truly don't want it?<page><box>Kinako: What a waste!<page>
+198:$72F8	story_and_event_dialogue	Ohagi: Oh my! What a shame!<page><box>Ohagi: You won't find a doll this glamorous anywhere<br>else!<page><box>Kinako: You truly don't want it?<page><box>Kinako: What a waste!<page>
 198:$7346	story_and_event_dialogue	Ohagi: Tee-hee. You changed your mind after all.<page><box>Ohagi: Oh, you! You want it, don't you?<page><box>
 198:$7373	story_and_event_dialogue	Kinako: Here.<page><box>Kinako: <cF8>h<cF8>i Unit. Five hundred Gitan.
 198:$7390	story_and_event_dialogue	Ohagi: Oh my, <name>. No window-shopping!<page>
 198:$73C7	story_and_event_dialogue	Ohagi and Kinako: Welcome!<page><box>Ohagi: Oh my! <name>! Where's your doll?<page><box>Kinako: D-Did you...<page><box>Kinako: Did you really...<page><box>Kinako: break it?!<page><box>Ohagi: Oh my! What a shock!<page><box>
-198:$742B	story_and_event_dialogue	Ohagi: W-We...<page><box>Ohagi: won't give up!<page><box>Ohagi: Something like this won't defeat us!!<page><box>Kinako: That's right!<page><box>Kinako: We made a new one in case this happened!<page><box>Kinako: Aren't we thoughtful?!<page><box>
+198:$742B	story_and_event_dialogue	Ohagi: W-We...<page><box>Ohagi: won't give up!<page><box>Ohagi: Something like this won't defeat us!!<page><box>Kinako: That's right!<page><box>Kinako: We made a new one in case this happened!<page><box>Kinako: Aren't we<br>thoughtful?!<page><box>
 198:$74AB	story_and_event_dialogue	Ohagi and Kinako: Ta-daaa!!<page><box>Ohagi: <cF8>h<cF8>i Unit!<page><box>Ohagi: Five hundred Gitan!
 198:$74D6	story_and_event_dialogue	Ohagi: Thank you!<page><box>Ohagi: It's starting over from scratch, so take better care of it this time!<page><box>
 198:$7507	story_and_event_dialogue	<cF8>h<cF8>i Unit joined you!<delay:96><page>
@@ -1023,7 +1023,7 @@ id	sections	draft
 198:$756F	story_and_event_dialogue	Ohagi: Tee-hee. You changed your mind after all.<page><box>Ohagi: Oh, you! You want it, don't you?<page><box>
 198:$759C	story_and_event_dialogue	Kinako: Here. <cF8>h<cF8>i Unit.<page><box>Kinako: Five hundred Gitan.
 198:$75B9	story_and_event_dialogue	Ohagi: Oh my, <name>. No window-shopping!<page>
-198:$75E5	story_and_event_dialogue	Ohagi: I can tell just by looking, <name>...<page><box>Ohagi: You broke it again, didn't you?<page><box>Kinako: We made you a new one.<page><box>
+198:$75E5	story_and_event_dialogue	Ohagi: I can tell just by looking, <name>...<page><box>Ohagi: You broke it again, didn't you?<page><box>Kinako: We made you a new<br>one.<page><box>
 198:$7630	story_and_event_dialogue	Kinako: Here. <cF8>h<cF8>i Unit.<page><box>Kinako: Five hundred Gitan.
 198:$764D	story_and_event_dialogue	Ohagi: Thank you!<page><box>Ohagi: It's starting over from scratch, so take better care of it this time!<page><box>
 198:$767E	story_and_event_dialogue	<cF8>h<cF8>i Unit joined you!<delay:96><page>
@@ -1037,33 +1037,33 @@ id	sections	draft
 198:$793F	story_and_event_dialogue	Ohagi: Will you take <cF8>h<cF8>i Unit?
 198:$7955	story_and_event_dialogue	Ohagi: Keep treating it gently for years to come!<page><box>Ohagi: Tee-hee!<page><box>
 198:$797B	story_and_event_dialogue	The doll powered up into <cF8>h<cF8>i Unit!<delay:3C><page><box>
-198:$79A0	story_and_event_dialogue	Ohagi and Kinako: Come again!<page>
-198:$79B4	story_and_event_dialogue	Ohagi: Oh my.<page><box>Ohagi: Could it be...<page><box>Ohagi: <name>, are you thinking of seeing someone else?<page><box>Ohagi: Well, <name>, you're a man. You have your reasons.<page><box>Ohagi: We'll look after the doll.<page>
+198:$79A0	story_and_event_dialogue	Ohagi and Kinako: Come<br>again!<page>
+198:$79B4	story_and_event_dialogue	Ohagi: Oh my.<page><box>Ohagi: Could it be...<page><box>Ohagi: <name>, are you thinking of seeing someone else?<page><box>Ohagi: Well, <name>, you're a man. You have your<br>reasons.<page><box>Ohagi: We'll look after the doll.<page>
 198:$7A22	story_and_event_dialogue	Ohagi: Hey, <name>!<page><box>Ohagi: What happened?!<page><box>Kinako: You promised to treat it well!!<page><box>Ohagi: Honestly! Can you be gentle this time?
-198:$7A7A	story_and_event_dialogue	Ohagi: Don't make it cry again!<page><box>
+198:$7A7A	story_and_event_dialogue	Ohagi: Don't make it cry<br>again!<page><box>
 198:$7A8E	story_and_event_dialogue	<cF8>h<cF8>i Unit joined you!<delay:96><page>
 198:$7AA6	story_and_event_dialogue	Ohagi: No! I can't believe it! This is why men are... Grumble...<page>
 198:$7AD0	story_and_event_dialogue	Ohagi: Can you be gentle this time?
-199:$419C	story_and_event_dialogue	Bank Teller: I love this town...<page><box>Bank Teller: So I decided to do my part and work hard!<page><box>
+199:$419C	story_and_event_dialogue	Bank Teller: I love this<br>town...<page><box>Bank Teller: So I decided to do my part and work hard!<page><box>
 199:$41C5	story_and_event_dialogue	Bank Teller: Welcome.<page><box>Bank Teller: How may I help you?
 199:$41E3	story_and_event_dialogue	Bank Teller: We look forward to serving you again.<page>
 199:$41FF	story_and_event_dialogue	Bank Teller: Thank you.<page><box>Bank Teller: We are currently holding <cF8>l Gitan for you.<page><box>
 199:$423E	story_and_event_dialogue	Bank Teller: I am very sorry to tell you this...<page><box>Bank Teller: You do not appear to be carrying any Gitan.<page><box>
-199:$4280	story_and_event_dialogue	Bank Teller: I will deposit...<page><box>Bank Teller: Oh dear...<page><box>Bank Teller: Dear customer!<page><box>Bank Teller: The vault is full!<page><box>Bank Teller: I am terribly sorry...<page><box>Bank Teller: We cannot accept any more deposits.<page><box>
+199:$4280	story_and_event_dialogue	Bank Teller: I will deposit...<page><box>Bank Teller: Oh dear...<page><box>Bank Teller: Dear customer!<page><box>Bank Teller: The vault is<br>full!<page><box>Bank Teller: I am terribly sorry...<page><box>Bank Teller: We cannot accept any more deposits.<page><box>
 199:$42F3	story_and_event_dialogue	Bank Teller: How much would you like to deposit?
 199:$430D	story_and_event_dialogue	Bank Teller: Certainly. I will deposit <cF8>j Gitan.<page><box>
 199:$433A	story_and_event_dialogue	Bank Teller: I am terribly sorry...<page><box>Bank Teller: We are not holding any Gitan for you.<page><box>
 199:$437C	story_and_event_dialogue	Bank Teller: I am terribly sorry...<page><box>Bank Teller: You cannot carry any more Gitan.<page><box>
 199:$43BD	story_and_event_dialogue	Bank Teller: How much would you like to withdraw?
 199:$43D8	story_and_event_dialogue	Bank Teller: Certainly. I will return <cF8>j Gitan to you.<page><box>
-199:$4400	story_and_event_dialogue	Bank Teller: This is the Bank.<page><box>Bank Teller: Please return when you have Gitan to deposit.<page>
+199:$4400	story_and_event_dialogue	Bank Teller: This is the<br>Bank.<page><box>Bank Teller: Please return when you have Gitan to deposit.<page>
 199:$4437	story_and_event_dialogue	Big Moai: Come on, tell me a spell!<page><box>Big Moai: Or I would say that, but I'm not ready yet. Come back later.<page>
-199:$448E	story_and_event_dialogue	Big Moai: Hey!<page><box>Big Moai: You finally found me!<page><box>Big Moai: Oh well. Tell me a spell.<page><box>
+199:$448E	story_and_event_dialogue	Big Moai: Hey!<page><box>Big Moai: You finally found<br>me!<page><box>Big Moai: Oh well. Tell me a spell.<page><box>
 199:$44D8	story_and_event_dialogue	Big Moai: Come on, tell me a spell!<page><box>Big Moai: Something good might happen.<page><box>
 199:$451A	story_and_event_dialogue	Big Moai: Shwoosh, shwoosh... I don't know that spell.<page>
 199:$4542	story_and_event_dialogue	Big Moai: Hnnngh...<delay:1E> Hah!!!
 199:$4558	story_and_event_dialogue	<name> received<br><cF8>g!<page><box>
-199:$4569	story_and_event_dialogue	Big Moai: We'll meet again somewhere.<page><box>Big Moai: Until then, farewell.<page><box>
+199:$4569	story_and_event_dialogue	Big Moai: We'll meet again somewhere.<page><box>Big Moai: Until then,<br>farewell.<page><box>
 199:$4596	story_and_event_dialogue	Big Moai: Incredible!!<page><box>Big Moai: You've completed every spell!<page><box>Big Moai: I'm retiring now.<page><box>Big Moai: From now on, tell your spells to my son.<page><box>Big Moai: Adios. This is farewell forever. Don't cry, baby.<page>
 199:$4640	story_and_event_dialogue	Big Moai: I'm growing tired of listening to spells.<page><box>Big Moai: So I've decided to travel.<page><box>Big Moai: Don't come looking for me.<page><box>Big Moai: Adios. Farewell.<page><box>
 199:$46B3	story_and_event_dialogue	Big Moai: Baboom... No window-shopping.<page>
@@ -1097,7 +1097,7 @@ id	sections	draft
 199:$4B30	story_and_event_dialogue	Shopkeeper: This is the item shop. We carry all kinds of items.<page><box>Shopkeeper: I'll show you next time you visit.<page>
 199:$4B70	story_and_event_dialogue	Blacksmith: Careful there.<page><box>Blacksmith: If you need something, speak to me here.<page><box>
 199:$4BA3	story_and_event_dialogue	Blacksmith: What can I do for you?
-199:$4BBC	story_and_event_dialogue	Blacksmith: Understood.<page><box>Blacksmith: Come back anytime you change your mind.<page>
+199:$4BBC	story_and_event_dialogue	Blacksmith: Understood.<page><box>Blacksmith: Come back anytime you change your<br>mind.<page>
 199:$4BE8	story_and_event_dialogue	Blacksmith: Hm...?<page><box>Blacksmith: You aren't carrying a sword.<page><box>
 199:$4C09	story_and_event_dialogue	Blacksmith: Sorry.<page><box>Blacksmith: My special technique needs time before I can use it again.<page><box>Blacksmith: Go cut loose in a dungeon. I should be ready when you return.<page><box>
 199:$4C73	story_and_event_dialogue	Blacksmith: Sorry. You don't have enough Gitan.<page><box>Blacksmith: Strengthening a sword costs 1,500 Gitan.<page><box>
@@ -1133,8 +1133,8 @@ id	sections	draft
 199:$5274	story_and_event_dialogue	Blacksmith: Sorry, the shop isn't open yet.<page>
 199:$5292	story_and_event_dialogue	Blacksmith: Which service should I explain?
 199:$52A6	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Strengthen"".<page><box>Blacksmith: The price is 1,500 Gitan.<page><box>Blacksmith: I can Strengthen weapons.<page><box>Blacksmith: Hand me the weapon you want and I'll Strengthen it immediately.<page><box>Blacksmith: A weapon grows more effective each time it is Strengthened.<page><box>Blacksmith: That will give you the advantage in battle.<page><box>Blacksmith: But every weapon has a strengthening limit.<page><box>Blacksmith: Please keep that in mind.<page><box>"
-199:$53BD	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Repair"".<page><box>Blacksmith: The price is 500 Gitan.<page><box>Blacksmith: I can Repair Bracelets.<page><box>Blacksmith: A Bracelet may crack when you take damage.<page><box>Blacksmith: Bring me a cracked one and I'll Repair it immediately.<page><box>Blacksmith: A cracked Bracelet is in danger.<page><box>Blacksmith: Take more damage and it may break and disappear.<page><box>Blacksmith: Please be careful.<page><box>"
-199:$54E7	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Synthesis"".<page><box>Blacksmith: Synthesis combines special item abilities.<page><box>Blacksmith: Weapons, Shields, and Bracelets can be synthesized.<page><box>Blacksmith: Unfortunately, I don't perform Synthesis here.<page><box>Blacksmith: You'll need a ""Synthesis Pot"".<page><box>Blacksmith: Place the items you want to synthesize inside it.<page><box>Blacksmith: Also...<page><box>Blacksmith: I hear a monster called Mini Mixer can perform Synthesis too.<page><box>Blacksmith: Apparently, you throw the items at it.<page><box>Blacksmith: But if you fail to defeat it, it will carry your items away.<page><box>Blacksmith: Be careful.<page><box>Blacksmith: One more thing.<page><box>Blacksmith: Both methods follow the same rule.<page><box>Blacksmith: The first item inserted becomes the base.<page><box>Blacksmith: Don't get the order wrong.<page><box>"
+199:$53BD	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Repair"".<page><box>Blacksmith: The price is 500 Gitan.<page><box>Blacksmith: I can Repair Bracelets.<page><box>Blacksmith: A Bracelet may crack when you take damage.<page><box>Blacksmith: Bring me a cracked one and I'll Repair it immediately.<page><box>Blacksmith: A cracked Bracelet is in danger.<page><box>Blacksmith: Take more damage and it may break and disappear.<page><box>Blacksmith: Please be<br>careful.<page><box>"
+199:$54E7	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Synthesis"".<page><box>Blacksmith: Synthesis combines special item abilities.<page><box>Blacksmith: Weapons, Shields, and Bracelets can be synthesized.<page><box>Blacksmith: Unfortunately, I don't perform Synthesis<br>here.<page><box>Blacksmith: You'll need a ""Synthesis Pot"".<page><box>Blacksmith: Place the items you want to synthesize inside it.<page><box>Blacksmith: Also...<page><box>Blacksmith: I hear a monster called Mini Mixer can perform Synthesis too.<page><box>Blacksmith: Apparently, you throw the items at it.<page><box>Blacksmith: But if you fail to defeat it, it will carry your items away.<page><box>Blacksmith: Be careful.<page><box>Blacksmith: One more thing.<page><box>Blacksmith: Both methods follow the same rule.<page><box>Blacksmith: The first item inserted becomes the base.<page><box>Blacksmith: Don't get the order wrong.<page><box>"
 199:$5701	story_and_event_dialogue	"Blacksmith: Understood.<page><box>Blacksmith: Let me explain ""Remove"".<page><box>Blacksmith: The price is 1,000 Gitan.<page><box>Blacksmith: ""Remove"" takes an ability off a synthesized item.<page><box>Blacksmith: An ability you never use only wastes a Synthesis slot.<page><box>Blacksmith: In that case, it is best to Remove it.<page><box>Blacksmith: Hand me the item and I'll take it off immediately.<page><box>"
 199:$57F3	story_and_event_dialogue	Kinako: Welco...<page><box>Kinako: !!!!<page><box>Kinako: What a handsome man!<page>
 199:$5810	story_and_event_dialogue	Kinako: Don't rush me!<page>
@@ -1162,7 +1162,7 @@ id	sections	draft
 199:$5C0E	story_and_event_dialogue	Good: I see... Will you undertake a new rescue instead?
 199:$5C3D	story_and_event_dialogue	Good: Roger!<page><box>Good: I shall begin the procedure immediately!<page><box>
 199:$5C5C	story_and_event_dialogue	Good: Which connection method would you like?
-199:$5C78	story_and_event_dialogue	"Good: This procedure will erase your previous Rescue Gate.<page><box>Good: To visit it again, you will need to repeat the procedure.<page><box>Good: Please understand.<page><box>Good: I shall briefly explain the Cable procedure.<page><box>Good: Connect the Link Cable and confirm the other player is ready.<page><box>Good: Did they select ""Adventure"", then ""SOS!"" from the game menu?<page><box>Good: They must then select ""Cable"".<page><box>Good: That completes their preparation.<page><box>Good: After they send the SOS data, press the A Button.<page><box>Good: They press! You press! Now receive the SOS of the person you wish to save!!"
+199:$5C78	story_and_event_dialogue	"Good: This procedure will erase your previous Rescue Gate.<page><box>Good: To visit it again, you will need to repeat the procedure.<page><box>Good: Please understand.<page><box>Good: I shall briefly explain the Cable procedure.<page><box>Good: Connect the Link Cable and confirm the other player is ready.<page><box>Good: Did they select ""Adventure"", then ""SOS!"" from the game menu?<page><box>Good: They must then select ""Cable"".<page><box>Good: That completes their preparation.<page><box>Good: After they send the SOS data, press the A<br>Button.<page><box>Good: They press! You press! Now receive the SOS of the person you wish to save!!"
 199:$5E2B	story_and_event_dialogue	Good: Hm? The connection failed!<page><box>Good: Please exchange the data within about ten seconds after they send it.<page><box>Good: Sorry for the trouble, but please try again.<page><box>
 199:$5EA1	story_and_event_dialogue	Good: Hmm...?<page><box>Good: This person...<page><box>Good: appears to have already been rescued!<page><box>
 199:$5ED5	story_and_event_dialogue	"Good: Entering a Password will erase your previous Rescue Gate.<page><box>Good: To visit it again, you will have to re-enter the Password.<page><box>Good: Please understand.<page><box>Good: Now, enter the ""SOS!"" Password!<page>"
@@ -1170,11 +1170,11 @@ id	sections	draft
 199:$5FAD	story_and_event_dialogue	Good: You cannot enter that dungeon yet!<page><box>Good: Advance the story a little further, then return!<page>
 199:$5FF5	story_and_event_dialogue	Good: Hmm...?<page><box>Good: That Password cannot be used because its rescue is already complete!<page><box>
 199:$602E	story_and_event_dialogue	"Good: The ""SOS!"" Password appears to be wrong!<page><box>Good: Please try again!<page>"
-199:$605E	story_and_event_dialogue	Setsu: I wish to watch over those who risk their lives in battle...<page><box>Setsu: Just like the Captain...<page><box>Setsu: This is the Rescue Team. Would you like an explanation?
+199:$605E	story_and_event_dialogue	Setsu: I wish to watch over those who risk their lives in battle...<page><box>Setsu: Just like the<br>Captain...<page><box>Setsu: This is the Rescue Team. Would you like an explanation?
 199:$60C2	story_and_event_dialogue	Setsu: This is the Rescue Team. Would you like an explanation?
 199:$60E8	story_and_event_dialogue	Setsu: Return anytime you would like an explanation.<page>
-199:$6106	story_and_event_dialogue	"Setsu: Many Wanderers besides you travel throughout the country.<page><box>Setsu: Some have only just become Wanderers...<page><box>Setsu: Others are veterans who have cleared every kind of dungeon.<page><box>Setsu: All of them are working hard and taking on challenges.<page><box>Setsu: But when a Wanderer collapses, their items are lost...<page><box>Setsu: ""I cannot lose this item!<page><box>Someone, please help me!""<page><box>Setsu: At such a time, you can rescue that person yourself.<page><box>Setsu: The process is simple.<page><box>Setsu: Use a Link Cable or Password to enter that person's dungeon...<page><box>Setsu: Reach the person you wish to save, and they will be revived.<page><box>Setsu: If you safely rescue a friend who has called for help...<page><box>Setsu: that friend will surely respect you forever.<page>"
-199:$62F0	story_and_event_dialogue	"Setsu: I wish to watch over those who risk their lives in battle...<page><box>Setsu: Just like the Captain...<page><box>Setsu: This is the Rescue Team.<page><box>Setsu: Would you like to hear the previous ""Revival"" Password?"
+199:$6106	story_and_event_dialogue	"Setsu: Many Wanderers besides you travel throughout the country.<page><box>Setsu: Some have only just become Wanderers...<page><box>Setsu: Others are veterans who have cleared every kind of dungeon.<page><box>Setsu: All of them are working hard and taking on<br>challenges.<page><box>Setsu: But when a Wanderer collapses, their items are lost...<page><box>Setsu: ""I cannot lose this item!<page><box>Someone, please help me!""<page><box>Setsu: At such a time, you can rescue that person yourself.<page><box>Setsu: The process is simple.<page><box>Setsu: Use a Link Cable or Password to enter that person's dungeon...<page><box>Setsu: Reach the person you wish to save, and they will be revived.<page><box>Setsu: If you safely rescue a friend who has called for help...<page><box>Setsu: that friend will surely respect you forever.<page>"
+199:$62F0	story_and_event_dialogue	"Setsu: I wish to watch over those who risk their lives in battle...<page><box>Setsu: Just like the<br>Captain...<page><box>Setsu: This is the Rescue Team.<page><box>Setsu: Would you like to hear the previous ""Revival"" Password?"
 199:$636B	story_and_event_dialogue	"Setsu: This is the Rescue Team.<page><box>Setsu: Would you like to hear the previous ""Revival"" Password?"
 199:$63A9	story_and_event_dialogue	Setsu: Then would you like an explanation of the Rescue Team?
 199:$63CB	story_and_event_dialogue	"Setsu: Return anytime you need an explanation or the ""Revival"" Password.<page>"
@@ -1185,8 +1185,8 @@ id	sections	draft
 199:$64D8	story_and_event_dialogue	Good: Roger!<page><box>Good: Return here once you are ready!<page><box>Good: We shall be waiting!<page>
 199:$6519	story_and_event_dialogue	Good: Cancel...?<page><box>Good: Did you say you wish to cancel?!<page><box>Good: What happened?! Did your friend give up waiting for you?!<page><box>Good: Or did someone else perform the rescue?!<page><box>Good: Ooooooh!<page><box>Good: I understand! This truly hurts...<page><box>Good: Then shall we close this mission and prepare for the next rescue?
 199:$65FF	story_and_event_dialogue	Good: It is understandable to hesitate. Please take time to consider it. I shall wait.<page><box>
-199:$6636	story_and_event_dialogue	Good: Understood... You must have considered this carefully.<page><box>Good: However! Your efforts have deeply moved me!<page><box>Good: I prepared a small gift!<page><box>Good: Please accept... Whoa!<page><box>Good: Your inventory is full!<page><box>Good: Make room, then please return!<page>
-199:$66FD	story_and_event_dialogue	Good: Understood... You must have considered this carefully.<page><box>Good: However! Your efforts have deeply moved me!<page><box>Good: I prepared a small gift!<page><box>Good: Please accept it!<page><box>
+199:$6636	story_and_event_dialogue	Good: Understood... You must have considered this carefully.<page><box>Good: However! Your efforts have deeply moved me!<page><box>Good: I prepared a small<br>gift!<page><box>Good: Please accept... Whoa!<page><box>Good: Your inventory is full!<page><box>Good: Make room, then please return!<page>
+199:$66FD	story_and_event_dialogue	Good: Understood... You must have considered this carefully.<page><box>Good: However! Your efforts have deeply moved me!<page><box>Good: I prepared a small<br>gift!<page><box>Good: Please accept it!<page><box>
 199:$678B	story_and_event_dialogue	<name> received<br><cF8>f!<delay:50><page><box>
 199:$679D	story_and_event_dialogue	Good: Do not be discouraged. Keep doing your best! Well done!<page>
 199:$67C7	story_and_event_dialogue	Good: Would you like to send an item to the person you rescued?
@@ -1215,7 +1215,7 @@ id	sections	draft
 199:$6F6E	story_and_event_dialogue	<name> received<br><cF8>1<br>and <cF8>f!<delay:50><page><box>
 199:$6F85	story_and_event_dialogue	Good: The Wanderer Rescue<br>Federation awards you an item<br>and a Revival Password!<page><box>
 199:$6FBA	story_and_event_dialogue	<name> received<br><cF8>1!<delay:50><page><box>
-199:$6FCD	story_and_event_dialogue	Good: The rescued player needs the Revival Password to revive.<page><box>Good: Be sure to tell them what it is!<page><box>Good: They may send you a Thank-You Password in return!<page><box>Good: If you receive one, speak to the Pigeon Handler!<page><box>Good: An even more wonderful reward may await you!<page><box>Good: I look forward to your future success!<page>
+199:$6FCD	story_and_event_dialogue	Good: The rescued player needs the Revival Password to revive.<page><box>Good: Be sure to tell them what it is!<page><box>Good: They may send you a Thank-You Password in<br>return!<page><box>Good: If you receive one, speak to the Pigeon Handler!<page><box>Good: An even more wonderful reward may await you!<page><box>Good: I look forward to your future success!<page>
 199:$70BB	story_and_event_dialogue	Good: Roger!<page><box>Good: Return here once you are ready!<page><box>Good: We shall be waiting!<page>
 199:$70FC	story_and_event_dialogue	Kume: Oh? Did something happen?<page><box>Kume: Keep your chin up!<page><box>Kume: Would you like to use the warehouse?
 199:$7132	story_and_event_dialogue	Kume: A lot of customers have been coming to retrieve their stored items lately...<page><box>Kume: It is terrible for business.<page><box>Kume: Would you like to use the warehouse?
@@ -1240,14 +1240,14 @@ id	sections	draft
 199:$74B4	story_and_event_dialogue	Kume: All right.<page><box>Kume: We will take responsibility and put it out by Tuesday.<page><box>
 199:$74E3	story_and_event_dialogue	Kame: Oh, my, my.<page><box>Kame: What is wrong? Something troubling you?<page><box>Kame: Then stay and listen to my warehouse explanation.
 199:$751D	story_and_event_dialogue	Kame: Oh, so busy, busy!<page><box>Kame: Hm?<page><box>Kame: Why, Auntie is simply irresistible!<page><box>Kame: You came to hear Auntie's ex<D2>pla<D2>na<D2>tion, did you not?
-199:$756B	story_and_event_dialogue	Kame: I said we should close the shop on a day like this.<page><box>Kame: But Kume is so diligent.<page><box>Kame: So Auntie is here working too.<page><box>Kame: You will stay for the warehouse explanation, right?
+199:$756B	story_and_event_dialogue	Kame: I said we should close the shop on a day like this.<page><box>Kame: But Kume is so<br>diligent.<page><box>Kame: So Auntie is here working too.<page><box>Kame: You will stay for the warehouse explanation, right?
 199:$75D9	story_and_event_dialogue	Kame: I am more than ready!<page><box>Kame: I will put my heart into this warehouse explanation!<page><box>Kame: So listen up!!<page><box>
 199:$7619	story_and_event_dialogue	Kame: Auntie said we did not need to clean.<page><box>Kame: But Kume claimed the dust would make her cough or something.<page><box>Kame: Cleaning was always...<page><box>Kame: Hm? Oh, right.<page><box>Kame: The point is, come back later!<page><box>Kame: Sorry, dear.<page>
-199:$76A8	story_and_event_dialogue	Kame: When it comes to the warehouse, leave it to Auntie.<page><box>Kame: Well? Would you like an explanation?
+199:$76A8	story_and_event_dialogue	Kame: When it comes to the warehouse, leave it to<br>Auntie.<page><box>Kame: Well? Would you like an explanation?
 199:$76DB	story_and_event_dialogue	Kame: Well, I never!<page><box>Kame: Trying to act tough, are we?<page><box>Kame: Very well. Auntie will be waiting.<page><box>
 199:$770A	story_and_event_dialogue	Kame: Tee-hee...<br>You are simply bursting with curiosity!<page><box>Kame: Which explanation would you like to hear?
 199:$7735	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: It will be jam-packed!<page><box>Kame: Our shop has two kinds of warehouse.<page><box>Kame: The Receptionist Kume to my left manages one of them.<page><box>Kame: The other is the wooden-floored room on your right.<page><box>Kame: Both are warehouses.<page><box>Kame: In the room on the right, simply place an item to store it.<page><box>Kame: Convenient, is it not?<page><box>Kame: And easy too!<page><box>
-199:$7817	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: A nice, juicy one!<page><box>Kame: When storing a Pot, it is best to leave nothing inside it.<page><box>Kame: Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The items inside the Pot will disappear!<page><box>Kame: I do not know why.<page><box>Kame: If it is important enough to put in a Pot...<page><box>Kame: perhaps you should carry it properly.<page><box>Kame: Maybe a Pot gets cross when you leave it behind and makes its contents vanish.<page><box>Kame: Oh, yes! Speaking of things disappearing, I just remembered!<page><box>Kame: Every so often, a strange Wanderer appears.<page><box>Kame: They try to gain levels inside the warehouse.<page><box>Kame: That is pointless. Pointless!<page><box>Kame: Utterly pointless!<page><box>Kame: Your original level returns as soon as you leave the shop.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The world would never allow such cheating, would it?<page><box>Kame: Auntie will not let anyone take the easy way out.<page><box>Kame: Just think of it as a pleasant dream and get on with your life.<page><box>
+199:$7817	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: A nice, juicy one!<page><box>Kame: When storing a Pot, it is best to leave nothing inside it.<page><box>Kame: Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The items inside the Pot will disappear!<page><box>Kame: I do not know why.<page><box>Kame: If it is important enough to put in a Pot...<page><box>Kame: perhaps you should carry it properly.<page><box>Kame: Maybe a Pot gets cross when you leave it behind and makes its contents vanish.<page><box>Kame: Oh, yes! Speaking of things disappearing, I just remembered!<page><box>Kame: Every so often, a strange Wanderer appears.<page><box>Kame: They try to gain levels inside the warehouse.<page><box>Kame: That is pointless. Pointless!<page><box>Kame: Utterly pointless!<page><box>Kame: Your original level returns as soon as you leave the shop.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The world would never allow such cheating, would<br>it?<page><box>Kame: Auntie will not let anyone take the easy way<br>out.<page><box>Kame: Just think of it as a pleasant dream and get on with your life.<page><box>
 199:$7A10	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: Soft and chewy!<page><box>Kame: Do not throw items outside the wooden-floored warehouse room.<page><box>Kame: Items thrown elsewhere become unusable.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: Auntie's power does not reach anywhere else.<page><box>Kame: Do not expect me to take responsibility that far away!<page><box>Kame: You would hate for an important item to become useless, would you not?<page><box>Kame: Then do not go throwing items around carelessly.<page><box>Kame: Auntie can only protect the wooden-floored room on the right.<page><box>Kame: If you simply must throw items, go inside and throw as many as you like.<page><box>Kame: But if an item flies out of the warehouse, do not blame Auntie!<page><box>
 199:$7BB1	story_and_event_dialogue	Kame: Oh, I see...<page><box>Kame: Very well.<page><box>Kame: Auntie will protect everything at full power.<page><box>Kame: You should make generous use of the warehouse. It pays off!<page>
 200:$40C8	story_and_event_dialogue	Mamel: Need something?<page><box>
@@ -1261,8 +1261,8 @@ id	sections	draft
 200:$4142	story_and_event_dialogue	Koppa: Hold Start while using the D-Pad to move only diagonally!<page>
 200:$4170	story_and_event_dialogue	Koppa: Press Start, then use the D-Pad to move only diagonally!<page>
 200:$419C	story_and_event_dialogue	Debug: I've never heard of that map!<page><box>
-200:$41AD	story_and_event_dialogue	Debug: Ilpa Town, upper area.<page><box>
-200:$41BF	story_and_event_dialogue	Debug: Ilpa Town, lower area.<page><box>
+200:$41AD	story_and_event_dialogue	Debug: Ilpa Town, upper<br>area.<page><box>
+200:$41BF	story_and_event_dialogue	Debug: Ilpa Town, lower<br>area.<page><box>
 200:$41D1	story_and_event_dialogue	Debug: Restaurant 1F.<page><box>
 200:$41DF	story_and_event_dialogue	Debug: Take me with you!<page><box>
 200:$41EE	story_and_event_dialogue	Pekeji: I'll do my best!<page><box>
@@ -1277,7 +1277,7 @@ id	sections	draft
 200:$4264	story_and_event_dialogue	Debug: Up-left.<page>
 200:$4272	story_and_event_dialogue	Debug: This is a Game Boy Color!<page><box>
 200:$4288	story_and_event_dialogue	Debug: This is a Game Boy Advance!<page><box>
-200:$429A	story_and_event_dialogue	Debug: Parted from companion.<page>
+200:$429A	story_and_event_dialogue	Debug: Parted from<br>companion.<page>
 200:$42A8	story_and_event_dialogue	Debug: Take me with you!<page><box>
 200:$42B7	story_and_event_dialogue	Pekeji: I'll do my best!<page>
 200:$42C8	story_and_event_dialogue	Pekeji: Aw, this is boring!<page>
@@ -1296,8 +1296,8 @@ id	sections	draft
 200:$4398	story_and_event_dialogue	Shiren: All spells complete!<page>
 200:$43AB	story_and_event_dialogue	Shiren: Subroutine Call 1.<page>
 200:$43BC	story_and_event_dialogue	Shiren: Subroutine Call 2.<page>
-200:$43CD	story_and_event_dialogue	Good: Welcome back!!<page><box>Good: This time, things ended this way, but...<page><box>Good: Your desire to help others...<page><box>Good: I felt it loud and clear!<page><box>Good: I sincerely hope you will try again!<page><box>
-200:$445A	story_and_event_dialogue	Higechiyo: Hmm...<page><box>Higechiyo: You must be terribly disappointed.<page><box>Higechiyo: But much can be learned from failure.<page><box>Higechiyo: Ho ho ho.<br>You are only getting started.<page><box>Higechiyo: I envy you.<page><box>
+200:$43CD	story_and_event_dialogue	Good: Welcome back!!<page><box>Good: This time, things ended this way, but...<page><box>Good: Your desire to help others...<page><box>Good: I felt it loud and<br>clear!<page><box>Good: I sincerely hope you will try again!<page><box>
+200:$445A	story_and_event_dialogue	Higechiyo: Hmm...<page><box>Higechiyo: You must be terribly disappointed.<page><box>Higechiyo: But much can be learned from failure.<page><box>Higechiyo: Ho ho ho.<br>You are only getting<br>started.<page><box>Higechiyo: I envy you.<page><box>
 200:$44C8	story_and_event_dialogue	This does various things.<br>Please use it somewhere deserted.
 200:$44E3	story_and_event_dialogue	Mamo can now appear.<br>Please exit and reenter the facility.<page>
 200:$450B	story_and_event_dialogue	Zenmaiger can now appear.<br>Please exit and reenter the facility.<page>
@@ -1326,7 +1326,7 @@ id	sections	draft
 200:$48FD	story_and_event_dialogue	The nine tools began to resonate!<page><box>The nine tools fused together...<page><box>They changed form...<page><box>and became the secret blade Kabura Sutegi!!<page><box>
 200:$4951	story_and_event_dialogue	<name> obtained the Kabura Sutegi!!<delay:F0><delay:C0><page><box>
 200:$4971	story_and_event_dialogue	Good: Welcome back!!<page><box>Good: Your life comes before any rescue. I am glad you returned safely!<page><box>Good: I sincerely hope you will try again!<page><box>
-200:$49C7	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: Charging ahead is not always the right path.<page><box>Higechiyo: Sometimes one needs the courage to retreat.<page><box>
+200:$49C7	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: Charging ahead is not always the right path.<page><box>Higechiyo: Sometimes one needs the courage to<br>retreat.<page><box>
 200:$4A1A	story_and_event_dialogue	"You cannot enter the ""<hspace:02>Rescue Gate<hspace:02>"" because the Receptionist is absent.<page>"
 200:$4A3E	story_and_event_dialogue	"You cannot enter this ""<hspace:02>Rescue Gate<hspace:02>"" yet.<page><box>The Rescue Team Receptionist next door can unlock it.<page><box>"
 200:$4A82	story_and_event_dialogue	Good: Please be careful!<page><box>Good: May Kron, god of travelers, grant you fair winds!<page><box>
@@ -1336,14 +1336,14 @@ id	sections	draft
 200:$4B94	story_and_event_dialogue	Dragon Guard: Gack! We have to catch them!!<page><br>Otherwise, we're...<page><box>
 200:$4BC9	story_and_event_dialogue	Dragon Guard: There they are!<br>Over there!<page><box>
 200:$4BE3	story_and_event_dialogue	Koppa: Whoa!<br>They're still chasing us, and now there are traps ahead...<page><box>
-200:$4C0C	story_and_event_dialogue	Koppa: <name>!<br>We need to move diagonally here!<page><box>Koppa: If we move diagonally, we can get away without being hit.<page><box>Koppa: Keep going, <name>!<page><box>
+200:$4C0C	story_and_event_dialogue	Koppa: <name>!<br>We need to move diagonally here!<page><box>Koppa: If we move diagonally, we can get away without being hit.<page><box>Koppa: Keep going,<br><name>!<page><box>
 200:$4C61	story_and_event_dialogue	Hold START to make diagonal movement easier.<delay:5A><page><box>
 200:$4C84	story_and_event_dialogue	Press SELECT to enter diagonal-only mode.<delay:5A><page><box>
-200:$4CA6	story_and_event_dialogue	Strong Guard: Report!<page><box>Strong Guard: They've already reached the third floor!<page><box>Strong Guard: At this rate, they'll escape!!<page><box><delay:1E>Dragon Guard: Hm. That's bad...<page><box><delay:3C>
+200:$4CA6	story_and_event_dialogue	Strong Guard: Report!<page><box>Strong Guard: They've already reached the third floor!<page><box>Strong Guard: At this rate, they'll escape!!<page><box><delay:1E>Dragon Guard: Hm. That's<br>bad...<page><box><delay:3C>
 200:$4D10	story_and_event_dialogue	???: What is it?<page><box><delay:1E>Dragon Guard: Sir!<page><br>There are escapees, but...<page><box>Dragon Guard: They're quite troublesome...<page><box><delay:1E>???: Troublesome, you say...<page><br>They may be useful.<page><box>Dragon Guard: Sir?<page><box>
 200:$4D99	story_and_event_dialogue	???: Listen.<page><br>Use the traps.<page><box>
 200:$4DB0	story_and_event_dialogue	???: Once a trap catches them, seize them at once.<page><box><delay:1E>Dragon Guard: Sir!!<page><box>
-200:$4DE1	story_and_event_dialogue	Dragon Guard: Drive them into the Sleep Trap corridor!<page><box><delay:1E>Strong Guard: Sir!!<page><box>
+200:$4DE1	story_and_event_dialogue	Dragon Guard: Drive them into the Sleep Trap<br>corridor!<page><box><delay:1E>Strong Guard: Sir!!<page><box>
 200:$4E13	story_and_event_dialogue	Strong Guard: Gack!<br>Don't let them escape!!<page><box><delay:1E>Koppa: Yikes! We have to keep moving or we'll never lose them!<page><box>
 200:$4E55	story_and_event_dialogue	Rookie Guard: There they are!<br>Hey! Over there!<page><box>
 200:$4E72	story_and_event_dialogue	Koppa: Whoa!<br>They're still after us!<page><box>
@@ -1361,7 +1361,7 @@ id	sections	draft
 203:$4250	story_and_event_dialogue	Amokachi: I do not want to go anywhere that dangerous...<page>
 203:$4271	story_and_event_dialogue	Amokachi: The food here is as delicious as ever!<page>
 203:$428F	story_and_event_dialogue	Amokachi: The food here is incredibly delicious!<page>
-203:$42AA	story_and_event_dialogue	Obaba: To think you reached the very end of the Abyssal Depths!<page><box>Obaba: Your name will forever be passed down in this desert town!<page><box>Obaba: The miasma in the air has also vanished.<page><box>Obaba: No further calamity should befall us.<page><box>Obaba: However...<page><box>Obaba: This is not a calamity, but...<page><box>Obaba: I still sense something from the fallen Magic Castle.<page><box>Obaba: The Castle Keep and the Castle Tower...<page><box>Obaba: A different miasma flows through those places.<page><box>Obaba: The cycle by which all things change...<page><box>Obaba: It seems different in those places alone...<page>
+203:$42AA	story_and_event_dialogue	Obaba: To think you reached the very end of the Abyssal Depths!<page><box>Obaba: Your name will forever be passed down in this desert town!<page><box>Obaba: The miasma in the air has also vanished.<page><box>Obaba: No further calamity should befall us.<page><box>Obaba: However...<page><box>Obaba: This is not a calamity, but...<page><box>Obaba: I still sense something from the fallen Magic<br>Castle.<page><box>Obaba: The Castle Keep and the Castle Tower...<page><box>Obaba: A different miasma flows through those places.<page><box>Obaba: The cycle by which all things change...<page><box>Obaba: It seems different in those places alone...<page>
 203:$43EB	story_and_event_dialogue	Obaba: The Abyssal Depths lie beyond the desert outside the town entrance.<page><box>Obaba: I fear this will be your most grueling journey yet...<page><box>Obaba: But please, save the Princess...<page>
 203:$4455	story_and_event_dialogue	Obaba: The Abyssal Depths lie beyond the desert outside the town entrance.<page><box>Obaba: You can take neither items nor companions.<page><box>Obaba: This will be your most grueling journey yet.<page>
 203:$44D1	story_and_event_dialogue	Obaba: Have you found the Ultimate Soil since then?<page><box>Obaba: What...?<page><box>Obaba: Not yet...?<page><box>Obaba: Ka-ka-ka-ka!!<page><box>Obaba: Forgive me.<page><box>Obaba: It seems to be a rather unusual dungeon.<page><box>Obaba: Take your time and keep trying.<page><box>Obaba: Yet...<page><box>Obaba: The flow of miasma still feels strange...<page>
@@ -1370,10 +1370,10 @@ id	sections	draft
 203:$45EF	story_and_event_dialogue	Obaba: Something appears to be happening in the dunes...<page>
 203:$4612	story_and_event_dialogue	Obaba: Leave the Lord to me.<page><box>Obaba: You must hurry after Curas at once!<page>
 203:$4654	story_and_event_dialogue	Obaba: Light of heaven and earth...<page><box>Obaba: Drive away the dark and wicked miasma...<page>
-203:$4683	story_and_event_dialogue	Obaba: Hmm... This is bad.<page><box>Obaba: No matter how I consider it, this is very bad...<page>
+203:$4683	story_and_event_dialogue	Obaba: Hmm... This is bad.<page><box>Obaba: No matter how I consider it, this is very<br>bad...<page>
 203:$46A9	story_and_event_dialogue	Obaba: The full moon will soon be upon us...<page>
 203:$46C8	story_and_event_dialogue	Obaba: Oh, even a young child like you is worried...<page><box>Obaba: It will be all right. Do not worry.<page><box>Obaba: Hope will surely come.<page>
-203:$4722	story_and_event_dialogue	Obaba: Events are always unfolding where none can see.<page><box>Obaba: By the time their movement is plain to everyone, it is already too late.<page>
+203:$4722	story_and_event_dialogue	Obaba: Events are always unfolding where none can<br>see.<page><box>Obaba: By the time their movement is plain to everyone, it is already too late.<page>
 203:$4771	story_and_event_dialogue	Obaba: Something...<page><box>Obaba: Something is about to happen...<page>
 203:$4798	story_and_event_dialogue	Obaba: The air is stagnant...<page><box>Obaba: Times like this make me fear something bad will happen...<page>
 203:$47E2	story_and_event_dialogue	Bibingida: ...<page>
@@ -1388,14 +1388,14 @@ id	sections	draft
 203:$498E	story_and_event_dialogue	"Bibingida: ""The secret to conquering dungeons...<page><box>Bibingida: is to read the Hints!""<page><box>Bibingida: ""Press B to open the menu and view Hints!""<page><box>Bibingida: ""Read the Hints and become a first-rate Wanderer!""<page><box>Bibingida: Well? Did you learn anything useful?<page>"
 203:$4A36	story_and_event_dialogue	Bibingida: I see.<br>You can read it anytime you feel like it.<page><box>Bibingida: Anyway, do your best!<page>
 203:$4A66	story_and_event_dialogue	Bibingida: It is already evening. Perhaps it is time to close the shop...<page>
-203:$4A8C	story_and_event_dialogue	Bibingida: Everyone is making such a fuss. Did something happen?<page><box>Bibingida: By the way, someone gave me this Scroll...<page><box>Bibingida: Would you like me to read it?<page><box>
-203:$4ADC	story_and_event_dialogue	Bibingida: It certainly is noisy.<page><box>Bibingida: By the way, someone gave me this Scroll...<page><box>Bibingida: Would you like me to read it?<page><box>
+203:$4A8C	story_and_event_dialogue	Bibingida: Everyone is making such a fuss. Did something happen?<page><box>Bibingida: By the way, someone gave me this<br>Scroll...<page><box>Bibingida: Would you like me to read it?<page><box>
+203:$4ADC	story_and_event_dialogue	Bibingida: It certainly is noisy.<page><box>Bibingida: By the way, someone gave me this<br>Scroll...<page><box>Bibingida: Would you like me to read it?<page><box>
 203:$4B20	story_and_event_dialogue	Bibingida: Someone gave me this Scroll...<page><box>Bibingida: Would you like me to read it?<page><box>
 203:$4B48	story_and_event_dialogue	"Bibingida: ""The secret to conquering dungeons...<page><box>Bibingida: is to read the Hints!""<page><box>Bibingida: ""Press B to open the menu and view Hints!""<page><box>Bibingida: ""Read the Hints and become a first-rate Wanderer!""<page><box>Bibingida: What in the world is this?<page>"
 203:$4BEC	story_and_event_dialogue	Bibingida: What could it be...? This Scroll has me curious...<page>
 203:$4C0F	story_and_event_dialogue	Bibingida: Business is booming again today.<page><box>Bibingida: Come on, handsome. Buy something from me.<page>
 203:$4C51	story_and_event_dialogue	Bubuyaro: I knew you could do it, big bro!<page>
-203:$4C71	story_and_event_dialogue	Bubuyaro: Levels gained in the training grounds will not count in the Abyssal Depths.<page><box>Bubuyaro: But I know you can rescue the Princess, big bro!!<page>
+203:$4C71	story_and_event_dialogue	Bubuyaro: Levels gained in the training grounds will not count in the Abyssal Depths.<page><box>Bubuyaro: But I know you can rescue the Princess, big<br>bro!!<page>
 203:$4CCA	story_and_event_dialogue	Bubuyaro: It is noisy near the town entrance...<page><box>Bubuyaro: Did something happen?<page>
 203:$4CF3	story_and_event_dialogue	Bubuyaro: Even if you gain levels in the training grounds...<page><box>Bubuyaro: More dungeons seem to reset your level now.<page>
 203:$4D39	story_and_event_dialogue	Bubuyaro: The trap arts sound difficult.<page><box>Bubuyaro: I hear your level resets when you enter, even after training...<page>
@@ -1412,8 +1412,8 @@ id	sections	draft
 203:$4FFB	story_and_event_dialogue	Goto: Well? Did you figure anything out?<page>
 203:$5013	story_and_event_dialogue	Goto: Speak to me anytime you want another look.<page>
 203:$5032	story_and_event_dialogue	Goto: We will hold them back somehow!<page><box>Goto: Hurry to Jahannam's Gate, <name>!!<page>
-203:$506C	story_and_event_dialogue	Goto: We will do our best too!<page>
-203:$507E	story_and_event_dialogue	Goto: We are counting on you!!<page>
+203:$506C	story_and_event_dialogue	Goto: We will do our best<br>too!<page>
+203:$507E	story_and_event_dialogue	Goto: We are counting on<br>you!!<page>
 203:$508D	story_and_event_dialogue	Goto: There is nothing we can do right now.<page>
 203:$50AF	story_and_event_dialogue	Goto: Things will turn out badly at this rate...<page>
 203:$50C6	story_and_event_dialogue	Goto: Everyone in this town loves gossip.<page><box>Goto: Though I suppose I do too.<page>
@@ -1423,14 +1423,14 @@ id	sections	draft
 203:$51CE	story_and_event_dialogue	Hachi the Wanderer: My friend was caught in an explosion right before my eyes...<page><box>Hachi the Wanderer: Ugh...<page><box>Hachi the Wanderer: And then... And then...<page>
 203:$5209	story_and_event_dialogue	Hachi the Wanderer: I...<page><box>Hachi the Wanderer: I...<page><box>Hachi the Wanderer: did something that can never be undone...<page>
 203:$5234	story_and_event_dialogue	Hachi the Wanderer: I received another SOS Password.<page><box>Hachi the Wanderer: I am off to rescue them! I cannot wait to put my skills to work!<page>
-203:$5279	story_and_event_dialogue	Hachi the Wanderer: Good thanked me earlier!<page><box>Hachi the Wanderer: He said he expects great things from me!<page><box>Hachi the Wanderer: I was so happy my legs started shaking!<page>
+203:$5279	story_and_event_dialogue	Hachi the Wanderer: Good thanked me earlier!<page><box>Hachi the Wanderer: He said he expects great things from<br>me!<page><box>Hachi the Wanderer: I was so happy my legs started<br>shaking!<page>
 203:$52CE	story_and_event_dialogue	Hachi the Wanderer: They say Good has scars all over his body.<page><box>Hachi the Wanderer: He must have risked himself to rescue others many times.<page><box>Hachi the Wanderer: I will rescue lots of people too and become a trusted Wanderer!<page>
 203:$534E	story_and_event_dialogue	Hachi the Wanderer: Pigeons carrying SOS Passwords keep arriving without end.<page><box>Hachi the Wanderer: I intend to rescue as many people as I can.<page>
 203:$53A7	story_and_event_dialogue	Hachi the Wanderer: When I first became a Wanderer, a rescue party saved me too...<page><box>Hachi the Wanderer: The one who rescued me was Good, right over there.<page><box>Hachi the Wanderer: I still remember that day clearly...<page>
 203:$5432	story_and_event_dialogue	Hachi the Wanderer: Why do I spend all my time rescuing people?<page><box>Hachi the Wanderer: I-It is not because I expect a reward!<page>
 203:$5477	story_and_event_dialogue	Hachi the Wanderer: My friend is calling for help!<page><box>Hachi the Wanderer: I must hurry!!<page>
 203:$54A4	story_and_event_dialogue	Higechiyo: Ho ho. This is the Training Dungeon.<page><box>Higechiyo: But it is not open yet. My apologies.<page><box>Higechiyo: Ho ho.<page>
-203:$54EA	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: This is the Training Dungeon.<page><box>Higechiyo: It returns you to Level 1 so you may retrain your body and spirit.<page><box>Higechiyo: You...<page><box>Higechiyo: You have fine eyes.<page><box>Higechiyo: Master your own path.<page><box>Higechiyo: Now, what do you seek?
+203:$54EA	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: This is the Training Dungeon.<page><box>Higechiyo: It returns you to Level 1 so you may retrain your body and spirit.<page><box>Higechiyo: You...<page><box>Higechiyo: You have fine<br>eyes.<page><box>Higechiyo: Master your own path.<page><box>Higechiyo: Now, what do you seek?
 203:$5569	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: This is the Training Dungeon.<page><box>Higechiyo: It returns you to Level 1 so you may retrain your body and spirit.<page><box>Higechiyo: Even wounded and defeated, you still walk your own path...<page><box>Higechiyo: Very well...<page><box>Higechiyo: What do you seek?
 203:$55F7	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: This is the Training Dungeon.<page><box>Higechiyo: It returns you to Level 1 so you may retrain your body and spirit.<page><box>Higechiyo: The light has not yet left your eyes.<page><box>Higechiyo: What do you seek?
 203:$566F	story_and_event_dialogue	Higechiyo: Ho ho ho.<page><box>Higechiyo: This is the Training Dungeon.<page><box>Higechiyo: It returns you to Level 1 so you may retrain your body and spirit.<page><box>Higechiyo: What do you seek?
@@ -1442,11 +1442,11 @@ id	sections	draft
 203:$5828	story_and_event_dialogue	Higechiyo: Ho ho.<page><box>Higechiyo: Next, choose the number of floors.<br><hspace:0F><hspace:0F><hspace:0F><hspace:0F><hspace:0F><hspace:0F><hspace:0F><hspace:0F>f
 203:$585B	story_and_event_dialogue	Higechiyo: Hmm...<br>I am afraid that cannot be done.<page><box>
 203:$587A	story_and_event_dialogue	"Higechiyo: Ho ho.<br>Are you certain about ""<cF8>9<cF8>af""?"
-203:$589F	story_and_event_dialogue	Higechiyo: Ho ho ho...<br>Then let the training...<page><box>Higechiyo: Hm?<page><box>Higechiyo: Ho ho ho.<page><box>Higechiyo: I know you feel uneasy, but you must go alone from here.<page><box>Higechiyo: A companion may tempt you to rely upon them.<page><box>Higechiyo: It will be too late once you lose your life.<page><box>Higechiyo: Be strict with yourself.<page><box>Higechiyo: Be kind to others.<page><box>Higechiyo: Do you understand?<page><box>Higechiyo: Then let the training begin.<page><box>Higechiyo: Do not push yourself too hard.<page><box>
+203:$589F	story_and_event_dialogue	Higechiyo: Ho ho ho...<br>Then let the training...<page><box>Higechiyo: Hm?<page><box>Higechiyo: Ho ho ho.<page><box>Higechiyo: I know you feel uneasy, but you must go alone from here.<page><box>Higechiyo: A companion may tempt you to rely upon them.<page><box>Higechiyo: It will be too late once you lose your life.<page><box>Higechiyo: Be strict with yourself.<page><box>Higechiyo: Be kind to others.<page><box>Higechiyo: Do you<br>understand?<page><box>Higechiyo: Then let the training begin.<page><box>Higechiyo: Do not push yourself too hard.<page><box>
 203:$597C	story_and_event_dialogue	Higechiyo: Ho ho.<br>Then let the training begin.<page><box>Higechiyo: Do not push yourself too hard.
 203:$59B1	story_and_event_dialogue	"Higechiyo: You wish to train in the same dungeon as before?<page><box>Higechiyo: Ho ho.<br>Are you certain about ""<cF8>9<cF8>af""?"
 203:$59F9	story_and_event_dialogue	"Higechiyo: Hm...?<br>It seems you received dungeon data through communication.<page><box>Higechiyo: Ho ho.<br>Are you certain about ""<cF8>9<cF8>af""?"
-203:$5A4B	story_and_event_dialogue	"Higechiyo: Ho ho. Now then...<page><box>Higechiyo: Shall I explain training?<page><box>Higechiyo: Leave a Mysterious Dungeon once, and everything inside changes completely.<page><box>Higechiyo: But the Training Dungeon is special.<page><box>Higechiyo: Unless you change its settings, you may play the same dungeon again.<page><box>Higechiyo: In other words, the dungeon layout is remembered.<page><box>Higechiyo: You can even remember where each item was found. Ho ho.<page><box>Higechiyo: When choosing a dungeon, select ""Same as Before"".<page><box>Higechiyo: You will enter the previous dungeon again.<page><box>Higechiyo: However...<page><box>Higechiyo: If you change the settings instead, those will be remembered from then on.<page><box>Higechiyo: Take care.<page><box>"
+203:$5A4B	story_and_event_dialogue	"Higechiyo: Ho ho. Now then...<page><box>Higechiyo: Shall I explain training?<page><box>Higechiyo: Leave a Mysterious Dungeon once, and everything inside changes completely.<page><box>Higechiyo: But the Training Dungeon is special.<page><box>Higechiyo: Unless you change its settings, you may play the same dungeon again.<page><box>Higechiyo: In other words, the dungeon layout is<br>remembered.<page><box>Higechiyo: You can even remember where each item was found. Ho ho.<page><box>Higechiyo: When choosing a dungeon, select ""Same as Before"".<page><box>Higechiyo: You will enter the previous dungeon again.<page><box>Higechiyo: However...<page><box>Higechiyo: If you change the settings instead, those will be remembered from then on.<page><box>Higechiyo: Take care.<page><box>"
 203:$5BF3	story_and_event_dialogue	Ichipeba: What a relief.<page><box>Ichipeba: The truth is, I am in love with the Princess.<page><box>Ichipeba: Blush.<page>
 203:$5C20	story_and_event_dialogue	Ichipeba: Princess!!<page>
 203:$5C30	story_and_event_dialogue	Ichipeba: The Wanado Tournament is over, but you can still enter the dungeon.<page>
@@ -1454,9 +1454,9 @@ id	sections	draft
 203:$5C86	story_and_event_dialogue	Ichipeba: The Trap Parts!<page>
 203:$5C96	story_and_event_dialogue	Ichipeba: I am helping with the town festival.<page>
 203:$5CB1	story_and_event_dialogue	Ichipeba: It is a full moon!<page>
-203:$5CBF	story_and_event_dialogue	Ichipeba: Th-The Magic Castle!<page>
+203:$5CBF	story_and_event_dialogue	Ichipeba: Th-The Magic<br>Castle!<page>
 203:$5CCF	story_and_event_dialogue	Ichipeba: I can see something like an aura around the Magic Castle.<page>
-203:$5CEF	story_and_event_dialogue	Ichipeba: These are the dunes.<page>
+203:$5CEF	story_and_event_dialogue	Ichipeba: These are the<br>dunes.<page>
 203:$5D01	story_and_event_dialogue	Ichipeba: All three of us cannot pass together!<page>
 203:$5D1B	story_and_event_dialogue	Kiko: You rescued the Princess! Thank you!<page><box>Kiko: I love you!!<page>
 203:$5D40	story_and_event_dialogue	Kiko: Please!<br>You have to rescue the Princess!!<page>
@@ -1473,8 +1473,8 @@ id	sections	draft
 203:$5EE0	story_and_event_dialogue	Komaru: Leave the exchange of dungeon data to me.<page><box>Komaru: Ask me anything!
 203:$5F0E	story_and_event_dialogue	Komaru: You are stopping?<page><box>Komaru: Come back again.<page>
 203:$5F27	story_and_event_dialogue	Komaru: Which method should I explain?
-203:$5F3A	story_and_event_dialogue	Komaru: Okay! Now then...<page><box>Komaru: I will explain Passwords.<page><box>Komaru: Have you ever wanted to show a friend the dungeon where you are training?<page><box>Komaru: A Password is one way to do that.<page><box>Komaru: I turn the dungeon you are currently exploring into a Password for you.<page><box>Komaru: Simply write it down and give it to your friend.<page><box>Komaru: Your friend brings the note to me and enters the Password. That is all!<page><box>Komaru: Easy, right?<page><box>Komaru: Make up different rules and it could be fun to play with friends!<page><box>Komaru: But do not misunderstand.<page><box>Komaru: Only the inside of the dungeon will be identical.<page><box>Komaru: You will not actually enter the dungeon together.<page><box>
-203:$60C5	story_and_event_dialogue	Komaru: Okay!<page><box>Komaru: Now then...<page><box>Komaru: I will explain the Cable.<page><box>Komaru: Ever wished for an easy way to show a friend your training dungeon?<page><box>Komaru: That is exactly when the Cable comes in!<page><box>Komaru: Speak to me and follow the Cable procedure.<page><box>Komaru: In no time at all, your friend will receive the dungeon you are exploring.<page><box>Komaru: Then your friend can play an identical copy of that dungeon.<page><box>Komaru: Convenient, right?<page><box>Komaru: Make up different rules and it could be fun to play with friends!<page><box>Komaru: But do not misunderstand.<page><box>Komaru: Only the inside of the dungeon will be identical.<page><box>Komaru: You will not actually enter the dungeon together.<page><box>
+203:$5F3A	story_and_event_dialogue	Komaru: Okay! Now then...<page><box>Komaru: I will explain Passwords.<page><box>Komaru: Have you ever wanted to show a friend the dungeon where you are training?<page><box>Komaru: A Password is one way to do that.<page><box>Komaru: I turn the dungeon you are currently exploring into a Password for you.<page><box>Komaru: Simply write it down and give it to your friend.<page><box>Komaru: Your friend brings the note to me and enters the Password. That is all!<page><box>Komaru: Easy, right?<page><box>Komaru: Make up different rules and it could be fun to play with friends!<page><box>Komaru: But do not misunderstand.<page><box>Komaru: Only the inside of the dungeon will be<br>identical.<page><box>Komaru: You will not actually enter the dungeon together.<page><box>
+203:$60C5	story_and_event_dialogue	Komaru: Okay!<page><box>Komaru: Now then...<page><box>Komaru: I will explain the Cable.<page><box>Komaru: Ever wished for an easy way to show a friend your training dungeon?<page><box>Komaru: That is exactly when the Cable comes in!<page><box>Komaru: Speak to me and follow the Cable procedure.<page><box>Komaru: In no time at all, your friend will receive the dungeon you are exploring.<page><box>Komaru: Then your friend can play an identical copy of that dungeon.<page><box>Komaru: Convenient, right?<page><box>Komaru: Make up different rules and it could be fun to play with friends!<page><box>Komaru: But do not misunderstand.<page><box>Komaru: Only the inside of the dungeon will be<br>identical.<page><box>Komaru: You will not actually enter the dungeon together.<page><box>
 203:$626B	story_and_event_dialogue	Komaru: Do you want to send dungeon data?<page><box>Komaru: Or receive it?
 203:$6294	story_and_event_dialogue	"Komaru: You want to send dungeon data?<page><box>Komaru: Is the Link Cable connected?<page><box>Komaru: Is the other player ready?<page><box>Komaru: To receive your data, the other player must visit me too.<page><box>Komaru: Have them speak to me, select ""Cable"", then choose ""Receive"".<page><box>Komaru: Once you send the data, have them press the A Button immediately.<page><box>Komaru: Now, shall we send it?"
 203:$6370	story_and_event_dialogue	Komaru: Huh...?!<br>I cannot connect.<page><box>
@@ -1485,7 +1485,7 @@ id	sections	draft
 203:$6518	story_and_event_dialogue	"Komaru: Here it comes!<page><box>Komaru: The dungeon data for ""<cF8>9<cF8>af"" has arrived!<page><box>Komaru: Select ""Same as Before"" when choosing a dungeon to play it!<page><box>Komaru: One more thing...<page><box>Komaru: If you select another dungeon, you will lose this one. Be careful!<page>"
 203:$65B5	story_and_event_dialogue	Komaru: Enter a Password you received?<page><box>Komaru: Or view the Password for your own dungeon?
 203:$65EC	story_and_event_dialogue	"Komaru: Huh?<page><box>Komaru: You have never trained before.<page><box>Komaru: But do not worry! I will choose one for you.<page><box>Komaru: Let me see...<page><box>Komaru: How about this?<page><box>Komaru: It says ""<cF8>9<cF8>af"".<page><box>Komaru: The Password is...<page><box>Komaru: ""<cF8>3"".<page><box>Komaru: Write it down.<page>"
-203:$6687	story_and_event_dialogue	"Komaru: Oh...<br>You received dungeon data through communication.<page><box>Komaru: That dungeon is ""<cF8>9<cF8>af"".<page><box>Komaru: The Password is...<page><box>Komaru: ""<cF8>3"".<page><box>Komaru: Write it down.<page>"
+203:$6687	story_and_event_dialogue	"Komaru: Oh...<br>You received dungeon data through communication.<page><box>Komaru: That dungeon is<br>""<cF8>9<cF8>af"".<page><box>Komaru: The Password is...<page><box>Komaru: ""<cF8>3"".<page><box>Komaru: Write it down.<page>"
 203:$66EF	story_and_event_dialogue	"Komaru: Let me see...<br>The dungeon you last entered was ""<cF8>9<cF8>af"".<page><box>Komaru: The Password is...<page><box>Komaru: ""<cF8>3"".<page><box>Komaru: Write it down.<page>"
 203:$6739	story_and_event_dialogue	Komaru: Okay. Now enter the Password.<page>
 203:$675B	story_and_event_dialogue	"Komaru: Here it comes!<page><box>Komaru: The dungeon data for ""<cF8>9<cF8>af"" has arrived!<page><box>Komaru: Select ""Same as Before"" when choosing a dungeon to play it!<page><box>Komaru: One more thing...<page><box>Komaru: If you select another dungeon, you will lose this one. Be careful!<page>"
@@ -1493,7 +1493,7 @@ id	sections	draft
 203:$6820	story_and_event_dialogue	Komaru: It seems you cannot enter that dungeon yet.<page><box>Komaru: You need to advance the story a little further. Keep trying!<page>
 203:$6869	story_and_event_dialogue	Koppa: We came all this way. Let us look around a little more.<page>
 203:$688B	story_and_event_dialogue	Wanda: Are you looking for a woman named Oryu?<page><box>Wanda: I saw her heading toward the dunes.<page>
-203:$68C9	story_and_event_dialogue	Now is not the time to fight!<page><box>Oryu is waiting on the hill overlooking the Magic Castle!<page>
+203:$68C9	story_and_event_dialogue	Now is not the time to<br>fight!<page><box>Oryu is waiting on the hill overlooking the Magic<br>Castle!<page>
 203:$69A4	story_and_event_dialogue	Roku the Wanderer: I will rescue lots of people and become famous too!!<page>
 203:$69CA	story_and_event_dialogue	Sabu the Wanderer: How many people have you rescued so far?<page>
 203:$69E9	story_and_event_dialogue	Sachi: Good morning!<page><box>Sachi: You have not eaten breakfast yet, have you?<page><box>Sachi: Take your time.<page>
@@ -1501,9 +1501,9 @@ id	sections	draft
 203:$6A2B	story_and_event_dialogue	Sachi: Are you all right, my Lord?<page>
 203:$6A44	story_and_event_dialogue	Sachi: Master Gaibara could simply go fetch it himself.<page>
 203:$6A66	story_and_event_dialogue	Sachi: Congratulations on winning!<page><box>Sachi: I knew you could do it, <name>!<page>
-203:$6A85	story_and_event_dialogue	Sachi: Good morning!<page><box>Sachi: My father announced the Wanado Tournament, remember?<page><box>Sachi: He becomes a different person when he is announcing...<page><box>Sachi: Anyway, do your best in the Wanado Tournament!<page>
-203:$6AF8	story_and_event_dialogue	Sachi: I love having flowers decorating the shop. La-la-la.<page>
-203:$6B19	story_and_event_dialogue	Sachi: Pekeji does nothing but eat...<page><box>Sachi: Has he ever considered doing some work for a change?<page>
+203:$6A85	story_and_event_dialogue	Sachi: Good morning!<page><box>Sachi: My father announced the Wanado Tournament, remember?<page><box>Sachi: He becomes a different person when he is<br>announcing...<page><box>Sachi: Anyway, do your best in the Wanado Tournament!<page>
+203:$6AF8	story_and_event_dialogue	Sachi: I love having flowers decorating the shop.<br>La-la-la.<page>
+203:$6B19	story_and_event_dialogue	Sachi: Pekeji does nothing but eat...<page><box>Sachi: Has he ever considered doing some work for a<br>change?<page>
 203:$6B58	story_and_event_dialogue	Sachi: We will defend the Town of Ilpa!<page>
 203:$6B73	story_and_event_dialogue	Sachi: We will defend the Town of Ilpa!<page>
 203:$6B8E	story_and_event_dialogue	Sachi: The Lord looks like he is in terrible pain...<page>
@@ -1516,7 +1516,7 @@ id	sections	draft
 203:$6C4E	story_and_event_dialogue	Sanpeba: Priiiiiinceeeeeesssss!!!<page>
 203:$6C71	story_and_event_dialogue	Sanpeba: I wonder what lies at the very bottom of this place?<page>
 203:$6C95	story_and_event_dialogue	Sanpeba: I wonder what lies at the very bottom of this place?<page>
-203:$6CB9	story_and_event_dialogue	Sanpeba: The Trap Paaaaarts!!<page>
+203:$6CB9	story_and_event_dialogue	Sanpeba: The Trap<br>Paaaaarts!!<page>
 203:$6CDB	story_and_event_dialogue	Sanpeba: I am helping too.<page><box>Sanpeba: Though in the end, all I do is watch.<page>
 203:$6D04	story_and_event_dialogue	Sanpeba: The full moon and the Magic Castle.<page><box>Sanpeba: Somehow, they are making me hungry.<page>
 203:$6D27	story_and_event_dialogue	Sanpeba: The Magic Caaaaastle!!<page>
@@ -1527,8 +1527,8 @@ id	sections	draft
 203:$6DCC	story_and_event_dialogue	Sanpeba: And we are the three Peba brothers.<page>
 203:$6DEA	story_and_event_dialogue	Sara: I am so glad the Princess is safe!<page><box>Sara: Thank you so much, <name>.<page>
 203:$6E19	story_and_event_dialogue	Sara: The Princess must be deep underground among the monsters by now...<page><box>Sara: Oh, I am so worried.<page>
-203:$6E49	story_and_event_dialogue	Sara: I must thank the Princess next time I see her.<page>
-203:$6E67	story_and_event_dialogue	Sara: What a cute little puppy.<page><box>Sara: Have you decided to keep it at Tonfan's place?<page>
+203:$6E49	story_and_event_dialogue	Sara: I must thank the Princess next time I see<br>her.<page>
+203:$6E67	story_and_event_dialogue	Sara: What a cute little<br>puppy.<page><box>Sara: Have you decided to keep it at Tonfan's place?<page>
 203:$6E95	story_and_event_dialogue	Sara: <name>!<br>Please help us!<page>
 203:$6EAA	story_and_event_dialogue	Sara: A woman headed toward the dunes a moment ago.<page>
 203:$6ECE	story_and_event_dialogue	Sara: Hey!<br>Do not say that in front of Mother.<page><box>Sara: Though it is true...<page>
@@ -1543,7 +1543,7 @@ id	sections	draft
 203:$716B	story_and_event_dialogue	Shiro the Wanderer: I guess being thanked by someone is not so bad...<page><box>Shiro the Wanderer: Oh...<page><box>Shiro the Wanderer: I-Idiot! I was only joking!<page>
 203:$71D2	story_and_event_dialogue	Shiro the Wanderer: Oww... That blasted Minotaur...<page><box>Shiro the Wanderer: Oh? It is you.<page><box>Shiro the Wanderer: Wh-What?! I was not rescuing anyone!<page><box>Shiro the Wanderer: I only wanted the reward!<page>
 203:$724C	story_and_event_dialogue	Shiro the Wanderer: The man at that counter told me to keep doing my best.<page><box>Shiro the Wanderer: But I hate pain and scary things...<page>
-203:$729F	story_and_event_dialogue	Shiro the Wanderer: Say...<br>Do you know an easy way to rescue people?<page><box>Shiro the Wanderer: Pushing yourself is exhausting, right?<page><box>Shiro the Wanderer: And I hate getting hurt.<page><box>Shiro the Wanderer: Ah, I want some Meat.<page>
+203:$729F	story_and_event_dialogue	Shiro the Wanderer: Say...<br>Do you know an easy way to rescue people?<page><box>Shiro the Wanderer: Pushing yourself is exhausting,<br>right?<page><box>Shiro the Wanderer: And I hate getting hurt.<page><box>Shiro the Wanderer: Ah, I want some Meat.<page>
 203:$7318	story_and_event_dialogue	Shiro the Wanderer: The man at that counter is always so intense.<page><box>Shiro the Wanderer: Why is he constantly worked up?<page>
 203:$735A	story_and_event_dialogue	Shiro the Wanderer: I try to rescue all sorts of people...<page><box>Shiro the Wanderer: But it never works out.<page><box>Shiro the Wanderer: What am I doing wrong...?<page><box>Shiro the Wanderer: Maybe bare hands are not enough...<page>
 203:$73C5	story_and_event_dialogue	Shiro the Wanderer: How many people have you rescued?!<page><box>Shiro the Wanderer: I have not rescued anyone yet.<page><box>Shiro the Wanderer: That Hachi fellow over there seems to have rescued quite a few.<page>
@@ -1557,9 +1557,9 @@ id	sections	draft
 203:$7584	story_and_event_dialogue	Shizu: I cooked for the first time in ages, and now my shoulders are stiff.<page><box>Shizu: Well? Would you like to try some too?<page>
 203:$75C4	story_and_event_dialogue	Shizu: All these troublesome matters...<page><box>Shizu: Could Big Moai not do something about them?<page>
 203:$7601	story_and_event_dialogue	Shizu: Perhaps I should pray to Big Moai?<page>
-203:$761D	story_and_event_dialogue	Shizu: This is only a thought...<page><box>Shizu: But perhaps the Lord and Princess are not truly father and daughter?<page>
+203:$761D	story_and_event_dialogue	Shizu: This is only a<br>thought...<page><box>Shizu: But perhaps the Lord and Princess are not truly father and daughter?<page>
 203:$7665	story_and_event_dialogue	Shizu: Things are becoming dangerous...<page><box>Shizu: I still suspect that Princess.<page><box>Shizu: Perhaps she is doing something strange...<page>
-203:$76C7	story_and_event_dialogue	Shizu: This is only a thought...<page><box>Shizu: Perhaps the Princess, not the Lord, is drawing monsters to the castle?<page>
+203:$76C7	story_and_event_dialogue	Shizu: This is only a<br>thought...<page><box>Shizu: Perhaps the Princess, not the Lord, is drawing monsters to the castle?<page>
 203:$7716	story_and_event_dialogue	Shizu: I still cannot help thinking...<page><box>Shizu: Perhaps the Princess, not the Lord, is drawing monsters to the castle?<page>
 203:$776D	story_and_event_dialogue	Songa: ...<page>
 203:$7777	story_and_event_dialogue	Songa: Peace will return once again!<page>
@@ -1572,16 +1572,16 @@ id	sections	draft
 203:$7881	story_and_event_dialogue	Songa: We will defend the town!<page>
 203:$7892	story_and_event_dialogue	"Songa: I found this scrap of paper...<page><box>Songa: ""You may take only one companion into a dungeon.""<page><box>Songa: I do not quite understand. What could it mean?<page>"
 203:$78FA	story_and_event_dialogue	Songa: Want to buy something? It is cheap! Cheap!<page>
-203:$7919	story_and_event_dialogue	Tao: You are amazing, big bro!!<page>
+203:$7919	story_and_event_dialogue	Tao: You are amazing, big<br>bro!!<page>
 203:$792B	story_and_event_dialogue	Tao: This is the Wanderer Rescue Team building...<page><box>Tao: But right now, please rescue the Princess!<page>
 203:$7961	story_and_event_dialogue	Tao: Congratulations on winning the Wanado Tournament!!<page><box>Tao: I knew you could do it, big bro.<page><box>Tao: I want to become a Wanderer like you someday.<page>
-203:$79C4	story_and_event_dialogue	Tao: Master Gaibara currently holds the top spot.<page><box>Tao: His record is 10,000 turns.<page><box>Tao: You must beat that to take first place.<page>
+203:$79C4	story_and_event_dialogue	Tao: Master Gaibara currently holds the top<br>spot.<page><box>Tao: His record is 10,000 turns.<page><box>Tao: You must beat that to take first place.<page>
 203:$7A15	story_and_event_dialogue	Tao: We can fight!<page>
 203:$7A22	story_and_event_dialogue	Tao: The adults are so noisy I cannot sleep.<page>
 203:$7A3D	story_and_event_dialogue	Tao: It sounds like things are becoming serious.<page><box>Tao: Honestly, this is no time for rescuing people.<page>
 203:$7A7B	story_and_event_dialogue	Tao: This is the Wanderer Rescue Team building.<page><box>Tao: They work hard to rescue Wanderers who collapse in dungeons.<page>
 203:$7AC9	story_and_event_dialogue	Tao: Where did you come from, big bro?<page>
-205:$40E6	story_and_event_dialogue	Mekerere: Truly, what a relief!<page>
+205:$40E6	story_and_event_dialogue	Mekerere: Truly, what a<br>relief!<page>
 205:$40FE	story_and_event_dialogue	Mekerere: The Princess was abducted?!!<page>
 205:$4119	story_and_event_dialogue	Mekerere: But who in the world devised such a strange event?<page>
 205:$4145	story_and_event_dialogue	Mekerere: Hmm...<br>Not bad at all.<page>
@@ -1601,7 +1601,7 @@ id	sections	draft
 205:$43C7	story_and_event_dialogue	Minai: We can go together once Father's work is finished.<page><box>Minai: Father is working hard, so I must be patient.<page>
 205:$440C	story_and_event_dialogue	Minai: The Castle Keep?<page><box>Minai: I once heard it was on Floor 19...<page>
 205:$4441	story_and_event_dialogue	Minai: Will it continue spreading like this...?<page>
-205:$445E	story_and_event_dialogue	Minai: An oasis in the desert...<page><box>Minai: That is the Town of Ilpa.<page><box>Minai: I love this town.<page>
+205:$445E	story_and_event_dialogue	Minai: An oasis in the<br>desert...<page><box>Minai: That is the Town of Ilpa.<page><box>Minai: I love this town.<page>
 205:$4499	story_and_event_dialogue	Minai: Ilpa is a castle town built by us desert folk.<page><box>Minai: Peace endures because the Lord's castle protects the town.<page>
 205:$450B	story_and_event_dialogue	Nipeba: What a relief.<page><box>Nipeba: The truth is, I am in love with the Princess.<page><box>Nipeba: Bluuush.<page>
 205:$4539	story_and_event_dialogue	Nipeba: Princess!!<page>
@@ -1611,11 +1611,11 @@ id	sections	draft
 205:$458F	story_and_event_dialogue	Nipeba: Me too.<page>
 205:$459A	story_and_event_dialogue	Nipeba: What a beautiful full moon!<page>
 205:$45AC	story_and_event_dialogue	Nipeba: The Magic Castle!!<page>
-205:$45BC	story_and_event_dialogue	Nipeba: The Magic Castle looks as though it is burning.<page>
+205:$45BC	story_and_event_dialogue	Nipeba: The Magic Castle looks as though it is<br>burning.<page>
 205:$45D7	story_and_event_dialogue	Nipeba: You can see the Magic Castle well from here.<page>
-205:$45F3	story_and_event_dialogue	Nipeba: We are all fat. There is nothing we can do about it.<page>
+205:$45F3	story_and_event_dialogue	Nipeba: We are all fat. There is nothing we can do about<br>it.<page>
 205:$460E	story_and_event_dialogue	Nuwanko: At this point, they can do whatever they want...<page>
-205:$462B	story_and_event_dialogue	Nuwanko: These fellows are still here.<page><box>Nuwanko: Honestly, do something about them already!!<page>
+205:$462B	story_and_event_dialogue	Nuwanko: These fellows are still here.<page><box>Nuwanko: Honestly, do something about them<br>already!!<page>
 205:$4658	story_and_event_dialogue	Nuwanko: These fellows have been here ever since.<page><box>Nuwanko: Please do something about them.<page>
 205:$4686	story_and_event_dialogue	Nuwanko: Pant, pant...<page><box>Nuwanko: I am exhausted from challenging the Wanado Tournament over and over...<page><box>Nuwanko: All right.<br>I will rest a little, then try again.<page>
 205:$46E6	story_and_event_dialogue	Nuwanko: Hey! Do not touch it with filthy hands!<page>
@@ -1635,7 +1635,7 @@ id	sections	draft
 205:$4941	story_and_event_dialogue	Oro: Oh? You are searching for the Ultimate Soil for Master Gaibara.<page>
 205:$4965	story_and_event_dialogue	Oro: Oh, yeah!<page><box>Oro: But it is already over.<page><box>Oro: I feel a little lonely...<page>
 205:$4993	story_and_event_dialogue	Oro: Hey, <name>.<br>The Wanado Tournament is still underway. Yeah!<page><box>
-205:$49C3	story_and_event_dialogue	"Oro: In this dungeon, traps catch monsters instead of you.<page><box>Oro: You can also pick up traps.<page><box>Oro: A trap you pick up becomes ""Trap Parts"".<page><box>Oro: You can use them to set a different trap.<page><box>Oro: Stand on a trap you set and choose ""Modify"" to improve it.<page><box>Oro: But once you set a trap, you cannot pick it up again. Remember that. Yeah!<page>"
+205:$49C3	story_and_event_dialogue	"Oro: In this dungeon, traps catch monsters instead of<br>you.<page><box>Oro: You can also pick up traps.<page><box>Oro: A trap you pick up becomes ""Trap Parts"".<page><box>Oro: You can use them to set a different trap.<page><box>Oro: Stand on a trap you set and choose ""Modify"" to improve it.<page><box>Oro: But once you set a trap, you cannot pick it up again. Remember that. Yeah!<page>"
 205:$4AA8	story_and_event_dialogue	Oro: Come back anytime you want an explanation.<page>
 205:$4ACC	story_and_event_dialogue	Oro: I think it was somewhere below here...<page>
 205:$4AE8	story_and_event_dialogue	Oro: We posted a lookout in the dunes for now.<page><box>Oro: Is there anything else?<page>
@@ -1657,10 +1657,10 @@ id	sections	draft
 205:$4D62	story_and_event_dialogue	Pigeon Handler: Unfortunately, you do not appear to have a Thank-You Password.<page><box>
 205:$4D8F	story_and_event_dialogue	Pigeon Handler: What would you like me to explain?
 205:$4DAC	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the SOS Password.<page><box>Pigeon Handler: Suppose you collapse inside a dungeon...<page><box>Pigeon Handler: You need a Password to ask a friend for help.<page><box>Pigeon Handler: That is the SOS Password.<page><box>Pigeon Handler: If disaster strikes, tell the SOS Password to a friend.<page><box>Pigeon Handler: With help from a trusted friend, you may be able to revive.<page><box>
-205:$4EA6	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Revival Password.<page><box>Pigeon Handler: It is the Password that lets you revive if you collapse in a dungeon.<page><box>Pigeon Handler: That is the Revival Password.<page><box>Pigeon Handler: Ask the friend who rescued you to tell it to you.<page><box>Pigeon Handler: You can then revive at the level you had before collapsing.<page><box>Pigeon Handler: Your equipment will also be restored.<page><box>
+205:$4EA6	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Revival<br>Password.<page><box>Pigeon Handler: It is the Password that lets you revive if you collapse in a dungeon.<page><box>Pigeon Handler: That is the Revival Password.<page><box>Pigeon Handler: Ask the friend who rescued you to tell it to you.<page><box>Pigeon Handler: You can then revive at the level you had before collapsing.<page><box>Pigeon Handler: Your equipment will also be restored.<page><box>
 205:$4F8F	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Thank-You Password.<page><box>Pigeon Handler: It conveys your joy at reviving with a Revival Password...<page><box>Pigeon Handler: and your gratitude to the person who rescued you.<page><box>Pigeon Handler: You can send those feelings through a Thank-You Password.<page><box>Pigeon Handler: Be sure to give it to the friend who rescued you.<page><box>Pigeon Handler: The Wanderer Rescue Federation will then recognize your friend.<page><box>Pigeon Handler: Their honor will be praised, and they may receive a title.<page><box>
 205:$50C9	story_and_event_dialogue	Princess Ateka: ...<page>
-205:$50D5	story_and_event_dialogue	Ateka: I have caused you and your friends so much trouble, <name>.<page><box>Ateka: Thank you sincerely for rescuing me time and again.<page><box>Ateka: And...<page><box>Ateka: I am glad I met you, <name>...<page><box>Ateka: For that alone, I thank Kron, god of travelers.<page>
+205:$50D5	story_and_event_dialogue	Ateka: I have caused you and your friends so much trouble, <name>.<page><box>Ateka: Thank you sincerely for rescuing me time and again.<page><box>Ateka: And...<page><box>Ateka: I am glad I met you, <name>...<page><box>Ateka: For that alone, I thank Kron, god of<br>travelers.<page>
 205:$5164	story_and_event_dialogue	Ateka: I was looking at the castle...<page><box>Ateka: at its ruins.<page><box>Ateka: I was thinking of everything that happened...<page><box>Ateka: The Evil God Statue, the full-moon ritual...<page><box>Ateka: and our battle with Curas.<page><box>Ateka: It all feels like the distant past now...<page><box>Ateka: We owe this peace to you, <name>.<page><box>
 205:$5213	story_and_event_dialogue	Ateka: <name>.<page><box>Ateka: Once again, you have my deepest gratitude.<page>
 205:$5235	story_and_event_dialogue	Ateka: Do your best, <name>!<page>
@@ -1673,18 +1673,18 @@ id	sections	draft
 205:$5391	story_and_event_dialogue	Rai: I tried challenging it too, but I failed...<page>
 205:$53B1	story_and_event_dialogue	Rai: We simply need to move this out of the way.<page>
 205:$53C9	story_and_event_dialogue	Rai: We must buy some time as well.<page>
-205:$53DE	story_and_event_dialogue	Rai: What should we do first?<page>
+205:$53DE	story_and_event_dialogue	Rai: What should we do<br>first?<page>
 205:$53F6	story_and_event_dialogue	Rai: What in the world could it be?<page>
 205:$5409	story_and_event_dialogue	Rai: Hmm. How can we stop the desert from advancing?<page>
 205:$5435	story_and_event_dialogue	Rai: Night will soon fall.<page><box>Rai: With the Magic Castle in that state, these dangerous times make me uneasy.<page>
 205:$5472	story_and_event_dialogue	Rai: What should we do...?<page>
 205:$5482	story_and_event_dialogue	Rai: There is something unpleasant about that man Zagan...<page>
 205:$54A4	story_and_event_dialogue	Rai: Th-The Magic Castle...<page>
-205:$54B4	story_and_event_dialogue	Rai: To think the once-gentle Lord could change so completely...<page><box>Rai: What in the world happened inside that castle...?<page>
+205:$54B4	story_and_event_dialogue	Rai: To think the once-gentle Lord could change so completely...<page><box>Rai: What in the world happened inside that<br>castle...?<page>
 205:$5503	story_and_event_dialogue	Rai: Why did the Lord change so suddenly...?<page>
 205:$5527	story_and_event_dialogue	Well done! Congratulations!!<delay:F0><br>Your efforts have rescued another Wanderer in need!<delay:BE><page><box>
 205:$5560	story_and_event_dialogue	Report to the Rescue Team at once!<page><box>
-205:$557D	story_and_event_dialogue	Rihipishi: Hello. I knew you would come.<page><box>Rihipishi: This is the last one...<page><box>Rihipishi: I will tell you the truth.<page><box>Rihipishi: What do you think Big Moai really is?<page><box>Rihipishi: Big Moai's true identity...<page><box>Rihipishi: is me.<page><box>Rihipishi: I created Big Moai.<page><box>Rihipishi: I retrieved a Rock Head from a dungeon and modified it...<page><box>Rihipishi: Then I installed rocket thrusters on its back.<page><box>Rihipishi: I even built in a voice system and made it speak in dialect.<page><box>Rihipishi: Every last part of it was my work.<page><box>Rihipishi: The one who created Big Moai...<page><box>Rihipishi: was me.<page><box>Rihipishi: It was all me.<page><box>Rihipishi: Sorry, sorry. That was all a lie.<page><box>Rihipishi: A complete fabrication.<page><box>Rihipishi: If I truly said that, Big Moai would punish me.<page><box>Rihipishi: Are you angry?<page><box>Rihipishi: Forgive me, and I will give you a spell as an apology.<page><box>Rihipishi: HOYO!<page><box>Rihipishi: Now go! Go to Big Moai!<page>
+205:$557D	story_and_event_dialogue	Rihipishi: Hello. I knew you would come.<page><box>Rihipishi: This is the last one...<page><box>Rihipishi: I will tell you the truth.<page><box>Rihipishi: What do you think Big Moai really is?<page><box>Rihipishi: Big Moai's true identity...<page><box>Rihipishi: is me.<page><box>Rihipishi: I created Big<br>Moai.<page><box>Rihipishi: I retrieved a Rock Head from a dungeon and modified it...<page><box>Rihipishi: Then I installed rocket thrusters on its<br>back.<page><box>Rihipishi: I even built in a voice system and made it speak in dialect.<page><box>Rihipishi: Every last part of it was my work.<page><box>Rihipishi: The one who created Big Moai...<page><box>Rihipishi: was me.<page><box>Rihipishi: It was all me.<page><box>Rihipishi: Sorry, sorry. That was all a lie.<page><box>Rihipishi: A complete fabrication.<page><box>Rihipishi: If I truly said that, Big Moai would punish me.<page><box>Rihipishi: Are you angry?<page><box>Rihipishi: Forgive me, and I will give you a spell as an apology.<page><box>Rihipishi: HOYO!<page><box>Rihipishi: Now go! Go to Big Moai!<page>
 205:$57A1	story_and_event_dialogue	Rihipishi: You have followed me this far. I must tip my hat to you.<page><box>Rihipishi: Are you some kind of stalker?<page><box>Rihipishi: Sorry, sorry! I am only joking.<page><box>Rihipishi: Do not take offense. I will teach you a spell.<page><box>Rihipishi: TSUB!<page><box>Rihipishi: Now hurry to Big Moai!!<page>
 205:$584E	story_and_event_dialogue	Rihipishi: Hello! You are as good at finding me as ever.<page><box>Rihipishi: I will reward you with a spell.<page><box>Rihipishi: SUGI!<page><box>Rihipishi: Try saying it to Big Moai.<page><box>Rihipishi: Something good is sure to happen.<page>
 205:$58C3	story_and_event_dialogue	Rihipishi: Hello!<br>You found me again.<page><box>Rihipishi: I will reward you with a spell.<page><box>Rihipishi: MAMA!<page><box>Rihipishi: Try saying it to Big Moai.<page><box>Rihipishi: Something good is sure to happen.<page>
@@ -1706,8 +1706,8 @@ id	sections	draft
 205:$5E73	story_and_event_dialogue	<name> received<br><cF8>m from Master Higechiyo!<delay:50><page><box>
 205:$5E8F	story_and_event_dialogue	Higechiyo: Ho ho ho.<br>Come again anytime.<page>
 205:$5EB0	story_and_event_dialogue	Higechiyo: What?!<br>You refuse!<page><box>Higechiyo: Do you truly have no need for <cF8>m?
-205:$5EE2	story_and_event_dialogue	Higechiyo: Understood.<page><box>Higechiyo: If you insist, then it cannot be helped...<page><box>Higechiyo: ......<page><box>Higechiyo: Come again anytime.<page>
-205:$5F29	story_and_event_dialogue	Torepan: Warrior Hall...<page>...what?<page><box>Torepan: Oh... You seem to have no energy.<page><box>Torepan: I see you have your reasons.<page><box>Torepan: What do you wish?
+205:$5EE2	story_and_event_dialogue	Higechiyo: Understood.<page><box>Higechiyo: If you insist, then it cannot be helped...<page><box>Higechiyo: ......<page><box>Higechiyo: Come again<br>anytime.<page>
+205:$5F29	story_and_event_dialogue	Torepan: Warrior<br>Hall...<page>...what?<page><box>Torepan: Oh... You seem to have no energy.<page><box>Torepan: I see you have your reasons.<page><box>Torepan: What do you wish?
 205:$5F85	story_and_event_dialogue	Torepan: Fewer people come to train lately.<page><box>Torepan: Heaven helps those who help themselves!<page><box>Torepan: So I have heard.<page><box>Torepan: What do you wish?
 205:$5FE4	story_and_event_dialogue	Torepan: Training makes you strong.<page><box>Torepan: At a time like this, you must work hard.<page><box>Torepan: Believe in yourself!<page><box>Torepan: Believe in Torepan!<page><box>Torepan: What do you wish?
 205:$6039	story_and_event_dialogue	Torepan: You fight for this town.<page><box>Torepan: Master Higechiyo and Torepan fight too.<page><box>Torepan: Now!<page><box>Torepan: What do you wish?!
@@ -1720,7 +1720,7 @@ id	sections	draft
 205:$6347	story_and_event_dialogue	Torepan: Continuing your training costs 400 Gitan.<page><box>Torepan: Is that acceptable?
 205:$637B	story_and_event_dialogue	Torepan: Continuing your training costs 600 Gitan.<page><box>Torepan: Is that acceptable?
 205:$63AF	story_and_event_dialogue	Torepan: Continuing your training costs 800 Gitan.<page><box>Torepan: Is that acceptable?
-205:$63E3	story_and_event_dialogue	Torepan: No! What a shame...<br>You do not have enough Gitan!<page><box>Torepan: Please come again!<page>
+205:$63E3	story_and_event_dialogue	Torepan: No! What a shame...<br>You do not have enough<br>Gitan!<page><box>Torepan: Please come again!<page>
 205:$6418	story_and_event_dialogue	Torepan: Oh! I see. What a shame... Please come again.<page>
 205:$6440	story_and_event_dialogue	Torepan: Oh!<page><box>Torepan: There is a limit to how long you may continue!<page><box>Torepan: A wanderer's body is their greatest asset! Do not overdo it!<page><box>Torepan: Go into a dungeon and see what your training has achieved.<page><box>Torepan: You may resume training after that.<page>
 205:$64CA	story_and_event_dialogue	Torepan: Where warriors' dreams remain!<page><box>Torepan: Welcome to the training ground!<page><box>Torepan: But it is not ready yet.<page><box>Torepan: You will be able to train here someday, so please come again!<page>
@@ -1734,11 +1734,11 @@ id	sections	draft
 205:$66E5	story_and_event_dialogue	Wanda: I'm getting ready to fight.<page>
 205:$66FD	story_and_event_dialogue	Wanda: I wonder what the story is about.<page>
 205:$670D	story_and_event_dialogue	Wanda: Should I sprinkle some water?<page>
-205:$671D	story_and_event_dialogue	Wanda: We bought a Club and a Wooden Shield for protection.<page><box>Wanda: Those two work well together, so they give you more power.<page>
+205:$671D	story_and_event_dialogue	Wanda: We bought a Club and a Wooden Shield for<br>protection.<page><box>Wanda: Those two work well together, so they give you more power.<page>
 205:$676F	story_and_event_dialogue	Wanda: Hmm...<page>
 205:$677C	story_and_event_dialogue	Wanda: Zagan comes down into town sometimes.<page><box>Wanda: He seemed to approach any outsider he found, but...<page>
 205:$67C9	story_and_event_dialogue	Wanda: Could it be connected to the spreading desert?!<page>
-205:$67E9	story_and_event_dialogue	Wanda: I may be imagining it...<page><box>Wanda: But since it became the Magic Castle, the desert seems to be spreading.<page>
+205:$67E9	story_and_event_dialogue	Wanda: I may be imagining<br>it...<page><box>Wanda: But since it became the Magic Castle, the desert seems to be spreading.<page>
 205:$6827	story_and_event_dialogue	Wanda: Monsters started settling in the castle a little while ago.<page><box>Wanda: Their numbers seem to grow every day, and it gives everyone the creeps.<page><box>Wanda: No one knows who first said it, but now we call it the Magic Castle...<page><box>Wanda: I hope everything will be all right...<page>
 205:$6905	story_and_event_dialogue	Got <number:19:C5>.<page><br>Carved from solid wood and shaped for an easy grip.<page><box>Press B to open the menu, then choose Items and equip it.
 205:$694D	story_and_event_dialogue	Got <number:19:C5>.<page><br>A sword forged from bronze.<page><box>Press B to open the menu, then choose Items and equip it.
@@ -1757,7 +1757,7 @@ id	sections	draft
 205:$6D54	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to fully restore Strength.<page><box>Press B to open the menu, then choose Items to view descriptions.
 205:$6DAD	story_and_event_dialogue	Got <number:19:C5>.<page><box>Drink it to lower HP and Strength and slow your movement.<page><box>Press B to open the menu, then choose Items to view descriptions.
 205:$6E10	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to become confused.<page><box>Press B to open the menu, then choose Items to view descriptions.
-205:$6E60	story_and_event_dialogue	Got <number:19:C5>.<page><br>It restores a little Fullness.<page><box>Press B to open the menu, then choose Items to view descriptions.
+205:$6E60	story_and_event_dialogue	Got <number:19:C5>.<page><br>It restores a little<br>Fullness.<page><box>Press B to open the menu, then choose Items to view descriptions.
 205:$6EB4	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to warp somewhere else on the floor.<page><box>Press B to open the menu, then choose Items to view descriptions.
 205:$6F04	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to move faster for a short while.<page><box>Press B to open the menu, then choose Items to view descriptions.
 205:$6F62	story_and_event_dialogue	Got <number:19:C5>.<page><br>Damages every monster in the room.<page><box>Press B to open the menu, then choose Items to view descriptions.

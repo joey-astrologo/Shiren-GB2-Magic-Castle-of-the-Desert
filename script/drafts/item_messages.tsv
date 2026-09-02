@@ -110,7 +110,7 @@ id	sections	draft
 194:$5DB5	item_and_action_messages	The crack in <cF3><number:19:C5> was <cF3>repaired!
 194:$5DC5	item_and_action_messages	<number:19:C5> <cF3>cracked.
 194:$5DD5	item_and_action_messages	<number:19:C5> <cF3>burned up.
-194:$5DE5	item_and_action_messages	<number:19:C5> <cF3>broke.<page>
+194:$5DE5	item_and_action_messages	<number:19:C5><br><cF3>broke.<page>
 194:$5DF7	item_and_action_messages	<number:19:C5> <cF3>surged with power!
 194:$5E0A	item_and_action_messages	<number:19:C5> <cF3>emitted a strange light.
 194:$5E1F	item_and_action_messages	Knocked <cF3><number:19:C5> away!

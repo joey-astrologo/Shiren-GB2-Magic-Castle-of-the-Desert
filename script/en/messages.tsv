@@ -160,12 +160,12 @@ id	sections	english
 193:$4F15	combat_and_dungeon_messages	Pekeji: <lookup:19:C5>!<br>Ow, ow, ow...<page>
 193:$4F2C	combat_and_dungeon_messages	Pekeji: I-I can't breathe...<page>
 193:$4F3D	combat_and_dungeon_messages	Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>
-193:$4F62	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<page>
-193:$4F70	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<page>
+193:$4F62	combat_and_dungeon_messages	<lookup:19:C5>:<br>BWOFFO!<page>
+193:$4F70	combat_and_dungeon_messages	<lookup:19:C5>:<br>BWOFFO!<page>
 193:$4F7E	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>
 193:$4F99	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>
 193:$4FB7	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>
-193:$4FD5	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... TOUGH!!<page>
+193:$4FD5	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>
 193:$4FF0	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>
 193:$500B	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>
 193:$5028	combat_and_dungeon_messages	<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>
@@ -203,7 +203,7 @@ id	sections	english
 194:$5275	floor_and_system_messages	A strong wind began to blow.
 194:$5283	floor_and_system_messages	But it was no big deal.<page>
 194:$5295	floor_and_system_messages	The wind is so strong,<br>it may blow you away!<page>
-194:$52A8	floor_and_system_messages	No! You are being blown away!<page>
+194:$52A8	floor_and_system_messages	No! You are being blown<br>away!<page>
 194:$52B5	floor_and_system_messages	Game suspended.<page><br>You may turn off the power<br>and continue later.<page>
 194:$52E2	floor_and_system_messages	<empty>
 194:$52E3	floor_and_system_messages	<empty>
@@ -226,7 +226,7 @@ id	sections	english
 194:$532C	floor_and_system_messages	Maximum level by DBC.
 194:$533A	floor_and_system_messages	<empty>
 194:$533B	floor_and_system_messages	Hunger is making<br>your head spin...
-194:$534E	floor_and_system_messages	No! You are about to collapse!<page><box>Quick... You have<br>to eat something...<page><box>You'll starve to death!<page>
+194:$534E	floor_and_system_messages	No! You are about to<br>collapse!<page><box>Quick... You have<br>to eat something...<page><box>You'll starve to death!<page>
 194:$537D	floor_and_system_messages	You cannot dig diagonally.
 194:$5389	floor_and_system_messages	There is nothing<br>on the ground.
 194:$5395	floor_and_system_messages	You cannot pick that up.
@@ -359,7 +359,7 @@ id	sections	english
 194:$5DB5	item_and_action_messages	The crack in <cF3><number:19:C5> was <cF3>repaired!
 194:$5DC5	item_and_action_messages	<number:19:C5> <cF3>cracked.
 194:$5DD5	item_and_action_messages	<number:19:C5> <cF3>burned up.
-194:$5DE5	item_and_action_messages	<number:19:C5> <cF3>broke.<page>
+194:$5DE5	item_and_action_messages	<number:19:C5><br><cF3>broke.<page>
 194:$5DF7	item_and_action_messages	<number:19:C5> <cF3>surged with power!
 194:$5E0A	item_and_action_messages	<number:19:C5> <cF3>emitted a strange light.
 194:$5E1F	item_and_action_messages	Knocked <cF3><number:19:C5> away!

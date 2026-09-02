@@ -144,7 +144,7 @@ class OriginalRomRuntimeWidthTests(unittest.TestCase):
         self.assertEqual(55, measured.lines[0].renderer_pixels)
 
         draft = (
-            "<number:19:C5> was found.<page><br>It is a sturdy wooden weapon."
+            "<number:19:C5> was found.<page><br>It is a sturdy wooden<br>weapon."
             "<page><box>Open the menu."
         )
         wrapped = wrap_en.wrap_record(

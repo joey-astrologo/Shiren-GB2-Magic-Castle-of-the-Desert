@@ -165,10 +165,10 @@ class OriginalRomLayoutTests(unittest.TestCase):
     def test_composer_and_renderer_edges_remain_independent(self):
         patched = english_font.install(self.rom)
         just_below = layout.source_layout(
-            patched, english.encode_source("W" * 23 + "a<page><box>")
+            patched, english.encode_source("W" * 23 + "a<box>")
         )
         exact = layout.source_layout(
-            patched, english.encode_source("W" * 24 + "<page><box>")
+            patched, english.encode_source("W" * 24 + "<box>")
         )
         self.assertEqual((143, 143), (
             just_below.lines[0].composer_pixels,
@@ -190,7 +190,7 @@ class OriginalRomLayoutTests(unittest.TestCase):
             },
             layout.validate_overrides(
                 patched,
-                {(195, 0x562F): english.encode_source("W" * 23 + "a<page><box>")},
+                {(195, 0x562F): english.encode_source("W" * 23 + "a<box>")},
             ),
         )
         with self.assertRaisesRegex(
@@ -199,14 +199,14 @@ class OriginalRomLayoutTests(unittest.TestCase):
         ):
             layout.validate_overrides(
                 patched,
-                {(195, 0x562F): english.encode_source("W" * 24 + "<page><box>")},
+                {(195, 0x562F): english.encode_source("W" * 24 + "<box>")},
             )
         with self.assertRaisesRegex(layout.LayoutError, "renderer 145px"):
             layout.validate_overrides(
                 patched,
                 {
                     (195, 0x562F): english.encode_source(
-                        "W" * 23 + "<hspace:07><page><box>"
+                        "W" * 23 + "<hspace:07><box>"
                     )
                 },
             )
@@ -256,8 +256,8 @@ class OriginalRomLayoutTests(unittest.TestCase):
         )
         layout.validate_overrides(patched, {(199, 0x6F39): safe})
 
-        # Native pages can wrap their marker on an earlier line because the
-        # automatic ten-pixel descent remains inside the dialogue canvas.
+        # An earlier-line wrap remains inside the canvas, but leaves the page
+        # marker detached and improperly animated at the next line's origin.
         earlier_line_wrap = english.encode_source(
             "Revival Password and an item!<page><br>Done.<page><box>"
         )
@@ -265,8 +265,59 @@ class OriginalRomLayoutTests(unittest.TestCase):
         self.assertTrue(measured.page_endpoints[0].wraps)
         self.assertEqual(0, measured.page_endpoints[0].line)
         self.assertEqual((), measured.page_marker_overflows)
-        layout.validate_overrides(
-            patched, {(199, 0x6F39): earlier_line_wrap}
+        self.assertEqual(
+            (measured.page_endpoints[0],), measured.detached_page_marker_wraps
+        )
+        with self.assertRaisesRegex(
+            layout.LayoutError,
+            r"199:\$6F39 surface 1 line 1: page marker .*wrap alone",
+        ):
+            layout.validate_overrides(
+                patched, {(199, 0x6F39): earlier_line_wrap}
+            )
+
+    def test_second_line_page_marker_wrap_is_reported_as_marker_only_line(self):
+        patched = english_font.install(self.rom)
+        source = english.encode_source(
+            "A short first line.<br>"
+            "Revival Password and an item!<page><box>"
+        )
+        measured = layout.source_layout(patched, source)
+
+        self.assertEqual(
+            [(0, 1, 139, 9, True)],
+            [
+                (
+                    endpoint.surface,
+                    endpoint.line,
+                    endpoint.renderer_pixels,
+                    endpoint.marker_pixels,
+                    endpoint.wraps,
+                )
+                for endpoint in measured.second_line_page_marker_wraps
+            ],
+        )
+
+    def test_first_line_page_marker_wrap_is_reported_as_marker_only_line(self):
+        patched = english_font.install(self.rom)
+        source = english.encode_source(
+            "Revival Password and an item!<page><br>"
+            "A short second line.<page><box>"
+        )
+        measured = layout.source_layout(patched, source)
+
+        self.assertEqual(
+            [(0, 0, 139, 9, True)],
+            [
+                (
+                    endpoint.surface,
+                    endpoint.line,
+                    endpoint.renderer_pixels,
+                    endpoint.marker_pixels,
+                    endpoint.wraps,
+                )
+                for endpoint in measured.detached_page_marker_wraps
+            ],
         )
 
     def test_f3_soft_wrap_depends_on_the_runtime_value_width(self):

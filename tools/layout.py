@@ -528,12 +528,42 @@ class SourceLayout:
         )
 
     @property
+    def second_line_page_marker_wraps(self):
+        """Return page markers that wrap alone from line two onto line three.
+
+        These markers remain inside a three-line dialogue canvas, unlike a
+        third-line overflow, but the wrapped marker is visually detached from
+        the text and does not animate normally.
+        """
+        limit = composer_line_limit(self.mode)
+        if limit is None or limit < 3:
+            return ()
+        return tuple(
+            endpoint
+            for endpoint in self.detached_page_marker_wraps
+            if endpoint.line == 1
+        )
+
+    @property
+    def detached_page_marker_wraps(self):
+        """Return markers wrapped alone onto a later line inside the canvas."""
+        limit = composer_line_limit(self.mode)
+        if limit is None:
+            return ()
+        return tuple(
+            endpoint
+            for endpoint in self.page_endpoints
+            if endpoint.line < limit - 1 and endpoint.wraps
+        )
+
+    @property
     def safe(self):
         return not (
             self.unresolved_dynamic_offsets
             or self.composer_overflows
             or self.renderer_overflows
             or self.line_limit_overflows
+            or self.detached_page_marker_wraps
             or self.page_marker_overflows
         )
 
@@ -1037,6 +1067,20 @@ def validate_overrides(rom, record_overrides, runtime_contract=None):
                     endpoint.marker_pixels,
                     endpoint.renderer_pixels,
                     RENDERER_WRAP_AT,
+                )
+            )
+        if measured.detached_page_marker_wraps:
+            endpoint = measured.detached_page_marker_wraps[0]
+            raise LayoutError(
+                "%s surface %d line %d: page marker %dpx at x=%d would "
+                "wrap alone onto line %d"
+                % (
+                    extract.location(*key),
+                    endpoint.surface + 1,
+                    endpoint.line + 1,
+                    endpoint.marker_pixels,
+                    endpoint.renderer_pixels,
+                    endpoint.line + 2,
                 )
             )
         for line_item in measured.lines:

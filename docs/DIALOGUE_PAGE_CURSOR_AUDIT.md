@@ -402,7 +402,8 @@ For dialogue surfaces:
 1. Continue rejecting any physical box longer than three lines.
 2. At every third-line `<page>`, reserve the native marker's nine-pixel advance.
 3. Reject a third-line final pen greater than 135 pixels.
-4. Report earlier-line marker wraps separately instead of rewriting them
-   automatically; they remain inside the box and also occur in the native game.
+4. Reject earlier-line marker wraps too: although they remain inside the box,
+   they leave a detached, improperly animated marker at the following line's
+   origin. See `DETACHED_PAGE_MARKER_AUDIT.md` for the complete approved audit.
 5. Never repair a violation by creating an empty fourth line or a line that
    contains only the page marker.

@@ -160,12 +160,12 @@ id	sections	family	draft
 193:$4F15	combat_and_dungeon_messages	pekeji_condition_chatter	Pekeji: <lookup:19:C5>!<br>Ow, ow, ow...<page>
 193:$4F2C	combat_and_dungeon_messages	pekeji_condition_chatter	Pekeji: I-I can't breathe...<page>
 193:$4F3D	combat_and_dungeon_messages	pekeji_condition_chatter	Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>
-193:$4F62	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<page>
-193:$4F70	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<page>
+193:$4F62	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>:<br>BWOFFO!<page>
+193:$4F70	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>:<br>BWOFFO!<page>
 193:$4F7E	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>
 193:$4F99	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>
 193:$4FB7	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>
-193:$4FD5	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... TOUGH!!<page>
+193:$4FD5	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>
 193:$4FF0	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>
 193:$500B	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>
 193:$5028	combat_and_dungeon_messages	robot_condition_chatter	<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>
@@ -184,7 +184,7 @@ id	sections	family	draft
 193:$5173	combat_and_dungeon_messages	scripted_boss_and_story	Don't turn down the AC<br>without asking! For<br>starters, the tem...<page>
 193:$5195	combat_and_dungeon_messages	scripted_boss_and_story	Always keep the kettle<br>full of hot water!<br>First of all, the tem...<page>
 193:$51B7	combat_and_dungeon_messages	scripted_boss_and_story	Put trash out on<br>the proper day!! Those<br>who disobey are mojo...<page>
-193:$51DE	combat_and_dungeon_messages	scripted_boss_and_story	"Nag-Mo"? You can't<br>abbreviate everything!<br>Kids these days...<page>
+193:$51DE	combat_and_dungeon_messages	scripted_boss_and_story	Nag-Mo? You can't<br>abbreviate everything!<br>Kids these days...<page>
 193:$5203	combat_and_dungeon_messages	scripted_boss_and_story	Hey! Listen when<br>someone's talking! Why<br>leave it in such a place...<page>
 193:$5225	combat_and_dungeon_messages	scripted_boss_and_story	Ahem. The equation<br>here goes like this,<br>therefore...<page>
 193:$5240	combat_and_dungeon_messages	scripted_boss_and_story	If you insist,<br>I have no choice.<page><box>I'll show you...<page><br>my true power!!<page><box>RUMBLE RUMBLE RUMBLE!!<page>
