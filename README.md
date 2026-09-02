@@ -120,20 +120,29 @@ python3 tools/build.py \
   --font-style both
 ```
 
-The release build writes both `build/shiren-gb2-english-classic-font.gbc` (the original
-black-only Thin Pixel-7 adaptation) and `build/shiren-gb2-english-shadowed-font.gbc` (the
-new gray `+1,+1` drop shadow). A single development ROM can still be requested with
+The release build writes both ROMs and their distribution patches:
+
+- `build/shiren-gb2-english-classic-font.gbc`
+- `build/shiren-gb2-english-classic-font.ips`
+- `build/shiren-gb2-english-shadowed-font.gbc`
+- `build/shiren-gb2-english-shadowed-font.ips`
+
+Each IPS is made against the verified original Japanese ROM and is reapplied in memory
+before it is written; the reconstructed bytes must exactly match the paired ROM. The
+classic variant uses the original black-only Thin Pixel-7 adaptation, while shadowed uses
+the gray `+1,+1` drop shadow. A single development ROM can still be requested with
 `--font-style classic` or `--font-style shadowed`; shadowed remains the single-output
-default. Both variants include the matching style in the runtime font, fixed Status labels,
-shared graphical keyboard, and Big Moai's private keyboard copy.
+default, and its matching `.ips` is written beside it. Both variants include the matching
+style in the runtime font, fixed Status labels, shared graphical keyboard, and Big Moai's
+private keyboard copy.
 
 The builder automatically validates the
 source ROM, translation controls and terminology, runtime-value widths, positioned text,
 far-pointer allocation, installed font and patches, all 7,163 logical text references,
-and both cartridge checksums before writing the ROM. It also prints the output SHA-1 so a
-manually tested artifact can be identified unambiguously.
+and both cartridge checksums before writing the ROM. It prints SHA-1 identifiers for every
+ROM and IPS so manually tested release artifacts can be identified unambiguously.
 
-Neither the source ROM nor generated ROMs belong in Git; both are covered by
+Neither the source ROM nor generated ROMs or IPS files belong in Git; all are covered by
 `.gitignore`.
 
 ## Run the tests

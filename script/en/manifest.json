@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5667,
   "explicit_empty_records": 54,
-  "workspace_sha1": "3dafd95a1e4e8b76afb4fa034d34f2904efc07ec",
+  "workspace_sha1": "0b55af58a565cc287ef271991d583a221736d613",
   "categories": [
     {
       "name": "glossary",
@@ -106,7 +106,7 @@
         "ending_and_credits_text": 18,
         "story_and_event_dialogue": 1768
       },
-      "overlay_sha1": "ffff3f849e54aca28a9b1c94f71456059d0b7531"
+      "overlay_sha1": "24735d27c4cd7386da253372be324947e40defd8"
     },
     {
       "name": "internal",

@@ -22,6 +22,7 @@ import extract
 import insert
 import item_formatting
 import item_status
+import ips
 import layout
 import lint_en
 import menu_graphics
@@ -345,6 +346,39 @@ def write_font_variant_outputs(destination, outputs):
     return paths
 
 
+def font_variant_patch_paths(destination):
+    """Return the IPS filename paired with each font-variant ROM."""
+    return {
+        style: path.with_suffix(".ips")
+        for style, path in font_variant_output_paths(destination).items()
+    }
+
+
+def write_font_variant_patches(destination, source, outputs):
+    """Write verified IPS patches for exactly the two release ROMs."""
+    expected = set(english_font.FONT_STYLES)
+    if set(outputs) != expected:
+        raise ValueError(
+            "font variant outputs must contain exactly %s"
+            % ", ".join(english_font.FONT_STYLES)
+        )
+    patches = {
+        style: ips.create_patch(source, outputs[style])
+        for style in english_font.FONT_STYLES
+    }
+    paths = font_variant_patch_paths(destination)
+    for style in english_font.FONT_STYLES:
+        # Verify the distributable artifact independently before it is written.
+        if ips.apply_patch(source, patches[style]) != outputs[style]:
+            raise ips.IpsError(
+                "%s font IPS patch failed round-trip verification" % style
+            )
+    for style in english_font.FONT_STYLES:
+        paths[style].parent.mkdir(parents=True, exist_ok=True)
+        paths[style].write_bytes(patches[style])
+    return paths
+
+
 def _validate_blank_scroll_catalog(extracted, translated):
     by_reference = {
         (reference.group, reference.index): record
@@ -449,6 +483,7 @@ def main(argv=None):
         extract.ExtractError,
         insert.InsertError,
         item_formatting.ItemFormattingError,
+        ips.IpsError,
         layout.LayoutError,
         lint_en.TranslationLintError,
         menu_graphics.MenuGraphicsError,
@@ -471,10 +506,22 @@ def main(argv=None):
             destination,
             {style: builds[style][0] for style in styles},
         )
+        patch_destinations = write_font_variant_patches(
+            destination,
+            source,
+            {style: builds[style][0] for style in styles},
+        )
     else:
+        output = builds[args.font_style][0]
+        patch = ips.create_patch(source, output)
+        if ips.apply_patch(source, patch) != output:
+            raise ips.IpsError("IPS patch failed round-trip verification")
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes(builds[args.font_style][0])
+        destination.write_bytes(output)
         destinations = {args.font_style: destination}
+        patch_destination = destination.with_suffix(".ips")
+        patch_destination.write_bytes(patch)
+        patch_destinations = {args.font_style: patch_destination}
     print(
         "%d translated record(s) / %d logical reference(s)"
         % (len(translated), validation["overridden_references"])
@@ -504,6 +551,9 @@ def main(argv=None):
         )
         print("sha1         : %s" % sha1(output).hexdigest())
         print("output       : %s" % destinations[style])
+        patch = patch_destinations[style].read_bytes()
+        print("patch sha1   : %s" % sha1(patch).hexdigest())
+        print("IPS patch    : %s" % patch_destinations[style])
     return 0
 
 

@@ -14,6 +14,7 @@ import english
 import english_font
 import extract
 import font
+import ips
 import menu_graphics
 import name6
 import spell_input
@@ -80,6 +81,41 @@ class FontVariantAssetTests(unittest.TestCase):
                 all(not path.exists() for path in
                     translated_build.font_variant_output_paths(base).values())
             )
+
+    def test_both_output_mode_writes_round_trip_release_patches(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source = bytes(32)
+            classic = bytearray(source)
+            classic[3:5] = b"CL"
+            shadowed = bytearray(source)
+            shadowed[12:14] = b"SH"
+            outputs = {
+                "classic": bytes(classic),
+                "shadowed": bytes(shadowed),
+            }
+            base = Path(temporary) / "shiren-gb2-english.gbc"
+
+            paths = translated_build.write_font_variant_patches(
+                base, source, outputs
+            )
+
+            self.assertEqual(
+                {
+                    "classic": base.with_name(
+                        "shiren-gb2-english-classic-font.ips"
+                    ),
+                    "shadowed": base.with_name(
+                        "shiren-gb2-english-shadowed-font.ips"
+                    ),
+                },
+                paths,
+            )
+            for style, path in paths.items():
+                with self.subTest(style=style):
+                    self.assertEqual(
+                        outputs[style],
+                        ips.apply_patch(source, path.read_bytes()),
+                    )
 
 
 class ProductionFontVariantTests(unittest.TestCase):

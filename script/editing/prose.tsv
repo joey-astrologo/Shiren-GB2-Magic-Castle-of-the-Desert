@@ -1132,7 +1132,7 @@ scene_order	scene_id	phase	scene_title	record_order	id	english
 67	town_npcs_early	town_dialogue	Early-game town NPC states	59	199:$4CCC	Blacksmith: Finished with swords?<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	60	199:$4CE8	Cursed items cannot be removed!<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	61	199:$4CFC	Blacksmith: That's no good...<page><box>Blacksmith: One more strike would break this sword.<page><box>Blacksmith: Why not leave well enough alone?<page><box>
-67	town_npcs_early	town_dialogue	Early-game town NPC states	62	199:$4D50	Blacksmith: <cF8>8... Understood. Leave it to me.<page><box>Blacksmith: The price is 1,500 Gitan.<page><box>Blacksmith: Is that acceptable?
+67	town_npcs_early	town_dialogue	Early-game town NPC states	62	199:$4D50	Blacksmith:<br><cF8>8...<br>Understood. Leave it to me.<page><box>Blacksmith: The price is 1,500 Gitan.<page><box>Blacksmith: Is that acceptable?
 67	town_npcs_early	town_dialogue	Early-game town NPC states	63	199:$4D8D	Blacksmith: Understood...<page><box>Blacksmith: This won't take long. Please wait.<page>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	64	199:$4DB9	Blacksmith: Thanks for waiting. I strengthened it properly.<page><box>
 67	town_npcs_early	town_dialogue	Early-game town NPC states	65	199:$4DDE	Blacksmith: Stop by anytime you need my services.<page>

@@ -130,11 +130,14 @@ python3 tools/build.py "$ROM" script/en build/shiren-gb2-english.gbc --font-styl
 ```
 
 This writes `build/shiren-gb2-english-classic-font.gbc` and
-`build/shiren-gb2-english-shadowed-font.gbc`. Use `--font-style classic` or
-`--font-style shadowed` for one ROM at the exact output path; shadowed is the default.
+`build/shiren-gb2-english-shadowed-font.gbc`, plus a same-named `.ips` for each font.
+Every IPS uses the verified original Japanese ROM as its base. The builder reapplies each
+generated patch and requires the result to equal its paired ROM byte for byte before the
+patch is written. Use `--font-style classic` or `--font-style shadowed` for one ROM at the
+exact output path; shadowed is the default, and the corresponding `.ips` is still produced.
 The production builder reruns required safety checks before writing each output. Text is
 relocated through far pointers, so storage growth does not justify shortening visible
-English. The builder prints the SHA-1 of the exact output artifact.
+English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifacts.
 
 ## Tests
 

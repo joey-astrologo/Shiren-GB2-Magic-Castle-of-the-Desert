@@ -1105,7 +1105,7 @@ id	sections	draft
 199:$4CCC	story_and_event_dialogue	Blacksmith: Finished with swords?<page><box>
 199:$4CE8	story_and_event_dialogue	Cursed items cannot be removed!<page><box>
 199:$4CFC	story_and_event_dialogue	Blacksmith: That's no good...<page><box>Blacksmith: One more strike would break this sword.<page><box>Blacksmith: Why not leave well enough alone?<page><box>
-199:$4D50	story_and_event_dialogue	Blacksmith: <cF8>8... Understood. Leave it to me.<page><box>Blacksmith: The price is 1,500 Gitan.<page><box>Blacksmith: Is that acceptable?
+199:$4D50	story_and_event_dialogue	Blacksmith:<br><cF8>8...<br>Understood. Leave it to me.<page><box>Blacksmith: The price is 1,500 Gitan.<page><box>Blacksmith: Is that acceptable?
 199:$4D8D	story_and_event_dialogue	Blacksmith: Understood...<page><box>Blacksmith: This won't take long. Please wait.<page>
 199:$4DB9	story_and_event_dialogue	Blacksmith: Thanks for waiting. I strengthened it properly.<page><box>
 199:$4DDE	story_and_event_dialogue	Blacksmith: Stop by anytime you need my services.<page>
