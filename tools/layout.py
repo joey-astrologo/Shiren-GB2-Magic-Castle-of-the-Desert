@@ -29,6 +29,7 @@ CANVAS_WIDTH_PIXELS = CANVAS_TILE_COLUMNS * 8
 COMPOSER_WRAP_AT = 0x90
 RENDERER_WRAP_AT = 0x91
 RENDERER_AUTO_LINE_ADVANCE = 10
+DIALOGUE_PAGE_MARKER_CODE = 0x2F
 
 FULL_RENDERER_ENTRY = (0, 0x35ED)
 DIRECT_RENDERER_ENTRY = (3, 0x5E62)
@@ -431,6 +432,22 @@ class SourceLine:
 
 
 @dataclass(frozen=True)
+class PageEndpoint:
+    """Renderer pen position where the native blinking page marker is drawn."""
+
+    surface: int
+    line: int
+    offset: int
+    renderer_pixels: int
+    marker_pixels: int
+    dynamic: bool
+
+    @property
+    def wraps(self):
+        return self.renderer_pixels + self.marker_pixels >= RENDERER_WRAP_AT
+
+
+@dataclass(frozen=True)
 class RuntimeWidthContract:
     """Translation-time bounds for runtime-generated source substitutions."""
 
@@ -469,6 +486,7 @@ class SourceLayout:
     unresolved_dynamic_offsets: tuple = ()
     dynamic_expansions: tuple = ()
     soft_wraps: tuple = ()
+    page_endpoints: tuple = ()
 
     @property
     def composer_overflows(self):
@@ -492,12 +510,31 @@ class SourceLayout:
                      if count > limit)
 
     @property
+    def page_marker_overflows(self):
+        """Return page waits whose marker wraps below a full text surface.
+
+        Earlier-line marker wraps remain inside the canvas and occur in the
+        native game.  The dangerous case is the last permitted physical line:
+        its automatic wrap advances below the surface and leaves stale marker
+        pixels at the window corners.
+        """
+        limit = composer_line_limit(self.mode)
+        if limit is None:
+            return ()
+        return tuple(
+            endpoint
+            for endpoint in self.page_endpoints
+            if endpoint.line >= limit - 1 and endpoint.wraps
+        )
+
+    @property
     def safe(self):
         return not (
             self.unresolved_dynamic_offsets
             or self.composer_overflows
             or self.renderer_overflows
             or self.line_limit_overflows
+            or self.page_marker_overflows
         )
 
 
@@ -612,6 +649,7 @@ def source_layout(
     unresolved_dynamic_offsets = []
     expansions = []
     lines = []
+    page_endpoints = []
     offset = 0
     after_boundary = False
     pending_page = False
@@ -684,6 +722,18 @@ def source_layout(
             # FB is only a wait.  Live tutorial playback proves that neither
             # the composer nor renderer resets x here: omitting the stock FD
             # from `<page><br>` concatenates the next sentence on this line.
+            page_endpoints.append(
+                PageEndpoint(
+                    surface=surface,
+                    line=line,
+                    offset=offset,
+                    renderer_pixels=renderer_pixels,
+                    marker_pixels=renderer_advance(
+                        rom, bytes((DIALOGUE_PAGE_MARKER_CODE,))
+                    ),
+                    dynamic=dynamic,
+                )
+            )
             pending_page = True
             after_boundary = False
         elif token.code == 0xFC:
@@ -712,6 +762,7 @@ def source_layout(
         bounded_dynamic_offsets=tuple(bounded_dynamic_offsets),
         unresolved_dynamic_offsets=tuple(unresolved_dynamic_offsets),
         dynamic_expansions=tuple(expansions),
+        page_endpoints=tuple(page_endpoints),
     )
 
 
@@ -744,6 +795,7 @@ def _soft_wrapped_source_layout(
     expansions = []
     lines = []
     soft_wraps = []
+    page_endpoints = []
     offset = 0
     after_boundary = False
     pending_page = False
@@ -854,6 +906,19 @@ def _soft_wrapped_source_layout(
             checkpoint = None
             unrecoverable = False
         elif token.code == 0xFB:
+            _composer_pixels, renderer_pixels, dynamic = totals()
+            page_endpoints.append(
+                PageEndpoint(
+                    surface=surface,
+                    line=line,
+                    offset=offset,
+                    renderer_pixels=renderer_pixels,
+                    marker_pixels=renderer_advance(
+                        rom, bytes((DIALOGUE_PAGE_MARKER_CODE,))
+                    ),
+                    dynamic=dynamic,
+                )
+            )
             pending_page = True
             after_boundary = False
         elif token.code == 0xFC:
@@ -878,6 +943,7 @@ def _soft_wrapped_source_layout(
         unresolved_dynamic_offsets=tuple(unresolved_dynamic_offsets),
         dynamic_expansions=tuple(expansions),
         soft_wraps=tuple(soft_wraps),
+        page_endpoints=tuple(page_endpoints),
     )
 
 
@@ -958,6 +1024,20 @@ def validate_overrides(rom, record_overrides, runtime_contract=None):
             raise LayoutError(
                 "%s has %d runtime substitution(s) without translated width bounds"
                 % (extract.location(*key), len(measured.unresolved_dynamic_offsets))
+            )
+        if measured.page_marker_overflows:
+            endpoint = measured.page_marker_overflows[0]
+            raise LayoutError(
+                "%s surface %d line %d: page marker %dpx at x=%d would wrap "
+                "at the %dpx renderer threshold"
+                % (
+                    extract.location(*key),
+                    endpoint.surface + 1,
+                    endpoint.line + 1,
+                    endpoint.marker_pixels,
+                    endpoint.renderer_pixels,
+                    RENDERER_WRAP_AT,
+                )
             )
         for line_item in measured.lines:
             max_composer = max(max_composer, line_item.composer_pixels)
@@ -1125,6 +1205,10 @@ def main(argv=None):
         "composer_overflows": [line.__dict__ for line in measured.composer_overflows],
         "renderer_overflows": [line.__dict__ for line in measured.renderer_overflows],
         "line_limit_overflows": measured.line_limit_overflows,
+        "page_endpoints": [item.__dict__ for item in measured.page_endpoints],
+        "page_marker_overflows": [
+            item.__dict__ for item in measured.page_marker_overflows
+        ],
         "lines": [line.__dict__ for line in measured.lines],
     }, indent=2))
     return 0 if measured.safe else 1

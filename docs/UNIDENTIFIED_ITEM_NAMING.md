@@ -126,15 +126,21 @@ bytes. Free labels retain the native contract of at most seven glyph bytes follo
 Canonical history selections use the same eight-byte slot without expanding save data:
 
 ```text
-FF FE <root-index> FF FF FF FF FF
+FE FF <root-index> FF FF FF FF FF
 ```
 
-The leading `$FF` is a native string terminator. A valid nonempty Japanese or English free
-label therefore cannot begin with this signature, while an old empty slot contains
-`FF FF ...` and cannot contain the `$FE` marker in byte two. The display resolver
-recognizes only `FF FE <valid-root>`, maps the root to the translated item table, renders
-the complete English name, and then returns to the native caller. All existing native/free
-labels follow the original path unchanged.
+The leading `$FE` is not enterable through the localized keyboard and, crucially, is not
+the native allocator's `$FF` free-slot sentinel. The display resolver recognizes
+`FE FF <valid-root>`, maps the root to the translated item table, renders the complete
+English name, and then returns to the native caller. It also continues reading the original
+English-patch signature `FF FE <valid-root>` for save compatibility; new confirmations
+always write the occupied `FE FF` form. All existing native/free labels follow the original
+path unchanged.
+
+Native confirmation returns `DE` immediately after the eight-byte slot it allocated. The
+token writer subtracts eight and writes that exact item-owned slot. It must not index the
+identification map with the selected recall root: a Windblade Scroll may deliberately be
+named `Escape`, so the label root and item root are different.
 
 ## Automated regressions
 
@@ -142,6 +148,7 @@ Run both the patch/route fixture and the distributable helper fixture:
 
 ```sh
 python3 -m unittest \
+  tests.test_multiple_unidentified_names \
   tests.test_unidentified_names \
   tests.test_mesen_unidentified_item -v
 ```
@@ -152,5 +159,6 @@ navigation type `$13` plus a live four-row Adventure-submenu cursor route, seven
 setup, the 14-cell recall catalog, `FILL IN` cycling, a pixel-frozen full `Windblade`
 preview without star padding, an asserted native seven-cell draw origin, pixel-frozen
 type/delete reset states, successful free-name
-confirmation after both resets, canonical-token persistence, full-name expansion, return to
-Items, helper injection, and its object/mapping/history contracts.
+confirmation after both resets, canonical-token persistence, current/legacy token expansion,
+two-item slot-allocation independence, full-name expansion, return to Items, helper
+injection, and its object/mapping/history contracts.

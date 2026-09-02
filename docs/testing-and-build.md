@@ -356,6 +356,12 @@ message end; both must write English space `$24` and advance exactly one positio
 and live PyBoy checks cover every one of the fourteen available space nodes and prove the
 same right-arrow operation remains a no-op in player-name mode 4.
 
+`tests.test_multiple_unidentified_names` loads
+`SaveStates/multiple-unidentified-items.mss`, names the Pot `Preservation`, then names the
+Rabbit Scroll `Escape` entirely through controller input. It requires distinct native
+custom-name slots containing roots 107 and 67. A live PyBoy check separately proves that
+both current `FE FF` and legacy `FF FE` canonical tokens resolve.
+
 `tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.mss` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live
 Mesen route closes and reopens Items before asserting the `(Cr)` screen. Static checks also

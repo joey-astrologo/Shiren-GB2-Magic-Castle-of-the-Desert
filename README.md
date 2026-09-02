@@ -19,6 +19,8 @@ at the end pads one space before advancing without changing player-name behavior
 history recall are also localized, including a 14-character preview and full display of
 canonical names longer than the native seven-character custom-label field. Recalled names
 show no star padding and reset safely to ordinary free entry on typing or `DEL`.
+Each confirmed recall owns a distinct native custom-name slot, so naming another
+unidentified item cannot rename the first one.
 Its private navigation graph is isolated from the native Adventure submenu, whose
 Continue/Secrets/Reset/Recap cursor route is replayed from a real save fixture.
 All fourteen title/demo and Wanderer's Secrets replay diaries also carry the localized

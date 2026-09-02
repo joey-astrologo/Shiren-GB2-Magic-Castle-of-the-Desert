@@ -138,6 +138,11 @@ actions, while mode 4 must continue skipping those cells. Controller regressions
 both a blank-cell space and right-arrow padding at an empty message end, plus the unchanged
 mode-4 right-arrow no-op.
 
+For unidentified-item canonical tokens, byte zero must not be `$FF`: the native 20-slot
+allocator treats that as free even when later bytes contain metadata. After native
+confirmation, use its returned slot-end pointer; the selected recall root names the label
+and is not necessarily the unidentified item's own root.
+
 ## Big Moai gift codes are not rescue passwords
 
 **Tempting assumption:** internal group 23 is named `password_fragments` by a compact

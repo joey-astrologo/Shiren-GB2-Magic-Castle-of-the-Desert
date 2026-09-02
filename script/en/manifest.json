@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5667,
   "explicit_empty_records": 54,
-  "workspace_sha1": "8eefc14efe4ae5fa8b973be677fd8a8283d13bbb",
+  "workspace_sha1": "60e1dda8cca7042012396f7b9d1192c27e3338c5",
   "categories": [
     {
       "name": "glossary",
@@ -94,7 +94,7 @@
         "floor_and_system_messages": 39,
         "item_and_action_messages": 159
       },
-      "overlay_sha1": "ff8776a8b94e5166f5c5116406a15b780cb699a3"
+      "overlay_sha1": "d52819ef547e9a95f20c4e5b5c898020c7f54a54"
     },
     {
       "name": "prose",
@@ -106,7 +106,7 @@
         "ending_and_credits_text": 18,
         "story_and_event_dialogue": 1768
       },
-      "overlay_sha1": "cf49c3442964c385b663bec229953b1de9a3f561"
+      "overlay_sha1": "2cb4c66bbd88bebd90d197911ee567b0f36b9842"
     },
     {
       "name": "internal",

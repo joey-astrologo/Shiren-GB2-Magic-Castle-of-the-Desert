@@ -350,9 +350,9 @@ local function afterFrame()
     local slot = workRead(IDENTIFICATION + WINDBLADE_ROOT * 2 + 1)
     if slot ~= 0xFF then
       local custom = 0x2D78 + slot * 8
-      assert(workRead(custom) == 0xFF, "canonical custom-name prefix is absent")
+      assert(workRead(custom) == 0xFE, "canonical custom-name prefix is absent")
       assert(
-        workRead(custom + 1) == 0xFE,
+        workRead(custom + 1) == 0xFF,
         "canonical custom-name marker is absent"
       )
       assert(

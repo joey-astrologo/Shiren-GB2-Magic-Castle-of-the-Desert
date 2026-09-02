@@ -741,7 +741,7 @@ class CombatMessageTests(unittest.TestCase):
             183: "Always keep the kettle<br>full of hot water!<br>First of all, the tem...<page>",
             184: "Put trash out on<br>the proper day!! Those<br>who disobey are mojo...<page>",
             185: "Nag-Mo? You can't<br>abbreviate everything!<br>Kids these days...<page>",
-            186: "Hey! Listen when<br>someone's talking! Why<br>leave it in a place like that...<page>",
+            186: "Hey! Listen when<br>someone's talking! Why<br>leave it in such a place...<page>",
             187: "Ahem. The equation<br>here goes like this,<br>therefore...<page>",
             188: "If you insist,<br>I have no choice.<page><box>I'll show you...<page><br>my true power!!<page><box>RUMBLE RUMBLE RUMBLE!!<page>",
             189: "Like I said...<page>That's not<br>what I mean...<page>",
@@ -770,7 +770,7 @@ class CombatMessageTests(unittest.TestCase):
         reports = {row["index"]: row for row in self.warnings}
         max_renderer_pixels = {
             177: 100, 178: 114, 179: 108, 180: 108, 181: 85, 182: 107,
-            183: 107, 184: 103, 185: 104, 186: 139, 187: 92, 188: 120,
+            183: 107, 184: 103, 185: 104, 186: 117, 187: 92, 188: 120,
             189: 106, 190: 103, 191: 93, 192: 47, 193: 57, 194: 54,
             195: 96, 196: 115, 197: 106, 198: 103, 199: 107, 200: 117,
         }

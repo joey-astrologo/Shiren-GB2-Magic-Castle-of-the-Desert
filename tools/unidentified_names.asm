@@ -28,10 +28,10 @@ DEF RenderRecord         EQU $1FA0 ; fixed bank
 
 DEF rSVBK                EQU $FF70
 
-DEF IdentificationSlots EQU $DC83 ; second byte of each root pair, WRAM bank 2
-DEF CustomNames          EQU $DD78 ; 20 slots x eight bytes, WRAM bank 2
-DEF CanonicalPrefix      EQU $FF
-DEF CanonicalMarker      EQU $FE
+DEF CanonicalPrefix      EQU $FE
+DEF CanonicalMarker      EQU $FF
+DEF LegacyCanonicalPrefix EQU $FF
+DEF LegacyCanonicalMarker EQU $FE
 DEF FreeNameMaximum      EQU 7
 DEF FillInMaximum        EQU 14
 DEF NativeEmpty          EQU $D5
@@ -221,29 +221,21 @@ Mode0Confirm::
     dec a
     push bc
     ld b,a
+    ; NativeConfirm returns DE immediately after the eight-byte custom slot it
+    ; just allocated. Use that authoritative item-owned slot rather than
+    ; indexing IdentificationSlots with wInputMatch: wInputMatch is the chosen
+    ; label root and may deliberately differ from the item's real root.
+    ld h,d
+    ld l,e
+    ld de,-8
+    add hl,de
     ldh a,[rSVBK]
     push af
     ld a,$02
     ldh [rSVBK],a
-    ld a,b
-    ld l,a
-    ld h,$00
-    add hl,hl
-    ld de,IdentificationSlots
-    add hl,de
-    ld a,[hl]
-    cp $FF
-    jr z,.restore
-    add a,a
-    add a,a
-    add a,a
-    ld l,a
-    ld h,$00
-    ld de,CustomNames
-    add hl,de
-    ; Prefix the token with a native terminator. This makes the signature
-    ; impossible for any old nonempty Japanese custom label; an old empty
-    ; label has an all-$FF tail and therefore cannot match the $FE marker.
+    ; Start with a non-enterable, non-$FF byte so the native custom-slot
+    ; allocator treats this token as occupied. $FF in byte zero means "free"
+    ; to that allocator and caused later canonical names to reuse this slot.
     ld a,CanonicalPrefix
     ld [hl+],a
     ld a,CanonicalMarker
@@ -292,7 +284,18 @@ ResolveCustomName::
     call FarDispatch
     ld a,[hl]
     cp CanonicalPrefix
+    jr z,.current
+    ; Decode the original $FF $FE token so existing English saves remain
+    ; readable even though new tokens must begin with an occupied byte.
+    cp LegacyCanonicalPrefix
     ret nz
+    inc hl
+    ld a,[hl]
+    cp LegacyCanonicalMarker
+    jr z,.canonical
+    dec hl
+    ret
+.current
     inc hl
     ld a,[hl]
     cp CanonicalMarker

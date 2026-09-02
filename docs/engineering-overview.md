@@ -144,7 +144,7 @@ Mode 0 retains the native seven-character free-label field and 20 persistent cus
 slots, but owns a dedicated English bank-250 keyboard and navigation graph. Its `FILL IN`
 control cycles learned canonical names directly into a build-guarded 14-character preview;
 it does not open a separate list. English roots are stored as a compact
-`FF FE <root-index>` signature in the native eight-byte slot and expanded through the
+`FE FF <root-index>` occupied signature in the native eight-byte slot and expanded through the
 translated root table at display time. This preserves the save layout while allowing full
 series names such as `Windblade`. The exact user state, helper route, and storage contract
 are documented in [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).

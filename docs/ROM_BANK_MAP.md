@@ -231,9 +231,10 @@ The loaded unidentified-item state uses WRAM bank 2:
 | `$DE1C` | learned-name/history bitset consumed by `FILL IN` |
 
 Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall stores
-`FF FE <root> FF FF FF FF FF` in the same slot. The bank-250 resolver expands that token
-through the translated root-name table, so names such as `Windblade` are not truncated and
-the native persistent layout does not grow. See
+`FE FF <root> FF FF FF FF FF` in the same slot. Its occupied first byte prevents the
+native allocator from reusing it; legacy `FF FE <root>` tokens remain readable. The
+bank-250 resolver expands either token through the translated root-name table, so names
+such as `Windblade` are not truncated and the native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
 
 ## Popup transient scratch

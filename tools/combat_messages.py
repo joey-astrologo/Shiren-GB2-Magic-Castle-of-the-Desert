@@ -361,6 +361,8 @@ def validate_draft(font_rom, row, draft, runtime_contract):
             problems.append("renderer overflow")
         if measured.line_limit_overflows:
             problems.append("dialogue line-limit overflow")
+        if measured.page_marker_overflows:
+            problems.append("third-line page-marker overflow")
         raise CombatMessageError(
             "%s fails native layout: %s" % (row.record.id, ", ".join(problems))
         )

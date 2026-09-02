@@ -18,7 +18,7 @@ Every consumer can impose several independent constraints:
 
 | Profile | Representative mode | Horizontal contract | Vertical contract | Owner |
 |---|---:|---|---|---|
-| Dialogue | `$02` | `<144` composer px and `<=144` renderer px | 3 physical lines per `<box>`; y=21; `<br>` +11 | `prose_editor.py`, `wrap_en.py`, `wrap_item_messages.py` |
+| Dialogue | `$02` | `<144` composer px and `<=144` renderer px; a third-line `<page>` must end at x<=135 | 3 physical lines per `<box>`; y=21; `<br>` +11 | `prose_editor.py`, `wrap_en.py`, `wrap_item_messages.py` |
 | Full-screen item detail | `$08` | Same 143/144 px limits | 11 composer lines; y=1; `<br>` +11 | `wrap_items.py` |
 | Stepped combat window | `$10` | Same 143/144 px limits with native `<cF3>` rollback | y=24; break step +16; context controls lifetime | `combat_messages.py` |
 | Positioned/direct | `$04` representative | Surface-specific subrange of the 144 px canvas | One row unless the caller proves otherwise | `surfaces.py`, `build.py` |
@@ -44,6 +44,12 @@ the visible speaker label where appropriate.
 
 `wrap_en.py` uses the fewest safe lines and balances word spaces, but it never invents a
 reader-controlled page/box decision. The editor owns pacing.
+
+The blinking page marker is a native nine-pixel glyph. On the third line, a text pen at
+x=136 or later makes that marker reach the renderer's 145-pixel wrap threshold. It then
+descends below the dialogue canvas and can leave stale triangles in all four window
+corners. The build therefore reserves nine pixels at every third-line `<page>` and rejects
+those endpoints while retaining native earlier-line marker wraps inside the canvas.
 
 ## Positioned surfaces
 
@@ -94,6 +100,7 @@ not the name-entry limit.
 ### Story and ordinary dialogue
 
 - Maximum three cumulative physical lines per `<box>`.
+- End third-line `<page>` text at x=135 or earlier so the nine-pixel marker cannot wrap.
 - Keep source pages, boxes, delays, and effect controls in order.
 - Use `<page><box>` when a new readable surface is required.
 - Allow the measured wrapper to generate normal `<br>` placement from spaces.

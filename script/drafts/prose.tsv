@@ -204,7 +204,7 @@ id	sections	draft
 196:$433B	story_and_event_dialogue	Sachi: Are you okay?<page><box>Sachi: Are you in pain?<page><box><delay:3C>Koppa: ...Hurry... We have to get the Evil God Statue back at once...<page><box>Koppa: We have to... defeat the Lord...<page><box><delay:1E>Sachi: Don't move now.<br>You have to lie still.<page><box><delay:3C>Koppa: Ugh...<page><box><delay:5A>Sachi: Poor thing...<page><box>
 196:$43CB	story_and_event_dialogue	Goto: How does the desert look?<page><box>
 196:$43E0	story_and_event_dialogue	Wanda: Bad.<br>It's definitely spreading.<page><box><delay:1E>Goto: Hmm...<br>This could be serious.<page><box>
-196:$4424	story_and_event_dialogue	Amokachi: Is this town eventually going to be swallowed by the desert too...?<page><box>
+196:$4424	story_and_event_dialogue	Amokachi: Will this town eventually be swallowed by the desert too...?<page><box>
 196:$444D	story_and_event_dialogue	Mekerere: What do we do?<br>Should we move away?<page><box><delay:1E>Shizu: There's nowhere to run.<page><box>
 196:$4482	story_and_event_dialogue	Nuwanko: How did things ever get this bad?!<page><box><delay:1E>Rai: It must be the Lord...<page><box>
 196:$44B8	story_and_event_dialogue	Shizu: No, it's that Princess.<page><br>Princess Ateka must be behind this.<page><box>Shizu: I heard something once.<page><box>Shizu: The Lord's sacred blood has been passed down for generations.<page><box>Shizu: Sometimes someone with a mysterious power was born into the bloodline.<page><box>Shizu: Long ago, one of them apparently used that power for evil.<page><box>Shizu: They used their strange power to summon darkness.<page><box>Shizu: They turned the castle into a den of monsters.<page><box>Shizu: So I'm sure that's what's happening now.<page><box><delay:1E>Nuwanko: What are you saying?<page><box>Nuwanko: If we do something about Princess Ateka, Ilpa will return to normal?<page><box>
@@ -291,7 +291,7 @@ id	sections	draft
 196:$56EF	story_and_event_dialogue	Ateka: I will explain everything...<page><br>Please bring everyone here...<page><box>Oro: All right. I'll gather them.<page><box>
 196:$5726	story_and_event_dialogue	Ateka: Oryu...<page><box>
 196:$5736	story_and_event_dialogue	Oryu: Yes.<page><box>Oryu: This is no time to hang your head.<page><box>Oryu: It'll be all right.<page><box>Oryu: If you tell them the truth, I'm sure everyone will understand.<page><box>
-196:$5789	story_and_event_dialogue	Oryu: <name>...<page><br>I'll be waiting on the hill overlooking the Magic Castle...<page><box>
+196:$5789	story_and_event_dialogue	Oryu: <name>...<page><br>I'll wait on the hill above the Magic Castle...<page><box>
 196:$5820	story_and_event_dialogue	Oryu: Has she already started speaking in front of everyone...?<page><box>Oryu: I'm sure she would rather run away...<page><box>
 196:$5869	story_and_event_dialogue	Oryu: Tell me, <name>.<page><box>Oryu: What do you think was happening inside that Magic Castle?<page><box>
 196:$5894	story_and_event_dialogue	Oryu: Why were the monsters after the Evil God Statue...?<page><box>Oryu: Why was Princess Ateka obeying the monsters...?<page><box>Oryu: And why did I come to this town...?<page><box>Oryu: I'll explain why.<page><br>First...<page><box>
@@ -303,7 +303,7 @@ id	sections	draft
 196:$5A8F	story_and_event_dialogue	Oryu: The Evil God's resting place...<page><box>Oryu: To discover it...<page><box>Oryu: Curas needed Princess Ateka's power as a priestess.<page><box>Oryu: The full-moon ritual was his way of finding the Evil God.<page><box>Oryu: But the ritual was also a tremendous gamble for Curas...<page><box>
 196:$5B2A	story_and_event_dialogue	Ateka: Curas first approached me.<page><box>Ateka: And then...<page><box>Ateka: When Mother discovered this, she tried to save me...<page><box>Ateka: But she was defeated in the battle...<page><box>Ateka: And Curas possessed her instead...<page><box>
 196:$5BC3	story_and_event_dialogue	Oryu: My mission...<page><br>Was to stop the Evil God's resurrection.<page><box>Oryu: I came to this town under those orders...<page><box>
-196:$5C17	story_and_event_dialogue	Oryu: I disguised myself as an attendant and infiltrated the Magic Castle.<page><box>Oryu: There, I gathered information.<page><box>Oryu: The more I learned, the more I wanted to save them both too.<page><box>
+196:$5C17	story_and_event_dialogue	Oryu: I disguised myself as an attendant and entered the Magic Castle.<page><box>Oryu: There, I gathered information.<page><box>Oryu: The more I learned, the more I wanted to save them both too.<page><box>
 196:$5C81	story_and_event_dialogue	Oryu: The full-moon ritual held both darkness and light.<page><box>Oryu: If we kept it from falling into darkness, we could destroy Curas instead.<page><box>
 196:$5CD7	story_and_event_dialogue	Oryu: Once we learned that...<page><box>Oryu: We placed our final hope on it...<page><box>Oryu: So we performed the ritual...<page><box>
 196:$5D09	story_and_event_dialogue	Ateka: But Curas was far stronger than we expected...<page><box>Ateka: And my own power was not enough...<page><box>Ateka: The ritual...<page><box>Ateka: It flowed...<page><box>Ateka: Into darkness...<page><box>Ateka: The place where the lightning struck...<page><box>Ateka: That is where the Evil God sleeps.<page><box>Ateka: Curas is already on his way there.<page><br>If we do not hurry...<page><box>
@@ -573,7 +573,7 @@ id	sections	draft
 197:$48FD	story_and_event_dialogue	Lord: This is not something I can accomplish alone...<page><box>Lord: Let us all join forces!<page><box>
 197:$493B	story_and_event_dialogue	Mekerere: Yeah!<br>That's right!<page><box>Rai: We'll all work together, my Lord!!<page><box>
 197:$4972	story_and_event_dialogue	Everyone: Yeah!!
-197:$497D	story_and_event_dialogue	Koppa: That's great, <name>.<br>Everyone is ready to rebuild.<page><box>Koppa: We don't have to worry anymore.<page><box>Koppa: Well... Shall we go?<page><box>
+197:$497D	story_and_event_dialogue	Koppa: That's great, <name>.<br>Everyone's ready to rebuild.<page><box>Koppa: We don't have to worry anymore.<page><box>Koppa: Well... Shall we go?<page><box>
 197:$49C1	story_and_event_dialogue	Sachi: We're having a feast today!<br>So you can look forward to...<page><box>Sachi: Huh? Are you going somewhere?<page><box>
 197:$49F2	story_and_event_dialogue	Sachi: ...!<page> You cannot mean...<page><box>
 197:$4A04	story_and_event_dialogue	Koppa: I stopped by Tonfan's place a moment ago...<page><box>
@@ -625,7 +625,7 @@ id	sections	draft
 197:$52B0	story_and_event_dialogue	Sachi: Right, Ateka?<page><box>Ateka: I-I...<page><box>
 197:$52CE	story_and_event_dialogue	Sachi: Ha! It's settled!<page><box>Sachi: Take it easy and stay a while.<page><box>
 197:$52EB	story_and_event_dialogue	Koppa: Sheesh. Well, I guess we'll stay here for a while.<page><box>Koppa: Right, <name>?<page><box>
-197:$5315	story_and_event_dialogue	Rai: I'm surprised there've been so many Collapsed Wanderers around here lately.<page><box>
+197:$5315	story_and_event_dialogue	Rai: I'm surprised there've been so many Collapsed Wanderers here lately.<page><box>
 197:$5347	story_and_event_dialogue	Koppa: Huh? You found someone besides us?<page><box>
 197:$536C	story_and_event_dialogue	Oro: Yeah. Yesterday we found two men buried in the desert.<page><box>
 197:$5391	story_and_event_dialogue	Oro: They were unconscious, so we carried them upstairs...<page><box>
@@ -690,7 +690,7 @@ id	sections	draft
 197:$5E98	story_and_event_dialogue	Sachi: Oh, of course.<page><box>
 197:$5EA5	story_and_event_dialogue	Sachi: Sorry. I'll get you a plate.<page><box>
 197:$5EC3	story_and_event_dialogue	???: Nfuu.<page><box>???: It's okay, fu.<page><box>
-197:$5ED3	story_and_event_dialogue	Rustle, rustle, rustle, rustle.<br>Rustle, rustle, rustle, rustle.<br>Rustle, rustle, rustle, rustle.<page><box>Koppa: I-It's...<page><box>Koppa: It's eating.<page><box>Koppa: And it's using the chopsticks properly...<page><box>Pekeji: Did it just speak our language too...?<page><box>
+197:$5ED3	story_and_event_dialogue	Rustle rustle rustle rustle.<br>Rustle rustle rustle rustle.<br>Rustle rustle rustle rustle.<page><box>Koppa: I-It's...<page><box>Koppa: It's eating.<page><box>Koppa: And it's using the chopsticks properly...<page><box>Pekeji: Did it just speak our language too...?<page><box>
 197:$5F58	story_and_event_dialogue	???: Nfuu!! Ahh, I'm stuffed!<page><box>???: I'm satisfied!!<page><box>
 197:$5F7E	story_and_event_dialogue	???: Nfuu! Thank you!!<page><box>
 197:$5F90	story_and_event_dialogue	Koppa: Where did you come from?<page><box>
@@ -853,7 +853,7 @@ id	sections	draft
 198:$4CAB	story_and_event_dialogue	Oryu: I want to hear the details too.<page><box>Oryu: So where is this forge?<page><box>
 198:$4CDB	story_and_event_dialogue	Blacksmith: You mean this one?<page><box>Blacksmith: It's the only forge here, but...<page><box>Blacksmith: Hm...?<page><box>Blacksmith: Come to think of it...<page><box>Oryu: What is it?<page><box>
 198:$4D29	story_and_event_dialogue	Blacksmith: I heard a story a long time ago...<page><box>Blacksmith: Back in my grandfather's day, this place was a dungeon.<page><box>
-198:$4D72	story_and_event_dialogue	Pekeji: Whaaat?!<page><box>Blacksmith: My grandfather was a famous smith and a great lover of adventure.<page><box>Blacksmith: He forged mighty swords and shields, then challenged this place himself.<page><box>Blacksmith: But its monsters were so strong that he never stood a chance...<page><box>Blacksmith: In the end, he gave up and sealed the dungeon.<page><box>
+198:$4D72	story_and_event_dialogue	Pekeji: Whaaat?!<page><box>Blacksmith: My grandfather was a famous smith and a great lover of adventure.<page><box>Blacksmith: He forged mighty<br>swords and shields, then<br>challenged it himself.<page><box>Blacksmith: But its monsters were so strong that he never stood a chance...<page><box>Blacksmith: In the end, he gave up and sealed the dungeon.<page><box>
 198:$4E48	story_and_event_dialogue	Koppa: Hey, <name>! Let's go inside!<page><box>Koppa: The treasure must be deep in there!<page><box>Blacksmith: If I remember my grandfather's stories correctly...<page><box>
 198:$4EA2	story_and_event_dialogue	Blacksmith: You should be able to bring plenty of items inside.<page><box>Blacksmith: And...<page><box>Blacksmith: I believe you can take one companion with you.<page><box>
 198:$4EE9	story_and_event_dialogue	Pekeji: Bro! Please take me with you!!<page><box>
@@ -1202,7 +1202,7 @@ id	sections	draft
 199:$6BBB	story_and_event_dialogue	<name> received a title<br>for <cF8>j rescues<cF3> and<br><cF8>f!<delay:50><page><box>
 199:$6BDF	story_and_event_dialogue	Good: I shall begin the procedure!<page><box>Good: ...<page><box>Good: ......<page><box>Good: .........<page><box>Good: Whoa!!<page><box>Good: The Wanderer Rescue Federation will award you a rescue title!<page><box>Good: Congratulations!<page><box>
 199:$6C69	story_and_event_dialogue	<name> received a title<br>for <cF8>j rescues!<delay:50><page><box>
-199:$6C88	story_and_event_dialogue	Good: If you have any questions about rescues, please ask the Pigeon Handler!<page><box>Good: I look forward to your future success!<page>
+199:$6C88	story_and_event_dialogue	Good: If you have any questions about rescues, ask the Pigeon Handler!<page><box>Good: I look forward to your future success!<page>
 199:$6CDF	story_and_event_dialogue	Good: Roger!<page><box>Good: Return here once you are ready!<page><box>Good: We shall be waiting!<page>
 199:$6D20	story_and_event_dialogue	Good: Would you like to send an item to the person you rescued?
 199:$6D51	story_and_event_dialogue	Good: Items inside Pots will be lost, so take care!<page><box>Good: Since you are not using a Cable, you can only send one item.<page><box>Good: Let us choose!<page><box>
@@ -1211,9 +1211,9 @@ id	sections	draft
 199:$6E6E	story_and_event_dialogue	Good: ...!<page><box>Good: You do not appear to have anything you can send!<page><box>
 199:$6E9A	story_and_event_dialogue	Good: Gwah!<page><br>Did you notice?!<br>There is a monster here!!<page><box>Good: I can only send items!<page><box>Good: Let us choose again!<page><box>
 199:$6EF8	story_and_event_dialogue	Good: Please wait a moment!<page><box>Good: ...<page><box>Good: ......<page><box>Good: .........<page><box>Good: Whoa!!<page><box>
-199:$6F39	story_and_event_dialogue	Good: The Wanderer Rescue Federation will award you a Revival Password and an item!<page><box>
+199:$6F39	story_and_event_dialogue	Good: The Wanderer Rescue<br>Federation awards you an item<br>and a Revival Password!<page><box>
 199:$6F6E	story_and_event_dialogue	<name> received<br><cF8>1<br>and <cF8>f!<delay:50><page><box>
-199:$6F85	story_and_event_dialogue	Good: The Wanderer Rescue Federation will award you a Revival Password and an item!<page><box>
+199:$6F85	story_and_event_dialogue	Good: The Wanderer Rescue<br>Federation awards you an item<br>and a Revival Password!<page><box>
 199:$6FBA	story_and_event_dialogue	<name> received<br><cF8>1!<delay:50><page><box>
 199:$6FCD	story_and_event_dialogue	Good: The rescued player needs the Revival Password to revive.<page><box>Good: Be sure to tell them what it is!<page><box>Good: They may send you a Thank-You Password in return!<page><box>Good: If you receive one, speak to the Pigeon Handler!<page><box>Good: An even more wonderful reward may await you!<page><box>Good: I look forward to your future success!<page>
 199:$70BB	story_and_event_dialogue	Good: Roger!<page><box>Good: Return here once you are ready!<page><box>Good: We shall be waiting!<page>
@@ -1247,7 +1247,7 @@ id	sections	draft
 199:$76DB	story_and_event_dialogue	Kame: Well, I never!<page><box>Kame: Trying to act tough, are we?<page><box>Kame: Very well. Auntie will be waiting.<page><box>
 199:$770A	story_and_event_dialogue	Kame: Tee-hee...<br>You are simply bursting with curiosity!<page><box>Kame: Which explanation would you like to hear?
 199:$7735	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: It will be jam-packed!<page><box>Kame: Our shop has two kinds of warehouse.<page><box>Kame: The Receptionist Kume to my left manages one of them.<page><box>Kame: The other is the wooden-floored room on your right.<page><box>Kame: Both are warehouses.<page><box>Kame: In the room on the right, simply place an item to store it.<page><box>Kame: Convenient, is it not?<page><box>Kame: And easy too!<page><box>
-199:$7817	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: A nice, juicy one!<page><box>Kame: When storing a Pot, it is best to leave nothing inside it.<page><box>Kame: Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The items inside the Pot will disappear!<page><box>Kame: I do not know why.<page><box>Kame: If it is important enough to put in a Pot...<page><box>Kame: perhaps you should carry it properly.<page><box>Kame: Maybe a Pot gets cross when you leave it behind and makes its contents disappear.<page><box>Kame: Oh, yes! Speaking of things disappearing, I just remembered!<page><box>Kame: Every so often, a strange Wanderer appears.<page><box>Kame: They try to gain levels inside the warehouse.<page><box>Kame: That is pointless. Pointless!<page><box>Kame: Utterly pointless!<page><box>Kame: Your original level returns as soon as you leave the shop.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The world would never allow such cheating, would it?<page><box>Kame: Auntie will not let anyone take the easy way out.<page><box>Kame: Just think of it as a pleasant dream and get on with your life.<page><box>
+199:$7817	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: A nice, juicy one!<page><box>Kame: When storing a Pot, it is best to leave nothing inside it.<page><box>Kame: Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The items inside the Pot will disappear!<page><box>Kame: I do not know why.<page><box>Kame: If it is important enough to put in a Pot...<page><box>Kame: perhaps you should carry it properly.<page><box>Kame: Maybe a Pot gets cross when you leave it behind and makes its contents vanish.<page><box>Kame: Oh, yes! Speaking of things disappearing, I just remembered!<page><box>Kame: Every so often, a strange Wanderer appears.<page><box>Kame: They try to gain levels inside the warehouse.<page><box>Kame: That is pointless. Pointless!<page><box>Kame: Utterly pointless!<page><box>Kame: Your original level returns as soon as you leave the shop.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: The world would never allow such cheating, would it?<page><box>Kame: Auntie will not let anyone take the easy way out.<page><box>Kame: Just think of it as a pleasant dream and get on with your life.<page><box>
 199:$7A10	story_and_event_dialogue	Kame: Auntie will give you the full rundown.<page><box>Kame: Soft and chewy!<page><box>Kame: Do not throw items outside the wooden-floored warehouse room.<page><box>Kame: Items thrown elsewhere become unusable.<page><box>Kame: Hm? Why, you ask?<page><box>Kame: Well, dear!<page><box>Kame: Auntie's power does not reach anywhere else.<page><box>Kame: Do not expect me to take responsibility that far away!<page><box>Kame: You would hate for an important item to become useless, would you not?<page><box>Kame: Then do not go throwing items around carelessly.<page><box>Kame: Auntie can only protect the wooden-floored room on the right.<page><box>Kame: If you simply must throw items, go inside and throw as many as you like.<page><box>Kame: But if an item flies out of the warehouse, do not blame Auntie!<page><box>
 199:$7BB1	story_and_event_dialogue	Kame: Oh, I see...<page><box>Kame: Very well.<page><box>Kame: Auntie will protect everything at full power.<page><box>Kame: You should make generous use of the warehouse. It pays off!<page>
 200:$40C8	story_and_event_dialogue	Mamel: Need something?<page><box>
@@ -1395,7 +1395,7 @@ id	sections	draft
 203:$4BEC	story_and_event_dialogue	Bibingida: What could it be...? This Scroll has me curious...<page>
 203:$4C0F	story_and_event_dialogue	Bibingida: Business is booming again today.<page><box>Bibingida: Come on, handsome. Buy something from me.<page>
 203:$4C51	story_and_event_dialogue	Bubuyaro: I knew you could do it, big bro!<page>
-203:$4C71	story_and_event_dialogue	Bubuyaro: Levels gained in the training grounds will not matter in the Abyssal Depths.<page><box>Bubuyaro: But I know you can rescue the Princess, big bro!!<page>
+203:$4C71	story_and_event_dialogue	Bubuyaro: Levels gained in the training grounds will not count in the Abyssal Depths.<page><box>Bubuyaro: But I know you can rescue the Princess, big bro!!<page>
 203:$4CCA	story_and_event_dialogue	Bubuyaro: It is noisy near the town entrance...<page><box>Bubuyaro: Did something happen?<page>
 203:$4CF3	story_and_event_dialogue	Bubuyaro: Even if you gain levels in the training grounds...<page><box>Bubuyaro: More dungeons seem to reset your level now.<page>
 203:$4D39	story_and_event_dialogue	Bubuyaro: The trap arts sound difficult.<page><box>Bubuyaro: I hear your level resets when you enter, even after training...<page>
@@ -1424,7 +1424,7 @@ id	sections	draft
 203:$5209	story_and_event_dialogue	Hachi the Wanderer: I...<page><box>Hachi the Wanderer: I...<page><box>Hachi the Wanderer: did something that can never be undone...<page>
 203:$5234	story_and_event_dialogue	Hachi the Wanderer: I received another SOS Password.<page><box>Hachi the Wanderer: I am off to rescue them! I cannot wait to put my skills to work!<page>
 203:$5279	story_and_event_dialogue	Hachi the Wanderer: Good thanked me earlier!<page><box>Hachi the Wanderer: He said he expects great things from me!<page><box>Hachi the Wanderer: I was so happy my legs started shaking!<page>
-203:$52CE	story_and_event_dialogue	Hachi the Wanderer: They say Good has scars all over his body.<page><box>Hachi the Wanderer: He must have risked himself to rescue others time and again.<page><box>Hachi the Wanderer: I will rescue lots of people too and become a trusted Wanderer!<page>
+203:$52CE	story_and_event_dialogue	Hachi the Wanderer: They say Good has scars all over his body.<page><box>Hachi the Wanderer: He must have risked himself to rescue others many times.<page><box>Hachi the Wanderer: I will rescue lots of people too and become a trusted Wanderer!<page>
 203:$534E	story_and_event_dialogue	Hachi the Wanderer: Pigeons carrying SOS Passwords keep arriving without end.<page><box>Hachi the Wanderer: I intend to rescue as many people as I can.<page>
 203:$53A7	story_and_event_dialogue	Hachi the Wanderer: When I first became a Wanderer, a rescue party saved me too...<page><box>Hachi the Wanderer: The one who rescued me was Good, right over there.<page><box>Hachi the Wanderer: I still remember that day clearly...<page>
 203:$5432	story_and_event_dialogue	Hachi the Wanderer: Why do I spend all my time rescuing people?<page><box>Hachi the Wanderer: I-It is not because I expect a reward!<page>
@@ -1657,7 +1657,7 @@ id	sections	draft
 205:$4D62	story_and_event_dialogue	Pigeon Handler: Unfortunately, you do not appear to have a Thank-You Password.<page><box>
 205:$4D8F	story_and_event_dialogue	Pigeon Handler: What would you like me to explain?
 205:$4DAC	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the SOS Password.<page><box>Pigeon Handler: Suppose you collapse inside a dungeon...<page><box>Pigeon Handler: You need a Password to ask a friend for help.<page><box>Pigeon Handler: That is the SOS Password.<page><box>Pigeon Handler: If disaster strikes, tell the SOS Password to a friend.<page><box>Pigeon Handler: With help from a trusted friend, you may be able to revive.<page><box>
-205:$4EA6	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Revival Password.<page><box>Pigeon Handler: It is the Password that lets you revive after collapsing in a dungeon.<page><box>Pigeon Handler: That is the Revival Password.<page><box>Pigeon Handler: Ask the friend who rescued you to tell it to you.<page><box>Pigeon Handler: You can then revive at the level you had before collapsing.<page><box>Pigeon Handler: Your equipment will also be restored.<page><box>
+205:$4EA6	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Revival Password.<page><box>Pigeon Handler: It is the Password that lets you revive if you collapse in a dungeon.<page><box>Pigeon Handler: That is the Revival Password.<page><box>Pigeon Handler: Ask the friend who rescued you to tell it to you.<page><box>Pigeon Handler: You can then revive at the level you had before collapsing.<page><box>Pigeon Handler: Your equipment will also be restored.<page><box>
 205:$4F8F	story_and_event_dialogue	Pigeon Handler: Now, I shall explain the Thank-You Password.<page><box>Pigeon Handler: It conveys your joy at reviving with a Revival Password...<page><box>Pigeon Handler: and your gratitude to the person who rescued you.<page><box>Pigeon Handler: You can send those feelings through a Thank-You Password.<page><box>Pigeon Handler: Be sure to give it to the friend who rescued you.<page><box>Pigeon Handler: The Wanderer Rescue Federation will then recognize your friend.<page><box>Pigeon Handler: Their honor will be praised, and they may receive a title.<page><box>
 205:$50C9	story_and_event_dialogue	Princess Ateka: ...<page>
 205:$50D5	story_and_event_dialogue	Ateka: I have caused you and your friends so much trouble, <name>.<page><box>Ateka: Thank you sincerely for rescuing me time and again.<page><box>Ateka: And...<page><box>Ateka: I am glad I met you, <name>...<page><box>Ateka: For that alone, I thank Kron, god of travelers.<page>

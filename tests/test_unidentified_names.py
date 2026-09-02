@@ -87,11 +87,14 @@ class UnidentifiedNameInstallerTests(unittest.TestCase):
         self.assertEqual(STATE_SHA1, sha1(state.read_bytes()).hexdigest())
 
     def test_canonical_signature_cannot_alias_a_native_free_label(self):
-        # Native/free labels are FF-terminated. No valid nonempty label can
-        # begin with FF, while an empty/cleared slot begins FF FF rather than
-        # the deliberately reserved FF FE canonical signature.
-        self.assertEqual(0xFF, unidentified_names.CANONICAL_PREFIX)
-        self.assertEqual(0xFE, unidentified_names.CANONICAL_MARKER)
+        # Native allocation treats byte-zero FF as an unused slot. New tokens
+        # therefore start with non-enterable FE and retain the old reversed
+        # pair only as a backward-compatible read signature.
+        self.assertEqual(0xFE, unidentified_names.CANONICAL_PREFIX)
+        self.assertEqual(0xFF, unidentified_names.CANONICAL_MARKER)
+        self.assertEqual(0xFF, unidentified_names.LEGACY_CANONICAL_PREFIX)
+        self.assertEqual(0xFE, unidentified_names.LEGACY_CANONICAL_MARKER)
+        self.assertNotEqual(0xFF, unidentified_names.CANONICAL_PREFIX)
         self.assertNotIn(
             unidentified_names.CANONICAL_PREFIX,
             name6.character_bytes(),
@@ -346,7 +349,7 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
             pyboy.tick()
         return pyboy
 
-    def _invoke(self, pyboy, bank, address, allow_interrupts=False, c=0):
+    def _invoke(self, pyboy, bank, address, allow_interrupts=False, c=0, de=0):
         trampoline = bytes(
             (
                 0x3E, bank, 0x21, address & 0xFF, address >> 8,
@@ -362,6 +365,8 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
         pyboy.memory[0xFF0F] = 0
         pyboy.register_file.B = 0
         pyboy.register_file.C = c
+        pyboy.register_file.D = de >> 8
+        pyboy.register_file.E = de & 0xFF
         pyboy.register_file.SP = 0xC6F0
         pyboy.register_file.PC = 0xC700
         for _frame in range(120 if allow_interrupts else 2):
@@ -429,6 +434,44 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
                 ),
                 observed,
             )
+        finally:
+            pyboy.stop(save=False)
+
+    def test_current_and_legacy_canonical_tokens_both_resolve(self):
+        pyboy = self._pyboy()
+        try:
+            destination = 0xC600
+            resolved = []
+            for signature in (
+                (
+                    unidentified_names.CANONICAL_PREFIX,
+                    unidentified_names.CANONICAL_MARKER,
+                ),
+                (
+                    unidentified_names.LEGACY_CANONICAL_PREFIX,
+                    unidentified_names.LEGACY_CANONICAL_MARKER,
+                ),
+            ):
+                with self.subTest(signature=signature):
+                    pyboy.memory[0xFF70] = 2
+                    raw = bytes(signature) + bytes((50,)) + b"\xFF" * 5
+                    for offset, value in enumerate(raw):
+                        pyboy.memory[0xDD78 + offset] = value
+                    for offset in range(16):
+                        pyboy.memory[destination + offset] = 0xD5
+                    self._invoke(
+                        pyboy,
+                        unidentified_names.RUNTIME_BANK,
+                        unidentified_names.RESOLVE_ADDRESS,
+                        c=0,
+                        de=destination,
+                    )
+                    observed = bytes(
+                        pyboy.memory[destination:destination + 16]
+                    )
+                    self.assertNotEqual(b"\xD5" * 16, observed)
+                    resolved.append(observed)
+            self.assertEqual(resolved[0], resolved[1])
         finally:
             pyboy.stop(save=False)
 

@@ -221,6 +221,54 @@ class OriginalRomLayoutTests(unittest.TestCase):
         ])
         self.assertTrue(smoke_layout.safe)
 
+    def test_third_dialogue_line_reserves_room_for_page_marker(self):
+        patched = english_font.install(self.rom)
+        unsafe = english.encode_source(
+            "Good: The Wanderer Rescue<br>"
+            "Federation will award you a<br>"
+            "Revival Password and an item!<page><box>"
+        )
+        measured = layout.source_layout(patched, unsafe)
+        self.assertEqual(
+            [(0, 2, 139, 9, True)],
+            [
+                (
+                    endpoint.surface,
+                    endpoint.line,
+                    endpoint.renderer_pixels,
+                    endpoint.marker_pixels,
+                    endpoint.wraps,
+                )
+                for endpoint in measured.page_endpoints
+            ],
+        )
+        self.assertEqual(measured.page_endpoints, measured.page_marker_overflows)
+        with self.assertRaisesRegex(
+            layout.LayoutError,
+            r"199:\$6F39 surface 1 line 3: page marker .*wrap",
+        ):
+            layout.validate_overrides(patched, {(199, 0x6F39): unsafe})
+
+        safe = english.encode_source(
+            "Good: The Wanderer Rescue<br>"
+            "Federation awards you an item<br>"
+            "and a Revival Password!<page><box>"
+        )
+        layout.validate_overrides(patched, {(199, 0x6F39): safe})
+
+        # Native pages can wrap their marker on an earlier line because the
+        # automatic ten-pixel descent remains inside the dialogue canvas.
+        earlier_line_wrap = english.encode_source(
+            "Revival Password and an item!<page><br>Done.<page><box>"
+        )
+        measured = layout.source_layout(patched, earlier_line_wrap)
+        self.assertTrue(measured.page_endpoints[0].wraps)
+        self.assertEqual(0, measured.page_endpoints[0].line)
+        self.assertEqual((), measured.page_marker_overflows)
+        layout.validate_overrides(
+            patched, {(199, 0x6F39): earlier_line_wrap}
+        )
+
     def test_f3_soft_wrap_depends_on_the_runtime_value_width(self):
         patched = english_font.install(self.rom)
         record_id = "193:$4192"
