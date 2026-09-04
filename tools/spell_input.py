@@ -132,7 +132,8 @@ def english_keyboard_map(rom):
     )
     rows = [bytearray(row) for row in zip(*[iter(raw)] * 20)]
     blank = english.ENGLISH_CODES[" "]
-    for row in range(2, 16):
+    # Preserve source row 15: it is the outer window's bottom border.
+    for row in range(2, 15):
         rows[row][1:19] = bytes((blank,) * 18)
 
     def put(row, column, text):

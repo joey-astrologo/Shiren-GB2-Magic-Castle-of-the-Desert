@@ -291,9 +291,10 @@ unidentified-item roots, every identified description-title/name pair, and the r
 Help/UI/dialogue layouts whose literal item references changed. The Wanda equipment lesson
 fixture also preserves its `<page><box>` reader wait.
 
-The complete run on 2026-09-02 used the matching ROM, PyBoy, and RGBDS. Mesen is not a test
-dependency. It includes the graphics-audit, credit-source/insertion, wait-sign,
-arrival-card, ranking-suffix, death-Rankings note, and warehouse horizontal-wrap regressions. The required gate
+The complete 562-test run on 2026-09-04 used the matching ROM, PyBoy, and RGBDS. Mesen is not
+a test dependency. It includes the graphics-audit, credit-source/insertion, wait-sign,
+arrival-card, graphical-input bottom-border, ranking-suffix, death-Rankings note, and
+warehouse horizontal-wrap regressions. The required gate
 is always discovery of the complete `tests/` directory, not a hard-coded count.
 
 `tests.test_save_summary` also replays the exact title-screen Adventure -> save-file route
@@ -353,6 +354,10 @@ glyphs in the installed graphical-input atlas, then checks the live `A` tile pix
 against black ink, gray shadow, and white background RGB values. `tests.test_spell_input`
 independently freezes the same literal `A` in Big Moai's private atlas; live editor routes
 cover Blank Scroll, unidentified items, Rescue entry/revival, and Big Moai `WISH`.
+`tests.test_graphical_input_borders` enumerates graphical-input modes 0-8 and requires every
+generated 20x16 map to retain the native corner/edge/corner bottom row. The Rankings-note
+route independently requires the complete gray-and-black bottom-edge raster, rather than
+accepting a new framebuffer hash.
 `tests.test_ranking_note_input` attacks the adjacent Mamel from the frozen one-HP state,
 reaches the death Rankings result, presses Start, requires mode 2 with its native
 13-character maximum, and compares the live editor against independently synthesized

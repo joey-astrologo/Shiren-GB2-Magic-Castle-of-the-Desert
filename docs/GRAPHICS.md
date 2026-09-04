@@ -45,6 +45,13 @@ Each asset still needs its producer and consumers mapped.
 | Shop-price font audit | All ten native two-tone digits decoded from guarded source `3:$5642-$56E1`, cropped and packed at the observed five-pixel shop-tag advance with captured black/white/gray palette roles; read-only contact sheet writes no ROM changes | `shop_price_font_audition.py` |
 | Save/load wait sign | Approved Thin Pixel-7 `Please` / `wait...` raster in two guarded sign blocks; both interleaved bird-art blocks preserved byte-for-byte | `wait_screen.py` |
 
+The graphical-input family contains nine logical modes but only five visible keyboard-map
+variants. Four variants derive from `name6.py`; Big Moai owns the fifth in `spell_input.py`.
+Every map preserves the native final row `$28 $2A...$2A $28`, which draws the complete outer
+bottom border. `tests.test_graphical_input_borders` checks that invariant for modes 0-8,
+while the Rankings-note PyBoy route checks the literal gray and black edge pixels without a
+whole-frame hash.
+
 These are not evidence that title art, story cards, ending art, or every graphical menu label
 is localized.
 

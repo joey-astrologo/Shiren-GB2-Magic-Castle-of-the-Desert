@@ -225,6 +225,13 @@ The graphical input dispatcher has independent modes and consumers:
 | Mode 1 / Blank Scroll | Scroll writing | 11-character presentation field; English shared map with mode-specific hyphen; full-name/history matcher resolves an ID before restoring the native seven-character backend field; bank-251 overlay |
 | Modes 5-8 | Wanderer Rescue passwords | 12/9/15/13 native cells; player-name layout without SPACE plus `?`/`!`; private type `$F5` graph in `$C800`; English nodes convert to native six-bit symbols in bank 249 before validation; the dedicated hardware-B deletion call is wrapped so remaining native symbols are redrawn through the English view |
 
+This is nine logical input modes, five visible keyboard-map variants, and six constructor
+entry points because Rescue has both ordinary and pre-mode wrappers. All five 20x16 maps
+are copied to BG map `$9840`. Their final source row is the outer window's bottom border,
+so it must remain exactly corner `$28`, eighteen horizontal-edge `$2A` tiles, corner `$28`.
+Only rows 2-14 are keyboard interior; clearing row 15 removes the horizontal edge while
+leaving the two corners visible.
+
 The English build treats these modes as independent consumers even where the native game
 shares graphical resources. Each installer owns its map, graph, maximum, and mode-specific
 logic. A change to one must prove that the others remain unchanged. In particular, removing

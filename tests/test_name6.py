@@ -146,7 +146,7 @@ class Name6InstallerTests(unittest.TestCase):
         for row in (6, 8, 10, 12, 14):
             self.assertEqual(blank_tile, rows[row][6])
             self.assertEqual(blank_tile, rows[row][12])
-        for row in range(3, 16, 2):
+        for row in range(3, 15, 2):
             self.assertEqual(bytes((blank_tile,) * 18), rows[row][1:19])
         self.assertEqual(english.encode("SPACE"), rows[2][1:6])
         self.assertEqual(bytes((blank_tile,) * 8), rows[2][7:15])

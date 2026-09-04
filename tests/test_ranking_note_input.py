@@ -145,6 +145,42 @@ class RankingNoteInputTests(unittest.TestCase):
                 ),
             )
 
+    def test_entry_screen_has_a_complete_outer_bottom_border(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            rom = Path(temporary) / "ranking-note.gbc"
+            rom.write_bytes(self.localized)
+            pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+            try:
+                self._open_editor(pyboy)
+                pyboy_route.run_frames(pyboy, 120)
+                image = pyboy.screen.image.convert("RGB")
+            finally:
+                pyboy.stop(save=False)
+
+        # The final 18 interior tiles must join the two surviving corner
+        # tiles. These literal raster rows detect the reported missing edge
+        # without accepting a replacement whole-frame hash.
+        for y, expected in ((141, (168, 168, 168)), (142, (0, 0, 0))):
+            actual = tuple(image.getpixel((x, y)) for x in range(8, 152))
+            mismatch = next(
+                (
+                    (x, color)
+                    for x, color in zip(range(8, 152), actual)
+                    if color != expected
+                ),
+                None,
+            )
+            self.assertIsNone(
+                mismatch,
+                "bottom border row %d first differs at x=%s: %s, expected %s"
+                % (
+                    y,
+                    mismatch[0] if mismatch else None,
+                    mismatch[1] if mismatch else None,
+                    expected,
+                ),
+            )
+
     def test_message_space_cells_and_right_arrow_work_through_controller(self):
         with tempfile.TemporaryDirectory() as temporary:
             rom = Path(temporary) / "ranking-note.gbc"

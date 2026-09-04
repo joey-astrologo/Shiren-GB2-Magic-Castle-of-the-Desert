@@ -531,7 +531,8 @@ def english_keyboard_map(rom):
     blank = english.ENGLISH_CODES[" "]
     # Native labels and raw keyboard glyphs use alternating continuation rows.
     # Clear the complete interior before placing the one-cell English glyphs.
-    for row in range(2, 16):
+    # Source row 15 is the outer window's bottom border, not interior space.
+    for row in range(2, 15):
         rows[row][1:19] = bytes((blank,) * 18)
 
     # Exact five/five/six-cell columns with real blank separator tiles.  Z
