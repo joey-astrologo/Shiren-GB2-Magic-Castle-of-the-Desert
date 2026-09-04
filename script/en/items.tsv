@@ -103,31 +103,31 @@ id	sections	english
 202:$5FD2	item_descriptions	<26>Special Onigiri<26><br>Restores a little Fullness and<br>may grant a special ability.
 202:$600E	item_descriptions	<26>Meat<26>
 202:$6013	item_descriptions	<26>Bufu's Riceball<26><br>This special Onigiri is one of<br>nine legendary items blessed<br>by Kron, the God of Travel. It<br>is said to bring its keeper<br>fortune.
-202:$6072	item_descriptions	<26>Herb<26><br>Drink it to restore a little<br>HP and cure confusion.
-202:$60A0	item_descriptions	<26>Otogirisou<26><br>Drink it to restore lots of<br>HP and cure status ailments.
-202:$60D3	item_descriptions	<26>Seewell Grass<26><br>Drink it to reveal invisible<br>creatures and traps.
-202:$60F7	item_descriptions	<26>Dragon Grass<26><br>Drink it to breathe fire over<br>a long distance.
+202:$6072	item_descriptions	<26>Herb<26><br>Consume it to restore a little<br>HP and cure confusion.
+202:$60A0	item_descriptions	<26>Otogirisou<26><br>Consume it to restore lots of<br>HP and cure status ailments.
+202:$60D3	item_descriptions	<26>Seewell Grass<26><br>Consume it to reveal invisible<br>creatures and traps.
+202:$60F7	item_descriptions	<26>Dragon Grass<26><br>Consume it to breathe fire<br>over a long distance.
 202:$611D	item_descriptions	<26>Revival Grass<26><br>Carry it to revive once when<br>you collapse. It does not work<br>inside a Pot. Afterward, it<br>turns into Weeds.
-202:$6176	item_descriptions	<26>Life Grass<26><br>Drink it to raise Max HP.
-202:$6193	item_descriptions	<26>Bellyexpand Seed<26><br>Drink it to raise Max<br>Fullness.
-202:$61B7	item_descriptions	<26>Bellyshrink Seed<26><br>Drink it to lower Max<br>Fullness.
-202:$61DC	item_descriptions	<26>Fortune Grass<26><br>Drink it to raise your level.
-202:$61F6	item_descriptions	<26>Angel Seed<26><br>Drink it to raise your level<br>by 3.
-202:$6212	item_descriptions	<26>Unlucky Seed<26><br>Drink it to lower your level<br>by 1.
-202:$6233	item_descriptions	<26>Antidote Grass<26><br>Drink it to fully restore<br>Strength.
-202:$6259	item_descriptions	<26>Strength Grass<26><br>Drink it to restore Strength.<br>At full Strength, it raises<br>Max Strength by 1.
-202:$6297	item_descriptions	<26>Poison Grass<26><br>Drink it to lower HP and<br>Strength and slow your<br>movement.
-202:$62C6	item_descriptions	<26>Confusion Grass<26><br>Drink it to become confused.
-202:$62E1	item_descriptions	<26>Sedating Grass<26><br>Drink it to fall asleep for a<br>short while.
+202:$6176	item_descriptions	<26>Life Grass<26><br>Consume it to raise Max HP.
+202:$6193	item_descriptions	<26>Bellyexpand Seed<26><br>Consume it to raise Max<br>Fullness.
+202:$61B7	item_descriptions	<26>Bellyshrink Seed<26><br>Consume it to lower Max<br>Fullness.
+202:$61DC	item_descriptions	<26>Fortune Grass<26><br>Consume it to raise your<br>level.
+202:$61F6	item_descriptions	<26>Angel Seed<26><br>Consume it to raise your level<br>by 3.
+202:$6212	item_descriptions	<26>Unlucky Seed<26><br>Consume it to lower your<br>level by 1.
+202:$6233	item_descriptions	<26>Antidote Grass<26><br>Consume it to fully restore<br>Strength.
+202:$6259	item_descriptions	<26>Strength Grass<26><br>Consume it to restore<br>Strength. At full Strength, it<br>raises Max Strength by 1.
+202:$6297	item_descriptions	<26>Poison Grass<26><br>Consume it to lower HP and<br>Strength and slow your<br>movement.
+202:$62C6	item_descriptions	<26>Confusion Grass<26><br>Consume it to become<br>confused.
+202:$62E1	item_descriptions	<26>Sedating Grass<26><br>Consume it to fall asleep for<br>a short while.
 202:$62FF	item_descriptions	<26>Weeds<26><br>Plain weeds with no special<br>effect. They restore a little<br>Fullness when consumed.
-202:$6326	item_descriptions	<26>Leaping Grass<26><br>Drink it to warp somewhere<br>else on the floor.
-202:$6341	item_descriptions	<26>Swift Grass<26><br>Drink it to move faster for a<br>short while.
+202:$6326	item_descriptions	<26>Leaping Grass<26><br>Consume it to warp somewhere<br>else on the floor.
+202:$6341	item_descriptions	<26>Swift Grass<26><br>Consume it to move faster for<br>a short while.
 202:$6368	item_descriptions	<26>Ranzan Grass<26><br>One of nine legendary items<br>blessed by Kron, the God of<br>Travel. It is said to bring<br>good fortune to those who<br>keep it.
 202:$63C4	item_descriptions	<26>Identifier Scroll<26><br>Read it to identify an item.
 202:$63E6	item_descriptions	<26>Mapping Scroll<26><br>Reveals the floor's layout and<br>the locations of monsters and<br>items.
 202:$641B	item_descriptions	<26>Pot-upsize Scroll<26><br>Read it to increase a Pot's<br>capacity.
 202:$643B	item_descriptions	<26>Windblade Scroll<26><br>Damages every monster in the<br>room.
-202:$646E	item_descriptions	<26>Muzzle Scroll<26><br>Prevents you from using your<br>mouth for the rest of the<br>floor. You cannot eat, drink,<br>or read.
+202:$646E	item_descriptions	<26>Muzzle Scroll<26><br>Prevents you from using your<br>mouth for the rest of the<br>floor. You cannot eat or read.
 202:$64A9	item_descriptions	<26>Swift Foe Scroll<26><br>Makes monsters move faster.<br>It also affects allies.
 202:$64D9	item_descriptions	<26>Slumber Scroll<26><br>Puts every monster in the<br>room to sleep for a short<br>while. They awaken at double<br>speed. It also affects allies.
 202:$6530	item_descriptions	<26>Power Up Scroll<26><br>Raises your attack power for<br>the rest of the floor.

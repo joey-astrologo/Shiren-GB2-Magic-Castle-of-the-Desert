@@ -71,6 +71,47 @@ class ItemTerminologyTests(unittest.TestCase):
                 self.assertIsNotNone(title)
                 self.assertEqual(name, title.group(1))
 
+    def test_grass_consumption_uses_eat_and_consume_language(self):
+        self.assertEqual("Eat", self.reference_text(7, 6))
+
+        consumable_description_ids = (
+            "202:$6072", "202:$60A0", "202:$60D3", "202:$60F7",
+            "202:$6176", "202:$6193", "202:$61B7", "202:$61DC",
+            "202:$61F6", "202:$6212", "202:$6233", "202:$6259",
+            "202:$6297", "202:$62C6", "202:$62E1", "202:$6326",
+            "202:$6341",
+        )
+        for record_id in consumable_description_ids:
+            with self.subTest(description=record_id):
+                self.assertIn(
+                    "Consume it",
+                    self.record_text(self.by_id[record_id]).replace("<br>", " "),
+                )
+
+        tutorial_ids = (
+            "195:$724F", "205:$6B40", "205:$6B92", "205:$6BE4",
+            "205:$6C40", "205:$6D02", "205:$6D54", "205:$6DAD",
+            "205:$6E10", "205:$6EB4", "205:$6F04",
+        )
+        for record_id in tutorial_ids:
+            with self.subTest(tutorial=record_id):
+                self.assertIn("Consume", self.record_text(self.by_id[record_id]))
+
+        medicine = self.record_text(self.by_id["194:$5679"])
+        self.assertIn("and consumed it.", medicine)
+
+        muzzle = self.record_text(self.by_id["202:$646E"]).replace("<br>", " ")
+        self.assertIn("You cannot eat or read.", muzzle)
+
+        drinking = re.compile(r"\b(?:drink|drinks|drinking|drank|drunk)\b", re.I)
+        remaining = {
+            record.id
+            for record in self.result["records"]
+            if (record.bank, record.address) in self.translated
+            and drinking.search(self.record_text(record))
+        }
+        self.assertEqual({"197:$470E", "200:$5DBC", "200:$67CB"}, remaining)
+
     def test_precedent_free_names_remain_explicitly_provisional(self):
         self.assertEqual(3, len(FIXTURE["provisional"]))
         for row in FIXTURE["provisional"]:

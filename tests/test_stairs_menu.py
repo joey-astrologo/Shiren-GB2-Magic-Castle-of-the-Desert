@@ -31,6 +31,12 @@ FIXTURE = json.loads(
     )
 )
 
+# An untouched Japanese ROM mutates every byte in this bank-7 interval during
+# ordinary dungeon UI activity.  Translation-owned state must therefore not
+# be parked here between frames: native code is free to overwrite it.
+NATIVE_BANK7_UI_LIVE_START = 0xD8B4
+NATIVE_BANK7_UI_LIVE_END = 0xD8F8
+
 
 def _original_rom():
     path = ROOT / ROM_NAME
@@ -102,6 +108,49 @@ class StairsMenuInstallerTests(unittest.TestCase):
             0xFF,
             stairs_menu.FLOOR_SAVED_FLAG_VALUE
             ^ stairs_menu.FLOOR_SAVED_FLAG_END_VALUE,
+        )
+
+    def test_floor_state_does_not_overlap_live_native_bank7_ui_memory(self):
+        self.assertNotEqual(7, stairs_menu.POPUP_STATE_WRAM_BANK)
+        floor_state = range(
+            stairs_menu.FLOOR_SAVED_CELLS_ADDRESS,
+            stairs_menu.FLOOR_SAVED_FLAG_END_ADDRESS + 1,
+        )
+        native_ui = range(
+            NATIVE_BANK7_UI_LIVE_START,
+            NATIVE_BANK7_UI_LIVE_END,
+        )
+        self.assertTrue(set(floor_state).isdisjoint(native_ui))
+        self.assertGreaterEqual(
+            floor_state.start, stairs_menu.POPUP_STATE_RESERVED_START
+        )
+        self.assertLessEqual(
+            floor_state.stop, stairs_menu.POPUP_STATE_RESERVED_END
+        )
+
+    def test_reserved_popup_state_is_clear_in_every_native_fixture(self):
+        flat_start = (
+            stairs_menu.POPUP_STATE_WRAM_BANK * 0x1000
+            + stairs_menu.POPUP_STATE_RESERVED_START
+            - 0xD000
+        )
+        size = (
+            stairs_menu.POPUP_STATE_RESERVED_END
+            - stairs_menu.POPUP_STATE_RESERVED_START
+        )
+        states = sorted((ROOT / "SaveStates").glob("*.state"))
+        self.assertTrue(states)
+        for state in states:
+            with self.subTest(state=state.name):
+                ram = pyboy_state.work_ram(state, self.path)
+                self.assertEqual(bytes(size), ram[flat_start:flat_start + size])
+
+    def test_status_exit_preserves_the_native_automatic_text_bank(self):
+        self.assertEqual(
+            stairs_menu.ORIGINAL_CONTROLLER_EXIT_CALL,
+            stairs_menu._status_exit_helper_bytes()[
+                :len(stairs_menu.ORIGINAL_CONTROLLER_EXIT_CALL)
+            ],
         )
 
     def test_installer_changes_only_reviewed_code_padding_and_checksums(self):

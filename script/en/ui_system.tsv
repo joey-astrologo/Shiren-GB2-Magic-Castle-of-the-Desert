@@ -5,11 +5,11 @@ id	sections	english
 192:$6A00	menus_and_system_labels	Wave
 192:$6A03	menus_and_system_labels	Read
 192:$6A06	menus_and_system_labels	Write
-192:$6A09	menus_and_system_labels	Drink
+192:$6A09	menus_and_system_labels	Eat
 192:$6A0C	menus_and_system_labels	Eat
 192:$6A10	menus_and_system_labels	Look
 192:$6A13	menus_and_system_labels	Put In
-192:$6A17	menus_and_system_labels	Suck
+192:$6A17	menus_and_system_labels	Absorb
 192:$6A1A	menus_and_system_labels	Push
 192:$6A1D	menus_and_system_labels	Take Out
 192:$6A21	menus_and_system_labels	Throw

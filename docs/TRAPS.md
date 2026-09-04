@@ -87,13 +87,18 @@ closed; the Status version had an independent too-small constructor.
 **Rule:** own the constructor and exit cleanup for both floor and Status routes. Regression
 tests must open, cancel/confirm, and inspect the restored background.
 
-The floor underlay scratch must also remain outside every popup staging buffer. A previous
-implementation stored it at `$D85A-$D871`, inside the generic `$D800-$D88B` template copy.
-An unrelated popup wrote `$8F` over the one-byte live flag, so later controller cleanup
-could restore window cells onto the dungeon map even when Shiren had not stepped on stairs.
-The regression now derives the largest popup staging range from the production template and
-rejects every stairs-runtime operand that aliases it; cleanup additionally requires a
-two-byte marker.
+The floor underlay scratch must also remain outside every popup staging buffer and every
+native live UI range. One implementation stored it at `$D85A-$D871`, inside the generic
+`$D800-$D88B` template copy. Moving it just past the enlarged template to bank-7
+`$D8E0-$D8F7` was still unsafe: live Japanese-ROM tracing showed native UI mutating every
+byte in `$D8B4-$D8F7`. Either collision can corrupt a marker or restore stale window cells
+onto the dungeon map even when Shiren never stepped on stairs. The production owner now
+uses the reserved bank-5 `$D9E0-$D9F7` slice, and regressions reject both staged-template
+and native-live overlaps.
+
+The controller hook replaced a native far call to bank `$11:$439C`. Calling the same CPU
+address in bank `$0B` does not preserve behavior; it reaches unrelated code. Chained exit
+helpers must copy the complete original bank/address call before adding cleanup.
 
 ## The Items corner triangle is a page marker
 

@@ -122,7 +122,7 @@ class ItemMessageWrapTests(unittest.TestCase):
             27: "Equipped <cF3><number:19:C5>.",
             30: "Waved <cF3><number:19:C5>.",
             31: "Read <cF3><number:19:C5>.",
-            32: "Made <number:19:C5> <cF3>into medicine <cF3>and drank it.",
+            32: "Made <number:19:C5> <cF3>into medicine <cF3>and consumed it.",
             34: "Ate <cF3><number:19:C5>.",
             94: "Got <cF3><number:19:C5>.",
             95: "Put down <cF3><number:19:C5>.",
@@ -332,12 +332,12 @@ class LiveLocalizedItemMessageTests(unittest.TestCase):
             + b"\xF3"
             + english.encode("into medicine ")
             + b"\xFD\xF3"
-            + english.encode("and drank it.")
+            + english.encode("and consumed it.")
             + b"\xFF"
         )
         self.assertEqual(1, events.count(expected))
         measured = layout.renderer_layout(self.font_rom, expected[:-1], mode=0x01)
-        self.assertEqual((116, 59), measured.line_widths)
+        self.assertEqual((116, 75), measured.line_widths)
         self.assertFalse(measured.auto_wraps)
 
     def test_live_at_feet_route_draws_relocated_english_trap_names(self):

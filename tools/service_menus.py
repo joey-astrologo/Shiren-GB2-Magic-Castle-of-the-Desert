@@ -119,19 +119,21 @@ SERVICE_LOOP_TRAMPOLINE_ADDRESS = 0x7FF4
 SERVICE_LOOP_TRAMPOLINE_EXPECTED = bytes(12)
 NATIVE_TOWN_REFRESH_ADDRESS = 0x69A1
 
-# The widened template ends at bank-7 WRAM $D8B3. The next aligned scratch
-# block retains all ten possible tile/attribute pairs in the one BG column
-# beyond the native town redraw's eight-column viewport. Metadata follows the
-# complete ten-row buffer; it must never overlap a four-entry service frame.
-SAVED_COLUMN_ADDRESS = 0xD8C0
-SAVED_DESTINATION_ADDRESS = 0xD8D4
-SAVED_ROWS_ADDRESS = 0xD8D6
-SAVED_FLAG_ADDRESS = 0xD8D7
-SAVED_FLAG_END_ADDRESS = 0xD8D8
+# The widened template ends at bank-7 WRAM $D8B3, but the bytes following it
+# are not free: native dungeon UI writes through $D8F7.  Share the explicitly
+# reserved bank-5 popup-state block declared by stairs_menu instead.  This
+# lower slice retains the ten tile/attribute pairs in the added BG column plus
+# its metadata and staged-tile state; stairs owns the upper slice.
+POPUP_STATE_WRAM_BANK = stairs_menu.POPUP_STATE_WRAM_BANK
+SAVED_COLUMN_ADDRESS = 0xD9C0
+SAVED_DESTINATION_ADDRESS = 0xD9D4
+SAVED_ROWS_ADDRESS = 0xD9D6
+SAVED_FLAG_ADDRESS = 0xD9D7
+SAVED_FLAG_END_ADDRESS = 0xD9D8
 SAVED_FLAG_VALUE = 0xA5
 SAVED_FLAG_END_VALUE = 0x5A
-BLACKSMITH_TILE_BANK_ADDRESS = 0xD8D9
-BLACKSMITH_TILE_FLAG_ADDRESS = 0xD8DA
+BLACKSMITH_TILE_BANK_ADDRESS = 0xD9D9
+BLACKSMITH_TILE_FLAG_ADDRESS = 0xD9DA
 BLACKSMITH_TILE_FLAG_VALUE = 0xA6
 RESCUE_DELIVERY_TILE_FLAG_VALUE = 0xA7
 MAXIMUM_SERVICE_ROWS = 10
@@ -365,14 +367,14 @@ def _save_support_bytes():
     raw = bytearray.fromhex(
         "F5C5D5E5"          # preserve AF/BC/DE/HL
         "F04FF5F070F5"      # preserve VBK and SVBK
-        "3E07E070"          # select WRAM bank 7
-        "AFEADAD8"          # clear Blacksmith suffix-tile marker
+        "3E05E070"          # select reserved popup-state WRAM bank 5
+        "AFEADAD9"          # clear staged suffix-tile marker
         "7BE6E06F"          # preserve the BG row bits from E in L
         "7BC608E61FB5"       # wrap x + 8 inside the same 32-tile row
-        "EAD4D86F"           # save extra-column low destination and L
-        "7AEAD5D867"         # keep the original BG row high byte in H
-        "783CEAD6D84F"      # B + bottom row -> saved height and C
-        "11C0D8"            # packed tile/attribute destination
+        "EAD4D96F"          # save extra-column low destination and L
+        "7AEAD5D967"        # keep the original BG row high byte in H
+        "783CEAD6D94F"      # B + bottom row -> saved height and C
+        "11C0D9"            # packed tile/attribute destination
     )
     loop = len(raw)
     raw += bytearray.fromhex(
@@ -393,8 +395,8 @@ def _save_support_bytes():
     raw += bytearray.fromhex("2000")
     _patch_relative(raw, branch, loop)
     raw += bytearray.fromhex(
-        "3EA5EAD7D8"        # first saved-column magic byte
-        "3E5AEAD8D8"        # second saved-column magic byte
+        "3EA5EAD7D9"        # first saved-column magic byte
+        "3E5AEAD8D9"        # second saved-column magic byte
         "F1E070F1E04F"      # restore SVBK and VBK
         "E1D1C1F1C9"        # restore registers
     )
@@ -418,17 +420,17 @@ def _restore_support_bytes():
     raw = bytearray.fromhex(
         "F5C5D5E5"          # preserve AF/BC/DE/HL
         "F04FF5F070F5"      # preserve VBK and SVBK
-        "3E07E070"          # select WRAM bank 7
-        "FAD7D8FEA5"        # first saved-column magic byte
+        "3E05E070"          # select reserved popup-state WRAM bank 5
+        "FAD7D9FEA5"        # first saved-column magic byte
     )
     no_saved = len(raw)
     raw += bytearray.fromhex("C20000")  # JP NZ, epilogue
-    raw += bytearray.fromhex("FAD8D8FE5A")  # second magic byte
+    raw += bytearray.fromhex("FAD8D9FE5A")  # second magic byte
     no_saved_end = len(raw)
     raw += bytearray.fromhex("C20000")  # JP NZ, epilogue
     raw += bytearray.fromhex(
         "AFE04F"            # inspect tile IDs in VRAM bank 0
-        "FAD4D86FFAD5D867"  # saved extra-column destination
+        "FAD4D96FFAD5D967"  # saved extra-column destination
         "7DE6E05F"          # preserve the saved destination's BG row bits
         "7DD608E61FB36F"    # wrap x - 8 to the popup top-left
     )
@@ -451,10 +453,10 @@ def _restore_support_bytes():
     for branch in (frame_gone_corner, frame_gone_first, frame_gone_last):
         _patch_relative(raw, branch, restore)
     raw += bytearray.fromhex(
-        "AFEAD7D8EAD8D8"    # consume both magic bytes before VRAM
-        "21C0D8"            # packed tile/attribute source
-        "FAD4D85FFAD5D857"  # saved extra-column destination
-        "FAD6D84F"          # saved row count
+        "AFEAD7D9EAD8D9"    # consume both magic bytes before VRAM
+        "21C0D9"            # packed tile/attribute source
+        "FAD4D95FFAD5D957"  # saved extra-column destination
+        "FAD6D94F"          # saved row count
     )
     loop = len(raw)
     raw += bytearray.fromhex(
@@ -474,12 +476,12 @@ def _restore_support_bytes():
     branch = len(raw)
     raw += bytearray.fromhex("2000")
     _patch_relative(raw, branch, loop)
-    raw += bytearray.fromhex("FADAD8FEA6")
+    raw += bytearray.fromhex("FADAD9FEA6")
     no_blacksmith_tile = len(raw)
     raw += bytearray.fromhex("2000")
     raw += bytearray.fromhex(
-        "AFEADAD8"          # consume suffix-tile marker before VRAM
-        "FAD9D8E04F"        # select the renderer's recorded VRAM bank
+        "AFEADAD9"          # consume suffix-tile marker before VRAM
+        "FAD9D9E04F"        # select the renderer's recorded VRAM bank
         "21908B"            # stable blank tile $B9
         "11308B"            # staged suffix tile $B3
         "011000CD6B0A"      # copy one 16-byte tile
@@ -492,8 +494,8 @@ def _restore_support_bytes():
     no_rescue_delivery_tile = len(raw)
     raw += bytearray.fromhex("2000")
     raw += bytearray.fromhex(
-        "AFEADAD8"          # consume delivery suffix marker before VRAM
-        "FAD9D8E04F"        # select the renderer's recorded VRAM bank
+        "AFEADAD9"          # consume delivery suffix marker before VRAM
+        "FAD9D9E04F"        # select the renderer's recorded VRAM bank
         "21308B"            # stable blank tile $B3
         "11C089"            # first staged suffix tile $9C
         "011000CD6B0A"      # clear one 16-byte staged tile
@@ -530,10 +532,20 @@ def _blacksmith_tile_support_bytes():
         bytes.fromhex(
             "F5C5D5E5"      # preserve AF/BC/DE/HL
             "F04FF5F070F5"  # preserve VBK and SVBK
-            "3E07E070"      # select WRAM bank 7
+            "3E07E070"      # select the bank-7 staged frame
             "FA03D8E608"    # renderer-selected VRAM bank bit
             "0F0F0F"        # move bit 3 into bit 0
-            "EAD9D8E04F"    # record and select that VRAM bank
+            "F5"            # retain bank 0/1 while updating attributes
+            "0707074F"      # selected bank 0/1 -> attribute bit 3 in C
+            "2121D8"        # first displayed spill-cell attribute
+            "111200"        # one widened template row is $12 bytes
+            "0607"          # seven displayed content rows
+            "7EE6F7B1771905"  # replace bank bit and advance one row
+            "20F7"          # loop over every displayed spill cell
+            "F1"            # recover selected VRAM bank 0/1
+            "4FE04F"        # keep it in C and select that VRAM bank
+            "3E05E070"      # select reserved popup-state WRAM bank 5
+            "79EAD9D9"      # record the renderer's VRAM bank
         )
         + bytes((0x21, source & 0xFF, source >> 8))
         + bytes((0x11, destination & 0xFF, destination >> 8))
@@ -544,13 +556,7 @@ def _blacksmith_tile_support_bytes():
         + bytes((0x11, source & 0xFF, source >> 8))
         + bytes.fromhex(
             "011000CD6B0A"  # blank the aliased unselected Quit cursor
-            "FAD9D80707074F"  # selected bank 0/1 -> attribute bit 3 in C
-            "2121D8"        # first displayed spill-cell attribute
-            "111200"        # one widened template row is $12 bytes
-            "0607"          # seven displayed content rows
-            "7EE6F7B1771905"  # replace bank bit and advance one row
-            "20F7"          # loop over every displayed spill cell
-            "3EA6EADAD8"    # mark suffix tile live
+            "3EA6EADAD9"    # mark suffix tile live
             "F1E070F1E04F"  # restore SVBK and VBK
             "E1D1C1F1C9"    # restore registers
         )
@@ -573,10 +579,20 @@ def _rescue_delivery_tile_support_bytes():
     raw = bytearray.fromhex(
         "F5C5D5E5"        # preserve AF/BC/DE/HL
         "F04FF5F070F5"    # preserve VBK and SVBK
-        "3E07E070"        # select WRAM bank 7
+        "3E07E070"        # select the bank-7 staged frame
         "FA03D8E608"      # renderer-selected VRAM bank bit
         "0F0F0F"          # move bit 3 into bit 0
-        "EAD9D8E04F"      # record and select that VRAM bank
+        "F5"              # retain bank 0/1 while updating attributes
+        "0707074F"        # selected bank 0/1 -> attribute bit 3 in C
+        "2121D8"          # first displayed spill-cell attribute
+        "111200"          # one widened template row is $12 bytes
+        "0607"            # seven possible displayed content rows
+        "7EE6F7B1771905"  # replace bank bit and advance one row
+        "20F7"            # loop over every displayed spill cell
+        "F1"              # recover selected VRAM bank 0/1
+        "4FE04F"          # keep it in C and select that VRAM bank
+        "3E05E070"        # select reserved popup-state WRAM bank 5
+        "79EAD9D9"        # record the renderer's VRAM bank
     )
     for source, destination in zip(sources, destinations):
         raw += bytes((0x21, source & 0xFF, source >> 8))
@@ -587,13 +603,7 @@ def _rescue_delivery_tile_support_bytes():
         raw += bytes((0x11, source & 0xFF, source >> 8))
         raw += bytes.fromhex("011000CD6B0A")
     raw += bytearray.fromhex(
-        "FAD9D80707074F"  # selected bank 0/1 -> attribute bit 3 in C
-        "2121D8"          # first displayed spill-cell attribute
-        "111200"          # one widened template row is $12 bytes
-        "0607"            # seven possible displayed content rows
-        "7EE6F7B1771905"  # replace bank bit and advance one row
-        "20F7"            # loop over every displayed spill cell
-        "3EA7EADAD8"      # mark both staged suffix tiles live
+        "3EA7EADAD9"      # mark both staged suffix tiles live
         "F1E070F1E04F"    # restore SVBK and VBK
         "E1D1C1F1C9"      # restore registers
     )
@@ -899,7 +909,7 @@ def summary(rom, approved=None):
                 "english_clearance_pixels": english_text_pixels - width,
             })
     return {
-        "schema": "shiren-gb2-service-menus-v1",
+        "schema": "shiren-gb2-service-menus-v2",
         "runtime_bank": RUNTIME_BANK,
         "load_helper": extract.location(RUNTIME_BANK, LOAD_HELPER_ADDRESS),
         "copy_helper": extract.location(RUNTIME_BANK, COPY_HELPER_ADDRESS),
@@ -939,6 +949,7 @@ def summary(rom, approved=None):
         "saved_column_scratch": "$%04X-$%04X" % (
             SAVED_COLUMN_ADDRESS, BLACKSMITH_TILE_FLAG_ADDRESS
         ),
+        "saved_column_wram_bank": POPUP_STATE_WRAM_BANK,
         "runtime_end": extract.location(RUNTIME_BANK, RUNTIME_END),
         "detector_sha1": sha1(detector_bytes()).hexdigest(),
         "load_support_sha1": sha1(_load_support_bytes()).hexdigest(),

@@ -25,6 +25,11 @@ FIXTURE = json.loads(
     )
 )
 
+# Confirmed live in an untouched Japanese ROM during ordinary dungeon UI.
+# Widened service menus cannot treat this bank-7 memory as persistent storage.
+NATIVE_BANK7_UI_LIVE_START = 0xD8B4
+NATIVE_BANK7_UI_LIVE_END = 0xD8F8
+
 
 def _original_rom():
     path = ROOT / ROM_NAME
@@ -210,7 +215,10 @@ class ServiceMenuInstallerTests(unittest.TestCase):
             stage,
         )
         self.assertIn(
-            bytes.fromhex("FAD9D80707074F2121D811120006077EE6F7B177190520F7"),
+            bytes.fromhex(
+                "F50707074F2121D811120006077EE6F7B177190520F7"
+                "F14FE04F3E05E07079EAD9D9"
+            ),
             stage,
         )
         self.assertIn(
@@ -256,6 +264,28 @@ class ServiceMenuInstallerTests(unittest.TestCase):
             service_menus.SAVED_COLUMN_ADDRESS,
         )
 
+    def test_service_state_does_not_overlap_live_native_bank7_ui_memory(self):
+        self.assertEqual(
+            stairs_menu.POPUP_STATE_WRAM_BANK,
+            service_menus.POPUP_STATE_WRAM_BANK,
+        )
+        self.assertNotEqual(7, service_menus.POPUP_STATE_WRAM_BANK)
+        service_state = range(
+            service_menus.SAVED_COLUMN_ADDRESS,
+            service_menus.BLACKSMITH_TILE_FLAG_ADDRESS + 1,
+        )
+        native_ui = range(
+            NATIVE_BANK7_UI_LIVE_START,
+            NATIVE_BANK7_UI_LIVE_END,
+        )
+        self.assertTrue(set(service_state).isdisjoint(native_ui))
+        self.assertGreaterEqual(
+            service_state.start, stairs_menu.POPUP_STATE_RESERVED_START
+        )
+        self.assertLessEqual(
+            service_state.stop, stairs_menu.POPUP_STATE_RESERVED_END
+        )
+
     def test_saved_column_wraps_from_first_bg_map_back_to_9800(self):
         # Warehouse starts at $9B88. Its added column is $9B90 and rows four
         # onward cross the hardware tile-map boundary $9BFF -> $9800.
@@ -273,14 +303,14 @@ class ServiceMenuInstallerTests(unittest.TestCase):
         # column is row 14, x=4 ($99C4), not row 15, x=4 ($99E4).
         self.assertIn(
             bytes.fromhex(
-                "7BE6E06F7BC608E61FB5EAD4D86F7AEAD5D867"
+                "7BE6E06F7BC608E61FB5EAD4D96F7AEAD5D967"
             ),
             service_menus._save_support_bytes(),
         )
         restore = service_menus._restore_support_bytes()
         self.assertIn(
             bytes.fromhex(
-                "FAD4D86FFAD5D8677DE6E05F7DD608E61FB36F"
+                "FAD4D96FFAD5D9677DE6E05F7DD608E61FB36F"
             ),
             restore,
         )
@@ -372,12 +402,25 @@ class ServiceMenuInstallerTests(unittest.TestCase):
 
 
 class PyBoyServiceMenuTests(unittest.TestCase):
-    SCRATCH_COLUMN = 0x78C0
-    SCRATCH_DESTINATION = 0x78D4
-    SCRATCH_ROWS = 0x78D6
-    SCRATCH_FLAG = 0x78D7
-    SCRATCH_FLAG_END = 0x78D8
-    BLACKSMITH_FLAG = 0x78DA
+    SCRATCH_FLAT_BASE = service_menus.POPUP_STATE_WRAM_BANK * 0x1000
+    SCRATCH_COLUMN = (
+        SCRATCH_FLAT_BASE + service_menus.SAVED_COLUMN_ADDRESS - 0xD000
+    )
+    SCRATCH_DESTINATION = (
+        SCRATCH_FLAT_BASE + service_menus.SAVED_DESTINATION_ADDRESS - 0xD000
+    )
+    SCRATCH_ROWS = (
+        SCRATCH_FLAT_BASE + service_menus.SAVED_ROWS_ADDRESS - 0xD000
+    )
+    SCRATCH_FLAG = (
+        SCRATCH_FLAT_BASE + service_menus.SAVED_FLAG_ADDRESS - 0xD000
+    )
+    SCRATCH_FLAG_END = (
+        SCRATCH_FLAT_BASE + service_menus.SAVED_FLAG_END_ADDRESS - 0xD000
+    )
+    BLACKSMITH_FLAG = (
+        SCRATCH_FLAT_BASE + service_menus.BLACKSMITH_TILE_FLAG_ADDRESS - 0xD000
+    )
 
     SYNTHESIS_RASTER = (
         ".####............#...#...............#.......",

@@ -92,10 +92,12 @@ uses 36 pixels and `Stay Here` 46.
 
 Geometry and teardown are one feature. Widening only the visible box leaves the added
 right-hand column behind after dismissal, which is why both routes have explicit exit
-regressions. The floor route stores its ten covered BG cells and destination in bank-7
-scratch `$D8E0-$D8F7`, beyond every generic/localized popup template and the service-popup
-scratch block. Cleanup requires the exact two-byte `$53/$AC` live marker; ordinary popup
-staging therefore cannot accidentally authorize a stale stairs restore.
+regressions. The floor route stores its ten covered BG cells and destination in the
+reserved bank-5 popup-state block at `$D9E0-$D9F7`. Bank 7 after the staged template is
+native live UI memory and must not be used for persistent restore state. Cleanup requires
+the exact two-byte `$53/$AC` live marker; ordinary popup staging therefore cannot
+accidentally authorize a stale stairs restore. The controller-exit shim also preserves the
+original far-call bank `$11`; bank `$0B` at the same CPU address is unrelated code.
 
 ## Service popups
 
@@ -120,7 +122,7 @@ prevents a shared label such as `Quit` from widening unrelated menus. The load a
 paths make the same decision. Because the native town redraw erases only eight columns,
 the service owner saves the added ninth BG column from both CGB VRAM banks before drawing.
 The shared controller-exit cleanup restores it for B/A dismissals; a post-town-refresh
-cleanup covers transitions such as selecting `Password`. Bank-7 scratch `$D8C0-$D8DA`
+cleanup covers transitions such as selecting `Password`. Reserved bank-5 popup state `$D9C0-$D9DA`
 holds the packed column, destination, height, two-byte live marker, and Blacksmith
 or completed-rescue suffix-tile bank/marker. Warehouse rows cross the BG-map boundary and explicitly wrap
 `$9BFF -> $9800`. The Rescue route opens a native Yes/No prompt

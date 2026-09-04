@@ -396,7 +396,7 @@ cursor positions, requiring the same literal `d`, one left cursor, and a blank r
 at every stop.
 The native town redraw clears only eight columns, so it cannot erase the ninth column added
 for English. Before drawing a widened popup, the service owner saves that column from both
-CGB VRAM banks in bank-7 scratch `$D8C0-$D8DA` (the final two bytes select and mark either
+CGB VRAM banks in reserved bank-5 popup state `$D9C0-$D9DA` (the final two bytes select and mark either
 Blacksmith or completed-rescue suffix staging). The shared controller-exit path restores it
 for ordinary dismissals, while a guarded post-town-refresh hook covers `Password`, whose
 transition leaves the town loop immediately. Both paths consume a two-byte `$A5/$5A` live

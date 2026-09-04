@@ -48,7 +48,7 @@ id	sections	english
 195:$5AB1	story_and_event_dialogue	Pekeji: And this<br>skunk is Koppa.<page><box>
 195:$5ACA	story_and_event_dialogue	Koppa: I'm not a<br>skunk! I'm a weasel!<page><box>
 195:$5AE7	story_and_event_dialogue	Sachi: Aww, you're cute.<page><box>
-195:$5AF9	story_and_event_dialogue	Sachi: I'm Sachi.<page><br>I help my mom here.<page><br>Nice to meet you.<page><box>
+195:$5AF9	story_and_event_dialogue	Sachi: I'm Sachi.<page><br>I help my father here.<page><br>Nice to meet you.<page><box>
 195:$5B2F	story_and_event_dialogue	Sachi: Well, I should<br>get back to work.<page><box>
 195:$5B4A	story_and_event_dialogue	Sachi: You two take your<br>time.<page><box>
 195:$5B63	story_and_event_dialogue	Pekeji: Still, I never<br>expected to find you<br>in this town, Bro...<page><box>
@@ -146,10 +146,10 @@ id	sections	english
 195:$6E7D	story_and_event_dialogue	???: ...That is...<page><br>Yes... I understand...<page><box>Princess: Then...<page><box>???: Shh... Someone's coming.<page><br>We will continue later...<page><box>
 195:$6EC1	story_and_event_dialogue	Princess: Who is it?<page><box>
 195:$6ECB	story_and_event_dialogue	Zagan: It is Zagan, Princess.<page><box>Princess: Enter...<page><box>
-195:$6EF3	story_and_event_dialogue	Princess: What is it?<page><box>Zagan: The Lord summons you.<page><box>Princess: Mother...?<page><box>Zagan: Yes.<page> She asks that you<br>come shortly...<page><box>Princess: Understood.<br>You may go.<page><box>Zagan: ...Princess Ateka.<page><box>Ateka: What is it?<page><box>Zagan: I hear it was<br>you who allowed those<br>people to escape...<page><box>
+195:$6EF3	story_and_event_dialogue	Princess: What is it?<page><box>Zagan: The Lord summons you.<page><box>Princess: Father...?<page><box>Zagan: Yes.<page> He asks that you<br>come shortly...<page><box>Princess: Understood.<br>You may go.<page><box>Zagan: ...Princess Ateka.<page><box>Ateka: What is it?<page><box>Zagan: I hear it was<br>you who allowed those<br>people to escape...<page><box>
 195:$6FA8	story_and_event_dialogue	Ateka: That is none<br>of your concern.<page><box>Zagan: Oh...?<page><box>Zagan: By the way, how<br>has the Lord been feeling<br>lately?<page><box>
 195:$6FF2	story_and_event_dialogue	Ateka: Y-You...<page><box>Ateka: You and the<br>others should know<br>that better than I do!<page><box>Zagan: Heh heh... The Lord's<br>health is most precious...<page><box>Zagan: Be especially<br>careful in your actions.<page><br>Farewell.<page><box>
-195:$705F	story_and_event_dialogue	Ateka: Mother...<delay:78><box>
+195:$705F	story_and_event_dialogue	Ateka: Father...<delay:78><box>
 195:$7075	story_and_event_dialogue	Sachi: Are you okay?<page><box>
 195:$7083	story_and_event_dialogue	Sachi: <name>!<br>Here, take this!<page><box>
 195:$7096	story_and_event_dialogue	Sachi: I know this is<br>hard, but keep going!<page><box>
@@ -160,7 +160,7 @@ id	sections	english
 195:$7174	story_and_event_dialogue	Ateka: I knew it.<page><box>Ateka: The evil<br>aura got to you.<page><box>Ateka: It's especially strong<br>inside the Magic Castle...<page><box>
 195:$71AA	story_and_event_dialogue	Ateka: I'm almost<br>finished, so hold still.<page><box><delay:3C>Koppa: ...That's better.<page><br>I knew you didn't seem<br>like a bad person.<page><box><delay:1E>Ateka: What?<page><box><delay:1E>
 195:$7202	story_and_event_dialogue	Koppa: All kinds of rumors<br>are going around Ilpa,<br>but they can't be true.<page><box>Koppa: You helped us<br>escape before too...<page><box>
-195:$724F	story_and_event_dialogue	Ateka: Drink this Herb<br>and you'll be all right.<page><box>Ateka: You should be<br>able to move again soon.<page><br>And one more thing...<page><box>
+195:$724F	story_and_event_dialogue	Ateka: Consume this Herb<br>and you'll be all right.<page><box>Ateka: You should be<br>able to move again soon.<page><br>And one more thing...<page><box>
 195:$7297	story_and_event_dialogue	Ateka: As soon as you can<br>move, get out of here.<page><box>Ateka: This place is<br>extremely dangerous...<page><br>Please.<page><box>
 195:$72DC	story_and_event_dialogue	Koppa: Ah, wait...
 195:$72EA	story_and_event_dialogue	<box>
@@ -255,7 +255,7 @@ id	sections	english
 196:$4BFF	story_and_event_dialogue	Rookie Guard: Good.<br>Nothing has changed.<page><box>
 196:$4C14	story_and_event_dialogue	Rookie Guard: Still,<br>doesn't this castle have<br>too many secret passages?<page><box>Rookie Guard: It's enough<br>to get anyone lost.<page><box>
 196:$4C58	story_and_event_dialogue	Rookie Guard:<br>Quit complaining.<br>Let's keep moving.<page><box>
-196:$4C76	story_and_event_dialogue	Ateka: Once the ritual begins,<br>I think I will lose my<br>memory.<page><box>Ateka: So...<page><box>Oryu: It will be all right.<page><box>Oryu: I promise to save<br>both you and your mother...<page><box>Oryu: Besides...<page><box>Oryu: <name> will<br>surely come too...<page><box>Ateka: <name>...?<page><br>He will come...?<page><box>Oryu: Yes. He may not look<br>it, but you can rely on him.<page><box>Oryu: When it matters<br>most, he has incredible<br>determination.<page><box>Ateka: Oryu...<page><box>Oryu: Yes?<page><box>Ateka: If <name><br>is ever in danger...<page><br>Please give him this...<page><box>
+196:$4C76	story_and_event_dialogue	Ateka: Once the ritual begins,<br>I think I will lose my<br>memory.<page><box>Ateka: So...<page><box>Oryu: It will be all right.<page><box>Oryu: I promise to save<br>both you and your father...<page><box>Oryu: Besides...<page><box>Oryu: <name> will<br>surely come too...<page><box>Ateka: <name>...?<page><br>He will come...?<page><box>Oryu: Yes. He may not look<br>it, but you can rely on him.<page><box>Oryu: When it matters<br>most, he has incredible<br>determination.<page><box>Ateka: Oryu...<page><box>Oryu: Yes?<page><box>Ateka: If <name><br>is ever in danger...<page><br>Please give him this...<page><box>
 196:$4D99	story_and_event_dialogue	Oryu: This is...<page><br>A Jewel?<page><box>Ateka: It is a talisman passed<br>down through our family.<page><box>Oryu: You want me to give this<br>to <name>. Understood.<page><box>
 196:$4DF6	story_and_event_dialogue	Ateka: Ah... Someone is<br>coming!<page><box>
 196:$4E0B	story_and_event_dialogue	Ateka: Oryu, hurry!<page><box>Oryu: It's all right.<br>There's no need to panic.<page><box>
@@ -264,7 +264,7 @@ id	sections	english
 196:$4EA6	story_and_event_dialogue	Rookie Guard: ...<br>Nothing seems out of place.<page><box>
 196:$4EC2	story_and_event_dialogue	Rookie Guard: Let's go...<page><box>
 196:$4EF1	story_and_event_dialogue	Lord: Heh heh...<br>The time has finally come.<br>The night of the full moon.<page><box>Lord: How long I have<br>waited for this ritual...<page><box>Ateka: ...<page><box>
-196:$4F45	story_and_event_dialogue	Lord: With this, your role<br>and your mother's will end.<page><box>Lord: Princess...<page><br>You understand, do you not?<page><box>
+196:$4F45	story_and_event_dialogue	Lord: Your roles as father<br>and daughter are over.<page><box>Lord: Princess...<page><br>You understand, do you not?<page><box>
 196:$4F7D	story_and_event_dialogue	Lord: Heh heh...<page><br>What this full-moon<br>ritual will summon...<page><box>Lord: Will it be your<br>light, or my darkness...?<page><box>Lord: Once the ritual<br>ends, everything will<br>finally be decided...<page><box>Lord: But before that...<page><box>Lord: I must dispose<br>of one little rat!<page><box>
 196:$500B	story_and_event_dialogue	Lord: You mean to interfere<br>again? Heh heh heh.<page><box>
 196:$502B	story_and_event_dialogue	Lord: What's wrong?<page><box>Lord: Did you not<br>come to defeat me?<page><box>
@@ -292,15 +292,15 @@ id	sections	english
 196:$53D6	story_and_event_dialogue	Nuwanko: Th-The<br>Magic Castle...<page><box>Mekerere: It's collapsing...<page><box>
 196:$5422	story_and_event_dialogue	Curas: Heh heh...<br>At last, I have found it.<br>Jahannam's Gate.<page><box>Curas: The time of<br>resurrection draws near.<br>Heh heh heh...<page><box>
 196:$546E	story_and_event_dialogue	Lord: Ugh...<page><box>Oryu: Such terrible heat...<page><box>
-196:$548D	story_and_event_dialogue	Oryu: Is this also an<br>effect of separating her<br>from that monster Curas?<page><box>
-196:$54B7	story_and_event_dialogue	Ateka: Probably...<page><br>Unless we defeat<br>Curas, Mother will...<page><box>
-196:$54E1	story_and_event_dialogue	Sachi: She won't recover?<page><box>
-196:$54F2	story_and_event_dialogue	Sachi: She looks like<br>she's in terrible pain.<page><box>Ateka: Mother...<page><box>
+196:$548D	story_and_event_dialogue	Oryu: Is this also an<br>effect of separating him<br>from that monster Curas?<page><box>
+196:$54B7	story_and_event_dialogue	Ateka: Probably...<page><br>Unless we defeat<br>Curas, Father will...<page><box>
+196:$54E1	story_and_event_dialogue	Sachi: He won't recover?<page><box>
+196:$54F2	story_and_event_dialogue	Sachi: He looks like<br>he's in terrible pain.<page><box>Ateka: Father...<page><box>
 196:$5513	story_and_event_dialogue	Pekeji: Pant, pant...<br>I brought Obaba!<page><box>
 196:$5534	story_and_event_dialogue	Obaba: Ow, ow...<br>Don't you know how to<br>handle someone gently?!<page><box>
 196:$5566	story_and_event_dialogue	Pekeji: Ow!<page><box>
 196:$5572	story_and_event_dialogue	Obaba: So...<br>Who is suffering<br>from this illness?<page><box>
-196:$558F	story_and_event_dialogue	Obaba: Hmm... She is<br>certainly cursed.<page><box>Obaba: A monster possessed<br>her for far too long.<page><box>Obaba: I do not know<br>how long my purification<br>can hold it back...<page><box>
+196:$558F	story_and_event_dialogue	Obaba: Hmm... He is<br>certainly cursed.<page><box>Obaba: A monster possessed<br>him for far too long.<page><box>Obaba: I do not know<br>how long my purification<br>can hold it back...<page><box>
 196:$5605	story_and_event_dialogue	Obaba: Then let us begin.<page><box>Obaba: Light of<br>Heaven and Earth.<page><box>Obaba: Drive away<br>this evil darkness...<page><box>
 196:$564E	story_and_event_dialogue	Oro: Princess.<page><box>Oro: I hate to ask at a<br>time like this, with the<br>Lord in this condition...<page><box>
 196:$5677	story_and_event_dialogue	Oro: Everyone in town wants<br>to ask you about the Magic<br>Castle and the desert...<page><box>Ateka: I understand...<page><br>I will tell them everything...<page><box>
@@ -319,7 +319,7 @@ id	sections	english
 196:$5A35	story_and_event_dialogue	Ateka: But that alone was<br>not enough for Curas to<br>resurrect the Evil God.<page><box>
 196:$5A68	story_and_event_dialogue	Ateka: Curas did not know<br>where the Evil God slept...<page><box>
 196:$5A8F	story_and_event_dialogue	Oryu: The Evil God's<br>resting place...<page><box>Oryu: To discover it...<page><box>Oryu: Curas needed<br>Princess Ateka's power as a<br>priestess.<page><box>Oryu: The full-moon<br>ritual was his way of<br>finding the Evil God.<page><box>Oryu: But the ritual<br>was also a tremendous<br>gamble for Curas...<page><box>
-196:$5B2A	story_and_event_dialogue	Ateka: Curas first<br>approached me.<page><box>Ateka: And then...<page><box>Ateka: When Mother discovered<br>this, she tried to save me...<page><box>Ateka: But she was<br>defeated in the battle...<page><box>Ateka: And Curas<br>possessed her instead...<page><box>
+196:$5B2A	story_and_event_dialogue	Ateka: Curas first<br>approached me.<page><box>Ateka: And then...<page><box>Ateka: When Father discovered<br>this, he tried to save me...<page><box>Ateka: But he was<br>defeated in the battle...<page><box>Ateka: And Curas<br>possessed him instead...<page><box>
 196:$5BC3	story_and_event_dialogue	Oryu: My mission...<page><br>Was to stop the Evil<br>God's resurrection.<page><box>Oryu: I came to this<br>town under those orders...<page><box>
 196:$5C17	story_and_event_dialogue	Oryu: I disguised myself<br>as an attendant and<br>entered the Magic Castle.<page><box>Oryu: There, I<br>gathered information.<page><box>Oryu: The more I learned,<br>the more I wanted to<br>save them both too.<page><box>
 196:$5C81	story_and_event_dialogue	Oryu: The full-moon ritual<br>held both darkness and light.<page><box>Oryu: If we kept it from<br>falling into darkness, we<br>could destroy Curas instead.<page><box>
@@ -572,7 +572,7 @@ id	sections	english
 197:$45E0	story_and_event_dialogue	Rai: My Lord!<page><box>
 197:$45EE	story_and_event_dialogue	Lord: The force covering<br>the land and the curse<br>upon me have both vanished.<page><box>Lord: The Evil God<br>has been defeated.<page><box>Rai: Then that means...<page><box>Mekerere: <name>...<br><name> finally<br>defeated the Evil God.<page><box>Shizu: The town is saved!<page><box>
 197:$467C	story_and_event_dialogue	Tao: We did it! Hooray!!
-197:$468E	story_and_event_dialogue	Lord: Ateka...<br>I have caused you such<br>worry.<page><box>Ateka: Mother!
+197:$468E	story_and_event_dialogue	Lord: Ateka...<br>I have caused you such<br>worry.<page><box>Ateka: Father!
 197:$46B1	story_and_event_dialogue	<box>
 197:$46B3	story_and_event_dialogue	Wanda: Hey! It's <name>!<page><box>
 197:$46C3	story_and_event_dialogue	Wanda: Everyone!<br><name> is back!<page><box>
@@ -601,7 +601,7 @@ id	sections	english
 197:$4AB4	story_and_event_dialogue	Ateka: You came<br>to return it...?<page><box>
 197:$4AC8	story_and_event_dialogue	Ateka: I see...<delay:78><br>You are already...<br>Leaving us...<delay:78><box>
 197:$4AF0	story_and_event_dialogue	Koppa: Goodbye, Princess.<delay:78><br>Thank you.<delay:3C> And stay well.<delay:78><box>
-197:$4B1B	story_and_event_dialogue	Ateka: Wait! Thank<br>you for everything!<delay:64><box>Ateka: For saving Mother...<delay:3C><br>And Ilpa...<delay:78> And...<delay:78><box>Ateka: And...<delay:78><box>
+197:$4B1B	story_and_event_dialogue	Ateka: Wait! Thank<br>you for everything!<delay:64><box>Ateka: For saving Father...<delay:3C><br>And Ilpa...<delay:78> And...<delay:78><box>Ateka: And...<delay:78><box>
 197:$4B6F	story_and_event_dialogue	Ateka: We will meet<br>again... Won't we?<delay:78><box>
 197:$4B84	story_and_event_dialogue	Oryu: Don't worry.<br>I'm sure we'll meet again.<delay:78><box>Ateka: Oryu...<delay:78><box>Oryu: If you ever need<br>me, I'll come running.<delay:78><br>So don't worry.<delay:78><box>
 197:$4BE3	story_and_event_dialogue	Oryu: Goodbye.<delay:78><box>Koppa: Farewell,<delay:3C> Princess.<delay:78><box>
@@ -1766,18 +1766,18 @@ id	sections	english
 205:$6A61	story_and_event_dialogue	Got <number:19:C5>.<page><br>Raises Strength<br>while equipped.<page><box>Press B to open the<br>menu, then choose<br>Items and equip it.
 205:$6A9E	story_and_event_dialogue	Got <number:19:C5>.<page><br>Eat it to restore<br>a little Fullness.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$6AEF	story_and_event_dialogue	Got <number:19:C5>.<page><br>Eat it to restore Fullness.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6B40	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to restore<br>a little HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6B92	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to<br>restore lots of HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6BE4	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to reveal invisible<br>creatures and traps.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6C40	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to breathe fire<br>and attack monsters.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6B40	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to<br>restore a little HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6B92	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to<br>restore lots of HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6BE4	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to see hidden<br>creatures and traps.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6C40	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to breathe<br>fire and attack monsters.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$6CA0	story_and_event_dialogue	Got <number:19:C5>.<page><br>Carry it to revive<br>once when you collapse.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6D02	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to raise Max HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6D54	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to fully<br>restore Strength.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6DAD	story_and_event_dialogue	Got <number:19:C5>.<page><box>Drink it to lower<br>HP and Strength and<br>slow your movement.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6E10	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to become confused.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6D02	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to raise Max HP.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6D54	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to fully<br>restore Strength.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6DAD	story_and_event_dialogue	Got <number:19:C5>.<page><box>Consume it to lower<br>HP and Strength and<br>slow your movement.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6E10	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to<br>become confused.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$6E60	story_and_event_dialogue	Got <number:19:C5>.<page><br>It restores a little<br>Fullness.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6EB4	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to warp somewhere<br>else on the floor.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
-205:$6F04	story_and_event_dialogue	Got <number:19:C5>.<page><br>Drink it to move faster<br>for a short while.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6EB4	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to warp<br>somewhere else on the floor.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
+205:$6F04	story_and_event_dialogue	Got <number:19:C5>.<page><br>Consume it to move<br>faster for a short while.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$6F62	story_and_event_dialogue	Got <number:19:C5>.<page><br>Damages every<br>monster in the room.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$6FC3	story_and_event_dialogue	Got <number:19:C5>.<page><br>Puts every monster<br>in the room to sleep.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.
 205:$7021	story_and_event_dialogue	Got <number:19:C5>.<page><br>Removes curses<br>from carried items.<page><box>Press B to open the<br>menu, then choose Items<br>to view descriptions.

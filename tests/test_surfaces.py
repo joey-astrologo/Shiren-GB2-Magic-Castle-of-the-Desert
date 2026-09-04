@@ -1280,8 +1280,8 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             )
 
         action_labels = (
-            "Items", "Equip", "Remove", "Wave", "Read", "Write", "Drink",
-            "Eat", "Look", "Put In", "Suck", "Push", "Take Out", "Throw",
+            "Items", "Equip", "Remove", "Wave", "Read", "Write", "Eat",
+            "Eat", "Look", "Put In", "Absorb", "Push", "Take Out", "Throw",
             "Shoot", "Info", "Name", "Place", "Exchange", "Pick Up", "Set",
             "Step On", "Pick Up", "Modify", "Discard",
         )

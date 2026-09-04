@@ -152,7 +152,7 @@ class OriginalRomProseWrapTests(unittest.TestCase):
     def test_required_post_page_break_and_tutorial_balance_are_enforced(self):
         record = self.by_id["205:$6B40"]
         missing_break = (
-            "Got <number:19:C5>.<page>Drink it to restore a little HP."
+            "Got <number:19:C5>.<page>Consume it to restore a little HP."
             "<page><box>Press B to open the menu, then choose "
             "Items to view descriptions."
         )
@@ -164,7 +164,7 @@ class OriginalRomProseWrapTests(unittest.TestCase):
                 self.runtime_contract,
             )
 
-        corrected = missing_break.replace(".<page>Drink", ".<page><br>Drink")
+        corrected = missing_break.replace(".<page>Consume", ".<page><br>Consume")
         wrapped = wrap_en.wrap_record(
             self.font_rom,
             record,
@@ -172,12 +172,12 @@ class OriginalRomProseWrapTests(unittest.TestCase):
             self.runtime_contract,
         )
         self.assertEqual(
-            "Got <number:19:C5>.<page><br>Drink it to restore<br>a little HP."
+            "Got <number:19:C5>.<page><br>Consume it to<br>restore a little HP."
             "<page><box>Press B to open the<br>menu, then choose "
             "Items<br>to view descriptions.",
             wrapped,
         )
-        self.assertNotIn(".<page>Drink", wrapped)
+        self.assertNotIn(".<page>Consume", wrapped)
 
     def test_fresh_box_can_replace_a_native_post_page_line_advance(self):
         wrapped = wrap_en.wrap_record(

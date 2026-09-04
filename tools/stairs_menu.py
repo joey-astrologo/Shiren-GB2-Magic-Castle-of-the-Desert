@@ -29,21 +29,26 @@ CONTROLLER_EXIT_PATCH_ADDRESS = 0x4130
 RUNTIME_BANK = 254
 HELPER_ADDRESS = 0x4000
 FLOOR_SAVE_ADDRESS = 0x405E
-TEMPLATE_ADDRESS = 0x410E
-NATIVE_TEMPLATE_ADDRESS = 0x4168
-STATUS_HELPER_ADDRESS = 0x41F4
-STATUS_TEMPLATE_ADDRESS = 0x421E
-STATUS_EXIT_HELPER_ADDRESS = 0x4278
-RUNTIME_END = 0x4284
+TEMPLATE_ADDRESS = 0x4116
+NATIVE_TEMPLATE_ADDRESS = 0x4170
+STATUS_HELPER_ADDRESS = 0x41FC
+STATUS_TEMPLATE_ADDRESS = 0x4226
+STATUS_EXIT_HELPER_ADDRESS = 0x4280
+RUNTIME_END = 0x428C
 
-# Generic popups stage tile/attribute templates from $D800 through $D8B3.
-# Keep the stairs-only underlay and its metadata outside that arena so an
-# unrelated popup cannot look like a live stairs restore.  The two-byte magic
-# is committed only after all ten covered cells have been saved.
-FLOOR_SAVED_CELLS_ADDRESS = 0xD8E0
-FLOOR_SAVED_DESTINATION_ADDRESS = 0xD8F4
-FLOOR_SAVED_FLAG_ADDRESS = 0xD8F6
-FLOOR_SAVED_FLAG_END_ADDRESS = 0xD8F7
+# Bank 7's apparent gap after the popup template is native live UI memory; an
+# untouched ROM writes every byte from $D8B4-$D8F7 during ordinary play.  Bank
+# 5 $D9BF-$DBFF is invariant across every retained game-state fixture and the
+# controller stress route.  Reserve a small, disjoint slice of that gap for
+# widened-popup underlays.  The two-byte magic is committed only after all ten
+# covered cells have been saved.
+POPUP_STATE_WRAM_BANK = 5
+POPUP_STATE_RESERVED_START = 0xD9C0
+POPUP_STATE_RESERVED_END = 0xDA00
+FLOOR_SAVED_CELLS_ADDRESS = 0xD9E0
+FLOOR_SAVED_DESTINATION_ADDRESS = 0xD9F4
+FLOOR_SAVED_FLAG_ADDRESS = 0xD9F6
+FLOOR_SAVED_FLAG_END_ADDRESS = 0xD9F7
 FLOOR_SAVED_FLAG_VALUE = 0x53
 FLOOR_SAVED_FLAG_END_VALUE = 0xAC
 
@@ -135,7 +140,8 @@ def helper_bytes():
 
 def _floor_save_bytes():
     """Save the ten BG cells covered only by the English floor frame."""
-    raw = bytearray.fromhex("C5D5E5AF")
+    raw = bytearray.fromhex("C5D5E5")
+    raw += bytes((0x3E, POPUP_STATE_WRAM_BANK, 0xE0, 0x70, 0xAF))
     raw += bytes((
         0xEA,
         FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
@@ -178,7 +184,8 @@ def _floor_save_bytes():
         FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
         FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
     ))
-    raw += bytes.fromhex("E1D1C1C9")
+    # The caller immediately reads its staged template from bank 7.
+    raw += bytes.fromhex("3E07E070E1D1C1C9")
     return bytes(raw)
 
 
@@ -215,7 +222,8 @@ def _floor_restore_bytes():
 
 def _floor_cleanup_bytes():
     restore = FLOOR_SAVE_ADDRESS + len(_floor_save_bytes())
-    raw = bytearray.fromhex("F070F53E07E070")
+    raw = bytearray.fromhex("F070F5")
+    raw += bytes((0x3E, POPUP_STATE_WRAM_BANK, 0xE0, 0x70))
     raw += bytes((
         0xFA,
         FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
@@ -262,7 +270,7 @@ def floor_runtime_bytes():
         + _floor_restore_bytes()
         + _floor_cleanup_bytes()
     )
-    if len(result) != 176:
+    if len(result) != 184:
         raise StairsMenuError("generated floor cleanup layout changed unexpectedly")
     return result
 
@@ -302,7 +310,7 @@ def status_exit_helper_address():
 
 def _status_exit_helper_bytes():
     cleanup = floor_cleanup_address()
-    return bytes.fromhex("3E0B219C43CDAC09") + bytes(
+    return ORIGINAL_CONTROLLER_EXIT_CALL + bytes(
         (0xCD, cleanup & 0xFF, cleanup >> 8, 0xC9)
     )
 
@@ -480,7 +488,7 @@ def summary(rom, approved=None):
             }
         )
     return {
-        "schema": "shiren-gb2-stairs-menu-v4",
+        "schema": "shiren-gb2-stairs-menu-v5",
         "bank": BANK,
         "runtime_bank": RUNTIME_BANK,
         "load_patch": extract.location(BANK, LOAD_PATCH_ADDRESS),
@@ -495,6 +503,7 @@ def summary(rom, approved=None):
             FLOOR_SAVED_CELLS_ADDRESS,
             FLOOR_SAVED_FLAG_END_ADDRESS,
         ),
+        "floor_saved_wram_bank": POPUP_STATE_WRAM_BANK,
         "floor_live_marker": "$%02X/$%02X" % (
             FLOOR_SAVED_FLAG_VALUE,
             FLOOR_SAVED_FLAG_END_VALUE,

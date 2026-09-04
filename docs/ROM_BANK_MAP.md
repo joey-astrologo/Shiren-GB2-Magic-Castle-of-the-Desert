@@ -239,22 +239,27 @@ such as `Windblade` are not truncated and the native persistent layout does not 
 
 ## Popup transient scratch
 
-`service_menus.py` uses WRAM bank 7 `$D8C0-$D8DA` only while a reviewed widened service
-popup is live. `$D8C0-$D8D3` packs up to ten original tile/attribute pairs from its added
-rightmost BG column; `$D8D4-$D8D5` store the BG destination, `$D8D6` the row count, and
-`$D8D7-$D8D8` the two-byte `$A5/$5A` live marker, and `$D8D9-$D8DA` the Blacksmith
-suffix tile's VRAM bank and `$A6` marker. The widened frame template ends at
-`$D8B3`, so these ranges do not overlap. The two-byte marker prevents uninitialized WRAM
-from authorizing a restore. Destination arithmetic preserves the current tile-map row while
-wrapping the low five x bits, then wraps vertical row traversal between `$9Bxx` and `$98xx`.
-This is transient rendering state, not SRAM and not general free WRAM.
+WRAM bank 7 `$D800-$D8B3` holds staged popup templates, but the apparent gap after the
+largest localized template is not free. An untouched Japanese ROM changes every byte in
+`$D8B4-$D8F7` during ordinary dungeon UI activity. Earlier widened-popup code placed live
+restore records there; native writes could corrupt an underlay or its marker and later make
+cleanup copy a stale window tile back onto the dungeon map.
 
-`stairs_menu.py` separately uses bank-7 `$D8E0-$D8F7`: `$D8E0-$D8F3` holds ten
-tile/attribute pairs covered by the widened floor frame, `$D8F4-$D8F5` holds their BG
-destination, and `$D8F6-$D8F7` is the complementary `$53/$AC` live marker. This range is
-beyond both the largest popup template ending at `$D8B3` and the service scratch ending at
-`$D8DA`. Both marker bytes are cleared before a restore, and a non-stairs popup cannot
-authorize cleanup by staging ordinary window data.
+The widened-popup owners now share a reserved slice of WRAM bank 5 `$D9C0-$D9F7`, inside
+the invariant `$D9BF-$DBFF` gap measured across all retained native game-state fixtures and
+controller stress routes. `service_menus.py` owns `$D9C0-$D9DA`: `$D9C0-$D9D3` packs up to
+ten original tile/attribute pairs from the added rightmost BG column, `$D9D4-$D9D5` stores
+the BG destination, `$D9D6` the row count, `$D9D7-$D9D8` the `$A5/$5A` live marker, and
+`$D9D9-$D9DA` the staged suffix tile's VRAM bank and marker. Destination arithmetic
+preserves the current tile-map row while wrapping the low five x bits, then wraps vertical
+row traversal between `$9Bxx` and `$98xx`.
+
+`stairs_menu.py` owns the disjoint upper slice `$D9E0-$D9F7`: `$D9E0-$D9F3` holds the ten
+tile/attribute pairs covered only by the widened floor frame, `$D9F4-$D9F5` holds their BG
+destination, and `$D9F6-$D9F7` is the complementary `$53/$AC` live marker. Both owners
+select bank 5 only around their state access and restore the caller's bank. Suffix rendering
+explicitly returns to bank 7 before reading or editing the staged frame. This is transient
+rendering state, not SRAM and not general free WRAM.
 
 ## Rescue requester live actor state
 

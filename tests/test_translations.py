@@ -2,6 +2,7 @@ import csv
 import io
 from hashlib import sha1
 from pathlib import Path
+import re
 import sys
 import tempfile
 import unittest
@@ -89,6 +90,64 @@ class ProductionUnidentifiedAppearanceTests(unittest.TestCase):
             )
         )
         self.assertNotEqual(rows["192:$6777"]["english"], rows["192:$679E"]["english"])
+
+
+class ProductionStoryGenderTests(unittest.TestCase):
+    @staticmethod
+    def _prose_rows():
+        with (ROOT / "script" / "en" / "prose.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            return {
+                row["id"]: row["english"]
+                for row in csv.DictReader(handle, delimiter="\t")
+            }
+
+    def test_f13c_parental_dialogue_consistently_identifies_fathers(self):
+        rows = self._prose_rows()
+
+        expected_fragments = {
+            "195:$5AF9": ("I help my father here.",),
+            "195:$6EF3": ("Princess: Father...?", "He asks that you"),
+            "195:$705F": ("Ateka: Father...",),
+            "196:$4C76": ("both you and your father",),
+            "196:$4F45": ("father and daughter",),
+            "196:$54B7": ("Father will...",),
+            "196:$54F2": ("He looks like", "he's in terrible pain", "Ateka: Father..."),
+            "196:$5B2A": (
+                "When Father discovered",
+                "he tried to save me",
+                "he was",
+                "possessed him instead",
+            ),
+            "196:$5C17": ("save them both too.",),
+            "197:$468E": ("Ateka: Father!",),
+            "197:$4B1B": ("For saving Father",),
+        }
+        maternal = re.compile(r"\b(?:mother|mom|she|her)\b", re.IGNORECASE)
+        for record_id, fragments in expected_fragments.items():
+            with self.subTest(record=record_id):
+                text = rows[record_id]
+                linear_text = text.replace("<br>", " ")
+                self.assertIsNone(maternal.search(text), text)
+                for fragment in fragments:
+                    self.assertIn(fragment, linear_text)
+
+    def test_lord_recovery_scene_uses_masculine_pronouns(self):
+        rows = self._prose_rows()
+        expected_fragments = {
+            "196:$548D": ("separating him from",),
+            "196:$54E1": ("He won't recover?",),
+            "196:$558F": ("He is certainly cursed.", "possessed him"),
+        }
+        feminine = re.compile(r"\b(?:she|her)\b", re.IGNORECASE)
+        for record_id, fragments in expected_fragments.items():
+            with self.subTest(record=record_id):
+                text = rows[record_id]
+                linear_text = text.replace("<br>", " ")
+                self.assertIsNone(feminine.search(text), text)
+                for fragment in fragments:
+                    self.assertIn(fragment, linear_text)
 
 
 class OriginalRomTranslationFileTests(unittest.TestCase):
