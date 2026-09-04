@@ -48,8 +48,8 @@ HUD_SOURCE_SIZE = SOURCE_TILE_COUNT * SOURCE_TILE_BYTES
 HUD_SOURCE_SHA256 = (
     "3ea78ca67f1364b85de7fe4971886ae3bc76bcd643837504cc22be5e839704a1"
 )
-HUD_NATIVE_MIDDLE_SHA256 = (
-    "e90d17c07e06e0f05d91e793faf93395b108d68d94b5aae884bc341d9300353a"
+HUD_NATIVE_BETWEEN_DIGITS_AND_LABELS_SHA256 = (
+    "af62d54ef93fc52524e0ef84a91a5cc5273384ae47b3e23b152e87afd4012427"
 )
 HUD_NATIVE_AFTER_SLASH_SHA256 = (
     "d9a01877e76c8d9752f80f4cb6441354ace005454b4e4b7cde4e82788622cbc7"
@@ -95,12 +95,15 @@ def read_source(rom):
         )
     actual = sha256(source).hexdigest()
     approved_digits = hud_font.approved_digit_bytes()
+    approved_labels = hud_font.approved_label_bytes()
     approved_slash = hud_font.approved_slash_bytes()
+    label_at = hud_font.LABEL_FIRST_TILE * SOURCE_TILE_BYTES
     slash_at = hud_font.SLASH_TILE * SOURCE_TILE_BYTES
     installed = (
         source[:hud_font.DIGIT_BYTES] == approved_digits
-        and sha256(source[hud_font.DIGIT_BYTES:slash_at]).hexdigest()
-        == HUD_NATIVE_MIDDLE_SHA256
+        and sha256(source[hud_font.DIGIT_BYTES:label_at]).hexdigest()
+        == HUD_NATIVE_BETWEEN_DIGITS_AND_LABELS_SHA256
+        and source[label_at:label_at + hud_font.LABEL_BYTES] == approved_labels
         and source[slash_at:slash_at + SOURCE_TILE_BYTES] == approved_slash
         and sha256(source[slash_at + SOURCE_TILE_BYTES:]).hexdigest()
         == HUD_NATIVE_AFTER_SLASH_SHA256
@@ -108,7 +111,7 @@ def read_source(rom):
     if actual != HUD_SOURCE_SHA256 and not installed:
         raise HudFontAuditionError(
             "HUD font source SHA-256 mismatch: got %s; expected native source "
-            "or approved digits/slash with unchanged native spans" % actual
+            "or approved numbers/labels with unchanged native spans" % actual
         )
     return source
 

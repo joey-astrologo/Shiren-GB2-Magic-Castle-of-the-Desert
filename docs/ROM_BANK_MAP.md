@@ -54,7 +54,7 @@ text growth.
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
-| 3 | `$4842-$5841` | Native one-byte font with style-selected Thin Pixel-7 English slots. Its `$5742-$5841` suffix is also the packed top-HUD atlas: `hud_font.py` replaces decimal tiles `$5742-$5791` and slash tile `$57E2-$57F1`; `$5792-$57E1` and `$57F2-$5841` (`A-F`, `Lv`, `Hp`, meter, blanks) stay native and are audited read-only | `english_font.py` owns its English slots; `hud_font.py` exclusively owns `$5742-$5791` and `$57E2-$57F1` |
+| 3 | `$4842-$5841` | Native one-byte font with style-selected Thin Pixel-7 English slots. Its `$5742-$5841` suffix is also the packed top-HUD atlas: `hud_font.py` replaces decimal tiles `$5742-$5791`, label tiles `$57B2-$57E1` (`E/F`, `L/v`, `H/p`, preserving native `E`), and slash tile `$57E2-$57F1`; `$5792-$57B1` (`A-D`) and `$57F2-$5841` (meter/blanks) stay native and are audited read-only | `english_font.py` owns its English slots; `hud_font.py` exclusively owns `$5742-$5791`, `$57B2-$57E1`, and `$57E2-$57F1` |
 | 3 | `$6A49-$6A53` | Shared floor-popup template load hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 3 | `$6A8F-$6A9F` | Shared floor-popup copy/cleanup hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
 | 4 | `$4148-$414F` | Status-menu Help-return template redirect | `menu_graphics.py` only |

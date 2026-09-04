@@ -17,7 +17,7 @@ matching Japanese cartridge dump.
 | Text | **Translation pass complete** | All 5,667 production records have explicit English or intentional empty values; editorial review and playtesting continue |
 | Menus and input | **Complete for known routes** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and known system screens are localized and fixture-tested |
 | Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
-| Graphics | **In progress** | Copyright card, arrival cards, save/load sign, and dungeon-HUD digits/slash are installed; the title and ending credits remain |
+| Graphics | **In progress** | Copyright card, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed; the title and ending credits remain |
 | Wanderer Rescue | **Protocol and English I/O tested** | The complete physical Rescue Gate and two-diary route still needs capture |
 | Automated tests | **560 tests passing — 2026-09-02** | Continue adding focused regressions for issues found during playtesting |
 

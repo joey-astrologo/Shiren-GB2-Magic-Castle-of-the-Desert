@@ -1,0 +1,23 @@
+{
+  "schema": "shiren-gb2-hud-labels-v1",
+  "status": "approved player-supplied dungeon HUD F, L, v, H, and p rasters",
+  "source": {
+    "file": "image (1).webp",
+    "sha256": "b3e671095afc7bad315b583e8baf42144e3f01280ade26d444b11ac93a0580ea",
+    "dimensions": [460, 160],
+    "pixel_scale": 20,
+    "proof": "F Lv Hp",
+    "note": "The monochrome proof is an exact 20x nearest-neighbor enlargement. Each character shape is normalized into its native 4x8 HUD slot; proof spacing is not installed."
+  },
+  "palette": {
+    ".": 1,
+    "#": 3
+  },
+  "glyphs": {
+    "F": ["....", "###.", "#...", "##..", "#...", "#...", "#...", "...."],
+    "L": ["....", "#...", "#...", "#...", "#...", "#...", "###.", "...."],
+    "v": ["....", "....", "....", "#..#", "#..#", ".#.#", "..#.", "...."],
+    "H": ["....", "#.#.", "#.#.", "###.", "#.#.", "#.#.", "#.#.", "...."],
+    "p": ["....", "....", "....", "##..", "#.#.", "##..", "#...", "...."]
+  }
+}

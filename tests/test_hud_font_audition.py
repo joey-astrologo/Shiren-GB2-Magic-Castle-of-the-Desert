@@ -40,6 +40,13 @@ APPROVED_SLASH_RASTER = (
     ".#......",
     "........",
 )
+APPROVED_LABEL_RASTERS = {
+    "F": ("....", "###.", "#...", "##..", "#...", "#...", "#...", "...."),
+    "L": ("....", "#...", "#...", "#...", "#...", "#...", "###.", "...."),
+    "v": ("....", "....", "....", "#..#", "#..#", ".#.#", "..#.", "...."),
+    "H": ("....", "#.#.", "#.#.", "###.", "#.#.", "#.#.", "#.#.", "...."),
+    "p": ("....", "....", "....", "##..", "#.#.", "##..", "#...", "...."),
+}
 
 
 class HudFontAuditionTests(unittest.TestCase):
@@ -145,7 +152,7 @@ class HudFontAuditionTests(unittest.TestCase):
         ):
             hud_font_audition.read_source(damaged)
 
-    def test_production_build_installs_the_approved_hud_digits_and_slash(self):
+    def test_production_build_installs_all_approved_hud_glyphs(self):
         output, _allocation, _validation = translated_build.build_rom(self.rom, {})
         for character, expected in APPROVED_DIGIT_RASTERS.items():
             with self.subTest(character=character):
@@ -157,18 +164,33 @@ class HudFontAuditionTests(unittest.TestCase):
             APPROVED_SLASH_RASTER,
             hud_font_audition.glyph_raster(output, "/"),
         )
+        for character, expected in APPROVED_LABEL_RASTERS.items():
+            with self.subTest(character=character):
+                self.assertEqual(
+                    expected,
+                    hud_font_audition.glyph_raster(output, character),
+                )
+        for character in "ABCDE":
+            with self.subTest(preserved_character=character):
+                self.assertEqual(
+                    hud_font_audition.glyph_raster(self.rom, character),
+                    hud_font_audition.glyph_raster(output, character),
+                )
 
         digit_start, digit_end = hud_font.digit_range()
+        label_start, label_end = hud_font.label_range()
         slash_start, slash_end = hud_font.slash_range()
         atlas_end = (
             hud_font_audition.HUD_SOURCE_OFFSET
             + hud_font_audition.HUD_SOURCE_SIZE
         )
-        self.assertEqual(self.rom[digit_end:slash_start], output[digit_end:slash_start])
+        self.assertEqual(label_end, slash_start)
+        self.assertEqual(self.rom[digit_end:label_start], output[digit_end:label_start])
         self.assertEqual(self.rom[slash_end:atlas_end], output[slash_end:atlas_end])
 
-    def test_digit_installer_is_asset_backed_guarded_and_confined(self):
+    def test_hud_installer_is_asset_backed_guarded_and_confined(self):
         spec = hud_font.load_approved()
+        label_spec = hud_font.load_approved_labels()
         self.assertEqual(
             hud_font.APPROVED_SOURCE_SHA256,
             spec["source"]["sha256"],
@@ -178,13 +200,24 @@ class HudFontAuditionTests(unittest.TestCase):
             {character: tuple(rows) for character, rows in spec["glyphs"].items()},
         )
         self.assertEqual(APPROVED_SLASH_RASTER, tuple(spec["slash"]))
+        self.assertEqual(
+            hud_font.APPROVED_LABEL_SOURCE_SHA256,
+            label_spec["source"]["sha256"],
+        )
+        self.assertEqual(
+            APPROVED_LABEL_RASTERS,
+            {character: tuple(rows) for character, rows in label_spec["glyphs"].items()},
+        )
         packed = hud_font.approved_digit_bytes(spec)
+        labels = hud_font.approved_label_bytes(label_spec)
         slash = hud_font.approved_slash_bytes(spec)
         self.assertEqual(5 * 16, len(packed))
+        self.assertEqual(3 * 16, len(labels))
         self.assertEqual(16, len(slash))
 
         output = hud_font.install(self.rom)
         digit_start, digit_end = hud_font.digit_range()
+        label_start, label_end = hud_font.label_range()
         slash_start, slash_end = hud_font.slash_range()
         changed = {
             offset
@@ -204,6 +237,7 @@ class HudFontAuditionTests(unittest.TestCase):
         }
         self.assertTrue(changed <= owned | checksums)
         self.assertEqual(packed, output[digit_start:digit_end])
+        self.assertEqual(labels, output[label_start:label_end])
         self.assertEqual(slash, output[slash_start:slash_end])
         self.assertEqual(output, hud_font.install(output))
         cartridge.verify_checksums(output)
@@ -211,6 +245,11 @@ class HudFontAuditionTests(unittest.TestCase):
         damaged = bytearray(self.rom)
         damaged[digit_start] ^= 1
         with self.assertRaisesRegex(hud_font.HudFontError, "unexpected HUD digit"):
+            hud_font.install(damaged)
+
+        damaged = bytearray(self.rom)
+        damaged[label_start] ^= 1
+        with self.assertRaisesRegex(hud_font.HudFontError, "unexpected HUD label"):
             hud_font.install(damaged)
 
         damaged = bytearray(self.rom)

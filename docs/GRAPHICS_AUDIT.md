@@ -264,25 +264,29 @@ pack two four-pixel slots each:
 - reserved blank tiles `$FD-$FF`.
 
 Production installs the approved player-supplied decimal and slash rasters from
-`assets/fonts/hud_digits.json` into two discontiguous regions: the first five tiles and slash
-tile ten. The asset freezes the SHA-256 of `hud edits.webp`, its ten-cell digit crop
-(`1234567890` at x=1, y=0), and its separate 8x8 slash crop at x=0, y=7. The ten other tiles
-are required to stay byte-exact native.
+`assets/fonts/hud_digits.json` into the first five tiles and slash tile ten. That asset
+freezes the SHA-256 of `hud edits.webp`, its ten-cell digit crop (`1234567890` at x=1,
+y=0), and its separate 8x8 slash crop at x=0, y=7. The visible `F`, `L`, `v`, `H`, and `p`
+rasters come from `assets/fonts/hud_labels.json`, which freezes the SHA-256 and exact 20x
+pixel scale of the supplied `F Lv Hp` proof. They occupy tiles seven through nine; the
+co-packed native `E` half-slot is reproduced pixel-exact. The seven other full tiles,
+native `A-E` glyphs, meter art, and reserved cells remain unchanged.
 
 Normal play has only demonstrated decimal numbers, `F`, `Lv`, and `Hp`; `A-E` remain
 included in the audition because they are real, distinct alphanumeric slots in the same
 source. The read-only tool accepts either the verified native atlas or the exact installed
-digit/native-tail combination and renders every slot, symbol, and native-width status proof:
+number/label combination and renders every slot, symbol, and native-width status proof:
 
 ```sh
 python3 -m unittest tests.test_hud_font_audition -v
 python3 tools/hud_font_audition.py
 ```
 
-The default output is `build/hud_font_audition.png`. Tests freeze the source-image identity,
-all ten approved digit rasters, the approved slash geometry, literal `F/L/v/H/p` pixels,
-distinct nonempty alphanumeric slots, maximum proof width, sheet geometry, CLI output, exact
-discontiguous ownership, and fail-closed behavior after any unapproved atlas mutation.
+The default output is `build/hud_font_audition.png`. Tests freeze both source-image
+identities, all ten approved digit rasters, the five approved label rasters, the approved
+slash geometry, preserved native `A-E`, distinct nonempty source slots, maximum proof width,
+sheet geometry, CLI output, exact discontiguous ownership, and fail-closed behavior after any
+unapproved atlas mutation.
 
 ## Ending and credits
 
@@ -313,7 +317,7 @@ remain unchanged by explicit project policy.
 | Candidate | Finding | Disposition |
 |---|---|---|
 | Opening chase/cinematics | Existing opening tests prove ordinary dialogue rendering, but do not constitute a frame-by-frame graphical-text inventory | Keep on the visual play-test watch list; no separate asset claimed yet |
-| HUD abbreviations | Dedicated packed atlas `3:$5742-$5841`; approved decimal digits and slash are installed while native labels, meter art, and reserved cells remain guarded | Digit/slash localization complete; retain the read-only audition for source and production review |
+| HUD abbreviations | Dedicated packed atlas `3:$5742-$5841`; approved decimal digits, `F/L/v/H/p`, and slash are installed while `A-E`, meter art, and reserved cells remain guarded | HUD glyph replacement complete; retain the read-only audition for source and production review |
 | Menus and graphical input | Status, name, gift-code, Blank Scroll, unidentified-name, Rescue, and service-menu owners already documented | Do not duplicate them in a new static-art patch |
 | Shop/store signs | Japanese characters are environmental signage | Preserve |
 | Postgame location cards | Covered by the installed 32-selector arrival renderer | Continue rare-route playtesting; all selectors are statically pixel-tested |

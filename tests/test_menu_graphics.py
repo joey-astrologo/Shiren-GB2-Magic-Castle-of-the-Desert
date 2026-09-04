@@ -198,8 +198,10 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
         cls.localized_path.write_bytes(output)
         native_hud = bytearray(output)
         digit_start, digit_end = hud_font.digit_range()
+        label_start, label_end = hud_font.label_range()
         slash_start, slash_end = hud_font.slash_range()
         native_hud[digit_start:digit_end] = hud_font.ORIGINAL_DIGIT_BYTES
+        native_hud[label_start:label_end] = hud_font.ORIGINAL_LABEL_BYTES
         native_hud[slash_start:slash_end] = hud_font.ORIGINAL_SLASH_BYTES
         cartridge.fix_checksums(native_hud)
         cls.native_hud_path = Path(cls.temporary.name) / "native-hud-control.gbc"
