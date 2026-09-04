@@ -47,6 +47,16 @@ APPROVED_LABEL_RASTERS = {
     "H": ("....", "#.#.", "#.#.", "###.", "#.#.", "#.#.", "#.#.", "...."),
     "p": ("....", "....", "....", "##..", "#.#.", "##..", "#...", "...."),
 }
+APPROVED_LV_TILE_RASTER = (
+    "........",
+    "#.......",
+    "#.......",
+    "#..#..#.",
+    "#..#..#.",
+    "#...#.#.",
+    "###..#..",
+    "........",
+)
 
 
 class HudFontAuditionTests(unittest.TestCase):
@@ -164,12 +174,21 @@ class HudFontAuditionTests(unittest.TestCase):
             APPROVED_SLASH_RASTER,
             hud_font_audition.glyph_raster(output, "/"),
         )
-        for character, expected in APPROVED_LABEL_RASTERS.items():
+        for character in "FHp":
+            expected = APPROVED_LABEL_RASTERS[character]
             with self.subTest(character=character):
                 self.assertEqual(
                     expected,
                     hud_font_audition.glyph_raster(output, character),
                 )
+        lv_tile = hud_font_audition.source_tiles(output)[8]
+        self.assertEqual(
+            APPROVED_LV_TILE_RASTER,
+            tuple(
+                "".join("#" if color >= 2 else "." for color in row)
+                for row in lv_tile
+            ),
+        )
         for character in "ABCDE":
             with self.subTest(preserved_character=character):
                 self.assertEqual(
@@ -207,6 +226,10 @@ class HudFontAuditionTests(unittest.TestCase):
         self.assertEqual(
             APPROVED_LABEL_RASTERS,
             {character: tuple(rows) for character, rows in label_spec["glyphs"].items()},
+        )
+        self.assertEqual(
+            APPROVED_LV_TILE_RASTER,
+            tuple(label_spec["packed_tiles"]["Lv"]),
         )
         packed = hud_font.approved_digit_bytes(spec)
         labels = hud_font.approved_label_bytes(label_spec)

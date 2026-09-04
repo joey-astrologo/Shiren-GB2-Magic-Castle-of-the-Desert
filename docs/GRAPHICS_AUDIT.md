@@ -269,7 +269,9 @@ freezes the SHA-256 of `hud edits.webp`, its ten-cell digit crop (`1234567890` a
 y=0), and its separate 8x8 slash crop at x=0, y=7. The visible `F`, `L`, `v`, `H`, and `p`
 rasters come from `assets/fonts/hud_labels.json`, which freezes the SHA-256 and exact 20x
 pixel scale of the supplied `F Lv Hp` proof. They occupy tiles seven through nine; the
-co-packed native `E` half-slot is reproduced pixel-exact. The seven other full tiles,
+packed `Lv` tile moves `v` one pixel left across the nominal four-pixel half-slot boundary
+to reproduce the proof's kerning, while the co-packed native `E` half-slot is reproduced
+pixel-exact. The seven other full tiles,
 native `A-E` glyphs, meter art, and reserved cells remain unchanged.
 
 Normal play has only demonstrated decimal numbers, `F`, `Lv`, and `Hp`; `A-E` remain
@@ -284,9 +286,9 @@ python3 tools/hud_font_audition.py
 
 The default output is `build/hud_font_audition.png`. Tests freeze both source-image
 identities, all ten approved digit rasters, the five approved label rasters, the approved
-slash geometry, preserved native `A-E`, distinct nonempty source slots, maximum proof width,
-sheet geometry, CLI output, exact discontiguous ownership, and fail-closed behavior after any
-unapproved atlas mutation.
+slash geometry, complete tightly kerned `Lv` tile, preserved native `A-E`, distinct nonempty
+source slots, maximum proof width, sheet geometry, CLI output, exact discontiguous ownership,
+and fail-closed behavior after any unapproved atlas mutation.
 
 ## Ending and credits
 

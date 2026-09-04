@@ -109,9 +109,10 @@ edited through the ordinary catalog workflow.
   without changing a framebuffer hash. Automated live reproduction of the user-observed
   suspend/reload route remains pending.
 - The dedicated dungeon-HUD atlas installs approved player-supplied `0-9`, `F/L/v/H/p`, and
-  slash rasters while retaining native `A-E`, meter art, and reserved cells. Both source
-  images are identity-frozen, every production glyph is pixel-tested independently, and the
-  three owned ROM ranges fail closed without updating framebuffer hashes.
+  slash rasters while retaining native `A-E`, meter art, and reserved cells. The `Lv` tile
+  moves `v` one pixel left to match the supplied pair spacing. Both source images are
+  identity-frozen, every production glyph and the complete kerned pair are pixel-tested, and
+  the three owned ROM ranges fail closed without updating framebuffer hashes.
 - The cracked-Bracelet suffix keeps its native `F2 1E` token and 14-pixel renderer advance,
   but its Japanese `(hibi)` bitmap is localized to `(Cr)`. All translated item-name shapes
   retain 18 pixels of worst-case row margin, and the supplied failure state is replayed in
@@ -173,13 +174,13 @@ The latest verified production build produces two font variants from the same tr
 and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `50ed93e5b3ebb35f87b7f56b3cec1d5e64ee6e52`
+  `40f51bda7e03b915dbf5affa8f7a3693c343914f`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `0913cf2f999d6f3ae7d0246c854bca7c85d14a86`
+  `7b6732b33a7e1cab6ca12503d43318312cf8a4d0`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `d2dbff28b7cc4e3af895fff93bcc2afcb9fb5090`
+  `42c608506ee36819563374fcea76a03210e27686`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `9de1dc3d82352eb6ea319c69c0a6830c844ea77b`
+  `e7284922dfd64ef734b48e990ef095bc4d5c9df2`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.

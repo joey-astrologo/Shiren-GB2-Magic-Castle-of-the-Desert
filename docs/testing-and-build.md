@@ -198,8 +198,9 @@ python3 tools/hud_font_audition.py
 This reads either the guarded native 16-tile source at `3:$5742-$5841` or a production atlas
 containing the approved decimal, `F/L/v/H/p`, and slash rasters. It writes only
 `build/hud_font_audition.png` by default. The regression freezes every installed `0-9`,
-label, and slash raster, preserves native `A-E`, meter, and reserved cells, proves all 20
-source alphanumeric slots are distinct and nonempty, checks a native-width
+label, and slash raster, freezes the complete `Lv` tile with `v` kerned one pixel left,
+preserves native `A-E`, meter, and reserved cells, proves all 20 source alphanumeric slots
+are distinct and nonempty, checks a native-width
 `99F Lv 99 Hp 999/999` proof, and confines installation to the three approved ranges. It
 never updates framebuffer hashes; the audition command does not modify the ROM.
 

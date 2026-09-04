@@ -36,25 +36,25 @@
     "exact_references": 7163,
     "written_banks": 13,
     "header_checksum": "CB",
-    "global_checksum": "FA7F",
+    "global_checksum": "FA98",
     "overridden_records": 1,
     "overridden_references": 1
   },
   "output": {
     "size": 4194304,
-    "sha1": "efbde26742967c7454863c5a645481bbcf6f7346",
-    "sha256": "a2a955cd49f73e16b3706f85457e0d7aeadd6530c52db9b3bb34f9556fa35864",
-    "md5": "6b5664a638133b3f00f89c961d75e256",
+    "sha1": "696cd3902a36e68a40b8f4e8fe9c283a46016723",
+    "sha256": "d7b09625a73d1afca41bf892e43590e5ee17deb3732d73f1bfa632f3c1880328",
+    "md5": "f3fce99c26b5540899c76fb48f2448a6",
     "header_checksum": "CB",
-    "global_checksum": "FA7F",
-    "changed_bytes": 237645,
-    "mutation_offsets_sha256": "b7e654ba6916108fef0638114e0ce8987ead03d7ba9ee40c1b2cfc075b34b58f",
+    "global_checksum": "FA98",
+    "changed_bytes": 237644,
+    "mutation_offsets_sha256": "a16c08106d3bccb7068321db9fd5ba8e0c4074e199151939b7a98f2da9ef81fe",
     "directory_sha1": "6fba5b254857f219c468665a9ee82638d28e1e3f",
     "written_banks_sha1": "634f0751458bad74851a24c03ee3a67c02b1993f"
   },
   "font_regions": {
     "widths": "bdff74e59b52a3f84626fd5703950d42c0b1bc94",
-    "single": "d3dbbd3362eabd9d9d3673d0a7e36cb2cb886dda",
+    "single": "c0b0c863bb5fb13eee549c324889836e112f9a0d",
     "kanji": "0d23ea9a4ac0772bcfb524e84ea582e9e24c52bc"
   },
   "allocation_manifest": {

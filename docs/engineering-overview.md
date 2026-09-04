@@ -164,9 +164,10 @@ composite: its stock pixels spell Japanese `(hibi)`. `item_status.py` replaces o
 
 The dungeon HUD uses another independent packed atlas. `hud_font.py` replaces its five
 decimal digit tiles, the visible `F/L/v/H/p` cells in tiles seven through nine, and slash tile
-ten with approved rasters. `A-E`, including the `E` half-slot co-packed with `F`, plus meter
-art and reserved cells remain native. `hud_font_audition.py` renders both the verified source
-atlas and this exact localized production form.
+ten with approved rasters. The packed `Lv` tile kerns `v` one pixel left across the nominal
+half-slot boundary to match its approved proof. `A-E`, including the `E` half-slot co-packed
+with `F`, plus meter art and reserved cells remain native. `hud_font_audition.py` renders both
+the verified source atlas and this exact localized production form.
 
 ## Dynamic item rows
 

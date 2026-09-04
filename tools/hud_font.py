@@ -133,40 +133,24 @@ def load_approved_labels(path=DEFAULT_LABEL_SPEC):
             )
         ):
             raise HudFontError("HUD label %s must contain eight 4-column .# rows" % character)
+    packed = spec.get("packed_tiles", {})
+    if set(packed) != {"Lv"}:
+        raise HudFontError("HUD label spec must define exactly one packed Lv tile")
+    if (
+        not isinstance(packed["Lv"], list)
+        or len(packed["Lv"]) != 8
+        or any(
+            not isinstance(row, str)
+            or len(row) != 8
+            or set(row) - {".", "#"}
+            for row in packed["Lv"]
+        )
+    ):
+        raise HudFontError("packed Lv tile must contain eight 8-column .# rows")
     return spec
 
 
-def _pack_pairs(glyphs, pairs):
-    out = bytearray()
-    for left, right in pairs:
-        for y in range(8):
-            pixels = glyphs[left][y] + glyphs[right][y]
-            low = high = 0
-            for x, pixel in enumerate(pixels):
-                color = INK_COLOR if pixel == "#" else BACKGROUND_COLOR
-                bit = 7 - x
-                low |= (color & 1) << bit
-                high |= ((color >> 1) & 1) << bit
-            out += bytes((low, high))
-    return bytes(out)
-
-
-def approved_digit_bytes(spec=None):
-    """Pack the ten approved 4x8 glyphs into five native 8x8 2bpp tiles."""
-    glyphs = (spec or load_approved())["glyphs"]
-    return _pack_pairs(glyphs, zip(DIGITS[::2], DIGITS[1::2]))
-
-
-def approved_label_bytes(spec=None):
-    """Pack the approved HUD labels while retaining the native E half-slot."""
-    glyphs = dict((spec or load_approved_labels())["glyphs"])
-    glyphs["E"] = NATIVE_E_RASTER
-    return _pack_pairs(glyphs, (("E", "F"), ("L", "v"), ("H", "p")))
-
-
-def approved_slash_bytes(spec=None):
-    """Encode the approved 8x8 slash in the native background/ink palette."""
-    rows = (spec or load_approved())["slash"]
+def _pack_tile(rows):
     out = bytearray()
     for row in rows:
         low = high = 0
@@ -177,6 +161,36 @@ def approved_slash_bytes(spec=None):
             high |= ((color >> 1) & 1) << bit
         out += bytes((low, high))
     return bytes(out)
+
+
+def _pack_pairs(glyphs, pairs):
+    return b"".join(
+        _pack_tile(tuple(glyphs[left][y] + glyphs[right][y] for y in range(8)))
+        for left, right in pairs
+    )
+
+
+def approved_digit_bytes(spec=None):
+    """Pack the ten approved 4x8 glyphs into five native 8x8 2bpp tiles."""
+    glyphs = (spec or load_approved())["glyphs"]
+    return _pack_pairs(glyphs, zip(DIGITS[::2], DIGITS[1::2]))
+
+
+def approved_label_bytes(spec=None):
+    """Pack the approved HUD labels while retaining the native E half-slot."""
+    spec = spec or load_approved_labels()
+    glyphs = dict(spec["glyphs"])
+    glyphs["E"] = NATIVE_E_RASTER
+    return b"".join((
+        _pack_pairs(glyphs, (("E", "F"),)),
+        _pack_tile(spec["packed_tiles"]["Lv"]),
+        _pack_pairs(glyphs, (("H", "p"),)),
+    ))
+
+
+def approved_slash_bytes(spec=None):
+    """Encode the approved 8x8 slash in the native background/ink palette."""
+    return _pack_tile((spec or load_approved())["slash"])
 
 
 def digit_range():

@@ -7,7 +7,7 @@
     "dimensions": [460, 160],
     "pixel_scale": 20,
     "proof": "F Lv Hp",
-    "note": "The monochrome proof is an exact 20x nearest-neighbor enlargement. Each character shape is normalized into its native 4x8 HUD slot; proof spacing is not installed."
+    "note": "The monochrome proof is an exact 20x nearest-neighbor enlargement. Individual shapes are normalized to 4x8; the packed Lv tile preserves the proof's tighter spacing by placing v one pixel left across the half-slot boundary."
   },
   "palette": {
     ".": 1,
@@ -19,5 +19,8 @@
     "v": ["....", "....", "....", "#..#", "#..#", ".#.#", "..#.", "...."],
     "H": ["....", "#.#.", "#.#.", "###.", "#.#.", "#.#.", "#.#.", "...."],
     "p": ["....", "....", "....", "##..", "#.#.", "##..", "#...", "...."]
+  },
+  "packed_tiles": {
+    "Lv": ["........", "#.......", "#.......", "#..#..#.", "#..#..#.", "#...#.#.", "###..#..", "........"]
   }
 }
