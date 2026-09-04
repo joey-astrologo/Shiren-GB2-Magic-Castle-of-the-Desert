@@ -1,5 +1,7 @@
 # Blank Scroll writing system
 
+For the concise player-facing checklist, see [Blank Scroll input list](BLANK_SCROLL_INPUTS.md).
+
 The English build fully localizes Blank Scroll writing while retaining GB2's native
 discovery rule. The keyboard is English, accepts up to 11 characters, and includes the
 hyphen needed by `Trap-eraser`. Enter the complete localized Scroll name without the word

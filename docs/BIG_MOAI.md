@@ -1,5 +1,7 @@
 # Big Moai spell system
 
+For the concise player-facing catalog, see [Big Moai code list](BIG_MOAI_CODES.md).
+
 Big Moai accepts four-character promotional gift codes, which the game calls
 “spells.” This is an item-reward system and is completely separate from Wanderer
 Rescue. The production ROM already localizes its A-Z/0-9 keyboard, all 100 runtime
