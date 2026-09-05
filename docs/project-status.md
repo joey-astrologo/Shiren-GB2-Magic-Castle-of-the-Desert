@@ -16,10 +16,10 @@ localization has completed editing, playtesting, or graphics work.
 | Gameplay messages | 399 | 399 |
 | Story, events, and endings | 1,786 | 1,786 |
 | Player-facing subtotal | 5,467 | 5,467 |
-| Runtime-facing Big Moai gift-code text | 200 | 200 |
-| Explicit production translations/empties | 5,667 | 5,667 |
+| Runtime-facing Big Moai and room-label text | 212 | 212 |
+| Explicit production translations/empties | 5,679 | 5,679 |
 
-The internal catalog contains another 1,028 records proven to be developer selectors,
+The internal catalog contains another 1,016 records proven to be developer selectors,
 debug labels, animation/effect dispatch identifiers, or internal object IDs. They are
 deliberately left native and guarded by the [internal-text audit](internal-text-audit.md).
 
@@ -161,8 +161,9 @@ edited through the ordinary catalog workflow.
 - Full graphics localization: the clean-boot copyright/composer card and all 32 arrival cards are installed from
   approved source art and pixel-tested across its fade and title handoff. The save/load wait
   sign is installed and statically pixel-tested but still needs its live route captured. The
-  main title still needs approved English art and insertion. The ending staff roll still needs main-ending and true-ending save states before
-  its visible storage/consumers can be traced; see [GRAPHICS.md](GRAPHICS.md).
+  main title still needs approved English art and insertion. The main-ending staff roll now has a
+  converted PyBoy fixture and complete 20-card audition; insertion, storage/consumer tracing, and a
+  true-ending fixture remain outstanding; see [GRAPHICS.md](GRAPHICS.md).
 - Iterative layout and font polish for issues discovered in playtesting.
 - Release packaging and final clean-ROM reproducibility checks.
 

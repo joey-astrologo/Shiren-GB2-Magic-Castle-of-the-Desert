@@ -303,16 +303,20 @@ walkthrough also separates a main ending and later true ending, which is useful 
 corroboration but not a substitute for a ROM/VRAM trace:
 [GB2 digest and ending timestamps](https://www.youtube.com/watch?v=RLu5OtIm-pM).
 
-The ending family therefore remains `live_route_required`. The needed fixtures are disposable
-save states immediately before:
+`SaveStates/ending-one.state` now provides the main-ending route. Its trace captures 20 stable
+credit cards followed by the Japanese end mark. `tools/ending_credits_audition.py` pairs those
+native cards with English candidates using the approved opening-copyright font treatment. The
+audition is read-only and does not yet classify or patch the underlying storage.
 
-1. the main ending; and
-2. the true ending.
+The ending family therefore remains partially `live_route_required`. The remaining fixture is a
+disposable save state immediately before:
 
-For each route, the audit must capture the complete roll, determine whether each credit is
-stored art, generated tilemap text, or ordinary VWF text, trace its palettes and transitions,
-and identify whether both endings share the same credit resources. A Japanese `Fin` mark may
-remain unchanged by explicit project policy.
+1. the true ending.
+
+The implementation audit must still determine whether the main credits are stored art, generated
+tilemap text, or ordinary VWF text and trace their palettes and transitions. The true-ending trace
+must capture its complete roll and establish whether both endings share the same credit resources.
+The Japanese end mark remains unchanged by explicit project policy.
 
 ## Other reviewed categories
 
@@ -328,7 +332,8 @@ remain unchanged by explicit project policy.
 ## Implementation order
 
 1. Main title: larger full-screen art with two VRAM planes and eight palettes.
-2. Ending credits after the two live states are available.
+2. Main-ending credits after visual approval of the audition, then the true-ending route after its
+   live state is available.
 
 Each implementation remains subject to [GRAPHICS.md](GRAPHICS.md): editable source art,
 licensed font provenance, exact-byte guards, collision checks, static plane/map tests, a live

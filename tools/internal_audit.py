@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Audit the player-facing boundary of GB2's internal text directory.
 
-Only Big Moai's runtime four-byte promotional gift-code table (called
-"spells" by the game) and its matching diagnostic labels need English bytes.
-This system is independent of Wanderer Rescue.  The remaining records are developer selectors or
-engine dispatch names; relocating them would add no player-facing coverage and
-would weaken the native identity contracts used while reverse engineering.
+Big Moai's runtime four-byte promotional gift-code table (called "spells" by
+the game), its matching diagnostic labels, and group 125's twelve runtime room
+labels need English bytes. The room labels are composed into the visible
+``It's <room>!`` dungeon alert. This system is independent of Wanderer Rescue.
+The remaining records are developer selectors or engine dispatch names;
+relocating them would add no player-facing coverage and would weaken the native
+identity contracts used while reverse engineering.
 """
 import argparse
 from collections import Counter
@@ -26,7 +28,9 @@ POLICIES = (
     ("debug_and_engine_labels", 0, 0, 255, False),
     ("scenario_debug_labels", 14, 0, 255, False),
     ("animation_effect_dispatch", (25, 26, 27), 0, 255, False),
-    ("internal_object_ids", 125, 0, 255, False),
+    ("internal_object_null", 125, 0, 0, False),
+    ("runtime_house_labels", 125, 1, 12, True),
+    ("internal_object_ids", 125, 13, 255, False),
 )
 
 

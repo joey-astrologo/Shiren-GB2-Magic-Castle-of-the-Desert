@@ -29,7 +29,7 @@ behind those workflows.
 | [GRAPHICS.md](GRAPHICS.md) | Graphics localization | You are inventorying or replacing graphical Japanese |
 | [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md) | Graphical-text inventory | You need the traced credit, title, arrival-card, palette, or ending-route evidence |
 | [engineering-overview.md](engineering-overview.md) | Architecture overview | You need the concise explanation of how the ROM and localization fit together |
-| [internal-text-audit.md](internal-text-audit.md) | Internal text boundary | You need to understand why 1,028 extracted engine identifiers remain native |
+| [internal-text-audit.md](internal-text-audit.md) | Internal text boundary | You need to understand why 1,016 extracted engine identifiers remain native or how runtime room labels are handled |
 
 The READMEs within `script/` and `tests/fixtures/` document the files beside them. They
 point back to these canonical project rules rather than carrying their own status claims.

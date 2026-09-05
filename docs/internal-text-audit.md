@@ -11,14 +11,15 @@ classified and checked by `tools/internal_audit.py`:
 |---|---:|---|---|
 | Big Moai promotional gift codes ("spells") | 100 | English | The independent mode-3 reward-code screen compares these exact four bytes; these are not rescue passwords. |
 | Matching gift-code diagnostic labels | 100 | English | Keeps all indexed diagnostic labels synchronized with the runtime codes. |
+| Runtime Monster House/room labels | 12 | English | Group 125 indices 1-12 are composed into the visible `It's <room>!` dungeon alert. |
 | Developer event selectors | 126 | Native | Debug event names and placeholder controls, not release dialogue. |
 | Debug/engine labels | 197 | Native | Assertion, key-scan, object, animation and engine-development names. |
 | Scenario debug labels | 39 | Native | Developer scenario-state selector names. |
-| Animation/effect dispatch names | 629 | Native | BGM, event, actor-animation and effect identifiers used by engine tables. |
-| Internal object IDs | 37 | Native | Dungeon-generation object and room-set identifiers. |
+| Animation/effect dispatch names | 629 | Native | BGM, event, actor-animation and effect identifiers used by engine tables. This includes the separate group-25 `Monster House` music/effect selector, which is not rendered as dialogue. |
+| Internal object null/IDs | 25 | Native | The null entry and remaining dungeon-generation object identifiers are not rendered. |
 
-Thus 200 internal records deliberately receive English overrides and 1,028
-retain their original bytes. The audit fails if a required gift-code record is
+Thus 212 internal records deliberately receive English overrides and 1,016
+retain their original bytes. The audit fails if a required gift-code or room-label record is
 blank, an engine-only record gains an override, a record changes family, or the
 partition ceases to cover all 1,228 records. The `spell` wording retained in tool and
 record identifiers is the game's name for this promotional system, not a rescue category.

@@ -4,9 +4,9 @@
   "partition_sha1": "b1a613a6fabf00a038d9664222019825dc425d16",
   "source_free": true,
   "records": 6695,
-  "translated_records": 5667,
+  "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "4ad526f76bf78f86a21d21cf0bd67e8cf4a9c21f",
+  "workspace_sha1": "d03af6468515fb8881341e2a4b78d4752d5d9960",
   "categories": [
     {
       "name": "glossary",
@@ -112,7 +112,7 @@
       "name": "internal",
       "filename": "internal.tsv",
       "records": 1228,
-      "translated_records": 200,
+      "translated_records": 212,
       "explicit_empty_records": 0,
       "sections": {
         "animation_and_effect_labels": 629,
@@ -122,7 +122,7 @@
         "password_fragments": 100,
         "scenario_labels": 39
       },
-      "overlay_sha1": "71edd8d0b089c55d63b9ce70dc7320e9da6f3156"
+      "overlay_sha1": "a7f8dd9413a2e39e6d9d8a55bdd33b974bd7a376"
     },
     {
       "name": "review",

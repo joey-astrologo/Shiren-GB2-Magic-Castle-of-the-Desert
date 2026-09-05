@@ -42,6 +42,11 @@ The committed `SaveStates/Mamel.state` is the native reproduction input for the
 nested-combat route. Separate `.srm` sidecars are not required because cartridge RAM is
 embedded in each PyBoy state.
 
+`tests.test_monster_house_labels` also reuses this state without modifying it. The test exhausts
+the opening tutorial, injects a disposable Monstercall Scroll, reads it through the real Items
+menu, and requires the composed `It's a Monster House!` renderer payload. The same regression
+freezes all twelve English room-label overrides.
+
 `SaveStates/blank-scroll.state` is the self-contained, exact populated-inventory confirmation
 state for the Blank Scroll restart regression. `tests.test_pyboy_blank_scroll` verifies its
 SHA-1, confirms `Windblade` through PyBoy, and requires conversion without a reset or

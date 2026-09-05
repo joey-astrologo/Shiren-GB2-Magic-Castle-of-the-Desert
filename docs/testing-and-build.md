@@ -40,6 +40,11 @@ patches. Their focused contracts can also be run directly through
 `tests.test_pyboy_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_pyboy_unidentified_item`.
 
+`tests.test_monster_house_labels` freezes all twelve group-125 runtime room labels and uses
+`SaveStates/Mamel.state` to create and read a Monstercall Scroll in a disposable PyBoy run. It
+requires the actual composed alert to be `It's a Monster House!`, independently preventing the
+Japanese label from being hidden again behind an internal-only classification.
+
 Ranking score/floor suffixes have a hash-independent static pixel contract plus a live
 complete-production replay. Run both focused checks with:
 
@@ -266,6 +271,23 @@ These tests freeze the licensed font provenance and editable four-level source, 
 guard both native name strips, confine production mutations to those ranges, and compare live
 pixels across the native fade and title handoff. They do not accept or refresh a framebuffer
 hash.
+
+For the read-only main-ending credits audition:
+
+```sh
+python3 -m unittest tests.test_ending_credits_audition -v
+python3 tools/ending_credits_audition.py
+```
+
+The command replays `SaveStates/ending-one.state`, captures all 20 stable Japanese credit cards,
+and writes `build/ending_credits_audition.png` with each native card beside its English candidate.
+The candidates use the exact Inter SemiBold source, four-color palette, and coverage thresholds
+approved for the opening copyright screen. The tests freeze the complete card/timing contract,
+fit every line within the native 144-pixel field, exercise CLI rendering, prove the ROM and state
+remain unchanged, and independently capture all 20 cards plus the preserved Japanese end mark.
+Use `--candidate-only` for a ROM-independent sheet or `--font` to audition another font. This tool
+does not insert credits into a ROM; the separate true-ending route still needs its own fixture and
+timing trace.
 
 For the approved save/load wait-sign source and production insertion:
 

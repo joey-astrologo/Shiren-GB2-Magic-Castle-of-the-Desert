@@ -1191,18 +1191,18 @@ id	sections	english
 195:$5576	animation_and_effect_labels	
 195:$557D	animation_and_effect_labels	
 205:$7186	internal_object_labels	
-205:$7189	internal_object_labels	
-205:$7192	internal_object_labels	
-205:$719A	internal_object_labels	
-205:$71A2	internal_object_labels	
-205:$71A9	internal_object_labels	
-205:$71B1	internal_object_labels	
-205:$71B9	internal_object_labels	
-205:$71C1	internal_object_labels	
-205:$71C9	internal_object_labels	
-205:$71D1	internal_object_labels	
-205:$71D9	internal_object_labels	
-205:$71E1	internal_object_labels	
+205:$7189	internal_object_labels	a Monster House
+205:$7192	internal_object_labels	a Ghost House
+205:$719A	internal_object_labels	a Drain House
+205:$71A2	internal_object_labels	a Power House
+205:$71A9	internal_object_labels	a Dragon House
+205:$71B1	internal_object_labels	a Bomb House
+205:$71B9	internal_object_labels	a Magic House
+205:$71C1	internal_object_labels	a One-Eyed House
+205:$71C9	internal_object_labels	a Hermit House
+205:$71D1	internal_object_labels	an Animal House
+205:$71D9	internal_object_labels	a Thief House
+205:$71E1	internal_object_labels	a Police Station
 205:$71E8	internal_object_labels	
 205:$71F0	internal_object_labels	
 205:$71F4	internal_object_labels	

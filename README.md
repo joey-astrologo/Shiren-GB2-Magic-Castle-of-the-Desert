@@ -148,11 +148,15 @@ python3 tools/runtime_widths.py "$ROM"
 python3 tools/graphics_audit.py "$ROM"
 python3 tools/font_shadow_audition.py
 python3 tools/arrival_card_audition.py
+python3 tools/ending_credits_audition.py
 python3 tools/hud_font_audition.py
 python3 tools/shop_price_font_audition.py
 ```
 
 The audition commands write review images under `build/` and do not modify the input ROM.
+The ending-credits command uses `SaveStates/ending-one.state` to pair all 20 captured main-ending
+cards with English candidates in the opening copyright screen's font and palette treatment; the
+Japanese end mark is intentionally preserved.
 See the [build and test guide](docs/testing-and-build.md) for feature-specific tests,
 fixture routes, and every diagnostic command.
 

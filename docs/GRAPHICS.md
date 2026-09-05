@@ -7,10 +7,9 @@ visual acceptance pass.
 The first whole-ROM graphical-text inventory is now recorded in
 [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). It traces the clean-boot copyright/composer card,
 main title, all 32 town/dungeon/floor arrival selectors, the dedicated dungeon-HUD font,
-and the save/load wait sign. The
-ending staff roll is
-proven by native scenario/BGM labels but remains unclassified until main-ending and true-ending
-save states are available. The approved English copyright/composer card, arrival cards, and
+and the save/load wait sign. The main-ending staff roll now has a PyBoy fixture and a complete
+20-card native/English audition, but its storage remains unclassified and the true-ending route
+still needs a save state. The approved English copyright/composer card, arrival cards, and
 wait sign are now installed; the title and ending staff roll remain active work. Automated live
 reproduction of the wait-sign route remains pending.
 
