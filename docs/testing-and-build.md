@@ -305,6 +305,14 @@ stealing a live menu graph or corrupting the submenu during Up/Down movement.
 The supplied requester SOS SRAM adds a second live summary fixture: `Awaiting Rescue` and
 the independent run count must render together without collision.
 
+`tests.test_stairs_menu` measures the renderer after the cursor indent, requires the
+one-tile dungeon extension and byte-exact native Status constructor, and rebuilds both
+routes through PyBoy. Its literal-pixel checks require the final `d` in `Proceed` and the
+complete added border. Both B cancellation and selecting `Stay` must restore every borrowed
+tile/attribute cell with no border pixels left on the floor. The Status route must copy the
+native bank-11 frame and restore its background. No framebuffer hash is accepted or
+refreshed by these tests.
+
 `tests.test_service_menus` chains its installer after the stairs-popup owner, measures all
 Rescue Team, warehouse, Bank Teller, and Blacksmith Info labels against the 48-pixel live
 text budget inside the new 56-pixel interior, and rejects any

@@ -56,19 +56,79 @@ class StairsMenuInstallerTests(unittest.TestCase):
 
     def test_source_code_frame_and_pixel_budget_are_frozen(self):
         self.assertEqual(FIXTURE, stairs_menu.summary(self.rom))
-        self.assertLess(FIXTURE["labels"][1]["native_clearance_pixels"], 0)
-        self.assertGreaterEqual(FIXTURE["labels"][1]["english_clearance_pixels"], 0)
+        self.assertLess(FIXTURE["labels"][0]["native_clearance_pixels"], 0)
+        self.assertGreaterEqual(
+            FIXTURE["labels"][0]["english_clearance_pixels"], 0
+        )
+        self.assertEqual(
+            FIXTURE["native_columns"] + 1, FIXTURE["english_columns"]
+        )
+        self.assertEqual(
+            FIXTURE["status_native_columns"], FIXTURE["status_english_columns"]
+        )
 
-    def test_wide_template_has_seven_interior_tiles_and_reviewed_edges(self):
+    def test_floor_budget_excludes_the_cursor_indent_and_adds_only_one_tile(self):
+        """Proceed needs one column beyond the native drawable text arena."""
+        approved = english_font.load_approved()
+        widths = tuple(
+            sum(approved.advances[character] for character in text)
+            for text in stairs_menu.STAIRS_LABELS
+        )
+        native_pixels = (
+            stairs_menu.ORIGINAL_INTERIOR_COLUMNS * stairs_menu.TILE_PIXELS
+            - stairs_menu.TEXT_START_X
+        )
+        english_pixels = (
+            stairs_menu.ENGLISH_INTERIOR_COLUMNS * stairs_menu.TILE_PIXELS
+            - stairs_menu.TEXT_START_X
+        )
+        status_pixels = (
+            stairs_menu.STATUS_ORIGINAL_INTERIOR_COLUMNS * stairs_menu.TILE_PIXELS
+            - stairs_menu.TEXT_START_X
+        )
+
+        self.assertEqual(("Proceed", "Stay"), stairs_menu.STAIRS_LABELS)
+        self.assertGreater(widths[0], native_pixels)
+        self.assertTrue(all(width <= english_pixels for width in widths))
+        self.assertTrue(all(width <= status_pixels for width in widths))
+        self.assertEqual(
+            stairs_menu.ORIGINAL_INTERIOR_COLUMNS + 1,
+            stairs_menu.ENGLISH_INTERIOR_COLUMNS,
+        )
+        self.assertTrue(stairs_menu.uses_extended_stairs_frame())
+
+    def test_floor_cleanup_requires_both_live_marker_bytes(self):
+        cleanup = stairs_menu._floor_cleanup_bytes()
+        self.assertIn(
+            bytes((0xFA, stairs_menu.FLOOR_SAVED_FLAG_ADDRESS & 0xFF,
+                   stairs_menu.FLOOR_SAVED_FLAG_ADDRESS >> 8,
+                   0xFE, stairs_menu.FLOOR_SAVED_FLAG_VALUE)),
+            cleanup,
+        )
+        self.assertIn(
+            bytes((0xFA, stairs_menu.FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
+                   stairs_menu.FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
+                   0xFE, stairs_menu.FLOOR_SAVED_FLAG_END_VALUE)),
+            cleanup,
+        )
+
+    def test_floor_template_has_six_interior_tiles_and_reviewed_edges(self):
         raw = stairs_menu.template_bytes()
         cells = [tuple(raw[offset:offset + 2]) for offset in range(0, len(raw), 2)]
-        rows = [cells[offset:offset + 9] for offset in range(0, len(cells), 9)]
+        rows = [cells[offset:offset + 8] for offset in range(0, len(cells), 8)]
         self.assertEqual(5, len(rows))
         self.assertEqual((0x7E, 0x8F), rows[0][0])
         self.assertEqual((0x7E, 0xAF), rows[0][-1])
-        self.assertEqual([(0x90 + index, 0x87) for index in range(7)], rows[1][1:-1])
+        self.assertEqual([(0x90 + index, 0x87) for index in range(6)], rows[1][1:-1])
         self.assertEqual((0x7E, 0xCF), rows[-1][0])
         self.assertEqual((0x7E, 0xEF), rows[-1][-1])
+
+    def test_status_constructor_remains_the_native_bank_11_code(self):
+        at = extract.file_offset(
+            stairs_menu.STATUS_BANK, stairs_menu.STATUS_PATCH_ADDRESS
+        )
+        actual = self.output[at:at + len(stairs_menu.ORIGINAL_STATUS_BRANCH)]
+        self.assertEqual(stairs_menu.ORIGINAL_STATUS_BRANCH, actual)
 
     def test_status_template_has_seven_interior_tiles_and_reviewed_edges(self):
         raw = stairs_menu.status_template_bytes()
@@ -222,7 +282,7 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temporary.cleanup()
 
-    def test_live_stairs_routes_draw_and_tear_down_both_wide_frames(self):
+    def test_live_stairs_routes_fit_and_tear_down_their_reviewed_frames(self):
         pyboy = self.PyBoy(
             str(self.localized_path),
             window="null",
@@ -303,20 +363,81 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
             pyboy.hook_register(0, 0x1FA0, at_selector, None)
             pyboy.hook_register(*surfaces.DIRECT_RENDERER, at_direct_draw, None)
             pyboy.hook_register(0, 0x0AEA, at_bg_copy, None)
+            floor_ready = io.BytesIO()
+            pyboy.save_state(floor_ready)
+            floor_ready_bytes = floor_ready.getvalue()
             floor_underlay = tilemap_cells(0x9988, 5, 9)
             pyboy.button("down", capture_dialogue.PRESS_FRAMES)
             for _frame in range(180):
                 pyboy.tick()
 
+            # Literal visible pixels for the final d in Proceed. This is
+            # independent of the generated template and catches text hidden
+            # under a too-early right border.
+            lower_d = (
+                "...#....", "...#....", ".###....", "#..#....",
+                "#..#....", "#..#....", ".###....", "........",
+            )
+            floor_screen = pyboy.screen.image.convert("RGB")
+            self.assertEqual(
+                36,
+                sum(
+                    floor_screen.getpixel((70, y)) == (0, 0, 0)
+                    for y in range(16, 56)
+                ),
+                "the one-column frame does not have its complete right border",
+            )
+            for row, expected in enumerate(lower_d):
+                for column, pixel in enumerate(expected):
+                    self.assertEqual(
+                        pixel == "#",
+                        floor_screen.getpixel((55 + column, 27 + row))
+                        == (0, 0, 0),
+                        "Proceed d pixel mismatch at (%d,%d)"
+                        % (55 + column, 27 + row),
+                    )
+
             self.assertEqual([60, 59], selectors)
             self.assertIn(english.encode("Proceed") + b"\xFF", draws)
-            self.assertIn(english.encode("Stay Here") + b"\xFF", draws)
-            self.assertIn((4, 9, 0xD800), copies)
-            self.assertIn((1, 9, 0xD848), copies)
+            self.assertIn(english.encode("Stay") + b"\xFF", draws)
+            self.assertIn((4, 8, 0xD800), copies)
+            self.assertIn((1, 8, 0xD840), copies)
 
-            # Stay Here closes through the native seven-column redraw.  The
-            # English-only two columns must be restored from the saved BG
-            # cells rather than remaining as a vertical frame fragment.
+            # Exactly one column is borrowed for the English frame; the next
+            # column remains untouched.
+            floor_frame = tilemap_cells(0x9988, 5, 9)
+            self.assertNotEqual(
+                [row[7] for row in floor_underlay],
+                [row[7] for row in floor_frame],
+            )
+            self.assertEqual(
+                [row[8] for row in floor_underlay],
+                [row[8] for row in floor_frame],
+            )
+
+            # B cancellation closes through the native redraw plus the exact
+            # one-column restore.
+            pyboy.button("b", capture_dialogue.PRESS_FRAMES)
+            for _frame in range(240):
+                pyboy.tick()
+            self.assertEqual(floor_underlay, tilemap_cells(0x9988, 5, 9))
+            self.assertEqual(
+                0,
+                sum(
+                    pyboy.screen.image.convert("RGB").getpixel((70, y))
+                    == (0, 0, 0)
+                    for y in range(16, 56)
+                ),
+                "the borrowed right border remains visible after dismissal",
+            )
+
+            # Reload the same live floor and prove selecting Stay uses the
+            # same teardown path rather than leaving a border fragment.
+            pyboy.load_state(io.BytesIO(floor_ready_bytes))
+            floor_underlay = tilemap_cells(0x9988, 5, 9)
+            pyboy.button("down", capture_dialogue.PRESS_FRAMES)
+            for _frame in range(180):
+                pyboy.tick()
             pyboy.button("down", capture_dialogue.PRESS_FRAMES)
             for _frame in range(100):
                 pyboy.tick()
@@ -324,10 +445,19 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
             for _frame in range(240):
                 pyboy.tick()
             self.assertEqual(floor_underlay, tilemap_cells(0x9988, 5, 9))
+            self.assertEqual(
+                0,
+                sum(
+                    pyboy.screen.image.convert("RGB").getpixel((70, y))
+                    == (0, 0, 0)
+                    for y in range(16, 56)
+                ),
+                "the borrowed right border remains visible after selecting Stay",
+            )
 
             # The status-menu Stairs command uses a separate bank-11
-            # constructor.  Open it naturally, prove its nine-column copy,
-            # then prove the ordinary main-menu redraw removes the full frame.
+            # constructor. Open it naturally and prove it also uses its
+            # original eight-column frame rather than the English extension.
             pyboy.button("b", capture_dialogue.PRESS_FRAMES)
             for _frame in range(240):
                 pyboy.tick()
@@ -338,11 +468,31 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
             pyboy.button("a", capture_dialogue.PRESS_FRAMES)
             for _frame in range(180):
                 pyboy.tick()
-            self.assertIn(
-                (5, 9, stairs_menu.status_template_address()), copies
-            )
+            self.assertIn((4, 8, 0x68F7), copies)
+            self.assertIn((1, 8, 0x6967), copies)
             status_frame = tilemap_cells(0x9883, 5, 9)
-            self.assertEqual([0x7C, 0x7D, 0x7D, 0x7D, 0x7C], [row[-1][0] for row in status_frame])
+            status_source = (
+                self.rom[extract.file_offset(stairs_menu.STATUS_BANK, 0x68F7):
+                         extract.file_offset(stairs_menu.STATUS_BANK, 0x68F7) + 64]
+                + self.rom[extract.file_offset(stairs_menu.STATUS_BANK, 0x6967):
+                           extract.file_offset(stairs_menu.STATUS_BANK, 0x6967) + 16]
+            )
+            status_cells = [
+                tuple(status_source[offset:offset + 2])
+                for offset in range(0, len(status_source), 2)
+            ]
+            expected_status = [
+                status_cells[offset:offset + 8]
+                for offset in range(0, len(status_cells), 8)
+            ]
+            self.assertEqual(
+                [[tile for tile, _attribute in row] for row in expected_status],
+                [[tile for tile, _attribute in row[:8]] for row in status_frame],
+            )
+            self.assertEqual(
+                [row[8] for row in status_underlay],
+                [row[8] for row in status_frame],
+            )
             pyboy.button("down", capture_dialogue.PRESS_FRAMES)
             for _frame in range(120):
                 pyboy.tick()

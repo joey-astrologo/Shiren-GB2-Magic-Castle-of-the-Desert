@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Widen and safely tear down both Proceed/Stay Here stairs popups.
+"""Fit and safely tear down both Proceed/Stay stairs popups.
 
 The stairs prompt is not built by GB2's ordinary menu-window constructor.  Its
 bank-3 overlay copies a fixed seven-column tilemap whose five interior columns
-provide only 40 pixels.  The English ``Stay Here`` raster needs 46 pixels.
+provide only 32 drawable label pixels after the cursor indent. ``Proceed`` needs
+36, so the dungeon popup borrows exactly one additional column. Its five covered
+BG cells are saved before drawing and restored after every controller exit.
 
-This installer adds stairs-only tilemaps in a dedicated empty ROM bank and routes both
-constructors through small helpers only when the staged records are group 7
-indices 59 and 60.  The floor overlay also saves the newly covered background
-cells and restores them after the native seven-column cleanup.  Every other
-overlay and ordinary two-choice popup retains its original path byte-for-byte.
+The separate Status-menu constructor already provides 40 drawable label pixels.
+It remains byte-for-byte native so its bank-11 template addresses are interpreted
+in the correct bank. The independently widened service menus continue to chain
+through the shared bank-254 floor-popup helpers.
 """
 from hashlib import sha1
 
@@ -40,8 +41,8 @@ RUNTIME_END = 0x428C
 # untouched ROM writes every byte from $D8B4-$D8F7 during ordinary play.  Bank
 # 5 $D9BF-$DBFF is invariant across every retained game-state fixture and the
 # controller stress route.  Reserve a small, disjoint slice of that gap for
-# widened-popup underlays.  The two-byte magic is committed only after all ten
-# covered cells have been saved.
+# widened-popup underlays.  The two-byte magic is committed only after all five
+# covered cells (tile and attribute byte for each row) have been saved.
 POPUP_STATE_WRAM_BANK = 5
 POPUP_STATE_RESERVED_START = 0xD9C0
 POPUP_STATE_RESERVED_END = 0xDA00
@@ -66,15 +67,15 @@ ORIGINAL_NATIVE_TEMPLATE = bytes.fromhex(
     "7F8FAE87AF87B087B187B2877FAF7ECFC0C7C0C7C0C7C0C7C0C77EEF"
 )
 ORIGINAL_INTERIOR_COLUMNS = 5
-ENGLISH_INTERIOR_COLUMNS = 7
+ENGLISH_INTERIOR_COLUMNS = ORIGINAL_INTERIOR_COLUMNS + 1
 STATUS_ORIGINAL_INTERIOR_COLUMNS = 6
-STATUS_ENGLISH_INTERIOR_COLUMNS = 7
+STATUS_ENGLISH_INTERIOR_COLUMNS = STATUS_ORIGINAL_INTERIOR_COLUMNS
 TILE_PIXELS = 8
 TEXT_START_X = 8
-TEXT_RIGHT_EDGE = TEXT_START_X + ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS
+TEXT_RIGHT_EDGE = ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS
 STAIRS_GROUP = 7
 STAIRS_INDICES = (59, 60)
-STAIRS_LABELS = ("Proceed", "Stay Here")
+STAIRS_LABELS = ("Proceed", "Stay")
 
 
 class StairsMenuError(ValueError):
@@ -110,23 +111,31 @@ def _is_stairs_helper():
     )
 
 
+def uses_extended_stairs_frame():
+    """Return whether the dungeon constructor selects its one-column extension."""
+    return True
+
+
 def _load_helper():
-    # Select and copy either the stairs-only 90-byte tilemap or the native
+    # Select and copy either the stairs-only 80-byte tilemap or the native
     # 140-byte generic overlay template into WRAM at D800.
-    return bytes.fromhex(
-        "CD0040200B"
-        "21F5401100D8065AC35B0A"
-        "214F411100D8068CC35B0A"
+    return (
+        bytes.fromhex("CD0040200B")
+        + bytes((0x21, TEMPLATE_ADDRESS & 0xFF, TEMPLATE_ADDRESS >> 8))
+        + bytes.fromhex("1100D80650C35B0A")
+        + bytes((0x21, NATIVE_TEMPLATE_ADDRESS & 0xFF,
+                 NATIVE_TEMPLATE_ADDRESS >> 8))
+        + bytes.fromhex("1100D8068CC35B0A")
     )
 
 
 def _copy_helper():
     # The caller supplies B (the number of top rows) and DE (BG destination).
-    # A stairs prompt copies nine columns and takes its bottom row from D848;
+    # A stairs prompt copies eight columns and takes its bottom row from D840;
     # the generic route remains seven columns with its bottom row at D87E.
     return bytes.fromhex(
         "CD00402014"
-        "CD5E400E092100D8CDEA0A2148D8010901C3EA0A"
+        "CD5E400E082100D8CDEA0A2140D8010801C3EA0A"
         "0E072100D8CDEA0A217ED8010701C3EA0A"
     )
 
@@ -139,7 +148,7 @@ def helper_bytes():
 
 
 def _floor_save_bytes():
-    """Save the ten BG cells covered only by the English floor frame."""
+    """Save the five BG cells covered only by the English floor frame."""
     raw = bytearray.fromhex("C5D5E5")
     raw += bytes((0x3E, POPUP_STATE_WRAM_BANK, 0xE0, 0x70, 0xAF))
     raw += bytes((
@@ -167,9 +176,9 @@ def _floor_save_bytes():
         0x05,
     ))
     raw += bytes.fromhex(
-        "C5E5AFE04F010200CD6B0A"
-        "E13E01E04F010200CD6B0A"
-        "7DC61E6F300124C10D20DF"
+        "C5E5AFE04F010100CD6B0A"
+        "E13E01E04F010100CD6B0A"
+        "7DC61F6F300124C10D20DF"
         "3E01E04F"
     )
     raw += bytes((
@@ -190,7 +199,7 @@ def _floor_save_bytes():
 
 
 def _floor_restore_bytes():
-    """Restore the saved two columns after the native dungeon redraw."""
+    """Restore the saved column after the native dungeon redraw."""
     raw = bytearray.fromhex("C5D5E5")
     raw += bytes((
         0xFA,
@@ -212,9 +221,9 @@ def _floor_restore_bytes():
         0x05,
     ))
     raw += bytes.fromhex(
-        "C5D5AFE04F010200CD6B0A"
-        "D13E01E04F010200CD6B0A"
-        "7BC61E5F300114C10D20DF"
+        "C5D5AFE04F010100CD6B0A"
+        "D13E01E04F010100CD6B0A"
+        "7BC61F5F300114C10D20DF"
         "3E01E04FE1D1C1C9"
     )
     return bytes(raw)
@@ -320,20 +329,20 @@ def _cells_to_bytes(cells):
 
 
 def template_bytes():
-    """Return the five-row, nine-column stairs tilemap/attribute template."""
-    top = [(0x7E, 0x8F)] + [(0xC0, 0x87)] * 7 + [(0x7E, 0xAF)]
+    """Return the five-row, eight-column stairs tilemap/attribute template."""
+    top = [(0x7E, 0x8F)] + [(0xC0, 0x87)] * 6 + [(0x7E, 0xAF)]
 
     def content(base):
         return (
             [(0x7F, 0x8F)]
-            + [(base + column, 0x87) for column in range(7)]
+            + [(base + column, 0x87) for column in range(6)]
             + [(0x7F, 0xAF)]
         )
 
-    bottom = [(0x7E, 0xCF)] + [(0xC0, 0xC7)] * 7 + [(0x7E, 0xEF)]
+    bottom = [(0x7E, 0xCF)] + [(0xC0, 0xC7)] * 6 + [(0x7E, 0xEF)]
     cells = top + content(0x90) + content(0xA2) + content(0xB4) + bottom
     result = _cells_to_bytes(cells)
-    if len(result) != 5 * 9 * 2:
+    if len(result) != 5 * 8 * 2:
         raise StairsMenuError("generated stairs template has the wrong size")
     return result
 
@@ -364,6 +373,7 @@ def runtime_payload():
         helper_bytes()
         + floor_runtime_bytes()
         + template_bytes()
+        + bytes(NATIVE_TEMPLATE_ADDRESS - TEMPLATE_ADDRESS - len(template_bytes()))
         + ORIGINAL_NATIVE_TEMPLATE
         + _status_helper_bytes()
         + status_template_bytes()
@@ -378,10 +388,6 @@ def owned_ranges():
     return (
         (_offset(LOAD_PATCH_ADDRESS), _offset(LOAD_PATCH_ADDRESS) + len(ORIGINAL_LOAD)),
         (_offset(COPY_PATCH_ADDRESS), _offset(COPY_PATCH_ADDRESS) + len(ORIGINAL_COPY)),
-        (
-            _offset(STATUS_PATCH_ADDRESS, STATUS_BANK),
-            _offset(STATUS_PATCH_ADDRESS, STATUS_BANK) + len(ORIGINAL_STATUS_BRANCH),
-        ),
         (
             _offset(CONTROLLER_EXIT_PATCH_ADDRESS, CONTROLLER_BANK),
             _offset(CONTROLLER_EXIT_PATCH_ADDRESS, CONTROLLER_BANK)
@@ -433,7 +439,7 @@ def verify_source(rom):
 
 
 def install(rom, checksums=True):
-    """Return a ROM with a widened popup only for the exact stairs records."""
+    """Return a ROM with one safe dungeon column and native Status stairs."""
     verify_source(rom)
     out = bytearray(rom)
     load_at = _offset(LOAD_PATCH_ADDRESS)
@@ -445,12 +451,6 @@ def install(rom, checksums=True):
         HELPER_ADDRESS + len(_is_stairs_helper()) + len(_load_helper()),
         len(ORIGINAL_COPY),
     )
-
-    status_patch_at = _offset(STATUS_PATCH_ADDRESS, STATUS_BANK)
-    status_patch = _far_call(
-        status_helper_address(), len(ORIGINAL_STATUS_BRANCH), tail_return=True
-    )
-    out[status_patch_at:status_patch_at + len(status_patch)] = status_patch
 
     controller_at = _offset(CONTROLLER_EXIT_PATCH_ADDRESS, CONTROLLER_BANK)
     out[
@@ -480,15 +480,17 @@ def summary(rom, approved=None):
                 "text": text,
                 "renderer_pixels": width,
                 "native_clearance_pixels": (
-                    ORIGINAL_INTERIOR_COLUMNS * TILE_PIXELS - width
+                    ORIGINAL_INTERIOR_COLUMNS * TILE_PIXELS
+                    - TEXT_START_X
+                    - width
                 ),
                 "english_clearance_pixels": (
-                    ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS - width
+                    TEXT_RIGHT_EDGE - TEXT_START_X - width
                 ),
             }
         )
     return {
-        "schema": "shiren-gb2-stairs-menu-v5",
+        "schema": "shiren-gb2-stairs-menu-v7",
         "bank": BANK,
         "runtime_bank": RUNTIME_BANK,
         "load_patch": extract.location(BANK, LOAD_PATCH_ADDRESS),
@@ -536,10 +538,10 @@ def summary(rom, approved=None):
         "controller_exit_source_sha1": sha1(
             ORIGINAL_CONTROLLER_EXIT_CALL
         ).hexdigest(),
-        "native_columns": 7,
-        "english_columns": 9,
-        "status_native_columns": 8,
-        "status_english_columns": 9,
+        "native_columns": ORIGINAL_INTERIOR_COLUMNS + 2,
+        "english_columns": ENGLISH_INTERIOR_COLUMNS + 2,
+        "status_native_columns": STATUS_ORIGINAL_INTERIOR_COLUMNS + 2,
+        "status_english_columns": STATUS_ENGLISH_INTERIOR_COLUMNS + 2,
         "native_interior_pixels": ORIGINAL_INTERIOR_COLUMNS * TILE_PIXELS,
         "english_interior_pixels": ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS,
         "text_start_x": TEXT_START_X,

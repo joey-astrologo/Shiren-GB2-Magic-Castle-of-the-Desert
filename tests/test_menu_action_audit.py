@@ -178,8 +178,8 @@ class MenuActionAuditTests(unittest.TestCase):
 
         stairs = self.audit["stairs"]
         self.assertEqual(2, stairs["entries"])
-        self.assertEqual(56, stairs["text_budget"])
-        self.assertEqual(46, stairs["widest"]["renderer_pixels"])
+        self.assertEqual(40, stairs["text_budget"])
+        self.assertEqual(36, stairs["widest"]["renderer_pixels"])
         self.assertEqual([], stairs["overflow_labels"])
 
     def test_developer_only_choices_are_kept_separate(self):

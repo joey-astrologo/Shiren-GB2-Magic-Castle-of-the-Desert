@@ -80,29 +80,34 @@ on the Help-return route is what prevents the menu from reverting to Japanese.
 
 ## Stairs popups
 
-There are two visible `Proceed / Stay Here` consumers:
+There are two visible `Proceed / Stay` consumers:
 
 1. the floor popup shown while standing on stairs;
 2. the popup opened from the Status menu's Stairs option.
 
-The native interiors are too narrow for `Stay Here`. `tools/stairs_menu.py` builds widened
-templates and cleanup helpers in bank 254, patches both constructors, and restores the
-correct background on exit. The English interior is 56 pixels from x=8 to x=64; `Proceed`
-uses 36 pixels and `Stay Here` 46.
+The floor popup's native five-tile interior is 40 pixels, but its first eight pixels belong
+to the cursor. That leaves only 32 pixels for a label, while `Proceed` needs 36.
+`tools/stairs_menu.py` therefore expands only this popup from seven to eight total columns,
+giving it a 40-pixel label area. `Stay` uses 21 pixels.
 
-Geometry and teardown are one feature. Widening only the visible box leaves the added
-right-hand column behind after dismissal, which is why both routes have explicit exit
-regressions. The floor route stores its ten covered BG cells and destination in the
-reserved bank-5 popup-state block at `$D9E0-$D9F7`. Bank 7 after the staged template is
-native live UI memory and must not be used for persistent restore state. Cleanup requires
-the exact two-byte `$53/$AC` live marker; ordinary popup staging therefore cannot
-accidentally authorize a stale stairs restore. The controller-exit shim also preserves the
-original far-call bank `$11`; bank `$0B` at the same CPU address is unrelated code.
+The Status-menu popup is a different constructor. Its native six-tile interior leaves 40
+pixels after the cursor, enough for both labels. Its bank-11 constructor remains byte-exact;
+redirecting it to bank 254 would interpret `$68F7/$6967` in the wrong bank and draw an empty
+area.
+
+The dungeon extension borrows one BG cell on each of five rows. Before drawing, the helper
+saves those five tile/attribute pairs and the destination in WRAM bank 5, then commits a
+complementary two-byte live marker. Both B cancellation and selecting `Stay` run the native
+redraw followed by the guarded one-column restore. Live regressions inspect the final `d`
+in `Proceed`, the complete right-border pixels while open, exact tile/attribute restoration,
+the absence of border pixels after both dismissal routes, and the untouched native Status
+frame.
 
 ## Service popups
 
-The ordinary bank-3 service-menu frame has five interior tiles, or 40 pixels. That is too
-narrow for `Password`, `Withdraw`, `Deposit`, `Balance`, and `Synthesis`.
+The ordinary bank-3 service-menu frame has five interior tiles, but only 32 label pixels
+after its cursor indent. That is too narrow for `Password`, `Withdraw`, `Deposit`,
+`Balance`, and `Synthesis`.
 `tools/service_menus.py` chains after the stairs installer and gives only five exact group-7
 selector sequences a seven-tile/56-pixel interior. The selector reserves the first 8 pixels,
 leaving 48 pixels for each label:

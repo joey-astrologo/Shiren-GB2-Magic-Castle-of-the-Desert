@@ -77,24 +77,34 @@ wrong palette or stale graphical state.
 **Rule:** keep the shared native template byte-exact. Build the English clone in bank 255 and
 redirect only the owned open, refresh, and Help-return consumers.
 
-## Widening a popup includes teardown
+## Popup width must exclude the cursor column
 
 **Tempting assumption:** expanding the stairs box is complete once `Stay Here` fits.
 
 **Failure:** the new right-hand extension remained on the dungeon floor after the popup
 closed; the Status version had an independent too-small constructor.
 
-**Rule:** own the constructor and exit cleanup for both floor and Status routes. Regression
-tests must open, cancel/confirm, and inspect the restored background.
+**Second failure:** treating the floor popup's five interior tiles as 40 label pixels ignored
+the cursor's eight-pixel indent. `Proceed` needs 36 pixels but the native label area is only
+32, so forcing the seven-column native frame clips the final `d`. The independent Status
+constructor was also redirected to bank 254 while still loading bank-11 addresses, producing
+an empty rectangle.
+
+**Rule:** use `Proceed / Stay`, add exactly one column only to the dungeon popup, and leave
+the eight-column Status constructor byte-exact. Regression tests must inspect literal text
+and border pixels, not only copy dimensions. The dungeon test must dismiss through both B
+and `Stay`, then prove the borrowed tile/attribute cells are restored and no border pixels
+remain.
 
 The floor underlay scratch must also remain outside every popup staging buffer and every
 native live UI range. One implementation stored it at `$D85A-$D871`, inside the generic
 `$D800-$D88B` template copy. Moving it just past the enlarged template to bank-7
 `$D8E0-$D8F7` was still unsafe: live Japanese-ROM tracing showed native UI mutating every
 byte in `$D8B4-$D8F7`. Either collision can corrupt a marker or restore stale window cells
-onto the dungeon map even when Shiren never stepped on stairs. The production owner now
-uses the reserved bank-5 `$D9E0-$D9F7` slice, and regressions reject both staged-template
-and native-live overlaps.
+onto the dungeon map even when Shiren never stepped on stairs. The production one-column
+extension uses reserved bank-5 `$D9E0-$D9F7`; its complementary marker is written only after
+all five covered cells are saved and is cleared before restoration. Service-menu hooks share
+the surrounding bank-254 ABI but use a disjoint lower scratch range.
 
 The controller hook replaced a native far call to bank `$11:$439C`. Calling the same CPU
 address in bank `$0B` does not preserve behavior; it reaches unrelated code. Chained exit

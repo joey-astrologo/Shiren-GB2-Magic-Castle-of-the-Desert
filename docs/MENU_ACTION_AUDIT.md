@@ -80,8 +80,9 @@ accept or update a framebuffer hash.
   both Rescue Team Password selectors, Blacksmith Info, and Warehouse.
 - All 24 item-action commands fit their independent 48-pixel columns. `Take Out` is widest
   at 41 pixels.
-- Both stairs actions fit their dedicated widened overlay. `Stay Here` is widest at 46 of
-  56 pixels.
+- Both stairs actions fit their reviewed 40-pixel label areas. The dungeon frame needs one
+  added tile because its native cursor indent leaves only 32 pixels; `Proceed` is 36 pixels.
+  The Status-menu frame already supplies 40 pixels and remains native. `Stay` uses 21 pixels.
 - The separate positioned-text inventory still assigns all 120 discovered call sites to
   exactly one geometry owner. Its existing family tests remain the authority for main-menu,
   Help, diary, ranking, item-list, and dungeon-selector surfaces.

@@ -95,8 +95,9 @@ ADVENTURE_START_START_X = 56
 ADVENTURE_START_RIGHT_EDGE = layout.CANVAS_WIDTH_PIXELS
 
 # The in-dungeon stairs overlay uses a fixed tilemap rather than the ordinary
-# menu constructor. ``stairs_menu`` expands its interior from 40 to 56 pixels;
-# these two direct-rendered labels must remain inside that engineered frame.
+# menu constructor. Its native five-tile interior leaves only 32 pixels after
+# the cursor indent, so ``stairs_menu`` adds one tile and exposes a 40-pixel
+# text budget. The separate Status popup keeps its native eight-column frame.
 STAIRS_MENU_GROUP = stairs_menu.STAIRS_GROUP
 STAIRS_MENU_INDICES = stairs_menu.STAIRS_INDICES
 STAIRS_MENU_START_X = stairs_menu.TEXT_START_X

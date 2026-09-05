@@ -19,7 +19,7 @@ matching Japanese cartridge dump.
 | Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
 | Graphics | **In progress** | Copyright card, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed; the title and ending credits remain |
 | Wanderer Rescue | **Protocol and English I/O tested** | The complete physical Rescue Gate and two-diary route still needs capture |
-| Automated tests | **573 tests passing — 2026-09-04** | Continue adding focused regressions for issues found during playtesting |
+| Automated tests | **576 tests passing — 2026-09-05** | Continue adding focused regressions for issues found during playtesting |
 
 Translation completion is not release completion. Optional events, endings, postgame
 states, uncommon save histories, and rare visual interactions still need manual testing.

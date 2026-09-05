@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Widen ordinary service popups whose English labels exceed five tiles.
 
-The generic bank-3 popup constructor exposes only five interior tiles (40
-pixels).  ``stairs_menu`` already redirects its template-load and BG-copy
-sites through bank 254.  This installer deliberately chains after that patch:
-it preserves the stairs discriminator, routes every non-stairs popup through
-an exact record-set detector, and uses a seven-interior-tile template only for
-reviewed service menus.  All other generic popups retain the native template.
+The generic bank-3 popup constructor exposes only five interior tiles. After
+its cursor indent, that leaves 32 drawable label pixels. ``stairs_menu``
+provides the shared bank-254 template-load and BG-copy base and a separate
+one-column stairs frame. This installer chains after that base, routes popups
+through an exact record-set detector, and uses a
+seven-interior-tile template only for reviewed service menus. All other generic
+popups retain the native template.
 """
 from hashlib import sha1
 
@@ -651,13 +652,13 @@ def blacksmith_info_template_address():
 
 
 def _patched_load_helper():
-    """Keep the stairs path inline and tail-dispatch everything else."""
+    """Preserve the base branch slot and tail-dispatch everything else."""
     service_load = load_support_address()
     stairs_load = bytes((
         0x21,
         stairs_menu.TEMPLATE_ADDRESS & 0xFF,
         stairs_menu.TEMPLATE_ADDRESS >> 8,
-    )) + bytes.fromhex("1100D8065AC35B0A")
+    )) + bytes.fromhex("1100D80650C35B0A")
     result = (
         bytes((0xCD, stairs_menu.HELPER_ADDRESS & 0xFF,
                stairs_menu.HELPER_ADDRESS >> 8))
@@ -672,10 +673,10 @@ def _patched_load_helper():
 
 
 def _patched_copy_helper():
-    """Keep the stairs path inline and tail-dispatch everything else."""
+    """Preserve the base branch slot and tail-dispatch everything else."""
     service_copy = copy_support_address()
     stairs_copy = bytes.fromhex(
-        "CD5E400E092100D8CDEA0A2148D8010901C3EA0A"
+        "CD5E400E082100D8CDEA0A2140D8010801C3EA0A"
     )
     result = (
         bytes((0xCD, stairs_menu.HELPER_ADDRESS & 0xFF,
@@ -852,7 +853,7 @@ def verify_source(rom):
 
 
 def install(rom, checksums=True):
-    """Return a stairs-patched ROM with the reviewed service popup widened."""
+    """Return a base-patched ROM with the reviewed service popups widened."""
     verify_source(rom)
     out = bytearray(rom)
     out[

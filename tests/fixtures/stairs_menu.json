@@ -1,5 +1,5 @@
 {
-  "schema": "shiren-gb2-stairs-menu-v5",
+  "schema": "shiren-gb2-stairs-menu-v7",
   "bank": 3,
   "runtime_bank": 254,
   "load_patch": "3:$6A49",
@@ -19,26 +19,26 @@
   "controller_exit_patch": "18:$4130",
   "source_load_sha1": "291b60a07805a2ec5e68f9f7193d853a03eb0ad1",
   "source_copy_sha1": "a8376924b050614b78cbf0a49896844e5c604116",
-  "helper_sha1": "acf1849d84bf3da33cecf2b05ac127c7440edcd0",
-  "template_sha1": "60a7dc26174b59e516e150961d2f797f069aacf6",
-  "floor_runtime_sha1": "7afd28315402cab9a7bc69ea07e8541926e50748",
+  "helper_sha1": "57fb1719e826e20dd86c6381c40f7757a46f089f",
+  "template_sha1": "154e084f6c60cb83d464c4279523fc23f0f4f138",
+  "floor_runtime_sha1": "14192bc75bc8c554858b93a29bd1e7ac2709f651",
   "status_source_sha1": "da00082fce4a8548d261ac0da6dc2e4b76285c32",
   "status_helper_sha1": "40f808d90f5395be6375d9c096fb2f623e04ba4d",
   "status_template_sha1": "0da8d857dc6e6a0e4b3c6c8b05be19cef25ad9f1",
   "status_exit_helper_sha1": "d790002b4969053a2e6ae6dd21efa95b9f4f17ae",
-  "runtime_payload_sha1": "a405b1bac7b36b69bd889bb2d907ac05d7c92b97",
+  "runtime_payload_sha1": "0c60e6ef817db2ea8ed21204bee1fad756926b95",
   "runtime_payload_bytes": 652,
   "controller_exit_source_sha1": "c5e1e679baf90dd0565f175274581a37af88255c",
   "native_columns": 7,
-  "english_columns": 9,
+  "english_columns": 8,
   "status_native_columns": 8,
-  "status_english_columns": 9,
+  "status_english_columns": 8,
   "native_interior_pixels": 40,
-  "english_interior_pixels": 56,
+  "english_interior_pixels": 48,
   "text_start_x": 8,
-  "text_right_edge": 64,
+  "text_right_edge": 48,
   "labels": [
-    {"group": 7, "index": 59, "text": "Proceed", "renderer_pixels": 36, "native_clearance_pixels": 4, "english_clearance_pixels": 20},
-    {"group": 7, "index": 60, "text": "Stay Here", "renderer_pixels": 46, "native_clearance_pixels": -6, "english_clearance_pixels": 10}
+    {"group": 7, "index": 59, "text": "Proceed", "renderer_pixels": 36, "native_clearance_pixels": -4, "english_clearance_pixels": 4},
+    {"group": 7, "index": 60, "text": "Stay", "renderer_pixels": 21, "native_clearance_pixels": 11, "english_clearance_pixels": 19}
   ]
 }

@@ -104,6 +104,11 @@ This closes the
 requester response-input/presentation loop; physically traversing a Rescue Gate and
 capturing the rescuer's own generated response remains the next two-diary fixture.
 
+`tests/fixtures/stairs_menu.json` freezes the seven-to-eight-column dungeon extension, its
+one-column bank-5 underlay lifecycle, and the byte-exact native Status constructor. The live
+Mamel route checks literal `Proceed` and border pixels, B and `Stay` teardown, exact BG-cell
+restoration, and the native Status frame without using a framebuffer hash.
+
 `tests/fixtures/service_menus.json` freezes the ordered bank-254 service-menu extension,
 all label widths, and all five live menu routes. `SaveStates/rescue-entry-menu.state` is backed
 out and rebuilt before checking the native Yes/No confirmation, the clean 56-pixel Rescue

@@ -71,7 +71,7 @@ text growth.
 | 11 | `$56E2-$56FB` | Ranking-name renderer | `name6.py` only |
 | 11 | `$5F1C-$5F2E` | Ranking-name write | `name6.py` only |
 | 11 | `$5FB3-$5FDC` | Fourteen-entry replay diary pointer table | Preserved byte-exact and guarded by `name6.py`; event IDs 0-3 are non-Secrets demos and 4-13 are Secrets |
-| 11 | `$68DE-$68F6` | Status stairs-popup hook | `stairs_menu.py` only |
+| 11 | `$68DE-$68F6` | Native Status stairs-popup constructor | Guarded byte-exact by `stairs_menu.py`; it must execute in bank 11 so `$68F7/$6967` resolve to the native frame data |
 | 17 | `$76B2-$7D8B` | Native Training/SOS/Revival/Thank-You payload builders, packet codec, checksum, and bit transforms | Preserve while `rescue_password.py` freezes and reproduces the protocol; do not overlay before the two-diary fixture passes |
 | 17 | `$792D-$797A` | SOS semantic builder: seed, diary-ID low word, actor position, dungeon, floor, diary record, and bit packing | Preserved and guarded by `rescue_password.py` |
 | 17 | `$4747-$474E` | Generated communication-code dynamic-text cache call | `rescue_presentation.py` redirects this call only; native `$C16D` bytes are restored after the localized cache copy |
@@ -101,7 +101,7 @@ text growth.
 | 16 | `$78C9-$78D0` | Rename screen redirect | `name6.py` only |
 | 16 | `$7BD4-$7BDB` | Mode-2 death-Rankings note screen redirect | `name6.py` only; preserves the native 13-character field/backend and replaces only the keyboard presentation |
 | 17 | `$5A2C-$6A2B` | Shared native Status/template graphics source | Must remain byte-exact |
-| 18 | `$4130-$4137` | Status stairs-popup exit cleanup | `stairs_menu.py` only |
+| 18 | `$4130-$4137` | Shared popup exit-dispatch base | `stairs_menu.py` installs the compatibility shim; `service_menus.py` chains its guarded cleanup through it |
 | 18 | `$502D-$5072` | Shared graphical-input mode-to-maximum dispatcher; modes 5-8 select 12/9/15/13 password characters | Preserved and guarded; the localized rescue overlay intercepts explicit shared calls without changing this table |
 | 18 | `$5310-$5340` | Mode-3 Big Moai gift-code selectable character table | Replaced by `spell_input.py` |
 | 78 | `$480B-$480D` | Custom item-name display resolver call | `unidentified_names.py` only |
@@ -163,7 +163,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
 | 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |
-| 254 | `$4000-$48E7` | `stairs_menu.py` base through `$4283`, followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, standard/Rescue/Blacksmith seven-interior-tile frames, Blacksmith `Synthesis` suffix staging with Quit-alias clearing and spill-bank synchronization, chained load/copy/controller-exit helpers, active-VRAM-bank bottom-border synchronization, and horizontally/vertically wrapped ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
+| 254 | `$4000-$48F9` | `stairs_menu.py` base through `$428B`, including the exact two-record detector, eight-column dungeon frame, five-cell underlay save/restore, native-template clone, and controller-exit cleanup; followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, seven-interior-tile frames, suffix staging, chained helpers, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A7C` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus loader | Exclusive |
 
 Banks 248-255 were measured empty before these reservations. Their unused tails are not a
@@ -245,19 +245,20 @@ largest localized template is not free. An untouched Japanese ROM changes every 
 restore records there; native writes could corrupt an underlay or its marker and later make
 cleanup copy a stale window tile back onto the dungeon map.
 
-The widened-popup owners now share a reserved slice of WRAM bank 5 `$D9C0-$D9F7`, inside
-the invariant `$D9BF-$DBFF` gap measured across all retained native game-state fixtures and
-controller stress routes. `service_menus.py` owns `$D9C0-$D9DA`: `$D9C0-$D9D3` packs up to
+The popup helpers reserve a slice of WRAM bank 5 `$D9C0-$D9F7`, inside the invariant
+`$D9BF-$DBFF` gap measured across all retained native game-state fixtures and controller
+stress routes. `service_menus.py` owns `$D9C0-$D9DA`: `$D9C0-$D9D3` packs up to
 ten original tile/attribute pairs from the added rightmost BG column, `$D9D4-$D9D5` stores
 the BG destination, `$D9D6` the row count, `$D9D7-$D9D8` the `$A5/$5A` live marker, and
 `$D9D9-$D9DA` the staged suffix tile's VRAM bank and marker. Destination arithmetic
 preserves the current tile-map row while wrapping the low five x bits, then wraps vertical
 row traversal between `$9Bxx` and `$98xx`.
 
-`stairs_menu.py` owns the disjoint upper slice `$D9E0-$D9F7`: `$D9E0-$D9F3` holds the ten
-tile/attribute pairs covered only by the widened floor frame, `$D9F4-$D9F5` holds their BG
-destination, and `$D9F6-$D9F7` is the complementary `$53/$AC` live marker. Both owners
-select bank 5 only around their state access and restore the caller's bank. Suffix rendering
+`stairs_menu.py` owns the disjoint upper reservation `$D9E0-$D9F7`. `$D9E0-$D9E9` stores
+the five tile/attribute pairs covered by the dungeon popup's single added column,
+`$D9F4-$D9F5` stores its BG destination, and `$D9F6-$D9F7` holds the complementary
+`$53/$AC` live marker. The native-width Status popup never arms this state. Both owners
+select bank 5 only around state access and restore the caller's bank. Suffix rendering
 explicitly returns to bank 7 before reading or editing the staged frame. This is transient
 rendering state, not SRAM and not general free WRAM.
 

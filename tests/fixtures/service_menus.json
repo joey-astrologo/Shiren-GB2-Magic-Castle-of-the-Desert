@@ -22,7 +22,7 @@
     "copy_helper": "254:$4034",
     "controller_exit_helper": "254:$4280",
     "controller_exit_helper_sha1": "bd1c15f44e914338eda9846470d780c975b031c6",
-    "copy_helper_sha1": "30cdb01c89ae8d0165b4d115d3ff46cc6a1bfacf",
+    "copy_helper_sha1": "7b030c2ba2faac041bc10038e1e2028a4fb37356",
     "copy_support_sha1": "e33cf7b159fcb52775ec51be5aeddf3b8779ec57",
     "detector_sha1": "cdaf9dabc6bdce40a71752ddf6616f291f23af0f",
     "english_columns": 9,
@@ -230,7 +230,7 @@
       }
     ],
     "load_helper": "254:$4019",
-    "load_helper_sha1": "514685fc874d68c507bc25d51424034bad334361",
+    "load_helper_sha1": "f9cc03712c8191f09c8de18803492265e556f704",
     "load_support_sha1": "5cabf621d7d456bdf955e4c74d945187ecf504fd",
     "native_columns": 7,
     "native_interior_pixels": 40,
