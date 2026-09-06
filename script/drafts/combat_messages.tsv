@@ -124,14 +124,14 @@ id	sections	family	draft
 193:$4B0B	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: Thanks for the meal, fu!
 193:$4B1B	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: I don't need that<br>meat, fu!
 193:$4B2F	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: Huh...?<br>I forgot that power, fu.
-193:$4B49	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu:<br>If you throw meat at me,<br>I'll learn its power, fu!<page>
-193:$4B6C	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: If I eat the same<br>meat twice, I'll forget<br>its power, fu!<page>
+193:$4B49	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: Throw meat at me and<br>I'll learn its power, fu!<page>
+193:$4B6C	combat_and_dungeon_messages	nfuu_abilities_and_training	Nfuu: The same meat twice?<br>I'll forget its power, fu!<page>
 193:$4B92	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: <lookup:19:C5>?<br>No match for me, fu!<page>
 193:$4BAB	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: <lookup:19:C5>?<br>I'm totally fine, fu!<page>
 193:$4BC7	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: I don't feel so<br>good, fu.<page><box>Nfuu: I think I'll recover<br>if I walk a little, fu.<page>
 193:$4C05	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: <lookup:19:C5><br>was a tough one, fu.<page>
 193:$4C22	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: Yelp! That hurt, fu!!<br>That <lookup:19:C5>...!<page>
-193:$4C40	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: I'm hurting, fu...<br>Please throw me<br>an Herb, fu...<page>
+193:$4C40	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: I'm hurting, fu...<br>Throw me an Herb, fu...<page>
 193:$4C61	combat_and_dungeon_messages	nfuu_condition_chatter	Nfuu: I... can't go on, fu...<page><br>Otogirisou... please... fu...<page>
 193:$4C89	combat_and_dungeon_messages	mamo_condition_chatter	Mamo:<br>You can also store items<br>by throwing them at me!<page>
 193:$4CAA	combat_and_dungeon_messages	mamo_condition_chatter	Mamo: I'm built sturdy,<br>so I'll be fine!<page>

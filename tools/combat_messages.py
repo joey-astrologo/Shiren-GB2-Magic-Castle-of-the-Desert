@@ -54,6 +54,9 @@ FIRST_INDEX = 0
 LAST_INDEX = 200
 COMBAT_LOG_LAST_INDEX = 109
 COMBAT_MODE = 0x10
+NFUU_TALK_FIRST_INDEX = 125
+NFUU_TALK_LAST_INDEX = 133
+NFUU_TALK_LINE_LIMIT = 2
 _HEX_SHA1_RE = re.compile(r"[0-9a-f]{40}\Z")
 
 
@@ -322,6 +325,20 @@ def _mode(row):
     return COMBAT_MODE if row.index <= COMBAT_LOG_LAST_INDEX else 0x02
 
 
+def _presentation_line_overflows(row, measured):
+    """Return Nfuu talk surfaces that exceed the live two-line viewport."""
+    if not NFUU_TALK_FIRST_INDEX <= row.index <= NFUU_TALK_LAST_INDEX:
+        return ()
+    counts = {}
+    for line in measured.lines:
+        counts[line.surface] = max(counts.get(line.surface, 0), line.line + 1)
+    return tuple(
+        (surface, count)
+        for surface, count in sorted(counts.items())
+        if count > NFUU_TALK_LINE_LIMIT
+    )
+
+
 def validate_draft(font_rom, row, draft, runtime_contract):
     """Return encoded English after proving controls and native layout."""
     if not draft:
@@ -353,7 +370,8 @@ def validate_draft(font_rom, row, draft, runtime_contract):
             "%s has runtime substitutions without translated width bounds"
             % row.record.id
         )
-    if not measured.safe:
+    presentation_overflows = _presentation_line_overflows(row, measured)
+    if not measured.safe or presentation_overflows:
         problems = []
         if measured.composer_overflows:
             problems.append("composer overflow")
@@ -363,6 +381,8 @@ def validate_draft(font_rom, row, draft, runtime_contract):
             problems.append("dialogue line-limit overflow")
         if measured.page_marker_overflows:
             problems.append("third-line page-marker overflow")
+        if presentation_overflows:
+            problems.append("Nfuu talk two-line presentation overflow")
         raise CombatMessageError(
             "%s fails native layout: %s" % (row.record.id, ", ".join(problems))
         )
@@ -560,7 +580,7 @@ def combination_report(font_rom, row, draft, analysis, domains, domain_counts):
             max_renderer,
             max((line.renderer_pixels for line in measured.lines), default=0),
         )
-        if not measured.safe:
+        if not measured.safe or _presentation_line_overflows(row, measured):
             outcome = "unsafe"
         elif measured.soft_wraps:
             outcome = "soft_wrap"

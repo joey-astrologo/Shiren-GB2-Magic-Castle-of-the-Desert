@@ -402,8 +402,8 @@ class CombatMessageTests(unittest.TestCase):
             122: "Nfuu: Thanks for the meal, fu!",
             123: "Nfuu: I don't need that<br>meat, fu!",
             124: "Nfuu: Huh...?<br>I forgot that power, fu.",
-            125: "Nfuu:<br>If you throw meat at me,<br>I'll learn its power, fu!<page>",
-            126: "Nfuu: If I eat the same<br>meat twice, I'll forget<br>its power, fu!<page>",
+            125: "Nfuu: Throw meat at me and<br>I'll learn its power, fu!<page>",
+            126: "Nfuu: The same meat twice?<br>I'll forget its power, fu!<page>",
         }
         for index, text in expected.items():
             row = self.rows[index]
@@ -423,8 +423,8 @@ class CombatMessageTests(unittest.TestCase):
             122: 139,
             123: 107,
             124: 113,
-            125: 117,
-            126: 111,
+            125: 127,
+            126: 128,
         }
         for index in range(119, 127):
             with self.subTest(index=index):
@@ -447,7 +447,7 @@ class CombatMessageTests(unittest.TestCase):
             129: "Nfuu: I don't feel so<br>good, fu.<page><box>Nfuu: I think I'll recover<br>if I walk a little, fu.<page>",
             130: "Nfuu: <lookup:19:C5><br>was a tough one, fu.<page>",
             131: "Nfuu: Yelp! That hurt, fu!!<br>That <lookup:19:C5>...!<page>",
-            132: "Nfuu: I'm hurting, fu...<br>Please throw me<br>an Herb, fu...<page>",
+            132: "Nfuu: I'm hurting, fu...<br>Throw me an Herb, fu...<page>",
             133: "Nfuu: I... can't go on, fu...<page><br>Otogirisou... please... fu...<page>",
         }
         for index, text in expected.items():
@@ -468,7 +468,7 @@ class CombatMessageTests(unittest.TestCase):
             129: 120,
             130: 122,
             131: 128,
-            132: 102,
+            132: 104,
             133: 116,
         }
         for index in range(127, 134):
@@ -484,6 +484,21 @@ class CombatMessageTests(unittest.TestCase):
                 self.assertEqual(
                     max_renderer_pixels[index], report["max_renderer_pixels"]
                 )
+
+    def test_live_nfuu_talk_records_never_require_a_third_line(self):
+        for index in range(125, 134):
+            row = self.rows[index]
+            draft = self.drafts[row.record.id].draft
+            _text, _encoded, measured = combat_messages.validate_draft(
+                self.font_rom, row, draft, self.runtime.contract
+            )
+            line_counts = {}
+            for line in measured.lines:
+                line_counts[line.surface] = max(
+                    line_counts.get(line.surface, 0), line.line + 1
+                )
+            with self.subTest(index=index, record=row.record.id):
+                self.assertLessEqual(max(line_counts.values()), 2)
 
     def test_reviewed_mamo_condition_chatter_is_present(self):
         expected = {
@@ -823,6 +838,18 @@ class CombatMessageTests(unittest.TestCase):
                 self.font_rom,
                 self.rows[110],
                 "Shopkeeper<speaker>Welcome.",
+                self.runtime.contract,
+            )
+
+    def test_nfuu_talk_validator_rejects_a_third_hard_line(self):
+        with self.assertRaisesRegex(
+            combat_messages.CombatMessageError,
+            "Nfuu talk two-line presentation overflow",
+        ):
+            combat_messages.validate_draft(
+                self.font_rom,
+                self.rows[125],
+                "Nfuu:<br>Second line.<br>Third line.<page>",
                 self.runtime.contract,
             )
 

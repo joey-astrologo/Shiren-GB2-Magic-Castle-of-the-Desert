@@ -16,7 +16,7 @@ id	sections	english
 193:$5760	control_help	<br> Hold B and press A.<br><br>Walking also restores HP, but<br>this restores it much faster.<br>Monsters move just as fast,<br>so stay alert!
 193:$57D8	control_help	<br> Hold B while moving.<br><br>This makes you dash, but<br>monsters move just as quickly.<br>Be careful!
 193:$582E	control_help	<br> 1<27>Stand on the item you want.<br> 2<27>Use At Feet to pick it up.<br> 3<27>Talk to the shopkeeper.<br><br>Dungeon shops work<br>differently from town shops.<br>Remember these steps!
-193:$58B3	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Abilities from the<br>menu does the same thing.
+193:$58B3	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Ability from the<br>menu does the same thing.
 193:$5936	control_help	<br> Tap SELECT to enter<br> diagonal-lock mode.<br><br>Now you can only move<br>diagonally. Tap SELECT again<br>to move normally. A quick tap<br>is the key!
 193:$59BF	control_help	<br> Press B to open the menu.<br><br>Choose Map to see where<br>you are in the dungeon.<br>Every path you have explored<br>is shown, so you should never<br>get lost again.
 193:$5A34	control_help	<br> 1<27>Open the Items menu.<br> 2<27>Press START.<br><br>One button press sorts your<br>items into a tidy list!
@@ -25,7 +25,7 @@ id	sections	english
 193:$5B3F	control_help	<br> Hold B and press A.<br><br>Walking also restores HP, but<br>this restores it much faster.<br>Monsters move just as fast,<br>so stay alert!
 193:$5BB7	control_help	<br> Hold B while moving.<br><br>This makes you dash, but<br>monsters move just as quickly.<br>Be careful!
 193:$5C0D	control_help	<br> 1<27>Stand on the item you want.<br> 2<27>Use At Feet to pick it up.<br> 3<27>Talk to the shopkeeper.<br><br>Dungeon shops work<br>differently from town shops.<br>Remember these steps!
-193:$5C92	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Abilities from the<br>menu does the same thing.
+193:$5C92	control_help	<br> 1<27>Eat Meat to transform.<br> 2<27>Hold SELECT and press A.<br><br>You can use the transformed<br>monster's Ability this way.<br>Choosing Ability from the<br>menu does the same thing.
 193:$5D58	technique_help	Take Turns
 193:$5D67	technique_help	Escaping Monsters
 193:$5D77	technique_help	Throwing Herbs and Staves

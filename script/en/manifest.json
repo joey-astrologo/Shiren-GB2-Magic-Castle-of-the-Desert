@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "d03af6468515fb8881341e2a4b78d4752d5d9960",
+  "workspace_sha1": "adbc35d6c6a0b0e72c8ab81ab7fd2ffcd0d6e14c",
   "categories": [
     {
       "name": "glossary",
@@ -67,7 +67,7 @@
         "ranking_titles_and_grade_labels": 74,
         "trap_menu_status": 1
       },
-      "overlay_sha1": "a736ea524310818691f134d0ff47270e5130395f"
+      "overlay_sha1": "a90e7d65d597b795a0b7c02e35d6e8f8a55d94f3"
     },
     {
       "name": "help",
@@ -81,7 +81,7 @@
         "wanderer_secret_pages": 96,
         "wanderers_guide": 21
       },
-      "overlay_sha1": "22b884ffb5749e93e94c7003d42733c068c135f5"
+      "overlay_sha1": "f48002ac84ec06e364830b365f6fe900c8c743df"
     },
     {
       "name": "messages",
@@ -94,7 +94,7 @@
         "floor_and_system_messages": 39,
         "item_and_action_messages": 159
       },
-      "overlay_sha1": "7b06a61b2e6175885c9bae31a59a46a1419ce333"
+      "overlay_sha1": "7abf234bd97ab87b48d2a0a7353b313dc57ee395"
     },
     {
       "name": "prose",

@@ -18,6 +18,7 @@ import english_font
 import extract
 import hud_font
 import menu_graphics
+import pyboy_route
 import pyboy_state
 import runtime_widths
 import surfaces
@@ -317,6 +318,91 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
                 expected["settled_frame"],
             )
             self.assertNotEqual(0, pyboy.register_file.PC)
+        finally:
+            pyboy.stop(save=False)
+
+    def test_monster_form_menu_renders_complete_ability_label(self):
+        """The selected first row must leave room for its eight-pixel cursor."""
+        state_path = ROOT / "SaveStates" / "Mamel.state"
+        pyboy = pyboy_route.start(self.PyBoy, self.localized_path, state_path)
+        pyboy.set_emulation_speed(0)
+        draws = []
+
+        def at_direct_draw(_context=None):
+            pointer = (pyboy.register_file.D << 8) | pyboy.register_file.E
+            raw = bytearray()
+            for offset in range(0x100):
+                value = pyboy.memory[(pointer + offset) & 0xFFFF]
+                raw.append(value)
+                if value == 0xFF:
+                    break
+            draws.append(bytes(raw))
+
+        try:
+            pyboy.hook_register(*surfaces.DIRECT_RENDERER, at_direct_draw, None)
+
+            # Reach normal dungeon control from the Mamel fixture.
+            for frame in range(1001):
+                if frame in (120, 240, 420, 600, 780, 960):
+                    pyboy.button("a", capture_dialogue.PRESS_FRAMES)
+                if frame in (180, 360):
+                    pyboy.button("start", capture_dialogue.PRESS_FRAMES)
+                pyboy.tick()
+
+            # Replace this disposable run's inventory with one identified
+            # Mamel Meat, then select Status -> Items -> Mamel Meat -> Eat.
+            inventory = pyboy_route.work_read(pyboy, 0x12C1, 20)
+            occupied = {value for value in inventory if value != 0xFF}
+            object_id = next(
+                index
+                for index in range(128)
+                if index not in occupied
+                and pyboy_route.work_read(pyboy, 0x2482 + index * 8, 8)
+                == bytes(8)
+            )
+            pyboy_route.work_write(
+                pyboy,
+                0x2482 + object_id * 8,
+                bytes.fromhex("C9 0B 01 01 00 00 00 00"),
+            )
+            pyboy_route.work_write(
+                pyboy,
+                0x12C1,
+                bytes((object_id,)) + bytes((0xFF,)) * 19,
+            )
+            for button, frames in (
+                ("b", 120),
+                ("a", 120),
+                ("a", 120),
+                ("a", 240),
+                ("a", 240),
+                ("a", 240),
+                ("b", 240),
+            ):
+                pyboy.button(button, capture_dialogue.PRESS_FRAMES)
+                for _frame in range(frames):
+                    pyboy.tick()
+
+            self.assertIn(english.encode("Ability") + b"\xFF", draws)
+
+            # The first selected label begins at x=11 after its cursor.  The
+            # final y begins at x=39; compare its literal 5x8 shadowed raster.
+            palette = {
+                1: (248, 248, 248),
+                2: (168, 168, 168),
+                3: (0, 0, 0),
+            }
+            approved = english_font.load_approved()
+            expected_y = tuple(
+                tuple(palette[color] for color in row[:5])
+                for row in english_font.glyph_pixels(approved.rows["y"])
+            )
+            screen = pyboy.screen.image.convert("RGB")
+            actual_y = tuple(
+                tuple(screen.getpixel((39 + x, 16 + y)) for x in range(5))
+                for y in range(8)
+            )
+            self.assertEqual(expected_y, actual_y)
         finally:
             pyboy.stop(save=False)
 
