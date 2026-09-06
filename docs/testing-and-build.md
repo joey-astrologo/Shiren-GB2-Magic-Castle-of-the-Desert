@@ -516,6 +516,16 @@ The complete accepted-name table and mechanism are in
 Back up the save or use a disposable state because Mesen may persist later in-game saves
 after the live WRAM injection.
 
+### Endgame and one-floor Mesen helpers
+
+`tools/mesen_prepare_endgame.lua` creates a guarded level-99, 250-HP Shiren with equipped
+Kabura Sutegi+99 and Rasen Fuuma+99 records carrying the conservative positive-seal set.
+`tools/mesen_advance_floor.lua` finds the generated native staircase and drives one normal
+transition, including the `Proceed` popup when present. Neither helper patches the ROM or
+writes SRAM directly, although a later in-game save can persist their WRAM changes. Their
+addresses, exclusions, safe operating state, and repeated-use procedure are documented in
+[MESEN_ENDGAME_HELPERS.md](MESEN_ENDGAME_HELPERS.md).
+
 ### Unidentified item naming manual route
 
 `SaveStates/unidentified-item-naming.state` freezes the exact reported Rabbit Scroll route.
