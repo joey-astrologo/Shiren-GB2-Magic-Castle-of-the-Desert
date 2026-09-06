@@ -33,7 +33,7 @@ BLOCK_CONTRACTS = (
             "4c8b018b97475bb18ac952aaa0951006d2d749628733a590bedeec97c3af4192"
         ),
         "localized_sha256": (
-            "8af82c6faeebc91d6cdbdc089b0af18b89da9e5597790d2d57826f8bf1491b38"
+            "10671b026734c11461bec05f74861aafc5171503e80434a4593aa7b4ef97fb43"
         ),
     },
     {
@@ -45,7 +45,7 @@ BLOCK_CONTRACTS = (
             "65d74b28ce217f454be340e6939dc323c0cff463cb18e58126b4dfd86867ff11"
         ),
         "localized_sha256": (
-            "5f0e0691637e51f767c069f0e8b0b69ac322e89c4e08f86c8cdcdb6b0e8ab047"
+            "d90687fcea0acd69586d0f6ad7c4e95e6acf86e569fb388c23c7c00492296c5f"
         ),
     },
 )
@@ -126,12 +126,12 @@ def load_asset(path=DEFAULT_ASSET):
     if layout.get("screen_rect") != [33, 74, 97, 106]:
         raise WaitScreenError("wait-screen rectangle changed")
     expected_lines = (
-        {"text": "Please", "origin": [8, 8], "advance": 30},
-        {"text": "wait...", "origin": [8, 18], "advance": 26},
+        {"text": "Please", "origin": [17, 8], "advance": 30},
+        {"text": "wait...", "origin": [19, 18], "advance": 26},
     )
     if tuple(layout.get("lines", ())) != expected_lines:
         raise WaitScreenError("wait-screen line layout changed")
-    if layout.get("gray_drop_shadow") != [1, 1]:
+    if "gray_drop_shadow" not in layout or layout["gray_drop_shadow"] is not None:
         raise WaitScreenError("wait-screen shadow changed")
 
     font = asset.get("font", {})

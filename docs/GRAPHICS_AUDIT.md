@@ -112,11 +112,12 @@ screen rectangle `(33,74)-(96,105)`. Its tiles are split across two column-major
 | Lower bird art | `56:$7D80-$7E7F` | Preserve and exact-hash guard |
 
 The editable four-level source is `assets/graphics/wait_screen.json`. It renders approved
-Thin Pixel-7 text as `Please` / `wait...` with the native-style one-pixel gray shadow while
-retaining all sign pixels outside the bounded text regions. `tools/wait_screen.py` owns only
+Thin Pixel-7 text as centered `Please` / `wait...` solid ink without a text shadow, while
+preserving the billboard's native gray edge shading and retaining all sign pixels outside
+the bounded text regions. `tools/wait_screen.py` owns only
 the two sign blocks and fails closed if either sign source or either preserved bird block
 changes. The independent production regression was written first and failed against the
-current ROM at 330 pixels; it now decodes production tiles independently and compares the
+current ROM at 335 pixels; it now decodes production tiles independently and compares the
 complete sign raster without accepting or updating a framebuffer hash. A live route capture
 remains the final visual check.
 

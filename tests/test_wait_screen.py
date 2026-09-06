@@ -16,7 +16,7 @@ import wait_screen
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
 ASSET_PATH = ROOT / "assets" / "graphics" / "wait_screen.json"
-ASSET_SHA256 = "d38cf756b5a9742575a1e281d261e7bd83164455289d1b6f5e13c23c82ea165b"
+ASSET_SHA256 = "6bc04dc03922923a57b838b1d86ff009aa93993997c054c98a4fedd713ae9460"
 SYMBOLS = ".lg#"
 BANK = 0x56
 TOP_ADDRESS = 0x7A80
@@ -73,6 +73,14 @@ class WaitScreenTests(unittest.TestCase):
         self.assertEqual(ASSET_SHA256, sha256(ASSET_PATH.read_bytes()).hexdigest())
         self.assertEqual(["Please", "wait..."], self.asset["content"])
         self.assertEqual([33, 74, 97, 106], self.asset["layout"]["screen_rect"])
+        self.assertEqual(
+            [
+                {"text": "Please", "origin": [17, 8], "advance": 30},
+                {"text": "wait...", "origin": [19, 18], "advance": 26},
+            ],
+            self.asset["layout"]["lines"],
+        )
+        self.assertIsNone(self.asset["layout"]["gray_drop_shadow"])
         self.assertEqual(32, len(self.asset["rows"]))
         self.assertTrue(all(len(row) == 64 for row in self.asset["rows"]))
         self.assertTrue(all(set(row) <= set(SYMBOLS) for row in self.asset["rows"]))
@@ -87,7 +95,7 @@ class WaitScreenTests(unittest.TestCase):
         allowed = {
             (x, y)
             for y in range(8, 18)
-            for x in range(6, 41)
+            for x in range(6, 47)
         } | {
             (x, y)
             for y in range(18, 28)
@@ -136,7 +144,7 @@ class WaitScreenTests(unittest.TestCase):
                             "4c8b018b97475bb18ac952aaa0951006d2d749628733a590bedeec97c3af4192"
                         ),
                         "localized_sha256": (
-                            "8af82c6faeebc91d6cdbdc089b0af18b89da9e5597790d2d57826f8bf1491b38"
+                            "10671b026734c11461bec05f74861aafc5171503e80434a4593aa7b4ef97fb43"
                         ),
                     },
                     {
@@ -147,7 +155,7 @@ class WaitScreenTests(unittest.TestCase):
                             "65d74b28ce217f454be340e6939dc323c0cff463cb18e58126b4dfd86867ff11"
                         ),
                         "localized_sha256": (
-                            "5f0e0691637e51f767c069f0e8b0b69ac322e89c4e08f86c8cdcdb6b0e8ab047"
+                            "d90687fcea0acd69586d0f6ad7c4e95e6acf86e569fb388c23c7c00492296c5f"
                         ),
                     },
                 ],

@@ -113,11 +113,11 @@ edited through the ordinary catalog workflow.
   the production floor blocks, and natural Mamel stairs transitions match the approved
   `Ancient Ruins` / `1F` and `2F` pixels. A separate live regression compares the `1` and `F`
   bright caps directly; none of these checks uses a framebuffer hash.
-- The save/load wait sign is localized to `Please` / `wait...` from an editable Thin Pixel-7
-  raster. Its two 256-byte sign blocks are exact-source guarded, both interleaved bird-art
-  blocks remain byte-exact, and an independent decoded-pixel regression covers the full sign
-  without changing a framebuffer hash. Automated live reproduction of the user-observed
-  suspend/reload route remains pending.
+- The save/load wait sign is localized to centered, no-shadow `Please` / `wait...` text from
+  an editable Thin Pixel-7 raster. Its two 256-byte sign blocks are exact-source guarded,
+  both interleaved bird-art blocks remain byte-exact, and an independent decoded-pixel
+  regression covers the full sign without changing a framebuffer hash. Automated live
+  reproduction of the user-observed suspend/reload route remains pending.
 - The dedicated dungeon-HUD atlas installs approved player-supplied `0-9`, `F/L/v/H/p`, and
   slash rasters while retaining native `A-E`, meter art, and reserved cells. The `Lv` tile
   moves `v` one pixel left to match the supplied pair spacing. Both source images are

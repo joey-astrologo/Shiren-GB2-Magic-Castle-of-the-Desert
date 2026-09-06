@@ -43,7 +43,7 @@ Each asset still needs its producer and consumers mapped.
 | Town/dungeon/floor arrival cards | Approved Inter SemiBold 4.1 location artwork for all 32 selectors, including the decoded `Mystery Dungeon` alias; native Latin digits plus an approved one-pixel-raised `F`, centering, floor formatter, underline, palette inheritance, fade, and transition preserved through a guarded bank-$F8 renderer clone | `arrival_cards.py` |
 | Dungeon HUD font | Approved player-supplied rasters replace decimal `0-9`, the visible `F`, tightly kerned `Lv`, `H`, and `p` labels, and the slash; `A-E`, meter, and reserved cells remain native; the read-only contact sheet accepts and audits both source and installed atlases | `hud_font.py`, `hud_font_audition.py` |
 | Shop-price font audit | All ten native two-tone digits decoded from guarded source `3:$5642-$56E1`, cropped and packed at the observed five-pixel shop-tag advance with captured black/white/gray palette roles; read-only contact sheet writes no ROM changes | `shop_price_font_audition.py` |
-| Save/load wait sign | Approved Thin Pixel-7 `Please` / `wait...` raster in two guarded sign blocks; both interleaved bird-art blocks preserved byte-for-byte | `wait_screen.py` |
+| Save/load wait sign | Approved centered, no-shadow Thin Pixel-7 `Please` / `wait...` raster in two guarded sign blocks; native gray billboard shading retained and both interleaved bird-art blocks preserved byte-for-byte | `wait_screen.py` |
 
 The graphical-input family contains nine logical modes but only five visible keyboard-map
 variants. Four variants derive from `name6.py`; Big Moai owns the fifth in `spell_input.py`.
