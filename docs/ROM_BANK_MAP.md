@@ -146,7 +146,12 @@ aliases before changing it.
 | 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | Preserve both credit aliases |
 | 86 | `$7A80-$7E7F` | Save/load wait sign and interleaved bird art | `wait_screen.py` owns only `$7A80-$7B7F` and `$7C80-$7D7F`; preserve both intervening bird blocks |
 | 127 | `$4000-$62EE` | Native arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | `arrival_cards.py` guards the family and replaces only `$4000-$4008` with a far-call wrapper; native assets remain source evidence |
-| 240 | `$4057-$409E`, `$40EF-$40F1`, `$410A` | Visible credit map generator, selector-24 pointer, and eight-page length | Preserve; generates tile IDs `$80-$FF` at `$9800` with VRAM-bank-1 attributes |
+| 240 | `$4057-$409E`, `$40EF-$40F1`, `$410A` | Visible credit map generator, selector-24 pointer, and eight-page length | `ending_credits.py` changes only `$4067-$4068` from `ld d,$80` to `ld d,$F0`, reserving tile `$F0`—verified black across every affected opening and ending plane—for outer map cells; all other bytes are preserved |
+| 240 | `$410B-$490A` | Main-ending staff-title card, raw row-major 2bpp plane | `ending_credits.py` exact-hash guards and replaces the localized title plane |
+| 240 | `$490B-$7B0A` | Main-ending staff cards 1-6, raw row-major 2bpp planes | `ending_credits.py` exact-hash guards and replaces the six planes only |
+| 241 | `$4000-$7FFF` | Main-ending staff cards 7-11, raw row-major 2bpp planes | `ending_credits.py` exact-hash guards and replaces the five planes only |
+| 242 | `$4000-$7EFF` | Main-ending staff cards 12-18, raw row-major 2bpp planes | `ending_credits.py` exact-hash guards and replaces the seven planes only |
+| 243 | `$4000-$55FF` | Main-ending staff cards 19-20, raw row-major 2bpp planes | `ending_credits.py` exact-hash guards and replaces the two planes only; Japanese end mark `$5600-$58FF` remains native |
 | 240 | `$409F-$40A6` | Credit-card BG palette-0 transition override | Preserve native fade behavior |
 | 243 | `$5D00-$64FF` | Visible credit foreground copied verbatim to VRAM bank 1 `$8800-$8FFF` | `credit_screen.py` owns only the two ranges listed above; both copyright rows and all other bytes remain native |
 
@@ -246,9 +251,11 @@ largest localized template is not free. An untouched Japanese ROM changes every 
 restore records there; native writes could corrupt an underlay or its marker and later make
 cleanup copy a stale window tile back onto the dungeon map.
 
-The popup helpers reserve a slice of WRAM bank 5 `$D9C0-$D9F7`, inside the invariant
-`$D9BF-$DBFF` gap measured across all retained native game-state fixtures and controller
-stress routes. `service_menus.py` owns `$D9C0-$D9DA`: `$D9C0-$D9D3` packs up to
+The popup helpers reserve a slice of WRAM bank 5 `$D9C0-$D9F7`. That slice is clear on
+retained gameplay fixtures and controller stress routes that can invoke these popups.
+Ending-credit code reuses nine non-marker bytes in the upper slice, but the ending is
+mutually exclusive with dungeon popups and leaves the complementary live marker clear.
+`service_menus.py` owns `$D9C0-$D9DA`: `$D9C0-$D9D3` packs up to
 ten original tile/attribute pairs from the added rightmost BG column, `$D9D4-$D9D5` stores
 the BG destination, `$D9D6` the row count, `$D9D7-$D9D8` the `$A5/$5A` live marker, and
 `$D9D9-$D9DA` the staged suffix tile's VRAM bank and marker. Destination arithmetic

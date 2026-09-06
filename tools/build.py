@@ -17,6 +17,7 @@ import arrival_cards
 import blank_scroll
 import credit_screen
 import dialogue_pacing
+import ending_credits
 import english_font
 import extract
 import hud_font
@@ -273,6 +274,7 @@ def build_rom(
     output = shop_sale_count.install(output)
     output = item_status.install(output)
     output = credit_screen.install(output)
+    output = ending_credits.install(output)
     output = wait_screen.install(output)
     output = arrival_cards.install(output)
     output = menu_graphics.install(output, approved=approved_font)
@@ -482,6 +484,7 @@ def main(argv=None):
         blank_scroll.BlankScrollError,
         credit_screen.CreditScreenError,
         dialogue_pacing.DialoguePacingError,
+        ending_credits.EndingCreditsError,
         english_font.FontError,
         extract.ExtractError,
         hud_font.HudFontError,

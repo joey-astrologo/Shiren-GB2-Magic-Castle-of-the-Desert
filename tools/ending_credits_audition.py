@@ -55,11 +55,13 @@ COVERAGE_THRESHOLDS = (
 ROLE_CAP_HEIGHT = 8
 NAME_CAP_HEIGHT = 9
 MINIMUM_CAP_HEIGHT = 5
-MAXIMUM_TEXT_WIDTH = 144
+# The native roll maps sixteen 8-pixel tile columns to screen x=16..143.
+# Keep every approved line inside that exact 128-pixel hardware viewport.
+MAXIMUM_TEXT_WIDTH = 128
 LINE_BAND_HEIGHT = 16
 
-# Midpoints of the 20 fully bright, stable cards measured from ending-one.state.
-# The title card before these is intentionally not part of the staff-credit asset.
+# Fully bright title and staff-card midpoints measured from ending-one.state.
+STAFF_TITLE_FRAME = 200
 STABLE_CARD_FRAMES = (
     500,
     830,
@@ -84,6 +86,14 @@ STABLE_CARD_FRAMES = (
 )
 END_MARK_FRAME = 7150
 END_MARK_POLICY = "preserve Japanese"
+
+STAFF_TITLE_LINES = (
+    "Shiren the Wanderer GB2",
+    "Magic Castle of the Desert",
+    "- Development Staff -",
+)
+STAFF_TITLE_BANDS = (38, 58, 78)
+STAFF_TITLE_CAP_HEIGHT = 8
 
 CELL_WIDTH = 336
 CELL_HEIGHT = 168
@@ -234,7 +244,21 @@ def _coverage(face, text, cap_height):
 def _fitting_masks(face, text, preferred_cap_height):
     for cap_height in range(preferred_cap_height, MINIMUM_CAP_HEIGHT - 1, -1):
         masks = _level_masks(face, text, cap_height)
-        if masks[0].width <= MAXIMUM_TEXT_WIDTH and masks[0].height <= LINE_BAND_HEIGHT:
+        if masks[0].height > LINE_BAND_HEIGHT:
+            continue
+        if masks[0].width <= MAXIMUM_TEXT_WIDTH:
+            return masks, cap_height
+        # One approved name is only two pixels wider than the native plane.
+        # Preserve its nine-pixel cap height and optical weight with a minimal
+        # horizontal fit instead of making that one name visibly smaller.
+        if masks[0].width <= math.ceil(MAXIMUM_TEXT_WIDTH / 0.98):
+            masks = tuple(
+                mask.resize(
+                    (MAXIMUM_TEXT_WIDTH, mask.height),
+                    Image.Resampling.NEAREST,
+                )
+                for mask in masks
+            )
             return masks, cap_height
     raise EndingCreditsAuditionError(
         "%r cannot fit the %d-pixel ending-credit width" % (text, MAXIMUM_TEXT_WIDTH)
@@ -261,6 +285,57 @@ def _row_tops(count):
 def _paste_mask(screen, mask, xy, color):
     ink = Image.new("RGB", mask.size, color)
     screen.paste(ink, xy, mask)
+
+
+def render_staff_title(face):
+    """Render the localized title that introduces the main staff roll."""
+    screen = Image.new("RGB", SCREEN_SIZE, BLACK)
+    metrics = []
+    overflows = []
+    for index, (text, band_top) in enumerate(
+        zip(STAFF_TITLE_LINES, STAFF_TITLE_BANDS)
+    ):
+        masks = _level_masks(face, text, STAFF_TITLE_CAP_HEIGHT)
+        if masks[0].width > MAXIMUM_TEXT_WIDTH:
+            masks = tuple(
+                mask.resize(
+                    (MAXIMUM_TEXT_WIDTH, mask.height),
+                    Image.Resampling.NEAREST,
+                )
+                for mask in masks
+            )
+        width, height = masks[0].size
+        left = (SCREEN_SIZE[0] - width) // 2
+        top = band_top + (LINE_BAND_HEIGHT - height) // 2
+        if left < 16 or left + width > 144:
+            overflows.append(index)
+        for mask, color in zip(masks, (DARK, MID, WHITE)):
+            _paste_mask(screen, mask, (left, top), color)
+        metrics.append(
+            {
+                "text": text,
+                "width": width,
+                "height": height,
+                "left": left,
+                "top": top,
+                "cap_height": STAFF_TITLE_CAP_HEIGHT,
+            }
+        )
+
+    points = [
+        (x, y)
+        for y in range(SCREEN_SIZE[1])
+        for x in range(SCREEN_SIZE[0])
+        if screen.getpixel((x, y)) != BLACK
+    ]
+    xs, ys = zip(*points)
+    return screen, {
+        "role": "Staff-roll title",
+        "frame": STAFF_TITLE_FRAME,
+        "lines": metrics,
+        "overflows": overflows,
+        "ink_bounds": (min(xs), min(ys), max(xs), max(ys)),
+    }
 
 
 def render_card(face, credit):
@@ -316,7 +391,7 @@ def capture_native_roll(rom_path, state_path, pyboy_class):
     if not state_path.is_file():
         raise EndingCreditsAuditionError("missing ending-credit state: %s" % state_path)
 
-    wanted = set(STABLE_CARD_FRAMES) | {END_MARK_FRAME}
+    wanted = set(STABLE_CARD_FRAMES) | {STAFF_TITLE_FRAME, END_MARK_FRAME}
     frames = {}
     pyboy = pyboy_class(
         str(rom_path),
@@ -343,7 +418,11 @@ def capture_native_roll(rom_path, state_path, pyboy_class):
     missing = sorted(wanted - set(frames))
     if missing:
         raise EndingCreditsAuditionError("failed to capture ending frames: %s" % missing)
-    return tuple(frames[frame] for frame in STABLE_CARD_FRAMES), frames[END_MARK_FRAME]
+    return (
+        frames[STAFF_TITLE_FRAME],
+        tuple(frames[frame] for frame in STABLE_CARD_FRAMES),
+        frames[END_MARK_FRAME],
+    )
 
 
 def _failure_card(message):
@@ -359,12 +438,14 @@ def render_sheet(face, native_cards=None, columns=2):
     """Render all cards, optionally paired with their captured Japanese originals."""
     if columns < 1:
         raise EndingCreditsAuditionError("columns must be positive")
-    if native_cards is not None and len(native_cards) != len(CREDITS):
+    expected_screens = len(CREDITS) + 1
+    if native_cards is not None and len(native_cards) != expected_screens:
         raise EndingCreditsAuditionError(
-            "native reference has %d cards, expected %d" % (len(native_cards), len(CREDITS))
+            "native reference has %d cards, expected %d"
+            % (len(native_cards), expected_screens)
         )
 
-    rows = math.ceil(len(CREDITS) / columns)
+    rows = math.ceil(expected_screens / columns)
     sheet = Image.new(
         "RGB",
         (CELL_WIDTH * columns, HEADER_HEIGHT + CELL_HEIGHT * rows),
@@ -379,13 +460,23 @@ def render_sheet(face, native_cards=None, columns=2):
 
     metrics = []
     overflowing = []
-    for index, credit in enumerate(CREDITS):
+    entries = (("Staff-roll title", None),) + tuple(
+        (credit.role, credit) for credit in CREDITS
+    )
+    for index, (label, credit) in enumerate(entries):
         try:
-            candidate, card_metrics = render_card(face, credit)
+            if credit is None:
+                candidate, card_metrics = render_staff_title(face)
+            else:
+                candidate, card_metrics = render_card(face, credit)
         except EndingCreditsAuditionError as exc:
             candidate = _failure_card(str(exc))
-            card_metrics = {"role": credit.role, "frame": credit.frame,
-                            "error": str(exc), "overflows": [0]}
+            card_metrics = {
+                "role": label,
+                "frame": STAFF_TITLE_FRAME if credit is None else credit.frame,
+                "error": str(exc),
+                "overflows": [0],
+            }
             overflowing.append(index)
         if card_metrics.get("overflows"):
             overflowing.append(index)
@@ -401,11 +492,12 @@ def render_sheet(face, native_cards=None, columns=2):
         else:
             sheet.paste(native_cards[index], (left + 4, top))
             sheet.paste(candidate, (left + 172, top))
-        footer = "%02d  %s" % (index + 1, credit.role)
+        footer = "%02d  %s" % (index + 1, label)
         draw.text((left + 8, top + 148), footer[:48], fill=MID)
 
     return sheet, {
-        "cards": len(CREDITS),
+        "cards": expected_screens,
+        "staff_cards": len(CREDITS),
         "font": str(face.path),
         "font_name": face.name,
         "font_sha256": face.sha256,
@@ -441,7 +533,10 @@ def main(argv=None):
         if not args.candidate_only:
             from capture_dialogue import _pyboy_class
 
-            native, _end_mark = capture_native_roll(args.rom, args.state, _pyboy_class())
+            native_title, native_cards, _end_mark = capture_native_roll(
+                args.rom, args.state, _pyboy_class()
+            )
+            native = (native_title,) + native_cards
         sheet, report = render_sheet(face, native_cards=native, columns=args.columns)
         if report["overflowing_cards"]:
             raise EndingCreditsAuditionError(

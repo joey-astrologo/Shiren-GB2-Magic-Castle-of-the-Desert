@@ -439,8 +439,11 @@ def summary(rom):
         },
         "routes_requiring_live_capture": {
             "ending_credits": {
-                "status": "live_route_required",
-                "storage": "unknown_until_live_trace",
+                "status": (
+                    "main_ending_english_installed_"
+                    "true_ending_live_route_required"
+                ),
+                "storage": "raw_row_major_2bpp_planes",
                 "native_evidence": {
                     "scenario_selector": 27,
                     "scenario_label": "Town 7 staff telop",
@@ -449,14 +452,33 @@ def summary(rom):
                     "music_label": "Staff Roll",
                     "music_label_source": "group 25 index 38 / C3:$432C",
                 },
-                "routes_to_capture": ["main ending", "true ending"],
+                "main_ending": {
+                    "fixture": "SaveStates/ending-one.state",
+                    "title_source": "F0:$410B-$490A",
+                    "card_count": 20,
+                    "destination": "CGB VRAM bank 1 $8800",
+                    "card_sources": [
+                        "F0:$490B-$7B0A",
+                        "F1:$4000-$7FFF",
+                        "F2:$4000-$7EFF",
+                        "F3:$4000-$55FF",
+                    ],
+                    "outer_blank_map_patch": (
+                        "F0:$4067-$4068 ld d,$80 -> ld d,$F0"
+                    ),
+                    "preserved": [
+                        "native fades/scroll/palettes/timing",
+                        "Japanese end mark",
+                    ],
+                },
+                "routes_to_capture": ["true ending"],
                 "needed_fixture": (
-                    "a disposable save state immediately before each ending"
+                    "a disposable save state immediately before the true ending"
                 ),
                 "reason": (
-                    "native labels prove the staff-roll route exists, but do not "
-                    "prove whether its visible names are stored art, a generated "
-                    "tilemap, or ordinary text"
+                    "the main-ending raw planes are traced and installed; the true "
+                    "ending must be compared before shared-resource coverage can be "
+                    "claimed"
                 ),
             }
         },

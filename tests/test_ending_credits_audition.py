@@ -24,6 +24,15 @@ STATE_SHA1 = "3ef2a74e1e926d1fd79df0c45d51b683b5793004"
 class EndingCreditsAuditionTests(unittest.TestCase):
     def test_complete_main_ending_contract_uses_the_opening_credit_treatment(self):
         self.assertEqual(20, len(ending_credits_audition.CREDITS))
+        self.assertEqual(200, ending_credits_audition.STAFF_TITLE_FRAME)
+        self.assertEqual(
+            (
+                "Shiren the Wanderer GB2",
+                "Magic Castle of the Desert",
+                "- Development Staff -",
+            ),
+            ending_credits_audition.STAFF_TITLE_LINES,
+        )
         self.assertEqual(
             (500, 830, 1140, 1460, 1780, 2100, 2400, 2750, 3100, 3440,
              3780, 4120, 4440, 4760, 5070, 5380, 5700, 6020, 6350, 6750),
@@ -46,14 +55,23 @@ class EndingCreditsAuditionTests(unittest.TestCase):
 
     def test_every_candidate_card_fits_and_uses_only_the_native_credit_palette(self):
         face = ending_credits_audition.load_font(FONT)
+        title, title_metrics = ending_credits_audition.render_staff_title(face)
+        self.assertEqual((160, 144), title.size)
+        self.assertTrue(set(title.getdata()) <= set(credit_screen_mockup.PALETTE))
+        self.assertEqual([], title_metrics["overflows"])
+        self.assertGreaterEqual(title_metrics["ink_bounds"][0], 16)
+        self.assertLessEqual(title_metrics["ink_bounds"][2], 143)
         for index, credit in enumerate(ending_credits_audition.CREDITS):
             with self.subTest(index=index, role=credit.role):
                 card, metrics = ending_credits_audition.render_card(face, credit)
                 self.assertEqual((160, 144), card.size)
                 self.assertTrue(set(card.getdata()) <= set(credit_screen_mockup.PALETTE))
                 self.assertEqual([], metrics["overflows"])
-                self.assertLessEqual(metrics["ink_bounds"][2], 151)
-                self.assertGreaterEqual(metrics["ink_bounds"][0], 8)
+                # The live ending map exposes exactly sixteen 8-pixel columns:
+                # screen x=16..143.  Review art must fit that same hardware
+                # viewport so production cannot silently clip an edge pixel.
+                self.assertLessEqual(metrics["ink_bounds"][2], 143)
+                self.assertGreaterEqual(metrics["ink_bounds"][0], 16)
 
     def test_role_and_name_scale_has_a_balanced_consistent_hierarchy(self):
         self.assertEqual(8, ending_credits_audition.ROLE_CAP_HEIGHT)
@@ -72,8 +90,9 @@ class EndingCreditsAuditionTests(unittest.TestCase):
     def test_sheet_and_cli_write_review_art_without_mutating_inputs(self):
         face = ending_credits_audition.load_font(FONT)
         sheet, report = ending_credits_audition.render_sheet(face, columns=2)
-        self.assertEqual((672, 1704), sheet.size)
-        self.assertEqual(20, report["cards"])
+        self.assertEqual((672, 1872), sheet.size)
+        self.assertEqual(21, report["cards"])
+        self.assertEqual(20, report["staff_cards"])
         self.assertEqual([], report["overflowing_cards"])
         self.assertEqual("Inter SemiBold", report["font_name"])
 
@@ -90,7 +109,7 @@ class EndingCreditsAuditionTests(unittest.TestCase):
         self.assertEqual(before_state, STATE.read_bytes())
         self.assertEqual(before_rom, ROM.read_bytes())
 
-    def test_live_fixture_captures_all_cards_and_the_preserved_end_mark(self):
+    def test_live_fixture_captures_title_all_cards_and_the_preserved_end_mark(self):
         if not ROM.is_file() or not STATE.is_file():
             raise unittest.SkipTest("ending ROM/state fixture is required")
         self.assertEqual(STATE_SHA1, sha1(STATE.read_bytes()).hexdigest())
@@ -99,9 +118,11 @@ class EndingCreditsAuditionTests(unittest.TestCase):
         except RuntimeError as exc:
             raise unittest.SkipTest(str(exc)) from exc
 
-        native, end_mark = ending_credits_audition.capture_native_roll(
+        title, native, end_mark = ending_credits_audition.capture_native_roll(
             ROM, STATE, PyBoy
         )
+        self.assertEqual((160, 144), title.size)
+        self.assertEqual(set(credit_screen_mockup.PALETTE), set(title.getdata()))
         self.assertEqual(20, len(native))
         for card in native:
             self.assertEqual((160, 144), card.size)

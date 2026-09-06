@@ -17,7 +17,7 @@ matching Japanese cartridge dump.
 | Text | **Translation pass complete** | All 5,667 production records have explicit English or intentional empty values; editorial review and playtesting continue |
 | Menus and input | **Complete for known routes** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and known system screens are localized and fixture-tested |
 | Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
-| Graphics | **In progress** | Copyright card, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed; the title and ending credits remain |
+| Graphics | **In progress** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed; the main title and untraced true-ending route remain |
 | Wanderer Rescue | **Protocol and English I/O tested** | The complete physical Rescue Gate and two-diary route still needs capture |
 | Automated tests | **576 tests passing — 2026-09-05** | Continue adding focused regressions for issues found during playtesting |
 
@@ -43,7 +43,8 @@ Install the Python dependencies with:
 python3 -m pip install pyboy pillow
 ```
 
-The normal ROM build itself uses only Python's standard library.
+The normal ROM build uses Pillow to reproduce the approved main-ending credit rasters from
+their licensed Inter source font.
 
 ## Build
 
@@ -154,9 +155,10 @@ python3 tools/shop_price_font_audition.py
 ```
 
 The audition commands write review images under `build/` and do not modify the input ROM.
-The ending-credits command uses `SaveStates/ending-one.state` to pair all 20 captured main-ending
-cards with English candidates in the opening copyright screen's font and palette treatment; the
-Japanese end mark is intentionally preserved.
+The ending-credits command uses `SaveStates/ending-one.state` to pair the captured staff-roll title
+and all 20 main-ending cards with the same English rasters installed by the production builder.
+They use the opening copyright screen's font and palette treatment; the Japanese end mark is
+intentionally preserved.
 See the [build and test guide](docs/testing-and-build.md) for feature-specific tests,
 fixture routes, and every diagnostic command.
 

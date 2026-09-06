@@ -273,23 +273,29 @@ guard both native name strips, confine production mutations to those ranges, and
 pixels across the native fade and title handoff. They do not accept or refresh a framebuffer
 hash.
 
-For the read-only main-ending credits audition:
+For the main-ending credits source, production insertion, and audition:
 
 ```sh
-python3 -m unittest tests.test_ending_credits_audition -v
+python3 -m unittest \
+  tests.test_ending_credits_audition \
+  tests.test_ending_credits -v
 python3 tools/ending_credits_audition.py
 ```
 
-The command replays `SaveStates/ending-one.state`, captures all 20 stable Japanese credit cards,
-and writes `build/ending_credits_audition.png` with each native card beside its English candidate.
+The command replays `SaveStates/ending-one.state`, captures the Japanese staff-title screen and all
+20 stable credit cards, and writes `build/ending_credits_audition.png` with every native screen
+beside its English candidate.
 The candidates use the exact Inter SemiBold source, four-color palette, and coverage thresholds
 approved for the opening copyright screen. Roles use an 8-pixel cap height and names use a
-consistent 9-pixel cap height. The tests freeze the complete card/timing and scale hierarchy,
-fit every line within the native 144-pixel field, exercise CLI rendering, prove the ROM and state
-remain unchanged, and independently capture all 20 cards plus the preserved Japanese end mark.
-Use `--candidate-only` for a ROM-independent sheet or `--font` to audition another font. This tool
-does not insert credits into a ROM; the separate true-ending route still needs its own fixture and
-timing trace.
+consistent 9-pixel cap height. Every line fits the live 128-pixel plane; the one 130-pixel name is
+minimally fitted horizontally without changing its cap height. The installer exact-hash guards the
+native title and all 20 staff source planes without changing timing or sequencing code. It redirects
+the map's surrounding blank from tile `$80` to tile `$F0`, verified black across every affected
+opening and ending plane, preventing wide top lines from repeating around the screen.
+Live PyBoy tests compare the localized staff title and every stable card directly to their approved
+rasters, compare the Japanese end mark pixel-for-pixel to native, and do not accept or refresh a
+framebuffer hash. Use `--candidate-only` for a ROM-independent sheet or `--font` to audition another font. The
+separate true-ending route still needs its own fixture and timing trace.
 
 For the approved save/load wait-sign source and production insertion:
 

@@ -213,9 +213,12 @@ class GraphicsAuditTests(unittest.TestCase):
         self.assertEqual("preserve_japanese", policy["ending_fin_mark"])
         self.assertEqual("audit_and_localize", policy["functional_graphical_text"])
 
-    def test_ending_credits_are_not_misreported_as_a_completed_trace(self):
+    def test_main_ending_credits_are_traced_and_true_ending_remains_pending(self):
         ending = self.summary["routes_requiring_live_capture"]["ending_credits"]
-        self.assertEqual("live_route_required", ending["status"])
+        self.assertEqual(
+            "main_ending_english_installed_true_ending_live_route_required",
+            ending["status"],
+        )
         self.assertEqual(
             {
                 "scenario_selector": 27,
@@ -227,9 +230,30 @@ class GraphicsAuditTests(unittest.TestCase):
             },
             ending["native_evidence"],
         )
-        self.assertEqual("unknown_until_live_trace", ending["storage"])
+        self.assertEqual("raw_row_major_2bpp_planes", ending["storage"])
         self.assertEqual(
-            ["main ending", "true ending"], ending["routes_to_capture"]
+            "F0:$410B-$490A", ending["main_ending"]["title_source"]
+        )
+        self.assertEqual(20, ending["main_ending"]["card_count"])
+        self.assertEqual(
+            [
+                "F0:$490B-$7B0A",
+                "F1:$4000-$7FFF",
+                "F2:$4000-$7EFF",
+                "F3:$4000-$55FF",
+            ],
+            ending["main_ending"]["card_sources"],
+        )
+        self.assertEqual(
+            "F0:$4067-$4068 ld d,$80 -> ld d,$F0",
+            ending["main_ending"]["outer_blank_map_patch"],
+        )
+        self.assertEqual(
+            ["native fades/scroll/palettes/timing", "Japanese end mark"],
+            ending["main_ending"]["preserved"],
+        )
+        self.assertEqual(
+            ["true ending"], ending["routes_to_capture"]
         )
 
     def test_native_pixel_and_map_sources_are_hash_frozen(self):

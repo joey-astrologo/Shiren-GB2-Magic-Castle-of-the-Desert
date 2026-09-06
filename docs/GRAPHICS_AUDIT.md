@@ -37,7 +37,7 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 | 1 | Main title screen logo | Stored multi-VRAM-bank tiles plus full-screen map | All three resources use title selector 0 | Fully traced; English art required |
 | 1 | Save/load wait sign | Two stored 64x16 column-major 2bpp sign blocks | Two interleaved 256-byte bird-art blocks are separate and preserved | English art installed and statically pixel-tested; automated live route pending |
 | 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors; duplicate Pot Cave and `Mystery Dungeon` pairs share sequences | Approved English atlas installed and live-pixel tested |
-| 3 | Ending staff roll | Unknown until the live route is captured | Native scenario and music identifiers prove the route exists | Needs main-ending and true-ending states |
+| 3 | Ending staff roll | One title plane plus twenty variable-size raw row-major 2bpp planes copied directly to VRAM bank 1 at `$8800` | The captured main ending uses the title and cards across banks F0-F3; the Japanese `終` mark remains a shared transition asset | English title and all 20 main-ending cards installed and live-pixel tested; true-ending route still needs a state and comparison |
 
 The title wording shown below remains a working content transcription rather than approved
 replacement art. The credit-card wording and Inter-based treatment have been approved and
@@ -303,22 +303,39 @@ walkthrough also separates a main ending and later true ending, which is useful 
 corroboration but not a substitute for a ROM/VRAM trace:
 [GB2 digest and ending timestamps](https://www.youtube.com/watch?v=RLu5OtIm-pM).
 
-`SaveStates/ending-one.state` now provides the main-ending route. Its trace captures 20 stable
-credit cards followed by the Japanese end mark. `tools/ending_credits_audition.py` pairs those
-native cards with English candidates using the approved opening-copyright font treatment. The
-audition uses an 8-pixel role cap height and a consistent 9-pixel name cap height, preserving a
-subtle hierarchy without the former oversized gap. It is read-only and does not yet classify or
-patch the underlying storage.
+`SaveStates/ending-one.state` provides the main-ending route. Its trace captures the staff-title
+screen, 20 stable credit cards, and the Japanese end mark. `tools/ending_credits_audition.py` pairs
+the title and native cards with English candidates using the approved opening-copyright font
+treatment. The audition uses an 8-pixel role cap height and a consistent 9-pixel name cap height,
+preserving a subtle hierarchy without the former oversized gap.
+
+The storage trace is complete. Fixed-bank copier `0:$1F3A` loads the title and each card directly
+to CGB VRAM bank 1 `$8800`; the sources are contiguous raw row-major 2bpp planes rather than script
+text or compressed graphics:
+
+| Cards | Source | Plane sizes |
+|---:|---|---|
+| Staff title | `F0:$410B-$490A` | `$0800` |
+| 1-6 | `F0:$490B-$7B0A` | `$0800,$0800,$0800,$0800,$0A00,$0800` |
+| 7-11 | `F1:$4000-$7FFF` | `$0800,$1000,$1000,$0800,$1000` |
+| 12-18 | `F2:$4000-$7EFF` | `$0800,$0800,$0A00,$0800,$0D00,$0800,$0800` |
+| 19-20 | `F3:$4000-$55FF` | `$0E00,$0800` |
+
+The fixed 16-column map generated at `F0:$4057-$409E` uses the copied plane at screen x=16-143.
+Native outer cells reused tile `$80` as a blank, but three approved wide headings occupy part of
+that tile. Production changes only `F0:$4067-$4068` from `ld d,$80` to `ld d,$F0` and proves tile
+`$F0` is black in the localized title, every localized card, and the native/localized opening-credit
+planes. `tools/ending_credits.py` exact-hash guards and replaces the title plus 20 staff planes while
+preserving the native fade/scroll/palette engine, frame-6983 Japanese end-mark plane
+`F3:$5600-$58FF`, and all later data.
 
 The ending family therefore remains partially `live_route_required`. The remaining fixture is a
 disposable save state immediately before:
 
 1. the true ending.
 
-The implementation audit must still determine whether the main credits are stored art, generated
-tilemap text, or ordinary VWF text and trace their palettes and transitions. The true-ending trace
-must capture its complete roll and establish whether both endings share the same credit resources.
-The Japanese end mark remains unchanged by explicit project policy.
+The true-ending trace must capture its complete roll and establish whether both endings share the
+same credit resources. The Japanese end mark remains unchanged by explicit project policy.
 
 ## Other reviewed categories
 
@@ -334,8 +351,8 @@ The Japanese end mark remains unchanged by explicit project policy.
 ## Implementation order
 
 1. Main title: larger full-screen art with two VRAM planes and eight palettes.
-2. Main-ending credits after visual approval of the audition, then the true-ending route after its
-   live state is available.
+2. True-ending route after its live state is available; compare its selectors and source loads to
+   the now-installed main-ending family before reusing any assets.
 
 Each implementation remains subject to [GRAPHICS.md](GRAPHICS.md): editable source art,
 licensed font provenance, exact-byte guards, collision checks, static plane/map tests, a live

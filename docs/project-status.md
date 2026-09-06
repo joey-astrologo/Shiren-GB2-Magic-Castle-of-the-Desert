@@ -98,6 +98,12 @@ edited through the ordinary catalog workflow.
   only its two private 512-byte name strips with approved `CHUNSOFT` and `Koichi Sugiyama`
   art. The editable Inter SemiBold 4.1 source, OFL provenance, exact source guards, native
   fade stages, and unchanged title handoff are all fixture-tested without a framebuffer hash.
+- The main-ending staff roll replaces its exact-hash-guarded title plane and all 20 raw 2bpp
+  role/name planes with approved Inter SemiBold 4.1 artwork. Native scroll positioning, fades,
+  palettes, timing, and the Japanese `終` mark remain unchanged. The fixed surrounding map now
+  uses tile `$F0`, verified black across the opening and ending planes, instead of the
+  English-occupied tile `$80`; the title, every stable staff card, and preserved end mark are
+  checked live in PyBoy without a framebuffer hash.
 - All 32 town/dungeon/floor arrival selectors use approved Inter SemiBold 4.1 artwork from
   an editable block source. The native nine-block alias was decoded as `Mystery Dungeon`;
   no placeholder text ships. A guarded bank-$F8 clone retains native centering, ten byte-exact
@@ -163,11 +169,11 @@ edited through the ordinary catalog workflow.
 - Full-game and rare-route playtesting, including optional allies, endings, postgame,
   traps, save/resume, rankings, and uncommon dynamic text combinations.
 - Full graphics localization: the clean-boot copyright/composer card and all 32 arrival cards are installed from
-  approved source art and pixel-tested across its fade and title handoff. The save/load wait
+  approved source art and pixel-tested across their live routes and transitions. The save/load wait
   sign is installed and statically pixel-tested but still needs its live route captured. The
-  main title still needs approved English art and insertion. The main-ending staff roll now has a
-  converted PyBoy fixture and complete 20-card audition; insertion, storage/consumer tracing, and a
-  true-ending fixture remain outstanding; see [GRAPHICS.md](GRAPHICS.md).
+  main title still needs approved English art and insertion. The main-ending staff title and all 20
+  approved staff cards are installed into their traced source planes and live-pixel tested from the converted PyBoy fixture;
+  only the separate true-ending route still needs a fixture and comparison; see [GRAPHICS.md](GRAPHICS.md).
 - Iterative layout and font polish for issues discovered in playtesting.
 - Release packaging and final clean-ROM reproducibility checks.
 

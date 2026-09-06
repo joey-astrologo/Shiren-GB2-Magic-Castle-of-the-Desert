@@ -188,22 +188,23 @@ class StairsMenuInstallerTests(unittest.TestCase):
             floor_state.stop, stairs_menu.POPUP_STATE_RESERVED_END
         )
 
-    def test_reserved_popup_state_is_clear_in_every_native_fixture(self):
+    def test_no_native_fixture_accidentally_arms_floor_cleanup(self):
+        """Unrelated native data is harmless unless both marker bytes match."""
         flat_start = (
             stairs_menu.POPUP_STATE_WRAM_BANK * 0x1000
-            + stairs_menu.POPUP_STATE_RESERVED_START
+            + stairs_menu.FLOOR_SAVED_FLAG_ADDRESS
             - 0xD000
         )
-        size = (
-            stairs_menu.POPUP_STATE_RESERVED_END
-            - stairs_menu.POPUP_STATE_RESERVED_START
-        )
+        armed = bytes((
+            stairs_menu.FLOOR_SAVED_FLAG_VALUE,
+            stairs_menu.FLOOR_SAVED_FLAG_END_VALUE,
+        ))
         states = sorted((ROOT / "SaveStates").glob("*.state"))
         self.assertTrue(states)
         for state in states:
             with self.subTest(state=state.name):
                 ram = pyboy_state.work_ram(state, self.path)
-                self.assertEqual(bytes(size), ram[flat_start:flat_start + size])
+                self.assertNotEqual(armed, ram[flat_start:flat_start + len(armed)])
 
     def test_status_exit_preserves_the_native_automatic_text_bank(self):
         self.assertEqual(
@@ -359,6 +360,18 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
             pyboy.memory[0xFF70] = old_svbk & 7
             pyboy.memory[0xFF93] = 5
             pyboy.memory[0xFF94] = 17
+
+            # Unlike ending credits, this route can actually invoke the
+            # dungeon popup. Its complete private state must be unused at the
+            # moment immediately before the stairs constructor runs.
+            old_svbk = pyboy.memory[0xFF70]
+            pyboy.memory[0xFF70] = stairs_menu.POPUP_STATE_WRAM_BANK
+            floor_scratch = bytes(pyboy.memory[
+                stairs_menu.FLOOR_SAVED_CELLS_ADDRESS:
+                stairs_menu.FLOOR_SAVED_FLAG_END_ADDRESS + 1
+            ])
+            pyboy.memory[0xFF70] = old_svbk & 7
+            self.assertEqual(bytes(len(floor_scratch)), floor_scratch)
 
             pyboy.hook_register(0, 0x1FA0, at_selector, None)
             pyboy.hook_register(*surfaces.DIRECT_RENDERER, at_direct_draw, None)

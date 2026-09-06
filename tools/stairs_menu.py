@@ -39,10 +39,12 @@ RUNTIME_END = 0x428C
 
 # Bank 7's apparent gap after the popup template is native live UI memory; an
 # untouched ROM writes every byte from $D8B4-$D8F7 during ordinary play.  Bank
-# 5 $D9BF-$DBFF is invariant across every retained game-state fixture and the
-# controller stress route.  Reserve a small, disjoint slice of that gap for
-# widened-popup underlays.  The two-byte magic is committed only after all five
-# covered cells (tile and attribute byte for each row) have been saved.
+# 5 $D9BF-$DBFF is clear on gameplay routes that can invoke these popups and on
+# the controller stress route. Ending-credit code reuses non-marker bytes in
+# the upper slice, but that route is mutually exclusive with dungeon popups and
+# never arms the complementary marker. Reserve a small, disjoint slice for
+# widened-popup underlays. The marker is committed only after all five covered
+# cells (tile and attribute byte for each row) have been saved.
 POPUP_STATE_WRAM_BANK = 5
 POPUP_STATE_RESERVED_START = 0xD9C0
 POPUP_STATE_RESERVED_END = 0xDA00

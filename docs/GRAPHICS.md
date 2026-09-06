@@ -7,10 +7,10 @@ visual acceptance pass.
 The first whole-ROM graphical-text inventory is now recorded in
 [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). It traces the clean-boot copyright/composer card,
 main title, all 32 town/dungeon/floor arrival selectors, the dedicated dungeon-HUD font,
-and the save/load wait sign. The main-ending staff roll now has a PyBoy fixture and a complete
-20-card native/English audition, but its storage remains unclassified and the true-ending route
-still needs a save state. The approved English copyright/composer card, arrival cards, and
-wait sign are now installed; the title and ending staff roll remain active work. Automated live
+and the save/load wait sign. The main-ending staff roll now has a PyBoy fixture, a complete
+title-plus-20-card native/English audition, and guarded production insertion; the true-ending route still
+needs a save state. The approved English copyright/composer card, main-ending staff cards,
+arrival cards, and wait sign are now installed; the title remains active work. Automated live
 reproduction of the wait-sign route remains pending.
 
 ## Proven storage model
@@ -39,6 +39,7 @@ Each asset still needs its producer and consumers mapped.
 | Cracked-Bracelet marker | Stock Japanese `(hibi)` composite replaced by compact `(Cr)` at native token `F2 1E` | `item_status.py` |
 | Item-row status gallery | Equip, curse, blessing, plate, cracked, synthesis color, and combined states reproduced on demand | `mesen_item_formatting_gallery.lua` |
 | Copyright/composer card | Approved Inter SemiBold 4.1 `CHUNSOFT` and `Koichi Sugiyama` strips; native copyright rows, map, palettes, fade, scroll, and title handoff preserved | `credit_screen.py` |
+| Main-ending staff roll | The staff-title card (`Shiren the Wanderer GB2` / `Magic Castle of the Desert` / `- Development Staff -`) and all 20 approved Inter SemiBold 4.1 role/name cards replace their exact raw 2bpp source planes; centering scroll values, fades, palettes, timing, and the Japanese `終` mark are preserved. The surrounding map uses tile `$F0`, verified black across the opening and ending planes, so wide headings cannot repeat tile `$80` around the perimeter | `ending_credits.py` |
 | Town/dungeon/floor arrival cards | Approved Inter SemiBold 4.1 location artwork for all 32 selectors, including the decoded `Mystery Dungeon` alias; native Latin digits plus an approved one-pixel-raised `F`, centering, floor formatter, underline, palette inheritance, fade, and transition preserved through a guarded bank-$F8 renderer clone | `arrival_cards.py` |
 | Dungeon HUD font | Approved player-supplied rasters replace decimal `0-9`, the visible `F`, tightly kerned `Lv`, `H`, and `p` labels, and the slash; `A-E`, meter, and reserved cells remain native; the read-only contact sheet accepts and audits both source and installed atlases | `hud_font.py`, `hud_font_audition.py` |
 | Shop-price font audit | All ten native two-tone digits decoded from guarded source `3:$5642-$56E1`, cropped and packed at the observed five-pixel shop-tag advance with captured black/white/gray palette roles; read-only contact sheet writes no ROM changes | `shop_price_font_audition.py` |
@@ -62,7 +63,7 @@ The graphics pass must still complete or visually verify:
 - opening chase/cinematic graphical text;
 - menu icons, category art, status marks, and explanatory diagrams;
 - gift-code/name editor decorative labels outside generated maps;
-- ending cards, credits, and end marks;
+- the untraced true-ending credit route and any route-specific cards it may introduce;
 - postgame/alternate-route graphics;
 - Super Game Boy or DMG assets only if later evidence shows the CGB-only ROM consumes them
   (the cartridge header currently says CGB-only and no SGB support).
