@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "44556b35524b9f31163f7c24512a34f463446254",
+  "workspace_sha1": "77755c4f218351633784bf8aead1fbf71f50f68f",
   "categories": [
     {
       "name": "glossary",
@@ -67,7 +67,7 @@
         "ranking_titles_and_grade_labels": 74,
         "trap_menu_status": 1
       },
-      "overlay_sha1": "edb67cd38cc120c8bcef5cc94af5e8ada4ed9f57"
+      "overlay_sha1": "cb3dff38738814f3c98c8a7f3dfad6f7e51fc2e6"
     },
     {
       "name": "help",

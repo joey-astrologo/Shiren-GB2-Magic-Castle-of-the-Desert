@@ -7366,7 +7366,7 @@
               41
             ],
             "record": "194:$4EF9",
-            "source": "竹"
+            "source": "位"
           },
           {
             "reference": [
@@ -7697,7 +7697,7 @@
             {
               "renderer": "direct",
               "raw": "F250",
-              "staged_text": "竹",
+              "staged_text": "位",
               "start_pen": [
                 16,
                 1
@@ -7802,7 +7802,7 @@
             {
               "renderer": "direct",
               "raw": "F250",
-              "staged_text": "竹",
+              "staged_text": "位",
               "start_pen": [
                 16,
                 1
@@ -7917,7 +7917,7 @@
             {
               "renderer": "direct",
               "raw": "F250",
-              "staged_text": "竹",
+              "staged_text": "位",
               "start_pen": [
                 16,
                 1

@@ -1,6 +1,6 @@
 {
   "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
-  "table_sha1": "a14b00d61d6572aad8b60aa239e30efbd91190ac",
+  "table_sha1": "bf94125355a5f5b6a15712e2ea0e3f1f8672db2c",
   "mapped_prefixed_codes": 281,
   "kanji_codes": 270,
   "symbol_codes": 4,
@@ -51,6 +51,6 @@
     {"record": "193:$75CC", "contains": "〒160"},
     {"record": "192:$4734", "contains": "<cracked>"},
     {"record": "192:$7162", "contains": "<passwordLeft><passwordRight>"},
-    {"record": "194:$4EF9", "contains": "竹"}
+    {"record": "194:$4EF9", "contains": "位"}
   ]
 }

@@ -277,6 +277,6 @@ F248	遺	kanji	font+context
 F24A	跡	kanji	font+context
 F24C	<passwordLeft>	token	font+menu-context
 F24E	<passwordRight>	token	font+menu-context
-F250	竹	kanji	font
+F250	位	kanji	font+ranking-context
 F252	世	kanji	font+context
 F254	界	kanji	font+context

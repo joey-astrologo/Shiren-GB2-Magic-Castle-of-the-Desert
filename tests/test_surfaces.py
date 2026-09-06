@@ -476,6 +476,12 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             translated[(floor_suffix.bank, floor_suffix.address)].text,
         )
 
+        position_suffix = by_reference[(18, 41)]
+        self.assertEqual(
+            ".",
+            translated[(position_suffix.bank, position_suffix.address)].text,
+        )
+
         # Freeze the actual native-pixel pen geometry for the user's example.
         # The amount and suffix are separate draws, as are the floor and F.
         font_rom = english_font.install(self.rom)
@@ -1571,6 +1577,9 @@ class ProductionRankingSuffixTests(unittest.TestCase):
                 {pen: event["text"] for pen, event in top_row.items()},
             )
             self.assertLess(amount_events[0]["start_pen"][0], 90)
+            self.assertEqual(
+                english.encode_source("."), top_row[(16, 1)]["raw"]
+            )
             self.assertEqual(english.encode_source("G"), top_row[(90, 1)]["raw"])
             floor_events = [
                 event

@@ -24,6 +24,9 @@ class KanjiTableTests(unittest.TestCase):
     def test_parental_kanji_is_father_not_mother(self):
         self.assertEqual("父", codec.decode(bytes.fromhex("F13C")))
 
+    def test_ranking_suffix_kanji_is_place_not_bamboo(self):
+        self.assertEqual("位", codec.decode(bytes.fromhex("F250")))
+
     def test_table_hash_counts_and_unique_reverse_mapping(self):
         self.assertEqual(
             FIXTURE["table_sha1"], hashlib.sha1(TABLE_PATH.read_bytes()).hexdigest()
