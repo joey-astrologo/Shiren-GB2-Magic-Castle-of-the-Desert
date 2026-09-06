@@ -22,6 +22,7 @@ behind those workflows.
 | [BIG_MOAI_CODES.md](BIG_MOAI_CODES.md) | Big Moai code list | You want the concise player-facing list of all 100 enterable gift codes |
 | [BIG_MOAI.md](BIG_MOAI.md) | Big Moai promotional spells | You need the four-byte code contract, progression unlock, WISH fixture, or manual Mesen route |
 | [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md) | Wanderer Rescue passwords | You are tracing, localizing, testing, or manually exercising the SOS/Revival/Thank-You handshake |
+| [CLEAR_CAMPAIGN.md](CLEAR_CAMPAIGN.md) | Clear Campaign and True Wanderer certificates | You need the historical mail-in flow, six-symbol display mapping, or PyBoy certificate fixture |
 | [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md) | Unidentified item Name / Fill In | You need the mode-0 screen, canonical-token storage/history contract, or deterministic PyBoy routes |
 | [ITEM_FORMATTING.md](ITEM_FORMATTING.md) | Dynamic item rows | You need status symbols, counts/modifiers, row-width limits, or the two-page gallery |
 | [ENGINEERING_RULES.md](ENGINEERING_RULES.md) | Change gates | Before changing code or claiming a fix complete |

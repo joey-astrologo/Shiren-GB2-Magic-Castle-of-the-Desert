@@ -306,7 +306,9 @@ corroboration but not a substitute for a ROM/VRAM trace:
 `SaveStates/ending-one.state` now provides the main-ending route. Its trace captures 20 stable
 credit cards followed by the Japanese end mark. `tools/ending_credits_audition.py` pairs those
 native cards with English candidates using the approved opening-copyright font treatment. The
-audition is read-only and does not yet classify or patch the underlying storage.
+audition uses an 8-pixel role cap height and a consistent 9-pixel name cap height, preserving a
+subtle hierarchy without the former oversized gap. It is read-only and does not yet classify or
+patch the underlying storage.
 
 The ending family therefore remains partially `live_route_required`. The remaining fixture is a
 disposable save state immediately before:

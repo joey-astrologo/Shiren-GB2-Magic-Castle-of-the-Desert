@@ -54,9 +54,9 @@ FIRST_INDEX = 0
 LAST_INDEX = 200
 COMBAT_LOG_LAST_INDEX = 109
 COMBAT_MODE = 0x10
-NFUU_TALK_FIRST_INDEX = 125
-NFUU_TALK_LAST_INDEX = 133
-NFUU_TALK_LINE_LIMIT = 2
+COMPANION_TALK_FIRST_INDEX = 125
+COMPANION_TALK_LAST_INDEX = 170
+COMPANION_TALK_LINE_LIMIT = 2
 _HEX_SHA1_RE = re.compile(r"[0-9a-f]{40}\Z")
 
 
@@ -326,8 +326,8 @@ def _mode(row):
 
 
 def _presentation_line_overflows(row, measured):
-    """Return Nfuu talk surfaces that exceed the live two-line viewport."""
-    if not NFUU_TALK_FIRST_INDEX <= row.index <= NFUU_TALK_LAST_INDEX:
+    """Return companion-talk surfaces that exceed the live two-line viewport."""
+    if not COMPANION_TALK_FIRST_INDEX <= row.index <= COMPANION_TALK_LAST_INDEX:
         return ()
     counts = {}
     for line in measured.lines:
@@ -335,7 +335,7 @@ def _presentation_line_overflows(row, measured):
     return tuple(
         (surface, count)
         for surface, count in sorted(counts.items())
-        if count > NFUU_TALK_LINE_LIMIT
+        if count > COMPANION_TALK_LINE_LIMIT
     )
 
 
@@ -382,7 +382,7 @@ def validate_draft(font_rom, row, draft, runtime_contract):
         if measured.page_marker_overflows:
             problems.append("third-line page-marker overflow")
         if presentation_overflows:
-            problems.append("Nfuu talk two-line presentation overflow")
+            problems.append("companion talk two-line presentation overflow")
         raise CombatMessageError(
             "%s fails native layout: %s" % (row.record.id, ", ".join(problems))
         )

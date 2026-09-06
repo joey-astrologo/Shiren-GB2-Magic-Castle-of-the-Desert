@@ -485,8 +485,8 @@ class CombatMessageTests(unittest.TestCase):
                     max_renderer_pixels[index], report["max_renderer_pixels"]
                 )
 
-    def test_live_nfuu_talk_records_never_require_a_third_line(self):
-        for index in range(125, 134):
+    def test_live_companion_talk_records_never_require_a_third_line(self):
+        for index in range(125, 171):
             row = self.rows[index]
             draft = self.drafts[row.record.id].draft
             _text, _encoded, measured = combat_messages.validate_draft(
@@ -502,7 +502,7 @@ class CombatMessageTests(unittest.TestCase):
 
     def test_reviewed_mamo_condition_chatter_is_present(self):
         expected = {
-            134: "Mamo:<br>You can also store items<br>by throwing them at me!<page>",
+            134: "Mamo: You can store items<br>by throwing them at me!<page>",
             135: "Mamo: I'm built sturdy,<br>so I'll be fine!<page>",
             136: "Mamo: I'm doing just fine.<page>",
             137: "Mamo: <lookup:19:C5><br>can't break me!<page>",
@@ -525,7 +525,7 @@ class CombatMessageTests(unittest.TestCase):
         reports = {row["index"]: row for row in self.warnings}
         dynamic = {137, 139, 140}
         max_renderer_pixels = {
-            134: 116,
+            134: 121,
             135: 106,
             136: 118,
             137: 123,
@@ -554,9 +554,9 @@ class CombatMessageTests(unittest.TestCase):
             143: "Oryu: With me by your side,<br>there's nothing to fear!<page>",
             144: "Oryu: Let's give it our all!<page>",
             145: "Oryu: <lookup:19:C5>?<br>What a pushover.<page>",
-            146: "Oryu: I'm fine.<br><lookup:19:C5>?<br>No problem.<page>",
+            146: "Oryu: <lookup:19:C5>?<br>I'm fine. No problem.<page>",
             147: "Oryu: Me? I'm still<br>doing just fine.<page>",
-            148: "Oryu: That one's strong!<br><lookup:19:C5>!<br><name>, be careful!<page>",
+            148: "Oryu: <lookup:19:C5>!<br>Strong! Careful, <name>!<page>",
             149: "Oryu: That was rough...<br><lookup:19:C5>...<page>",
             150: "Oryu: I'm really starting<br>to struggle...<page>",
             151: "Oryu: <name>, help me...<page>",
@@ -577,9 +577,9 @@ class CombatMessageTests(unittest.TestCase):
             143: 126,
             144: 124,
             145: 128,
-            146: 101,
+            146: 128,
             147: 88,
-            148: 110,
+            148: 130,
             149: 103,
             150: 116,
             151: 123,
@@ -608,7 +608,7 @@ class CombatMessageTests(unittest.TestCase):
             157: "Pekeji: Really watch out for<br><lookup:19:C5>, Bro!<page>",
             158: "Pekeji: <lookup:19:C5>!<br>Ow, ow, ow...<page>",
             159: "Pekeji: I-I can't breathe...<page>",
-            160: "Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>",
+            160: "Pekeji: Sorry... In the end,<br>I was just dead weight...<page>",
         }
         for index, text in expected.items():
             row = self.rows[index]
@@ -654,10 +654,10 @@ class CombatMessageTests(unittest.TestCase):
             163: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>",
             164: "<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>",
             165: "<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>",
-            166: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>",
-            167: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>",
+            166: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5> TOUGH!!<page>",
+            167: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>! CRACK!<page>",
             168: "<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>",
-            169: "<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>",
+            169: "<lookup:19:C5>: ...BWO...<br>...FFO... G-GI... GIGIGI...<page>",
             170: "<lookup:19:C5>: ......<page>",
         }
         for index, text in expected.items():
@@ -841,17 +841,27 @@ class CombatMessageTests(unittest.TestCase):
                 self.runtime.contract,
             )
 
-    def test_nfuu_talk_validator_rejects_a_third_hard_line(self):
-        with self.assertRaisesRegex(
-            combat_messages.CombatMessageError,
-            "Nfuu talk two-line presentation overflow",
-        ):
-            combat_messages.validate_draft(
-                self.font_rom,
-                self.rows[125],
-                "Nfuu:<br>Second line.<br>Third line.<page>",
-                self.runtime.contract,
-            )
+    def test_companion_talk_validator_rejects_a_third_hard_line(self):
+        problematic = {
+            134: "Mamo:<br>You can also store items<br>by throwing them at me!<page>",
+            146: "Oryu: I'm fine.<br><lookup:19:C5>?<br>No problem.<page>",
+            148: "Oryu: That one's strong!<br><lookup:19:C5>!<br><name>, be careful!<page>",
+            160: "Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>",
+            166: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>",
+            167: "<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>",
+            169: "<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>",
+        }
+        for index, draft in problematic.items():
+            with self.subTest(index=index), self.assertRaisesRegex(
+                combat_messages.CombatMessageError,
+                "companion talk two-line presentation overflow",
+            ):
+                combat_messages.validate_draft(
+                    self.font_rom,
+                    self.rows[index],
+                    draft,
+                    self.runtime.contract,
+                )
 
 
 class LiveLocalizedCombatMessageTests(unittest.TestCase):

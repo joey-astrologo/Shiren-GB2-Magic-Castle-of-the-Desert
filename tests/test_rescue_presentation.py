@@ -181,6 +181,16 @@ class RescuePresentationTests(unittest.TestCase):
                 rescue_presentation.PREMODE_SCREEN_HOOK_ADDRESS,
                 rescue_presentation.PREMODE_SCREEN_ADDRESS,
             ),
+            (
+                rescue_presentation.CLEAR_CAMPAIGN_HOOK_BANK,
+                rescue_presentation.CLEAR_CAMPAIGN_PASSWORD_HOOK_ADDRESS,
+                rescue_presentation.CLEAR_CAMPAIGN_PASSWORD_WRAPPER,
+            ),
+            (
+                rescue_presentation.CLEAR_CAMPAIGN_HOOK_BANK,
+                rescue_presentation.TRUE_WANDERER_PASSWORD_HOOK_ADDRESS,
+                rescue_presentation.TRUE_WANDERER_PASSWORD_WRAPPER,
+            ),
         ):
             at = extract.file_offset(bank, address)
             self.assertEqual(
@@ -250,6 +260,14 @@ class RescuePresentationTests(unittest.TestCase):
             (
                 rescue_presentation.HARDWARE_B_BANK,
                 rescue_presentation.HARDWARE_B_HOOK_ADDRESS,
+            ),
+            (
+                rescue_presentation.CLEAR_CAMPAIGN_HOOK_BANK,
+                rescue_presentation.CLEAR_CAMPAIGN_PASSWORD_HOOK_ADDRESS,
+            ),
+            (
+                rescue_presentation.CLEAR_CAMPAIGN_HOOK_BANK,
+                rescue_presentation.TRUE_WANDERER_PASSWORD_HOOK_ADDRESS,
             ),
             (
                 rescue_presentation.NAVIGATION_BANK,

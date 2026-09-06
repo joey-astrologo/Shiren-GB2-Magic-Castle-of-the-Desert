@@ -176,7 +176,7 @@ id	sections	english
 192:$7268	menus_and_system_labels	Recruit Nfuu?<br><br><hspace:18>Yes<hspace:40>No
 192:$7282	menus_and_system_labels	Discard this item?<br><br><hspace:18>Yes<hspace:40>No
 192:$729B	menus_and_system_labels	<br><br><hspace:18>Yes<hspace:40>No
-192:$72A7	menus_and_system_labels	Oro: Hear the Wanado rules?<br><hspace:18>Yes<hspace:40>No
+192:$72A7	menus_and_system_labels	Oro: Hear the Wanado<br>rules?<br><hspace:18>Yes<hspace:40>No
 192:$72C8	menus_and_system_labels	Oro: Will you enter?<br><br><hspace:18>Yes<hspace:40>No
 192:$72E5	menus_and_system_labels	Koppa: <name>,<br>will you hear Nfuu's request?<br><hspace:18>Yes<hspace:40>No
 192:$730E	menus_and_system_labels	Nfuu: That's all, fu.<br>Hear it again?<br><hspace:18>Yes<hspace:40>No
@@ -195,7 +195,7 @@ id	sections	english
 192:$74C8	menus_and_system_labels	Look at the scrap of paper?<br><br><hspace:18>Yes<hspace:40>No
 192:$74E0	menus_and_system_labels	Try reading it?<br><br><hspace:18>Yes<hspace:40>No
 192:$74F5	menus_and_system_labels	Return to Ilpa Town?<br><br><hspace:18>Yes<hspace:40>No
-192:$750F	menus_and_system_labels	Oro: Hear the rules again?<br><hspace:18>Yes<hspace:40>No
+192:$750F	menus_and_system_labels	Oro: Hear the rules<br>again?<br><hspace:18>Yes<hspace:40>No
 192:$7530	menus_and_system_labels	Give Item
 192:$7535	menus_and_system_labels	Weapons/Shields
 192:$753A	menus_and_system_labels	Bracelets/Grass

@@ -173,6 +173,11 @@ exist only at the renderer/input boundary. Output hooks must restore `$C16D` aft
 input hooks must map each English glyph back to the corresponding native value before any
 native validator or persistence path runs.
 
+Clear Campaign and True Wanderer are separate six-symbol mail-in certificates with no
+in-game input path. Their generators also leave a native value at `$C16D`, but copy six
+display bytes to `$FFB0`. Localize only that display copy; never rewrite the certificate
+value merely because the English font makes an unmapped native byte resemble Latin text.
+
 Graphical editors may handle physical buttons before dispatching the selected on-screen
 node. A localized node overlay is therefore not sufficient coverage for hardware B. When a
 dedicated native handler mutates the field, wrap that narrow operation and redraw through

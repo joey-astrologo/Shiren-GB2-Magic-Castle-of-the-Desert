@@ -313,4 +313,45 @@ RescuePreModeScreen::
     ld hl,NativeScreen
     jp FarDispatch
 
+; Clear Campaign and True Wanderer each generate a six-symbol authentication
+; code through the same native 64-symbol alphabet as rescue passwords.  Their
+; original routines leave the protocol value at PasswordBuffer and a separate
+; display copy at $FFB0.  Map only that display copy so the saved value and the
+; historical mail-in code remain byte-exact.
+ClearCampaignPassword::
+    ld a,$11
+    ld hl,$7E3B
+    call FarDispatch
+    jr LocalizeClearCampaignOutput
+
+TrueWandererPassword::
+    ld a,$11
+    ld hl,$7E01
+    call FarDispatch
+
+LocalizeClearCampaignOutput::
+    ld hl,$FFB0
+    ld b,$06
+.loop
+    ld a,[hl]
+    cp $5E
+    jr c,.low
+    sub $39
+    jr .mapped
+.low
+    sub $30
+.mapped
+    ld e,a
+    ld d,$00
+    push hl
+    ld hl,EnglishAlphabetCodes
+    add hl,de
+    ld a,[hl]
+    pop hl
+    ld [hl],a
+    inc hl
+    dec b
+    jr nz,.loop
+    ret
+
 RescuePresentationCodeEnd::

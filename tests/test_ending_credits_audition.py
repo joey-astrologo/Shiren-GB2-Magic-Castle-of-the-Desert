@@ -55,6 +55,20 @@ class EndingCreditsAuditionTests(unittest.TestCase):
                 self.assertLessEqual(metrics["ink_bounds"][2], 151)
                 self.assertGreaterEqual(metrics["ink_bounds"][0], 8)
 
+    def test_role_and_name_scale_has_a_balanced_consistent_hierarchy(self):
+        self.assertEqual(8, ending_credits_audition.ROLE_CAP_HEIGHT)
+        self.assertEqual(9, ending_credits_audition.NAME_CAP_HEIGHT)
+
+        face = ending_credits_audition.load_font(FONT)
+        for index, credit in enumerate(ending_credits_audition.CREDITS):
+            with self.subTest(index=index, role=credit.role):
+                _card, metrics = ending_credits_audition.render_card(face, credit)
+                self.assertEqual(8, metrics["lines"][0]["cap_height"])
+                self.assertEqual(
+                    {9},
+                    {line["cap_height"] for line in metrics["lines"][1:]},
+                )
+
     def test_sheet_and_cli_write_review_art_without_mutating_inputs(self):
         face = ending_credits_audition.load_font(FONT)
         sheet, report = ending_credits_audition.render_sheet(face, columns=2)

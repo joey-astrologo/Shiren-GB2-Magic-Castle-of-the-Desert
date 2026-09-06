@@ -49,8 +49,11 @@ COVERAGE_THRESHOLDS = (
     credit_screen_mockup.HIGH_COVERAGE,
 )
 
-ROLE_CAP_HEIGHT = 7
-NAME_CAP_HEIGHT = 10
+# Keep the role visibly subordinate without making it look detached from the
+# credited names.  A one-pixel cap-height step also keeps every name at one
+# consistent size; the old 7/10 split forced the longest names down to 9.
+ROLE_CAP_HEIGHT = 8
+NAME_CAP_HEIGHT = 9
 MINIMUM_CAP_HEIGHT = 5
 MAXIMUM_TEXT_WIDTH = 144
 LINE_BAND_HEIGHT = 16

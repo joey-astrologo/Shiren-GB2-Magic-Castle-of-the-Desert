@@ -129,6 +129,12 @@ diary's generated response remain the next
 engineering gate. See
 [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
 
+The postgame Clear Campaign and True Wanderer certificates are a third, display-only code
+family. Their six-symbol credentials were printed for Chunsoft's historical postcard
+campaign and are not entered in the game. They reuse the proven 64-symbol English display
+alphabet while leaving the native `$C16D` value unchanged; only the `$FFB0` certificate
+copy is mapped. See [CLEAR_CAMPAIGN.md](CLEAR_CAMPAIGN.md).
+
 ## Blank Scroll writing
 
 Mode 1 uses the English graphical keyboard and a bank-251 history-filtered full-name matcher.

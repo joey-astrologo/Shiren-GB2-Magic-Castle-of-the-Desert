@@ -133,7 +133,7 @@ id	sections	english
 193:$4C22	combat_and_dungeon_messages	Nfuu: Yelp! That hurt, fu!!<br>That <lookup:19:C5>...!<page>
 193:$4C40	combat_and_dungeon_messages	Nfuu: I'm hurting, fu...<br>Throw me an Herb, fu...<page>
 193:$4C61	combat_and_dungeon_messages	Nfuu: I... can't go on, fu...<page><br>Otogirisou... please... fu...<page>
-193:$4C89	combat_and_dungeon_messages	Mamo:<br>You can also store items<br>by throwing them at me!<page>
+193:$4C89	combat_and_dungeon_messages	Mamo: You can store items<br>by throwing them at me!<page>
 193:$4CAA	combat_and_dungeon_messages	Mamo: I'm built sturdy,<br>so I'll be fine!<page>
 193:$4CCB	combat_and_dungeon_messages	Mamo: I'm doing just fine.<page>
 193:$4CDF	combat_and_dungeon_messages	Mamo: <lookup:19:C5><br>can't break me!<page>
@@ -145,9 +145,9 @@ id	sections	english
 193:$4D8E	combat_and_dungeon_messages	Oryu: With me by your side,<br>there's nothing to fear!<page>
 193:$4DAB	combat_and_dungeon_messages	Oryu: Let's give it our all!<page>
 193:$4DBC	combat_and_dungeon_messages	Oryu: <lookup:19:C5>?<br>What a pushover.<page>
-193:$4DD4	combat_and_dungeon_messages	Oryu: I'm fine.<br><lookup:19:C5>?<br>No problem.<page>
+193:$4DD4	combat_and_dungeon_messages	Oryu: <lookup:19:C5>?<br>I'm fine. No problem.<page>
 193:$4DEC	combat_and_dungeon_messages	Oryu: Me? I'm still<br>doing just fine.<page>
-193:$4E05	combat_and_dungeon_messages	Oryu: That one's strong!<br><lookup:19:C5>!<br><name>, be careful!<page>
+193:$4E05	combat_and_dungeon_messages	Oryu: <lookup:19:C5>!<br>Strong! Careful, <name>!<page>
 193:$4E24	combat_and_dungeon_messages	Oryu: That was rough...<br><lookup:19:C5>...<page>
 193:$4E3D	combat_and_dungeon_messages	Oryu: I'm really starting<br>to struggle...<page>
 193:$4E56	combat_and_dungeon_messages	Oryu: <name>, help me...<page>
@@ -159,16 +159,16 @@ id	sections	english
 193:$4EF8	combat_and_dungeon_messages	Pekeji: Really watch out for<br><lookup:19:C5>, Bro!<page>
 193:$4F15	combat_and_dungeon_messages	Pekeji: <lookup:19:C5>!<br>Ow, ow, ow...<page>
 193:$4F2C	combat_and_dungeon_messages	Pekeji: I-I can't breathe...<page>
-193:$4F3D	combat_and_dungeon_messages	Pekeji: Sorry... In the end,<br>I guess I was just<br>dead weight after all...<page>
+193:$4F3D	combat_and_dungeon_messages	Pekeji: Sorry... In the end,<br>I was just dead weight...<page>
 193:$4F62	combat_and_dungeon_messages	<lookup:19:C5>:<br>BWOFFO!<page>
 193:$4F70	combat_and_dungeon_messages	<lookup:19:C5>:<br>BWOFFO!<page>
 193:$4F7E	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>... WEAK!!<page>
 193:$4F99	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>I AM STURDY. FINE.<page>
 193:$4FB7	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>BWOFFO! I CAN GO ON!!<page>
-193:$4FD5	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>TOUGH!!<page>
-193:$4FF0	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>...<br>BROKE ME!<page>
+193:$4FD5	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5> TOUGH!!<page>
+193:$4FF0	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br><lookup:1B:C5>! CRACK!<page>
 193:$500B	combat_and_dungeon_messages	<lookup:19:C5>: BWOFFO!<br>DANGER! DANGER!<page>
-193:$5028	combat_and_dungeon_messages	<lookup:19:C5>: ...BWO...<br>...FFO...<br>G-GI... GIGIGI...<page>
+193:$5028	combat_and_dungeon_messages	<lookup:19:C5>: ...BWO...<br>...FFO... G-GI... GIGIGI...<page>
 193:$5047	combat_and_dungeon_messages	<lookup:19:C5>: ......<page>
 193:$5055	combat_and_dungeon_messages	<lookup:19:C5><cF3> is watching.
 193:$5067	combat_and_dungeon_messages	The staff's effect<br>didn't make you fall.

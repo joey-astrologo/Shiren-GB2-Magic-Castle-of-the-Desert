@@ -1375,6 +1375,60 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
                 text, translated[(record.bank, record.address)].text
             )
 
+    def test_horizontal_yes_no_labels_preserve_native_cursor_row(self):
+        result = extract.extract(self.rom)
+        translated = translations.load_path(
+            ROOT / "script" / "en", result["records"]
+        )
+        by_reference = {
+            (reference.group, reference.index): record
+            for record in result["records"]
+            for reference in record.references
+        }
+
+        def choice_row(text):
+            prefix = text.split("<hspace:18>", 1)[0]
+            prefix = prefix.rsplit("<box>", 1)[-1]
+            prefix = prefix.rsplit("<page>", 1)[-1]
+            return prefix.count("<br>") + 1
+
+        checked = 0
+        for reference, record in sorted(by_reference.items()):
+            entry = translated.get((record.bank, record.address))
+            if entry is None or "<hspace:18>Yes<hspace:40>No" not in entry.text:
+                continue
+            checked += 1
+            with self.subTest(reference=reference, record=record.id):
+                self.assertEqual(choice_row(record.source), choice_row(entry.text))
+        self.assertEqual(35, checked)
+
+    def test_oro_wanado_choice_prompts_keep_two_question_lines(self):
+        result = extract.extract(self.rom)
+        translated = translations.load_path(
+            ROOT / "script" / "en", result["records"]
+        )
+        by_reference = {
+            (reference.group, reference.index): record
+            for record in result["records"]
+            for reference in record.references
+        }
+        expected = {
+            (7, 177): (
+                "Oro: Hear the Wanado<br>rules?<br>"
+                "<hspace:18>Yes<hspace:40>No"
+            ),
+            (7, 196): (
+                "Oro: Hear the rules<br>again?<br>"
+                "<hspace:18>Yes<hspace:40>No"
+            ),
+        }
+        for reference, text in expected.items():
+            record = by_reference[reference]
+            with self.subTest(reference=reference, record=record.id):
+                self.assertEqual(
+                    text, translated[(record.bank, record.address)].text
+                )
+
 
 class ProductionRankingSuffixTests(unittest.TestCase):
     @classmethod

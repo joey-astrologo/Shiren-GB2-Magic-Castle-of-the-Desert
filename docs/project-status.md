@@ -46,6 +46,10 @@ edited through the ordinary catalog workflow.
   `$C3EF/$C3F0` stage-9 gate; the production helper changes only that pair, and a live
   controller route enters `WISH`, verifies the localized Fortune Grass reward, and reaches
   a fresh post-reward conversation without freezing.
+- Clear Campaign and True Wanderer certificates display their six-symbol historical
+  mail-in credentials through the established `A-Z a-z 0-9 ? !` mapping. A PyBoy replay
+  freezes `QVZ9Ee` for the supplied clear-campaign state at pixel level and proves that the
+  native credential remains unchanged. These credentials have no in-game input route.
 - Full-name English Blank Scroll writing, including all 32 accepted roots, the required
   hyphen, and the original notebook rule. The supplied live confirmation state is retained
   as a no-reset, no-inventory-damage PyBoy regression.

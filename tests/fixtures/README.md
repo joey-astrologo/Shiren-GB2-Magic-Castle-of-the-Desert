@@ -42,6 +42,12 @@ The committed `SaveStates/Mamel.state` is the native reproduction input for the
 nested-combat route. Separate `.srm` sidecars are not required because cartridge RAM is
 embedded in each PyBoy state.
 
+`SaveStates/clear-campaign-password.state` freezes the Adventure → History → Clear
+Campaign certificate. `tests.test_clear_campaign_password` forces a fresh render, requires
+the six native symbols `40 45 49 76 34 4E` to appear as `QVZ9Ee`, and proves the native
+buffer is unchanged. The certificate is a historical mail-in credential, not an in-game
+password-entry route; see [`docs/CLEAR_CAMPAIGN.md`](../../docs/CLEAR_CAMPAIGN.md).
+
 `tests.test_monster_house_labels` also reuses this state without modifying it. The test exhausts
 the opening tutorial, injects a disposable Monstercall Scroll, reads it through the real Items
 menu, and requires the composed `It's a Monster House!` renderer payload. The same regression

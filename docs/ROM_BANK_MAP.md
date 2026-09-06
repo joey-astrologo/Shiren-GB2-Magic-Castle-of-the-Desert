@@ -52,6 +52,7 @@ text growth.
 | 0 | `$1F8C-$1F8E` | `far_text.py`: source selector call | Guarded patch |
 | 0 | `$1FD3-$1FD5` | `far_text.py`: direct selector call | Guarded patch |
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
+| 0 | `$355F-$3566`, `$3573-$357A` | True Wanderer and Clear Campaign six-symbol display-generator calls | `rescue_presentation.py` redirects only the two certificate display copies; native `$C16D` values remain unchanged |
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
 | 3 | `$4842-$5841` | Native one-byte font with style-selected Thin Pixel-7 English slots. Its `$5742-$5841` suffix is also the packed top-HUD atlas: `hud_font.py` replaces decimal tiles `$5742-$5791`, label tiles `$57B2-$57E1` (`E/F`, `L/v`, `H/p`, preserving native `E`), and slash tile `$57E2-$57F1`; `$5792-$57B1` (`A-D`) and `$57F2-$5841` (meter/blanks) stay native and are audited read-only | `english_font.py` owns its English slots; `hud_font.py` exclusively owns `$5742-$5791`, `$57B2-$57E1`, and `$57E2-$57F1` |
@@ -158,7 +159,7 @@ after every ROM writer. They are output metadata, not allocation space.
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
 | 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
-| 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42A1`, graph begins `$4300`, map begins `$4600` |
+| 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, Clear Campaign and True Wanderer display-only wrappers, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42D3`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |

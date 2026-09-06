@@ -163,6 +163,7 @@ python3 -m unittest \
   tests.test_pyboy_state_fixtures \
   tests.test_rescue_password \
   tests.test_rescue_presentation \
+  tests.test_clear_campaign_password \
   tests.test_service_menus \
   tests.test_item_status \
   tests.test_item_formatting \
@@ -282,7 +283,8 @@ python3 tools/ending_credits_audition.py
 The command replays `SaveStates/ending-one.state`, captures all 20 stable Japanese credit cards,
 and writes `build/ending_credits_audition.png` with each native card beside its English candidate.
 The candidates use the exact Inter SemiBold source, four-color palette, and coverage thresholds
-approved for the opening copyright screen. The tests freeze the complete card/timing contract,
+approved for the opening copyright screen. Roles use an 8-pixel cap height and names use a
+consistent 9-pixel cap height. The tests freeze the complete card/timing and scale hierarchy,
 fit every line within the native 144-pixel field, exercise CLI rendering, prove the ROM and state
 remain unchanged, and independently capture all 20 cards plus the preserved Japanese end mark.
 Use `--candidate-only` for a ROM-independent sheet or `--font` to audition another font. This tool
