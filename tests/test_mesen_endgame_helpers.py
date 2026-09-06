@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import extract
-import mesen_state
+import pyboy_state
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -114,12 +114,11 @@ class MesenEndgameLoadoutTests(unittest.TestCase):
         self.assertEqual(bytes.fromhex("C09A5E"), rom[threshold_at:threshold_at + 3])
 
     def test_final_gate_has_valid_equipped_targets_without_inventory_loss(self):
-        path = ROOT / "SaveStates" / "final-gate.mss"
+        path = ROOT / "SaveStates" / "final-gate.state"
         if not path.is_file():
-            self.skipTest("final-gate Mesen state is required")
-        fields = mesen_state.load_fields(path)
-        work = fields["workRam"]
-        high = fields["highRam"]
+            self.skipTest("final-gate PyBoy state is required")
+        work = pyboy_state.work_ram(path)
+        high = pyboy_state.high_ram(path)
         actor = work[0x1000:0x1020]
         self.assertEqual(actor, high[0x10:0x30])
         self.assertEqual(0, high[0x7C])
@@ -144,10 +143,10 @@ class MesenEndgameLoadoutTests(unittest.TestCase):
         self.assertEqual(self.shield, mutated[shield_at:shield_at + 8])
 
     def test_empty_categories_can_use_two_clear_records_without_replacing_mamel_item(self):
-        path = ROOT / "SaveStates" / "Mamel.mss"
+        path = ROOT / "SaveStates" / "Mamel.state"
         if not path.is_file():
-            self.skipTest("Mamel Mesen state is required")
-        work = mesen_state.load_fields(path)["workRam"]
+            self.skipTest("Mamel PyBoy state is required")
+        work = pyboy_state.work_ram(path)
         inventory = work[0x12C1:0x12D5]
         self.assertGreaterEqual(inventory.count(0xFF), 2)
         occupied = {value for value in inventory if value != 0xFF}
@@ -178,29 +177,28 @@ class MesenAdvanceFloorTests(unittest.TestCase):
 
     def test_two_independent_mesen_floors_resolve_one_staircase(self):
         expected = {
-            "Mamel.mss": (5, 18),
-            "final-gate.mss": (24, 22),
+            "Mamel.state": (5, 18),
+            "final-gate.state": (24, 22),
         }
         for name, coordinate in expected.items():
             path = ROOT / "SaveStates" / name
             if not path.is_file():
                 self.skipTest("%s is required" % name)
-            work = mesen_state.load_fields(path)["workRam"]
+            work = pyboy_state.work_ram(path)
             with self.subTest(state=name):
                 self.assertEqual([coordinate], stairs_in(work, self.constants))
 
     def test_each_fixture_has_a_safe_adjacent_setup_cell(self):
         expected = {
-            "Mamel.mss": ((5, 18), (5, 17)),
-            "final-gate.mss": ((24, 22), (23, 22)),
+            "Mamel.state": ((5, 18), (5, 17)),
+            "final-gate.state": ((24, 22), (23, 22)),
         }
         for name, (stair, preferred) in expected.items():
             path = ROOT / "SaveStates" / name
             if not path.is_file():
                 self.skipTest("%s is required" % name)
-            fields = mesen_state.load_fields(path)
-            work = fields["workRam"]
-            high = fields["highRam"]
+            work = pyboy_state.work_ram(path)
+            high = pyboy_state.high_ram(path)
             old = (high[0x13], high[0x14])
             candidates = (
                 (stair[0], stair[1] - 1),

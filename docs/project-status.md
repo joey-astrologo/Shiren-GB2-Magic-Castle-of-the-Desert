@@ -185,13 +185,13 @@ The latest verified production build produces two font variants from the same tr
 and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `9463146f296472364ab18199100d8057bfea87ef`
+  `be81f8bc3512d154ce1fc75b36806447262cf109`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `bbee09d8d39c8caffb17a7d0a1bd7313822b852e`
+  `bb8ebeae750213e551b341bd1f7ec2c0ac62f345`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `e38b010a93401fe203e9b091854706c78c567974`
+  `9b75e6c5903da5c667cbf36c5e3269b0be2958cf`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `0606217b02da8b6ab2073ea04b28a0f095757843`
+  `3f611e70a13295b6cb9b45b3848196f556b20f05`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.
