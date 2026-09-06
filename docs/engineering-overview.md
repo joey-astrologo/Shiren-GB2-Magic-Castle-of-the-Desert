@@ -54,7 +54,9 @@ character limit.
 Widened dynamic menus also retain the renderer's native tile-allocation limits. The reviewed
 Rescue Team, warehouse, Bank Teller, and Blacksmith Info frames have seven visible interior
 cells, but only six sequential dynamic tiles per row. Warehouse and Bank use stable tile
-`$B3` for every seventh cell. Blacksmith Info stages the final `Synthesis` tile in `$B3`,
+`$B3` for every seventh cell and clear `Withdraw`'s aliased `$BA` shadow fragment before it
+can appear in the unselected Quit cursor. Blacksmith Info stages the final `Synthesis` tile
+in `$B3`,
 blanks its `$9C` alias in the unselected Quit cursor cell, and selects the renderer's VRAM
 bank for every stable `$B9` spill. Rescue uses a
 separate template exposing only the two off-screen-row overflow tiles needed by `Password`'s

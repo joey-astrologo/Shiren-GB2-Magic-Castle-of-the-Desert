@@ -383,11 +383,14 @@ the Rescue popup alone displays stale tile graphics under `Quit`.
 The label renderer provides only six sequential dynamic tile IDs per row. A generic seventh
 sequential ID aliases another row's cursor and can produce a duplicate arrow when lower
 options are selected, so the shared warehouse/Bank Teller template uses stable tile `$B3`
-throughout. Rescue has a separate three-entry template: only the two physical spill cells containing the final
-column of `Password` use the already-rendered overflow tiles `$A8/$BA`; every other spill
-cell remains `$B3`. Those aliased lower rows are outside the shorter Rescue frame. A separate
-PyBoy regression compares the final `d` against its literal approved 5x8 raster, while the
-live route visits Cable, Password, and Quit and requires distinct corrected frames.
+throughout. The shadowed `Withdraw` raster still reaches aliased cursor tile `$BA`; an exact
+Warehouse/Bank-only post-render helper copies blank `$B3` over `$BA` in the selected VRAM
+bank before the frame is shown. Rescue has a separate three-entry template: only the two
+physical spill cells containing the final column of `Password` use the already-rendered
+overflow tiles `$A8/$BA`; every other spill cell remains `$B3`. Those aliased lower rows are
+outside the shorter Rescue frame. A separate PyBoy regression compares the final `d` against
+its literal approved 5x8 raster, while the live route visits Cable, Password, and Quit and
+requires distinct corrected frames.
 The completed-rescue Cable / Password / Cancel / Later selector is taller, so `$A8/$BA`
 are live cursor rows there. Its dedicated constructor copies the two `Password` fragments
 to off-frame `$9C/$AE`, clears the source aliases, and uses `$B3` for every other spill.

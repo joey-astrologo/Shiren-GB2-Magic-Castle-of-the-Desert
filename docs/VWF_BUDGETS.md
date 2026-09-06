@@ -62,7 +62,7 @@ The build has explicit contracts for known direct-rendered rows:
 | Status condition body | x=1 to 144 | 143 px | Heading fields have separate contracts |
 | Diary/front-end hub | x=6 to 80 | 74 px | Conditional rows |
 | Start Adventure submenu | x=56 to 144 | 88 px | Up to eight enabled rows |
-| Stairs popup labels | x=8 to 64 | 56 px | Both floor and Status routes use widened geometry |
+| Dungeon stairs popup labels | x=8 to 48 | 40 px | Floor route adds one interior tile; Status keeps its native eight-column frame |
 | Main-menu left slots | caller-specific | 50 px typical | Exact slot domains live in `build.py`/`surfaces.py` |
 | Main-menu location | right-aligned to x=142 | 83 px from x=59 | Uses the native alignment wrapper |
 

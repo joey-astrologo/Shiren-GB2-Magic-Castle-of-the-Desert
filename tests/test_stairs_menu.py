@@ -112,6 +112,29 @@ class StairsMenuInstallerTests(unittest.TestCase):
             cleanup,
         )
 
+    def test_floor_added_column_wraps_both_bg_map_axes(self):
+        save = stairs_menu._floor_save_bytes()
+        restore = stairs_menu._floor_restore_bytes()
+        self.assertIn(
+            bytes.fromhex(
+                "7BE6E06F7BC607E61FB5EAF4D96F7AEAF5D967"
+            ),
+            save,
+        )
+        self.assertIn(
+            bytes.fromhex("FAF4D95FFAF5D957"),
+            restore,
+        )
+        self.assertNotIn(bytes.fromhex("FAF4D9C6075F"), restore)
+        self.assertIn(
+            bytes.fromhex("7CFE9C200426981806FEA02002269C"),
+            save,
+        )
+        self.assertIn(
+            bytes.fromhex("7AFE9C200416981806FEA02002169C"),
+            restore,
+        )
+
     def test_floor_template_has_six_interior_tiles_and_reviewed_edges(self):
         raw = stairs_menu.template_bytes()
         cells = [tuple(raw[offset:offset + 2]) for offset in range(0, len(raw), 2)]
@@ -316,13 +339,20 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
                 )
             )
 
+        def tilemap_address(top_left, row, column):
+            base = 0x9C00 if top_left >= 0x9C00 else 0x9800
+            offset = top_left - base
+            x = offset & 0x1F
+            y = (offset >> 5) & 0x1F
+            return base + (((y + row) & 0x1F) << 5) + ((x + column) & 0x1F)
+
         def tilemap_cells(top_left, rows, columns):
             old_vbk = pyboy.memory[0xFF4F]
             result = []
             for row in range(rows):
                 values = []
                 for column in range(columns):
-                    address = top_left + row * 32 + column
+                    address = tilemap_address(top_left, row, column)
                     pyboy.memory[0xFF4F] = 0
                     tile = pyboy.memory[address]
                     pyboy.memory[0xFF4F] = 1
@@ -513,6 +543,98 @@ class LiveLocalizedStairsMenuTests(unittest.TestCase):
             for _frame in range(240):
                 pyboy.tick()
             self.assertEqual(status_underlay, tilemap_cells(0x9883, 5, 9))
+
+            # The native constructor can place the widened floor frame across
+            # either edge of the 32x32 BG map. Force every edge combination
+            # and prove both controller exits restore the wrapped cells.
+            scroll_override = {"value": None}
+
+            def force_popup_scroll(_context=None):
+                if scroll_override["value"] is None:
+                    return
+                scx, scy, _top_left = scroll_override["value"]
+                pyboy.memory[0xFF43] = scx
+                pyboy.memory[0xFF42] = scy
+
+            restored_columns = []
+            saved_underlays = []
+
+            def at_floor_save_entry(_context=None):
+                if scroll_override["value"] is None:
+                    return
+                _scx, _scy, top_left = scroll_override["value"]
+                saved_underlays.append([
+                    row[7] for row in tilemap_cells(top_left, 5, 8)
+                ])
+
+            def at_floor_restore_return(_context=None):
+                if scroll_override["value"] is None:
+                    return
+                _scx, _scy, top_left = scroll_override["value"]
+                restored_columns.append([
+                    row[7] for row in tilemap_cells(top_left, 5, 8)
+                ])
+
+            pyboy.hook_register(3, 0x6A65, force_popup_scroll, None)
+            pyboy.hook_register(
+                stairs_menu.RUNTIME_BANK,
+                stairs_menu.FLOOR_SAVE_ADDRESS,
+                at_floor_save_entry,
+                None,
+            )
+            restore_return = (
+                stairs_menu.FLOOR_SAVE_ADDRESS
+                + len(stairs_menu._floor_save_bytes())
+                + len(stairs_menu._floor_restore_bytes())
+                - 1
+            )
+            pyboy.hook_register(
+                stairs_menu.RUNTIME_BANK,
+                restore_return,
+                at_floor_restore_return,
+                None,
+            )
+            edge_cases = (
+                ("horizontal", 0xD0, 0x50, 0x999C),
+                ("vertical", 0x30, 0xD0, 0x9B88),
+                ("combined", 0xD0, 0xD0, 0x9B9C),
+            )
+            right_border = [
+                (0x7E, 0xAF),
+                (0x7F, 0xAF),
+                (0x7F, 0xAF),
+                (0x7F, 0xAF),
+                (0x7E, 0xEF),
+            ]
+            for edge, scx, scy, top_left in edge_cases:
+                for exit_route in ("cancel", "stay"):
+                    with self.subTest(edge=edge, exit=exit_route):
+                        pyboy.load_state(io.BytesIO(floor_ready_bytes))
+                        scroll_override["value"] = (scx, scy, top_left)
+                        saved_underlays.clear()
+                        restored_columns.clear()
+                        pyboy.button("down", capture_dialogue.PRESS_FRAMES)
+                        for _frame in range(180):
+                            pyboy.tick()
+                        self.assertTrue(saved_underlays)
+                        underlay = saved_underlays[-1]
+                        frame = tilemap_cells(top_left, 5, 8)
+                        self.assertEqual(right_border, [row[7] for row in frame])
+                        if exit_route == "cancel":
+                            pyboy.button("b", capture_dialogue.PRESS_FRAMES)
+                        else:
+                            pyboy.button("down", capture_dialogue.PRESS_FRAMES)
+                            for _frame in range(100):
+                                pyboy.tick()
+                            pyboy.button("a", capture_dialogue.PRESS_FRAMES)
+                        for _frame in range(240):
+                            pyboy.tick()
+                        self.assertTrue(restored_columns)
+                        self.assertEqual(
+                            underlay,
+                            restored_columns[-1],
+                        )
+            scroll_override["value"] = None
             self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
             pyboy.stop(save=False)

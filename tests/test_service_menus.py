@@ -228,6 +228,41 @@ class ServiceMenuInstallerTests(unittest.TestCase):
         self.assertIn(bytes((0x21, blank & 0xFF, blank >> 8)), restore)
         self.assertIn(bytes((0x11, destination & 0xFF, destination >> 8)), restore)
 
+    def test_standard_menus_clear_withdraws_quit_cursor_alias(self):
+        stage = service_menus._standard_tile_support_bytes()
+        blank = 0x8000 + service_menus.SERVICE_BLANK_TILE * 16
+        destination = (
+            0x8000 + service_menus.STANDARD_CURSOR_ALIAS_TILE * 16
+        )
+        self.assertIn(
+            bytes((
+                0x21, blank & 0xFF, blank >> 8,
+                0x11, destination & 0xFF, destination >> 8,
+                0x01, 0x10, 0x00, 0xCD, 0x6B, 0x0A,
+            )),
+            stage,
+        )
+        self.assertIn(bytes.fromhex("FA03D8E6080F0F0FE04F"), stage)
+
+        copy = service_menus._copy_support_bytes()
+        helper = service_menus.standard_tile_support_address()
+        dispatch = (
+            bytes((
+                0xCD,
+                service_menus.warehouse_detector_address() & 0xFF,
+                service_menus.warehouse_detector_address() >> 8,
+            ))
+            + bytes.fromhex("2805")
+            + bytes((
+                0xCD,
+                service_menus.bank_detector_address() & 0xFF,
+                service_menus.bank_detector_address() >> 8,
+            ))
+            + bytes.fromhex("2003")
+            + bytes((0xCD, helper & 0xFF, helper >> 8))
+        )
+        self.assertIn(dispatch, copy)
+
     def test_native_load_branch_lands_on_the_native_ld_hl(self):
         raw = service_menus._load_support_bytes()
         self.assertEqual(b"\x20", raw[3:4])
@@ -449,14 +484,16 @@ class PyBoyServiceMenuTests(unittest.TestCase):
         except RuntimeError as exc:
             raise unittest.SkipTest(str(exc)) from exc
         cls.temporary = tempfile.TemporaryDirectory()
-        cls.localized = Path(cls.temporary.name) / "service-menus.gbc"
+        destination = Path(cls.temporary.name) / "service-menus.gbc"
         built = subprocess.run(
             [
                 sys.executable,
                 str(ROOT / "tools" / "build.py"),
                 str(cls.source),
                 str(ROOT / "script" / "en"),
-                str(cls.localized),
+                str(destination),
+                "--font-style",
+                "both",
             ],
             cwd=ROOT,
             text=True,
@@ -469,6 +506,11 @@ class PyBoyServiceMenuTests(unittest.TestCase):
                 "could not build service-menu fixture:\n"
                 + built.stdout + built.stderr
             )
+        cls.localized_by_style = {
+            "classic": destination.with_name("service-menus-classic-font.gbc"),
+            "shadowed": destination.with_name("service-menus-shadowed-font.gbc"),
+        }
+        cls.localized = cls.localized_by_style["shadowed"]
 
     @classmethod
     def tearDownClass(cls):
@@ -599,6 +641,55 @@ class PyBoyServiceMenuTests(unittest.TestCase):
         finally:
             pyboy.stop(save=False)
 
+    def _assert_standard_cursor_cells(
+        self, row, rom, initial_actions, *, auto_advance=False
+    ):
+        state = ROOT / row["state"]
+        if not state.is_file():
+            self.skipTest("service-menu state fixture is unavailable")
+        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
+        pyboy = pyboy_route.start(self.PyBoy, rom, state)
+        opened = None
+        observed = []
+        try:
+            for frame in range(1801):
+                if frame in initial_actions:
+                    pyboy_route.press(pyboy, initial_actions[frame])
+                if auto_advance and opened is None and frame % 70 == 0:
+                    pyboy_route.press(pyboy, "a")
+                if opened is not None and frame - opened in (100, 220, 340):
+                    pyboy_route.press(pyboy, "down")
+                pyboy.tick()
+                if opened is None and self._active(pyboy):
+                    opened = frame
+                if opened is None or frame - opened not in (60, 180, 300, 420):
+                    continue
+
+                selected = (60, 180, 300, 420).index(frame - opened)
+                image = pyboy.screen.image.convert("RGB")
+                cursor_rows = ((24, 33), (36, 45), (48, 57), (60, 69))
+                nonblank = []
+                for top, bottom in cursor_rows:
+                    background = image.getpixel((68, (top + bottom) // 2))
+                    nonblank.append(sum(
+                        image.getpixel((x, y)) != background
+                        for x in range(16, 23)
+                        for y in range(top, bottom + 1)
+                    ))
+                self.assertGreater(nonblank[selected], 0)
+                self.assertEqual(
+                    [0, 0, 0],
+                    [value for index, value in enumerate(nonblank)
+                     if index != selected],
+                )
+                observed.append(selected)
+                if len(observed) == 4:
+                    self.assertEqual([0, 1, 2, 3], observed)
+                    return
+            self.fail("standard service menu did not expose all cursor positions")
+        finally:
+            pyboy.stop(save=False)
+
     def test_blacksmith_info_synthesis_matches_approved_pixels(self):
         row = FIXTURE["blacksmith_info"]
         state = ROOT / row["state"]
@@ -720,6 +811,21 @@ class PyBoyServiceMenuTests(unittest.TestCase):
             FIXTURE["warehouse"], {}, len(FIXTURE["warehouse"]["options"]),
             auto_advance=True,
         )
+
+    def test_standard_menu_cursor_cells_are_clean_in_both_font_variants(self):
+        routes = (
+            ("warehouse", {}, True),
+            ("bank", {60: "a", 160: "a"}, False),
+        )
+        for style, rom in self.localized_by_style.items():
+            for route, initial_actions, auto_advance in routes:
+                with self.subTest(style=style, route=route):
+                    self._assert_standard_cursor_cells(
+                        FIXTURE[route],
+                        rom,
+                        initial_actions,
+                        auto_advance=auto_advance,
+                    )
 
     def test_warehouse_floor_items_keep_the_literal_right_border(self):
         row = FIXTURE["warehouse"]

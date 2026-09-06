@@ -29,6 +29,7 @@ behind those workflows.
 | [TRAPS.md](TRAPS.md) | Disproved assumptions | You are about to generalize a control, renderer, menu, state, or storage behavior |
 | [GRAPHICS.md](GRAPHICS.md) | Graphics localization | You are inventorying or replacing graphical Japanese |
 | [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md) | Graphical-text inventory | You need the traced credit, title, arrival-card, palette, or ending-route evidence |
+| [GRAPHICS_ARTIFACT_AUDIT.md](GRAPHICS_ARTIFACT_AUDIT.md) | Graphics artifact bug audit | You are investigating dungeon stray tiles, damaged borders or glyphs, or the line beside `Quit` |
 | [engineering-overview.md](engineering-overview.md) | Architecture overview | You need the concise explanation of how the ROM and localization fit together |
 | [internal-text-audit.md](internal-text-audit.md) | Internal text boundary | You need to understand why 1,016 extracted engine identifiers remain native or how runtime room labels are handled |
 

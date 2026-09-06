@@ -101,6 +101,7 @@ TEXT_RIGHT_EDGE = ENGLISH_INTERIOR_COLUMNS * TILE_PIXELS
 # post-rescue selector cannot: it stages both halves in its two off-frame rows,
 # then blanks the live aliases before the frame is copied.
 SERVICE_BLANK_TILE = 0xB3
+STANDARD_CURSOR_ALIAS_TILE = 0xBA
 BLACKSMITH_BLANK_TILE = 0xB9
 BLACKSMITH_SUFFIX_SOURCE_TILE = 0x9C
 BLACKSMITH_SUFFIX_TILE = 0xB3
@@ -111,7 +112,7 @@ ORIGINAL_INSTALLED_LOAD = stairs_menu._load_helper()
 ORIGINAL_INSTALLED_COPY = stairs_menu._copy_helper()
 ORIGINAL_INSTALLED_EXIT = stairs_menu._status_exit_helper_bytes()
 LOAD_SUPPORT_LENGTH = 51
-COPY_SUPPORT_LENGTH = 77
+COPY_SUPPORT_LENGTH = 90
 
 SERVICE_LOOP_BANK = 6
 SERVICE_LOOP_CALL_ADDRESS = 0x6268
@@ -225,6 +226,16 @@ def rescue_delivery_detector_address():
     return exact_detector_address(RESCUE_DELIVERY_RECORDS)
 
 
+def warehouse_detector_address():
+    """Return the exact Warehouse predicate embedded after the dispatcher."""
+    return exact_detector_address(WAREHOUSE_RECORDS)
+
+
+def bank_detector_address():
+    """Return the exact Bank Teller predicate embedded after the dispatcher."""
+    return exact_detector_address(BANK_RECORDS)
+
+
 def blacksmith_info_detector_address():
     """Return the exact Blacksmith Info predicate after the dispatcher."""
     return exact_detector_address(BLACKSMITH_INFO_RECORDS)
@@ -307,10 +318,28 @@ def _copy_support_bytes():
         + bytes.fromhex("22230520FBC1")
     )
     save = service_save_address()
+    clear_standard_alias = standard_tile_support_address()
     stage_blacksmith = blacksmith_tile_support_address()
     stage_rescue_delivery = rescue_delivery_tile_support_address()
     service_copy = (
         bytes((0xCD, save & 0xFF, save >> 8))
+        + bytes((
+            0xCD,
+            warehouse_detector_address() & 0xFF,
+            warehouse_detector_address() >> 8,
+        ))
+        + bytes.fromhex("2805")
+        + bytes((
+            0xCD,
+            bank_detector_address() & 0xFF,
+            bank_detector_address() >> 8,
+        ))
+        + bytes.fromhex("2003")
+        + bytes((
+            0xCD,
+            clear_standard_alias & 0xFF,
+            clear_standard_alias >> 8,
+        ))
         + bytes((
             0xCD,
             rescue_delivery_detector_address() & 0xFF,
@@ -611,6 +640,36 @@ def _rescue_delivery_tile_support_bytes():
     return bytes(raw)
 
 
+def standard_tile_support_address():
+    return (
+        rescue_delivery_tile_support_address()
+        + len(_rescue_delivery_tile_support_bytes())
+    )
+
+
+def _standard_tile_support_bytes():
+    """Clear Withdraw's shadow spill from the unselected Quit cursor tile."""
+    blank = 0x8000 + SERVICE_BLANK_TILE * 16
+    destination = 0x8000 + STANDARD_CURSOR_ALIAS_TILE * 16
+    return (
+        bytes.fromhex(
+            "F5C5D5E5"      # preserve AF/BC/DE/HL
+            "F04FF5F070F5"  # preserve VBK and SVBK
+            "3E07E070"      # select the bank-7 staged frame
+            "FA03D8E608"    # renderer-selected VRAM bank bit
+            "0F0F0F"        # move bit 3 into bit 0
+            "E04F"          # select the renderer's VRAM bank
+        )
+        + bytes((0x21, blank & 0xFF, blank >> 8))
+        + bytes((0x11, destination & 0xFF, destination >> 8))
+        + bytes.fromhex(
+            "011000CD6B0A"  # overwrite the aliased cursor tile with blank
+            "F1E070F1E04F"  # restore SVBK and VBK
+            "E1D1C1F1C9"    # restore registers
+        )
+    )
+
+
 def _service_loop_trampoline():
     """Run guarded cleanup after the native town BG refresh.
 
@@ -631,8 +690,8 @@ def _service_loop_trampoline():
 
 def service_template_address():
     return (
-        rescue_delivery_tile_support_address()
-        + len(_rescue_delivery_tile_support_bytes())
+        standard_tile_support_address()
+        + len(_standard_tile_support_bytes())
     )
 
 
@@ -767,6 +826,7 @@ def runtime_payload():
         + _restore_support_bytes()
         + _blacksmith_tile_support_bytes()
         + _rescue_delivery_tile_support_bytes()
+        + _standard_tile_support_bytes()
         + service_template_bytes()
         + rescue_template_bytes()
         + rescue_delivery_template_bytes()
@@ -910,7 +970,7 @@ def summary(rom, approved=None):
                 "english_clearance_pixels": english_text_pixels - width,
             })
     return {
-        "schema": "shiren-gb2-service-menus-v2",
+        "schema": "shiren-gb2-service-menus-v3",
         "runtime_bank": RUNTIME_BANK,
         "load_helper": extract.location(RUNTIME_BANK, LOAD_HELPER_ADDRESS),
         "copy_helper": extract.location(RUNTIME_BANK, COPY_HELPER_ADDRESS),
@@ -930,6 +990,9 @@ def summary(rom, approved=None):
         ),
         "rescue_delivery_tile_helper": extract.location(
             RUNTIME_BANK, rescue_delivery_tile_support_address()
+        ),
+        "standard_tile_helper": extract.location(
+            RUNTIME_BANK, standard_tile_support_address()
         ),
         "template": extract.location(RUNTIME_BANK, service_template_address()),
         "rescue_template": extract.location(
@@ -962,6 +1025,9 @@ def summary(rom, approved=None):
         ).hexdigest(),
         "rescue_delivery_tile_support_sha1": sha1(
             _rescue_delivery_tile_support_bytes()
+        ).hexdigest(),
+        "standard_tile_support_sha1": sha1(
+            _standard_tile_support_bytes()
         ).hexdigest(),
         "town_refresh_trampoline_sha1": sha1(
             _service_loop_trampoline()

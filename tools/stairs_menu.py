@@ -30,12 +30,12 @@ CONTROLLER_EXIT_PATCH_ADDRESS = 0x4130
 RUNTIME_BANK = 254
 HELPER_ADDRESS = 0x4000
 FLOOR_SAVE_ADDRESS = 0x405E
-TEMPLATE_ADDRESS = 0x4116
-NATIVE_TEMPLATE_ADDRESS = 0x4170
-STATUS_HELPER_ADDRESS = 0x41FC
-STATUS_TEMPLATE_ADDRESS = 0x4226
-STATUS_EXIT_HELPER_ADDRESS = 0x4280
-RUNTIME_END = 0x428C
+TEMPLATE_ADDRESS = 0x4135
+NATIVE_TEMPLATE_ADDRESS = 0x418F
+STATUS_HELPER_ADDRESS = 0x421B
+STATUS_TEMPLATE_ADDRESS = 0x4245
+STATUS_EXIT_HELPER_ADDRESS = 0x429F
+RUNTIME_END = 0x42AB
 
 # Bank 7's apparent gap after the popup template is native live UI memory; an
 # untouched ROM writes every byte from $D8B4-$D8F7 during ordinary play.  Bank
@@ -82,6 +82,13 @@ STAIRS_LABELS = ("Proceed", "Stay")
 
 class StairsMenuError(ValueError):
     """The stairs-popup code, padding, or generated tilemap is not as expected."""
+
+
+def _patch_relative(raw, branch, target):
+    distance = target - (branch + 2)
+    if not -128 <= distance <= 127:
+        raise StairsMenuError("stairs-menu relative branch leaves its routine")
+    raw[branch + 1] = distance & 0xFF
 
 
 def _offset(address, bank=BANK):
@@ -160,16 +167,21 @@ def _floor_save_bytes():
         0xEA,
         FLOOR_SAVED_FLAG_END_ADDRESS & 0xFF,
         FLOOR_SAVED_FLAG_END_ADDRESS >> 8,
-        0x7B,
+    ))
+    # Preserve the row bits while wrapping x + 7 inside the 32-tile BG row,
+    # then retain the actual added-column address for the restore helper.
+    raw += bytes.fromhex("7BE6E06F7BC607E61FB5")
+    raw += bytes((
         0xEA,
         FLOOR_SAVED_DESTINATION_ADDRESS & 0xFF,
         FLOOR_SAVED_DESTINATION_ADDRESS >> 8,
+        0x6F,
         0x7A,
         0xEA,
         (FLOOR_SAVED_DESTINATION_ADDRESS + 1) & 0xFF,
         (FLOOR_SAVED_DESTINATION_ADDRESS + 1) >> 8,
+        0x67,
     ))
-    raw += bytes.fromhex("626B01070009")
     raw += bytes((
         0x11,
         FLOOR_SAVED_CELLS_ADDRESS & 0xFF,
@@ -177,12 +189,17 @@ def _floor_save_bytes():
         0x0E,
         0x05,
     ))
-    raw += bytes.fromhex(
+    loop = len(raw)
+    raw += bytearray.fromhex(
         "C5E5AFE04F010100CD6B0A"
         "E13E01E04F010100CD6B0A"
-        "7DC61F6F300124C10D20DF"
-        "3E01E04F"
+        "7DC61F6F300124"
+        # Wrap either hardware BG map after advancing to the next row.
+        "7CFE9C200426981806FEA02002269C"
+        "C10D2000"
     )
+    _patch_relative(raw, len(raw) - 2, loop)
+    raw += bytes.fromhex("3E01E04F")
     raw += bytes((
         0x3E,
         FLOOR_SAVED_FLAG_VALUE,
@@ -207,14 +224,14 @@ def _floor_restore_bytes():
         0xFA,
         FLOOR_SAVED_DESTINATION_ADDRESS & 0xFF,
         FLOOR_SAVED_DESTINATION_ADDRESS >> 8,
+        0x5F,
     ))
-    raw += bytes.fromhex("C6075F")
     raw += bytes((
         0xFA,
         (FLOOR_SAVED_DESTINATION_ADDRESS + 1) & 0xFF,
         (FLOOR_SAVED_DESTINATION_ADDRESS + 1) >> 8,
+        0x57,
     ))
-    raw += bytes.fromhex("CE0057")
     raw += bytes((
         0x21,
         FLOOR_SAVED_CELLS_ADDRESS & 0xFF,
@@ -222,12 +239,17 @@ def _floor_restore_bytes():
         0x0E,
         0x05,
     ))
-    raw += bytes.fromhex(
+    loop = len(raw)
+    raw += bytearray.fromhex(
         "C5D5AFE04F010100CD6B0A"
         "D13E01E04F010100CD6B0A"
-        "7BC61F5F300114C10D20DF"
-        "3E01E04FE1D1C1C9"
+        "7BC61F5F300114"
+        # Match the native copier's $9C->$98 and $A0->$9C map wraps.
+        "7AFE9C200416981806FEA02002169C"
+        "C10D2000"
     )
+    _patch_relative(raw, len(raw) - 2, loop)
+    raw += bytes.fromhex("3E01E04FE1D1C1C9")
     return bytes(raw)
 
 
@@ -281,7 +303,7 @@ def floor_runtime_bytes():
         + _floor_restore_bytes()
         + _floor_cleanup_bytes()
     )
-    if len(result) != 184:
+    if len(result) != 215:
         raise StairsMenuError("generated floor cleanup layout changed unexpectedly")
     return result
 
@@ -492,7 +514,7 @@ def summary(rom, approved=None):
             }
         )
     return {
-        "schema": "shiren-gb2-stairs-menu-v7",
+        "schema": "shiren-gb2-stairs-menu-v8",
         "bank": BANK,
         "runtime_bank": RUNTIME_BANK,
         "load_patch": extract.location(BANK, LOAD_PATCH_ADDRESS),

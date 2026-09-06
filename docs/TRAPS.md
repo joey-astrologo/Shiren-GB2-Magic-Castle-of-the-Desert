@@ -482,7 +482,8 @@ line, even though the menu geometry and primary cursor were correct.
 
 **Rule:** trace the renderer's dynamic-tile allocation independently from the visible tilemap
 width; never assign a seventh sequential ID across all rows. Warehouse and Bank use reviewed
-stable tile `$B3` throughout. Blacksmith Info copies the aliased `Synthesis` suffix into
+stable tile `$B3` throughout and clear `Withdraw`'s `$BA` shadow alias before it can appear
+in the unselected Quit cursor. Blacksmith Info copies the aliased `Synthesis` suffix into
 stable `$B3`, clears `$9C` before that aliased tile can appear as an `s` beside Quit, assigns
 every spill the active VRAM bank, uses blank `$B9` for the other spills, and restores `$B3`
 on exit. The shorter three-entry Rescue frame may expose only `$A8/$BA`, the two aliased
