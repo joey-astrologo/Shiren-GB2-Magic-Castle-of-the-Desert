@@ -4,8 +4,14 @@
 
 The website is published on GitHub Pages. To use it offline, open [`index.html`](index.html)
 in a browser. There are no package installs, external scripts/fonts, fetches, ROM files,
-account requirements, or backend services. Keep all five web files together:
-`index.html`, `style.css`, `page.js`, `converter.js`, and `password-data.js`.
+account requirements, or backend services. Keep all six web files together:
+`index.html`, `style.css`, `page.js`, `i18n.js`, `converter.js`, and `password-data.js`.
+
+Use **Language / 言語** at the top of the page to choose **English** or **日本語**.
+The interface starts in Japanese for a Japanese browser locale and English otherwise;
+an explicit choice is remembered when browser storage is available. Switching languages
+preserves the input, conversion direction, and result. Labels, help, mission names,
+validation messages, and clipboard feedback all follow the selected interface language.
 
 The [mission guide](../SPECIAL_RESCUE_MISSIONS.md) explains the three promotional
 requests, original sources, supported passwords, and ROM audit.
@@ -58,7 +64,11 @@ python3 tools/rescue_converter.py --export-web-data docs/rescue-converter/passwo
 
 `converter.js` transcribes packet decoding/checksum validation from the existing
 Python codec. It maps symbols directly instead of regenerating packets, preserving
-otherwise unused padding bits. `page.js` owns the form and mission presets.
+otherwise unused padding bits. Its errors carry stable codes and details so that the page
+can translate them without parsing English messages. `page.js` owns the form, language
+selection, and mission presets; `i18n.js` owns both sets of interface text. Japanese dungeon
+names come from the reviewed mission data. Keep translation keys and `{placeholder}` names
+consistent between languages; update the English HTML fallback when changing visible copy.
 
 With Python 3.9+ and Node.js installed, run:
 

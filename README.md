@@ -89,7 +89,8 @@ ROMs, patches, saves, and generated files under `build/` are ignored by Git.
 **[Open the rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)**
 
 Convert GB2 passwords between Japanese and this English patch, with checksum checks
-and presets for the three original guidebook rescue missions. No ROM or account is needed.
+and presets for the three original guidebook rescue missions. Choose **English** or
+**日本語** for the interface using the language selector. No ROM or account is needed.
 
 The [special rescue mission guide](docs/SPECIAL_RESCUE_MISSIONS.md) explains the codes
 and how to enter them. An [offline browser copy](docs/rescue-converter/index.html) and

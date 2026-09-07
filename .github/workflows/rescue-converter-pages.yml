@@ -13,6 +13,7 @@ on:
       - 'tools/extract.py'
       - 'tests/test_rescue_converter.py'
       - 'tests/rescue_converter.test.cjs'
+      - 'tests/rescue_converter.test.cjs'
       - '.github/workflows/rescue-converter-pages.yml'
   workflow_dispatch:
 

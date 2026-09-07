@@ -48,6 +48,8 @@ edited through the ordinary catalog workflow.
   A source-free Python/browser converter supports both directions and all four GB2 packet
   lengths, with generated alphabet data and Python/JavaScript codec parity checks. The
   converter is published on GitHub Pages, with updates on main deployed after its tests pass.
+  Its English/Japanese interface selector translates labels, instructions, mission names,
+  and validation/clipboard feedback while preserving entered passwords and results.
   The bounded ROM audit found no promotional whitelist on the SOS path or embedded
   representations of the published packets. See
   [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md).

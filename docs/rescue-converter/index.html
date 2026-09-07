@@ -8,27 +8,35 @@
   <link rel="stylesheet" href="style.css">
   <script src="password-data.js" defer></script>
   <script src="converter.js" defer></script>
+  <script src="i18n.js" defer></script>
   <script src="page.js" defer></script>
 </head>
 <body>
   <main>
+    <div class="language-bar">
+      <label for="language">Language / 言語</label>
+      <select id="language" name="language">
+        <option value="en" lang="en">English</option>
+        <option value="ja" lang="ja">日本語</option>
+      </select>
+    </div>
     <header>
-      <p class="eyebrow">SHIREN GB2 · MAGIC CASTLE OF THE DESERT</p>
-      <h1>A rescue crosses<br>every language.</h1>
-      <p class="intro">Bring a Japanese rescue password into the English patch, or translate one back to share with a Japanese player.</p>
+      <p class="eyebrow" data-i18n="eyebrow">SHIREN GB2 · MAGIC CASTLE OF THE DESERT</p>
+      <h1><span data-i18n="headlineStart">A rescue crosses</span><br><span data-i18n="headlineEnd">every language.</span></h1>
+      <p class="intro" data-i18n="intro">Bring a Japanese rescue password into the English patch, or translate one back to share with a Japanese player.</p>
     </header>
 
     <section class="converter" aria-labelledby="converter-title">
       <div class="section-heading">
-        <h2 id="converter-title">Password converter</h2>
-        <span class="local-badge">Works offline</span>
+        <h2 id="converter-title" data-i18n="converterTitle">Password converter</h2>
+        <span class="local-badge" data-i18n="offline">Works offline</span>
       </div>
-      <noscript>This converter needs JavaScript. You can also use the Python tool linked below.</noscript>
+      <noscript><p lang="en">This converter needs JavaScript. You can also use the Python tool linked below.</p><p lang="ja">このツールには JavaScript が必要です。下のリンクから Python 版も利用できます。</p></noscript>
       <form id="converter-form">
-        <label for="direction">Convert from</label>
+        <label for="direction" data-i18n="directionLabel">Convert from</label>
         <select id="direction" name="direction">
-          <option value="english">Japanese → English patch</option>
-          <option value="japanese">English patch → Japanese</option>
+          <option value="english" data-i18n="toEnglish">Japanese → English patch</option>
+          <option value="japanese" data-i18n="toJapanese">English patch → Japanese</option>
         </select>
         <div class="fields">
           <div>
@@ -40,32 +48,32 @@
             <textarea id="result" rows="3" readonly spellcheck="false" aria-describedby="output-help" placeholder="Your converted password"></textarea>
           </div>
         </div>
-        <p id="input-help" class="hint">Spaces and line breaks are ignored. Hiragana, katakana, and full-width text are accepted.</p>
-        <div class="actions"><button class="primary" type="submit">Convert password <span aria-hidden="true">→</span></button><button id="clear" type="button" class="secondary">Clear</button></div>
+        <p id="input-help" class="hint" data-i18n="inputHelp">Spaces and line breaks are ignored. Hiragana, katakana, and full-width text are accepted.</p>
+        <div class="actions"><button class="primary" type="submit"><span data-i18n="convertButton">Convert password</span> <span aria-hidden="true">→</span></button><button id="clear" type="button" class="secondary" data-i18n="clear">Clear</button></div>
         <p id="status" role="status" aria-live="polite"></p>
       </form>
-      <p id="output-help" class="hint">English passwords are <strong>case-sensitive</strong>: keep every capital letter, lowercase letter, digit, <code>?</code>, and <code>!</code> exactly as shown.</p>
+      <p id="output-help" class="hint"><strong data-i18n="caseSensitive">English passwords are case-sensitive.</strong> <span data-i18n="preserveSymbols">Keep every capital letter, lowercase letter, digit, ?, and ! exactly as shown.</span></p>
     </section>
 
     <section class="missions" aria-labelledby="missions-title">
-      <p class="eyebrow">THREE MISSIONS FROM THE ORIGINAL GUIDEBOOK</p>
-      <h2 id="missions-title">Answer the emergency order.</h2>
-      <p>Chunsoft’s 2001 rescue promotion published three SOS passwords. Choose a mission to convert its original code.</p>
+      <p class="eyebrow" data-i18n="missionsEyebrow">THREE MISSIONS FROM THE ORIGINAL GUIDEBOOK</p>
+      <h2 id="missions-title" data-i18n="missionsTitle">Answer the emergency order.</h2>
+      <p data-i18n="missionsIntro">Chunsoft’s 2001 rescue promotion published three SOS passwords. Choose a mission to convert its original code.</p>
       <div id="mission-list" class="mission-list"></div>
-      <p class="hint">Talk to Good at the Rescue Team building in Ilpa, choose <strong>Password</strong>, and enter the code when asked for an SOS password. Your diary must have access to the destination dungeon. The original mail-in prize campaign ended in 2002.</p>
-      <a id="source-link" href="https://mysterydungeonwiki.com/wiki/Meta:Emergency_Order!_The_True_Wanderer_Rescue_Team_Mobilizes!!">Read the campaign history and original scans ↗</a>
+      <p class="hint" data-i18n="missionsHelp">Talk to Good at the Rescue Team building in Ilpa, choose Password, and enter the code when asked for an SOS password. Your diary must have access to the destination dungeon. The original mail-in prize campaign ended in 2002.</p>
+      <a id="source-link" data-i18n="sourceLink" href="https://mysterydungeonwiki.com/wiki/Meta:Emergency_Order!_The_True_Wanderer_Rescue_Team_Mobilizes!!">Read the campaign history and original scans ↗</a>
     </section>
 
     <section class="help" aria-labelledby="help-title">
-      <h2 id="help-title">Which passwords work here?</h2>
-      <p>GB2 Training (9 symbols), Thank-You (12), SOS (13), and Revival (15). The same mapping works with both the classic and shadowed English fonts.</p>
-      <p>A checksum check catches many copying errors. It cannot confirm that a dungeon is unlocked, that a rescue is still available, or that a Revival or Thank-You password belongs to your rescue.</p>
-      <p>Big Moai’s four-character gift codes and the six-character Clear Campaign / True Wanderer certificates are separate systems. Passwords from other Shiren games are not supported.</p>
+      <h2 id="help-title" data-i18n="helpTitle">Which passwords work here?</h2>
+      <p data-i18n="supportedPasswords">GB2 Training (9 symbols), Thank-You (12), SOS (13), and Revival (15).</p>
+      <p data-i18n="checksumHelp">A checksum check catches many copying errors. It cannot confirm that a dungeon is unlocked, that a rescue is still available, or that a Revival or Thank-You password belongs to your rescue.</p>
+      <p data-i18n="unsupportedPasswords">Big Moai’s four-character gift codes and the six-character Clear Campaign / True Wanderer certificates are separate systems. Passwords from other Shiren games are not supported.</p>
     </section>
     <footer>
-      <p>Runs entirely in your browser. No ROM, account, upload, or network connection needed after loading.</p>
-      <p><a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/SPECIAL_RESCUE_MISSIONS.md">Mission guide</a><span aria-hidden="true"> · </span><a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/tools/rescue_converter.py">Python converter</a><span aria-hidden="true"> · </span><a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert">English translation project</a></p>
-      <p>Unofficial fan tool. Not affiliated with Chunsoft or Spike Chunsoft.</p>
+      <p data-i18n="privacy">Runs entirely in your browser. No ROM, account, upload, or network connection needed after loading.</p>
+      <p><a data-i18n="missionGuide" href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/SPECIAL_RESCUE_MISSIONS.md">Mission guide</a><span aria-hidden="true"> · </span><a data-i18n="pythonConverter" href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/tools/rescue_converter.py">Python converter</a><span aria-hidden="true"> · </span><a data-i18n="projectLink" href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert">English translation project</a></p>
+      <p data-i18n="unofficial">Unofficial fan tool. Not affiliated with Chunsoft or Spike Chunsoft.</p>
     </footer>
   </main>
 </body>

@@ -4,8 +4,16 @@
   const data = typeof module === "object" && module.exports
     ? require("./password-data.js") : root.RescuePasswordData;
 
+  // Stable identifiers let the interface translate errors without parsing English prose.
+  function invalid(code, message, details = {}) {
+    const error = new Error(message);
+    error.code = code;
+    error.details = details;
+    return error;
+  }
+
   function normalize(text) {
-    if (typeof text !== "string") throw new Error("Password must be text.");
+    if (typeof text !== "string") throw invalid("text", "Password must be text.");
     return Array.from(text.normalize("NFKC"))
       .filter(character => !data.whitespace.includes(character))
       .map(character => {
@@ -35,7 +43,7 @@
     }
     const checksum = cumulative.reduce((sum, value, index) => sum + value * (2 * (size - index) + 1), 0) & 63;
     if (checksum !== symbols[symbols.length - 1]) {
-      throw new Error("Password checksum does not match. Check each character and its case against the source.");
+      throw invalid("checksum", "Password checksum does not match. Check each character and its case against the source.");
     }
     const payload = cumulative.map((value, index) => (value - (index ? cumulative[index - 1] : 0)) & 255);
     if (size >= 8) {
@@ -47,19 +55,23 @@
   }
 
   function convert(input, to = "english") {
-    if (to !== "english" && to !== "japanese") throw new Error("Output language must be english or japanese.");
+    if (to !== "english" && to !== "japanese") throw invalid("direction", "Output language must be english or japanese.");
     const text = normalize(input);
-    if (!text) throw new Error("Enter a password first.");
+    if (!text) throw invalid("empty", "Enter a password first.");
     const source = to === "english" ? "Japanese" : "English";
     const alphabet = to === "english" ? data.native_alphabet : data.english_alphabet;
     const characters = Array.from(text);
     const values = characters.map((character, index) => {
       const value = alphabet.indexOf(character);
-      if (value < 0) throw new Error(`Character “${character}” at position ${index + 1} is not in the ${source} rescue alphabet. Check the conversion direction.`);
+      if (value < 0) throw invalid("character",
+        `Character “${character}” at position ${index + 1} is not in the ${source} rescue alphabet. Check the conversion direction.`,
+        {character, position: index + 1, source: source.toLowerCase()});
       return value;
     });
     const kind = data.kinds[values.length];
-    if (!kind) throw new Error(`Password has ${values.length} symbols. Expected 9 (Training), 12 (Thank-You), 13 (SOS), or 15 (Revival).`);
+    if (!kind) throw invalid("length",
+      `Password has ${values.length} symbols. Expected 9 (Training), 12 (Thank-You), 13 (SOS), or 15 (Revival).`,
+      {count: values.length});
     const payload = decode(values, data.payload_lengths[kind]);
     return {
       japanese: values.map(value => data.native_alphabet[value]).join(""),
