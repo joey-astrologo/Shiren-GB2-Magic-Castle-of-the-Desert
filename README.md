@@ -80,6 +80,17 @@ using an IPS-compatible patcher. Do not apply both font patches to the same ROM.
 
 ROMs, patches, saves, and generated files under `build/` are ignored by Git.
 
+## Rescue passwords and special missions
+
+The [special rescue mission guide](docs/SPECIAL_RESCUE_MISSIONS.md) has the three
+original guidebook SOS passwords translated for this patch. The
+[browser converter](docs/rescue-converter/index.html) and
+[Python tool](tools/rescue_converter.py) also convert ordinary GB2 passwords between
+Japanese and English, with checksum checks. Neither needs a ROM.
+
+Open the browser page locally, or follow the [GitHub Pages setup](docs/rescue-converter/README.md)
+to host it from this repository.
+
 ## Edit the translation
 
 Generate or refresh the ignored source-rich reference catalogs from your own ROM with:

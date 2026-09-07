@@ -1,5 +1,9 @@
 # Wanderer Rescue password system
 
+For the three published promotional SOS missions and a Japanese ↔ English password
+converter, see [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md). Those missions
+use this ordinary rescue protocol and need no extra ROM patch.
+
 GB2's Wanderer Rescue feature is a three-password, two-diary protocol. This document
 records the original player flow, confirmed native input contracts, localization design,
 manual and automated test strategy, and the reverse-engineering gates that must be passed

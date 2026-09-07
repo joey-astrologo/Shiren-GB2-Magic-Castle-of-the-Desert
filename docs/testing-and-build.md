@@ -106,6 +106,22 @@ python3 tools/rescue_password.py "$ROM" --json
 python3 -m unittest tests.test_rescue_password tests.test_rescue_presentation -v
 ```
 
+The [special mission guide](SPECIAL_RESCUE_MISSIONS.md) includes the three original
+guidebook SOS codes and their English equivalents. Converter checks need only Python
+and Node.js; set `SHIREN_NODE` to an executable path if Node is not on PATH. The native
+mission acceptance and locked-dungeon checks additionally require the matching source
+ROM, PyBoy, and the existing `SaveStates/rescue-entry-menu.state` fixture:
+
+```sh
+python3 -m unittest tests.test_rescue_converter tests.test_special_rescue_missions -v
+python3 tools/audit_special_rescues.py "$ROM" > build/special-rescue-audit.json
+```
+
+The browser page runs directly from `docs/rescue-converter/index.html`. Its
+[maintenance and Pages instructions](rescue-converter/README.md) cover regenerating
+the browser alphabet from the ROM presentation's Python constants and publishing the
+source-free site. These tools do not alter a ROM or a save file.
+
 It freezes the native input limits, protocol code, loaded-diary record dispatchers, stage
 callers, SOS field layout, native actor Max/current-HP paths, a one-HP requester setup
 helper, and a real linked SOS/Revival/Thank-You exchange. The presentation test builds the

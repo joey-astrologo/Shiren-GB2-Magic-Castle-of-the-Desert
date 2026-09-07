@@ -30,6 +30,16 @@ edited through the ordinary catalog workflow.
 
 ## Completed engineering
 
+- The three guidebook promotional rescue missions have verified English SOS codes,
+  advertised dungeon/floor payloads, and native acceptance tests in both font builds.
+  The tests use disposable copies of the existing entry fixture, with separately checked
+  locked and accessible dungeon conditions; complete mission playthroughs are not implied.
+  A source-free Python/browser converter supports both directions and all four GB2 packet
+  lengths, with generated alphabet data and Python/JavaScript codec parity checks. A
+  GitHub Pages workflow is prepared for publication from main. The bounded ROM audit found
+  no promotional whitelist on the SOS path or embedded representations of the published
+  packets. See [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md).
+
 - Stable extraction and semantic organization of 6,695 records and 7,163 logical
   references.
 - Thin Pixel-7 variable-width English font and measured line-layout validation.

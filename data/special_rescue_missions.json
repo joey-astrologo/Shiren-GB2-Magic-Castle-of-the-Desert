@@ -1,0 +1,42 @@
+{
+  "source_url": "https://mysterydungeonwiki.com/wiki/Meta:Emergency_Order!_The_True_Wanderer_Rescue_Team_Mobilizes!!",
+  "source_book": "Shiren the Wanderer GB2: Magic Castle of the Desert Official Perfect Guide, p. 206 (ISBN 978-4757706071)",
+  "missions": [
+    {
+      "id": "beginner",
+      "title": "Beginner directive",
+      "dungeon": "Wanado",
+      "dungeon_japanese": "天下一ワナ道会",
+      "dungeon_id": 8,
+      "floor": 20,
+      "japanese": "ろいほおんりぶづおきぐすも",
+      "english": "qBdEtn!6EGwMi",
+      "payload_hex": "ab32750585914c2205",
+      "source_image_url": "https://mysterydungeonwiki.com/images/3/35/Magic_Castle_GBC_-_Emergency_Order_Beginner_Directive.png"
+    },
+    {
+      "id": "intermediate",
+      "title": "Intermediate directive",
+      "dungeon": "Tonfan's Hole",
+      "dungeon_japanese": "トンファンの穴",
+      "dungeon_id": 7,
+      "floor": 40,
+      "japanese": "まぶどらごわるがふむそどあ",
+      "english": "e!8myroubgO8A",
+      "payload_hex": "82d09790f6887e1f0a",
+      "source_image_url": "https://mysterydungeonwiki.com/images/a/a5/Magic_Castle_GBC_-_Emergency_Order_Intermediate_Directive.png"
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced directive",
+      "dungeon": "Abyssal Depths",
+      "dungeon_japanese": "奈落の果て",
+      "dungeon_id": 6,
+      "floor": 98,
+      "japanese": "あけきこぶでねぬとにしぶげ",
+      "english": "AIGJ!7XWTVL!x",
+      "payload_hex": "f9f29bc5be948e9918",
+      "source_image_url": "https://mysterydungeonwiki.com/images/0/09/Magic_Castle_GBC_-_Emergency_Order_Advanced_Directive.png"
+    }
+  ]
+}
