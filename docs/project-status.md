@@ -1,8 +1,14 @@
 # Project status
 
-The extracted text translation pass is complete. This means every player-facing
-record has explicit English or an intentional empty value; it does not mean the
-localization has completed editing, playtesting, or graphics work.
+The English localization is complete apart from the opening menu/title-screen artwork.
+Every player-facing text record has explicit English or an intentional empty value.
+In-game menus, input screens, and the other localized graphics are implemented; playtesting
+and bug fixes continue.
+
+The [hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
+is available with all three promotional mission presets. The latest release verification
+passed **646 suite tests and 30 additional checks against the exact release ROMs**, with
+zero failures, errors, or skips.
 
 ## Text coverage
 
@@ -40,10 +46,11 @@ edited through the ordinary catalog workflow.
   The tests use disposable copies of the existing entry fixture, with separately checked
   locked and accessible dungeon conditions; complete mission playthroughs are not implied.
   A source-free Python/browser converter supports both directions and all four GB2 packet
-  lengths, with generated alphabet data and Python/JavaScript codec parity checks. A
-  GitHub Pages workflow is prepared for publication from main. The bounded ROM audit found
-  no promotional whitelist on the SOS path or embedded representations of the published
-  packets. See [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md).
+  lengths, with generated alphabet data and Python/JavaScript codec parity checks. The
+  converter is published on GitHub Pages, with updates on main deployed after its tests pass.
+  The bounded ROM audit found no promotional whitelist on the SOS path or embedded
+  representations of the published packets. See
+  [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md).
 
 - Stable extraction and semantic organization of 6,695 records and 7,163 logical
   references.
@@ -177,47 +184,51 @@ edited through the ordinary catalog workflow.
   routes, production builds, native PyBoy state behavior, and RGBDS payload
   equivalence.
 
-## Remaining project work
+## Remaining localization
 
-- Wanderer Rescue protocol engineering: the native packet codec and semantic
-  SOS -> Revival/gift -> Thank-You chain reproduce a real published exchange. The supplied
-  Rankings and SOS states are hash-frozen, and their generated SOS code exactly matches the
-  saved diary record. The live Rankings -> Await Rescue route now renders the frozen
-  `A-Z a-z 0-9 ? !` mapping while restoring `$C16D` to its native bytes and leaving the
-  diary record untouched. Modes 5-8 now use a private English name-layout keyboard with
-  `?` and `!`; each selection is converted back to the corresponding native password byte
-  before validation. The supplied Password-menu state and published SOS vector exercise
-  the full controller route, all thirteen cells, and native-validator return. Hardware-B deletion is also
-  replayed after entering `AB`, with the uppercase rendered remainder and native buffer
-  frozen independently of the on-screen `DEL` path. The patch wraps only the dedicated
-  native delete far call and leaves the common input loop intact. Manual testing also accepted
-  `I3CqdGY6iuyws`, an Ancient Ruins 1F SOS with a distinct diary ID; its exact native
-  bytes, payload, and semantic fields are now fixture-frozen. A requester-side controller
-  replay also accepts 15-character Revival response `SVgaVwAhmUmoM3u`, displays the
-  native success result, and generates linked Thank-You Password `EkWsMPtHHOEE`; the same
-  complete route was manually confirmed in Mesen. Add the
-  physical Rescue Gate/two-diary emulator and SRAM completion fixture and preserve cable
-  compatibility; see
+The opening menu/title screen needs approved English replacement artwork and insertion.
+Its native resources are traced in [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen).
+This is the only known missing localization item.
+
+## Verification coverage and playtesting
+
+The full suite and additional release battery cover the implemented localization. Further
+manual testing and fixture coverage remain useful for:
+
+- The complete Rescue Gate/two-diary exchange, including rescuer dungeon completion,
+  gift delivery, SRAM persistence, and Link Cable. Native protocol compatibility,
+  English SOS entry, and the requester Revival-to-Thank-You route already pass; see
   [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
-- Editorial read-through of the complete scene document for voice, continuity, and
-  natural English.
-- Full-game and rare-route playtesting, including optional allies, endings, postgame,
-  traps, save/resume, rankings, and uncommon dynamic text combinations.
-- Full graphics localization: the clean-boot copyright/composer card and all 32 arrival cards are installed from
-  approved source art and pixel-tested across their live routes and transitions. The save/load wait
-  sign is installed and statically pixel-tested but still needs its live route captured. The
-  main title still needs approved English art and insertion. The main-ending staff title and all 20
-  approved staff cards are installed into their traced source planes and live-pixel tested from the converted PyBoy fixture;
-  only the separate true-ending route still needs a fixture and comparison; see [GRAPHICS.md](GRAPHICS.md).
-- Iterative layout and font polish for issues discovered in playtesting.
-- Release packaging and final clean-ROM reproducibility checks.
+- A dedicated true-ending trace to compare its graphic resource loads with the localized
+  main ending, and a live visual capture of the installed save/load wait sign.
+- Full-game and rare-route playtesting, including optional allies, postgame, traps,
+  uncommon save histories, dynamic text combinations, and editorial/layout polish.
 
-The release gate is intentionally stricter than “all extracted text has English.” See
-[ENGINEERING_RULES.md](ENGINEERING_RULES.md) for the missing route, graphics, and clean-build
-requirements.
+The automated release run did not perform a full playthrough. Its detailed coverage is
+recorded in [testing-and-build.md](testing-and-build.md#release-verification).
 
-The latest verified production build produces two font variants from the same translation
-and engine patches:
+## Verified build and package
+
+The 2026-09-07 build was verified from clean source revision
+`535f884d4a5d3d0697231718a8a26cadacbe4b6f`:
+
+- 646 discovered tests passed in 807.464 seconds, with no failures, errors, or skips.
+- 30 additional tests passed against the exact classic and shadowed ROMs, including
+  cold boot, save/reload in all four font combinations, rescue I/O, ending cards,
+  equipment previews, and combat/Monster Log borders.
+- All ten validation/build commands passed. A fresh local clone reproduced both ROMs
+  and both IPS patches byte for byte. Both cartridge checksums and IPS reconstruction
+  were verified, including patches read back from the final ZIP.
+- `Shiren-GB2-English-2026-09-07.zip` contains both IPS patches, instructions, font
+  licenses, checksums, the verification report, and the offline rescue converter.
+  Its SHA-256 is `0cd9e5b10df9e4905cbf94ae7129adb90c8325ed2b304c9da72ec7631ad94483`.
+
+The package and detailed logs are local generated artifacts under
+`build/release-2026-09-07/`, which is ignored by Git. The package is a public test build;
+the [engineering rules](ENGINEERING_RULES.md#release-claims) describe broader release
+acceptance and playthrough evidence.
+
+Both font variants use the same translation and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
   `4050696a08102b3bf3d25a1f790ec68cedac09b8`

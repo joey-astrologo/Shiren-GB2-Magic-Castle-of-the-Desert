@@ -12,19 +12,22 @@ matching Japanese cartridge dump.
 
 ## Project status
 
-| Area | State | Remaining work |
-|---|---|---|
-| Text | **Translation pass complete** | All 5,667 production records have explicit English or intentional empty values; editorial review and playtesting continue |
-| Menus and input | **Complete for known routes** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and known system screens are localized and fixture-tested |
-| Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
-| Graphics | **In progress** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed; the main title and untraced true-ending route remain |
-| Wanderer Rescue | **Protocol and English I/O tested** | The complete physical Rescue Gate and two-diary route still needs capture |
-| Automated tests | **619 tests passing — 2026-09-07** | Continue adding focused regressions for issues found during playtesting |
+**The opening menu/title-screen artwork is the only remaining localization work.**
+Story and gameplay text, in-game menus, input screens, and the other localized graphics
+are implemented. Both font variants have passed the complete test suite and release checks.
 
-Translation completion is not release completion. Optional events, endings, postgame
-states, uncommon save histories, and rare visual interactions still need manual testing.
-See [project status](docs/project-status.md) for the detailed coverage and current artifact
-hashes.
+| Area | State | Details |
+|---|---|---|
+| Text | **Complete** | All 5,679 production records have explicit English or intentional empty values |
+| In-game menus and input | **Complete** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and system screens are localized and fixture-tested |
+| Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
+| Opening menu/title screen | **Localization remaining** | English replacement artwork and insertion |
+| Other graphics | **Implemented** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed |
+| Wanderer Rescue | **English input/output implemented and tested** | Native password compatibility, promotional mission acceptance, and Japanese ↔ English conversion are verified |
+| Automated verification | **646 suite tests + 30 release-battery checks passed — 2026-09-07** | Zero failures, errors, or skips; both fonts rebuilt identically from a fresh local clone, with IPS application and save/reload verified |
+
+Playtesting and bug fixes continue. See [project status](docs/project-status.md) for
+verification coverage, the remaining manual route checks, and current artifact hashes.
 
 ## Requirements
 
@@ -36,6 +39,7 @@ hashes.
 - [PyBoy](https://github.com/Baekalfen/PyBoy) and Pillow for the complete emulator and
   graphics test suite.
 - RGBDS for optional assembly-source equivalence tests.
+- Node.js for the browser rescue-converter parity test.
 
 Install the Python dependencies with:
 
@@ -82,14 +86,15 @@ ROMs, patches, saves, and generated files under `build/` are ignored by Git.
 
 ## Rescue passwords and special missions
 
-The [special rescue mission guide](docs/SPECIAL_RESCUE_MISSIONS.md) has the three
-original guidebook SOS passwords translated for this patch. The
-[browser converter](docs/rescue-converter/index.html) and
-[Python tool](tools/rescue_converter.py) also convert ordinary GB2 passwords between
-Japanese and English, with checksum checks. Neither needs a ROM.
+**[Open the rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)**
 
-Open the browser page locally, or follow the [GitHub Pages setup](docs/rescue-converter/README.md)
-to host it from this repository.
+Convert GB2 passwords between Japanese and this English patch, with checksum checks
+and presets for the three original guidebook rescue missions. No ROM or account is needed.
+
+The [special rescue mission guide](docs/SPECIAL_RESCUE_MISSIONS.md) explains the codes
+and how to enter them. An [offline browser copy](docs/rescue-converter/index.html) and
+[Python converter](tools/rescue_converter.py) are also included. See the
+[website maintenance guide](docs/rescue-converter/README.md) for GitHub Pages deployment.
 
 ## Edit the translation
 
@@ -141,9 +146,10 @@ Run the complete suite from the repository root:
 python3 -m unittest discover -s tests -v
 ```
 
-ROM-dependent tests skip when the matching source ROM is absent. PyBoy and RGBDS checks
-also skip when their dependencies are unavailable. All automated emulator routes use native
-PyBoy `.state` fixtures; Mesen is not required.
+ROM-dependent tests skip when the matching source ROM is absent. PyBoy, RGBDS, and Node.js
+checks also skip when their dependencies are unavailable. The browser parity test uses
+`node` on PATH or an executable path in `SHIREN_NODE`. All automated emulator routes use
+native PyBoy `.state` fixtures; Mesen is not required.
 
 Useful focused checks:
 

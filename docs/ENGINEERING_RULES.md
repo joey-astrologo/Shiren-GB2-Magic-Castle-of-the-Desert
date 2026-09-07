@@ -50,9 +50,15 @@ dedicated installer verifies its reservation before writing.
 
 ### Release claims
 
-GB2 does not yet have GB1's mature release-battery runner or full route fixture library.
-Until those exist, do not describe a build as release-complete. A release candidate needs,
-at minimum:
+GB2 has a complete discovered test suite and an additional battery run against the exact
+packaged ROMs, including cold boot and cross-font SRAM reload. The additional battery
+currently uses a local release-audit script; GB2 still lacks GB1's mature tracked runner
+and full route fixture library. Current results and coverage are recorded in
+[testing-and-build.md](testing-and-build.md#release-verification).
+
+Describe automated verification, localization status, and manual playthrough coverage
+accurately. Do not describe a build as release-complete without the required evidence.
+A release candidate needs, at minimum:
 
 - a clean production build from the verified ROM;
 - the complete automated suite with no dependency-related skips;

@@ -31,6 +31,9 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 
 ## Results
 
+The opening menu/title-screen artwork is the only known missing localization asset.
+The wait-sign and true-ending capture notes below describe automated verification coverage.
+
 | Priority | Family | Storage | Variants / sharing | Audit state |
 |---:|---|---|---|---|
 | 1 | Post-Chunsoft copyright/credit card | Verbatim foreground plane plus a generated tilemap; surrounding transition resources remain native | Two private 16x2-tile name strips inside `F3:$5D00-$64FF` | English art installed, transition-tested, and visually approved |
@@ -330,10 +333,9 @@ planes. `tools/ending_credits.py` exact-hash guards and replaces the title plus 
 preserving the native fade/scroll/palette engine, frame-6983 Japanese end-mark plane
 `F3:$5600-$58FF`, and all later data.
 
-The ending family therefore remains partially `live_route_required`. The remaining fixture is a
-disposable save state immediately before:
-
-1. the true ending.
+The ending family's audit remains partially `live_route_required` because automated coverage
+needs a disposable save state immediately before the true ending. The main-ending artwork
+is installed; this flag records the missing route comparison.
 
 The true-ending trace must capture its complete roll and establish whether both endings share the
 same credit resources. The Japanese end mark remains unchanged by explicit project policy.
@@ -351,9 +353,12 @@ same credit resources. The Japanese end mark remains unchanged by explicit proje
 
 ## Implementation order
 
-1. Main title: larger full-screen art with two VRAM planes and eight palettes.
-2. True-ending route after its live state is available; compare its selectors and source loads to
-   the now-installed main-ending family before reusing any assets.
+The remaining implementation is the opening menu/title artwork: a full-screen composition
+with two VRAM planes and eight palettes.
+
+For additional verification, capture the true-ending route and compare its selectors and
+source loads with the installed main-ending family. Capture the wait sign's live appearance
+to complement its static pixel checks.
 
 Each implementation remains subject to [GRAPHICS.md](GRAPHICS.md): editable source art,
 licensed font provenance, exact-byte guards, collision checks, static plane/map tests, a live

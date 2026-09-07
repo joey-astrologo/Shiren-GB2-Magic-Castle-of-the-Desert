@@ -4,6 +4,8 @@ For the three published promotional SOS missions and a Japanese ↔ English pass
 converter, see [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md). Those missions
 use this ordinary rescue protocol and need no extra ROM patch.
 
+**[Open the hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/).**
+
 GB2's Wanderer Rescue feature is a three-password, two-diary protocol. This document
 records the original player flow, confirmed native input contracts, localization design,
 manual and automated test strategy, and the reverse-engineering gates that must be passed
@@ -16,8 +18,11 @@ implementation. The supplied Rankings and SOS captures prove one live requester 
 and the production ROM replays that route with an English code while restoring the native
 buffer and preserving the diary record byte-for-byte. The supplied Password-menu capture
 also enters a published English SOS code through the localized keyboard and proves its
-native bytes before the original validator runs. The complete live two-diary emulator
-fixture remains to be implemented.
+native bytes before the original validator runs. A requester-side route also enters a
+15-character Revival Password, reaches the native success result, and generates its
+linked 12-character Thank-You Password. These routes passed against both exact release
+ROMs in the [release battery](testing-and-build.md#release-verification). The complete
+live two-diary emulator fixture remains a coverage gap.
 
 ## Original GB2 flow and availability
 
@@ -288,14 +293,15 @@ retry behavior, and compatibility tooling.
 
 - Freeze the clean-ROM mode-length dispatcher and long-code length table.
 - Capture each live rescue screen's mode, buffer, maximum, character table, navigation
-  type, renderer, confirmation routine, and error return. Mode 8 is frozen; modes 5-7
-  still need stage-specific live captures even though the shared overlay covers them.
+  type, renderer, confirmation routine, and error return. Modes 8 (SOS) and 7 (Revival)
+  have controller fixtures; modes 5-6 still need stage-specific input captures even
+  though the shared overlay covers them.
 - The native 64-symbol domain, frozen English mapping, packet lengths, codec, checksum, mode dispatcher, diary
   records, stage callers, and three public vectors are frozen in
   `tests/fixtures/rescue_password.json`.
 - The SOS builder, three rescue-stage relationships, loaded-diary records, and optional
   gift boundary are frozen. Complete the Training builder trace and live SRAM locations.
-- Capture modes 5-7 live and prove their stage-specific callers use the shared alphabet.
+- Capture modes 5-6 live and prove their stage-specific callers use the shared alphabet.
 - Add semantic malformed-field fixtures after the stage validators are reproduced.
 
 ### Encoder/decoder behavior
@@ -502,9 +508,11 @@ not permission to toggle an inferred unlock flag.
 4. ~~Trace the SOS/Revival/Thank-You builders, loaded-diary records, and semantic
    relationship.~~ Complete; live SRAM persistence remains part of step 5.
 5. Capture the two-SRAM native handshake. Requester one-HP setup, Rankings, and SOS are
-   complete; rescuer, Revival, resumed-floor, and Thank-You states remain.
+   complete, and the requester Revival-entry-to-Thank-You-output route is captured.
+   The continuous rescuer dungeon/reward route, resumed-floor persistence, and rescuer
+   Thank-You redemption still need linked fixtures.
 6. ~~Add the presentation mapping and localized input/output screens.~~ Complete for the
-   shared generated-code path and input modes 5-8; stage-specific modes 5-7 captures remain
+   shared generated-code path and input modes 5-8; stage-specific modes 5-6 input captures remain
    part of the handshake fixture.
 7. Replay the complete handshake in the English build, including gifts and persistence.
 8. Update this document, [ROM_BANK_MAP.md](ROM_BANK_MAP.md), the root README, and project

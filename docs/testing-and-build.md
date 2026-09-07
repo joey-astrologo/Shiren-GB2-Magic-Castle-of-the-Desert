@@ -4,7 +4,8 @@ The prescriptive change gates are in [ENGINEERING_RULES.md](ENGINEERING_RULES.md
 tracked fixture conventions are documented in
 [`tests/fixtures/README.md`](../tests/fixtures/README.md).
 
-All tools expect a user-supplied matching Japanese ROM. A convenient shell variable is:
+ROM build and audit tools expect a user-supplied matching Japanese ROM. The rescue-password
+converter and some source/graphics checks also run without one. A convenient shell variable is:
 
 ```sh
 ROM="Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -117,9 +118,10 @@ python3 -m unittest tests.test_rescue_converter tests.test_special_rescue_missio
 python3 tools/audit_special_rescues.py "$ROM" > build/special-rescue-audit.json
 ```
 
-The browser page runs directly from `docs/rescue-converter/index.html`. Its
+The [hosted browser converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
+is available online and also runs directly from `docs/rescue-converter/index.html`. Its
 [maintenance and Pages instructions](rescue-converter/README.md) cover regenerating
-the browser alphabet from the ROM presentation's Python constants and publishing the
+the browser alphabet from the ROM presentation's Python constants and deploying the
 source-free site. These tools do not alter a ROM or a save file.
 
 It freezes the native input limits, protocol code, loaded-diary record dispatchers, stage
@@ -189,11 +191,51 @@ The production builder reruns required safety checks before writing each output.
 relocated through far pointers, so storage growth does not justify shortening visible
 English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifacts.
 
+## Release verification
+
+The 2026-09-07 public test build at source revision
+`535f884d4a5d3d0697231718a8a26cadacbe4b6f` passed the following checks:
+
+| Check | Result |
+|---|---|
+| Complete unittest discovery | 646 tests passed in 807.464 seconds; no failures, errors, or skips |
+| Additional battery against the exact release ROMs | 30 tests passed in 24.891 seconds; no failures, errors, or skips |
+| Validators and production build | All ten commands passed |
+| Fresh local clone | Both fonts' ROMs and IPS patches reproduced byte for byte from tracked inputs plus the verified source ROM |
+| Patch and cartridge integrity | IPS application reproduced both tested ROMs; header/global checksums passed |
+| Final ZIP | Member CRCs and SHA-256 hashes checked; both archived IPS patches reapplied successfully |
+
+The run used Python 3.9.6, PyBoy 2.7.0, Pillow 11.3.0, RGBDS 1.0.2, and Node 24.18.0
+through the installed VS Code Electron runtime. The complete suite used standard unittest
+discovery through a JSON-reporting wrapper.
+
+The extra battery reused selected semantic regressions with the exact release ROMs. It
+covered cold boot with empty SRAM; all 30 archived states loading and advancing in each
+font; native suspend and fresh SRAM reload in all four classic/shadowed combinations;
+six-character diary names; unidentified-item Select/B/Start behavior; SOS and requester
+Revival-to-Thank-You routes; Clear Campaign certificate pixels; main-ending staff cards;
+equipment digit/redraw matrices; and combat/Monster Log borders. The state-load checks are
+smoke coverage. The extra battery overlaps suite coverage and is not 30 new regressions.
+
+The battery runner, JSON reports, logs, ROMs, and package are local generated artifacts in
+`build/release-2026-09-07/`; they are not tracked test infrastructure. The package's current
+identity is recorded in [project-status.md](project-status.md#verified-build-and-package).
+Future builds need their own run and artifact hashes.
+
+This run did not perform a full playthrough or physical-hardware testing. Remaining route
+coverage includes the complete Rescue Gate/two-diary/cable exchange, a dedicated true-ending
+trace, and live visual verification of the installed wait sign. The opening menu/title
+screen is the only known remaining localization item.
+
 ## Tests
 
 ```sh
-python3 -m unittest discover -s tests
+python3 -m unittest discover -s tests -v
 ```
+
+For a full run without dependency skips, provide the matching ROM, PyBoy, Pillow, RGBDS,
+and Node.js. The converter parity test uses `node` on PATH or the executable named by
+`SHIREN_NODE`. Mesen is not required; emulator tests load the committed native PyBoy states.
 
 For a focused graphical-input check:
 

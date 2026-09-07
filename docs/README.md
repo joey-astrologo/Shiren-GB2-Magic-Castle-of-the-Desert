@@ -5,6 +5,13 @@ Subject-organized reference for the Shiren GB2 localization. The repository
 with [`script/README.md`](../script/README.md). The files here explain the measured rules
 behind those workflows.
 
+The opening menu/title-screen artwork is the only remaining localization work.
+Current build verification and playtesting coverage are recorded in
+[project status](project-status.md).
+
+**[Open the hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)**
+for Japanese ↔ English conversion and the three promotional mission presets.
+
 | Document | Subject | Read it when |
 |---|---|---|
 | [project-status.md](project-status.md) | Current status | You need authoritative coverage, completed engineering, or remaining work |
@@ -23,6 +30,7 @@ behind those workflows.
 | [BIG_MOAI.md](BIG_MOAI.md) | Big Moai promotional spells | You need the four-byte code contract, progression unlock, WISH fixture, or manual Mesen route |
 | [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md) | Wanderer Rescue passwords | You are tracing, localizing, testing, or manually exercising the SOS/Revival/Thank-You handshake |
 | [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md) | Promotional rescue missions and password conversion | You want the three guidebook SOS passwords in English, the Japanese ↔ English converter, or the ROM audit for additional missions |
+| [rescue-converter/README.md](rescue-converter/README.md) | Converter website maintenance | You are updating the hosted converter, using it offline, or configuring Pages for a fork |
 | [CLEAR_CAMPAIGN.md](CLEAR_CAMPAIGN.md) | Clear Campaign and True Wanderer certificates | You need the historical mail-in flow, six-symbol display mapping, or PyBoy certificate fixture |
 | [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md) | Unidentified item Name / Fill In | You need the mode-0 screen, canonical-token storage/history contract, or deterministic PyBoy routes |
 | [ITEM_FORMATTING.md](ITEM_FORMATTING.md) | Dynamic item rows | You need status symbols, counts/modifiers, row-width limits, or the two-page gallery |

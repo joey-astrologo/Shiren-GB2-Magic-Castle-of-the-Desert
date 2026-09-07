@@ -414,6 +414,11 @@ Repair implemented:
 
 ## Verification performed
 
+The latest full-suite and packaged-ROM results are recorded in
+[release verification](testing-and-build.md#release-verification). All repaired routes below
+are included in that passing suite; combat and Monster Log borders and equipment previews
+also passed against the exact release ROMs in both fonts.
+
 - Built fresh classic and shadowed ROMs from the matching Japanese source.
 - Disassembled the Japanese and fresh shadowed ROMs with `mgbdis --print-hex`.
 - Byte-compared the four native rendering spans listed above.
@@ -422,7 +427,7 @@ Repair implemented:
   family.
 - Ran 137 focused font, layout, surface, input-border, stairs, service-menu, and page-marker
   tests successfully.
-- Ran full test discovery after the repairs and fixture refreshes: 611 tests, all passing.
+- Ran full test discovery after the repairs and fixture refreshes, with all tests passing.
 - Ran live edge probes for both stairs axes and exact classic/shadowed/Japanese service-menu
   pixel comparisons.
 
@@ -438,12 +443,10 @@ Follow-up repair verification:
   40-pixel visible label raster and reports only the two reviewed shadow-only overflows.
 - The stale script-extraction output hashes caused by the earlier `F250` kanji correction
   were refreshed so that failure no longer obscures graphics-suite results.
-- Full discovery exercised 617 tests after the GFX-03 repair, all passing.
-- Full discovery after the combat compositor repair passes 633 tests with no skips,
-  including both real grass Drink routes and the existing Monster Log border regression.
-- Full discovery after the equipment-preview position repair passes 637 tests with no
-  skips, including the supplied converted state, both equipment categories, maximum-width
-  values, panel pixels, cursor cleanup, and close/reopen redraw.
+- The combat compositor regressions cover both real grass Drink routes and the existing
+  Monster Log border fixture.
+- The equipment-preview regressions cover the supplied converted state, both equipment
+  categories, maximum-width values, panel pixels, cursor cleanup, and close/reopen redraw.
 
 ## Remaining follow-up order
 

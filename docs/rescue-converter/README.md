@@ -1,18 +1,22 @@
 # Rescue password converter website
 
-Open [`index.html`](index.html) in a browser. The page works from a local folder as
-well as GitHub Pages: there are no package installs, external scripts/fonts, fetches,
-ROM files, account requirements, or backend services. Keep all five web files together:
+**[Open the hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/).**
+
+The website is published on GitHub Pages. To use it offline, open [`index.html`](index.html)
+in a browser. There are no package installs, external scripts/fonts, fetches, ROM files,
+account requirements, or backend services. Keep all five web files together:
 `index.html`, `style.css`, `page.js`, `converter.js`, and `password-data.js`.
 
 The [mission guide](../SPECIAL_RESCUE_MISSIONS.md) explains the three promotional
 requests, original sources, supported passwords, and ROM audit.
 
-## Host it on GitHub Pages
+## GitHub Pages deployment
 
 The repository includes
 [`.github/workflows/rescue-converter-pages.yml`](../../.github/workflows/rescue-converter-pages.yml).
-It tests the source-free converter and uploads only this website folder.
+It tests the source-free converter and uploads only this website folder. Changes to the
+converter on main deploy automatically after its tests pass. The following setup steps
+are for a fork or for configuring Pages again; the main project's setup is complete.
 
 1. Commit/merge these files to the repository's **main** branch and **push them to
    GitHub**. The workflow must exist on GitHub's main branch before it can be run.
@@ -37,15 +41,8 @@ If GitHub prompts you to enable Actions for the repository, do that first. The m
 run button is on the individual workflow's page, not the general Actions overview.
 GitHub documents these controls in [Manually running a workflow](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
 
-Later changes to the converter on main deploy automatically after its tests pass.
-
-Once that deployment succeeds, the website is served at:
-
-**https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/**
-
-This is the expected deployment address, not a claim that the site has already been
-published. The workflow intentionally does not deploy feature branches. For forks,
-use the Pages URL shown by the workflow and update the footer's repository links.
+The workflow deploys main. For forks, use the Pages URL shown by the workflow and
+update the footer's repository links.
 
 See GitHub's [custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 

@@ -40,10 +40,11 @@ Adventure History. [Campaign history and original instructions][campaign].
 
 ## Convert other Japanese rescue passwords
 
-The [browser converter](rescue-converter/index.html) includes all three mission presets,
-copyable output, reverse conversion, and checksum checking. Open that file locally with
-the other files in its folder beside it; no server or ROM is needed. For GitHub hosting,
-see the [Pages setup](rescue-converter/README.md).
+The [hosted browser converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
+includes all three mission presets, copyable output, reverse conversion, and checksum
+checking. The [offline copy](rescue-converter/index.html) also works locally with the other
+files in its folder beside it; no server or ROM is needed. For website maintenance,
+see the [Pages deployment guide](rescue-converter/README.md).
 
 The command-line converter also needs no ROM or third-party Python packages:
 

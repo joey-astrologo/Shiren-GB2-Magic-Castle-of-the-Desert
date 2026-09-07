@@ -1,17 +1,17 @@
 # Graphics localization
 
-Full graphics localization is a project requirement and remains active work. This document
-separates what is already engineered from what still needs an inventory, translation, and
-visual acceptance pass.
+The opening menu/title-screen artwork is the only known remaining graphics localization
+item. This document records the installed graphics, the title-art workflow, and automated
+visual coverage.
 
 The first whole-ROM graphical-text inventory is now recorded in
 [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). It traces the clean-boot copyright/composer card,
 main title, all 32 town/dungeon/floor arrival selectors, the dedicated dungeon-HUD font,
-and the save/load wait sign. The main-ending staff roll now has a PyBoy fixture, a complete
-title-plus-20-card native/English audition, and guarded production insertion; the true-ending route still
-needs a save state. The approved English copyright/composer card, main-ending staff cards,
-arrival cards, and wait sign are now installed; the title remains active work. Automated live
-reproduction of the wait-sign route remains pending.
+and the save/load wait sign. The main-ending staff roll has a PyBoy fixture, a complete
+title-plus-20-card native/English audition, and guarded production insertion. The approved
+English copyright/composer card, main-ending staff cards, arrival cards, HUD, and wait sign
+are installed. Additional automated visual coverage needs a true-ending save state and a
+live capture of the wait-sign route.
 
 ## Proven storage model
 
@@ -22,7 +22,7 @@ graphical Japanese.
 
 This does not mean every visible screen is one stored bitmap. A route may combine raw tile
 planes, a tilemap, attributes, palette selection, numbers, and text drawn by the native VWF.
-Each asset still needs its producer and consumers mapped.
+Map each asset's producer and consumers before changing its graphics.
 
 ## Already localized or engineered
 
@@ -53,24 +53,26 @@ bottom border. `tests.test_graphical_input_borders` checks that invariant for mo
 while the Rankings-note PyBoy route checks the literal gray and black edge pixels without a
 whole-frame hash.
 
-These are not evidence that title art, story cards, ending art, or every graphical menu label
-is localized.
+Environmental Japanese shop signs and the main-ending `終` mark are intentionally
+preserved under the [graphics scope decisions](GRAPHICS_AUDIT.md#scope-decisions).
 
-## Remaining inventory and implementation
+## Remaining localization
 
-The graphics pass must still complete or visually verify:
+Create, approve, and insert English artwork for the opening menu/title screen. The native
+logo planes, map, palettes, and animation are already traced in
+[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen).
 
-- replacement art and visual acceptance for the now-traced title logo;
-- opening chase/cinematic graphical text;
-- menu icons, category art, status marks, and explanatory diagrams;
-- gift-code/name editor decorative labels outside generated maps;
-- the untraced true-ending credit route and any route-specific cards it may introduce;
-- postgame/alternate-route graphics;
-- Super Game Boy or DMG assets only if later evidence shows the CGB-only ROM consumes them
-  (the cartridge header currently says CGB-only and no SGB support).
+## Visual verification coverage
 
-For each candidate, record the screen/route, ROM range, tile dimensions, tilemap/attribute
-source, palette, sharing/aliasing, and whether the asset is stored or composed.
+The separate true-ending route needs a captured trace to compare its resource loads with
+the installed main-ending artwork. The English save/load wait sign has static pixel
+coverage and still needs an automated live visual checkpoint. Continue watching opening
+cinematics and rare/postgame transitions during playtesting; the earlier candidate list
+did not establish additional missing translation assets.
+
+For any newly reported graphical text or defect, record the screen/route, ROM range, tile
+dimensions, tilemap/attribute source, palette, sharing/aliasing, and whether the asset is
+stored or composed.
 
 ## Asset workflow
 
@@ -114,5 +116,5 @@ A graphical family is complete only when:
 - the result is visually approved at integer scale;
 - the project status and bank map are updated.
 
-Until that inventory is complete, project status must continue to say that graphics
-localization remains unfinished.
+Track the opening menu/title screen as the remaining localization item and document
+uncaptured routes as verification gaps in [project-status.md](project-status.md).
