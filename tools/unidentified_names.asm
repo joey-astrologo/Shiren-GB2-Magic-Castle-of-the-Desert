@@ -19,6 +19,7 @@ DEF Name6ScreenClean     EQU $4232 ; bank $FD
 DEF BlankScrollInput     EQU $4020 ; bank $FB; delegates non-mode-1 to name6
 DEF BlankScrollConfirm   EQU $4080 ; bank $FB; delegates non-mode-1 to native
 DEF NativeInputAction    EQU $5215 ; bank $12
+DEF NativeStartRecall    EQU $5073 ; bank $12
 DEF NativeConfirm        EQU $50F7 ; bank $12
 DEF NativeScreenRefresh  EQU $4D51 ; bank $04
 DEF NativeInputPlacement EQU $4D6F ; bank $04
@@ -29,7 +30,8 @@ DEF RenderRecord         EQU $1FA0 ; fixed bank
 DEF rSVBK                EQU $FF70
 
 DEF CanonicalPrefix      EQU $FE
-DEF CanonicalMarker      EQU $FF
+DEF CanonicalMarker      EQU $FE
+DEF PreviousCanonicalMarker EQU $FF
 DEF LegacyCanonicalPrefix EQU $FF
 DEF LegacyCanonicalMarker EQU $FE
 DEF FreeNameMaximum      EQU 7
@@ -94,6 +96,8 @@ Mode0Input::
     ld a,$12
     ld hl,NativeInputAction
     call FarDispatch
+.expandRecall
+    push bc
     ld a,[wInputMatch]
     inc a
     jr z,.noCandidate
@@ -134,6 +138,7 @@ Mode0Input::
     ; cycling its history. Reinstall this mode's navigation graph before
     ; control returns to the keyboard.
     call UploadMode0Navigation
+    pop bc
     ret
 .delete
     ; DEL on a canonical preview means "return to free naming", not "edit a
@@ -195,8 +200,11 @@ ASSERT @ <= $4100
     ds $4100-@
 
 ; Overlay the shared confirmation hook. Arbitrary mode-0 names retain the
-; native seven-byte slot. A successful Fill In result has wInputMatch set to
-; its canonical root; replace the stored prefix with a compact root token.
+; native seven-byte slot. A Fill In result has wInputMatch set to its canonical
+; root, so give NativeConfirm a compact token instead of its 14-cell preview.
+; NativeConfirm then writes the same token to both the WRAM slot and its SRAM
+; journal entry. An internal $FF marker cannot be used here: the save journal
+; is variable-length and would persist only the leading $FE byte.
 Mode0Confirm::
     ld a,[wInputMode]
     and a
@@ -205,37 +213,12 @@ Mode0Confirm::
     ld hl,BlankScrollConfirm
     jp FarDispatch
 .mode0
-    ; A recalled root can occupy 14 presentation cells, but NativeConfirm
-    ; still writes an eight-byte custom-name slot. Terminate the temporary
-    ; field at the native boundary after wInputMatch has retained the root.
-    call RestoreNativeTail
-    ld a,$12
-    ld hl,NativeConfirm
-    call FarDispatch
-    ld a,c
-    cp $F8
-    ret nz
     ld a,[wInputMatch]
     inc a
-    ret z
+    jr z,.freeName
     dec a
-    push bc
     ld b,a
-    ; NativeConfirm returns DE immediately after the eight-byte custom slot it
-    ; just allocated. Use that authoritative item-owned slot rather than
-    ; indexing IdentificationSlots with wInputMatch: wInputMatch is the chosen
-    ; label root and may deliberately differ from the item's real root.
-    ld h,d
-    ld l,e
-    ld de,-8
-    add hl,de
-    ldh a,[rSVBK]
-    push af
-    ld a,$02
-    ldh [rSVBK],a
-    ; Start with a non-enterable, non-$FF byte so the native custom-slot
-    ; allocator treats this token as occupied. $FF in byte zero means "free"
-    ; to that allocator and caused later canonical names to reuse this slot.
+    ld hl,$C16D
     ld a,CanonicalPrefix
     ld [hl+],a
     ld a,CanonicalMarker
@@ -244,13 +227,26 @@ Mode0Confirm::
     ld [hl+],a
     ld a,$FF
     ld b,$05
-.clearTail
+.tokenTail
     ld [hl+],a
     dec b
-    jr nz,.clearTail
-.restore
-    pop af
-    ldh [rSVBK],a
+    jr nz,.tokenTail
+    jr .native
+.freeName
+    call RestoreNativeTail
+.native
+    ld a,FreeNameMaximum
+    ld [wInputMaximum],a
+    ld a,$12
+    ld hl,NativeConfirm
+    call FarDispatch
+    ld a,c
+    cp $F8
+    ret z
+    ; A rejected confirmation leaves the editor open. Re-expand the selected
+    ; root because its presentation buffer was temporarily replaced above.
+    push bc
+    call Mode0Input.expandRecall
     pop bc
     ret
 
@@ -299,6 +295,10 @@ ResolveCustomName::
     inc hl
     ld a,[hl]
     cp CanonicalMarker
+    jr z,.canonical
+    ; Compatibility with the first English long-name build. Its internal $FF
+    ; marker works in live WRAM but is truncated by the native save journal.
+    cp PreviousCanonicalMarker
     jr z,.canonical
     dec hl
     ret
@@ -389,6 +389,31 @@ AlignedPresentationRefresh:
     ld a,$11
     ld hl,NativeInputDraw
     jp FarDispatch
+
+ASSERT @ <= $4220
+    ds $4220-@
+
+; The shared editor controller handles START before dispatching the selected
+; grid node, so it bypasses Mode0Input. Preserve that shortcut for every other
+; input mode; mode 0 runs the native history selection at its required
+; seven-cell limit and then reuses the same full canonical-preview finisher as
+; the visible FILL IN control. The controller consumes C after this call, so
+; retain the native routine's return value across rendering and navigation
+; restoration.
+Mode0StartRecall::
+    ld a,[wInputMode]
+    and a
+    jr z,.mode0
+    ld a,$12
+    ld hl,NativeStartRecall
+    jp FarDispatch
+.mode0
+    ld a,FreeNameMaximum
+    ld [wInputMaximum],a
+    ld a,$12
+    ld hl,NativeStartRecall
+    call FarDispatch
+    jp Mode0Input.expandRecall
 
 ASSERT @ <= Mode0Navigation
     ds Mode0Navigation-@

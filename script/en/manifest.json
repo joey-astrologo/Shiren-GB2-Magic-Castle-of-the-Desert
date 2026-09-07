@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "77755c4f218351633784bf8aead1fbf71f50f68f",
+  "workspace_sha1": "f4482837ccc57dd70dc0ec6430dd0b5e60a55876",
   "categories": [
     {
       "name": "glossary",
@@ -49,7 +49,7 @@
         "monster_meat_descriptions": 222,
         "monster_notebook_descriptions": 237
       },
-      "overlay_sha1": "35cfe5a821651bede89a8c8a1d8ce6cddd4436ed"
+      "overlay_sha1": "297b75f355762e2c7aba41a0b19372eb44a9dc54"
     },
     {
       "name": "ui_system",

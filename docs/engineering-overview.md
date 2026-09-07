@@ -160,10 +160,11 @@ Mode 0 retains the native seven-character free-label field and 20 persistent cus
 slots, but owns a dedicated English bank-250 keyboard and navigation graph. Its `FILL IN`
 control cycles learned canonical names directly into a build-guarded 14-character preview;
 it does not open a separate list. English roots are stored as a compact
-`FE FF <root-index>` occupied signature in the native eight-byte slot and expanded through the
-translated root table at display time. This preserves the save layout while allowing full
-series names such as `Windblade`. The exact user state, helper route, and storage contract
-are documented in [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
+`FE FE <root-index>` occupied signature in the native eight-byte slot and SRAM journal, then
+expanded through the translated root table at display time. This preserves the save layout
+while allowing full series names such as `Windblade`. The exact user state, helper route,
+storage contract, and suspend/reload regression are documented in
+[UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
 Its private WRAM graph is selected through an unreachable English name-entry record, not by
 replacing native navigation type `$13`; the latter remains owned by ordinary vertical menus
 including Adventure -> Continue/Secrets/Reset/Recap.

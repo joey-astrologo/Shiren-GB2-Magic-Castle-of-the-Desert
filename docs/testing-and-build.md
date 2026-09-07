@@ -413,8 +413,12 @@ same right-arrow operation remains a no-op in player-name mode 4.
 `tests.test_multiple_unidentified_names` loads
 `SaveStates/multiple-unidentified-items.state`, names the Pot `Preservation`, then names the
 Rabbit Scroll `Escape` entirely through controller input. It requires distinct native
-custom-name slots containing roots 107 and 67. A live PyBoy check separately proves that
-both current `FE FF` and legacy `FF FE` canonical tokens resolve.
+custom-name slots containing roots 107 and 67. The same fixture presses the native **Start**
+recall shortcut and requires its final input draw to use the complete 14-cell
+`Preservation` field. A live PyBoy check separately proves that
+current `FE FE`, interim `FE FF`, and legacy `FF FE` canonical tokens resolve. A second
+route confirms `Preservation`, selects **Quit**, captures SRAM after suspension, cold-boots
+that SRAM, and requires the same root token in the reloaded custom-name slot.
 
 `tests.test_item_status` freezes the exact `SaveStates/broken-bracelet.state` supplied for the
 bad cracked-marker report. Because a machine state retains already-rendered VRAM, the live
@@ -537,7 +541,8 @@ addresses, exclusions, safe operating state, and repeated-use procedure are docu
 Because it was captured after the old screen was drawn, back out and reopen **Name** after
 loading it with the latest ROM. From the initial `A` cell, **Up, Right, Up** reaches the
 localized `FILL IN` history control. Each activation cycles to the next learned name; it
-does not open a separate list.
+does not open a separate list. **Start** is a shortcut for the same cycle and now uses the
+same complete canonical-name preview.
 
 `tools/mesen_spawn_unidentified_item.lua` provides a second disposable route from
 `Mamel.mss`: it creates a real item, presents it through a chosen unidentified appearance,

@@ -9,24 +9,58 @@ Every consumer can impose several independent constraints:
 2. **Composer width** — the source composer wraps when a prospective glyph reaches 144 px.
 3. **Renderer width** — the renderer accepts a final pen at 144 px and rejects a slice that
    would reach 145 px.
-4. **Vertical geometry** — line count, starting baseline, and line advance depend on mode.
-5. **Runtime values** — names, items, locations, counters, and player input expand after
+4. **Glyph-cell footprint** — the native compositor paints an eight-pixel cell even when a
+   glyph's variable advance is narrower; that cell must not cross the consumer's right edge.
+5. **Vertical geometry** — line count, starting baseline, and line advance depend on mode.
+6. **Runtime values** — names, items, locations, counters, and player input expand after
    the literal template is read.
-6. **Caller geometry** — positioned menus may expose only part of the 144 px canvas.
+7. **Caller geometry** — positioned menus may expose only part of the 144 px canvas.
 
 ## Core renderer profiles
 
 | Profile | Representative mode | Horizontal contract | Vertical contract | Owner |
 |---|---:|---|---|---|
-| Dialogue | `$02` | `<144` composer px and `<=144` renderer px; a third-line `<page>` must end at x<=135 | 3 physical lines per `<box>`; y=21; `<br>` +11 | `prose_editor.py`, `wrap_en.py`, `wrap_item_messages.py` |
-| Full-screen item detail | `$08` | Same 143/144 px limits | 11 composer lines; y=1; `<br>` +11 | `wrap_items.py` |
-| Stepped combat window | `$10` | Same 143/144 px limits with native `<cF3>` rollback | y=24; break step +16; context controls lifetime | `combat_messages.py` |
+| Dialogue | `$02` | `<144` composer px and `<=144` renderer pen; the bottom line must keep every 8px glyph cell inside x=144; a third-line `<page>` must end at x<=135 | 3 physical lines per `<box>`; y=21; `<br>` +11 | `prose_editor.py`, `wrap_en.py`, `wrap_item_messages.py` |
+| Full-screen item detail | `$08` | Same pen limits; fixed-cell acceptance depends on the spill target and final owned row | 11 composer lines; y=1; `<br>` +11 | `wrap_items.py` |
+| Stepped combat window | `$10` | Same pen limits and surface-aware fixed-cell checks with native `<cF3>` rollback | y=24; break step +16; context controls lifetime | `combat_messages.py` |
 | Positioned/direct | `$04` representative | Surface-specific subrange of the 144 px canvas | One row unless the caller proves otherwise | `surfaces.py`, `build.py` |
 
 “143 composer pixels” means the source line must remain strictly below the `$90` wrap
 threshold. “144 renderer pixels” means a final pen position at the right edge is legal.
 The two totals can differ for wide prefixed glyph slices and for `<hspace>`, which the
 renderer applies without adding it to the composer's width counter.
+
+## Glyph-cell edge safety
+
+The VWF advance is not the complete painted-memory footprint. The renderer positions the
+next character with the variable advance in `$C4D5`, but the native compositor at
+`0:$3922` receives an eight-pixel cell. On an 18-tile row-major canvas, a cell beginning at
+x=137 or later crosses the x=144 boundary and aliases the first tile of the following row.
+
+The raw full-renderer footprint is:
+
+```text
+glyph origin + 8 <= 144
+```
+
+This must be measured for every glyph, not inferred solely from the final pen. A crossing
+is a defect when the aliased cell belongs to a frame, another persistent surface, or memory
+the consumer does not subsequently repaint. For example, a final period on the bottom line
+of a dialogue box advances two pixels, so it is border-safe only when the period begins no
+later than x=136—equivalently, when the final pen is at most 138. Other final glyphs have
+different advances but the same eight-pixel compositor footprint. Earlier text-row
+crossings remain diagnostics until the consumer's following-row repaint is modeled; they
+must not be treated as proof of the bottom-border defect.
+
+This rule was discovered from
+[GFX-03](GRAPHICS_ARTIFACT_AUDIT.md#gfx-03-fixed--a-right-edge-glyph-cell-overwrote-the-bottom-frame-row):
+Monster Log final periods at x=138 and x=141 overwrite two and five pixels respectively in
+the first bottom-border tile. Runtime composition matters: the Monster Notebook stores a
+two-line description, but the live surface prepends the monster name and displays the
+description on physical lines two and three.
+
+The page marker has a separate nine-pixel advance rule described below. Satisfying the
+glyph-cell rule does not prove that a following marker also fits.
 
 ## Dialogue box accounting
 
@@ -100,6 +134,9 @@ not the name-entry limit.
 ### Story and ordinary dialogue
 
 - Maximum three cumulative physical lines per `<box>`.
+- Keep every third-line ordinary glyph's eight-pixel compositor cell inside x=144; a glyph
+  must begin at x=136 or earlier. Report earlier-line crossings separately until the
+  following-row repaint is modeled.
 - End third-line `<page>` text at x=135 or earlier so the nine-pixel marker cannot wrap.
 - Keep source pages, boxes, delays, and effect controls in order.
 - Use `<page><box>` when a new readable surface is required.
@@ -120,7 +157,8 @@ not the name-entry limit.
 
 ### Item descriptions
 
-- Mode `$08`, 144 px, 11 composer lines.
+- Mode `$08`, 144 px, 11 composer lines; measure fixed-cell crossings on every line and
+  reject any crossing whose target is not owned and repainted by this surface.
 - Title/stat headers are preserved.
 - The wrapper may change only body spaces and `<br>` boundaries; visible wording must
   remain identical.
@@ -134,16 +172,18 @@ not the name-entry limit.
   characters; mode 1 Blank Scroll input has a separately guarded 11-character maximum and
   history-filtered matcher.
 - Mode 0 unidentified-item free labels remain seven characters. A `FILL IN` canonical
-  recall uses a separate 14-cell presentation field because its native slot stores a root
+  recall—or its native **Start** shortcut—uses a separate 14-cell presentation field because
+  its native slot stores a root
   token and the ordinary item-name renderer expands the complete translated root. Those
   14 cells render from the original seven-cell horizontal origin instead of shifting left. Every
   active group-12 root is build-validated against that 14-cell limit.
 
 ## Acceptance policy
 
-Accept an exact edge fit when both composer and renderer models prove it. Do not add
-speculative padding by shortening established terminology. Conversely, do not extend a
-budget from one surface to another because both happen to use the same font.
+Accept an exact pen-edge fit only when the compositor footprint is also owned or clipped;
+pen width alone is not proof that the backing tiles are safe. Do not add speculative
+padding by shortening established terminology. Conversely, do not extend a budget from
+one surface to another because both happen to use the same font.
 
 After any font-metric change, invalidate every stored width assumption and rerun the full
 layout, runtime-domain, menu, build, and emulator test matrix.

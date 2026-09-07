@@ -221,6 +221,64 @@ class OriginalRomLayoutTests(unittest.TestCase):
         ])
         self.assertTrue(smoke_layout.safe)
 
+    def test_fixed_glyph_cells_distinguish_bottom_row_from_earlier_rows(self):
+        for style in english_font.FONT_STYLES:
+            patched = english_font.install(
+                self.rom, approved=english_font.load_approved(style=style)
+            )
+            prefix = "A<br>B<br>"
+            exact = layout.source_layout(
+                patched,
+                english.encode_source(prefix + "W" * 22 + "i."),
+            )
+            self.assertEqual((), exact.glyph_cell_overflows)
+            self.assertTrue(exact.safe)
+
+            crossed = layout.source_layout(
+                patched,
+                english.encode_source(prefix + "W" * 22 + "a."),
+            )
+            self.assertEqual(1, len(crossed.glyph_cell_overflows))
+            cell = crossed.glyph_cell_overflows[0]
+            self.assertEqual((2, 137, 145, 1), (
+                cell.line, cell.origin, cell.right_edge, cell.spill_pixels
+            ))
+            self.assertEqual(
+                english.ENGLISH_CODES["."], cell.code
+            )
+            self.assertEqual((cell,), crossed.bottom_line_glyph_cell_overflows)
+            self.assertFalse(crossed.safe)
+
+            earlier = layout.source_layout(
+                patched,
+                english.encode_source("W" * 22 + "a.<br>B<br>C"),
+            )
+            self.assertEqual(1, len(earlier.glyph_cell_overflows))
+            self.assertEqual(0, earlier.glyph_cell_overflows[0].line)
+            self.assertEqual((), earlier.bottom_line_glyph_cell_overflows)
+            self.assertTrue(earlier.safe)
+
+            shifted = layout.source_layout(
+                patched,
+                english.encode_source(
+                    prefix + "W" * 22 + "i<hspace:01>."
+                ),
+            )
+            self.assertEqual(
+                (137,), tuple(cell.origin for cell in shifted.glyph_cell_overflows)
+            )
+            self.assertFalse(shifted.safe)
+
+            wide_final = layout.source_layout(
+                patched,
+                english.encode_source(prefix + "W" * 22 + "aW"),
+            )
+            self.assertEqual(
+                (137,),
+                tuple(cell.origin for cell in wide_final.glyph_cell_overflows),
+            )
+            self.assertFalse(wide_final.safe)
+
     def test_third_dialogue_line_reserves_room_for_page_marker(self):
         patched = english_font.install(self.rom)
         unsafe = english.encode_source(

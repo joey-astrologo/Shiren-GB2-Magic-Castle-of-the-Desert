@@ -2,26 +2,32 @@
 
 ## Status and scope
 
-This audit began as a read-only snapshot on 2026-09-06. The follow-up repair on the same
-date fixes the reproduced defects, freezes their generated machine-code contracts, and
-adds live regressions. The review followed the reported symptoms through the dungeon popup,
-service-menu, dialogue-frame, and proportional-font paths, then compared the suspicious
-machine code with a fresh `mgbdis --print-hex` disassembly of the Japanese ROM.
+This audit began as a read-only snapshot on 2026-09-06. The first follow-up repair on the
+same date fixed GFX-01, GFX-02, and GFX-06, froze their generated machine-code contracts,
+and added live regressions. A later supplied Monster Log state confirmed GFX-03; its
+2026-09-07 follow-up repaired the affected text, made the raster budget executable, and
+added a converted-state regression. The review followed the reported symptoms through the
+dungeon popup, service-menu, dialogue-frame, and proportional-font paths, then compared
+the suspicious machine code with a fresh `mgbdis --print-hex` disassembly of the Japanese
+ROM.
 
-Three defects were confirmed and are now fixed:
+Four defects were confirmed and all four are fixed:
 
 1. the added stairs-popup column was saved and restored with linear VRAM addresses instead
    of 32x32 BG-map wrapping;
 2. the shadowed `Withdraw` raster wrote four gray pixels into the dynamic tile later shown
-   as the unselected `Quit` cursor cell in Warehouse and Bank menus; and
+   as the unselected `Quit` cursor cell in Warehouse and Bank menus;
 3. the shadowed `Exchange` item-action raster wrote three gray pixels into cursor-only
-   tiles that the compact action-window map exposes on lower blank rows.
+   tiles that the compact action-window map exposes on lower blank rows; and
+4. a narrow final glyph near the 144-pixel right edge can make the native eight-pixel
+   compositor cell alias the first tile of the next canvas row, which is the bottom frame
+   row in a three-line dialogue box.
 
-The reported dialogue-border and missing-glyph-row symptoms have not been reproduced as stable
-defects. The relevant native renderers are byte-identical to the Japanese ROM and the
-current static layout audits are clean, but the live tests do not yet cover the complete
-border lifecycle or every glyph at every tile phase. Those are actionable coverage gaps,
-not proof that the reports are invalid.
+The supplied Monster Log state reproduces the dialogue-border symptom deterministically.
+The missing-glyph-row symptom has not been reproduced as a stable defect. The relevant
+native renderers remain byte-identical to the Japanese ROM, but GFX-03 demonstrates that
+byte identity is not a sufficient safety argument when wider translated text reaches a
+native compositor edge case.
 
 ## Baseline and method
 
@@ -30,8 +36,10 @@ not proof that the reports are invalid.
 - Pre-repair classic English build SHA-1: `1b148e487b988ea94614cc8c59a18002427ff636`.
 - Earlier repaired shadowed build (before GFX-06) SHA-1: `e38b010a93401fe203e9b091854706c78c567974`.
 - Earlier repaired classic build (before GFX-06) SHA-1: `9463146f296472364ab18199100d8057bfea87ef`.
-- Current repaired shadowed English build SHA-1: `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`.
-- Current repaired classic English build SHA-1: `f543abf33ea0016c503c252686cefd0590ce9f43`.
+- Repaired shadowed build before GFX-03: `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`.
+- Repaired classic build before GFX-03: `f543abf33ea0016c503c252686cefd0590ce9f43`.
+- Current repaired shadowed English build SHA-1: `2f76e609138c14f818fc1120e2dcb06252f43a22`.
+- Current repaired classic English build SHA-1: `2e5a0774dcb94cd4e68eb21ef2e0a32b9d78cfd8`.
 - Japanese disassembly: `build/mgbdis/`.
 - Fresh shadowed-build disassembly: `build/mgbdis-graphics-audit/`.
 - Disassembler: `../mgbdis/mgbdis.py`, with `--print-hex`.
@@ -175,31 +183,123 @@ Repair implemented:
    both classic and shadowed builds. It requires exactly one nonblank cursor cell and exact
    background pixels in the other three cells at every stop.
 
+## GFX-03 follow-up repair
+
+### GFX-03: fixed — a right-edge glyph cell overwrote the bottom frame row
+
+Severity: **medium**. This exactly reproduces the missing bottom-border pixels in the
+supplied `SaveStates/monster-logs.mss` Monster Log state. It is deterministic for affected
+descriptions even though it appears rare while navigating the complete log.
+
+The state was converted to a native PyBoy state with `../mesen-to-pyboy/mss_to_pyboy.py`
+and replayed against the current shadowed, classic, and original Japanese ROMs. The BG map
+continues to reference the expected first inner bottom-row tile, `$6C` in VRAM bank 1. The
+tile data changes; the tilemap entry does not.
+
+| Entry | Final line | Final pen | Last-glyph origin | Cell spill | Visible gap |
+|---|---|---:|---:|---:|---:|
+| Death Reaper | `Its scythe is a hand-me-down.` | 140 | 138 | 2 px | 2 px |
+| Vampire Baron | `It likes the monster Bow Boy.` | 140 | 138 | 2 px | 2 px |
+| Jungarian | `Even that cute face throws it.` | 143 | 141 | 5 px | 5 px |
+
+For Death Reaper, tile `$6C` is intact when the full renderer starts and becomes
+`EF31 FFF8 837C FF00 FF00 C03F FF3F FF00` in the backing canvas as the final period is
+drawn. That data is then copied to VRAM. Replacing only that period with the terminator in
+emulated WRAM leaves the bottom rows intact. The classic and shadowed builds both reproduce
+the same two-pixel border loss; the shorter Japanese description does not.
+
+This is not the blinking page marker. The composed Monster Log buffer is
+`name<br>description line 1<br>description line 2<FF>` and contains no `<page>` control.
+The failure happens while painting the final ordinary glyph.
+
+#### Root cause
+
+The VWF pen and compositor have different widths:
+
+- `3:$6F1F-$6F36` decides whether to wrap from the glyph's variable advance and the
+  native `$91` threshold;
+- `3:$6EDD-$6F1E` still sends an eight-pixel glyph cell to `0:$3922`; and
+- the canvas is an 18-tile, 144-pixel row-major backing store.
+
+A period advances only two pixels. At x=138 the wrap test therefore sees a legal final pen
+of 140, while the compositor cell covers x=138..145. Its x=144..145 writes alias the first
+two pixels of the next canvas row. At x=141, five columns alias that row. On the third line
+of this surface, the aliased row is the first inner tile of the bottom dialogue frame.
+
+The production audits modeled the pen but not that fixed compositor footprint.
+`layout.SourceLayout.renderer_overflows` rejects only a pen greater than 144. In addition,
+`menu_text.py` validates each Monster Notebook description as an independent two-line
+record; the runtime-prepended monster name makes those lines two and three of the live
+dialogue-shaped surface.
+
+A complete scan found **44 of 219** translated Monster Notebook description records with
+a final glyph cell crossing x=144. Their predicted spill is one to five pixels, and the
+three live samples above match that prediction exactly. A broader static scan also found
+12 item-description, two UI, and one Help line with an edge-crossing cell. Those use other
+vertical layouts, so they are review candidates rather than established dialogue-border
+reproductions.
+
+#### Ordinary in-game dialogue scope
+
+The defect is inside the full renderer shared by the Monster Log and normal dialogue, so
+the engine can produce the same corruption in an ordinary three-line dialogue box. It is
+not Monster-Log-specific.
+
+The current translated content does not contain a known ordinary-dialogue trigger:
+
+- all 1,786 translated prose records were measured across 647 third-line instances;
+- all 399 translated gameplay-message records were measured across 40 third-line
+  instances, including bounded runtime substitutions;
+- the largest prose fixed-cell right edge is x=141 exclusive, inside the x=144 boundary;
+  gameplay messages have still more clearance; and
+- `dialogue_page_marker_audit.py` separately reports zero unsafe page-marker endpoints.
+
+Therefore a Monster-Log text-only repair does not change ordinary dialogue, which is
+already safe in the current catalog. It also cannot guarantee safety for a future or
+unmodeled runtime-composed string.
+
+#### Repair
+
+The required authoring rule is independent of the final pen total: for every painted
+glyph, `glyph origin + 8 <= 144`. For the common final period with a two-pixel advance,
+that means the final pen must be at most 138. A general test must inspect every glyph
+origin, not special-case punctuation.
+
+Repair implemented:
+
+1. `layout.py` now has a fixed-cell raster-footprint measurement and makes full-renderer
+   validation reject any crossing on a bounded surface's dangerous bottom row, while
+   reporting earlier-row crossings separately.
+2. `menu_text.py` validates the live Monster Log composition—monster name plus two
+   description lines—for the 209 entries in the native master catalog, not only standalone
+   stored records.
+3. The 44 affected descriptions were rebalanced or shortened while preserving exactly two
+   description lines and keeping every glyph origin at x=136 or earlier.
+4. The same dangerous-bottom-row footprint rule applies to prose, messages, item details,
+   Help, and bounded runtime expansions so future text cannot reintroduce the condition.
+5. `monster-logs.mss` was converted to `monster-logs.state`. The live regression redraws
+   Death Reaper, Jungarian, and Mamel in both font variants, then asserts the complete
+   bottom frame row, tilemap/attribute row, and both VRAM banks after two settled frames.
+
+The post-repair native-catalog scan reports zero bottom-line crossings for 209/209 visible
+entries. It retains 28 second-physical-line crossings as diagnostics; the following
+description row repaints those cells before presentation, so they do not touch the bottom
+frame. The production build now invokes this complete live-composition check before writing
+either ROM.
+
+The exact 44-record adjustment list, review copy, and implementation sequence are in
+[`MONSTER_LOG_GLYPH_CELL_REPAIR_PLAN.md`](MONSTER_LOG_GLYPH_CELL_REPAIR_PLAN.md).
+
+This repair prevents the defect in all statically audited dialogue, including future
+ordinary in-game dialogue changes. It does not make the renderer intrinsically safe from
+an unregistered runtime producer. An engine-level right-edge clip in the compositor would
+provide that global guarantee and would protect ordinary dialogue automatically, but it
+is a higher-risk native-code change: it must suppress only columns beyond x=143 without
+wrapping the glyph below a three-line box or clipping legitimate inter-tile drawing inside
+the canvas. Merely treating every advance as eight pixels is not a valid fix; it would wrap
+the final glyph below the box and trade this artifact for another one.
+
 ## Unconfirmed reports and test gaps
-
-### GFX-03: intermittent missing dialogue-border tiles
-
-No current static defect was found in the ordinary dialogue frame path:
-
-- the Japanese and English BG copier is byte-identical;
-- the Japanese and English VWF code is byte-identical;
-- the production layout validator accepted all 5,679 translated records in the fresh
-  build, including bounded runtime substitutions; and
-- `dialogue_page_marker_audit.py` currently reports zero detached markers and zero
-  third-line marker overflows.
-
-The previous marker failure is visually relevant: an overflowing nine-pixel page marker can
-leave triangles in window corners and resemble a damaged frame. The current catalogue no
-longer contains those endpoints. Graphical-input bottom borders are a separate, already
-repaired path; `tests.test_graphical_input_borders` verifies the complete 20-tile bottom row
-for modes 0-8.
-
-There is still no focused live test that records every ordinary dialogue border tile and
-attribute through initial draw, each `<page>` wait, `<box>` reset, and close. Existing live
-dialogue tests prove the selected record and text raster, not the full frame lifecycle. A
-future reproduction should record the ROM build/font variant, save state, exact page, screen
-coordinate, and whether the bad tile persists for two consecutive settled frames. The
-regression should inspect both VRAM banks rather than accepting only a framebuffer hash.
 
 ### GFX-04: intermittent missing horizontal glyph rows
 
@@ -296,10 +396,10 @@ Follow-up repair verification:
   40-pixel visible label raster and reports only the two reviewed shadow-only overflows.
 - The stale script-extraction output hashes caused by the earlier `F250` kanji correction
   were refreshed so that failure no longer obscures graphics-suite results.
-- Full discovery exercised 611 tests, all passing.
+- Full discovery exercised 617 tests after the GFX-03 repair, all passing.
 
 ## Remaining follow-up order
 
-1. Add the GFX-03 dialogue-border lifecycle fixture before changing dialogue code.
+1. Review the 15 non-dialogue edge-cell candidates under their actual surface geometry.
 2. Add the GFX-04 exhaustive glyph/phase probe; use a captured failing record to narrow any
    remaining transient defect.

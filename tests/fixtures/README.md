@@ -64,6 +64,10 @@ editor route. `tests.test_unidentified_names` verifies its SHA-1, the private ty
 navigation graph, canonical preview/free-entry transitions, and return to Items. The
 separate Adventure submenu regression reuses `Mamel.state` so the same patch must also prove
 that native type `$13` still drives Continue/Secrets/Reset/Recap.
+`SaveStates/multiple-unidentified-items.state` also drives the native **Start** recall
+shortcut and requires its last redraw to contain the complete 14-cell `Preservation`
+preview rather than the old seven-character `Preserv` truncation. It also drives a real
+**Quit** suspension and fresh SRAM reload, proving the save-safe compact token survives.
 
 `SaveStates/broken-bracelet.state` freezes the item-list report where the native `F2 1E`
 suffix appeared as corrupt mixed-language graphics. `tests.test_item_status` verifies the
@@ -80,6 +84,15 @@ framebuffer. Its static companion proves the replacement remains inside the orig
 reopens the popup through real input and requires every cursor-alias tile plus the three
 reported screen pixels to be blank. This distinguishes a fixed constructor from a save
 state that merely retained its already-rendered bad frame.
+
+`SaveStates/monster-logs.state` is the converted counterpart of the supplied
+`monster-logs.mss` (source SHA-1 `f201c1c52722a94c0c805a044be0e4319a375623`;
+native-state SHA-1 `5ec94d5ece186ef9a059fd3e1547cd93dd822506`). It opens on
+Vampire Baron with the reported two-pixel bottom-border gap already present.
+`tests.test_monster_log` requires that exact contaminated input, reopens the native catalog,
+then visits Death Reaper, Jungarian, and an unaffected Mamel control in classic and shadowed
+builds. Each route freezes the complete bottom frame row, the tilemap and attribute rows,
+both VRAM banks, and two further settled frames.
 
 `SaveStates/big-moai-locked.state` freezes the real NPC before his spell system becomes
 available. `tests/fixtures/big_moai.json` records the state hash, active/shadow stage pair,

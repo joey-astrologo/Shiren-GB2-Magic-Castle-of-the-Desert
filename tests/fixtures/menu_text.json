@@ -1,5 +1,5 @@
 {
-  "schema": "shiren-gb2-menu-text-v2",
+  "schema": "shiren-gb2-menu-text-v3",
   "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
   "families": {
     "control_help": {
@@ -76,8 +76,8 @@
       "membership_sha1": "1e3ebe6e05d75f45f41769006dec9ce0fd2795ed",
       "max_lines": 2,
       "widest": {
-        "record": "200:$50CD",
-        "line": 1,
+        "record": "200:$5401",
+        "line": 0,
         "composer_pixels": 143,
         "renderer_pixels": 143
       }
@@ -106,6 +106,15 @@
     "200:$6DE6",
     "200:$6DE7"
   ],
+  "monster_notebook_live_composition": {
+    "master_table": "11:$7CBD",
+    "checked_entries": 209,
+    "physical_line_histogram": {
+      "3": 209
+    },
+    "glyph_cell_overflows": 28,
+    "bottom_line_glyph_cell_overflows": 0
+  },
   "positioned_topics": {
     "wanderers_guide": {
       "entries": 10,
@@ -141,5 +150,5 @@
     "help_popup_secrets": {"record": "192:$6FA3", "text": "Secrets", "pixel_budget": 40, "composer_pixels": 36, "renderer_pixels": 36},
     "control_help_heading": {"record": "192:$6FAB", "text": "Control Guide", "pixel_budget": 141, "composer_pixels": 64, "renderer_pixels": 64}
   },
-  "translation_sha1": "e8232e1287bb3cfa3853cb6a49f594d17dfc94e1"
+  "translation_sha1": "8751447b65e3799128eadc5aa1cd1d4222da8d95"
 }

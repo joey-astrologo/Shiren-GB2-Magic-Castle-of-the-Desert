@@ -432,6 +432,27 @@ class SourceLine:
 
 
 @dataclass(frozen=True)
+class GlyphCell:
+    """One fixed eight-pixel compositor write made by a source glyph slice."""
+
+    surface: int
+    line: int
+    offset: int
+    code: int
+    slice_index: int
+    origin: int
+    advance: int
+
+    @property
+    def right_edge(self):
+        return self.origin + 8
+
+    @property
+    def spill_pixels(self):
+        return max(0, self.right_edge - CANVAS_WIDTH_PIXELS)
+
+
+@dataclass(frozen=True)
 class PageEndpoint:
     """Renderer pen position where the native blinking page marker is drawn."""
 
@@ -487,6 +508,7 @@ class SourceLayout:
     dynamic_expansions: tuple = ()
     soft_wraps: tuple = ()
     page_endpoints: tuple = ()
+    glyph_cells: tuple = ()
 
     @property
     def composer_overflows(self):
@@ -497,6 +519,30 @@ class SourceLayout:
     def renderer_overflows(self):
         return tuple(line for line in self.lines
                      if line.renderer_pixels > CANVAS_WIDTH_PIXELS)
+
+    @property
+    def glyph_cell_overflows(self):
+        """Return literal glyph slices whose fixed cell crosses the canvas edge.
+
+        Runtime substitutions are represented by their conservative pen widths,
+        but their internal glyph sequence is owned by the runtime-domain audits.
+        This trace covers every concrete glyph slice present in the source.
+        """
+        return tuple(
+            cell for cell in self.glyph_cells
+            if cell.right_edge > CANVAS_WIDTH_PIXELS
+        )
+
+    @property
+    def bottom_line_glyph_cell_overflows(self):
+        """Return crossings from the last physical row of a bounded surface."""
+        limit = composer_line_limit(self.mode)
+        if limit is None:
+            return ()
+        return tuple(
+            cell for cell in self.glyph_cell_overflows
+            if cell.line >= limit - 1
+        )
 
     @property
     def line_limit_overflows(self):
@@ -562,6 +608,7 @@ class SourceLayout:
             self.unresolved_dynamic_offsets
             or self.composer_overflows
             or self.renderer_overflows
+            or self.bottom_line_glyph_cell_overflows
             or self.line_limit_overflows
             or self.detached_page_marker_wraps
             or self.page_marker_overflows
@@ -680,6 +727,7 @@ def source_layout(
     expansions = []
     lines = []
     page_endpoints = []
+    glyph_cells = []
     offset = 0
     after_boundary = False
     pending_page = False
@@ -716,7 +764,21 @@ def source_layout(
             resume_after_page()
             after_boundary = False
             composer_pixels += composer_advance(rom, token.raw)
-            renderer_pixels += renderer_advance(rom, token.raw)
+            for slice_index, advance in enumerate(
+                renderer_slice_advances(rom, token.raw)
+            ):
+                glyph_cells.append(
+                    GlyphCell(
+                        surface=surface,
+                        line=line,
+                        offset=offset,
+                        code=token.code,
+                        slice_index=slice_index,
+                        origin=renderer_pixels,
+                        advance=advance,
+                    )
+                )
+                renderer_pixels += advance
         elif token.kind == "source_control":
             resume_after_page()
             after_boundary = False
@@ -793,6 +855,7 @@ def source_layout(
         unresolved_dynamic_offsets=tuple(unresolved_dynamic_offsets),
         dynamic_expansions=tuple(expansions),
         page_endpoints=tuple(page_endpoints),
+        glyph_cells=tuple(glyph_cells),
     )
 
 
@@ -826,6 +889,7 @@ def _soft_wrapped_source_layout(
     lines = []
     soft_wraps = []
     page_endpoints = []
+    glyph_cells = []
     offset = 0
     after_boundary = False
     pending_page = False
@@ -850,6 +914,25 @@ def _soft_wrapped_source_layout(
                 dynamic=dynamic,
             )
         )
+        pen = 0
+        for source_offset, _composer, renderer, _dynamic, glyph in units:
+            if glyph is not None:
+                code, advances = glyph
+                for slice_index, advance in enumerate(advances):
+                    glyph_cells.append(
+                        GlyphCell(
+                            surface=surface,
+                            line=line,
+                            offset=source_offset,
+                            code=code,
+                            slice_index=slice_index,
+                            origin=pen,
+                            advance=advance,
+                        )
+                    )
+                    pen += advance
+            else:
+                pen += renderer
 
     def resume_after_page():
         nonlocal surface, line, pending_page
@@ -858,9 +941,9 @@ def _soft_wrapped_source_layout(
             line = 0
             pending_page = False
 
-    def add_unit(source_offset, composer, renderer, dynamic):
+    def add_unit(source_offset, composer, renderer, dynamic, glyph=None):
         nonlocal units, checkpoint, line, line_start, unrecoverable
-        units.append((source_offset, composer, renderer, dynamic))
+        units.append((source_offset, composer, renderer, dynamic, glyph))
         composer_pixels, _renderer_pixels, _dynamic = totals()
         if composer_pixels < COMPOSER_WRAP_AT:
             return
@@ -884,11 +967,13 @@ def _soft_wrapped_source_layout(
         if token.kind in ("glyph", "kanji"):
             resume_after_page()
             after_boundary = False
+            advances = renderer_slice_advances(rom, token.raw)
             add_unit(
                 offset,
                 composer_advance(rom, token.raw),
-                renderer_advance(rom, token.raw),
+                sum(advances),
                 False,
+                (token.code, advances),
             )
         elif token.kind == "source_control":
             resume_after_page()
@@ -974,6 +1059,7 @@ def _soft_wrapped_source_layout(
         dynamic_expansions=tuple(expansions),
         soft_wraps=tuple(soft_wraps),
         page_endpoints=tuple(page_endpoints),
+        glyph_cells=tuple(glyph_cells),
     )
 
 
@@ -1248,6 +1334,22 @@ def main(argv=None):
         "dynamic_expansions": [item.__dict__ for item in measured.dynamic_expansions],
         "composer_overflows": [line.__dict__ for line in measured.composer_overflows],
         "renderer_overflows": [line.__dict__ for line in measured.renderer_overflows],
+        "glyph_cell_overflows": [
+            {
+                **cell.__dict__,
+                "right_edge": cell.right_edge,
+                "spill_pixels": cell.spill_pixels,
+            }
+            for cell in measured.glyph_cell_overflows
+        ],
+        "bottom_line_glyph_cell_overflows": [
+            {
+                **cell.__dict__,
+                "right_edge": cell.right_edge,
+                "spill_pixels": cell.spill_pixels,
+            }
+            for cell in measured.bottom_line_glyph_cell_overflows
+        ],
         "line_limit_overflows": measured.line_limit_overflows,
         "page_endpoints": [item.__dict__ for item in measured.page_endpoints],
         "page_marker_overflows": [

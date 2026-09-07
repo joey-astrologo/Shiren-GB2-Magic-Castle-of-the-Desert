@@ -83,6 +83,7 @@ text growth.
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
 | 16 | `$5B22-$5B29` | Rescue hardware-B native delete far-call wrapper | `rescue_presentation.py` only; calls native bank-18 `$53B0`, then redraws through the localized view only for modes 5-8 with private navigation `$F5` |
+| 16 | `$5B36-$5B3D` | Graphical-input Start-recall redirect | `unidentified_names.py` expands mode-0 history recalls through the same 14-cell preview as `FILL IN`; every other mode delegates unchanged |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, mode-1 `blank_scroll.py`, mode-0 `unidentified_names.py`, then rescue modes 5-8 `rescue_presentation.py`; every layer delegates modes it does not own |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
 | 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
@@ -238,10 +239,12 @@ The loaded unidentified-item state uses WRAM bank 2:
 | `$DE1C` | learned-name/history bitset consumed by `FILL IN` |
 
 Free labels remain seven glyph bytes plus `$FF`. A canonical `FILL IN` recall stores
-`FE FF <root> FF FF FF FF FF` in the same slot. Its occupied first byte prevents the
-native allocator from reusing it; legacy `FF FE <root>` tokens remain readable. The
-bank-250 resolver expands either token through the translated root-name table, so names
-such as `Windblade` are not truncated and the native persistent layout does not grow. See
+`FE FE <root> FF FF FF FF FF` in the same slot. Its occupied first byte prevents the
+native allocator from reusing it, and its non-terminating second byte lets the native SRAM
+journal preserve the root. Interim `FE FF <root>` and legacy `FF FE <root>` tokens remain
+readable when present in live state. The bank-250 resolver expands all three forms through
+the translated root-name table, so names such as `Windblade` are not truncated and the
+native persistent layout does not grow. See
 [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md).
 
 ## Popup transient scratch

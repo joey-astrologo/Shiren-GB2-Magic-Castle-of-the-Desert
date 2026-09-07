@@ -22,9 +22,12 @@ import translations as translation_file
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TRANSLATIONS = ROOT / "script" / "en"
-SCHEMA = "shiren-gb2-menu-text-v2"
+SCHEMA = "shiren-gb2-menu-text-v3"
 CANVAS_PIXELS = layout.CANVAS_WIDTH_PIXELS
 POSITIONED_PIXELS = CANVAS_PIXELS - 3
+MONSTER_NOTEBOOK_MASTER_TABLE = (11, 0x7CBD)
+MONSTER_NOTEBOOK_MASTER_ENTRIES = 209
+MONSTER_NOTEBOOK_MASTER_ENTRY_BYTES = 2
 
 
 class MenuTextError(ValueError):
@@ -137,10 +140,34 @@ def _line_count(data):
     return data.count(bytes((0xFD,))) + 1
 
 
+def _monster_notebook_master_entries(rom):
+    """Return the native visible catalog's (tier, one-based monster) pairs."""
+    start = extract.file_offset(*MONSTER_NOTEBOOK_MASTER_TABLE)
+    size = MONSTER_NOTEBOOK_MASTER_ENTRIES * MONSTER_NOTEBOOK_MASTER_ENTRY_BYTES
+    raw = rom[start:start + size]
+    if len(raw) != size:
+        raise MenuTextError("native Monster Notebook master table is truncated")
+    entries = tuple(zip(raw[0::2], raw[1::2]))
+    if len(set(entries)) != len(entries):
+        raise MenuTextError("native Monster Notebook master table has duplicate entries")
+    for tier, monster in entries:
+        if not 1 <= tier <= 3 or not 1 <= monster <= 73:
+            raise MenuTextError(
+                "native Monster Notebook master entry %d:%d is out of range"
+                % (tier, monster)
+            )
+    return entries
+
+
 def analyze(rom, result, translated):
     """Validate the production menu translations and return a fixture summary."""
     families = resolve_families(result)
     font_rom = english_font.install(rom)
+    by_reference = {
+        (reference.group, reference.index): record
+        for record in result["records"]
+        for reference in record.references
+    }
     family_summaries = {}
     total_records = 0
 
@@ -247,11 +274,58 @@ def analyze(rom, result, translated):
                 "native empty Notebook slot %s must remain empty" % record.id
             )
 
-    by_reference = {
-        (reference.group, reference.index): record
-        for record in result["records"]
-        for reference in record.references
-    }
+    notebook_histogram = {}
+    notebook_cell_overflows = 0
+    notebook_bottom_overflows = 0
+    notebook_entries = _monster_notebook_master_entries(rom)
+    for tier, monster in notebook_entries:
+        group = tier + 28
+        index = monster - 1
+        description_record = by_reference[(group, index)]
+        name_record = by_reference[(tier, monster)]
+        name = translated.get((name_record.bank, name_record.address))
+        description = translated.get(
+            (description_record.bank, description_record.address)
+        )
+        if name is None or not name.text:
+            raise MenuTextError(
+                "%s is missing the Monster Notebook name for %d:%d"
+                % (name_record.id, group, index)
+            )
+        if description is None:
+            raise MenuTextError(
+                "%s is missing the Monster Notebook description for %d:%d"
+                % (description_record.id, group, index)
+            )
+        composed = layout.source_layout(
+            font_rom,
+            name.encoded + bytes((0xFD,)) + description.encoded,
+            mode=0x02,
+            record_id=description_record.id,
+        )
+        physical_lines = max(
+            (line.line + 1 for line in composed.lines), default=1
+        )
+        notebook_histogram[physical_lines] = (
+            notebook_histogram.get(physical_lines, 0) + 1
+        )
+        notebook_cell_overflows += len(composed.glyph_cell_overflows)
+        notebook_bottom_overflows += len(
+            composed.bottom_line_glyph_cell_overflows
+        )
+        if composed.bottom_line_glyph_cell_overflows:
+            cell = composed.bottom_line_glyph_cell_overflows[0]
+            raise MenuTextError(
+                "%s live Notebook bottom line %d has an 8px glyph cell "
+                "at x=%d spilling %dpx past the canvas"
+                % (
+                    description_record.id,
+                    cell.line + 1,
+                    cell.origin,
+                    cell.spill_pixels,
+                )
+            )
+
     positioned = {}
     for name, group, first_index, last_index in POSITIONED_TOPICS:
         rows = []
@@ -313,6 +387,16 @@ def analyze(rom, result, translated):
         ]["stable_records"],
         "total_translated_records": total_records,
         "native_empty_notebook_slots": empty_records,
+        "monster_notebook_live_composition": {
+            "master_table": "%d:$%04X" % MONSTER_NOTEBOOK_MASTER_TABLE,
+            "checked_entries": len(notebook_entries),
+            "physical_line_histogram": {
+                str(lines): notebook_histogram[lines]
+                for lines in sorted(notebook_histogram)
+            },
+            "glyph_cell_overflows": notebook_cell_overflows,
+            "bottom_line_glyph_cell_overflows": notebook_bottom_overflows,
+        },
         "positioned_topics": positioned,
         "positioned_headers": positioned_headers,
         "translation_sha1": _translation_sha1(families, translated),

@@ -88,13 +88,16 @@ class UnidentifiedNameInstallerTests(unittest.TestCase):
 
     def test_canonical_signature_cannot_alias_a_native_free_label(self):
         # Native allocation treats byte-zero FF as an unused slot. New tokens
-        # therefore start with non-enterable FE and retain the old reversed
-        # pair only as a backward-compatible read signature.
+        # therefore use two non-enterable FE bytes. The second byte must also
+        # be non-FF because native SRAM journaling terminates strings at FF.
         self.assertEqual(0xFE, unidentified_names.CANONICAL_PREFIX)
-        self.assertEqual(0xFF, unidentified_names.CANONICAL_MARKER)
+        self.assertEqual(0xFE, unidentified_names.CANONICAL_MARKER)
+        self.assertEqual(0xFE, unidentified_names.PREVIOUS_CANONICAL_PREFIX)
+        self.assertEqual(0xFF, unidentified_names.PREVIOUS_CANONICAL_MARKER)
         self.assertEqual(0xFF, unidentified_names.LEGACY_CANONICAL_PREFIX)
         self.assertEqual(0xFE, unidentified_names.LEGACY_CANONICAL_MARKER)
         self.assertNotEqual(0xFF, unidentified_names.CANONICAL_PREFIX)
+        self.assertNotEqual(0xFF, unidentified_names.CANONICAL_MARKER)
         self.assertNotIn(
             unidentified_names.CANONICAL_PREFIX,
             name6.character_bytes(),
@@ -437,7 +440,7 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
         finally:
             pyboy.stop(save=False)
 
-    def test_current_and_legacy_canonical_tokens_both_resolve(self):
+    def test_current_interim_and_legacy_canonical_tokens_all_resolve(self):
         pyboy = self._pyboy()
         try:
             destination = 0xC600
@@ -446,6 +449,10 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
                 (
                     unidentified_names.CANONICAL_PREFIX,
                     unidentified_names.CANONICAL_MARKER,
+                ),
+                (
+                    unidentified_names.PREVIOUS_CANONICAL_PREFIX,
+                    unidentified_names.PREVIOUS_CANONICAL_MARKER,
                 ),
                 (
                     unidentified_names.LEGACY_CANONICAL_PREFIX,
@@ -472,6 +479,7 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
                     self.assertNotEqual(b"\xD5" * 16, observed)
                     resolved.append(observed)
             self.assertEqual(resolved[0], resolved[1])
+            self.assertEqual(resolved[0], resolved[2])
         finally:
             pyboy.stop(save=False)
 

@@ -29,6 +29,7 @@ import ips
 import layout
 import lint_en
 import menu_graphics
+import menu_text
 import name6
 import rescue_presentation
 import runtime_widths
@@ -519,6 +520,7 @@ def main(argv=None):
             )
             for style in styles
         }
+        menu_text.analyze(source, extracted, translated)
         _validate_blank_scroll_catalog(extracted, translated)
         _validate_unidentified_name_catalog(extracted, translated)
     except (
@@ -538,6 +540,7 @@ def main(argv=None):
         layout.LayoutError,
         lint_en.TranslationLintError,
         menu_graphics.MenuGraphicsError,
+        menu_text.MenuTextError,
         name6.Name6Error,
         runtime_widths.RuntimeWidthError,
         shop_sale_count.ShopSaleCountError,

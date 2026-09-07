@@ -40,6 +40,16 @@ class OriginalRomMenuTextTests(unittest.TestCase):
         self.assertEqual(176, self.summary["help_and_secrets_records"])
         self.assertEqual(219, self.summary["monster_notebook_records"])
         self.assertEqual(395, self.summary["total_translated_records"])
+        self.assertEqual(
+            {
+                "master_table": "11:$7CBD",
+                "checked_entries": 209,
+                "physical_line_histogram": {"3": 209},
+                "glyph_cell_overflows": 28,
+                "bottom_line_glyph_cell_overflows": 0,
+            },
+            self.summary["monster_notebook_live_composition"],
+        )
 
     def test_exact_family_counts_and_native_empty_slots_are_preserved(self):
         self.assertEqual(
@@ -125,6 +135,19 @@ class OriginalRomMenuTextTests(unittest.TestCase):
             broken[key], text=text, encoded=english.encode_source(text)
         )
         with self.assertRaisesRegex(menu_text.MenuTextError, "must use 2 Notebook"):
+            menu_text.analyze(self.rom, self.result, broken)
+
+    def test_notebook_live_bottom_glyph_cell_fails_closed(self):
+        broken = dict(self.translated)
+        key = (200, 0x5240)
+        text = "Attacks without expression.<br>Its scythe is a hand-me-down."
+        broken[key] = replace(
+            broken[key], text=text, encoded=english.encode_source(text)
+        )
+        with self.assertRaisesRegex(
+            menu_text.MenuTextError,
+            r"200:\$5240 live Notebook bottom line 3 .* spilling 2px",
+        ):
             menu_text.analyze(self.rom, self.result, broken)
 
     def test_secret_canvas_reset_control_fails_closed(self):

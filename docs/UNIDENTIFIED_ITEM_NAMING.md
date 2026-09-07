@@ -8,8 +8,10 @@ canonical-name display resolver.
 ## What `FILL IN` means
 
 `FILL IN` is the localized native history recall. It does not open a list or a second
-free-entry field. Each press advances to the next previously learned canonical name for
-the current item category and places that name in the entry field. The original shared
+free-entry field. Each activation advances to the next previously learned canonical name
+for the current item category and places that name in the entry field. The player may
+activate the visible control with **A** or use the native **Start** shortcut; both now
+finish through the same full-name presentation path. The original shared
 English keyboard rewrite accidentally made this node unreachable. Mode 0 now owns a
 separate graph, so the control is both visible and selectable.
 
@@ -29,7 +31,7 @@ mode-0 graph.
 
 The user-supplied fixture `SaveStates/unidentified-item-naming.state` contains a Rabbit Scroll
 in inventory and freezes the exact reported route. Its SHA-1 is
-`2db915b2283fb9e0d831df2a0fe0d3e5beaf3c76`.
+`537c360d4a7745700e7d8864b4c2fb0389a701f0`.
 
 Because that machine state was captured after the old keyboard had already been drawn,
 load it with the latest English ROM, back out once, and reopen **Name**. This makes the new
@@ -46,6 +48,9 @@ constructor redraw the screen. Verify:
    and that character must become byte one of a fresh seven-cell free label.
 6. Repeat once more and activate `DEL`. The recalled name must become the original empty
    seven-star field. Enter a new free label and confirm it to prove the editor can exit.
+7. Reopen **Name** and press **Start**. The shortcut must show the same complete canonical
+   root as `FILL IN`, including roots longer than seven characters; `Preservation` in
+   `SaveStates/multiple-unidentified-items.state` is the automated long-name probe.
 
 Free labels retain the native seven-character storage contract. A history recall instead
 expands the presentation field to 14 cells, so `Windblade` and every current translated
@@ -119,6 +124,13 @@ validates all 123 translated root entries and rejects any active root longer tha
 The current longest roots are `Narrow-escape` and `Transmutation` at 13 characters,
 leaving one cell of measured headroom inside the 14-cell field.
 
+The editor controller handles **Start** before its selected-grid-node dispatch, through the
+far call at `16:$5B36` to native `12:$5073`. That bypass originally left the native
+seven-character preview (`Preserv`) even though the root ID was correct. A mode-checked
+wrapper now preserves the shortcut's native return value and sends mode 0 through the same
+14-cell expansion, aligned redraw, and private-navigation restoration as `FILL IN`. Every
+other graphical-input mode still delegates directly to `12:$5073`.
+
 Persistent custom labels occupy 20 slots beginning at bank 2 `$DD78`. Each slot is eight
 bytes. Free labels retain the native contract of at most seven glyph bytes followed by
 `$FF`.
@@ -126,21 +138,34 @@ bytes. Free labels retain the native contract of at most seven glyph bytes follo
 Canonical history selections use the same eight-byte slot without expanding save data:
 
 ```text
-FE FF <root-index> FF FF FF FF FF
+FE FE <root-index> FF FF FF FF FF
 ```
 
-The leading `$FE` is not enterable through the localized keyboard and, crucially, is not
-the native allocator's `$FF` free-slot sentinel. The display resolver recognizes
-`FE FF <valid-root>`, maps the root to the translated item table, renders the complete
-English name, and then returns to the native caller. It also continues reading the original
-English-patch signature `FF FE <valid-root>` for save compatibility; new confirmations
-always write the occupied `FE FF` form. All existing native/free labels follow the original
-path unchanged.
+Both `$FE` bytes are unavailable on the localized keyboard. The first is not the native
+allocator's `$FF` free-slot sentinel; the second is not the `$FF` terminator used by the
+variable-length SRAM journal. The display resolver recognizes `FE FE <valid-root>`, maps
+the root to the translated item table, renders the complete English name, and then returns
+to the native caller.
 
-Native confirmation returns `DE` immediately after the eight-byte slot it allocated. The
-token writer subtracts eight and writes that exact item-owned slot. It must not index the
-identification map with the selected recall root: a Windblade Scroll may deliberately be
-named `Escape`, so the label root and item root are different.
+The first long-name implementation confirmed the seven-cell `Preserv` field natively and
+only afterward changed its WRAM slot to `FE FF <root>`. That made the current session look
+correct, but the native confirmation had already journaled `Preserv` to SRAM. On reload,
+the game correctly reconstructed the truncated literal. The repaired confirmation instead
+temporarily puts `FE FE <root> FF...` in the input buffer before calling the native routine,
+so the SRAM journal and the item-owned WRAM slot receive the same compact value. The
+resolver still accepts the interim `FE FF <root>` form and the original English-patch
+`FF FE <root>` form when they exist in a live state. Existing SRAM that has already become
+a literal such as `Preserv` has lost the selected root ID and must be named with **FILL IN**
+once more after updating.
+
+This does not enlarge the save or runtime tables. There are 20 native custom-name slots,
+each eight bytes, and the new value uses only three non-terminator bytes. Allocation belongs
+to an unidentified item root, not to each physical inventory object: an inventory containing
+20 copies of the same Preservation Pot uses one root mapping and one custom-name slot. Even
+20 different custom-named roots fit the native table exactly. If all 20 slots are already
+occupied, the native allocator's bounded 20-entry scan returns `$FF`; it does not write a
+21st slot or overrun adjacent WRAM. The attempted additional name can fail to stick, but it
+does not create memory corruption.
 
 ## Automated regressions
 
@@ -159,6 +184,8 @@ navigation type `$13` plus a live four-row Adventure-submenu cursor route, seven
 setup, the 14-cell recall catalog, `FILL IN` cycling, a pixel-frozen full `Windblade`
 preview without star padding, an asserted native seven-cell draw origin, pixel-frozen
 type/delete reset states, successful free-name
-confirmation after both resets, canonical-token persistence, current/legacy token expansion,
-two-item slot-allocation independence, full-name expansion, return to Items, helper
+confirmation after both resets, canonical-token persistence through a real suspend and fresh
+SRAM reload, current/interim/legacy token expansion,
+the live **Start** shortcut's final 14-cell `Preservation` draw, two-item slot-allocation
+independence, full-name expansion, return to Items, helper
 injection, and its object/mapping/history contracts.
