@@ -40,6 +40,36 @@ patches. Their focused contracts can also be run directly through
 `tests.test_pyboy_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_pyboy_unidentified_item`.
 
+`tests.test_multiple_unidentified_names` also presses physical B after a canonical recall,
+checks the cleared field pixels and native seven-cell buffer, enters forty characters
+through the actual keyboard while guarding adjacent memory, and confirms a seven-character
+free label. Layout/build regressions reject final-row glyph-cell spills both with and
+without intervening page waits. Runtime-domain regressions include all 119 enabled recalled
+names with category prefixes; the item-message tests retain short `Pushed <name>.` messages
+on one line and wrap the longest expansion at its native checkpoint.
+
+Physical Select has separate coverage: repeated presses preserve empty/free/canonical
+item-name buffers and field pixels, `Shiren` remains unchanged through player-name
+confirmation, and the full Rescue input vector survives Select before native validation.
+The installer guards the shared event table and redirects only its Select entry to idle.
+
+`tests.test_glyph_cell_clip` exercises the real Otogirisou and Leaping Grass Drink routes
+from a disposable inventory in `SaveStates/Mamel.state`. It requires mode `$10`, the
+unchanged composed message, the final period at x=139/y=40, and every bottom-border pixel
+over three settled frames in both font variants. Its separate native-compositor probe
+checks all 144 horizontal origins, 8- and 10-pixel cells, five modes, and both fonts against
+an independent pixel oracle, including unchanged destination canaries and bank/stack
+restoration. The existing Monster Log regression continues to cover that three-line route.
+
+`tests.test_equipment_preview` uses the converted
+`SaveStates/strength-defense-rendering-issue.state` fixture. The untouched Bronze Shield
+route must display `129 -> 5`; a separate disposable-item matrix covers both equipment
+categories and all combinations of 0, 9, 10, 99, 100, and 255 in both fonts. It checks the
+complete panel raster, cleared cursor cells, unchanged inventory, and close/reopen redraw.
+Every possible unsigned-byte value is also measured against a three-digit value on either
+side. The original source state remains alongside its conversion; conversion uses the
+sibling `mesen-to-pyboy/mss_to_pyboy.py` tool, never an ad hoc state reconstruction.
+
 `tests.test_monster_house_labels` freezes all twelve group-125 runtime room labels and uses
 `SaveStates/Mamel.state` to create and read a Monstercall Scroll in a disposable PyBoy run. It
 requires the actual composed alert to be `It's a Monster House!`, independently preventing the

@@ -14,6 +14,8 @@ the first five label tiles after each cursor cell. A shadow pixel entering the
 sixth label tile therefore aliases the next column's cursor cell. The upload
 wrapper clears both cursor-only canvas columns after rendering and before the
 native VRAM copy, so clipped shadow pixels cannot reappear on lower blank rows.
+The equipment preview starts one tile after the cleared third-column cursor
+cell, leaving 40 pixels for its two unsigned-byte values and native arrow.
 """
 import argparse
 from dataclasses import dataclass
@@ -126,6 +128,21 @@ ITEM_ACTION_WRAM_BANK = 7
 ITEM_ACTION_VRAM_SOURCE = 0xD240
 ITEM_ACTION_VRAM_DESTINATION = 0x9240
 ITEM_ACTION_VRAM_COPY_BYTES = 0x05A0
+
+# The sword/shield comparison shares canvas tiles $30/$42 with the third
+# logical command column's cursor. Cleanup must keep those tiles blank. Its
+# native x=96 origin therefore erases leading digits; x=104 leaves five whole
+# tiles for the largest English preview, "255" + native arrow + "255" (38px).
+# Guard both coordinate stores, but own only the changed X immediate byte.
+EQUIPMENT_PREVIEW_BANK = 17
+EQUIPMENT_PREVIEW_POSITION_ADDRESS = 0x71A1
+EQUIPMENT_PREVIEW_POSITION_ORIGINAL = bytes.fromhex("3E60EAD6C43E14EAD7C4")
+EQUIPMENT_PREVIEW_START = (104, 20)
+EQUIPMENT_PREVIEW_RIGHT_EDGE = 144
+
+
+def equipment_preview_position_offset():
+    return extract.file_offset(EQUIPMENT_PREVIEW_BANK, EQUIPMENT_PREVIEW_POSITION_ADDRESS)
 
 def template_offset():
     return extract.file_offset(TEMPLATE_BANK, TEMPLATE_ADDRESS)
@@ -415,9 +432,11 @@ def owned_ranges(approved=None):
     ) + ((overlay, overlay + OVERLAY_PAYLOAD_SIZE),)
     upload = item_action_upload_offset()
     helper = item_action_helper_offset()
+    preview = equipment_preview_position_offset()
     return status_ranges + (
         (upload, upload + len(ITEM_ACTION_UPLOAD_ORIGINAL)),
         (helper, helper + len(item_action_cleanup_payload())),
+        (preview + 1, preview + 2),
     )
 
 
@@ -445,6 +464,9 @@ def install(rom, approved=None, verify_original=True, checksums=True):
         != ITEM_ACTION_UPLOAD_ORIGINAL
     ):
         raise MenuGraphicsError("item-action upload call site is not original")
+    preview = equipment_preview_position_offset()
+    if bytes(out[preview:preview + len(EQUIPMENT_PREVIEW_POSITION_ORIGINAL)]) != EQUIPMENT_PREVIEW_POSITION_ORIGINAL:
+        raise MenuGraphicsError("equipment preview position is not original")
     action_payload = item_action_cleanup_payload()
     action_cave = item_action_helper_offset()
     if any(
@@ -464,6 +486,7 @@ def install(rom, approved=None, verify_original=True, checksums=True):
         action_call:action_call + len(ITEM_ACTION_UPLOAD_ORIGINAL)
     ] = item_action_upload_patch()
     out[action_cave:action_cave + len(action_payload)] = action_payload
+    out[preview + 1] = EQUIPMENT_PREVIEW_START[0]
     if checksums:
         fix_checksums(out)
     return bytes(out)
@@ -531,6 +554,14 @@ def summary(rom, approved=None):
                     + ITEM_ACTION_VRAM_COPY_BYTES - 1,
                 ),
             },
+        },
+        "equipment_preview": {
+            "position_store": extract.location(EQUIPMENT_PREVIEW_BANK, EQUIPMENT_PREVIEW_POSITION_ADDRESS),
+            "original_hex": EQUIPMENT_PREVIEW_POSITION_ORIGINAL.hex().upper(),
+            "start_pen": list(EQUIPMENT_PREVIEW_START),
+            "right_edge": EQUIPMENT_PREVIEW_RIGHT_EDGE,
+            "available_pixels": EQUIPMENT_PREVIEW_RIGHT_EDGE - EQUIPMENT_PREVIEW_START[0],
+            "value_domain": [0, 255],
         },
     }
 

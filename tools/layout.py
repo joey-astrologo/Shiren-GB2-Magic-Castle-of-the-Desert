@@ -730,21 +730,6 @@ def source_layout(
     glyph_cells = []
     offset = 0
     after_boundary = False
-    pending_page = False
-
-    def resume_after_page():
-        """Start the next paced chunk without discarding the current pen width.
-
-        FB pauses the renderer but does not move its pen.  A following FD ends
-        the old physical line and starts line zero of the next paced chunk.  If
-        text resumes without FD, its width must instead accumulate on the same
-        physical line even though it belongs to the next chunk.
-        """
-        nonlocal surface, line, pending_page
-        if pending_page:
-            surface += 1
-            line = 0
-            pending_page = False
 
     def finish(end_offset):
         lines.append(
@@ -761,7 +746,6 @@ def source_layout(
 
     for token in codec.parse_source(data):
         if token.kind in ("glyph", "kanji"):
-            resume_after_page()
             after_boundary = False
             composer_pixels += composer_advance(rom, token.raw)
             for slice_index, advance in enumerate(
@@ -780,7 +764,6 @@ def source_layout(
                 )
                 renderer_pixels += advance
         elif token.kind == "source_control":
-            resume_after_page()
             after_boundary = False
             dynamic = True
             dynamic_offsets.append(offset)
@@ -795,18 +778,12 @@ def source_layout(
             else:
                 unresolved_dynamic_offsets.append(offset)
         elif token.code == 0xF7:
-            resume_after_page()
             after_boundary = False
             renderer_pixels += token.args[0]
         elif token.code == 0xFD:
             after_boundary = False
             finish(offset)
-            if pending_page:
-                surface += 1
-                line = 0
-                pending_page = False
-            else:
-                line += 1
+            line += 1
             line_start = offset + len(token.raw)
             composer_pixels = renderer_pixels = 0
             dynamic = False
@@ -826,12 +803,10 @@ def source_layout(
                     dynamic=dynamic,
                 )
             )
-            pending_page = True
             after_boundary = False
         elif token.code == 0xFC:
             # FC returns from this renderer invocation and therefore owns the
-            # actual box/canvas reset.  In the common `<page><box>` pair, the
-            # pending FB does not invent an empty paced chunk.
+            # actual box/canvas reset. FB never resets physical occupancy.
             if not after_boundary:
                 finish(offset)
             surface += 1
@@ -840,9 +815,7 @@ def source_layout(
             line_start = offset + len(token.raw)
             composer_pixels = renderer_pixels = 0
             dynamic = False
-            pending_page = False
         elif token.code == 0xF3:
-            resume_after_page()
             after_boundary = False
         offset += len(token.raw)
     if line_start < len(data) or not lines:
@@ -892,7 +865,6 @@ def _soft_wrapped_source_layout(
     glyph_cells = []
     offset = 0
     after_boundary = False
-    pending_page = False
 
     def totals():
         return (
@@ -934,13 +906,6 @@ def _soft_wrapped_source_layout(
             else:
                 pen += renderer
 
-    def resume_after_page():
-        nonlocal surface, line, pending_page
-        if pending_page:
-            surface += 1
-            line = 0
-            pending_page = False
-
     def add_unit(source_offset, composer, renderer, dynamic, glyph=None):
         nonlocal units, checkpoint, line, line_start, unrecoverable
         units.append((source_offset, composer, renderer, dynamic, glyph))
@@ -965,7 +930,6 @@ def _soft_wrapped_source_layout(
 
     for token in codec.parse_source(data):
         if token.kind in ("glyph", "kanji"):
-            resume_after_page()
             after_boundary = False
             advances = renderer_slice_advances(rom, token.raw)
             add_unit(
@@ -976,7 +940,6 @@ def _soft_wrapped_source_layout(
                 (token.code, advances),
             )
         elif token.kind == "source_control":
-            resume_after_page()
             after_boundary = False
             dynamic_offsets.append(offset)
             expansion = dynamic_expansion(
@@ -995,11 +958,9 @@ def _soft_wrapped_source_layout(
                 unresolved_dynamic_offsets.append(offset)
                 add_unit(offset, 0, 0, True)
         elif token.code == 0xF7:
-            resume_after_page()
             after_boundary = False
             add_unit(offset, 0, token.args[0], False)
         elif token.code == 0xF3:
-            resume_after_page()
             after_boundary = False
             composer_pixels, _renderer_pixels, _dynamic = totals()
             checkpoint = (
@@ -1010,12 +971,7 @@ def _soft_wrapped_source_layout(
         elif token.code == 0xFD:
             after_boundary = False
             finish(offset)
-            if pending_page:
-                surface += 1
-                line = 0
-                pending_page = False
-            else:
-                line += 1
+            line += 1
             line_start = offset + len(token.raw)
             units = []
             checkpoint = None
@@ -1034,7 +990,6 @@ def _soft_wrapped_source_layout(
                     dynamic=dynamic,
                 )
             )
-            pending_page = True
             after_boundary = False
         elif token.code == 0xFC:
             if not after_boundary:
@@ -1046,7 +1001,6 @@ def _soft_wrapped_source_layout(
             units = []
             checkpoint = None
             unrecoverable = False
-            pending_page = False
         offset += len(token.raw)
     if line_start < len(data) or not lines:
         finish(len(data))
@@ -1112,13 +1066,14 @@ def corpus_summary(rom):
     }
 
 
-def validate_overrides(rom, record_overrides, runtime_contract=None):
+def validate_overrides(rom, record_overrides, runtime_contract=None, surface_modes=None):
     """Fail closed on statically provable horizontal overflow in translations.
 
-    Surface-specific line counts are intentionally not guessed here; the caller
-    inventory still decides whether a record is dialogue, a full-screen page or
-    positioned UI text.  Horizontal geometry is shared, so it is already safe
-    to enforce.  F4 integer and F5 player-name maxima contribute conservative
+    Without a surface map, inputs are dialogue. The production caller supplies
+    its known full-renderer modes; other records retain shared horizontal checks
+    and their separate positioned/composition validators. Known full surfaces
+    also enforce physical line counts and the last row's fixed glyph cells.
+    F4 integer and F5 player-name maxima contribute conservative
     widths. F6 record/cached strings must have a consumer-specific translated-
     domain bound; an unresolved substitution fails instead of allowing a
     partially measured line into a build.
@@ -1127,9 +1082,11 @@ def validate_overrides(rom, record_overrides, runtime_contract=None):
     max_composer = max_renderer = 0
     runtime_contract = runtime_contract or english_runtime_width_contract()
     for key, raw in sorted(record_overrides.items()):
+        mode = 0x02 if surface_modes is None else surface_modes.get(key)
         measured = source_layout(
             rom,
             raw,
+            mode=0x02 if mode is None else mode,
             runtime_contract=runtime_contract,
             record_id=extract.location(*key),
             simulate_soft_wrap=True,
@@ -1168,6 +1125,20 @@ def validate_overrides(rom, record_overrides, runtime_contract=None):
                     endpoint.renderer_pixels,
                     endpoint.line + 2,
                 )
+            )
+        if mode is not None and measured.bottom_line_glyph_cell_overflows:
+            cell = measured.bottom_line_glyph_cell_overflows[0]
+            raise LayoutError(
+                "%s surface %d line %d: 8px glyph cell at x=%d spills %dpx "
+                "past the %dpx canvas"
+                % (extract.location(*key), cell.surface + 1, cell.line + 1,
+                   cell.origin, cell.spill_pixels, CANVAS_WIDTH_PIXELS)
+            )
+        if mode is not None and measured.line_limit_overflows:
+            surface, count = measured.line_limit_overflows[0]
+            raise LayoutError(
+                "%s surface %d has %d physical lines, maximum %d"
+                % (extract.location(*key), surface + 1, count, composer_line_limit(mode))
             )
         for line_item in measured.lines:
             max_composer = max(max_composer, line_item.composer_pixels)

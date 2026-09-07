@@ -497,6 +497,10 @@ def runtime_candidate_domains(font_rom, result, translated):
 
     domains = {}
     counts = {}
+    items.extend(
+        WidthCandidate(row.text, row.composer_pixels, row.renderer_pixels)
+        for row in runtime_widths.canonical_item_name_candidates(font_rom, result, translated)
+    )
     for name, values in (
         ("actor_name", actor),
         ("trap_name", traps),

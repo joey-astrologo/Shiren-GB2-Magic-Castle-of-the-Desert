@@ -22,6 +22,7 @@ import english_smoke
 import extract
 import far_text
 import font
+import glyph_cell_clip
 import hud_font
 import insert
 import item_formatting
@@ -131,6 +132,7 @@ class TranslationBuildTests(unittest.TestCase):
     def test_mutations_are_confined_to_script_font_directory_and_checksums(self):
         fixture = FIXTURE["output"]
         self.assertTrue(dialogue_pacing.verify(self.output))
+        self.assertTrue(glyph_cell_clip.verify(self.output))
         changed = insert.mutation_offsets(self.original, self.output)
         packed = b"".join(offset.to_bytes(4, "little") for offset in changed)
         self.assertEqual(fixture["changed_bytes"], len(changed))
@@ -253,6 +255,11 @@ class TranslationBuildTests(unittest.TestCase):
         }
         pacing_start, pacing_end = dialogue_pacing.owned_range()
         pacing_offsets = set(range(pacing_start, pacing_end))
+        glyph_clip_offsets = {
+            offset
+            for start, end in glyph_cell_clip.owned_ranges()
+            for offset in range(start, end)
+        }
         allowed = (
             directory_offsets
             | script_offsets
@@ -275,6 +282,7 @@ class TranslationBuildTests(unittest.TestCase):
             | unidentified_name_offsets
             | rescue_presentation_offsets
             | pacing_offsets
+            | glyph_clip_offsets
             | checksum_offsets
         )
         self.assertTrue(set(changed) <= allowed)
@@ -382,6 +390,35 @@ class TranslationBuildTests(unittest.TestCase):
                 insert.read_source_record(output, reference.group, reference.index),
             )
         self.assertEqual(1, len(targets))
+
+    def test_build_rejects_bottom_row_glyph_cells_even_across_page_waits(self):
+        for prefix in ("A<br>B<br>", "A<page><br>B<page><br>"):
+            with self.subTest(prefix=prefix), self.assertRaisesRegex(
+                layout.LayoutError, "line 3: 8px glyph cell at x=137"
+            ):
+                translated_build.build_rom(
+                    self.original,
+                    {(195, 0x562F): english.encode_source(prefix + "W" * 22 + "a.")},
+                )
+
+    def test_full_screen_rows_do_not_inherit_dialogue_bottom_border(self):
+        contracts = translated_build._full_renderer_surface_modes(self.original)
+        records = extract.extract(self.original)["records"]
+        item = next(record for record in records
+                    if any(ref.group == 6 and ref.index == 0 for ref in record.references))
+        key = item.bank, item.address
+        self.assertEqual(0x08, contracts[key])
+        earlier_row = "A<br>B<br>" + "W" * 22 + "a.<br>Next row"
+        layout.validate_overrides(
+            english_font.install(self.original), {key: english.encode_source(earlier_row)},
+            surface_modes=contracts,
+        )
+        last_row = "A<br>" * 10 + "W" * 22 + "a."
+        with self.assertRaisesRegex(layout.LayoutError, "8px glyph cell"):
+            layout.validate_overrides(
+                english_font.install(self.original), {key: english.encode_source(last_row)},
+                surface_modes=contracts,
+            )
 
     def test_build_rejects_a_rune_description_that_exceeds_its_direct_row(self):
         key = (194, 0x7263)

@@ -5,6 +5,12 @@ the **Name** action for unidentified Bracelets, Grasses, Scrolls, Staffs, and Po
 English build now gives mode 0 its own keyboard, navigation graph, history control, and
 canonical-name display resolver.
 
+**Select** does nothing on the English entry screen. The original Japanese shortcut
+cycles kana voicing marks, such as は → ば → ぱ, by modifying the current or preceding
+character. Its byte table overlaps English lowercase letters: Select could turn the final
+`n` in `Preservation` into `ぜ`. The shared English input controller now routes Select to
+its native idle handler, preserving the buffer, cursor, and canonical recall selection.
+
 ## What `FILL IN` means
 
 `FILL IN` is the localized native history recall. It does not open a list or a second
@@ -61,12 +67,19 @@ A recalled canonical name is a distinct editor state, not a long editable free l
 unused presentation cells use the ordinary space glyph, so only the translated name is
 visible. Rendering copies all 14 safe cells but calculates the horizontal origin from the
 native seven-cell field, so short recalls do not drift left and long recalls retain their
-full capacity. The first subsequent character or `DEL` atomically demotes that state back to the
-native seven-cell free editor. Character entry supplies the one redraw for that input frame;
-`DEL` supplies its own redraw. After either redraw, the presentation-only tail is restored
+full capacity. The first subsequent character, `DEL`, or physical **B** atomically demotes
+that state back to the native seven-cell free editor. **B** clears the preview and resets
+the cursor to the first cell. Character entry supplies the one redraw for that input frame;
+deletion supplies its own redraw. After the redraw, the presentation-only tail is restored
 to the native terminator/filler form before confirmation or cancellation code can consume
 it. This ordering prevents invisible appends, off-screen cursors, double-refresh deadlocks,
-and the formerly trapped delete state.
+and the formerly trapped delete state. Character insertion also bounds the cursor before
+writing, including when an older editor state retains a cursor beyond the seventh cell.
+
+The native physical-B event clears the canonical-match byte before calling deletion, so
+the localized helper recognizes the preview by its 14-cell maximum, mode 0, and private
+navigation type `$F4`. It wraps only the native deletion call and retains ordinary B
+behavior in other modes, including the Rescue presentation wrapper layered over it.
 
 ### Disposable early-dungeon route
 
@@ -186,6 +199,9 @@ preview without star padding, an asserted native seven-cell draw origin, pixel-f
 type/delete reset states, successful free-name
 confirmation after both resets, canonical-token persistence through a real suspend and fresh
 SRAM reload, current/interim/legacy token expansion,
-the live **Start** shortcut's final 14-cell `Preservation` draw, two-item slot-allocation
+the live **Start** shortcut's final 14-cell `Preservation` draw, repeated physical **Select**
+preserving empty, typed, and recalled fields at byte and pixel level, physical **B** clearing
+that preview followed by forty controller-driven character entries with unchanged adjacent
+memory and successful seven-character confirmation, two-item slot-allocation
 independence, full-name expansion, return to Items, helper
 injection, and its object/mapping/history contracts.

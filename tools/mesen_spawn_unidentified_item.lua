@@ -20,7 +20,7 @@
 -- state, and this helper deliberately refuses to overwrite an existing custom mapping.
 -- It modifies live WRAM, not the ROM. Mesen may later persist those changes to SRAM.
 
-local TARGET_KEY = os.getenv("GB2_UNIDENTIFIED_TARGET") or "preservation_pot"
+local TARGET_KEY = os.getenv("GB2_UNIDENTIFIED_TARGET") or "passage_bracelet"
 
 local INVENTORY_BANK = 1
 local INVENTORY_BASE = 0xD2C1

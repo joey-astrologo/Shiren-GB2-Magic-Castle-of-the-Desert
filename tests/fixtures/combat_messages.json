@@ -106,7 +106,7 @@
   "rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
   "runtime_candidate_values": {
     "actor_name": 295,
-    "item_name": 347,
+    "item_name": 466,
     "trap_name": 22
   },
   "runtime_substitutions": {
@@ -126,13 +126,13 @@
   "source_free": true,
   "warning_records": 201,
   "warning_totals": {
-    "layout_distinct_combinations": 30511,
-    "layout_one_line": 15849,
-    "layout_soft_wrap": 14662,
+    "layout_distinct_combinations": 30865,
+    "layout_one_line": 15898,
+    "layout_soft_wrap": 14967,
     "layout_unsafe": 0,
-    "one_line": 351915,
-    "runtime_value_combinations": 741656,
-    "soft_wrap": 389741,
+    "one_line": 352791,
+    "runtime_value_combinations": 777237,
+    "soft_wrap": 424446,
     "unsafe": 0
   }
 }

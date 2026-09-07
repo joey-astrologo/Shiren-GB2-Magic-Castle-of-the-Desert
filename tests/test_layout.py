@@ -279,6 +279,43 @@ class OriginalRomLayoutTests(unittest.TestCase):
             )
             self.assertFalse(wide_final.safe)
 
+    def test_page_waits_preserve_physical_rows_and_bottom_cell_guard(self):
+        patched = english_font.install(self.rom)
+        for soft in (False, True):
+            with self.subTest(simulate_soft_wrap=soft):
+                measured = layout.source_layout(
+                    patched,
+                    english.encode_source("A<page><br>B<page><br>" + "W" * 22 + "a."),
+                    simulate_soft_wrap=soft,
+                )
+                self.assertEqual([(0, 0), (0, 1), (0, 2)],
+                                 [(line.surface, line.line) for line in measured.lines])
+                self.assertFalse(measured.safe)
+                self.assertEqual(137, measured.bottom_line_glyph_cell_overflows[0].origin)
+                overflow = layout.source_layout(
+                    patched, english.encode_source("A<br>B<page><br>C<br>D"),
+                    simulate_soft_wrap=soft,
+                )
+                self.assertEqual(((0, 4),), overflow.line_limit_overflows)
+                reset = layout.source_layout(
+                    patched, english.encode_source("A<br>B<page><box>C<br>D"),
+                    simulate_soft_wrap=soft,
+                )
+                self.assertEqual([(0, 0), (0, 1), (1, 0), (1, 1)],
+                                 [(line.surface, line.line) for line in reset.lines])
+                self.assertTrue(reset.safe)
+
+    def test_page_wait_in_middle_of_bottom_row_does_not_relabel_glyphs(self):
+        patched = english_font.install(self.rom)
+        for soft in (False, True):
+            measured = layout.source_layout(
+                patched,
+                english.encode_source("A<br>B<br>C<page>" + "W" * 21 + "a."),
+                simulate_soft_wrap=soft,
+            )
+            self.assertFalse(measured.safe)
+            self.assertEqual(2, measured.bottom_line_glyph_cell_overflows[0].line)
+
     def test_third_dialogue_line_reserves_room_for_page_marker(self):
         patched = english_font.install(self.rom)
         unsafe = english.encode_source(

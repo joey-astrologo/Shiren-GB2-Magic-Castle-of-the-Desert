@@ -10,9 +10,9 @@ Blank means incomplete; ``<empty>`` is an intentional zero-width translation.
 Composed item names have three mutually exclusive shapes proven by the formatter
 at 120:$47E9: an identified group-4 name, an unidentified group-5 appearance, or
 a group-11 class fragment followed by an FF-terminated custom-name slot.  The 20
-slots at WRAM $DD78 are eight bytes each, hence at most seven English glyph bytes
-plus the terminator.  The bound is the maximum of those three shapes, not the sum
-of every item family.
+slots at WRAM $DD78 are eight bytes each. Free labels contain at most seven
+glyphs; canonical tokens instead expand a group-12 root in its category. Both
+forms must contribute to the custom-name bound.
 """
 import argparse
 from collections import Counter
@@ -30,12 +30,17 @@ import extract
 import layout
 import runtime_terms
 import translations as translation_file
+import unidentified_names
 
 
 SCHEMA = "shiren-gb2-runtime-widths-v1"
 CUSTOM_ITEM_NAME_SLOTS = 20
 CUSTOM_ITEM_NAME_SLOT_BYTES = 8
 CUSTOM_ITEM_NAME_MAX_BYTES = CUSTOM_ITEM_NAME_SLOT_BYTES - 1
+# Root ranges and the native action-class index selecting a group-11 prefix.
+CANONICAL_NAME_PARTITIONS = (
+    (0, 26, 3), (27, 46, 6), (47, 80, 7), (81, 106, 8), (107, 122, 9),
+)
 
 WIDTH_FAMILY_NAMES = (
     "actor_name_tier_1",
@@ -44,6 +49,7 @@ WIDTH_FAMILY_NAMES = (
     "identified_item_names",
     "unidentified_item_appearances",
     "item_name_format_fragments",
+    "item_ability_roots",
     "trap_names",
     "location_names_primary",
     "location_names_history",
@@ -62,6 +68,7 @@ DOMAIN_FAMILIES = {
         "identified_item_names",
         "unidentified_item_appearances",
         "item_name_format_fragments",
+        "item_ability_roots",
     ),
     "location_record": ("location_names_primary", "location_names_history"),
     "sender_string": (),
@@ -87,6 +94,14 @@ class WidthMaximum:
     renderer_pixels: int
     composer_record_id: str
     renderer_record_id: str
+
+
+@dataclass(frozen=True)
+class CanonicalItemName:
+    text: str
+    composer_pixels: int
+    renderer_pixels: int
+    evidence: str
 
 
 @dataclass(frozen=True)
@@ -257,7 +272,34 @@ def _sum_maximum(first, second, label):
     )
 
 
-def _domain_statuses(families, player_maximum, custom_maximum):
+def canonical_item_name_candidates(font_rom, result, translated):
+    """Measure every enabled recall with its actual item-category prefix."""
+    records = _record_map(result)
+    candidates = []
+    for first, last, prefix_index in CANONICAL_NAME_PARTITIONS:
+        prefix_record = records[(11, prefix_index)]
+        prefix = translated.get((prefix_record.bank, prefix_record.address))
+        if prefix is None:
+            raise RuntimeWidthError("missing canonical-name prefix %s" % prefix_record.id)
+        prefix_widths = _measure_translation(font_rom, prefix)
+        for index in range(first, last + 1):
+            if index in unidentified_names.ROOT_DISABLED:
+                continue
+            record = records[(unidentified_names.ROOT_GROUP, index)]
+            root = translated.get((record.bank, record.address))
+            if root is None:
+                raise RuntimeWidthError("missing canonical-name root %s" % record.id)
+            root_widths = _measure_translation(font_rom, root)
+            candidates.append(CanonicalItemName(
+                english.decode_source(prefix.encoded + root.encoded),
+                prefix_widths[0] + root_widths[0],
+                prefix_widths[1] + root_widths[1],
+                "%s+%s" % (prefix.record_id, root.record_id),
+            ))
+    return tuple(candidates)
+
+
+def _domain_statuses(families, player_maximum, custom_maximum, canonical_maximum):
     out = {}
     for name, required in DOMAIN_FAMILIES.items():
         missing = tuple(
@@ -286,6 +328,7 @@ def _domain_statuses(families, player_maximum, custom_maximum):
                         families["identified_item_names"].maximum,
                         families["unidentified_item_appearances"].maximum,
                         custom_shape,
+                        canonical_maximum,
                     )
                 )
             else:
@@ -323,7 +366,14 @@ def analyze(font_rom, result, translated):
         "custom_name_7_bytes",
         "custom_name_7_bytes",
     )
-    domains = _domain_statuses(families, player_maximum, custom_maximum)
+    canonical_maximum = None
+    if all(families[name].complete for name in DOMAIN_FAMILIES["item_name"]):
+        canonical_maximum = _max_of(
+            WidthMaximum(row.composer_pixels, row.renderer_pixels,
+                         row.evidence, row.evidence)
+            for row in canonical_item_name_candidates(font_rom, result, translated)
+        )
+    domains = _domain_statuses(families, player_maximum, custom_maximum, canonical_maximum)
 
     occurrences = Counter()
     records = {}

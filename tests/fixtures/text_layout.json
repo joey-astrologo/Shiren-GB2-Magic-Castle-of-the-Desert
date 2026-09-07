@@ -221,9 +221,9 @@
     "max_renderer_pixels": 352,
     "max_explicit_lines": 10,
     "explicit_line_histogram": {
-      "1": 4522,
-      "2": 1231,
-      "3": 552,
+      "1": 4406,
+      "2": 1061,
+      "3": 838,
       "4": 43,
       "5": 117,
       "6": 90,

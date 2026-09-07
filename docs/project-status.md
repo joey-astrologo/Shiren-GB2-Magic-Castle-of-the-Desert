@@ -33,6 +33,16 @@ edited through the ordinary catalog workflow.
 - Stable extraction and semantic organization of 6,695 records and 7,163 logical
   references.
 - Thin Pixel-7 variable-width English font and measured line-layout validation.
+- Production validation includes final-row glyph cells and cumulative physical rows across
+  page waits. Item-message width bounds include full canonical recalled names with their
+  category prefixes; the longest current expansion is 107 pixels.
+- The shared VWF compositor clips secondary tile writes at the 144-pixel canvas edge.
+  Drinking Otogirisou and Leaping Grass exposed a three-pixel bottom-border gap in a
+  two-line combat window that the previous third-line audit missed. Both real item-use
+  routes preserve the complete bottom border in both fonts, with unchanged message text.
+- Sword/shield equipment previews start after the item-action cursor tile, so cursor
+  cleanup cannot erase the current or proposed value. Both unsigned-byte values and the
+  native arrow fit within 40 pixels, including three-digit totals on both sides.
 - Far-pointer allocation that separates ROM storage from visible line constraints.
 - Localized menus, Help/Secrets, Monster Notebook, item information, gameplay messages,
   combat text, and story/event text.
@@ -57,8 +67,12 @@ edited through the ordinary catalog workflow.
   control, seven-character free labels, 14-character canonical previews, and tokens that
   display complete English names without changing the native persistent slot layout.
   Canonical previews have blank tails, retain the original seven-cell horizontal origin,
-  and atomically reset to the native free editor on either character entry or `DEL`; both
-  transitions are live-route tested through return to Items.
+  and atomically reset to the native free editor on character entry, `DEL`, or physical B.
+  Live routes cover all three transitions, repeated typing without adjacent-memory writes,
+  and confirmation back to Items.
+- The shared English graphical-input controller ignores Select's obsolete Japanese kana
+  modifier. Regressions preserve typed and recalled item names, the default player name,
+  and native Rescue password symbols through Select and subsequent confirmation.
 - Adventure -> save-file navigation retains its native nine-row graph; the complete
   Continue/Secrets/Reset/Recap cursor route is replayed from the Mamel fixture and its
   cursor state, sprite positions, and stable framebuffer are frozen.

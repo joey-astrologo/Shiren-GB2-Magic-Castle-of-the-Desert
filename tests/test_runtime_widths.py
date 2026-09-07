@@ -51,6 +51,7 @@ class OriginalRomRuntimeWidthTests(unittest.TestCase):
                 "identified_item_names",
                 "unidentified_item_appearances",
                 "item_name_format_fragments",
+                "item_ability_roots",
             )
             for record_id in self.blank.families[family].record_ids
         }
@@ -120,6 +121,28 @@ class OriginalRomRuntimeWidthTests(unittest.TestCase):
             "192:$58FC": "Dragon Guard",
         }
         self.assertEqual(expected, {key: by_id[key] for key in expected})
+
+    def test_canonical_names_expand_beyond_the_free_label_bound(self):
+        translated = translations.load_path(ROOT / "script" / "en", self.result["records"])
+        analysis = runtime_widths.analyze(self.font_rom, self.result, translated)
+        candidates = runtime_widths.canonical_item_name_candidates(
+            self.font_rom, self.result, translated
+        )
+        self.assertEqual(119, len(candidates))
+        widest = max(candidates, key=lambda row: row.renderer_pixels)
+        self.assertEqual("Bracelet: Far-throwing", widest.text)
+        self.assertEqual((107, 107), (widest.composer_pixels, widest.renderer_pixels))
+        self.assertEqual(107, analysis.domains["item_name"].maximum.renderer_pixels)
+        self.assertIn("Pot: Transmutation", {row.text for row in candidates})
+        self.assertNotIn("Bracelet: Transmutation", {row.text for row in candidates})
+        self.assertEqual(7, runtime_widths.CUSTOM_ITEM_NAME_MAX_BYTES)
+
+        root = next(record for record in self.result["records"]
+                    if any(ref.group == 12 and ref.index == 5 for ref in record.references))
+        del translated[(root.bank, root.address)]
+        incomplete = runtime_widths.analyze(self.font_rom, self.result, translated)
+        self.assertFalse(incomplete.domains["item_name"].ready)
+        self.assertIn(root.id, incomplete.domains["item_name"].missing_record_ids)
 
     def test_complete_item_families_unlock_all_item_consumers(self):
         translated = self._complete_item_mapping()

@@ -5,10 +5,10 @@
 Status: **implemented and live-verified on 2026-09-07**.
 
 GFX-03 required changes to **44 of the 219 stored Monster Notebook descriptions**.
-No ordinary story dialogue or gameplay-message text currently requires editing for this
-specific defect.
+The later combat reproduction also requires the shared compositor repair described below;
+the original three-line audit did not cover the bottom of a two-line combat window.
 
-The completed repair is content plus surface-aware validation:
+The Monster Log repair is content plus surface-aware validation:
 
 1. teach the shared layout model to report any full-renderer glyph whose fixed eight-pixel
    compositor cell crosses x=144 and to reject crossings into an unowned or persistent row;
@@ -20,14 +20,41 @@ The completed repair is content plus surface-aware validation:
    crossings for surface-specific review; and
 5. add a PyBoy regression based on `SaveStates/monster-logs.mss` for both font variants.
 
-This plan fixes every known translated-text trigger for the persistent dialogue-border
-artifact and prevents future audited dialogue bottom lines from acquiring one. It does not
-make an unknown, unregistered runtime string intrinsically safe. A right-edge clip in the
-native compositor would provide that stronger engine-wide guarantee, but it is a separate,
-higher-risk patch and is not required by the current text catalog.
+This content repair covers the Monster Log. Production additionally installs
+`tools/glyph_cell_clip.py`, which prevents the shared compositor's secondary tile write
+from crossing the 144-pixel canvas edge. It repairs the reproduced combat gap without
+changing message wording or line breaks. The raw glyph-cell diagnostics remain in place.
 
 The wording below was approved and has been applied to
 [`script/en/monsters.tsv`](../script/en/monsters.tsv).
+
+## Combat scope correction and runtime repair
+
+Drinking **Otogirisou** or **Leaping Grass** through the real item menu composes group 11
+index 32 (`194:$5679`) into a two-line mode-`$10` window:
+
+```text
+Made Otogirisou
+into medicine and consumed it.
+```
+
+The final period begins at x=139/y=40. Its advance of two pixels fits, but its eight-pixel
+cell crosses the canvas by three pixels and erases the first inner bottom-border tile.
+The original audit measured gameplay third lines and therefore missed this reachable
+second-line bottom. A mode with an unbounded/context-dependent lifetime cannot be declared
+safe because `bottom_line_glyph_cell_overflows` returns no bounded-row violations.
+
+The guarded native patch changes the secondary-write gate at `0:$3971` and moves the
+aligned-cell bypass to the existing register-restoration path at `$3996`. A six-byte
+predicate at `0:$3FF6` identifies the final canvas tile. Primary-tile drawing, interior tile
+crossings, font-bank switching, pen movement, and source composition remain native.
+
+`tests/test_glyph_cell_clip.py` reproduces both item-use routes from `SaveStates/Mamel.state`
+with a disposable identified-grass inventory. The test failed on all four item/font
+combinations before the patch and passes after it, checking the unchanged message,
+mode `$10`, period origin, and entire bottom frame over three settled frames. Its separate
+pixel-oracle test exercises all 144 origins in five modes, both font styles, and both
+native glyph heights/source banks, including destination canaries and bank/stack restoration.
 
 ## What is being measured
 
@@ -39,8 +66,9 @@ description line 1
 description line 2
 ```
 
-The VWF pen uses each glyph's variable advance, but the native compositor always writes an
-eight-pixel cell. A glyph is safe only when its origin is x=136 or earlier:
+The VWF pen uses each glyph's variable advance, but the original compositor writes an
+eight-pixel cell. The conservative unpatched-footprint rule requires an origin at x=136
+or earlier:
 
 ```text
 glyph origin + 8 <= 144
@@ -155,13 +183,11 @@ and menu-text fixtures contain the resulting hashes and widest record.
 
 Implemented: a fixed-cell crossing from the last owned text row is now a build failure for story
 prose, gameplay-message templates with their bounded runtime values, item descriptions,
-Help, and other known full-renderer surfaces. Existing ordinary dialogue remains unchanged:
-its 647 measured third-line instances have no such crossing, and the 40 measured gameplay
-third-line instances have still more clearance. Keep crossings from earlier text rows in
-the audit output until their following-row repaint behavior is explicitly modeled; they are
-not part of this bottom-border adjustment list. Non-dialogue edge cases found on other
-vertical layouts likewise remain separate review items because their spill target is not
-the dialogue bottom border.
+Help, and other known full-renderer surfaces. The 647 measured prose third-line instances
+and 40 gameplay third-line instances had no crossing, but that finding did not cover
+two-line combat windows. Keep raw crossings from other rows in the audit output until the
+consumer's lifetime is explicitly modeled. The shared runtime clip now blocks these
+secondary writes at the canvas edge regardless of which row owns the frame.
 
 ### 5. Prove the visible repair
 
@@ -179,7 +205,8 @@ Acceptance result:
 
 - 44/44 edited records safe under composer, renderer-pen, and fixed-cell checks;
 - 209/209 native visible Monster Log compositions have safe bottom rows;
-- zero unsafe current ordinary-dialogue or gameplay-message bottom rows;
+- zero raw crossings on the audited ordinary-dialogue and gameplay **third** rows;
+- runtime protection and live border regressions for the reproduced two-line combat window;
 - exact bottom-border preservation in the converted-state test; and
 - both production font variants build successfully.
 
@@ -198,12 +225,9 @@ does not edit the ROM or battery SRAM.
 ## Effect on in-game dialogue
 
 The content edits alone repair only the Monster Log because those 44 strings are used
-there. The shared validator is what protects current and future ordinary in-game dialogue:
-it will reject any three-line box whose third line could make the same fixed-cell write
-into the bottom border. The current catalog already passes that bottom-row rule, so no story
-or gameplay-message wording is on this adjustment list.
-
-An engine-level clip would additionally protect unmodeled runtime producers without text
-changes. If that stronger guarantee is chosen later, keep the static diagnostics anyway:
-they document the intended geometry and avoid silently clipping translated glyphs at the
-right edge.
+there. The shared validator also rejects raw third-line crossings in ordinary dialogue.
+Combat required the additional native clip because its frame can be below line two.
+Production now suppresses the offending secondary tile write in the shared compositor,
+preserving existing message wording, native wrapping, and all pixels inside x=0..143.
+Static diagnostics remain conservative authoring checks; a clipped cell does not prove
+that an overlong sentence, visible glyph, or page marker fits its intended surface.

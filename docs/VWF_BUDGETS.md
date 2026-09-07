@@ -22,7 +22,7 @@ Every consumer can impose several independent constraints:
 |---|---:|---|---|---|
 | Dialogue | `$02` | `<144` composer px and `<=144` renderer pen; the bottom line must keep every 8px glyph cell inside x=144; a third-line `<page>` must end at x<=135 | 3 physical lines per `<box>`; y=21; `<br>` +11 | `prose_editor.py`, `wrap_en.py`, `wrap_item_messages.py` |
 | Full-screen item detail | `$08` | Same pen limits; fixed-cell acceptance depends on the spill target and final owned row | 11 composer lines; y=1; `<br>` +11 | `wrap_items.py` |
-| Stepped combat window | `$10` | Same pen limits and surface-aware fixed-cell checks with native `<cF3>` rollback | y=24; break step +16; context controls lifetime | `combat_messages.py` |
+| Stepped combat window | `$10` | Same pen limits, native `<cF3>` rollback, and compositor edge clipping | y=24; break step +16; context controls lifetime; two-line windows are reachable | `combat_messages.py`, `glyph_cell_clip.py` |
 | Positioned/direct | `$04` representative | Surface-specific subrange of the 144 px canvas | One row unless the caller proves otherwise | `surfaces.py`, `build.py` |
 
 “143 composer pixels” means the source line must remain strictly below the `$90` wrap
@@ -32,7 +32,7 @@ renderer applies without adding it to the composer's width counter.
 
 ## Glyph-cell edge safety
 
-The VWF advance is not the complete painted-memory footprint. The renderer positions the
+The VWF advance is not the complete native painted-memory footprint. The renderer positions the
 next character with the variable advance in `$C4D5`, but the native compositor at
 `0:$3922` receives an eight-pixel cell. On an 18-tile row-major canvas, a cell beginning at
 x=137 or later crosses the x=144 boundary and aliases the first tile of the following row.
@@ -59,7 +59,28 @@ the first bottom-border tile. Runtime composition matters: the Monster Notebook 
 two-line description, but the live surface prepends the monster name and displays the
 description on physical lines two and three.
 
-The page marker has a separate nine-pixel advance rule described below. Satisfying the
+Combat also reaches this defect on physical line **two** in mode `$10`: drinking
+Otogirisou or Leaping Grass renders `Made <name>` followed by `into medicine and consumed
+it.` The period starts at x=139, y=40 and the native eight-pixel cell erases three columns
+of the bottom frame. A three-line dialogue audit cannot certify this variable-lifetime
+consumer; `bottom_line_glyph_cell_overflows` has no bounded last row for mode `$10`.
+
+Production now installs `glyph_cell_clip.py`. Its bank-0 compositor gate skips the
+secondary tile write when the origin is in the final canvas tile (x>=136), while retaining
+the primary tile and the native variable advance. Aligned cells elsewhere still skip the
+secondary write; unaligned cells inside the canvas still paint both tiles. This protects
+every row using this compositor without adding a line break or changing message text.
+Raw fixed-cell diagnostics and conservative authoring checks remain useful: clipping does
+not excuse text ink, a pen, a page marker, or vertical content that actually exceeds its
+surface's budget.
+
+The production build checks fixed glyph cells on the final physical row of known
+full-renderer surfaces as well as their pen widths. Dialogue uses three rows; item detail
+and Help retain their eleven-row profile. Streamed combat retains its own lifetime and
+receives the runtime edge protection above; absence of a bounded-row diagnostic is not
+evidence that its unpatched border was safe.
+Composed Monster Notebook descriptions still use their separate name-plus-description
+check. The page marker has a separate nine-pixel advance rule described below. Satisfying the
 glyph-cell rule does not prove that a following marker also fits.
 
 ## Dialogue box accounting
@@ -68,7 +89,7 @@ The three-line limit is physical, not textual. `<page>` waits but does not reset
 cursor, so these two fragments do not have the same occupancy:
 
 ```text
-Line 1<br>Line 2<page>Line 3
+Line 1<br>Line 2<page><br>Line 3
 Line 1<br>Line 2<page><box>Line 1 in a new box
 ```
 
@@ -78,6 +99,10 @@ the visible speaker label where appropriate.
 
 `wrap_en.py` uses the fewest safe lines and balances word spaces, but it never invents a
 reader-controlled page/box decision. The editor owns pacing.
+
+Both explicit and soft-wrap layout analysis keep the physical surface and row across
+`<page>`, including a wait in the middle of a row. Only `<box>` resets them; splitting a
+message into reader-controlled waits cannot hide a bottom-row glyph-cell spill.
 
 The blinking page marker is a native nine-pixel glyph. On the third line, a text pen at
 x=136 or later makes that marker reach the renderer's 145-pixel wrap threshold. It then
@@ -93,6 +118,7 @@ The build has explicit contracts for known direct-rendered rows:
 |---|---:|---:|---|
 | Synthesis-rune description | x=3 to 144 | 141 px | One direct row |
 | Item-action command | x=8 to 48 visible; x=56 logical stride | 40 px visible | Black ink must fit the five mapped label tiles. `Take Out` and `Exchange` advance 41 px only because one gray shadow column enters the next cursor-only tile; `menu_graphics.py` clears both alias columns before upload |
+| Equipment comparison | x=104 to 144; y=20 | 40 px | Current and proposed unsigned-byte values (0..255), separated by the native eight-pixel arrow, need at most 38 px. x=96..103 belongs to the cursor cleanup; rendering there erases leading digits |
 | Status condition body | x=1 to 144 | 143 px | Heading fields have separate contracts |
 | Diary/front-end hub | x=6 to 80 | 74 px | Conditional rows |
 | Start Adventure submenu | x=56 to 144 | 88 px | Up to eight enabled rows |
@@ -117,7 +143,7 @@ is explicit. Current maxima are:
 |---|---:|
 | Actor/monster names | 95 px |
 | Trap names | 87 px |
-| Item names and composed item forms | 109 px |
+| Item names, including prefixed canonical recalls | 107 px |
 | Locations | 80 px |
 | Seven-byte custom item-name slot | 49 px |
 
@@ -177,6 +203,12 @@ not the name-entry limit.
   token and the ordinary item-name renderer expands the complete translated root. Those
   14 cells render from the original seven-cell horizontal origin instead of shifting left. Every
   active group-12 root is build-validated against that 14-cell limit.
+
+Runtime item-message bounds include every enabled canonical root with its actual category
+prefix, in addition to identified names, appearances, and seven-character free labels.
+The current maximum is `Bracelet: Far-throwing` at 107 pixels. Canonical recall is a token
+expansion, so the seven-byte free-label bound cannot stand in for that domain. The
+`Pushed <name>.` message has a native soft-wrap checkpoint before the name.
 
 ## Acceptance policy
 

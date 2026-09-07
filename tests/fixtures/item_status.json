@@ -24,10 +24,10 @@
   "item_row": {
     "start_x": 7,
     "right_edge": 144,
-    "maximum_translated_name_pixels": 105,
+    "maximum_translated_name_pixels": 107,
     "marker_pixels": 14,
-    "rightmost_pixel": 126,
-    "remaining_pixels": 18
+    "rightmost_pixel": 128,
+    "remaining_pixels": 16
   },
   "pyboy_state": {
     "path": "SaveStates/broken-bracelet.state",

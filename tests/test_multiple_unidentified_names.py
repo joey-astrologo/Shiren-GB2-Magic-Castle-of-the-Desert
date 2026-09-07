@@ -1,4 +1,5 @@
 from hashlib import sha1
+from collections import deque
 import io
 from pathlib import Path
 import sys
@@ -53,6 +54,133 @@ class MultipleUnidentifiedNameTests(unittest.TestCase):
 
     def test_user_fixture_is_frozen(self):
         self.assertEqual(STATE_SHA1, sha1(STATE.read_bytes()).hexdigest())
+
+    def test_select_preserves_empty_free_and_canonical_name_fields(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            rom = Path(temporary) / "name-select.gbc"
+            rom.write_bytes(self.localized)
+            pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+            kana_calls = []
+            pyboy.hook_register(18, 0x549D, lambda _=None: kana_calls.append(True), None)
+
+            def press(button):
+                pyboy_route.press(pyboy, button)
+                pyboy_route.run_frames(pyboy, 30)
+
+            def state():
+                return (bytes(pyboy.memory[0xC16D:0xC17C]),
+                        tuple(pyboy.memory[at] for at in
+                              (0xC14E, 0xC14F, 0xC152, 0xC153, 0xC195, 0xC196)))
+
+            def ink():
+                screen = pyboy.screen.image
+                return tuple(screen.getpixel((x, y))[:3] == (0, 0, 0)
+                             for y in range(24) for x in range(160))
+
+            try:
+                pyboy_route.run_frames(
+                    pyboy, 530,
+                    ((60, "a"), (120, "down"), (180, "down"),
+                     (240, "down"), (300, "down"), (400, "a")),
+                )
+                for case in ("empty", "free", "canonical"):
+                    with self.subTest(case=case):
+                        if case == "free":
+                            for button in ("down", "left", "down", "down", "left", "left"):
+                                press(button)
+                            self.assertEqual(39, pyboy.memory[0xC14F])  # English n
+                            press("a")
+                            self.assertEqual(english.encode("n")[0], pyboy.memory[0xC16D])
+                        elif case == "canonical":
+                            press("b")  # Clear the free-label history filter.
+                            press("start")
+                            self.assertEqual(107, pyboy.memory[0xC196])
+                            self.assertEqual(english.encode("Preservation"),
+                                             bytes(pyboy.memory[0xC16D:0xC179]))
+                        before, pixels = state(), ink()
+                        for _ in range(3):
+                            press("select")
+                            self.assertEqual(before, state())
+                            self.assertEqual(pixels, ink())
+                self.assertEqual([], kana_calls)
+            finally:
+                pyboy.stop(save=False)
+
+    def test_hardware_b_clears_recall_and_repeated_typing_stays_in_free_field(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            rom = Path(temporary) / "recall-hardware-b.gbc"
+            rom.write_bytes(self.localized)
+            pyboy = pyboy_route.start(self.PyBoy, rom, STATE)
+
+            def press(button):
+                pyboy_route.press(pyboy, button)
+                pyboy_route.run_frames(pyboy, 30)
+
+            def field_ink():
+                # The caret's palette blinks independently of input. Compare
+                # the actual black glyph pixels, not the animation phase.
+                image = pyboy.screen.image
+                return tuple(image.getpixel((x, y))[:3] == (0, 0, 0)
+                             for y in range(24) for x in range(160))
+
+            def select(target):
+                pending = deque([(pyboy.memory[0xC14F], ())])
+                seen = set()
+                while pending:
+                    node, path = pending.popleft()
+                    if node == target:
+                        for button in path:
+                            press(button)
+                        self.assertEqual(target, pyboy.memory[0xC14F])
+                        return
+                    if node in seen:
+                        continue
+                    seen.add(node)
+                    for index, button in enumerate(("down", "up", "left", "right")):
+                        neighbor = pyboy.memory[0xC800 + node * 7 + index]
+                        pending.append((neighbor, path + (button,)))
+                self.fail("keyboard node is unreachable")
+
+            try:
+                pyboy_route.run_frames(
+                    pyboy, 530,
+                    ((60, "a"), (120, "down"), (180, "down"),
+                     (240, "down"), (300, "down"), (400, "a")),
+                )
+                empty_field = field_ink()
+                press("start")
+                self.assertEqual(107, pyboy.memory[0xC196])
+                self.assertEqual(14, pyboy.memory[0xC153])
+                adjacent = bytes(pyboy.memory[0xC17C:0xC195])
+                press("b")
+                self.assertEqual(0, pyboy.memory[0xC152])
+                self.assertEqual(7, pyboy.memory[0xC153])
+                self.assertEqual(0xFF, pyboy.memory[0xC196])
+                self.assertEqual(b"\xD5" * 7 + b"\xFF",
+                                 bytes(pyboy.memory[0xC16D:0xC175]))
+                self.assertEqual(empty_field, field_ink())
+                # A full field moves selection to OK. Navigate back to A each
+                # time so repeated real inputs exercise insertion, not confirm.
+                for _ in range(40):
+                    select(0)
+                    press("a")
+                    self.assertLess(pyboy.memory[0xC152], 7)
+                    self.assertEqual(7, pyboy.memory[0xC153])
+                    self.assertEqual(0, pyboy.memory[0xC195])
+                    self.assertEqual(adjacent, bytes(pyboy.memory[0xC17C:0xC195]))
+                self.assertEqual(english.encode("AAAAAAA") + b"\xFF",
+                                 bytes(pyboy.memory[0xC16D:0xC175]))
+                select(0x4D)
+                press("a")
+                pyboy_route.run_frames(pyboy, 100)
+                slot = pyboy_route.work_read(pyboy, 0x2C82 + 107 * 2 + 1)[0]
+                self.assertLess(slot, 20)
+                self.assertEqual(
+                    english.encode("AAAAAAA") + b"\xFF",
+                    pyboy_route.work_read(pyboy, 0x2D78 + slot * 8, 8),
+                )
+            finally:
+                pyboy.stop(save=False)
 
     def test_start_shortcut_finishes_with_the_full_canonical_preview(self):
         with tempfile.TemporaryDirectory() as temporary:

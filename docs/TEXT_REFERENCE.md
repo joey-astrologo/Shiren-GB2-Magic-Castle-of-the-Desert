@@ -87,7 +87,7 @@ Current complete maximums under Thin Pixel-7 are:
 |---|---:|
 | Actor/monster name | 95 px |
 | Trap name | 87 px |
-| Identified/composed item name | 109 px |
+| Item name, including prefixed canonical recalls | 107 px |
 | Location name | 80 px |
 | Seven-byte custom item-name slot | 49 px |
 

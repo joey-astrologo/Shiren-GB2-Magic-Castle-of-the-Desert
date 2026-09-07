@@ -129,6 +129,18 @@ NAVIGATION_RECORD_SIZE = 7
 NAVIGATION_SIZE = NAVIGATION_NODES * NAVIGATION_RECORD_SIZE
 NAVIGATION_SHA1 = "7ba13e1ec4eababe201fc8fa178ba55144fd84dc"
 
+# Shared graphical-input event 6 is physical Select. Its Japanese handler
+# cycles kana voicing marks in the field; English glyph bytes overlap that
+# table and would become Japanese glyphs. Route it to the existing idle event.
+INPUT_EVENT_BANK = 16
+INPUT_EVENT_TABLE_ADDRESS = 0x5AE3
+INPUT_EVENT_TABLE_ORIGINAL = bytes.fromhex(
+    "5B5BF55AF55AF55AF55A305B505B0F5B5E5B"
+)
+SELECT_EVENT_ADDRESS = INPUT_EVENT_TABLE_ADDRESS + 6 * 2
+IDLE_EVENT_ADDRESS = 0x5B5B
+IDLE_EVENT_ORIGINAL = bytes.fromhex("3EFFC9")
+
 MAX_VISIBLE_CHARACTERS = 6
 DEFAULT_NAME = "Shiren"
 UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -775,6 +787,8 @@ def owned_ranges():
             )
         )
     return patches + tuple(replay_ranges) + (
+        (_offset(INPUT_EVENT_BANK, SELECT_EVENT_ADDRESS),
+         _offset(INPUT_EVENT_BANK, SELECT_EVENT_ADDRESS) + 2),
         (navigation_at, navigation_at + NAVIGATION_SIZE),
         (
             _runtime_offset(RUNTIME_ADDRESS),
@@ -786,6 +800,17 @@ def owned_ranges():
 def install(rom, approved=None, verify_original=True, checksums=True):
     """Return ``rom`` with six-character names and ranking suffixes installed."""
     out = bytearray(install_replay_names(rom, verify_original=verify_original))
+    for address, expected in (
+        (INPUT_EVENT_TABLE_ADDRESS, INPUT_EVENT_TABLE_ORIGINAL),
+        (IDLE_EVENT_ADDRESS, IDLE_EVENT_ORIGINAL),
+    ):
+        at = _offset(INPUT_EVENT_BANK, address)
+        if verify_original and bytes(out[at:at + len(expected)]) != expected:
+            raise Name6Error("graphical-input event at %s is not original"
+                             % extract.location(INPUT_EVENT_BANK, address))
+    select_at = _offset(INPUT_EVENT_BANK, SELECT_EVENT_ADDRESS)
+    out[select_at:select_at + 2] = IDLE_EVENT_ADDRESS.to_bytes(2, "little")
+
     for name, bank, address, original, target in ROUTINE_PATCHES:
         at = _offset(bank, address)
         if verify_original and bytes(out[at:at + len(original)]) != original:

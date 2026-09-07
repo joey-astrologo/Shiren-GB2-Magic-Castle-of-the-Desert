@@ -314,6 +314,9 @@ class UnidentifiedNameInstallerTests(unittest.TestCase):
             unidentified_names.ASSEMBLED_CODE,
             raw[start:start + len(unidentified_names.ASSEMBLED_CODE)],
         )
+        helper = start + unidentified_names.HARDWARE_B_ADDRESS - 0x4000
+        self.assertEqual(unidentified_names.HARDWARE_B_CODE,
+                         raw[helper:helper + len(unidentified_names.HARDWARE_B_CODE)])
 
 
 class LiveUnidentifiedNameTests(unittest.TestCase):
@@ -486,40 +489,42 @@ class LiveUnidentifiedNameTests(unittest.TestCase):
     def test_free_typing_stays_at_seven_even_with_an_expanded_recall_field(self):
         pyboy = self._pyboy()
         try:
-            pyboy.memory[0xC195] = unidentified_names.MODE
-            pyboy.memory[unidentified_names.INPUT_MAXIMUM_ADDRESS] = (
-                unidentified_names.FILL_IN_MAXIMUM
-            )
-            pyboy.memory[unidentified_names.INPUT_POSITION_ADDRESS] = 6
-            pyboy.memory[0xC196] = 0xFF
-            raw = english.encode("ABCDEFG") + b"\xFF" + b"\xD5" * 7
-            for offset, value in enumerate(raw):
-                pyboy.memory[unidentified_names.INPUT_BUFFER_ADDRESS + offset] = value
+            for position in (6, 7, 11, 14, 0xFF):
+                with self.subTest(position=position):
+                    pyboy.memory[0xC195] = unidentified_names.MODE
+                    pyboy.memory[unidentified_names.INPUT_MAXIMUM_ADDRESS] = (
+                        unidentified_names.FILL_IN_MAXIMUM
+                    )
+                    pyboy.memory[unidentified_names.INPUT_POSITION_ADDRESS] = position
+                    pyboy.memory[0xC196] = 0xFF
+                    raw = english.encode("ABCDEFG") + b"\xFF" + b"\xD5" * 7
+                    for offset, value in enumerate(raw):
+                        pyboy.memory[unidentified_names.INPUT_BUFFER_ADDRESS + offset] = value
 
-            self._invoke(
-                pyboy,
-                unidentified_names.RUNTIME_BANK,
-                unidentified_names.INPUT_ADDRESS,
-                c=name6.KEYBOARD_CHARACTERS.index("H"),
-            )
-            self.assertEqual(
-                6, pyboy.memory[unidentified_names.INPUT_POSITION_ADDRESS]
-            )
-            # At the final native cell, another character edits that cell; it
-            # must not extend into the presentation-only recall tail.
-            self.assertEqual(
-                english.encode("ABCDEFH") + b"\xFF",
-                bytes(
-                    pyboy.memory[
-                        unidentified_names.INPUT_BUFFER_ADDRESS:
-                        unidentified_names.INPUT_BUFFER_ADDRESS + 8
-                    ]
-                ),
-            )
-            self.assertEqual(
-                unidentified_names.FREE_NAME_MAXIMUM,
-                pyboy.memory[unidentified_names.INPUT_MAXIMUM_ADDRESS],
-            )
+                    self._invoke(
+                        pyboy,
+                        unidentified_names.RUNTIME_BANK,
+                        unidentified_names.INPUT_ADDRESS,
+                        c=name6.KEYBOARD_CHARACTERS.index("H"),
+                    )
+                    self.assertEqual(
+                        6, pyboy.memory[unidentified_names.INPUT_POSITION_ADDRESS]
+                    )
+                    # At the final native cell, another character edits that cell; it
+                    # must not extend into the presentation-only recall tail.
+                    self.assertEqual(
+                        english.encode("ABCDEFH") + b"\xFF",
+                        bytes(
+                            pyboy.memory[
+                                unidentified_names.INPUT_BUFFER_ADDRESS:
+                                unidentified_names.INPUT_BUFFER_ADDRESS + 8
+                            ]
+                        ),
+                    )
+                    self.assertEqual(
+                        unidentified_names.FREE_NAME_MAXIMUM,
+                        pyboy.memory[unidentified_names.INPUT_MAXIMUM_ADDRESS],
+                    )
         finally:
             pyboy.stop(save=False)
 

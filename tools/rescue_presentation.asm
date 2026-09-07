@@ -20,7 +20,7 @@ DEF NativeEmpty           EQU $D5
 DEF Mode0Input            EQU $4000 ; bank $FA; delegates every non-mode-0 mode
 DEF Name6ScreenClean      EQU $4232 ; bank $FD
 DEF NativeInsert          EQU $524C ; bank $12, character in B
-DEF NativeHardwareB       EQU $53B0 ; bank $12
+DEF Mode0HardwareB        EQU $45C0 ; bank $FA; delegates native free deletion
 DEF NativeInputRefresh    EQU $4D51 ; bank $04
 DEF NativeScreen          EQU $4045 ; bank $F4
 
@@ -269,8 +269,8 @@ ASSERT @ <= RescueHardwareBAddress
 ; symbols are presented through the English mapping. The rest of the native
 ; handler, including its empty-field result and $FF return value, stays intact.
 RescueHardwareB::
-    ld a,$12
-    ld hl,NativeHardwareB
+    ld a,$FA
+    ld hl,Mode0HardwareB
     call FarDispatch
     ld a,[wInputMode]
     cp FirstRescueMode

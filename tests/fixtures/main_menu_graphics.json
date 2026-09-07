@@ -45,5 +45,19 @@
     "contaminated_tiles": {"60": "00000000000000000000000000000080", "72": "00800000008000000000000000000000"},
     "artifact_pixels": [[104, 95], [104, 96], [104, 98]],
     "background_rgb": [248, 248, 248]
+  },
+  "equipment_preview": {
+    "position_store": "17:$71A1",
+    "original_hex": "3E60EAD6C43E14EAD7C4",
+    "start_pen": [
+      104,
+      20
+    ],
+    "right_edge": 144,
+    "available_pixels": 40,
+    "value_domain": [
+      0,
+      255
+    ]
   }
 }

@@ -347,6 +347,12 @@ class Name6InstallerTests(unittest.TestCase):
         self.assertTrue(changed <= allowed)
         cartridge.verify_checksums(self.output)
 
+    def test_select_uses_idle_handler_without_changing_other_input_events(self):
+        at = extract.file_offset(name6.INPUT_EVENT_BANK, name6.INPUT_EVENT_TABLE_ADDRESS)
+        native = name6.INPUT_EVENT_TABLE_ORIGINAL
+        expected = native[:12] + name6.IDLE_EVENT_ADDRESS.to_bytes(2, "little") + native[14:]
+        self.assertEqual(expected, self.output[at:at + len(native)])
+
     def test_source_code_and_runtime_guards_fail_closed(self):
         cases = [
             (bank, address)
@@ -354,6 +360,8 @@ class Name6InstallerTests(unittest.TestCase):
                 name6.ROUTINE_PATCHES + name6.CALL_PATCHES
             )
         ] + [
+            (name6.INPUT_EVENT_BANK, name6.SELECT_EVENT_ADDRESS),
+            (name6.INPUT_EVENT_BANK, name6.IDLE_EVENT_ADDRESS),
             (name6.NAVIGATION_BANK, name6.NAVIGATION_ADDRESS),
             (name6.RUNTIME_BANK, name6.RUNTIME_ADDRESS),
             (name6.REPLAY_POINTER_BANK, name6.REPLAY_POINTER_ADDRESS),
@@ -557,6 +565,38 @@ class LiveName6Tests(unittest.TestCase):
                         bytes(pyboy.memory[0xC620:0xC627]),
                     )
                     self.assertEqual(6, pyboy.register_file.C)
+        finally:
+            pyboy.stop(save=False)
+
+    def test_physical_select_preserves_default_name_and_confirmation(self):
+        pyboy = self.PyBoy(
+            str(self.localized_path), window="null",
+            ram_file=io.BytesIO(bytes(0x8000)), sound_emulated=False,
+        )
+        pyboy.set_emulation_speed(0)
+        try:
+            for frame in range(721):
+                if frame in (360, 540):
+                    pyboy.button("start" if frame == 360 else "a", 5)
+                pyboy.tick()
+            pyboy.button("a", 5)
+            capture_dialogue._ticks(pyboy, 240)
+            self.assertEqual(4, pyboy.memory[0xC195])
+            expected = english.encode("Shiren") + b"\xFF"
+            self.assertEqual(expected, bytes(pyboy.memory[0xC16D:0xC174]))
+            position = pyboy.memory[0xC152]
+            for _ in range(3):
+                pyboy.button("select", 5)
+                capture_dialogue._ticks(pyboy, 30)
+                self.assertEqual(expected, bytes(pyboy.memory[0xC16D:0xC174]))
+                self.assertEqual(position, pyboy.memory[0xC152])
+            pyboy.button("start", 5)
+            capture_dialogue._ticks(pyboy, 30)
+            self.assertEqual(0x4D, pyboy.memory[0xC14F])
+            pyboy.button("a", 5)
+            capture_dialogue._ticks(pyboy, 100)
+            self.assertEqual(expected[:4], bytes(pyboy.memory[0xC252:0xC256]))
+            self.assertEqual(expected[4:6], bytes(pyboy.memory[0xC2A2:0xC2A4]))
         finally:
             pyboy.stop(save=False)
 

@@ -105,6 +105,21 @@
       }
     },
     {
+      "name": "item_ability_roots",
+      "entries": 123,
+      "unique_records": 123,
+      "membership_sha1": "650ed931295ee135bfee71e3b754d5019eb308b4",
+      "translated_records": 123,
+      "missing_records": 0,
+      "complete": true,
+      "maximum": {
+        "composer_pixels": 67,
+        "renderer_pixels": 67,
+        "composer_evidence": "194:$63B7",
+        "renderer_evidence": "194:$63B7"
+      }
+    },
+    {
       "name": "trap_names",
       "entries": 22,
       "unique_records": 22,
@@ -172,7 +187,9 @@
     },
     {
       "name": "trap_name",
-      "families": ["trap_names"],
+      "families": [
+        "trap_names"
+      ],
       "consumer_occurrences": 8,
       "consumer_records": 7,
       "missing_records": 0,
@@ -187,7 +204,9 @@
     },
     {
       "name": "identified_item_name",
-      "families": ["identified_item_names"],
+      "families": [
+        "identified_item_names"
+      ],
       "consumer_occurrences": 1,
       "consumer_records": 1,
       "missing_records": 0,
@@ -223,7 +242,8 @@
       "families": [
         "identified_item_names",
         "unidentified_item_appearances",
-        "item_name_format_fragments"
+        "item_name_format_fragments",
+        "item_ability_roots"
       ],
       "consumer_occurrences": 104,
       "consumer_records": 101,
@@ -231,10 +251,10 @@
       "permanently_unresolved": false,
       "ready": true,
       "maximum": {
-        "composer_pixels": 105,
-        "renderer_pixels": 105,
-        "composer_evidence": "192:$5E4B",
-        "renderer_evidence": "192:$5E4B"
+        "composer_pixels": 107,
+        "renderer_pixels": 107,
+        "composer_evidence": "194:$558B+194:$6206",
+        "renderer_evidence": "194:$558B+194:$6206"
       }
     },
     {

@@ -52,8 +52,10 @@ text growth.
 | 0 | `$1F8C-$1F8E` | `far_text.py`: source selector call | Guarded patch |
 | 0 | `$1FD3-$1FD5` | `far_text.py`: direct selector call | Guarded patch |
 | 0 | `$37B9-$37BE` | `dialogue_pacing.py`: explicit-page auto-advance bypass | Guarded patch |
+| 0 | `$3971-$3976`, `$397D-$397E` | `glyph_cell_clip.py`: VWF secondary-tile write gate and aligned-cell bypass | Guards the complete native `$3922-$39E2` compositor; clips only the secondary write at x>=136 and preserves primary-tile rendering |
 | 0 | `$355F-$3566`, `$3573-$357A` | True Wanderer and Clear Campaign six-symbol display-generator calls | `rescue_presentation.py` redirects only the two certificate display copies; native `$C16D` values remain unchanged |
 | 0 | `$3FBD-$3FF5` | `far_text.py`: publishing and nonpublishing far selectors | Exclusive verified cave |
+| 0 | `$3FF6-$3FFB` | `glyph_cell_clip.py`: six-byte right-edge predicate | Exclusive verified remainder of the same bank-0 tail; native table data ends at `$3FBC`, far selectors end at `$3FF5`, and `$3FFC-$3FFF` stays unused |
 | 3 | `$4442-$4841` | Native four-page width table; English advances installed here | `english_font.py` only |
 | 3 | `$4842-$5841` | Native one-byte font with style-selected Thin Pixel-7 English slots. Its `$5742-$5841` suffix is also the packed top-HUD atlas: `hud_font.py` replaces decimal tiles `$5742-$5791`, label tiles `$57B2-$57E1` (`E/F`, `L/v`, `H/p`, preserving native `E`), and slash tile `$57E2-$57F1`; `$5792-$57B1` (`A-D`) and `$57F2-$5841` (meter/blanks) stay native and are audited read-only | `english_font.py` owns its English slots; `hud_font.py` exclusively owns `$5742-$5791`, `$57B2-$57E1`, and `$57E2-$57F1` |
 | 3 | `$6A49-$6A53` | Shared floor-popup template load hook | `stairs_menu.py` installs the bank-254 base; `service_menus.py` chains through its installed helper |
@@ -78,11 +80,13 @@ text growth.
 | 17 | `$4747-$474E` | Generated communication-code dynamic-text cache call | `rescue_presentation.py` redirects this call only; native `$C16D` bytes are restored after the localized cache copy |
 | 17 | `$4309-$430E` | Multiple-item town-shop count suffix | `shop_sale_count.py` terminates the cached decimal value instead of appending Japanese `ko` |
 | 17 | `$6F04-$6F15` | Item-action rendered-canvas upload tail | `menu_graphics.py` redirects the guarded native copy through bank 255 so cursor-only alias tiles are cleared before the same `$D240-$D7DF` to `$9240-$97DF` upload |
+| 17 | `$71A2` | Sword/shield equipment-preview X origin | `menu_graphics.py` guards both native coordinate stores at `$71A1-$71AA` and changes only x=96 to x=104; the first interior tile stays reserved for cursor cleanup and the remaining 40 px fit both unsigned-byte values plus the arrow |
 | 16 | `$68DF-$6953` | Revival decoder success route and immediate Thank-You generator | Preserved and guarded by `rescue_password.py` |
 | 16 | `$7B8A-$7BD1` | SOS generation route | Preserved and guarded by `rescue_password.py` |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
-| 16 | `$5B22-$5B29` | Rescue hardware-B native delete far-call wrapper | `rescue_presentation.py` only; calls native bank-18 `$53B0`, then redraws through the localized view only for modes 5-8 with private navigation `$F5` |
+| 16 | `$5AEF-$5AF0` | Shared graphical-input Select event pointer | `name6.py` redirects the Japanese kana modifier to existing idle handler `$5B5B`; guards the complete `$5AE3-$5AF4` event table and idle-handler bytes, preserving every other input event |
+| 16 | `$5B22-$5B29` | Graphical-input hardware-B delete far-call wrapper | `unidentified_names.py` first redirects native bank-18 `$53B0` through bank-250 `$45C0`; `rescue_presentation.py` guards that installed call and wraps it with the localized redraw for modes 5-8/private navigation `$F5` |
 | 16 | `$5B36-$5B3D` | Graphical-input Start-recall redirect | `unidentified_names.py` expands mode-0 history recalls through the same 14-cell preview as `FILL IN`; every other mode delegates unchanged |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, mode-1 `blank_scroll.py`, mode-0 `unidentified_names.py`, then rescue modes 5-8 `rescue_presentation.py`; every layer delegates modes it does not own |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
@@ -167,7 +171,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
 | 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, Clear Campaign and True Wanderer display-only wrappers, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42D3`, graph begins `$4300`, map begins `$4600` |
-| 250 | `$4000-$45BF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver | Exclusive |
+| 250 | `$4000-$45FF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver; `$45C0-$45FF` owns the hardware-B reset helper | Exclusive |
 | 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
 | 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |

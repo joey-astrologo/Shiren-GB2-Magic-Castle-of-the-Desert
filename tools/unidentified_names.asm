@@ -79,6 +79,14 @@ Mode0Input::
     ; input frame. ResetFreeField has already blanked the complete safe tail,
     ; so this first glyph replaces the canonical preview atomically.
 .freeCharacter
+    ; Recover an out-of-range cursor from an older editor state as well as
+    ; preventing insertion beyond the native persistent field.
+    ld a,[wInputPosition]
+    cp FreeNameMaximum
+    jr c,.boundedCursor
+    ld a,FreeNameMaximum-1
+    ld [wInputPosition],a
+.boundedCursor
     ld a,FreeNameMaximum
     ld [wInputMaximum],a
     ld a,$FB
@@ -417,3 +425,35 @@ Mode0StartRecall::
 
 ASSERT @ <= Mode0Navigation
     ds Mode0Navigation-@
+
+SECTION "Unidentified hardware B", ROMX[$45C0], BANK[$FA]
+
+; Hardware B bypasses the keyboard node dispatcher. Clear a canonical preview
+; before native deletion can retain a cursor beyond seven cells. The event
+; handler has already cleared wInputMatch, so the 14-cell maximum identifies
+; the preview here. Ordinary free labels and every other input mode
+; keep their native single-character deletion behavior.
+Mode0HardwareB::
+    ld a,[wInputMode]
+    and a
+    jr nz,.native
+    ld a,[wNavigationType]
+    cp Mode0NavigationType
+    jr nz,.native
+    ld a,[wInputMaximum]
+    cp FillInMaximum
+    jr nz,.native
+    ld c,DeleteNode
+    call ResetFreeField
+    ; Match the native handler's caret redraw after moving to cell zero.
+    ld c,0
+    ld a,$10
+    ld hl,$5EE8
+    jp FarDispatch
+.native
+    ld a,$12
+    ld hl,$53B0
+    jp FarDispatch
+
+ASSERT @ <= $4600
+    ds $4600-@

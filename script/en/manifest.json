@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "f4482837ccc57dd70dc0ec6430dd0b5e60a55876",
+  "workspace_sha1": "d380fae91cf5efa5354c7657628e99904444b428",
   "categories": [
     {
       "name": "glossary",
@@ -94,7 +94,7 @@
         "floor_and_system_messages": 39,
         "item_and_action_messages": 159
       },
-      "overlay_sha1": "66278a59af7ba4aab5915036fc48a06632d94801"
+      "overlay_sha1": "4ef572a900d1c28f05cf5ce44895e14b26368c5a"
     },
     {
       "name": "prose",

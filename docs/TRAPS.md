@@ -158,6 +158,13 @@ typing or `DEL` must atomically rebuild the seven-cell field, redraw once, and r
 native tail. Treating it as an editable 14-cell free label permits invisible appends,
 off-screen cursors, and a trapped delete/confirmation path.
 
+Physical B uses a separate event path and clears the match byte before reaching deletion.
+Testing that byte in a late wrapper misses the canonical preview. Retaining its cursor
+and 14-cell maximum then lets repeated character entry reach adjacent mode state. The B
+wrapper must recognize mode 0/private navigation `$F4` plus the 14-cell preview maximum,
+clear the field, reset the cursor, and restore the seven-cell maximum. Bound character
+insertion independently so an older invalid cursor cannot escape the field.
+
 **Rule:** generate and test each input mode independently. Freeze maximums, maps, connected
 navigation, history/control reachability, confirmation, return paths, presentation-only
 extensions, canonical-preview-to-free-entry transitions, and any persistent encoding
@@ -344,6 +351,14 @@ gate.
 
 ## A selected-node input test does not cover the physical B handler
 
+The same distinction applies to Select. Its native graphical-input event calls bank-18
+`$549D`, which cycles Japanese kana voicing marks. English `n` uses byte `$3D`; that
+routine treats it as `せ` and replaces it with `$6F` (`ぜ`). It can also modify native
+Rescue symbols behind the English presentation layer. `name6.py` redirects only the
+Select event-table pointer at `16:$5AEF` to the existing idle event. Regressions press the
+physical button on free/canonical item labels, the default player name, and a complete
+Rescue password before native confirmation. Other menus keep their own Select handlers.
+
 **Tempting assumption:** if the on-screen `DEL` node works, the physical B button must use
 the same localized input handler.
 
@@ -388,6 +403,36 @@ of submission. The test stayed green while it was not confirming the intended co
 node `$4D`, then press A without directional input. Successful SOS validation must assert
 the actual inaccessible-dungeon response; successful Revival validation must assert
 `Revival complete!` and the linked generated Thank-You Password.
+
+## A two-line combat window can own the bottom border
+
+Do not apply the ordinary three-line dialogue lifetime to every gameplay message. The
+Otogirisou and Leaping Grass Drink routes render group 11 index 32 in mode `$10`, with the
+second line at y=40. Its final period at x=139 advances only two pixels but the original
+eight-pixel compositor cell clears three columns in the next canvas row: the bottom frame.
+`SourceLayout.bottom_line_glyph_cell_overflows` returns no bounded-row diagnostic for mode
+`$10`; that result never proved its border was safe.
+
+`glyph_cell_clip.py` gates only the secondary tile write at the right canvas edge. Keep
+interior tile crossings and the original pen advance intact; forcing an eight-pixel
+advance would instead wrap an otherwise fitting glyph below the window. Regressions must
+assert the actual native mode and border pixels, not merely the source text's line count.
+
+## Cursor cleanup can erase equipment-preview digits
+
+The sword/shield comparison panel reuses canvas tiles `$30/$42`, which are also the
+third logical item-action column's cursor cells. `menu_graphics.py` correctly clears those
+cells to remove `Exchange` shadow contamination, but the native preview starts at x=96
+inside that cleared tile. The supplied Bronze Shield state calculates `129 -> 5` correctly
+while losing the leading digits during upload. A raw numeric-string/pen-width assertion
+does not detect this ownership collision.
+
+The localized preview starts at x=104, after the cursor tile. The remaining five tiles
+provide 40 pixels; `255` plus the native arrow plus `255` advances 38 pixels in both fonts.
+Keep the cleanup intact and assert the complete panel raster after upload and reopen,
+including blank cursor cells, both equipment categories, all digit-count combinations,
+and unchanged inventory records. The native-source surface fixtures still document x=96;
+the localized position is owned and guarded by `menu_graphics.py`.
 
 ## A preserved composite glyph may still contain Japanese text
 

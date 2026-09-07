@@ -123,6 +123,7 @@ class ItemMessageWrapTests(unittest.TestCase):
             30: "Waved <cF3><number:19:C5>.",
             31: "Read <cF3><number:19:C5>.",
             32: "Made <number:19:C5> <cF3>into medicine <cF3>and consumed it.",
+            33: "Pushed <cF3><number:19:C5>.",
             34: "Ate <cF3><number:19:C5>.",
             94: "Got <cF3><number:19:C5>.",
             95: "Put down <cF3><number:19:C5>.",
@@ -136,6 +137,27 @@ class ItemMessageWrapTests(unittest.TestCase):
                     text,
                     self.translated[(record.bank, record.address)].text,
                 )
+
+    def test_push_wraps_long_recalled_names_and_keeps_short_names_together(self):
+        text = self.translated[(194, 0x568C)].text
+        for name, count in (("Herb", 1), ("Bracelet: Far-throwing", 2)):
+            with self.subTest(name=name):
+                measured = layout.source_layout(
+                    self.font_rom,
+                    english.encode_source(text.replace("<number:19:C5>", name)),
+                    simulate_soft_wrap=True,
+                )
+                self.assertTrue(measured.safe)
+                self.assertEqual(count, len(measured.lines))
+        unsafe = layout.source_layout(
+            self.font_rom,
+            english.encode_source("Pushed <number:19:C5>."),
+            runtime_contract=self.runtime.contract,
+            record_id="194:$568C",
+            simulate_soft_wrap=True,
+        )
+        self.assertFalse(unsafe.safe)
+        self.assertEqual(144, unsafe.lines[0].composer_pixels)
 
     def test_reviewed_trap_operation_wording_is_present(self):
         expected = {

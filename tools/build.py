@@ -21,6 +21,7 @@ import ending_credits
 import english
 import english_font
 import extract
+import glyph_cell_clip
 import hud_font
 import insert
 import item_formatting
@@ -300,6 +301,30 @@ def _service_menu_positioned_contracts(rom):
     }
 
 
+def _full_renderer_surface_modes(rom):
+    """Return the strictest proven full-renderer mode for each source record.
+
+    Notebook descriptions gain their name row in menu_text's composition
+    check. Full-screen Help/item detail must not inherit dialogue's bottom row.
+    Streamed combat has no fixed final row owned by one source record.
+    """
+    modes_by_key = {}
+    for record in extract.extract(rom)["records"]:
+        modes = set()
+        for reference in record.references:
+            group, index = reference.group, reference.index
+            if group in (6, 19, 20, 21, 32, 113, 114, 115):
+                modes.add(0x08)
+            elif group == 8:
+                modes.add(0x10 if index <= 109 else 0x02)
+            elif (33 <= group <= 112 or group in (9, 10)
+                  or group == 11 and 20 <= index <= 169):
+                modes.add(0x02)
+        if modes:
+            modes_by_key[(record.bank, record.address)] = min(modes)
+    return modes_by_key
+
+
 def build_rom(
     rom,
     record_overrides,
@@ -325,13 +350,15 @@ def build_rom(
     output = stairs_menu.install(output)
     output = service_menus.install(output)
     output = dialogue_pacing.install(output)
+    output = glyph_cell_clip.install(output)
     output = name6.install(output, approved=approved_font)
     output = blank_scroll.install(output)
     output = spell_input.install(output, approved=approved_font)
     output = unidentified_names.install(output)
     output = rescue_presentation.install(output)
     layout.validate_overrides(
-        output, overrides, runtime_contract=runtime_contract
+        output, overrides, runtime_contract=runtime_contract,
+        surface_modes=_full_renderer_surface_modes(rom),
     )
     layout.validate_positioned_overrides(
         output, overrides, _item_ability_positioned_contracts(rom)
@@ -533,6 +560,7 @@ def main(argv=None):
         ending_credits.EndingCreditsError,
         english_font.FontError,
         extract.ExtractError,
+        glyph_cell_clip.GlyphCellClipError,
         hud_font.HudFontError,
         insert.InsertError,
         item_formatting.ItemFormattingError,

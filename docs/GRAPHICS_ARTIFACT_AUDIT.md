@@ -6,12 +6,14 @@ This audit began as a read-only snapshot on 2026-09-06. The first follow-up repa
 same date fixed GFX-01, GFX-02, and GFX-06, froze their generated machine-code contracts,
 and added live regressions. A later supplied Monster Log state confirmed GFX-03; its
 2026-09-07 follow-up repaired the affected text, made the raster budget executable, and
-added a converted-state regression. The review followed the reported symptoms through the
+added a converted-state regression. A subsequent Otogirisou/Leaping Grass reproduction
+established the same failure in two-line combat windows and added the shared compositor
+edge gate. The review followed the reported symptoms through the
 dungeon popup, service-menu, dialogue-frame, and proportional-font paths, then compared
 the suspicious machine code with a fresh `mgbdis --print-hex` disassembly of the Japanese
 ROM.
 
-Four defects were confirmed and all four are fixed:
+Five defects were confirmed and all five are fixed:
 
 1. the added stairs-popup column was saved and restored with linear VRAM addresses instead
    of 32x32 BG-map wrapping;
@@ -21,13 +23,15 @@ Four defects were confirmed and all four are fixed:
    tiles that the compact action-window map exposes on lower blank rows; and
 4. a narrow final glyph near the 144-pixel right edge can make the native eight-pixel
    compositor cell alias the first tile of the next canvas row, which is the bottom frame
-   row in a three-line dialogue box.
+   row in a three-line dialogue box or a two-line stepped combat window; and
+5. item-action cursor cleanup erased leading equipment-preview digits because the preview
+   started in a cleared cursor-alias tile.
 
-The supplied Monster Log state reproduces the dialogue-border symptom deterministically.
-The missing-glyph-row symptom has not been reproduced as a stable defect. The relevant
-native renderers remain byte-identical to the Japanese ROM, but GFX-03 demonstrates that
-byte identity is not a sufficient safety argument when wider translated text reaches a
-native compositor edge case.
+The supplied Monster Log state and the two grass Drink routes reproduce the dialogue-border
+symptom deterministically. The missing-glyph-row symptom has not been reproduced as a
+stable defect. The renderers were byte-identical before the compositor edge gate;
+GFX-03 demonstrates why byte identity was not a sufficient safety argument when wider
+translated text reached a native compositor edge case.
 
 ## Baseline and method
 
@@ -38,18 +42,19 @@ native compositor edge case.
 - Earlier repaired classic build (before GFX-06) SHA-1: `9463146f296472364ab18199100d8057bfea87ef`.
 - Repaired shadowed build before GFX-03: `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`.
 - Repaired classic build before GFX-03: `f543abf33ea0016c503c252686cefd0590ce9f43`.
-- Current repaired shadowed English build SHA-1: `2f76e609138c14f818fc1120e2dcb06252f43a22`.
-- Current repaired classic English build SHA-1: `2e5a0774dcb94cd4e68eb21ef2e0a32b9d78cfd8`.
+- Current repaired shadowed English build SHA-1: `041e77084b74efcda6ec76cc5754786e0fedbd70`.
+- Current repaired classic English build SHA-1: `d1c010b403f7f5014385a257bb92fa71b72ba659`.
 - Japanese disassembly: `build/mgbdis/`.
 - Fresh shadowed-build disassembly: `build/mgbdis-graphics-audit/`.
 - Disassembler: `../mgbdis/mgbdis.py`, with `--print-hex`.
 
-The source/English comparison found these graphics primitives unchanged:
+The initial source/English comparison found these graphics primitives unchanged. The
+subsequent combat reproduction required the narrow compositor gate recorded below:
 
 | Routine | Range | Japanese SHA-1 | Fresh English result |
 |---|---|---|---|
 | BG tilemap/attribute copier | `0:$0AEA-$0B5F` | `330fcbbda1ba5d22c7deb94c9591c1dfb645ecc3` | byte-identical |
-| Native VWF compositor | `0:$3922-$39E2` | `5f592102f709521dbc692378870645c058ce1e84` | byte-identical |
+| Native VWF compositor | `0:$3922-$39E2` | `5f592102f709521dbc692378870645c058ce1e84` | now guarded and patched by `glyph_cell_clip.py` at `$3971-$3976` and `$397D-$397E` |
 | Direct text renderer entry | `3:$5E62-$5EAA` | `877c9a68a2ffd94b8f98472d38becb0157922c74` | byte-identical |
 | Width/glyph dispatch core | `3:$6DD3-$7020` | `2dc6c52dc96a1af22021f52ee2d0218975753257` | byte-identical |
 
@@ -245,7 +250,7 @@ The defect is inside the full renderer shared by the Monster Log and normal dial
 the engine can produce the same corruption in an ordinary three-line dialogue box. It is
 not Monster-Log-specific.
 
-The current translated content does not contain a known ordinary-dialogue trigger:
+The initial scope scan considered only third-line bottom rows:
 
 - all 1,786 translated prose records were measured across 647 third-line instances;
 - all 399 translated gameplay-message records were measured across 40 third-line
@@ -254,9 +259,12 @@ The current translated content does not contain a known ordinary-dialogue trigge
   gameplay messages have still more clearance; and
 - `dialogue_page_marker_audit.py` separately reports zero unsafe page-marker endpoints.
 
-Therefore a Monster-Log text-only repair does not change ordinary dialogue, which is
-already safe in the current catalog. It also cannot guarantee safety for a future or
-unmodeled runtime-composed string.
+That scope was incomplete. Drinking Otogirisou or Leaping Grass renders group 11 index 32
+(`194:$5679`) in a **two-line mode-`$10` window**. The line `into medicine and consumed it.`
+ends with a period at x=139/y=40; its cell clears three columns of the bottom frame. Both
+user screenshots were reproduced through the actual item menu from `SaveStates/Mamel.state`
+with a disposable identified-grass inventory. No supplied new save state was needed.
+The lack of a third-line violation never established safety for this combat consumer.
 
 #### Repair
 
@@ -275,11 +283,22 @@ Repair implemented:
    stored records.
 3. The 44 affected descriptions were rebalanced or shortened while preserving exactly two
    description lines and keeping every glyph origin at x=136 or earlier.
-4. The same dangerous-bottom-row footprint rule applies to prose, messages, item details,
-   Help, and bounded runtime expansions so future text cannot reintroduce the condition.
+4. The same dangerous-bottom-row footprint rule applies to known bounded prose, message,
+   item-detail, Help, and runtime-expansion surfaces. It remains a conservative authoring
+   check, with the combat lifetime limitation described above.
 5. `monster-logs.mss` was converted to `monster-logs.state`. The live regression redraws
    Death Reaper, Jungarian, and Mamel in both font variants, then asserts the complete
    bottom frame row, tilemap/attribute row, and both VRAM banks after two settled frames.
+6. `glyph_cell_clip.py` gates the compositor's secondary tile write at the canvas edge.
+   Its six-byte bank-0 predicate fits at `$3FF6-$3FFB`, after the far selectors. The aligned
+   zero-shift bypass moves to the existing register-restoration path at `$3996`; all
+   interior tile crossings, primary-tile pixels, advances, and line breaks stay native.
+   No combat text edit is required.
+7. `test_glyph_cell_clip.py` requires the entire bottom border in both real Drink routes
+   and both font variants. An independent pixel oracle checks all 144 horizontal origins,
+   both native cell heights/source banks, and five renderer modes, including memory
+   canaries and bank/stack restoration. The real-route regression failed for all four
+   item/font combinations before the clip and passes after it.
 
 The post-repair native-catalog scan reports zero bottom-line crossings for 209/209 visible
 entries. It retains 28 second-physical-line crossings as diagnostics; the following
@@ -290,14 +309,35 @@ either ROM.
 The exact 44-record adjustment list, review copy, and implementation sequence are in
 [`MONSTER_LOG_GLYPH_CELL_REPAIR_PLAN.md`](MONSTER_LOG_GLYPH_CELL_REPAIR_PLAN.md).
 
-This repair prevents the defect in all statically audited dialogue, including future
-ordinary in-game dialogue changes. It does not make the renderer intrinsically safe from
-an unregistered runtime producer. An engine-level right-edge clip in the compositor would
-provide that global guarantee and would protect ordinary dialogue automatically, but it
-is a higher-risk native-code change: it must suppress only columns beyond x=143 without
-wrapping the glyph below a three-line box or clipping legitimate inter-tile drawing inside
-the canvas. Merely treating every advance as eight pixels is not a valid fix; it would wrap
-the final glyph below the box and trade this artifact for another one.
+The shared runtime repair now suppresses secondary writes beyond x=143 without wrapping
+the glyph below its box or clipping legitimate inter-tile drawing inside the canvas.
+Raw diagnostics stay in place to enforce authored geometry. Merely treating every advance
+as eight pixels would not be a valid fix: it could wrap the final glyph below the box.
+
+## GFX-07: equipment-preview digits shared a cleared cursor tile
+
+The supplied `strength-defense-rendering-issue.mss` was converted with the existing
+`mesen-to-pyboy/mss_to_pyboy.py` tool and retained alongside its native `.state` conversion.
+From the untouched state, pressing A on Bronze Shield enters `17:$7116` with category 2
+and object 9. The native calculation and formatter correctly produce `129`, arrow, `5`.
+
+The preview begins at canvas x=96/y=20, using tiles `$30/$42`. Those cells are also the
+third logical command column's cursor cells, which the GFX-06 upload helper clears.
+Consequently the text buffer and width audit pass while leading digits disappear from
+the uploaded screen. This is a tile-ownership error, not an incorrect equipment total.
+
+`menu_graphics.py` now guards both coordinate stores at `17:$71A1-$71AA` and changes only
+the X immediate at `$71A2` from 96 to 104. The cursor tile remains blank. Five interior
+tiles remain available for the preview: 40 pixels, versus a maximum 38-pixel advance for
+`255`, the native arrow, and `255`. Both classic and shadowed visible pixels fit, with the
+existing compositor clip suppressing unused trailing cell pixels beyond the canvas.
+
+`tests/test_equipment_preview.py` requires the untouched `129 -> 5` route to match the
+complete panel raster in both fonts. Its disposable native-item matrix covers swords and
+shields, all combinations of 0/9/10/99/100/255, and close/reopen redraw. It also checks every
+unsigned-byte value against a three-digit value on either side, preserved cursor cleanup,
+and unchanged inventory records. The supplied-state pixel regression fails in both fonts
+before the one-byte position adjustment and passes afterward.
 
 ## Unconfirmed reports and test gaps
 
@@ -397,9 +437,15 @@ Follow-up repair verification:
 - The stale script-extraction output hashes caused by the earlier `F250` kanji correction
   were refreshed so that failure no longer obscures graphics-suite results.
 - Full discovery exercised 617 tests after the GFX-03 repair, all passing.
+- Full discovery after the combat compositor repair passes 633 tests with no skips,
+  including both real grass Drink routes and the existing Monster Log border regression.
+- Full discovery after the equipment-preview position repair passes 637 tests with no
+  skips, including the supplied converted state, both equipment categories, maximum-width
+  values, panel pixels, cursor cleanup, and close/reopen redraw.
 
 ## Remaining follow-up order
 
-1. Review the 15 non-dialogue edge-cell candidates under their actual surface geometry.
+1. Review the 15 non-dialogue edge-cell candidates for visible-ink fit under their actual
+   surface geometry; the shared clip now protects their secondary canvas writes.
 2. Add the GFX-04 exhaustive glyph/phase probe; use a captured failing record to narrow any
    remaining transient defect.

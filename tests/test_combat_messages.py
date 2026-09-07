@@ -96,7 +96,7 @@ class CombatMessageTests(unittest.TestCase):
     def test_reviewed_batches_are_generated_idempotently_and_have_no_unsafe_name_case(self):
         self.assertEqual(201, len(self.state["generated"]))
         self.assertEqual(list(range(201)), [row["index"] for row in self.warnings])
-        self.assertEqual(741656, sum(row["runtime_value_combinations"] for row in self.warnings))
+        self.assertEqual(777237, sum(row["runtime_value_combinations"] for row in self.warnings))
         self.assertEqual(0, sum(row["unsafe"] for row in self.warnings))
         for row in self.rows:
             draft = self.drafts[row.record.id].draft
@@ -248,11 +248,11 @@ class CombatMessageTests(unittest.TestCase):
         self.assertEqual(
             ["actor_name", "item_name"], reports[51]["f6_domains"]
         )
-        self.assertEqual(295 * 347, reports[51]["runtime_value_combinations"])
+        self.assertEqual(295 * 466, reports[51]["runtime_value_combinations"])
         for index in (55, 56, 57, 58):
             with self.subTest(index=index):
                 self.assertEqual(["item_name"], reports[index]["f6_domains"])
-                self.assertEqual(347, reports[index]["runtime_value_combinations"])
+                self.assertEqual(466, reports[index]["runtime_value_combinations"])
                 self.assertEqual(0, reports[index]["unsafe"])
         self.assertEqual(
             ["actor_name", "actor_name"], reports[64]["f6_domains"]

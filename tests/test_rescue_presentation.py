@@ -417,8 +417,16 @@ class PyBoyRescuePresentationRouteTests(unittest.TestCase):
                         expected = bytes.fromhex(vector["native_hex"] + "FF")
                         if bytes(pyboy.memory[0xC16D:0xC17B]) == expected:
                             self.assertEqual(0x0C, pyboy.memory[0xC152])
+                            pyboy_route.press(pyboy, "select")
                             confirm_at = frame + 60
                 if confirm_at is not None:
+                    if frame == confirm_at - 30:
+                        # Select must not run the kana modifier against native
+                        # password symbols behind the English display layer.
+                        self.assertEqual(
+                            bytes.fromhex(vector["native_hex"] + "FF"),
+                            bytes(pyboy.memory[0xC16D:0xC17B]),
+                        )
                     for index, button in enumerate(confirm):
                         if frame == confirm_at + index * 15:
                             pyboy_route.press(pyboy, button)
