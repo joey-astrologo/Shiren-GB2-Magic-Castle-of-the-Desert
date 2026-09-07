@@ -42,8 +42,10 @@ translated text reached a native compositor edge case.
 - Earlier repaired classic build (before GFX-06) SHA-1: `9463146f296472364ab18199100d8057bfea87ef`.
 - Repaired shadowed build before GFX-03: `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`.
 - Repaired classic build before GFX-03: `f543abf33ea0016c503c252686cefd0590ce9f43`.
-- Current repaired shadowed English build SHA-1: `041e77084b74efcda6ec76cc5754786e0fedbd70`.
-- Current repaired classic English build SHA-1: `d1c010b403f7f5014385a257bb92fa71b72ba659`.
+- Repaired shadowed English build at this audit's verification: `041e77084b74efcda6ec76cc5754786e0fedbd70`.
+- Repaired classic English build at this audit's verification: `d1c010b403f7f5014385a257bb92fa71b72ba659`.
+- Later production builds, including subsequent certificate text polish, are recorded
+  in [project-status.md](project-status.md).
 - Japanese disassembly: `build/mgbdis/`.
 - Fresh shadowed-build disassembly: `build/mgbdis-graphics-audit/`.
 - Disassembler: `../mgbdis/mgbdis.py`, with `--print-hex`.

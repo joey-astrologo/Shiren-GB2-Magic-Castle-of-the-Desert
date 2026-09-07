@@ -30,6 +30,11 @@ edited through the ordinary catalog workflow.
 
 ## Completed engineering
 
+- Clear Campaign and True Wanderer certificate fields use compact English `Label: value`
+  spacing. The extra fixed padding before each colon is removed in the two owning
+  UI text records. Both font variants were inspected from the converted spacing-report
+  fixture, with the native certificate values preserved; see [CLEAR_CAMPAIGN.md](CLEAR_CAMPAIGN.md).
+
 - The three guidebook promotional rescue missions have verified English SOS codes,
   advertised dungeon/floor payloads, and native acceptance tests in both font builds.
   The tests use disposable copies of the existing entry fixture, with separately checked
@@ -215,13 +220,13 @@ The latest verified production build produces two font variants from the same tr
 and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `f543abf33ea0016c503c252686cefd0590ce9f43`
+  `4050696a08102b3bf3d25a1f790ec68cedac09b8`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `8c526c2ffbd56fdcdeaff0c02234d47ee1497b19`
+  `ad78698a13f758608cad8729ccdad4db3ca92b12`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`
+  `b26feba0f8688b48a3eb20249089d9056ccb1227`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `866b3daba31075eddfb567d76c7c45888063f1c0`
+  `6bfeb5de96e0e890321959888a916aa8866f9ad1`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.

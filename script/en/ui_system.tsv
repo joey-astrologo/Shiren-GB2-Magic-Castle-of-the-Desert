@@ -371,9 +371,9 @@ id	sections	english
 193:$755E	adventure_history_labels	Abyssal Depths: no sword
 193:$7570	adventure_history_labels	Smith's Forge: with allies
 193:$7583	adventure_history_labels	Filled the bank with Gitan
-193:$7594	adventure_history_labels	<hspace:16>Clear Campaign!<br><br>Wanderer Points<hspace:05><27> <cF8>e<br>Diary ID<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>d
+193:$7594	adventure_history_labels	<hspace:16>Clear Campaign!<br><br>Wanderer Points: <cF8>e<br>Diary ID: <cF8>k<br>Password: <cF8>d
 193:$75CC	adventure_history_labels	Congratulations!!<br>Shiren goods will be sent<br>to the first 100 applicants.<br>On a postcard, clearly write:<br><D2>Postal Code<D2>Address<D2>Name<D2>Age<br><D2>Phone<D2>Wanderer Points<br><D2>ID Number<D2>Password<br>Send it to:<br>160-0022 Tokyo, Shinjuku-ku,<br>Shinjuku 6-24-20,<br>Sigma Higashi-Shinjuku, 10F
-193:$7678	adventure_history_labels	"Chunsoft Co., Ltd.<br>""True Wanderer"" Department<br>Send it to the address above.<br>No inquiries by phone.<br>Thank you for understanding.<br>Wanderer Points<hspace:05><27> <cF8>c<br>ID Number<hspace:24><27> <cF8>k<br>Password<hspace:1A><27> <cF8>b"
+193:$7678	adventure_history_labels	"Chunsoft Co., Ltd.<br>""True Wanderer"" Department<br>Send it to the address above.<br>No inquiries by phone.<br>Thank you for understanding.<br>Wanderer Points: <cF8>c<br>ID Number: <cF8>k<br>Password: <cF8>b"
 193:$7764	condition_labels	Asleep
 193:$7769	condition_labels	Paralyzed
 193:$776F	condition_labels	Onigiri
