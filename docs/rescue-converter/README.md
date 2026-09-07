@@ -14,11 +14,30 @@ The repository includes
 [`.github/workflows/rescue-converter-pages.yml`](../../.github/workflows/rescue-converter-pages.yml).
 It tests the source-free converter and uploads only this website folder.
 
-1. Commit/merge these files to the repository's **main** branch.
+1. Commit/merge these files to the repository's **main** branch and **push them to
+   GitHub**. The workflow must exist on GitHub's main branch before it can be run.
 2. In the repository's **Settings → Pages → Build and deployment**, set **Source**
    to **GitHub Actions**.
-3. In **Actions → Rescue password converter**, choose **Run workflow** on **main**.
-   Later changes to the converter on main deploy automatically after its tests pass.
+   You may still see suggested **GitHub Pages Jekyll** and **Static HTML** cards with
+   **Configure** buttons. Leave those alone: this repository already includes its
+   own workflow, so this settings step is complete once the source is selected.
+3. Leave Settings and open the repository's **Actions** tab at the top of the page.
+   In its left sidebar, select **Rescue password converter**. This is a separate
+   page from the **GitHub Actions** source dropdown in Pages settings.
+   [Open this workflow directly](https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/actions/workflows/rescue-converter-pages.yml).
+4. Above the list of runs, click **Run workflow** on the right. Leave **Branch: main**
+   selected, then click the green **Run workflow** button inside the dropdown.
+5. Refresh the runs list if needed and open the new run. Wait for both
+   **check-and-upload** and **deploy** to turn green. The deploy job provides the site
+   link; it also appears in **Settings → Pages** after deployment.
+
+If **Rescue password converter** is missing, check that
+[the workflow file exists on GitHub's main branch](https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/.github/workflows/rescue-converter-pages.yml).
+If GitHub prompts you to enable Actions for the repository, do that first. The manual
+run button is on the individual workflow's page, not the general Actions overview.
+GitHub documents these controls in [Manually running a workflow](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+
+Later changes to the converter on main deploy automatically after its tests pass.
 
 Once that deployment succeeds, the website is served at:
 
