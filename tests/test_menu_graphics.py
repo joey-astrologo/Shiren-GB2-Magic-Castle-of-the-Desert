@@ -51,6 +51,7 @@ class OriginalRomMainMenuGraphicsTests(unittest.TestCase):
         static_fixture.pop("live_clean_boot_diary_menu")
         static_fixture.pop("live_mamel_hints_popup")
         static_fixture.pop("live_mamel_hints_return")
+        static_fixture.pop("live_stray_item_action")
         self.assertEqual(
             static_fixture, menu_graphics.summary(self.rom, self.approved)
         )
@@ -143,7 +144,44 @@ class OriginalRomMainMenuGraphicsTests(unittest.TestCase):
         payload, _rows = menu_graphics.overlay_payload(self.rom, self.approved)
         cave = menu_graphics.overlay_offset()
         self.assertEqual(payload, self.output[cave:cave + len(payload)])
+        action_call = menu_graphics.item_action_upload_offset()
+        self.assertEqual(
+            menu_graphics.item_action_upload_patch(),
+            self.output[
+                action_call:
+                action_call + len(menu_graphics.ITEM_ACTION_UPLOAD_ORIGINAL)
+            ],
+        )
+        action_payload = menu_graphics.item_action_cleanup_payload()
+        action_cave = menu_graphics.item_action_helper_offset()
+        self.assertEqual(
+            action_payload,
+            self.output[action_cave:action_cave + len(action_payload)],
+        )
         cartridge.verify_checksums(self.output)
+
+    def test_item_action_helper_clears_both_cursor_only_canvas_columns(self):
+        payload = menu_graphics.item_action_cleanup_payload()
+        self.assertEqual(57, len(payload))
+        self.assertEqual(
+            (42, 60, 78, 96, 114, 48, 66, 84, 102, 120),
+            menu_graphics.ITEM_ACTION_CURSOR_TILE_IDS,
+        )
+        for column in menu_graphics.ITEM_ACTION_CURSOR_COLUMNS:
+            first_tile = (
+                menu_graphics.ITEM_ACTION_VISIBLE_TILE_ROWS[0]
+                * menu_graphics.ITEM_ACTION_CANVAS_COLUMNS
+                + column
+            )
+            first_address = (
+                menu_graphics.ITEM_ACTION_CANVAS_ADDRESS
+                + first_tile * menu_graphics.ITEM_ACTION_TILE_BYTES
+            )
+            self.assertIn(
+                bytes((0x21, first_address & 0xFF, first_address >> 8)),
+                payload,
+            )
+        self.assertTrue(payload.endswith(bytes.fromhex("CD6B0AC9")))
 
     def test_wrong_template_is_rejected_before_mutation(self):
         damaged = bytearray(self.rom)
@@ -167,6 +205,20 @@ class OriginalRomMainMenuGraphicsTests(unittest.TestCase):
         cave[menu_graphics.overlay_offset()] = 1
         with self.assertRaisesRegex(menu_graphics.MenuGraphicsError, "cave"):
             menu_graphics.install(cave)
+
+        action_call = bytearray(self.rom)
+        action_call[menu_graphics.item_action_upload_offset()] ^= 1
+        with self.assertRaisesRegex(
+            menu_graphics.MenuGraphicsError, "item-action upload"
+        ):
+            menu_graphics.install(action_call)
+
+        action_cave = bytearray(self.rom)
+        action_cave[menu_graphics.item_action_helper_offset()] = 1
+        with self.assertRaisesRegex(
+            menu_graphics.MenuGraphicsError, "item-action cleanup cave"
+        ):
+            menu_graphics.install(action_cave)
 
 
 class LiveLocalizedMainMenuTests(unittest.TestCase):
@@ -554,6 +606,72 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
                 events,
                 expected["settled_frame"],
             )
+        finally:
+            pyboy.stop(save=False)
+
+    def test_item_action_reopen_clears_exchange_shadow_from_blank_rows(self):
+        """Reproduce the supplied floor-item action-menu artifact."""
+        expected = FIXTURE["live_stray_item_action"]
+        state_path = ROOT / expected["state_path"]
+        if not state_path.exists():
+            self.skipTest("stray item-action native state is required")
+        self.assertEqual(
+            expected["state_sha1"], sha1(state_path.read_bytes()).hexdigest()
+        )
+
+        pyboy = pyboy_route.start(self.PyBoy, self.localized_path, state_path)
+        draws = []
+
+        def at_direct_draw(_context=None):
+            pointer = (pyboy.register_file.D << 8) | pyboy.register_file.E
+            raw = bytearray()
+            for offset in range(0x100):
+                value = pyboy.memory[(pointer + offset) & 0xFFFF]
+                raw.append(value)
+                if value == 0xFF:
+                    break
+            draws.append(bytes(raw))
+
+        def tile_bytes(tile_id):
+            old_vbk = pyboy.memory[0xFF4F]
+            pyboy.memory[0xFF4F] = expected["vram_bank"]
+            address = 0x9000 + tile_id * menu_graphics.ITEM_ACTION_TILE_BYTES
+            raw = bytes(
+                pyboy.memory[address + offset]
+                for offset in range(menu_graphics.ITEM_ACTION_TILE_BYTES)
+            )
+            pyboy.memory[0xFF4F] = old_vbk & 1
+            return raw
+
+        try:
+            pyboy.hook_register(*surfaces.DIRECT_RENDERER, at_direct_draw, None)
+            before = None
+            for frame in range(expected["settled_after_frame"] + 1):
+                if frame == expected["dismiss_frame"]:
+                    pyboy.button("b", capture_dialogue.PRESS_FRAMES)
+                if frame == expected["reopen_frame"]:
+                    pyboy.button("a", capture_dialogue.PRESS_FRAMES)
+                pyboy.tick()
+                if frame == expected["settled_before_frame"]:
+                    before = {
+                        "%02X" % tile: tile_bytes(tile).hex().upper()
+                        for tile in expected["contaminated_tile_ids"]
+                    }
+
+            self.assertEqual(expected["contaminated_tiles"], before)
+            for label in expected["labels"]:
+                with self.subTest(label=label):
+                    self.assertIn(english.encode(label) + b"\xFF", draws)
+            for tile in menu_graphics.ITEM_ACTION_CURSOR_TILE_IDS:
+                with self.subTest(cursor_tile="$%02X" % tile):
+                    self.assertEqual(bytes(16), tile_bytes(tile))
+
+            background = tuple(expected["background_rgb"])
+            image = pyboy.screen.image.convert("RGB")
+            for x, y in expected["artifact_pixels"]:
+                with self.subTest(pixel=(x, y)):
+                    self.assertEqual(background, image.getpixel((x, y)))
+            self.assertNotEqual(0, pyboy.register_file.PC)
         finally:
             pyboy.stop(save=False)
 

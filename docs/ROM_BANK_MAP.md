@@ -77,6 +77,7 @@ text growth.
 | 17 | `$792D-$797A` | SOS semantic builder: seed, diary-ID low word, actor position, dungeon, floor, diary record, and bit packing | Preserved and guarded by `rescue_password.py` |
 | 17 | `$4747-$474E` | Generated communication-code dynamic-text cache call | `rescue_presentation.py` redirects this call only; native `$C16D` bytes are restored after the localized cache copy |
 | 17 | `$4309-$430E` | Multiple-item town-shop count suffix | `shop_sale_count.py` terminates the cached decimal value instead of appending Japanese `ko` |
+| 17 | `$6F04-$6F15` | Item-action rendered-canvas upload tail | `menu_graphics.py` redirects the guarded native copy through bank 255 so cursor-only alias tiles are cleared before the same `$D240-$D7DF` to `$9240-$97DF` upload |
 | 16 | `$68DF-$6953` | Revival decoder success route and immediate Thank-You generator | Preserved and guarded by `rescue_password.py` |
 | 16 | `$7B8A-$7BD1` | SOS generation route | Preserved and guarded by `rescue_password.py` |
 | 16 | `$464F-$4656` | Status-menu open template redirect | `menu_graphics.py` only |
@@ -170,7 +171,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
 | 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |
 | 254 | `$4000-$48F9` | `stairs_menu.py` base through `$428B`, including the exact two-record detector, eight-column dungeon frame, five-cell underlay save/restore, native-template clone, and controller-exit cleanup; followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info detector, seven-interior-tile frames, suffix staging, chained helpers, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
-| 255 | `$4000-$4A7C` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus loader | Exclusive |
+| 255 | `$4000-$4A7C`, `$4B00-$4B38` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus the item-action cursor-column cleanup/upload wrapper | Exclusive; `$4A7D-$4AFF` remains unused separation between the two guarded payloads |
 
 Banks 248-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions

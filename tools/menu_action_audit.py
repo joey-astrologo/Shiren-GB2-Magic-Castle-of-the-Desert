@@ -18,13 +18,14 @@ import english
 import english_font
 import extract
 import layout
+import menu_graphics
 import service_menus
 import stairs_menu
 import surfaces
 import translations
 
 
-SCHEMA = "shiren-gb2-menu-action-audit-v1"
+SCHEMA = "shiren-gb2-menu-action-audit-v2"
 EVENT_CHOICE_OPCODE = 0x1E
 EVENT_CHOICE_BYTES = 13
 EVENT_CHOICE_SLOTS = 5
@@ -33,7 +34,8 @@ RELEASE_EVENT_BANKS = frozenset((116, 117))
 DEVELOPER_EVENT_BANKS = frozenset((180,))
 
 ITEM_ACTION_INDICES = tuple(range(1, 25))
-ITEM_ACTION_TEXT_BUDGET = 48
+ITEM_ACTION_LOGICAL_SLOT_PIXELS = 48
+ITEM_ACTION_TEXT_BUDGET = 40
 EVENT_NATIVE_INTERIOR_COLUMNS = service_menus.NATIVE_INTERIOR_COLUMNS
 EVENT_WIDE_INTERIOR_COLUMNS = service_menus.ENGLISH_INTERIOR_COLUMNS
 EVENT_TEXT_START_PIXELS = service_menus.TEXT_START_X
@@ -263,13 +265,76 @@ def _fixed_action_summary(indices, budget, records, translated, font_rom):
     }
 
 
+def _item_action_summary(records, translated, font_rom, approved):
+    """Measure visible ink separately from the action grid's logical stride."""
+    summary = _fixed_action_summary(
+        ITEM_ACTION_INDICES,
+        ITEM_ACTION_LOGICAL_SLOT_PIXELS,
+        records,
+        translated,
+        font_rom,
+    )
+    shadow_alias_labels = []
+    ink_overflow_labels = []
+    for label in summary["labels"]:
+        label["logical_clearance_pixels"] = label.pop("clearance_pixels")
+        pen = 0
+        ink = []
+        shadow = []
+        try:
+            for character in label["text"]:
+                pixels = english_font.glyph_pixels(approved.rows[character])
+                for y, row in enumerate(pixels):
+                    for x, color in enumerate(row):
+                        if color == english_font.INK_COLOR:
+                            ink.append((pen + x, y))
+                        elif color == english_font.SHADOW_COLOR:
+                            shadow.append((pen + x, y))
+                pen += approved.advances[character]
+        except KeyError as exc:
+            raise MenuActionAuditError(
+                "%s uses unsupported item-action raster glyph %r"
+                % (label["record"], exc.args[0])
+            ) from None
+        label["visible_text_budget"] = ITEM_ACTION_TEXT_BUDGET
+        label["ink_right_edge"] = max((x + 1 for x, _y in ink), default=0)
+        label["visible_ink_clearance_pixels"] = (
+            ITEM_ACTION_TEXT_BUDGET - label["ink_right_edge"]
+        )
+        label["shadow_alias_pixels"] = [
+            [x - ITEM_ACTION_TEXT_BUDGET, y]
+            for x, y in shadow
+            if x >= ITEM_ACTION_TEXT_BUDGET
+        ]
+        if label["ink_right_edge"] > ITEM_ACTION_TEXT_BUDGET:
+            ink_overflow_labels.append(dict(label))
+        if label["shadow_alias_pixels"]:
+            shadow_alias_labels.append(dict(label))
+    summary["widest"] = dict(
+        max(summary["labels"], key=lambda label: label["renderer_pixels"])
+    )
+    summary["logical_overflow_labels"] = summary.pop("overflow_labels")
+    summary["logical_slot_pixels"] = ITEM_ACTION_LOGICAL_SLOT_PIXELS
+    summary["text_budget"] = ITEM_ACTION_TEXT_BUDGET
+    summary["ink_overflow_labels"] = ink_overflow_labels
+    summary["shadow_alias_labels"] = shadow_alias_labels
+    summary["cursor_alias_cleanup"] = {
+        "owner": "menu_graphics.py",
+        "cursor_only_columns": list(menu_graphics.ITEM_ACTION_CURSOR_COLUMNS),
+        "tile_rows": list(menu_graphics.ITEM_ACTION_VISIBLE_TILE_ROWS),
+        "cleared_tile_ids": list(menu_graphics.ITEM_ACTION_CURSOR_TILE_IDS),
+    }
+    return summary
+
+
 def audit(rom, translation_path):
     """Return the complete translated action-menu audit for ``rom``."""
     rom = bytes(rom)
     result = extract.extract(rom)
     records = _record_map(result)
     translated = translations.load_path(translation_path, result["records"])
-    font_rom = english_font.install(rom, checksums=False)
+    approved = english_font.load_approved()
+    font_rom = english_font.install(rom, approved=approved, checksums=False)
 
     candidates = _event_choice_candidates(rom, records)
     unexpected_banks = sorted(
@@ -306,12 +371,11 @@ def audit(rom, translation_path):
             "assigned_call_sites": coverage["assigned_count"],
             "complete": coverage["complete"],
         },
-        "item_actions": _fixed_action_summary(
-            ITEM_ACTION_INDICES,
-            ITEM_ACTION_TEXT_BUDGET,
+        "item_actions": _item_action_summary(
             records,
             translated,
             font_rom,
+            approved,
         ),
         "stairs": _fixed_action_summary(
             stairs_menu.STAIRS_INDICES,

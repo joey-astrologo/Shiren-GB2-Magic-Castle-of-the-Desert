@@ -90,6 +90,12 @@ edited through the ordinary catalog workflow.
   Training Ground (`Train`), Training House (`Train+`), Pigeon Handler
   (`SOS / Revive / Thanks / Quit`), and the rescued-player
   (`Yes / No / Info / Later`) menus were manually accepted on 2026-08-31.
+- Item-action labels now distinguish their 48-pixel coordinate stride from the five mapped
+  label tiles (40 visible pixels) after the cursor. All black pixels fit; the one-column
+  gray shadows from `Take Out` and `Exchange` are clipped by clearing the two cursor-only
+  canvas columns immediately before upload. The supplied floor-item save state preserves
+  the exact `$60/$72` contamination and a PyBoy regression proves it disappears after a
+  real dismiss/reopen cycle.
 - Rankings renders its dynamic currency and floor fields as compact suffix forms:
   `<amount>G` and `<floor>F`. The fixed score suffix at `192:$6B7D` is `G`, while the
   separate floor suffix at `192:$6B2B` remains `F`; a production-ROM controller replay
@@ -185,13 +191,13 @@ The latest verified production build produces two font variants from the same tr
 and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `be81f8bc3512d154ce1fc75b36806447262cf109`
+  `f543abf33ea0016c503c252686cefd0590ce9f43`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `bb8ebeae750213e551b341bd1f7ec2c0ac62f345`
+  `8c526c2ffbd56fdcdeaff0c02234d47ee1497b19`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `9b75e6c5903da5c667cbf36c5e3269b0be2958cf`
+  `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `3f611e70a13295b6cb9b45b3848196f556b20f05`
+  `866b3daba31075eddfb567d76c7c45888063f1c0`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.

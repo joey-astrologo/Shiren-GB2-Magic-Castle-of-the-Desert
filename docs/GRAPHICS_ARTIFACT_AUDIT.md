@@ -3,17 +3,19 @@
 ## Status and scope
 
 This audit began as a read-only snapshot on 2026-09-06. The follow-up repair on the same
-date fixes the two reproduced defects, freezes their generated machine-code contracts, and
+date fixes the reproduced defects, freezes their generated machine-code contracts, and
 adds live regressions. The review followed the reported symptoms through the dungeon popup,
 service-menu, dialogue-frame, and proportional-font paths, then compared the suspicious
 machine code with a fresh `mgbdis --print-hex` disassembly of the Japanese ROM.
 
-Two defects were confirmed and are now fixed:
+Three defects were confirmed and are now fixed:
 
 1. the added stairs-popup column was saved and restored with linear VRAM addresses instead
-   of 32x32 BG-map wrapping; and
+   of 32x32 BG-map wrapping;
 2. the shadowed `Withdraw` raster wrote four gray pixels into the dynamic tile later shown
-   as the unselected `Quit` cursor cell in Warehouse and Bank menus.
+   as the unselected `Quit` cursor cell in Warehouse and Bank menus; and
+3. the shadowed `Exchange` item-action raster wrote three gray pixels into cursor-only
+   tiles that the compact action-window map exposes on lower blank rows.
 
 The reported dialogue-border and missing-glyph-row symptoms have not been reproduced as stable
 defects. The relevant native renderers are byte-identical to the Japanese ROM and the
@@ -26,8 +28,10 @@ not proof that the reports are invalid.
 - Japanese ROM SHA-1: `5264f6d0c4f12c9144de1d12fddadbadd82b3e33`.
 - Pre-repair shadowed English build SHA-1: `49df090f7b1de0e6a448f096f99c093756a55b65`.
 - Pre-repair classic English build SHA-1: `1b148e487b988ea94614cc8c59a18002427ff636`.
-- Repaired shadowed English build SHA-1: `e38b010a93401fe203e9b091854706c78c567974`.
-- Repaired classic English build SHA-1: `9463146f296472364ab18199100d8057bfea87ef`.
+- Earlier repaired shadowed build (before GFX-06) SHA-1: `e38b010a93401fe203e9b091854706c78c567974`.
+- Earlier repaired classic build (before GFX-06) SHA-1: `9463146f296472364ab18199100d8057bfea87ef`.
+- Current repaired shadowed English build SHA-1: `8a8f8e3e2ba88748e453ab0c7959d154b6a2dbe7`.
+- Current repaired classic English build SHA-1: `f543abf33ea0016c503c252686cefd0590ce9f43`.
 - Japanese disassembly: `build/mgbdis/`.
 - Fresh shadowed-build disassembly: `build/mgbdis-graphics-audit/`.
 - Disassembler: `../mgbdis/mgbdis.py`, with `--print-hex`.
@@ -228,6 +232,44 @@ tests and build-time positioned contract use the code value, so this was not the
 runtime artifact. [`docs/VWF_BUDGETS.md`](VWF_BUDGETS.md) now records the implemented floor
 and Status geometry.
 
+### GFX-06: fixed — item-action logical slots hid cursor-tile aliases
+
+Severity: **medium**. This exactly reproduces the thin gray line below `Info` in the
+supplied `stray-item-menu-tile.mss` floor-item popup.
+
+The native action renderer uses an 18-tile-wide canvas and places up to eight commands at
+x=`8,56,104`. Those coordinates are 48 pixels apart, but the compact Window tilemap maps
+only a cursor cell followed by five label tiles for each row. The sixth nominal label tile
+is therefore the next logical column's cursor cell. The prior action audit checked only the
+48-pixel pen stride and called all 24 labels safe; it did not model that tilemap remap or
+the separate black/shadow raster extents.
+
+In the shadowed font, `Exchange` advances 41 pixels. Its black raster ends inside the 40
+visible pixels, but its final gray column lands at canvas x=48. At y=43 that contaminates
+VRAM-bank-1 tiles `$60` and `$72` with exactly these bytes:
+
+```text
+$60  00000000000000000000000000000080
+$72  00800000008000000000000000000000
+```
+
+The action tilemap reuses those tiles as lower cursor cells, producing the three gray
+pixels at screen x=104. `Take Out` has the same class of overflow with one gray pixel.
+
+Repair implemented:
+
+1. `menu_graphics.py` redirects the guarded bank-17 `$6F04-$6F15` action upload tail
+   through a 57-byte bank-255 helper.
+2. After rendering and before the unchanged `$D240-$D7DF` to `$9240-$97DF` copy, the
+   helper clears cursor-only canvas columns 6 and 12 for tile rows 2-6: `$2A,$3C,$4E,$60,
+   $72` and `$30,$42,$54,$66,$78`.
+3. The build now separately rejects any item-action black ink that enters those tiles.
+   The audit reports the 40-pixel visible label budget, the 48-pixel logical stride, and
+   the exact shadow-only exceptions instead of conflating the two.
+4. The converted PyBoy fixture first proves that the supplied state contains the exact
+   dirty `$60/$72` bytes, then dismisses and reopens the menu through controller input. It
+   requires all ten alias tiles and all three reported framebuffer pixels to be blank.
+
 ## Verification performed
 
 - Built fresh classic and shadowed ROMs from the matching Japanese source.
@@ -238,11 +280,7 @@ and Status geometry.
   family.
 - Ran 137 focused font, layout, surface, input-border, stairs, service-menu, and page-marker
   tests successfully.
-- Ran full test discovery: 598 tests, with 597 passing and one unrelated pre-existing
-  failure in `test_extract.test_generated_files_are_deterministic`. Commit `161e598`
-  changed kanji decode `F250` from `竹` to `位`, but the generated-output SHA-1 values in
-  `tests/fixtures/script_directory.json` were not refreshed (expected JSON/TSV hashes
-  `fdf6e2...`/`94a875...`; actual `8c8ce5...`/`c1e8c5...`).
+- Ran full test discovery after the repairs and fixture refreshes: 611 tests, all passing.
 - Ran live edge probes for both stairs axes and exact classic/shadowed/Japanese service-menu
   pixel comparisons.
 
@@ -251,11 +289,14 @@ Follow-up repair verification:
 - The stairs live regression passes all three edge placements through both exit routes.
 - The service-menu cursor regression passes all four positions for Warehouse and Bank in
   both classic and shadowed builds.
+- The supplied floor-item state reproduces exact shadow contamination in action tiles
+  `$60/$72`; a real dismiss/reopen passes with all ten cursor aliases and the three
+  reported screen pixels blank.
+- The revised menu-action audit distinguishes the 48-pixel coordinate stride from the
+  40-pixel visible label raster and reports only the two reviewed shadow-only overflows.
 - The stale script-extraction output hashes caused by the earlier `F250` kanji correction
   were refreshed so that failure no longer obscures graphics-suite results.
-- Full discovery exercised 601 tests. Its first repaired-build pass had 599 successes and
-  only the two expected frozen translation-build contract mismatches; after refreshing
-  those output checksum and mutation-count fields, both failed assertions pass.
+- Full discovery exercised 611 tests, all passing.
 
 ## Remaining follow-up order
 

@@ -54,8 +54,19 @@ does not prove the complete Status screen.
 
 The Items list, At Feet row, category action boxes, Blank Scroll actions, Pot actions, and
 equipped-state actions share labels but not necessarily one constructor. Group 7 indices
-1-24 are the complete compact action vocabulary; each is validated inside a 48-pixel
-column.
+1-24 are the complete compact action vocabulary. Their renderer coordinates advance in
+48-pixel logical slots, but the compact Window tilemap maps only five label tiles after
+the cursor, so the visible label area is 40 pixels.
+
+All black action-label pixels fit that 40-pixel area. In the shadowed font, `Take Out` and
+`Exchange` each advance 41 pixels and write respectively one and three gray pixels into
+the next logical slot's cursor-only tile. The action uploader in `menu_graphics.py` clears
+both cursor-only canvas columns (x tiles 6 and 12, rows 2-6) after text rendering and
+before copying `$D240-$D7DF` to VRAM `$9240-$97DF`. This clips only those off-row shadows;
+the complete black words remain visible. The supplied `stray-item-menu-tile.state`
+regression preserves `Exchange`'s exact `$60/$72` contamination, dismisses and reopens the
+floor-item menu, and requires all ten cursor tiles plus the reported framebuffer pixels to
+be blank.
 
 The small triangular marker at the upper right of a full Items page is a native page
 indicator. It is not the action-menu cursor left behind. Tests should distinguish a static
@@ -249,7 +260,7 @@ history node.
 
 | Area | Primary owner | Focused tests |
 |---|---|---|
-| Status template and return routes | `menu_graphics.py` | `test_menu_graphics.py`, `test_poc_dungeon1.py` |
+| Status template, return routes, and item-action cursor-tile cleanup | `menu_graphics.py` | `test_menu_graphics.py`, `test_poc_dungeon1.py` |
 | Positioned call graph and budgets | `surfaces.py`, `layout.py` | `test_surfaces.py`, `test_layout.py` |
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |

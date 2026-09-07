@@ -89,6 +89,8 @@ Examples already in the suite include:
   positions and a stable cursor-masked framebuffer;
 - mode-0 unidentified naming using private type `$F4` without stealing a native menu graph;
 - dynamic item rows exercising nonzero arrow/staff/Pot branches and combined status flags;
+- item-action logical-slot aliases, with black ink constrained to the five mapped label
+  tiles and cursor-only columns cleared after shadow rendering;
 - generated prose ownership and conflicts between editor, draft, and catalogs.
 
 Tracked JSON fixtures belong under `tests/fixtures/`. Prefer hashes, counts, geometry,

@@ -30,6 +30,7 @@ Each asset still needs its producer and consumers mapped.
 |---|---|---|
 | In-game proportional font | Selectable Thin Pixel-7 classic black-only or reviewed palette-color-2 `+1,+1` shadowed style in all 79 native one-byte English slots, including the straight ASCII double quote at `$59`; both retain identical color-3 ink and advances | `english_font.py` |
 | Core Status template labels | English bitmap overlay generated from the selected font style; shared native graphics remain unchanged | `menu_graphics.py` |
+| Item-action cursor cells | Post-render cleanup of the two cursor-only canvas columns prevents clipped `Take Out` / `Exchange` shadow pixels from aliasing into lower blank rows; black label rasters remain complete | `menu_graphics.py` |
 | Player-name / Rankings-note keyboard | English A-Z/a-z/0-9 map and shared style-selected glyph atlas, including the private cursor symbols; mode 2 retains its native 13-character note field while a private graph turns fourteen formerly empty slots into spaces and lets right pad a space at the current end | `name6.py` |
 | Big Moai promotional gift-code keyboard ("spells") | Approved four-row A-Z/0-9 map, private navigation, below-label `DEL`/`OK` cursors, and its own guarded copy of the selected atlas style | `spell_input.py` |
 | Blank Scroll keyboard | English A-Z/a-z/0-9 map, 11-character full-name input, mode-specific hyphen cell, and shared style-selected atlas | `blank_scroll.py` |

@@ -1,5 +1,5 @@
 {
-  "schema": "shiren-gb2-status-menu-overlay-v5",
+  "schema": "shiren-gb2-menu-graphics-v6",
   "source": {"location": "17:$5A2C", "size": 4096, "sha1": "b856fd7fdc133762e758f75e0ed4b245e4f3a990", "remains_byte_exact": true},
   "call_sites": [
     {"name": "help_return", "location": "4:$4148", "original_hex": "3E11212C6ACDAC09", "patch_hex": "3EFF210040CDAC09"},
@@ -23,8 +23,27 @@
     {"name": "money", "text": "Gitan", "start": [0, 99], "final_x": 25, "visual_right_edge": 105, "clearance_pixels": 80},
     {"name": "money_suffix", "text": "G", "start": [138, 99], "final_x": 144, "visual_right_edge": 144, "clearance_pixels": 0}
   ],
+  "item_action_cursor_cleanup": {
+    "call_site": {"location": "17:$6F04", "original_hex": "3E07E0702140D211409201A005CD6B0AC1C9", "patch_hex": "3EFF21004BCDAC09C1C90000000000000000"},
+    "helper": {"location": "255:$4B00", "bytes": 57, "sha1": "46e81bbae7adb29dd9b8a32d585291cf2f28d320"},
+    "canvas": {"wram_bank": 7, "address": "$D000", "tile_columns": 18, "cursor_only_columns": [6, 12], "visible_tile_rows": [2, 3, 4, 5, 6], "cleared_tile_ids": [42, 60, 78, 96, 114, 48, 66, 84, 102, 120], "vram_copy": "$9240-$97DF"}
+  },
   "live_mamel_menu": {"settled_frame": 1050, "screen_rgb_sha1": "6b2999968c2350d276acdaac5f0b3bff6692f681", "dynamic_labels": ["Items", "Floor", "Ancient Ruins"]},
   "live_mamel_hints_popup": {"settled_frame": 1249, "screen_rgb_sha1": "5e8e6503b276396ab66425ca6351e372e648e5c7", "labels": ["Controls", "Tech", "Secrets"]},
   "live_mamel_hints_return": {"settled_frame": 1449, "screen_rgb_sha1": "362a5dd47ae48b48bcaa33604ab99b57647ad147", "dynamic_labels": ["Items", "Floor", "Ancient Ruins"]},
-  "live_clean_boot_diary_menu": {"settled_frame": 600, "screen_rgb_sha1": "3e65d14ec4e411f8642d04376024b6fb78a5fdef", "dynamic_labels": ["New Game", "Secrets"]}
+  "live_clean_boot_diary_menu": {"settled_frame": 600, "screen_rgb_sha1": "3e65d14ec4e411f8642d04376024b6fb78a5fdef", "dynamic_labels": ["New Game", "Secrets"]},
+  "live_stray_item_action": {
+    "state_path": "SaveStates/stray-item-menu-tile.state",
+    "state_sha1": "6fc321ec97702e26a948dc0e18e511a278e646d8",
+    "vram_bank": 1,
+    "settled_before_frame": 29,
+    "dismiss_frame": 30,
+    "reopen_frame": 120,
+    "settled_after_frame": 180,
+    "labels": ["Pick Up", "Throw", "Exchange", "Info"],
+    "contaminated_tile_ids": [96, 114],
+    "contaminated_tiles": {"60": "00000000000000000000000000000080", "72": "00800000008000000000000000000000"},
+    "artifact_pixels": [[104, 95], [104, 96], [104, 98]],
+    "background_rgb": [248, 248, 248]
+  }
 }

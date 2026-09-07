@@ -172,9 +172,25 @@ class MenuActionAuditTests(unittest.TestCase):
 
         items = self.audit["item_actions"]
         self.assertEqual(24, items["entries"])
-        self.assertEqual(48, items["text_budget"])
+        self.assertEqual(48, items["logical_slot_pixels"])
+        self.assertEqual(40, items["text_budget"])
         self.assertEqual(41, items["widest"]["renderer_pixels"])
-        self.assertEqual([], items["overflow_labels"])
+        self.assertEqual([], items["logical_overflow_labels"])
+        self.assertEqual([], items["ink_overflow_labels"])
+        self.assertEqual(
+            [
+                ("Take Out", [[0, 7]]),
+                ("Exchange", [[0, 4], [0, 5], [0, 7]]),
+            ],
+            [
+                (label["text"], label["shadow_alias_pixels"])
+                for label in items["shadow_alias_labels"]
+            ],
+        )
+        self.assertEqual(
+            [42, 60, 78, 96, 114, 48, 66, 84, 102, 120],
+            items["cursor_alias_cleanup"]["cleared_tile_ids"],
+        )
 
         stairs = self.audit["stairs"]
         self.assertEqual(2, stairs["entries"])

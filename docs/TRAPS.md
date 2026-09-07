@@ -121,6 +121,23 @@ available. The action cursor moves independently.
 **Rule:** identify the tile's native role and navigation state before patching a visual
 artifact.
 
+## An item-action slot is wider than its visible label cells
+
+**Tempting assumption:** the item-action coordinate step from x=8 to x=56 proves that each
+label has 48 visible pixels.
+
+**Failure:** the action window maps a cursor tile followed by only five label tiles. The
+sixth tile in each 48-pixel logical slot is the next column's cursor cell. Shadowed
+`Exchange` keeps its black ink in the visible 40 pixels but writes three gray pixels into
+that alias, which then appears as a vertical mark several rows below the selected action.
+`Take Out` has the same mechanism with one gray pixel.
+
+**Rule:** validate item-action black rasters against the 40-pixel visible label area, not
+only the 48-pixel pen stride. After rendering, clear canvas tile columns 6 and 12 across
+the five uploaded rows before the native VRAM copy. A regression must preserve the dirty
+source tiles, rebuild the popup through input, and inspect both the alias tiles and literal
+screen pixels.
+
 ## Every graphical input mode is separate
 
 **Tempting assumption:** one graphical input layout/controller patch can localize every text

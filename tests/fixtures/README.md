@@ -71,6 +71,16 @@ state's SHA-1/SHA-256, forces a fresh Items redraw in PyBoy, and freezes the loc
 framebuffer. Its static companion proves the replacement remains inside the original
 14-pixel advance and every translated item-name shape remains within the 144-pixel row.
 
+`SaveStates/stray-item-menu-tile.state` is the converted native counterpart of the supplied
+`stray-item-menu-tile.mss` (source SHA-1
+`606bcbdca6e9b9fbb18f971ff26252799f9fb531`; native-state SHA-1
+`6fc321ec97702e26a948dc0e18e511a278e646d8`). It freezes the floor-item popup after
+`Exchange` wrote three gray shadow pixels into cursor-only tiles `$60/$72`.
+`tests.test_menu_graphics` first requires those exact dirty VRAM bytes, then dismisses and
+reopens the popup through real input and requires every cursor-alias tile plus the three
+reported screen pixels to be blank. This distinguishes a fixed constructor from a save
+state that merely retained its already-rendered bad frame.
+
 `SaveStates/big-moai-locked.state` freezes the real NPC before his spell system becomes
 available. `tests/fixtures/big_moai.json` records the state hash, active/shadow stage pair,
 both observed native SRAM mirrors, dialogue selectors, reviewed localized prompt/editor

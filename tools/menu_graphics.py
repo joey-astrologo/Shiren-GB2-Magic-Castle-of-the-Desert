@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Localize GB2's in-dungeon status menu without mutating shared graphics.
+"""Install the localized Status overlay and item-action tile safeguards.
 
 Bank 17 copies a 4 KiB 2bpp template at 17:$5A2C into WRAM.  The Monster Log
 also consumes that bitmap with a different layout, so changing the source
@@ -7,6 +7,13 @@ template corrupts the Log.  Instead, this module replaces all three Status
 reconstruction calls and draws the English labels over their WRAM canvas.  The
 wrapper lives in dedicated empty bank 255, not padding another graphic may consume.
 The shared template consequently remains byte-exact for every other consumer.
+
+The item-action window uses the same 18-tile-wide canvas in a different way. Its
+eight logical label slots are 48 pixels apart, but the compact window maps only
+the first five label tiles after each cursor cell. A shadow pixel entering the
+sixth label tile therefore aliases the next column's cursor cell. The upload
+wrapper clears both cursor-only canvas columns after rendering and before the
+native VRAM copy, so clipped shadow pixels cannot reappear on lower blank rows.
 """
 import argparse
 from dataclasses import dataclass
@@ -94,6 +101,31 @@ OVERLAY_ADDRESS = 0x4000
 OVERLAY_LIMIT = 0x8000
 OVERLAY_ORIGINAL_BYTE = 0x00
 OVERLAY_PAYLOAD_SIZE = 2685
+
+# Bank 17 clears and renders the complete item-action canvas in WRAM bank 7,
+# then copies its five visible tile rows from $D240 to VRAM $9240. Replace only
+# that final copy tail. The helper lives after the independently frozen Status
+# overlay payload in the same dedicated menu-graphics bank.
+ITEM_ACTION_UPLOAD_BANK = 17
+ITEM_ACTION_UPLOAD_ADDRESS = 0x6F04
+ITEM_ACTION_UPLOAD_ORIGINAL = bytes.fromhex(
+    "3E07E0702140D211409201A005CD6B0AC1C9"
+)
+ITEM_ACTION_HELPER_ADDRESS = 0x4B00
+ITEM_ACTION_CANVAS_ADDRESS = 0xD000
+ITEM_ACTION_CANVAS_COLUMNS = 18
+ITEM_ACTION_CURSOR_COLUMNS = (6, 12)
+ITEM_ACTION_VISIBLE_TILE_ROWS = tuple(range(2, 7))
+ITEM_ACTION_CURSOR_TILE_IDS = tuple(
+    row * ITEM_ACTION_CANVAS_COLUMNS + column
+    for column in ITEM_ACTION_CURSOR_COLUMNS
+    for row in ITEM_ACTION_VISIBLE_TILE_ROWS
+)
+ITEM_ACTION_TILE_BYTES = 16
+ITEM_ACTION_WRAM_BANK = 7
+ITEM_ACTION_VRAM_SOURCE = 0xD240
+ITEM_ACTION_VRAM_DESTINATION = 0x9240
+ITEM_ACTION_VRAM_COPY_BYTES = 0x05A0
 
 def template_offset():
     return extract.file_offset(TEMPLATE_BANK, TEMPLATE_ADDRESS)
@@ -268,6 +300,67 @@ def overlay_offset():
     return _banked_offset(OVERLAY_BANK, OVERLAY_ADDRESS)
 
 
+def item_action_upload_offset():
+    return _banked_offset(ITEM_ACTION_UPLOAD_BANK, ITEM_ACTION_UPLOAD_ADDRESS)
+
+
+def item_action_helper_offset():
+    return _banked_offset(OVERLAY_BANK, ITEM_ACTION_HELPER_ADDRESS)
+
+
+def item_action_upload_patch():
+    """Return the guarded far-call replacement for the native upload tail."""
+    call = bytes((
+        0x3E, OVERLAY_BANK,
+        0x21, ITEM_ACTION_HELPER_ADDRESS & 0xFF,
+        ITEM_ACTION_HELPER_ADDRESS >> 8,
+        0xCD, 0xAC, 0x09,
+        0xC1,  # pop bc retained from the native tail
+        0xC9,
+    ))
+    return call + bytes(len(ITEM_ACTION_UPLOAD_ORIGINAL) - len(call))
+
+
+def item_action_cleanup_payload():
+    """Clear cursor-only canvas columns, then perform the native VRAM copy."""
+    code = bytearray((
+        0x3E, ITEM_ACTION_WRAM_BANK,
+        0xE0, 0x70,
+    ))
+    for column in ITEM_ACTION_CURSOR_COLUMNS:
+        first_tile = (
+            ITEM_ACTION_VISIBLE_TILE_ROWS[0] * ITEM_ACTION_CANVAS_COLUMNS + column
+        )
+        first_address = (
+            ITEM_ACTION_CANVAS_ADDRESS + first_tile * ITEM_ACTION_TILE_BYTES
+        )
+        code += bytes((
+            0x21, first_address & 0xFF, first_address >> 8,  # ld hl,first tile
+            0x06, len(ITEM_ACTION_VISIBLE_TILE_ROWS),       # ld b,row count
+            0xC5,                                           # loop: push bc
+            0x01, ITEM_ACTION_TILE_BYTES, 0x00,             # ld bc,$0010
+            0xCD, 0xEA, 0x09,                               # call zero-fill
+            0xC1,                                           # pop bc
+            0x11, 0x10, 0x01,                               # ld de,$0110
+            0x19,                                           # add hl,de
+            0x05,                                           # dec b
+            0x20, 0xF1,                                     # jr nz,loop
+        ))
+    code += bytes((
+        0x21, ITEM_ACTION_VRAM_SOURCE & 0xFF,
+        ITEM_ACTION_VRAM_SOURCE >> 8,
+        0x11, ITEM_ACTION_VRAM_DESTINATION & 0xFF,
+        ITEM_ACTION_VRAM_DESTINATION >> 8,
+        0x01, ITEM_ACTION_VRAM_COPY_BYTES & 0xFF,
+        ITEM_ACTION_VRAM_COPY_BYTES >> 8,
+        0xCD, 0x6B, 0x0A,
+        0xC9,
+    ))
+    if ITEM_ACTION_HELPER_ADDRESS + len(code) > OVERLAY_LIMIT:
+        raise MenuGraphicsError("item-action cleanup exceeds the bank-255 code cave")
+    return bytes(code)
+
+
 def overlay_payload(rom, approved=None):
     """Return a wrapper that applies only reviewed label bits to WRAM bank 7."""
     approved = approved or english_font.load_approved()
@@ -316,14 +409,20 @@ def overlay_payload(rom, approved=None):
 
 def owned_ranges(approved=None):
     overlay = overlay_offset()
-    return tuple(
+    status_ranges = tuple(
         (offset, offset + len(CALL_SITE_ORIGINAL))
         for _name, _bank, _address, offset in call_site_offsets()
     ) + ((overlay, overlay + OVERLAY_PAYLOAD_SIZE),)
+    upload = item_action_upload_offset()
+    helper = item_action_helper_offset()
+    return status_ranges + (
+        (upload, upload + len(ITEM_ACTION_UPLOAD_ORIGINAL)),
+        (helper, helper + len(item_action_cleanup_payload())),
+    )
 
 
 def install(rom, approved=None, verify_original=True, checksums=True):
-    """Return a ROM with the status-menu-only English overlay installed."""
+    """Return a ROM with the Status overlay and action-tile cleanup installed."""
     out = bytearray(rom)
     approved = approved or english_font.load_approved()
     if verify_original:
@@ -340,6 +439,19 @@ def install(rom, approved=None, verify_original=True, checksums=True):
     cave = overlay_offset()
     if any(byte != OVERLAY_ORIGINAL_BYTE for byte in out[cave:cave + len(payload)]):
         raise MenuGraphicsError("status-menu overlay cave is not empty")
+    action_call = item_action_upload_offset()
+    if (
+        bytes(out[action_call:action_call + len(ITEM_ACTION_UPLOAD_ORIGINAL)])
+        != ITEM_ACTION_UPLOAD_ORIGINAL
+    ):
+        raise MenuGraphicsError("item-action upload call site is not original")
+    action_payload = item_action_cleanup_payload()
+    action_cave = item_action_helper_offset()
+    if any(
+        byte != OVERLAY_ORIGINAL_BYTE
+        for byte in out[action_cave:action_cave + len(action_payload)]
+    ):
+        raise MenuGraphicsError("item-action cleanup cave is not empty")
     call = bytes((
         0x3E, OVERLAY_BANK,
         0x21, OVERLAY_ADDRESS & 0xFF, OVERLAY_ADDRESS >> 8,
@@ -348,6 +460,10 @@ def install(rom, approved=None, verify_original=True, checksums=True):
     for _name, _bank, _address, call_site in call_site_offsets():
         out[call_site:call_site + len(call)] = call
     out[cave:cave + len(payload)] = payload
+    out[
+        action_call:action_call + len(ITEM_ACTION_UPLOAD_ORIGINAL)
+    ] = item_action_upload_patch()
+    out[action_cave:action_cave + len(action_payload)] = action_payload
     if checksums:
         fix_checksums(out)
     return bytes(out)
@@ -359,7 +475,7 @@ def summary(rom, approved=None):
     original = template_bytes(rom)
     payload, rows = overlay_payload(rom, approved)
     return {
-        "schema": "shiren-gb2-status-menu-overlay-v5",
+        "schema": "shiren-gb2-menu-graphics-v6",
         "source": {
             "location": extract.location(TEMPLATE_BANK, TEMPLATE_ADDRESS),
             "size": TEMPLATE_SIZE,
@@ -387,6 +503,35 @@ def summary(rom, approved=None):
             "remaining_bytes": OVERLAY_LIMIT - OVERLAY_ADDRESS - len(payload),
         },
         "labels": rows,
+        "item_action_cursor_cleanup": {
+            "call_site": {
+                "location": extract.location(
+                    ITEM_ACTION_UPLOAD_BANK, ITEM_ACTION_UPLOAD_ADDRESS
+                ),
+                "original_hex": ITEM_ACTION_UPLOAD_ORIGINAL.hex().upper(),
+                "patch_hex": item_action_upload_patch().hex().upper(),
+            },
+            "helper": {
+                "location": extract.location(
+                    OVERLAY_BANK, ITEM_ACTION_HELPER_ADDRESS
+                ),
+                "bytes": len(item_action_cleanup_payload()),
+                "sha1": sha1(item_action_cleanup_payload()).hexdigest(),
+            },
+            "canvas": {
+                "wram_bank": ITEM_ACTION_WRAM_BANK,
+                "address": "$%04X" % ITEM_ACTION_CANVAS_ADDRESS,
+                "tile_columns": ITEM_ACTION_CANVAS_COLUMNS,
+                "cursor_only_columns": list(ITEM_ACTION_CURSOR_COLUMNS),
+                "visible_tile_rows": list(ITEM_ACTION_VISIBLE_TILE_ROWS),
+                "cleared_tile_ids": list(ITEM_ACTION_CURSOR_TILE_IDS),
+                "vram_copy": "$%04X-$%04X" % (
+                    ITEM_ACTION_VRAM_DESTINATION,
+                    ITEM_ACTION_VRAM_DESTINATION
+                    + ITEM_ACTION_VRAM_COPY_BYTES - 1,
+                ),
+            },
+        },
     }
 
 

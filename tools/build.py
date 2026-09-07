@@ -18,6 +18,7 @@ import blank_scroll
 import credit_screen
 import dialogue_pacing
 import ending_credits
+import english
 import english_font
 import extract
 import hud_font
@@ -58,13 +59,16 @@ MAIN_MENU_LOCATION_LEFT_EDGE = 59
 MAIN_MENU_LOCATION_ANCHOR = 142
 MAIN_MENU_LOCATION_Y = 24
 
-# Every item-action command is drawn into one of eight fixed 48-pixel columns.
-# Group 7 index 0 is the independent Items heading; indices 1..24 are the
-# complete command vocabulary shared by all 16 item and trap action classes.
+# Every item-action command is drawn into one of eight logical 48-pixel slots.
+# The compact tilemap reserves the first tile of each visible row for its cursor,
+# leaving only 40 visible label pixels. A bank-255 upload helper clears the next
+# slot's cursor-only tile after rendering, so a clipped gray shadow cannot alias
+# into a lower row; black glyph pixels must still fit before that tile.
 ITEM_ACTION_GROUP = 7
 ITEM_ACTION_INDEX_RANGE = (1, 24)
 ITEM_ACTION_START_X = 8
 ITEM_ACTION_RIGHT_EDGE = 56
+ITEM_ACTION_VISIBLE_RIGHT_EDGE = 48
 
 # Help -> Status uses a 136-pixel heading row and a separate full-width body.
 # The affected branch selects every nonempty group-28 record through one finite
@@ -176,6 +180,45 @@ def _item_action_positioned_contracts(rom):
             ITEM_ACTION_INDEX_RANGE[0], ITEM_ACTION_INDEX_RANGE[1] + 1
         )
     }
+
+
+def _validate_item_action_visible_ink(rom, overrides, approved_font):
+    """Reject action labels whose black raster enters a cursor-only tile."""
+    by_reference = _record_keys_by_reference(rom)
+    for index in range(
+        ITEM_ACTION_INDEX_RANGE[0], ITEM_ACTION_INDEX_RANGE[1] + 1
+    ):
+        key = by_reference[(ITEM_ACTION_GROUP, index)]
+        raw = overrides.get(key)
+        if raw is None:
+            continue
+        text = english.decode_source(raw)
+        pen = ITEM_ACTION_START_X
+        ink_right_edge = pen
+        try:
+            for character in text:
+                rows = approved_font.rows[character]
+                for row in rows:
+                    columns = [x for x, pixel in enumerate(row) if pixel == "#"]
+                    if columns:
+                        ink_right_edge = max(
+                            ink_right_edge, pen + max(columns) + 1
+                        )
+                pen += approved_font.advances[character]
+        except KeyError as exc:
+            raise layout.LayoutError(
+                "%s: item-action raster uses unsupported glyph %r"
+                % (extract.location(*key), exc.args[0])
+            ) from None
+        if ink_right_edge > ITEM_ACTION_VISIBLE_RIGHT_EDGE:
+            raise layout.LayoutError(
+                "%s: positioned item-action ink reaches x=%d past visible edge x=%d"
+                % (
+                    extract.location(*key),
+                    ink_right_edge,
+                    ITEM_ACTION_VISIBLE_RIGHT_EDGE,
+                )
+            )
 
 
 def _status_condition_positioned_contracts(rom):
@@ -295,6 +338,7 @@ def build_rom(
     layout.validate_positioned_overrides(
         output, overrides, _item_action_positioned_contracts(rom)
     )
+    _validate_item_action_visible_ink(rom, overrides, approved_font)
     layout.validate_positioned_overrides(
         output, overrides, _status_condition_positioned_contracts(rom)
     )

@@ -64,6 +64,14 @@ final `d`, with `$B3` everywhere else. Live PyBoy routes traverse every option s
 redraws, tile aliasing, VRAM-bank attributes, glyph pixels, staged-tile restoration, and
 teardown are tested as behavior rather than inferred from a single open frame.
 
+The compact item-action window has a related but independent allocation rule. Its label
+coordinates are 48 pixels apart, while the visible map provides only five label tiles (40
+pixels) after each cursor cell. `Take Out` and `Exchange` keep all black ink visible but
+their shadowed rasters enter the next cursor-only canvas column. The bank-255 action upload
+wrapper clears both alias columns after rendering and before the native VRAM copy. The
+supplied floor-item fixture freezes the exact `$60/$72` dirty tiles and verifies a clean
+dismiss/reopen cycle without relying on a framebuffer hash.
+
 ## Save and name expansion
 
 The localized player-name editor accepts up to six visible characters and defaults to

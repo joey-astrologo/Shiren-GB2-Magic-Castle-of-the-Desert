@@ -58,7 +58,7 @@ The build has explicit contracts for known direct-rendered rows:
 | Surface | Start/right edge | Available width | Notes |
 |---|---:|---:|---|
 | Synthesis-rune description | x=3 to 144 | 141 px | One direct row |
-| Item-action command | x=8 to 56 | 48 px | Fixed command column |
+| Item-action command | x=8 to 48 visible; x=56 logical stride | 40 px visible | Black ink must fit the five mapped label tiles. `Take Out` and `Exchange` advance 41 px only because one gray shadow column enters the next cursor-only tile; `menu_graphics.py` clears both alias columns before upload |
 | Status condition body | x=1 to 144 | 143 px | Heading fields have separate contracts |
 | Diary/front-end hub | x=6 to 80 | 74 px | Conditional rows |
 | Start Adventure submenu | x=56 to 144 | 88 px | Up to eight enabled rows |

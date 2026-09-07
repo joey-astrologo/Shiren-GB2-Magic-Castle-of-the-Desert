@@ -245,6 +245,11 @@ font JSON, change layout contracts, or modify a ROM.
 shadow/ink counts for all 14 fixed Status-screen labels. Those labels are a generated bitmap
 overlay rather than runtime strings, so this regression ensures they stay pixel-identical to
 the installed two-tone font across menu open, refresh, and Help-return routes.
+The same module uses the native fixture converted from the supplied
+`stray-item-menu-tile.mss`, proves that shadowed `Exchange` contaminated item-action tiles
+`$60/$72`, then
+dismisses and reopens the popup. It requires all ten cursor-only alias tiles and the three
+reported framebuffer pixels to be blank after the guarded pre-upload cleanup.
 
 For the approved arrival-card source and production insertion:
 

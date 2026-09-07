@@ -1292,6 +1292,8 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             "Step On", "Pick Up", "Modify", "Discard",
         )
         action_widths = []
+        action_shadow_spills = {}
+        approved = english_font.load_approved()
         for index, expected in enumerate(action_labels):
             record = by_reference[(7, index)]
             entry = translated[(record.bank, record.address)]
@@ -1309,8 +1311,49 @@ class OriginalRomPositionedSurfaceTests(unittest.TestCase):
             action_widths.append(
                 measured.rightmost_pen - surfaces.ITEM_ACTION_COORDINATES[0][0]
             )
+            pen = translated_build.ITEM_ACTION_START_X
+            raster = []
+            for character in expected:
+                pixels = english_font.glyph_pixels(approved.rows[character])
+                raster.extend(
+                    (pen + x, y, color)
+                    for y, row in enumerate(pixels)
+                    for x, color in enumerate(row)
+                    if color in (
+                        english_font.SHADOW_COLOR,
+                        english_font.INK_COLOR,
+                    )
+                )
+                pen += approved.advances[character]
+            self.assertFalse(
+                [
+                    pixel
+                    for pixel in raster
+                    if pixel[0] >= translated_build.ITEM_ACTION_VISIBLE_RIGHT_EDGE
+                    and pixel[2] == english_font.INK_COLOR
+                ],
+                expected,
+            )
+            spill = sorted(
+                (x - translated_build.ITEM_ACTION_VISIBLE_RIGHT_EDGE, y, color)
+                for x, y, color in raster
+                if x >= translated_build.ITEM_ACTION_VISIBLE_RIGHT_EDGE
+            )
+            if spill:
+                action_shadow_spills[expected] = spill
         self.assertEqual(24, len(action_widths))
         self.assertEqual(41, max(action_widths))
+        self.assertEqual(
+            {
+                "Take Out": [(0, 7, english_font.SHADOW_COLOR)],
+                "Exchange": [
+                    (0, 4, english_font.SHADOW_COLOR),
+                    (0, 5, english_font.SHADOW_COLOR),
+                    (0, 7, english_font.SHADOW_COLOR),
+                ],
+            },
+            action_shadow_spills,
+        )
 
     def test_production_condition_page_is_complete_series_consistent_and_safe(self):
         result = extract.extract(self.rom)

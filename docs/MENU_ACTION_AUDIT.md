@@ -3,7 +3,9 @@
 This audit replaces save-state-by-save-state discovery for action-label overflow. It scans
 the original ROM for native event-choice opcode `$1E`, resolves every referenced record
 through the translated group-7 table, and measures the staged bytes with the installed
-Thin Pixel-7 advances.
+Thin Pixel-7 advances. Fixed item actions receive an additional color-index raster check:
+their 48-pixel coordinate stride is not mistaken for the 40-pixel label area actually
+mapped after the cursor.
 
 Run it from the repository root:
 
@@ -78,8 +80,10 @@ accept or update a framebuffer hash.
   both `<passwordLeft><passwordRight>` graphic rows, which measure exactly 32 pixels.
 - Five event choice sets are safe in the reviewed 48-pixel service frame: Bank Teller,
   both Rescue Team Password selectors, Blacksmith Info, and Warehouse.
-- All 24 item-action commands fit their independent 48-pixel columns. `Take Out` is widest
-  at 41 pixels.
+- All 24 item-action commands keep their black ink inside the five mapped label tiles, or
+  40 visible pixels. `Take Out` and `Exchange` both advance 41 pixels; only one and three
+  gray shadow pixels respectively cross into the next cursor-only tile. The guarded action
+  uploader clears both alias columns before copying the rendered canvas to VRAM.
 - Both stairs actions fit their reviewed 40-pixel label areas. The dungeon frame needs one
   added tile because its native cursor indent leaves only 32 pixels; `Proceed` is 36 pixels.
   The Status-menu frame already supplies 40 pixels and remains native. `Stay` uses 21 pixels.
@@ -99,5 +103,6 @@ them and will fail if these records move into an unclassified bank.
 `tests/test_menu_action_audit.py` freezes the opcode size, complete ROM occurrence and set
 counts, player/developer partition, every confirmed release overflow and pixel width, each
 review recommendation, the approved `Train` and `Train+` labels, the five widened sets,
-the 24 item actions, both stairs labels, and the 120-call-site positioned-text coverage. A
-new menu record or changed translation cannot silently inherit an assumed budget.
+the 24 item actions, their exact shadow-only alias pixels and cleanup tile IDs, both stairs
+labels, and the 120-call-site positioned-text coverage. A new menu record or changed
+translation cannot silently inherit an assumed budget.

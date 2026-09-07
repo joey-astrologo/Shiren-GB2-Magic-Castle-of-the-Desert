@@ -429,6 +429,17 @@ class TranslationBuildTests(unittest.TestCase):
                 {action_key: english.encode_source("Action Too Long")},
             )
 
+        # Eight W glyphs advance exactly through the 48-pixel logical slot, so
+        # the older pen-only check accepted them. Their black raster enters
+        # the cursor-only tile beyond the 40-pixel visible label area.
+        with self.assertRaisesRegex(
+            layout.LayoutError, r"192:\$69F8: positioned item-action ink"
+        ):
+            translated_build.build_rom(
+                self.original,
+                {action_key: english.encode_source("WWWWWWWW")},
+            )
+
     def test_build_rejects_status_heading_outside_its_live_row(self):
         heading_key = (192, 0x6A52)
         with self.assertRaisesRegex(
