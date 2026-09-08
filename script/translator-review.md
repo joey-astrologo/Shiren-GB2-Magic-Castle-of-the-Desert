@@ -49,5 +49,6 @@ python3 tools/export_script_sheet.py "$ROM" script/en --out script/translator-re
 The exporter builds and validates in memory without writing a ROM or changing the
 translation. It checks all exported text against the inserted bytes and leaves
 `edited_en` blank. It refuses to overwrite an existing file; choose a new filename
-such as `script/translator-review-v2.tsv` for a later snapshot. These generated
-TSVs are ignored by Git, like the other local source dumps.
+such as `script/translator-review-v2.tsv` for a later snapshot. The shared
+`script/translator-review.tsv` can be committed to Git; additional review snapshots
+remain ignored.

@@ -19,6 +19,7 @@ script/script.json
 script/script.tsv
 script/organized/
 script/translator-review*.tsv
+!script/translator-review.tsv
 
 # ---- Python ------------------------------------------------------------
 __pycache__/
