@@ -47,6 +47,10 @@ the ordinary check succeeds.
 
 ## Which file to open
 
+For one spreadsheet with Japanese, inserted English and a separate proposed-edit
+column, use [`translator-review.tsv`](translator-review.tsv). The
+[spreadsheet guide](translator-review.md) explains its columns and regeneration.
+
 | File | Contents | Records |
 |---|---|---:|
 | `organized/glossary.tsv` | Actor/monster names, item names and appearances, item abilities, traps, locations and numbered monster variants | 1,938 |
