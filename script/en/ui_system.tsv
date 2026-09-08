@@ -153,7 +153,7 @@ id	sections	english
 192:$7153	menus_and_system_labels	Synthesis
 192:$7158	menus_and_system_labels	Train
 192:$715D	menus_and_system_labels	Train+
-192:$7162	menus_and_system_labels	<passwordLeft><passwordRight>
+192:$7162	menus_and_system_labels	Password
 192:$7167	menus_and_system_labels	OK
 192:$716C	menus_and_system_labels	Input
 192:$7171	menus_and_system_labels	View

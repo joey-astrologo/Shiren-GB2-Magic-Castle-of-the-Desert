@@ -38,8 +38,8 @@ class MenuActionAuditTests(unittest.TestCase):
 
     def test_release_overflow_sets_and_pixels_are_reported_exactly(self):
         release = self.audit["event_choices"]["release"]
-        self.assertEqual(14, release["safe_native_sets"])
-        self.assertEqual(5, release["safe_widened_sets"])
+        self.assertEqual(12, release["safe_native_sets"])
+        self.assertEqual(7, release["safe_widened_sets"])
         self.assertEqual(0, release["overflow_sets"])
         self.assertEqual(0, release["overflow_occurrences"])
         self.assertEqual(
@@ -144,7 +144,7 @@ class MenuActionAuditTests(unittest.TestCase):
                 )
                 self.assertEqual(labels, actual)
 
-    def test_existing_widened_and_special_glyph_menus_are_not_false_positives(self):
+    def test_widened_menus_include_both_translated_training_selectors(self):
         release = self.audit["event_choices"]["release"]
         self.assertEqual(
             [
@@ -153,17 +153,23 @@ class MenuActionAuditTests(unittest.TestCase):
                 "Cable / Password / Cancel / Later",
                 "Forge / Repair / Synthesis / Remove / Quit",
                 "Deposit / Withdraw / Trash / Quit",
+                "Cable / Password / Info / Quit",
+                "Cable / Password / Quit",
             ],
             [menu["name"] for menu in release["sets"]
              if menu["status"] == "safe_widened"],
         )
-        password_graphic = next(
+        training_passwords = [
             label
             for menu in release["sets"]
             for label in menu["labels"]
-            if label["text"] == "<passwordLeft><passwordRight>"
-        )
-        self.assertEqual(32, password_graphic["renderer_pixels"])
+            if label["reference"] == [7, 154]
+        ]
+        self.assertEqual(2, len(training_passwords))
+        for label in training_passwords:
+            self.assertEqual("Password", label["text"])
+            self.assertEqual(42, label["renderer_pixels"])
+            self.assertEqual(6, label["clearance_pixels"])
 
     def test_other_action_paths_are_complete_and_fit(self):
         positioned = self.audit["positioned_text"]

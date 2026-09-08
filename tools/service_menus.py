@@ -35,6 +35,9 @@ RESCUE_DELIVERY_RECORDS = (
     (0x92, 0x07),
     (0x9E, 0x07),
 )
+# Komaru's main menu and its Info submenu use a separate Password record.
+TRAINING_RECORDS = ((0x80, 0x07), (0x9A, 0x07), (0x0F, 0x07), (0x87, 0x07))
+TRAINING_INFO_RECORDS = ((0x80, 0x07), (0x9A, 0x07), (0x87, 0x07))
 WAREHOUSE_RECORDS = (
     (0x85, 0x07),
     (0x86, 0x07),
@@ -60,12 +63,18 @@ SERVICE_RECORD_SETS = (
     WAREHOUSE_RECORDS,
     BANK_RECORDS,
     BLACKSMITH_INFO_RECORDS,
+    TRAINING_RECORDS,
+    TRAINING_INFO_RECORDS,
 )
 SERVICE_GROUP = 7
 RESCUE_INDICES = (128, 127, 135)
 RESCUE_LABELS = ("Cable", "Password", "Quit")
 RESCUE_DELIVERY_INDICES = (128, 127, 146, 158)
 RESCUE_DELIVERY_LABELS = ("Cable", "Password", "Cancel", "Later")
+TRAINING_INDICES = (128, 154, 15, 135)
+TRAINING_LABELS = ("Cable", "Password", "Info", "Quit")
+TRAINING_INFO_INDICES = (128, 154, 135)
+TRAINING_INFO_LABELS = ("Cable", "Password", "Quit")
 WAREHOUSE_INDICES = (133, 134, 144, 135)
 WAREHOUSE_LABELS = ("Deposit", "Withdraw", "Trash", "Quit")
 BANK_INDICES = (133, 147, 86, 135)
@@ -82,6 +91,8 @@ SERVICE_LABEL_SETS = (
     ("warehouse", WAREHOUSE_INDICES, WAREHOUSE_LABELS),
     ("bank", BANK_INDICES, BANK_LABELS),
     ("blacksmith_info", BLACKSMITH_INFO_INDICES, BLACKSMITH_INFO_LABELS),
+    ("training", TRAINING_INDICES, TRAINING_LABELS),
+    ("training_info", TRAINING_INFO_INDICES, TRAINING_INFO_LABELS),
 )
 
 NATIVE_COLUMNS = 7
@@ -111,8 +122,8 @@ RESCUE_DELIVERY_SUFFIX_TILES = (0x9C, 0xAE)
 ORIGINAL_INSTALLED_LOAD = stairs_menu._load_helper()
 ORIGINAL_INSTALLED_COPY = stairs_menu._copy_helper()
 ORIGINAL_INSTALLED_EXIT = stairs_menu._status_exit_helper_bytes()
-LOAD_SUPPORT_LENGTH = 51
-COPY_SUPPORT_LENGTH = 90
+LOAD_SUPPORT_LENGTH = 67
+COPY_SUPPORT_LENGTH = 95
 
 SERVICE_LOOP_BANK = 6
 SERVICE_LOOP_CALL_ADDRESS = 0x6268
@@ -252,30 +263,22 @@ def _load_support_bytes():
     rescue_delivery = rescue_delivery_template_address()
     blacksmith = blacksmith_info_template_address()
     native = stairs_menu.NATIVE_TEMPLATE_ADDRESS
-    service_body = (
-        bytes((0x21, standard & 0xFF, standard >> 8))
-        + bytes((
-            0xCD,
-            rescue_detector_address() & 0xFF,
-            rescue_detector_address() >> 8,
-        ))
-        + bytes.fromhex("2003")
-        + bytes((0x21, rescue & 0xFF, rescue >> 8))
-        + bytes((
-            0xCD,
-            rescue_delivery_detector_address() & 0xFF,
-            rescue_delivery_detector_address() >> 8,
-        ))
-        + bytes.fromhex("2003")
-        + bytes((0x21, rescue_delivery & 0xFF, rescue_delivery >> 8))
-        + bytes((
-            0xCD,
-            blacksmith_info_detector_address() & 0xFF,
-            blacksmith_info_detector_address() >> 8,
-        ))
-        + bytes.fromhex("2003")
-        + bytes((0x21, blacksmith & 0xFF, blacksmith >> 8))
-        + bytes.fromhex("1100D8")
+    service_body = bytes((0x21, standard & 0xFF, standard >> 8))
+    for records, template in (
+        (RESCUE_RECORDS, rescue),
+        (RESCUE_DELIVERY_RECORDS, rescue_delivery),
+        (BLACKSMITH_INFO_RECORDS, blacksmith),
+        (TRAINING_RECORDS, rescue_delivery),
+        (TRAINING_INFO_RECORDS, rescue),
+    ):
+        detector = exact_detector_address(records)
+        service_body += (
+            bytes((0xCD, detector & 0xFF, detector >> 8))
+            + bytes.fromhex("2003")
+            + bytes((0x21, template & 0xFF, template >> 8))
+        )
+    service_body += (
+        bytes.fromhex("1100D8")
         + bytes((0x06, 10 * ENGLISH_COLUMNS * 2))
         + bytes.fromhex("C35B0A")
     )
@@ -344,6 +347,12 @@ def _copy_support_bytes():
             0xCD,
             rescue_delivery_detector_address() & 0xFF,
             rescue_delivery_detector_address() >> 8,
+        ))
+        + bytes.fromhex("2805")
+        + bytes((
+            0xCD,
+            exact_detector_address(TRAINING_RECORDS) & 0xFF,
+            exact_detector_address(TRAINING_RECORDS) >> 8,
         ))
         + bytes.fromhex("2003")
         + bytes((

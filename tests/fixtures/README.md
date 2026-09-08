@@ -144,7 +144,7 @@ Mamel route checks literal `Proceed` and border pixels, B and `Stay` teardown, e
 restoration, and the native Status frame without using a framebuffer hash.
 
 `tests/fixtures/service_menus.json` freezes the ordered bank-254 service-menu extension,
-all label widths, and all five live menu routes. `SaveStates/rescue-entry-menu.state` is backed
+all label widths, and all seven live menu routes. `SaveStates/rescue-entry-menu.state` is backed
 out and rebuilt before checking the native Yes/No confirmation, the clean 56-pixel Rescue
 Team interior (48 pixels of label space after its cursor column) in the
 confirmation-selected VRAM bank, and clean column restoration after dismissal;
@@ -182,6 +182,18 @@ Framebuffer hashes are secondary presentation checks. A third Rescue checkpoint 
 `Password`, requires saved BG destination `$9950` and a consumed two-byte live marker, and
 freezes the immediate transition so the added ninth column cannot remain as a vertical
 strip.
+
+`SaveStates/training-passwords.state` is the converted counterpart of the supplied
+`training-passwords.mss` (source SHA-1 `d5faa13e119e63b8b4e5f927655db33b5622b299`;
+native-state SHA-1 `2d3e971d712cce20e07e2e1602722e2a3dd679c7`). It preserves Komaru's
+four-entry menu with the untranslated Japanese Password graphic. The service-menu test
+dismisses and reopens it through controller input, then visits the three-entry Info submenu.
+Both fonts must retain the complete final `d`, exactly one cursor, and a blank right spill
+column at every selection, and restore the saved BG cells after dismissal. Selecting
+Password also checks cleanup before the native Input / View / Quit submenu opens.
+The same fixture verifies English View output `i2qlqUjXl` with the native buffer preserved,
+mode-6 input with a nine-character limit, and type-3 decoder result 0 for that code. These
+are presentation and accepted-input checks, not a Training dungeon or persistence replay.
 
 The Rescue entry fixture also freezes a hardware-B edit after entering `AB`: the rendered
 field must retain uppercase `A` and the native buffer must be `30 D5...FF`. This is separate

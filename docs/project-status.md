@@ -36,6 +36,14 @@ edited through the ordinary catalog workflow.
 
 ## Completed engineering
 
+- Komaru's Training Password label is English in both the main and Info selectors.
+  Both menus use the measured service-popup width, with cursor and background-restoration
+  replays in both fonts. The supplied state also verifies Training View output, native
+  symbol preservation, mode-6 keyboard input, and acceptance by the type-3 validator.
+  Both dungeon-data arrival messages keep `has arrived!` on the third line using explicit
+  line breaks; the dungeon name and floor fit on the second line in both fonts.
+  See [MENU_STRUCTURE.md](MENU_STRUCTURE.md) and [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md).
+
 - Clear Campaign and True Wanderer certificate fields use compact English `Label: value`
   spacing. The extra fixed padding before each colon is removed in the two owning
   UI text records. Both font variants were inspected from the converted spacing-report

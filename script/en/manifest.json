@@ -6,7 +6,7 @@
   "records": 6695,
   "translated_records": 5679,
   "explicit_empty_records": 54,
-  "workspace_sha1": "d659463ea7b96ca9132592f2272302dd3581c8e3",
+  "workspace_sha1": "f1494f4469bba63c582a007da848a990bf5db073",
   "categories": [
     {
       "name": "glossary",
@@ -67,7 +67,7 @@
         "ranking_titles_and_grade_labels": 74,
         "trap_menu_status": 1
       },
-      "overlay_sha1": "bf9d590f642b48457d09d009ae29703850f5d253"
+      "overlay_sha1": "cb29bcad2498b14f06c8e92be2798a6e2930239c"
     },
     {
       "name": "help",
@@ -106,7 +106,7 @@
         "ending_and_credits_text": 18,
         "story_and_event_dialogue": 1768
       },
-      "overlay_sha1": "074c90898ff6a7a438ff397f11b62b3009153bb8"
+      "overlay_sha1": "e61c33c096473861da31c4026020fc17ec696394"
     },
     {
       "name": "internal",

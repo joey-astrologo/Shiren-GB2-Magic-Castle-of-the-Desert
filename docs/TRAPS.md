@@ -502,6 +502,20 @@ popup, the copy helper takes bit 3 from `$D803` and applies it to
 Cable/Password/Quit popup, then assert the widened geometry and teardown independently; a
 stable hash of a damaged later frame is not a correctness test.
 
+## A named glyph token can still contain Japanese text
+
+**Tempting assumption:** a nonblank English catalog cell made of recognized tokens is
+already localized if its measured width fits.
+
+**Failure:** Komaru's group-7 record 154 retained `<passwordLeft><passwordRight>`, which
+drew the original Japanese Password graphic. Both of its event menus passed the old
+32-pixel width check. Replacing the graphic with English `Password` requires 42 pixels,
+so the main and Info selectors also need their own exact service-menu matches.
+
+**Rule:** inspect composite glyphs in the actual screen. Treat translated wording and
+its consumer's width as separate checks. Rebuild captured menus through controller input
+and verify cursor traversal and teardown in both fonts.
+
 ## A BG tile-map row increment is not a linear `$20` past `$9BFF`
 
 **Tempting assumption:** advancing a popup column to its next row is always `address += $20`.

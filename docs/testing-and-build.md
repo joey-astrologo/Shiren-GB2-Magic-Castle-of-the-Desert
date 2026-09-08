@@ -41,6 +41,11 @@ patches. Their focused contracts can also be run directly through
 `tests.test_pyboy_blank_scroll`, `tests.test_unidentified_names`, and
 `tests.test_pyboy_unidentified_item`.
 
+`tests.test_service_menus` covers Komaru's Training main and Info selectors from the
+converted `training-passwords.state`. Both fonts must show the complete Password label,
+retain one cursor at every selection, and restore the added BG column. The same fixture
+checks Training View output and accepted nine-character input through the mode-6 editor.
+
 `tests.test_multiple_unidentified_names` also presses physical B after a canonical recall,
 checks the cleared field pixels and native seven-cell buffer, enters forty characters
 through the actual keyboard while guarding adjacent memory, and confirms a seven-character

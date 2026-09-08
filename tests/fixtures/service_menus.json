@@ -1,30 +1,45 @@
 {
-  "blacksmith_info": {
-    "state": "SaveStates/blacksmith-info.state",
-    "state_sha1": "bf1fc2df7baf0e94f074c83390086343265c6028",
-    "options": ["Forge", "Repair", "Synthesis", "Remove", "Quit"]
-  },
   "bank": {
+    "options": [
+      "Deposit",
+      "Withdraw",
+      "Balance",
+      "Quit"
+    ],
     "state": "SaveStates/bank-teller.state",
-    "state_sha1": "194e0e531259f16bf8700560ef91fcf3eef176e9",
-    "options": ["Deposit", "Withdraw", "Balance", "Quit"]
+    "state_sha1": "194e0e531259f16bf8700560ef91fcf3eef176e9"
+  },
+  "blacksmith_info": {
+    "options": [
+      "Forge",
+      "Repair",
+      "Synthesis",
+      "Remove",
+      "Quit"
+    ],
+    "state": "SaveStates/blacksmith-info.state",
+    "state_sha1": "bf1fc2df7baf0e94f074c83390086343265c6028"
   },
   "rescue": {
+    "options": [
+      "Cable",
+      "Password",
+      "Quit"
+    ],
     "state": "SaveStates/rescue-entry-menu.state",
-    "state_sha1": "8c79794a9ae28857dd51ebe343191e1796007164",
-    "options": ["Cable", "Password", "Quit"]
+    "state_sha1": "8c79794a9ae28857dd51ebe343191e1796007164"
   },
   "static": {
-    "blacksmith_info_template": "254:$48A1",
+    "blacksmith_info_template": "254:$490E",
     "blacksmith_info_template_sha1": "dc8b4dd308763adac79b5e23565aeee8c4b57a13",
-    "blacksmith_tile_helper": "254:$457E",
+    "blacksmith_tile_helper": "254:$45EB",
     "blacksmith_tile_support_sha1": "8fae4a10d76846a3600408cdd2e4efc5eca54cb9",
-    "copy_helper": "254:$4034",
     "controller_exit_helper": "254:$429F",
     "controller_exit_helper_sha1": "93cb05753e0965d52cc80a489fbb81cbe7db5074",
-    "copy_helper_sha1": "89f904a45680acc8a2587a3a1f87696386490b60",
-    "copy_support_sha1": "f8fe40921c88ead4b21412d618b9202ebef07c07",
-    "detector_sha1": "fe48064fa32c038e965dbe3c77f2fcb89ecac394",
+    "copy_helper": "254:$4034",
+    "copy_helper_sha1": "8348f989e0026cecb14a6d2b3c3770302632ea00",
+    "copy_support_sha1": "a5a331506594c635e9c654c4963cd5182c8e97c7",
+    "detector_sha1": "5629cf72bb006c2ff57a3713039f33b104d58b39",
     "english_columns": 9,
     "english_interior_pixels": 56,
     "labels": [
@@ -227,48 +242,225 @@
         "renderer_pixels": 20,
         "text": "Quit",
         "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 23,
+        "group": 7,
+        "index": 128,
+        "menu": "training",
+        "native_clearance_pixels": 7,
+        "renderer_pixels": 25,
+        "text": "Cable",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 6,
+        "group": 7,
+        "index": 154,
+        "menu": "training",
+        "native_clearance_pixels": -10,
+        "renderer_pixels": 42,
+        "text": "Password",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 27,
+        "group": 7,
+        "index": 15,
+        "menu": "training",
+        "native_clearance_pixels": 11,
+        "renderer_pixels": 21,
+        "text": "Info",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "training",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 23,
+        "group": 7,
+        "index": 128,
+        "menu": "training_info",
+        "native_clearance_pixels": 7,
+        "renderer_pixels": 25,
+        "text": "Cable",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 6,
+        "group": 7,
+        "index": 154,
+        "menu": "training_info",
+        "native_clearance_pixels": -10,
+        "renderer_pixels": 42,
+        "text": "Password",
+        "text_start_pixels": 8
+      },
+      {
+        "english_clearance_pixels": 28,
+        "group": 7,
+        "index": 135,
+        "menu": "training_info",
+        "native_clearance_pixels": 12,
+        "renderer_pixels": 20,
+        "text": "Quit",
+        "text_start_pixels": 8
       }
     ],
     "load_helper": "254:$4019",
-    "load_helper_sha1": "220f6a2cc5d33db6be5b768256b9077cd942385f",
-    "load_support_sha1": "aa9b697297816149fd8266cf927928eea5d732bf",
+    "load_helper_sha1": "61df2b44533af1bef64d65c9dab254f002e5800f",
+    "load_support_sha1": "20454805d278e8b424b75fae30e615c4ff362490",
     "native_columns": 7,
     "native_interior_pixels": 40,
-    "rescue_delivery_template": "254:$47ED",
+    "rescue_delivery_template": "254:$485A",
     "rescue_delivery_template_sha1": "c5d1f8aae8dc43260e0a71fe429b4cb0a8ca2a6d",
-    "rescue_delivery_tile_helper": "254:$45DE",
+    "rescue_delivery_tile_helper": "254:$464B",
     "rescue_delivery_tile_support_sha1": "f914ee4f81aa2e959045448ae0515c9e09386f3c",
-    "rescue_template": "254:$4739",
+    "rescue_template": "254:$47A6",
     "rescue_template_sha1": "ed028b14628c195f9e3594ceee06bc19481ef575",
-    "restore_helper": "254:$449F",
-    "restore_support_sha1": "2cf5e51f94426fe26df5425ab8a606b977e22755",
+    "restore_helper": "254:$450C",
+    "restore_support_sha1": "bb5c6160f60e5bb9578d7138a74aeff68cb0735f",
     "runtime_bank": 254,
-    "runtime_end": "254:$4955",
-    "runtime_payload_bytes": 1706,
-    "runtime_payload_sha1": "dabdea57ef2eb6ac9c7707afab5e62cabd6d6bf8",
-    "save_helper": "254:$4433",
+    "runtime_end": "254:$49C2",
+    "runtime_payload_bytes": 1815,
+    "runtime_payload_sha1": "7c241416bcf8dba89a23db1658b8de54089e6fc6",
+    "save_helper": "254:$44A0",
     "save_support_sha1": "a4df22cb132b7227a64b6d8c5a9696506c4ef8b4",
     "saved_column_scratch": "$D9C0-$D9DA",
     "saved_column_wram_bank": 5,
     "schema": "shiren-gb2-service-menus-v3",
     "service_exit_helper": "254:$42AB",
-    "service_exit_helper_sha1": "190942a60779967c348e0f3dc7508f48129fa3c6",
-    "standard_tile_helper": "254:$4656",
+    "service_exit_helper_sha1": "de937dfcd4ccec9ff9c57a74d3e597948ca97566",
+    "standard_tile_helper": "254:$46C3",
     "standard_tile_support_sha1": "29299b302be9f28f884674a83d6a541e4e20f953",
     "support": "254:$42AB",
-    "template": "254:$4685",
+    "template": "254:$46F2",
     "template_sha1": "1abc0c0bfa9f16b46baee417ae01bfb69d4b60dc",
     "town_refresh_hook": "6:$6268",
     "town_refresh_trampoline": "6:$7FF4",
-    "town_refresh_trampoline_sha1": "70add595105ab0b64f0d335b8bc49aba7e40425e"
+    "town_refresh_trampoline_sha1": "ab04bf26c50d9ba8ee2fef13e23af4ba5af02dbc"
+  },
+  "training": {
+    "info_actions": [
+      [
+        20,
+        "down"
+      ],
+      [
+        70,
+        "down"
+      ],
+      [
+        120,
+        "a"
+      ]
+    ],
+    "info_frames": 270,
+    "initial_menu_hex": "040180079A070F078707",
+    "options": [
+      "Cable",
+      "Password",
+      "Info",
+      "Quit"
+    ],
+    "password_english": "i2qlqUjXl",
+    "password_native_hex": "526F5A555A44534755FF",
+    "reopen_actions": [
+      [
+        20,
+        "b"
+      ],
+      [
+        140,
+        "a"
+      ],
+      [
+        280,
+        "a"
+      ],
+      [
+        420,
+        "a"
+      ],
+      [
+        560,
+        "a"
+      ]
+    ],
+    "reopen_frames": 691,
+    "state": "SaveStates/training-passwords.state",
+    "state_sha1": "2d3e971d712cce20e07e2e1602722e2a3dd679c7",
+    "view_actions": [
+      [
+        20,
+        "down"
+      ],
+      [
+        70,
+        "a"
+      ],
+      [
+        200,
+        "a"
+      ],
+      [
+        300,
+        "down"
+      ],
+      [
+        330,
+        "a"
+      ],
+      [
+        460,
+        "a"
+      ],
+      [
+        590,
+        "a"
+      ],
+      [
+        720,
+        "a"
+      ],
+      [
+        850,
+        "a"
+      ],
+      [
+        980,
+        "a"
+      ],
+      [
+        1110,
+        "a"
+      ],
+      [
+        1240,
+        "a"
+      ]
+    ],
+    "view_frames": 1341
   },
   "warehouse": {
     "floor_items_reenter_state": "SaveStates/warehouse-floor-items-reenter.state",
     "floor_items_reenter_state_sha1": "588bb6e79621ef851948312f6a88ac9468be6240",
     "floor_items_state": "SaveStates/warehouse-floor-items.state",
     "floor_items_state_sha1": "3ed8b57207b25280a42169c4aa9df0aba92d7aa2",
+    "options": [
+      "Deposit",
+      "Withdraw",
+      "Trash",
+      "Quit"
+    ],
     "state": "SaveStates/warehouse-menu.state",
-    "state_sha1": "2b6c2c0c899d5dc1b9b24be9078e4059d695edd7",
-    "options": ["Deposit", "Withdraw", "Trash", "Quit"]
+    "state_sha1": "2b6c2c0c899d5dc1b9b24be9078e4059d695edd7"
   }
 }

@@ -26,13 +26,14 @@ a character-count estimate.
 
 ## Player-facing result
 
-No player-facing action-menu set currently exceeds its selected geometry. The final
-confirmed overflow retained the established `Password` terminology and now uses the
-reviewed 48-pixel service frame:
+No player-facing action-menu set currently exceeds its selected geometry. These Password
+menus use the reviewed 48-pixel service frame:
 
 | Event record | In-game context | Choice set | Widest label / selected budget |
 |---|---|---|---:|
 | `116:$6C00` | Good at the Rescue Team, processing a completed rescue | Cable / Password / Cancel / Later | Password: 42 / 48 px |
+| `117:$5EF9` | Komaru's Training menu | Cable / Password / Info / Quit | Password: 42 / 48 px |
+| `117:$5F1B` | Komaru's Info submenu | Cable / Password / Quit | Password: 42 / 48 px |
 
 The approved wording changes all fit without geometry changes:
 
@@ -76,10 +77,12 @@ accept or update a framebuffer hash.
 
 ## Confirmed safe coverage
 
-- Fourteen player-facing event choice sets fit their native 32-pixel text budget. This includes
-  both `<passwordLeft><passwordRight>` graphic rows, which measure exactly 32 pixels.
-- Five event choice sets are safe in the reviewed 48-pixel service frame: Bank Teller,
-  both Rescue Team Password selectors, Blacksmith Info, and Warehouse.
+- Twelve player-facing event choice sets fit their native 32-pixel text budget.
+- Seven event choice sets are safe in the reviewed 48-pixel service frame: Bank Teller,
+  both Rescue Team Password selectors, Blacksmith Info, Warehouse, and both Komaru selectors.
+  Komaru's old `<passwordLeft><passwordRight>` graphic measured 32 pixels but still drew
+  Japanese. Its translated `Password` needs 42 pixels. Both menus have live cursor and
+  teardown checks from `training-passwords.state` in classic and shadowed fonts.
 - All 24 item-action commands keep their black ink inside the five mapped label tiles, or
   40 visible pixels. `Take Out` and `Exchange` both advance 41 pixels; only one and three
   gray shadow pixels respectively cross into the next cursor-only tile. The guarded action
@@ -102,7 +105,7 @@ them and will fail if these records move into an unclassified bank.
 
 `tests/test_menu_action_audit.py` freezes the opcode size, complete ROM occurrence and set
 counts, player/developer partition, every confirmed release overflow and pixel width, each
-review recommendation, the approved `Train` and `Train+` labels, the five widened sets,
+review recommendation, the approved `Train` and `Train+` labels, the seven widened sets,
 the 24 item actions, their exact shadow-only alias pixels and cleanup tile IDs, both stairs
 labels, and the 120-call-site positioned-text coverage. A new menu record or changed
 translation cannot silently inherit an assumed budget.

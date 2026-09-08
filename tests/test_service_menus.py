@@ -12,10 +12,13 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import cartridge
 import capture_dialogue
+import english
 import extract
 import pyboy_route
+import rescue_password
 import service_menus
 import stairs_menu
+from tests.test_rescue_presentation import _input_sequences
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -271,6 +274,22 @@ class ServiceMenuInstallerTests(unittest.TestCase):
         self.assertEqual(
             bytes((0x21, native & 0xFF, native >> 8)),
             raw[target:target + 3],
+        )
+
+    def test_service_entry_addresses_follow_the_emitted_code(self):
+        # These lengths break the address-generation dependency cycle. A stale
+        # length sends native calls into operands instead of helper entries.
+        self.assertEqual(service_menus.LOAD_SUPPORT_LENGTH,
+                         len(service_menus._load_support_bytes()))
+        self.assertEqual(service_menus.COPY_SUPPORT_LENGTH,
+                         len(service_menus._copy_support_bytes()))
+        self.assertEqual(
+            service_menus.load_support_address() + service_menus.LOAD_SUPPORT_LENGTH,
+            service_menus.copy_support_address(),
+        )
+        self.assertEqual(
+            service_menus.copy_support_address() + service_menus.COPY_SUPPORT_LENGTH,
+            service_menus.service_save_address(),
         )
 
     def test_wide_copy_inherits_the_active_vram_bank_for_its_bottom_row(self):
@@ -805,6 +824,119 @@ class PyBoyServiceMenuTests(unittest.TestCase):
             self.fail("post-rescue delivery menu was not reached")
         finally:
             pyboy.stop(save=False)
+
+    def _reopen_training(self, rom):
+        row = FIXTURE["training"]
+        state = ROOT / row["state"]
+        self.assertEqual(row["state_sha1"], sha1(state.read_bytes()).hexdigest())
+        pyboy = pyboy_route.start(self.PyBoy, rom, state)
+        self.assertEqual(bytes.fromhex(row["initial_menu_hex"]),
+                         bytes(pyboy.memory[0xFFB0:0xFFBA]))
+        # Dismiss the captured Japanese bitmap and rebuild via real input.
+        pyboy_route.run_frames(pyboy, row["reopen_frames"], row["reopen_actions"])
+        self.assertEqual(bytes.fromhex(row["initial_menu_hex"]),
+                         bytes(pyboy.memory[0xFFB0:0xFFBA]))
+        return pyboy
+
+    def test_training_main_and_info_password_pixels_cursors_and_teardown(self):
+        row = FIXTURE["training"]
+        for style, rom in self.localized_by_style.items():
+            for info in (False, True):
+                with self.subTest(style=style, info=info):
+                    pyboy = self._reopen_training(rom)
+                    try:
+                        if info:
+                            pyboy_route.run_frames(
+                                pyboy, row["info_frames"], row["info_actions"]
+                            )
+                            self.assertEqual(bytes.fromhex("030180079A078707"),
+                                             bytes(pyboy.memory[0xFFB0:0xFFB8]))
+                        count = 3 if info else 4
+                        capture = self._capture_column(pyboy)
+                        for selected in range(count):
+                            if selected:
+                                pyboy_route.press(pyboy, "down")
+                                pyboy.tick(40)
+                            self._assert_raster(
+                                pyboy, 61, 37 if info else 39, self.LOWER_D_RASTER
+                            )
+                            for option in range(count):
+                                top = (22 if info else 24) + option * 12
+                                ink = sum(self._ink(pyboy, x, y)
+                                          for x in range(16, 23)
+                                          for y in range(top, top + 10))
+                                if option == selected:
+                                    self.assertGreaterEqual(ink, 8)
+                                else:
+                                    self.assertEqual(0, ink)
+                            self.assertEqual(
+                                0, sum(self._ink(pyboy, x, y)
+                                       for x in range(66, 72)
+                                       for y in range(22, 70 if not info else 58))
+                            )
+                        pyboy_route.press(pyboy, "b")
+                        pyboy.tick(120)
+                        self._assert_restored(pyboy, capture)
+                    finally:
+                        pyboy.stop(save=False)
+
+    def test_training_password_display_and_input_use_the_native_nine_symbols(self):
+        row = FIXTURE["training"]
+        native = bytes.fromhex(row["password_native_hex"])
+        localized = row["password_english"]
+        self.assertEqual(localized, rescue_password.localize_password(native[:-1]))
+        for style, rom in self.localized_by_style.items():
+            with self.subTest(style=style, route="view"):
+                pyboy = self._reopen_training(rom)
+                try:
+                    pyboy_route.run_frames(pyboy, row["view_frames"], row["view_actions"])
+                    self.assertEqual(native, bytes(pyboy.memory[0xC16D:0xC177]))
+                    self.assertIn(english.encode_source(localized),
+                                  bytes(pyboy.memory[0xC800:0xC880]))
+                finally:
+                    pyboy.stop(save=False)
+            with self.subTest(style=style, route="input"):
+                pyboy = self._reopen_training(rom)
+                entered, validated = [], []
+                try:
+                    capture = self._capture_column(pyboy)
+                    pyboy_route.run_frames(
+                        pyboy, 291, ((20, "down"), (70, "a"), (200, "a"))
+                    )
+                    self.assertEqual(bytes.fromhex("03019C079D078707"),
+                                     bytes(pyboy.memory[0xFFB0:0xFFB8]))
+                    self._assert_restored(pyboy, capture)
+                    pyboy_route.run_frames(pyboy, 260, ((39, "a"), (169, "a")))
+                    self.assertEqual((6, 0xF5, 9),
+                                     (pyboy.memory[0xC195], pyboy.memory[0xC14E],
+                                      pyboy.memory[0xC153]))
+
+                    def before_decode(_):
+                        entered.append((pyboy.register_file.C,
+                                        bytes(pyboy.memory[0xC16D:0xC177])))
+
+                    def after_decode(_):
+                        validated.append(pyboy.register_file.C)
+
+                    pyboy.hook_register(0x11, 0x76CA, before_decode, None)
+                    pyboy.hook_register(0x11, 0x76E4, after_decode, None)
+                    buttons, confirm = _input_sequences(rom.read_bytes(), localized)
+                    for button in buttons:
+                        pyboy_route.press(pyboy, button)
+                        pyboy.tick(15)
+                    pyboy.tick(30)
+                    self.assertEqual(native, bytes(pyboy.memory[0xC16D:0xC177]))
+                    self.assertEqual(0x4D, pyboy.memory[0xC14F])
+                    for button in confirm:
+                        pyboy_route.press(pyboy, button)
+                        pyboy.tick(15)
+                    pyboy.tick(600)
+                    self.assertEqual([(3, native)], entered)
+                    self.assertEqual([0], validated)
+                    self.assertIn(english.encode_source("Komaru: Here it comes!"),
+                                  bytes(pyboy.memory[0xC800:0xC880]))
+                finally:
+                    pyboy.stop(save=False)
 
     def test_warehouse_popup_is_opened_wide_and_dismisses_cleanly(self):
         self._exercise_lifecycle(

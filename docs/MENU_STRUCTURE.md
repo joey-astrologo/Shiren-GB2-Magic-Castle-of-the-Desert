@@ -119,13 +119,17 @@ frame.
 The ordinary bank-3 service-menu frame has five interior tiles, but only 32 label pixels
 after its cursor indent. That is too narrow for `Password`, `Withdraw`, `Deposit`,
 `Balance`, and `Synthesis`.
-`tools/service_menus.py` chains after the stairs installer and gives only five exact group-7
+`tools/service_menus.py` chains after the stairs installer and gives only seven exact group-7
 selector sequences a seven-tile/56-pixel interior. The selector reserves the first 8 pixels,
 leaving 48 pixels for each label:
 
 - Rescue Team: `$80/$07`, `$7F/$07`, `$87/$07` (`Cable`, `Password`, `Quit`);
 - completed-rescue delivery: `$80/$07`, `$7F/$07`, `$92/$07`, `$9E/$07`
   (`Cable`, `Password`, `Cancel`, `Later`);
+- Komaru's Training menu: `$80/$07`, `$9A/$07`, `$0F/$07`, `$87/$07`
+  (`Cable`, `Password`, `Info`, `Quit`);
+- Komaru's Info submenu: `$80/$07`, `$9A/$07`, `$87/$07`
+  (`Cable`, `Password`, `Quit`);
 - warehouse: `$85/$07`, `$86/$07`, `$90/$07`, `$87/$07` (`Deposit`, `Withdraw`,
   `Trash`, `Quit`);
 - Bank Teller: `$85/$07`, `$93/$07`, `$56/$07`, `$87/$07` (`Deposit`, `Withdraw`,
@@ -168,6 +172,12 @@ right border in both VRAM banks, overwrites the cursor-owned source tiles after 
 render, and then uses real Down inputs through all four cursor positions. It requires the
 final `d` at every stop, exactly one cursor in the left column, and no graphic in the right
 spill column.
+Komaru's main and Info selectors reuse the four-entry and three-entry Password templates
+respectively. Their distinct group-7 record 154 (`192:$7162`) now contains English
+`Password`; its former `<passwordLeft><passwordRight>` tokens drew Japanese graphic tiles.
+The converted `training-passwords.state` replay dismisses that captured bitmap and rebuilds
+both menus, checks every cursor position and the final `d` in both fonts, and verifies
+added-column restoration after B and the transition to Input / View / Quit.
 Hash-independent pixel assertions check both `Password` paths' complete final `d`, the
 complete 45x8 `Synthesis` raster, and blank cells on both sides of unselected `Quit`. The
 shared tests also freeze the Yes/No prompt, B-button teardown, and the initial `Password`
@@ -264,7 +274,7 @@ history node.
 | Positioned call graph and budgets | `surfaces.py`, `layout.py` | `test_surfaces.py`, `test_layout.py` |
 | Help/Secrets/Notebook content | `menu_text.py` | `test_menu_text.py` |
 | Stairs popups and teardown | `stairs_menu.py` | `test_stairs_menu.py` |
-| Rescue Team, warehouse, Bank Teller, and Blacksmith Info service popups | `service_menus.py` (chained after `stairs_menu.py`) | `test_service_menus.py` |
+| Rescue Team, warehouse, Bank Teller, Blacksmith Info, and Training service popups | `service_menus.py` (chained after `stairs_menu.py`) | `test_service_menus.py` |
 | Six-character names, embedded replay diaries, save summary, and Adventure submenu isolation | `name6.py`, `unidentified_names.py` | `test_name6.py`, `test_save_summary.py`, `test_unidentified_names.py` |
 | Big Moai gift-code input | `spell_input.py`, `translate_spells.py` | `test_spell_input.py`, `test_translate_spells.py` |
 | Blank Scroll writing | `blank_scroll.py` | `test_blank_scroll.py`, `test_pyboy_blank_scroll.py` |

@@ -71,7 +71,7 @@ The clean-ROM dispatcher at `12:$502D-$5072` and length table/routine at
 | Input mode | Native maximum | Role and evidence |
 |---:|---:|---|
 | 5 | 12 | Thank-You Password; role inferred from unique protocol length, live capture pending |
-| 6 | 9 | Training Dungeon password; role inferred from unique protocol length, live capture pending |
+| 6 | 9 | Training Dungeon password; live Komaru Input route from `training-passwords.state` confirmed |
 | 7 | 15 | Revival Password; directly selected by `10:$68DF-$68E7` |
 | 8 | 13 | SOS Password; live `rescue-entry-menu.state` capture and controller replay confirmed |
 
@@ -86,8 +86,9 @@ right-arrow no-op.
 
 The packet roles are additionally confirmed by their callers: `10:$7B8A-$7BD1` invokes
 type 0 to generate SOS, while `10:$68DF-$6953` explicitly opens mode 7, decodes type 1
-Revival, and then generates type 2 Thank-You. Modes 5 and 6 still require live `$C195`
-captures before their inferred role names become stage-specific fixture contracts.
+Revival, and then generates type 2 Thank-You. Komaru's Input route directly confirms mode 6,
+navigation type `$F5`, maximum 9, and packet type 3 at the native decoder. Mode 5 still
+requires a live `$C195` capture before its inferred role becomes a stage-specific contract.
 
 ## Deterministic requester-state preparation
 
@@ -245,6 +246,14 @@ Thank-You without changing their lengths or packet data. The captured SOS
 `ぜづれうほまぐうむぜづだじ` therefore displays as `26pCdewCg2640` while its native
 buffer remains `6F 73 59 32 4D 4E 69 32 50 6F 73 71 6D FF`.
 
+`tests.test_service_menus` also replays Komaru's Training View and Input routes in both
+font builds from `SaveStates/training-passwords.state`. View composes `i2qlqUjXl` while
+preserving native bytes `52 6F 5A 55 5A 44 53 47 55 FF` at `$C16D`. Input enters the same
+nine symbols through controller navigation, automatically selects OK, and passes the
+native type-3 validator with result 0 before reaching `Komaru: Here it comes!`. This
+checks display and accepted input; Training dungeon traversal and save/reload persistence
+remain separate from that route.
+
 The input overlay intercepts the shared graphical-input call at `16:$5B66` only when
 `$C195` is mode 5, 6, 7, or 8. At both screen-constructor redirects the requested mode is
 authoritative in register C; `$C195` may still describe whichever editor ran previously.
@@ -293,15 +302,15 @@ retry behavior, and compatibility tooling.
 
 - Freeze the clean-ROM mode-length dispatcher and long-code length table.
 - Capture each live rescue screen's mode, buffer, maximum, character table, navigation
-  type, renderer, confirmation routine, and error return. Modes 8 (SOS) and 7 (Revival)
-  have controller fixtures; modes 5-6 still need stage-specific input captures even
-  though the shared overlay covers them.
+  type, renderer, confirmation routine, and error return. Modes 8 (SOS), 7 (Revival), and
+  6 (Training) have controller fixtures; mode 5 still needs a stage-specific input capture
+  even though the shared overlay covers it.
 - The native 64-symbol domain, frozen English mapping, packet lengths, codec, checksum, mode dispatcher, diary
   records, stage callers, and three public vectors are frozen in
   `tests/fixtures/rescue_password.json`.
 - The SOS builder, three rescue-stage relationships, loaded-diary records, and optional
   gift boundary are frozen. Complete the Training builder trace and live SRAM locations.
-- Capture modes 5-6 live and prove their stage-specific callers use the shared alphabet.
+- Capture mode 5 live and prove its stage-specific caller uses the shared alphabet.
 - Add semantic malformed-field fixtures after the stage validators are reproduced.
 
 ### Encoder/decoder behavior
@@ -512,7 +521,7 @@ not permission to toggle an inferred unlock flag.
    The continuous rescuer dungeon/reward route, resumed-floor persistence, and rescuer
    Thank-You redemption still need linked fixtures.
 6. ~~Add the presentation mapping and localized input/output screens.~~ Complete for the
-   shared generated-code path and input modes 5-8; stage-specific modes 5-6 input captures remain
+   shared generated-code path and input modes 5-8; the stage-specific mode-5 input capture remains
    part of the handshake fixture.
 7. Replay the complete handshake in the English build, including gifts and persistence.
 8. Update this document, [ROM_BANK_MAP.md](ROM_BANK_MAP.md), the root README, and project
