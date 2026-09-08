@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#253c34">
+  <meta name="description" content="Edit Shiren GB2 dialogue by event, compare Japanese source and translations, and download validated changes as a TSV.">
+  <title>Prose editor · Shiren GB2</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23253c34'/%3E%3Cpath d='M27 9H17v4h-4v14h4v4h14v-4H21v-4h-4V13h10z' fill='%23dbc797'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to dialogue</a>
+  <aside class="sidebar">
+    <a class="brand" href="../" aria-label="Shiren GB2 translation home"><span class="moon" aria-hidden="true"></span><span>SHIREN GB2<small>Translation tools</small></span></a>
+    <div class="collection"><span class="collection-icon" aria-hidden="true">文</span><span>Prose editor<small>Proof of concept</small></span><span class="live-dot" aria-hidden="true"></span></div>
+    <div class="nav-label">SCENES <span id="event-count"></span></div>
+    <nav id="events" aria-label="Story scenes"></nav>
+    <div class="sidebar-footer"><small>Current game font: English glyph set</small><button id="rules-open" class="sidebar-link">Editing guide ↗</button></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="breadcrumb"><a href="../">HOME</a> <span>/</span> <strong>PROSE</strong></div><button id="rules-mobile" class="text-button mobile-guide">Guide</button><div class="save-state" id="save-state" role="status"><span></span>Saved in this browser</div></header>
+    <main id="content" tabindex="-1">
+      <section class="intro">
+        <div><h1>Prose editor</h1><p>Select a scene to view its dialogue and edit the translation.</p></div>
+        <div class="file-actions"><button id="backup-draft" class="text-button" disabled>Back up draft</button><button id="import-edits" class="button secondary">Import edits</button><button id="export-edits" class="button primary" disabled><span aria-hidden="true">↓</span> Download changes <span id="download-count">0</span></button></div>
+      </section>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <p id="allocation-status" class="notice error" role="status" hidden></p>
+      <div id="recovery" class="notice warning" hidden><span>A saved draft belongs to an older catalogue. Download it before starting a fresh draft.</span><button id="recover-draft" class="text-button">Download recovery file</button><button id="fresh-draft" class="text-button">Start fresh</button></div>
+      <div class="source-strip"><div><span class="source-symbol" aria-hidden="true">↔</span><strong>Japanese source included</strong><span>72 scenes · 1,768 entries · GB2 controls, terminology and font measurements</span></div></div>
+      <section class="toolbar" aria-label="Find dialogue">
+        <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4 4"></path></svg><input id="search" type="search" placeholder="Search dialogue, speaker, or address…" aria-label="Search all dialogue"></label>
+        <div class="filters" role="group" aria-label="Filter dialogue"><button data-filter="all" class="active" aria-pressed="true">All entries</button><button data-filter="edited" aria-pressed="false">Edited <span id="edited-count">0</span></button><button data-filter="errors" aria-pressed="false">Needs attention <span id="error-count">0</span></button></div>
+      </section>
+      <div class="event-heading"><div><div class="eyebrow" id="event-kicker">EVENT</div><h2 id="event-title">Loading dialogue…</h2><p id="event-description">Loading the current prose catalogue.</p></div><span id="row-count" class="entry-count"></span></div>
+      <div class="column-labels"><span>日本語 <small>ORIGINAL</small></span><span>YOUR TRANSLATION <small>EDITABLE DRAFT</small></span></div>
+      <section id="records" aria-label="Dialogue entries"></section>
+      <div id="empty" class="empty" hidden><span aria-hidden="true">◌</span><h3>No matching entries.</h3><p id="empty-message">Try a different search or filter.</p><button id="clear-filters" class="button secondary">Show all dialogue</button></div>
+      <div class="pagination"><button id="previous" class="button secondary">← Previous</button><span id="page-status" role="status"></span><button id="next" class="button secondary">Next →</button></div>
+      <footer class="page-footer"><span>Drafts stay in this browser. Downloads contain only your changes. <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/translation-tool/README.md">Import instructions</a></span><a href="font-license.txt" target="_blank" rel="noopener">Font credit & license</a></footer>
+    </main>
+  </div>
+  <input type="file" id="edits-file" accept=".tsv,.json,text/tab-separated-values,text/plain,application/json" hidden>
+  <dialog id="guide"><div class="dialog-heading"><span class="eyebrow">EDITING GUIDE</span><button id="rules-close" class="icon-button" aria-label="Close editing guide">×</button></div><h2>Prose editing rules</h2><p>GB2 dialogue uses three physical lines per box. Text wraps at word spaces using the installed Thin Pixel-7 font: below 144 composer pixels and at most 144 renderer pixels. There is no character-count limit for a line.</p>
+  <ul><li><code>&lt;br&gt;</code> advances a line immediately. Enter inserts it.</li><li><code>&lt;page&gt;</code> waits for input and keeps the pen and line cursor. Use <code>&lt;page&gt;&lt;box&gt;</code> to wait and start a new box. Ctrl/Cmd+Enter inserts both.</li><li>Keep source page/box boundaries in order. Keep the break after a source <code>&lt;page&gt;&lt;br&gt;</code>, or replace it with a box reset.</li><li>Keep runtime substitutions and timing/effect controls with their exact arguments and counts. Keep <code>&lt;cF8&gt;</code> selector runs in order and unchanged; keep at least one required <code>&lt;cF3&gt;</code>.</li><li>Use <code>Name: dialogue</code> speaker labels, straight ASCII quotes, and the listed project terms. Repeat the speaker label when needed after a new box.</li><li>Keep the exact four-letter Big Moai story codes when they appear in an entry.</li><li>The last row must keep every 8px glyph cell inside the box. A page marker needs 9px at the pen, so a wait must begin at 135px or earlier.</li><li>Runtime names and values reserve the measured project maximum. Player names allow six characters; the checker retains a conservative 49px reservation.</li></ul>
+  <p>Downloads contain only changed, validated entries with their project baselines. Import them with the project's prose importer for the full owner and lint checks, then build and test in game. The preview cannot judge translation accuracy, event timing or every runtime replacement.</p>
+  <p class="muted">Scenes follow the project map. Branches and optional events are grouped by phase, not forced into a single timeline. Thin Pixel-7 by Sizenko Alexander (Style-7), adapted to the Game Boy cell.</p></dialog>
+  <noscript><p>This editor needs JavaScript to check and preview dialogue.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

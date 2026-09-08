@@ -7,6 +7,11 @@ in a browser. There are no package installs, external scripts/fonts, fetches, RO
 account requirements, or backend services. Keep all six web files together:
 `index.html`, `style.css`, `page.js`, `i18n.js`, `converter.js`, and `password-data.js`.
 
+The rescue converter is the hosted home page. Its bottom link opens the
+[translation tool index](../translation-tool/README.md), which currently offers the GB2
+prose editor with included Japanese text. To preview that navigation locally, stage and
+serve the combined site using the commands in the translation tool documentation.
+
 Use **Language / 言語** at the top of the page to choose **English** or **日本語**.
 The interface starts in Japanese for a Japanese browser locale and English otherwise;
 an explicit choice is remembered when browser storage is available. Switching languages
@@ -20,8 +25,11 @@ requests, original sources, supported passwords, and ROM audit.
 
 The repository includes
 [`.github/workflows/rescue-converter-pages.yml`](../../.github/workflows/rescue-converter-pages.yml).
-It tests the source-free converter and uploads only this website folder. Changes to the
-converter on main deploy automatically after its tests pass. The following setup steps
+It tests the converter and GB2 prose rules, then runs `tools/build_pages.py` to stage an
+explicit public-file allowlist in `build/pages`. The converter occupies the root and the
+translation index/editor occupy `translation-tool/`. No ROM, save, raw extraction, test
+page or build tool is uploaded. Changes on main deploy automatically after the checks
+pass. The following setup steps
 are for a fork or for configuring Pages again; the main project's setup is complete.
 
 1. Commit/merge these files to the repository's **main** branch and **push them to

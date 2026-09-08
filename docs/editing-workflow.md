@@ -15,6 +15,11 @@ Edit only `english`. Do not change the stable ID or scene/order metadata. Use `<
 only for the one genuinely empty native dialogue slot. Follow the control and terminology
 rules in [Translation policy](translation-policy.md).
 
+The [browser prose editor](translation-tool/README.md) offers the same scene order,
+included Japanese prose, immediate GB2 checks and a game-font preview. Its downloaded
+changes must be checked/imported with `tools/prose_web.py import` before the normal
+apply/build steps below; they are not replacements for the complete scene TSV.
+
 ## Check an edit
 
 From the repository root:

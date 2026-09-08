@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>GB2 prose browser checks</title>
+<style>body{font:14px system-ui}iframe{width:100%;height:900px;border:1px solid #aaa}pre{white-space:pre-wrap}</style>
+<h1>GB2 prose browser checks</h1><pre id="result">Running…</pre><iframe title="Editor under test"></iframe>
+<script type="module">
+import {validateDraft, importEdits, importBackup} from "./translation-tool/prose/rules.js";
+const frame = document.querySelector("iframe"), report = document.querySelector("#result");
+const key = "shiren-gb2-prose-studio-v1", original = localStorage.getItem(key), messages = [];
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+function check(value, message) { if (!value) throw new Error(message); messages.push(message); }
+async function until(condition) {
+  for (let n = 0; n < 400; n++) { if (condition()) return; await wait(25); }
+  throw new Error("Timed out waiting for the editor");
+}
+async function load(hash = "") {
+  frame.src = "about:blank"; await new Promise(resolve => frame.onload = resolve);
+  frame.src = "./translation-tool/prose/" + hash;
+  await until(() => frame.contentDocument?.body?.dataset.ready === "true" || frame.contentDocument?.body?.dataset.failed === "true");
+  check(frame.contentDocument.body.dataset.ready === "true", "Editor loaded without a script error");
+  return frame.contentWindow;
+}
+function edit(win, input, value) { input.value = value; input.dispatchEvent(new win.Event("input", {bubbles: true})); }
+try {
+  localStorage.removeItem(key);
+  const data = await (await fetch("./translation-tool/prose/catalog.json")).json();
+  const row = data.records.find(row => row.editable && validateDraft(row, row.draft + " Next.", data).valid);
+  let win = await load("#" + encodeURIComponent(row.loc)), doc = win.document;
+  check(doc.querySelectorAll("#events button").length === 73, "All 72 scenes and all-dialogue navigation are available");
+  check(doc.querySelector(".jp").textContent.includes(row.japanese.slice(0, 2)), "Japanese prose is included without a user file");
+  let input = doc.querySelector("textarea"), value = row.draft + " Next.";
+  edit(win, input, row.draft + " ☃");
+  check(input.getAttribute("aria-invalid") === "true" && doc.querySelector("#export-edits").disabled, "Unsupported glyphs immediately block download");
+  check(JSON.parse(localStorage.getItem(key)).edits[row.loc].endsWith("☃"), "Invalid drafts are saved for correction");
+  let backup;
+  win.URL.createObjectURL = value => { backup = value; return "blob:backup"; };
+  win.URL.revokeObjectURL = () => {}; win.HTMLAnchorElement.prototype.click = function () {};
+  doc.querySelector("#backup-draft").click();
+  check(importBackup(await backup.text(), data)[row.loc].endsWith("☃"), "An unfinished draft can be backed up and restored without a valid TSV");
+  edit(win, input, value);
+  check(input.getAttribute("aria-invalid") === "false" && !doc.querySelector("#export-edits").disabled, "A valid edit enables download and clears errors");
+  const canvas = doc.querySelector("canvas");
+  check(canvas.width === 144 && canvas.getContext("2d").getImageData(0, 0, 144, 40).data.some((v, i) => i % 4 === 0 && v !== 220), "Game-font preview paints pixels");
+  const next = doc.querySelector('[aria-label="Next preview box"]');
+  next.click(); check(doc.querySelector(".preview-navigation span").textContent.startsWith("Box 2"), "Preview navigation advances a physical box");
+  let blob;
+  win.URL.createObjectURL = value => { blob = value; return "blob:test"; };
+  win.URL.revokeObjectURL = () => {};
+  win.HTMLAnchorElement.prototype.click = function () {};
+  doc.querySelector("#export-edits").click();
+  const download = await blob.text();
+  check(importEdits(download, data)[row.loc] === value, "The download contains the exact checked edit and matching baseline");
+  win = await load("#" + encodeURIComponent(row.loc)); doc = win.document; input = doc.querySelector("textarea");
+  check(input.value === value, "Draft survives a reload");
+  win.confirm = () => true; doc.querySelector(".reset-row").click();
+  check(input.value === row.draft && doc.querySelector("#export-edits").disabled, "Reset restores only the selected project draft");
+  const transfer = new win.DataTransfer();
+  transfer.items.add(new win.File([download], "changes.tsv", {type: "text/tab-separated-values"}));
+  const file = doc.querySelector("#edits-file"); file.files = transfer.files;
+  file.dispatchEvent(new win.Event("change", {bubbles: true}));
+  await until(() => doc.querySelector("#notice").textContent.startsWith("Edits imported"));
+  check(doc.querySelector("textarea").value === value, "File-input import restores the downloaded edit");
+  doc.querySelector("#rules-open").click(); check(doc.querySelector("#guide").open, "The GB2 editing guide opens");
+  doc.querySelector("#rules-close").click();
+  doc.querySelector('[data-event="all"]').click();
+  const search = doc.querySelector("#search"); search.value = row.loc;
+  search.dispatchEvent(new win.Event("input", {bubbles: true}));
+  check(doc.querySelectorAll(".record").length === 1, "Stable-ID search selects a single entry");
+  input = doc.querySelector("textarea"); input.selectionStart = input.selectionEnd = input.value.length;
+  input.dispatchEvent(new win.KeyboardEvent("keydown", {key: "Enter", ctrlKey: true, bubbles: true, cancelable: true}));
+  check(input.value.endsWith("<page><box>"), "Ctrl+Enter inserts GB2 wait and box controls");
+  frame.style.width = "390px";
+  await wait(100);
+  check(win.innerWidth === 390 && doc.documentElement.scrollWidth <= 390,
+    `Mobile page fits its 390px viewport (content ${doc.documentElement.scrollWidth}px)`);
+  const symbolRow = data.records.find(row => row.draft.includes("<D2>"));
+  win = await load("#" + encodeURIComponent(symbolRow.loc)); doc = win.document;
+  check(!!doc.querySelector("canvas") && data.glyphTokens["<D2>"].pixels.length === 8,
+    "Native prose symbols use their measured glyph pixels in the preview");
+  const stale = localStorage.getItem(key).replace(data.rulesRevision, "old rules");
+  localStorage.setItem(key, stale);
+  win = await load(); doc = win.document;
+  check(!doc.querySelector("#recovery").hidden && doc.querySelector("textarea").disabled, "Stale drafts are preserved and editing is blocked");
+  check(localStorage.getItem(key) === stale, "Loading a stale draft never overwrites it");
+  win.URL.createObjectURL = value => { blob = value; return "blob:test"; };
+  win.URL.revokeObjectURL = () => {}; win.HTMLAnchorElement.prototype.click = function () {};
+  doc.querySelector("#recover-draft").click();
+  check(await blob.text() === stale, "Recovery downloads the original saved data without modification");
+  localStorage.removeItem(key);
+  win = await load("#" + encodeURIComponent(row.loc)); doc = win.document;
+  win.Storage.prototype.setItem = () => { throw new Error("Storage disabled"); };
+  edit(win, doc.querySelector("textarea"), value);
+  check(doc.querySelector("#save-state").textContent === "Browser storage unavailable", "Storage failure is reported without claiming the edit was saved");
+  check(!doc.querySelector("#export-edits").disabled, "A valid edit can still be downloaded when browser storage fails");
+  document.body.dataset.result = "passed";
+  report.textContent = messages.join("\n") + `\nPASS: ${messages.length} browser checks`;
+} catch (error) {
+  document.body.dataset.result = "failed";
+  report.textContent = messages.join("\n") + "\nFAIL: " + error.stack;
+} finally {
+  if (original === null) localStorage.removeItem(key); else localStorage.setItem(key, original);
+}
+</script></html>

@@ -39,7 +39,7 @@ verification coverage, the remaining manual route checks, and current artifact h
 - [PyBoy](https://github.com/Baekalfen/PyBoy) and Pillow for the complete emulator and
   graphics test suite.
 - RGBDS for optional assembly-source equivalence tests.
-- Node.js for the browser rescue-converter parity test.
+- Node.js for the browser rescue-converter and prose-rule parity tests.
 
 Install the Python dependencies with:
 
@@ -96,6 +96,10 @@ The [special rescue mission guide](docs/SPECIAL_RESCUE_MISSIONS.md) explains the
 and how to enter them. An [offline browser copy](docs/rescue-converter/index.html) and
 [Python converter](tools/rescue_converter.py) are also included. See the
 [website maintenance guide](docs/rescue-converter/README.md) for GitHub Pages deployment.
+
+The rescue page also links to the [GB2 translation tools](docs/translation-tool/README.md).
+The prose editor includes Japanese text, scene navigation, immediate project-rule checks,
+a game-font preview, local drafts, backups and validated TSV downloads.
 
 ## Edit the translation
 
