@@ -198,13 +198,13 @@ English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifact
 
 ## Release verification
 
-The 2026-09-07 public test build at source revision
-`535f884d4a5d3d0697231718a8a26cadacbe4b6f` passed the following checks:
+The 2026-09-08 public test build at source revision
+`4ca33271c381a72f6cf6a48283a9e607643c022d` passed the following checks:
 
 | Check | Result |
 |---|---|
-| Complete unittest discovery | 646 tests passed in 807.464 seconds; no failures, errors, or skips |
-| Additional battery against the exact release ROMs | 30 tests passed in 24.891 seconds; no failures, errors, or skips |
+| Complete unittest discovery | 649 tests passed in 804.705 seconds; no failures, errors, or skips |
+| Additional battery against the exact release ROMs | 34 tests passed in 27.528 seconds; no failures, errors, or skips |
 | Validators and production build | All ten commands passed |
 | Fresh local clone | Both fonts' ROMs and IPS patches reproduced byte for byte from tracked inputs plus the verified source ROM |
 | Patch and cartridge integrity | IPS application reproduced both tested ROMs; header/global checksums passed |
@@ -215,15 +215,21 @@ through the installed VS Code Electron runtime. The complete suite used standard
 discovery through a JSON-reporting wrapper.
 
 The extra battery reused selected semantic regressions with the exact release ROMs. It
-covered cold boot with empty SRAM; all 30 archived states loading and advancing in each
+covered cold boot with empty SRAM; all 31 archived states loading and advancing in each
 font; native suspend and fresh SRAM reload in all four classic/shadowed combinations;
 six-character diary names; unidentified-item Select/B/Start behavior; SOS and requester
 Revival-to-Thank-You routes; Clear Campaign certificate pixels; main-ending staff cards;
-equipment digit/redraw matrices; and combat/Monster Log borders. The state-load checks are
-smoke coverage. The extra battery overlaps suite coverage and is not 30 new regressions.
+equipment digit/redraw matrices; combat/Monster Log borders; and Training main/Info labels,
+password display/input, and the three-line arrival receipt. The state-load checks are
+smoke coverage. The extra battery overlaps suite coverage and is not 34 new regressions.
+
+Both receipt sources also passed layout checks for all 29 current location names and floors
+0-255: 7,424 combinations per font, with maximum line widths of 117, 128, and 55 pixels.
+Training menu and arrival screenshots were inspected in both fonts. The freshly built and
+clean-clone ROMs and IPS patches also match the existing latest builds byte for byte.
 
 The battery runner, JSON reports, logs, ROMs, and package are local generated artifacts in
-`build/release-2026-09-07/`; they are not tracked test infrastructure. The package's current
+`build/release-2026-09-08/`; they are not tracked test infrastructure. The package's current
 identity is recorded in [project-status.md](project-status.md#verified-build-and-package).
 Future builds need their own run and artifact hashes.
 

@@ -7,7 +7,7 @@ and bug fixes continue.
 
 The [hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
 is available with all three promotional mission presets. The latest release verification
-passed **646 suite tests and 30 additional checks against the exact release ROMs**, with
+passed **649 suite tests and 34 additional checks against the exact release ROMs**, with
 zero failures, errors, or skips.
 
 ## Text coverage
@@ -219,35 +219,35 @@ recorded in [testing-and-build.md](testing-and-build.md#release-verification).
 
 ## Verified build and package
 
-The 2026-09-07 build was verified from clean source revision
-`535f884d4a5d3d0697231718a8a26cadacbe4b6f`:
+The 2026-09-08 build was verified from clean source revision
+`4ca33271c381a72f6cf6a48283a9e607643c022d`:
 
-- 646 discovered tests passed in 807.464 seconds, with no failures, errors, or skips.
-- 30 additional tests passed against the exact classic and shadowed ROMs, including
+- 649 discovered tests passed in 804.705 seconds, with no failures, errors, or skips.
+- 34 additional tests passed against the exact classic and shadowed ROMs, including
   cold boot, save/reload in all four font combinations, rescue I/O, ending cards,
-  equipment previews, and combat/Monster Log borders.
+  equipment previews, combat/Monster Log borders, and Training menu/password/arrival routes.
 - All ten validation/build commands passed. A fresh local clone reproduced both ROMs
   and both IPS patches byte for byte. Both cartridge checksums and IPS reconstruction
   were verified, including patches read back from the final ZIP.
-- `Shiren-GB2-English-2026-09-07.zip` contains both IPS patches, instructions, font
+- `Shiren-GB2-English-2026-09-08.zip` contains both IPS patches, instructions, font
   licenses, checksums, the verification report, and the offline rescue converter.
-  Its SHA-256 is `0cd9e5b10df9e4905cbf94ae7129adb90c8325ed2b304c9da72ec7631ad94483`.
+  Its SHA-256 is `a15678760d517ae3211db5949902e060884e22137262c8fdd5310afbc0a2c5b0`.
 
 The package and detailed logs are local generated artifacts under
-`build/release-2026-09-07/`, which is ignored by Git. The package is a public test build;
+`build/release-2026-09-08/`, which is ignored by Git. The package is a public test build;
 the [engineering rules](ENGINEERING_RULES.md#release-claims) describe broader release
 acceptance and playthrough evidence.
 
 Both font variants use the same translation and engine patches:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `4050696a08102b3bf3d25a1f790ec68cedac09b8`
+  `0be0d8c257f4e09eabfbb441b2ef35c112dd4423`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `ad78698a13f758608cad8729ccdad4db3ca92b12`
+  `a7d35e60e1f0ddffaacad3865de938c2c4cf2f7b`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `b26feba0f8688b48a3eb20249089d9056ccb1227`
+  `8094c9b1c3d410e655cc31a68634398fdb7865e3`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `6bfeb5de96e0e890321959888a916aa8866f9ad1`
+  `9afcf86efec8258cbabc47533dc33d6b3ff7a656`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.

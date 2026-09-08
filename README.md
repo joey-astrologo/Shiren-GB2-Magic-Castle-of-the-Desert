@@ -24,7 +24,7 @@ are implemented. Both font variants have passed the complete test suite and rele
 | Opening menu/title screen | **Localization remaining** | English replacement artwork and insertion |
 | Other graphics | **Implemented** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed |
 | Wanderer Rescue | **English input/output implemented and tested** | Native password compatibility, promotional mission acceptance, and Japanese ↔ English conversion are verified |
-| Automated verification | **646 suite tests + 30 release-battery checks passed — 2026-09-07** | Zero failures, errors, or skips; both fonts rebuilt identically from a fresh local clone, with IPS application and save/reload verified |
+| Automated verification | **649 suite tests + 34 release-battery checks passed — 2026-09-08** | Zero failures, errors, or skips; both fonts rebuilt identically from a fresh local clone, with IPS application and save/reload verified |
 
 Playtesting and bug fixes continue. See [project status](docs/project-status.md) for
 verification coverage, the remaining manual route checks, and current artifact hashes.
