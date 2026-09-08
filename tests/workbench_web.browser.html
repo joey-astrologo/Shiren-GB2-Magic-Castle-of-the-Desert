@@ -23,6 +23,11 @@ try {
   let win = await load("?subject=messages#194%3A%2455B1"), doc = win.document;
   check(doc.querySelector("#subject option").textContent.includes("6,695"), "Complete catalogue included");
   check(doc.querySelector('[data-loc="194:$55B1"] .jp').textContent === data.records.find(r => r.loc === "194:$55B1").japanese, "Japanese source loads without a file");
+  const reference = new win.DOMParser().parseFromString(await (await fetch("./translation-tool/controls/")).text(), "text/html");
+  const links = [...doc.querySelectorAll(".control-reference-link")];
+  check(links.length > 0 && links.every(link => link.target === "_blank" && link.relList.contains("noopener") && reference.getElementById(new URL(link.href).hash.slice(1))), "Visible source and guide codes link to existing reference anchors in a new tab");
+  check(doc.querySelector('.control-guide-link a').target === "_blank", "The full reference is available near the top of the editor");
+  check(doc.querySelector('#guide a[href$="#page"]') && doc.querySelector('#guide a[href$="#box"]'), "Compound page/box instructions link each code to its own explanation");
   let input = doc.querySelector('[data-loc="194:$55B1"] textarea');
   change(win, input, "Unsupported é"); await wait(500);
   check(doc.querySelector("#export-edits").disabled && input.getAttribute("aria-invalid") === "true", "Invalid text is saved and blocks download");

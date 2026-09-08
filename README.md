@@ -6,9 +6,9 @@ This is a personal, unofficial English localization of *Fushigi no Dungeon:
 Fuurai no Shiren GB2 — Sabaku no Majou* (Chunsoft, Game Boy Color, 2001). It is not
 affiliated with or endorsed by the original developers or publishers.
 
-This repository contains the translation, graphics assets, build tools, and tests. It does
-not contain the game ROM or complete extracted Japanese script. You must supply your own
-matching Japanese cartridge dump.
+This repository contains the translation, graphics assets, build tools, and tests. The
+browser tools include Japanese text for reference. The game ROM is not included; local
+builds and imports require your own matching Japanese cartridge dump.
 
 ## Project status
 
@@ -97,12 +97,68 @@ and how to enter them. An [offline browser copy](docs/rescue-converter/index.htm
 [Python converter](tools/rescue_converter.py) are also included. See the
 [website maintenance guide](docs/rescue-converter/README.md) for GitHub Pages deployment.
 
-The rescue page also links to the [GB2 translation tools](docs/translation-tool/README.md).
-The subject workbenches include all 6,695 extracted entries, Japanese text, scene/group
-navigation, shared project-rule checks, game-font previews, local drafts, backups and
-validated TSV downloads.
+The rescue page also links to the hosted translation tools. See [Edit the translation](#edit-the-translation)
+below for browser editing and importing downloaded changes into this project.
 
 ## Edit the translation
+
+### Use the hosted editor
+
+**[Open the GB2 translation tools](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/translation-tool/index.html)**
+
+Choose a subject workbench and a scene or group. Japanese source and the current English
+are included, so browser editing needs no ROM or script upload. Edit the English and review
+the immediate GB2 rule checks and game-font preview. **Preview font** switches between
+Classic and Shadowed; clickable codes open the
+[control code reference](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/translation-tool/controls/).
+Fixed or unconfirmed entries remain visible with an explanation.
+
+All subjects share a draft saved in this browser. Use **Needs attention** to resolve errors,
+including other entries affected by a name change. **Download changes** produces a TSV of
+your edits once all checks pass. **Back up draft** saves unfinished work as JSON, and
+**Import edits** reopens compatible TSV downloads or JSON backups in the browser.
+
+### Import downloaded edits into the project
+
+Use `tools/workbench_web.py` with a local checkout, the [build dependencies](#requirements)
+and your matching Japanese ROM. From the repository root, check the downloaded TSV first:
+
+```sh
+ROM="Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
+EDITS="/path/to/shiren-gb2-workbench-changes.tsv"
+
+python3 tools/workbench_web.py import "$ROM" "$EDITS"
+```
+
+This prints the proposed diff and validates the full prospective script, including runtime
+substitutions, terminology, layouts, draft owners and an in-memory ROM build. It changes no
+project files. Downloads carry their rule version and original-entry baselines; incompatible
+or stale downloads are rejected rather than overwriting current work.
+
+After reviewing the successful check and diff, apply the same download:
+
+```sh
+python3 tools/workbench_web.py import "$ROM" "$EDITS" --apply
+```
+
+The importer updates the appropriate authoritative TSVs, generated text and ownership
+records together. Then refresh both browser catalogues:
+
+```sh
+python3 tools/prose_web.py export "$ROM"
+python3 tools/workbench_web.py export "$ROM"
+```
+
+Review the resulting `git diff`, [build the patched ROM](#build), and run the affected
+[tests and in-game checks](docs/testing-and-build.md). The browser preview cannot judge
+translation meaning or event behavior. JSON backups are for reopening in the browser;
+the project importer takes the **Download changes** TSV.
+
+See the [workbench guide](docs/translation-tool/workbench/README.md#download-and-project-import)
+for details. Downloads from the earlier standalone prose editor use its
+[separate importer](docs/translation-tool/prose/README.md#apply-a-download-to-the-project).
+
+### Edit local TSV files
 
 Generate or refresh the ignored source-rich reference catalogs from your own ROM with:
 

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#253c34">
+  <meta name="description" content="Shiren GB2 text control codes: line breaks, page waits, box resets, runtime substitutions, timing and named glyphs, with project editing rules.">
+  <title>Control code reference · Shiren GB2</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to control codes</a>
+  <header class="masthead"><div class="header-inner">
+    <a class="brand" href="../" aria-label="Shiren GB2 translation home"><span class="moon" aria-hidden="true"></span><span>SHIREN GB2<small>Translation tools</small></span></a>
+    <a class="project-link" href="../">All workbenches →</a>
+  </div></header>
+  <main id="content" class="control-reference" tabindex="-1">
+    <div class="eyebrow">TEXT REFERENCE</div>
+    <h1>Control code reference</h1>
+    <p class="lead">Control codes tell GB2 when to break a line, wait, reset a box or insert a value from the game. This page explains the project’s spellings and editing rules. Click a code in either editor to open its explanation here.</p>
+    <nav class="reference-nav" aria-label="Control code sections">
+      <a href="#layout">Lines and boxes</a><a href="#values">Runtime values</a><a href="#effects">Timing and effects</a><a href="#glyphs">Named glyphs</a><a href="#raw-bytes">Raw bytes and syntax</a><a href="#editor-rules">Editing rules</a>
+    </nav>
+    <section class="reading-note" aria-labelledby="reading">
+      <h2 id="reading">Reading a code</h2>
+      <p>Keep the angle brackets and spelling. Arguments are two-digit hexadecimal bytes: <code>1E</code> is decimal 30. Letters such as <code>NN</code>, <code>LL</code> and <code>HH</code> below are placeholders, not text to enter. For a two-byte argument, <code>LL</code> is the low byte and <code>HH</code> the high byte.</p>
+      <p>The Japanese source and each entry’s checks determine which codes belong there. A code appearing in this reference does not make it valid in every entry. Keep runtime arguments, native selectors and required effects unchanged.</p>
+      <p class="note">These are GB2 definitions. The ROM source composer expands <code>F4–F6</code> before rendering; those bytes have different meanings in already-expanded renderer data. Use the named source forms below when editing the script.</p>
+    </section>
+
+    <section aria-labelledby="layout">
+      <h2 id="layout">Lines and boxes</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Code</th><th scope="col">What it does</th><th scope="col">Editing guidance</th></tr></thead>
+        <tbody>
+          <tr id="br"><th scope="row"><code>&lt;br&gt;</code><small>FD</small></th><td>Advances one physical line immediately and returns the pen to the left edge. It does not wait for input.</td><td>Use for a measured line break. Enter inserts it. Dialogue and full-renderer text advance 11 pixels; the stepped renderer advances 16. Each surface has its own line budget.</td></tr>
+          <tr id="page"><th scope="row"><code>&lt;page&gt;</code><small>FB</small></th><td>Waits for fresh input. It keeps the horizontal pen and physical line position.</td><td>Keep required waits in order. A wait does not free a line or reset a box. In dialogue, the 9-pixel wait marker must start at 135 pixels or earlier. If words continue after a wait, keep their separating space.</td></tr>
+          <tr id="box"><th scope="row"><code>&lt;box&gt;</code><small>FC</small></th><td>Ends the current renderer invocation. In dialogue, it resets the text surface for the next box. It does not guarantee a reading pause.</td><td>Use <code>&lt;page&gt;&lt;box&gt;</code> for an added readable dialogue box. Ctrl/Cmd+Enter inserts both. Preserve source box boundaries, including native standalone boxes; do not replace every box with a new wait.</td></tr>
+          <tr id="cf3"><th scope="row"><code>&lt;cF3&gt;</code><small>F3</small></th><td>Marks a conditional soft-wrap checkpoint in the source composer. If expanded text reaches its 144-pixel threshold, it rolls back to the latest checkpoint and turns it into a line break. Otherwise the renderer ignores the marker.</td><td>Keep at least one when required by the prose source. Place additional checkpoints at safe word boundaries where the entry permits them. A checkpoint after an overflow cannot rescue text before it. Other subjects apply their own source-control rules.</td></tr>
+          <tr id="hspace"><th scope="row"><code>&lt;hspace:NN&gt;</code><small>F7 NN</small></th><td>Adds <code>NN</code> pixels to the renderer’s horizontal pen. The source composer does not count this spacing.</td><td>Keep spacing required by positioned labels and other fixed layouts. The preview checks renderer spacing separately from composer width; extra spacing still has to fit the surface.</td></tr>
+        </tbody>
+      </table></div>
+      <p><code>&lt;page&gt;&lt;br&gt;</code> waits and then advances a line within the same box. <code>&lt;page&gt;&lt;box&gt;</code> waits and starts a fresh dialogue box. In prose, keep the break after a source wait, or replace that break with a box reset when needed to fit. Three physical lines remain the dialogue limit even across waits.</p>
+    </section>
+
+    <section aria-labelledby="values">
+      <h2 id="values">Runtime values</h2>
+      <p>These insert text or values supplied while the game runs. Keep their arguments and occurrence counts. The same spelling can refer to different kinds of text in different records; the preview reserves the project’s measured width for that entry.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Code</th><th scope="col">What it does</th><th scope="col">Editing guidance</th></tr></thead>
+        <tbody>
+          <tr id="copy"><th scope="row"><code>&lt;copy:AA:BB:CC&gt;</code><small>F4 AA BB CC</small></th><td>Inserts an unsigned integer supplied at runtime. The legacy name is retained in extracted scripts; the first argument is the integer’s byte count, not a number of text characters to copy.</td><td>Preserve all three bytes, for example <code>&lt;copy:01:19:C5&gt;</code>. Do not change the first argument to shorten the preview.</td></tr>
+          <tr id="name"><th scope="row"><code>&lt;name&gt;</code><br><code>&lt;name:NN&gt;</code><small>F5 FF / F5 NN</small></th><td>Inserts the player name. The argument-free spelling means the complete name; an explicit argument selects a bounded form.</td><td>Keep the source form, including <code>&lt;name:00&gt;</code> where present. The localized player editor accepts six visible characters. The conservative 49-pixel reservation in legacy F5 checks is headroom, not permission for a seventh character.</td></tr>
+          <tr id="lookup"><th scope="row"><code>&lt;lookup:LL:HH&gt;</code><small>F6 01 LL HH</small></th><td>Inserts a table-selected runtime string.</td><td>Keep the two argument bytes. The supplying code and record determine the string’s domain; do not substitute a guessed name.</td></tr>
+          <tr id="number"><th scope="row"><code>&lt;number:LL:HH&gt;</code><small>F6 03 LL HH</small></th><td>Inserts a cached runtime string. <strong>The legacy name does not mean the result is always a number.</strong> It may contain a name or another value.</td><td>Keep the exact arguments and use the entry’s reserved width. Do not measure this as a fixed number of digits.</td></tr>
+          <tr id="sourcef6"><th scope="row"><code>&lt;sourceF6:MM:LL:HH&gt;</code><small>F6 MM LL HH</small></th><td>Preserves an F6 source mode without giving it a guessed semantic name. <code>MM</code> selects the mode.</td><td>Keep all three arguments. Modes 01 and 03 have the <code>lookup</code> and <code>number</code> spellings above. An unconfirmed runtime domain needs project investigation before an entry can be opened for editing.</td></tr>
+          <tr id="cf8"><th scope="row"><code>&lt;cF8&gt;</code><small>F8</small></th><td>A native template escape whose following digit/lowercase selector run is consumed by game formatting code. The renderer itself treats F8 as a no-op.</td><td>Keep the marker and its following native <code>0–9</code>/<code>a–z</code> selectors unchanged and in order. In <code>&lt;cF8&gt;g</code>, <code>g</code> is a selector, not a word to translate: the bytes must stay <code>F8 10</code>, not localized <code>F8 36</code>.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section aria-labelledby="effects">
+      <h2 id="effects">Timing and effects</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Code</th><th scope="col">What it does</th><th scope="col">Editing guidance</th></tr></thead>
+        <tbody>
+          <tr id="delay"><th scope="row"><code>&lt;delay:NN&gt;</code><small>FA NN</small></th><td>Sets the native character/timing delay from one byte. This is not a general instruction to pause for exactly that many frames.</td><td>Keep required values and counts. Timing needs an in-game check; the text preview does not play it back.</td></tr>
+          <tr id="cf9"><th scope="row"><code>&lt;cF9:LL:HH&gt;</code><small>F9 LL HH</small></th><td>Passes a two-byte little-endian effect argument to the native handler at <code>0:$3A4C</code>. <span class="uncertain">Individual effect meanings are not fully mapped here.</span></td><td>Preserve the exact arguments and required count. Do not change it based on a guess about a sound, animation or other effect.</td></tr>
+          <tr id="cfe"><th scope="row"><code>&lt;cFE&gt;</code><small>FE</small></th><td>A named no-op in the ordinary renderer, retained for lossless source decoding.</td><td>Keep source occurrences where the entry requires them. A renderer no-op is not permission to remove bytes from records also used by native formatting code.</td></tr>
+        </tbody>
+      </table></div>
+      <p>The production dialogue patch makes explicit <code>&lt;page&gt;</code> waits require fresh input. Cinematic records without that code retain native delay-driven automatic pacing. Keep their required controls and check the event in game.</p>
+    </section>
+
+    <section aria-labelledby="glyphs">
+      <h2 id="glyphs">Named glyphs</h2>
+      <p>These are two-byte font glyphs, not timing or layout commands. Their distinct spellings preserve distinct source bytes. The editor accepts only the glyphs supported for that entry by the installed font.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Token</th><th scope="col">What it represents</th><th scope="col">Editing guidance</th></tr></thead>
+        <tbody>
+          <tr id="speaker"><th scope="row"><code>&lt;speaker&gt;</code><small>F2 24</small></th><td>An opening speaker quote/separator in the Japanese font.</td><td>An unmatched separator after a speaker name becomes <code>Name: dialogue</code> in English. A paired form may remain only when intentionally quoting a visible in-game label.</td></tr>
+          <tr id="speakerend"><th scope="row"><code>&lt;speakerEnd&gt;</code><small>F2 26</small></th><td>The closing counterpart to <code>&lt;speaker&gt;</code>.</td><td>Review the pair as punctuation. It does not end a text box or a record.</td></tr>
+          <tr id="quoteopen"><th scope="row"><code>&lt;quoteOpen&gt;</code><small>F1 98</small></th><td>A separate opening quote glyph.</td><td>Its source bytes differ from <code>&lt;speaker&gt;</code> and ordinary corner quotes. Use the project’s English punctuation rules; do not treat it as a layout command.</td></tr>
+          <tr id="quoteclose"><th scope="row"><code>&lt;quoteClose&gt;</code><small>F1 9A</small></th><td>The closing glyph paired with <code>&lt;quoteOpen&gt;</code>.</td><td>Keep quote meaning and pairing when translating. The font and entry checks determine which spelling is usable.</td></tr>
+          <tr id="cracked"><th scope="row"><code>&lt;cracked&gt;</code><small>F2 1E</small></th><td>The composite cracked-item mark. The production graphics pass changes its Japanese bitmap to <code>(Cr)</code>, retaining the same script token and width metadata.</td><td>Preserve the token where required. Do not replace it with guessed punctuation from the Japanese bitmap.</td></tr>
+          <tr id="passwordleft"><th scope="row"><code>&lt;passwordLeft&gt;</code><small>F2 4C</small></th><td>The named left password glyph from the reviewed font table.</td><td>Part of the native password presentation. Follow the entry’s fixed/reference status; this is not a general text-box border control.</td></tr>
+          <tr id="passwordright"><th scope="row"><code>&lt;passwordRight&gt;</code><small>F2 4E</small></th><td>The named right password glyph.</td><td>Keep the corresponding native presentation. Password data is not ordinary translatable dialogue.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section aria-labelledby="raw-bytes">
+      <h2 id="raw-bytes">Raw bytes and authoring syntax</h2>
+      <p><code>&lt;HH&gt;</code>, such as <code>&lt;D2&gt;</code>, preserves a single byte for which the codec has no ordinary character spelling. It is not automatically a control: many native symbols occupy the <code>D0–EF</code> glyph range. Keep source identity and use only aliases accepted by the entry’s font checks.</p>
+      <p id="prefixed-glyphs"><code>{HHHH}</code> preserves a two-byte glyph with an <code>F0</code>, <code>F1</code> or <code>F2</code> prefix. A form such as the reviewed <code>{F174=明}</code> is a byte-specific character alias, not a new glyph definition. Use the actual reviewed mapping in the project. The codec can preserve unknown source bytes even when the translation editor cannot safely render or accept them.</p>
+      <p id="terminator"><strong>Record terminator — <code>FF</code>.</strong> The build writes the record ending. Do not type <code>&lt;FF&gt;</code> into a translation. An <code>FF</code> argument inside a complete control, such as <code>F5 FF</code> for <code>&lt;name&gt;</code>, belongs to that control and does not end the record.</p>
+      <p id="empty"><strong><code>&lt;empty&gt;</code> is an authoring marker, not a ROM control.</strong> It identifies an intentional empty value in project files. A blank English project cell instead means untranslated/native fallback. Empty or internal slots shown as references in the browser do not become editable by entering this marker.</p>
+    </section>
+
+    <section aria-labelledby="editor-rules">
+      <h2 id="editor-rules">Using the codes in a translation</h2>
+      <p>Keep each entry’s listed runtime substitutions, native selector runs, required timing effects and source boundaries. Prose wraps at word spaces; other subjects retain explicit line breaks or use their own project wrapper. Names, descriptions, menus and help text have different line, width and shared-dependency checks.</p>
+      <p>Choose Classic or Shadowed near the top of the editor to inspect the game font. Both styles have the same widths. Shaded runtime spans reserve measured space; they are not a prediction of the exact text that will appear in every playthrough.</p>
+      <p>Invalid edits stay in your browser and can be backed up. The changes download remains blocked until the entry and shared checks pass. Import the TSV with the project importer for the native owner checks and build validation, then review translation meaning, timing and appearance in game.</p>
+    </section>
+    <section class="reference-sources" aria-labelledby="sources">
+      <h2 id="sources">Project sources</h2>
+      <p>Definitions follow the GB2 <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/TEXT_REFERENCE.md">text reference</a>, <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/tools/codec.py">source and renderer codec</a>, <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/data/kanji.tsv">reviewed glyph table</a> and <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/tests/fixtures/control_dispatch.json">native control-dispatch evidence</a>. Entry-specific validation is described in the <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/translation-tool/workbench/README.md">workbench guide</a>.</p>
+    </section>
+  </main>
+  <footer class="footer"><a href="../">All translation workbenches</a><a href="../../index.html">Rescue password converter</a></footer>
+</body>
+</html>

@@ -8,9 +8,13 @@ account requirements, or backend services. Keep all six web files together:
 `index.html`, `style.css`, `page.js`, `i18n.js`, `converter.js`, and `password-data.js`.
 
 The rescue converter is the hosted home page. Its bottom link opens the
-[translation tool index](../translation-tool/README.md), which offers GB2 subject
-workbenches with all extracted entries and included Japanese text. To preview that navigation locally, stage and
-serve the combined site using the commands in the translation tool documentation.
+[hosted translation tool index](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/translation-tool/index.html),
+which offers GB2 subject workbenches with included Japanese text, immediate rule checks,
+game-font previews and downloadable edits. The project README documents
+[browser editing](../../README.md#use-the-hosted-editor) and the
+[downloaded-TSV import workflow](../../README.md#import-downloaded-edits-into-the-project).
+To preview that navigation locally, stage and serve the combined site using the
+[translation tool commands](../translation-tool/README.md#regenerate-test-and-preview).
 
 Use **Language / 言語** at the top of the page to choose **English** or **日本語**.
 The interface starts in Japanese for a Japanese browser locale and English otherwise;

@@ -7,7 +7,8 @@ import shutil
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "build/pages"
 RESCUE_FILES = ("index.html", "style.css", "page.js", "i18n.js", "converter.js", "password-data.js")
-TRANSLATION_FILES = ("index.html", "style.css", "coverage.html", "prose/index.html", "prose/style.css",
+TRANSLATION_FILES = ("index.html", "style.css", "coverage.html", "controls/index.html", "controls/style.css",
+                     "controls/links.js", "prose/index.html", "prose/style.css",
                      "prose/app.js", "prose/rules.js", "prose/preview.js", "prose/catalog.json", "prose/font-license.txt",
                      "workbench/index.html", "workbench/app.js", "workbench/rules.js", "workbench/preview.js",
                      "workbench/style.css", "workbench/catalog.json")

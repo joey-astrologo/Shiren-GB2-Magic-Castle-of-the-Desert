@@ -8,6 +8,9 @@ home page, with a link to this translation index at the bottom.
 The [workbench guide](workbench/README.md) explains editing, shared checks,
 download/import and the reference-only cases. The [coverage page](coverage.html)
 lists counts and the owners of graphics and code-generated text outside the script.
+The [control code reference](controls/) explains every named GB2 control, runtime
+substitution and named glyph. Both editors link code chips to individual explanations
+in a new tab, including the codes in their editing guides.
 Prose retains all 72 project scenes. Each record has one primary subject; aliases
 are counted once.
 
@@ -46,6 +49,7 @@ python3 tools/workbench_web.py check-assets
 python3 -m unittest tests.test_prose_web tests.test_workbench_web -v
 node tests/prose_web.test.mjs
 node tests/workbench_web.test.mjs
+node tests/control_reference.test.mjs
 python3 tools/build_pages.py --test
 python3 -m http.server 8765 --bind 127.0.0.1 --directory build/pages
 ~~~

@@ -29,6 +29,11 @@ try {
   let win = await load("#" + encodeURIComponent(row.loc)), doc = win.document;
   check(doc.querySelectorAll("#events button").length === 73, "All 72 scenes and all-dialogue navigation are available");
   check(doc.querySelector(".jp").textContent.includes(row.japanese.slice(0, 2)), "Japanese prose is included without a user file");
+  const reference = new win.DOMParser().parseFromString(await (await fetch("./translation-tool/controls/")).text(), "text/html");
+  const links = [...doc.querySelectorAll(".control-reference-link")];
+  check(links.length > 0 && links.every(link => link.target === "_blank" && link.relList.contains("noopener") && reference.getElementById(new URL(link.href).hash.slice(1))), "Visible source and guide codes link to existing reference anchors in a new tab");
+  check(doc.querySelector('.control-guide-link a').target === "_blank", "The full reference is available near the top of the editor");
+  check(doc.querySelector('#guide a[href$="#page"]') && doc.querySelector('#guide a[href$="#box"]'), "Compound page/box instructions link each code to its own explanation");
   let input = doc.querySelector("textarea"), value = row.draft + " Next.";
   edit(win, input, row.draft + " ☃");
   check(input.getAttribute("aria-invalid") === "true" && doc.querySelector("#export-edits").disabled, "Unsupported glyphs immediately block download");

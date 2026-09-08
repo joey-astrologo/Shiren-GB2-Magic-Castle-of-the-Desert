@@ -1,6 +1,10 @@
 import {validateDraft, exportEdits, importEdits, checkAllocation, draftBackup, importBackup, MAX_TEXT} from "./rules.js";
 import {drawPreview, WINDOW, FONT_STYLES} from "./preview.js";
 
+import {controlReferenceLink, controlReferenceLinks, linkGuideControls} from "../controls/links.js";
+
+linkGuideControls(document.querySelector("#guide"));
+
 const $ = selector => document.querySelector(selector);
 const STORAGE = "shiren-gb2-prose-studio-v1";
 const FONT_STORAGE = "shiren-gb2-prose-preview-font-v1";
@@ -110,12 +114,12 @@ function sourceContent(container, row) {
     return;
   }
   container.className = "jp";
-  for (const part of jp.split(/(<[^>]+>)/g)) {
+  for (const part of jp.split(/(<[^>]+>|\{[0-9a-f]{4}(?:=[^{}])?\})/gi)) {
     if (part === "<br>") container.append(node("br"));
     else if (part === "<box>") {
       const divider = node("span", "source-page-break");
       divider.setAttribute("aria-label", "Page break"); container.append(divider);
-    } else if (/^<[^>]+>$/.test(part)) container.append(node("span", "token", part));
+    } else if (/^(?:<[^>]+>|\{[0-9a-f]{4}(?:=[^{}])?\})$/i.test(part)) container.append(controlReferenceLink(part, "token"));
     else container.append(document.createTextNode(part));
   }
 }
@@ -244,8 +248,11 @@ function makeCard(row, first) {
     });
     tools.append(inserts, reset); right.append(input, tools);
     if (row.sequence.length) {
-      const required = node("div", "required", "Source controls (see guide): ");
-      for (const token of row.sequence) required.append(node("code", "", token));
+      const required = node("div", "required", "Source controls (click for meaning): ");
+      for (const token of row.sequence) {
+        const group = node("span", "control-group");
+        group.append(controlReferenceLinks(token)); required.append(group);
+      }
       right.append(required);
     }
     if (row.terms.length) {

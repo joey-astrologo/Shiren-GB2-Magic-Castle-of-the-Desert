@@ -11,6 +11,7 @@ on:
       - 'script/editing/**'
       - 'tests/test_workbench_web.py'
       - 'tests/workbench_web*'
+      - 'tests/control_reference.test.mjs'
       - 'tests/fixtures/workbench_web_cases.json'
       - 'script/en/**'
       - 'assets/fonts/thin_pixel_7*'
@@ -51,6 +52,7 @@ jobs:
           python3 -m unittest tests.test_workbench_web -v
           node tests/prose_web.test.mjs
           node tests/workbench_web.test.mjs
+          node tests/control_reference.test.mjs
       - name: Stage public pages
         run: python3 tools/build_pages.py
       - uses: actions/configure-pages@v5
