@@ -1,7 +1,9 @@
 import {validateDraft, exportEdits, importEdits, checkAllocation, draftBackup, importBackup, MAX_TEXT} from "./rules.js";
+import {drawPreview, WINDOW, FONT_STYLES} from "./preview.js";
 
 const $ = selector => document.querySelector(selector);
 const STORAGE = "shiren-gb2-prose-studio-v1";
+const FONT_STORAGE = "shiren-gb2-prose-preview-font-v1";
 const PAGE_SIZE = 12;
 let data, state, validation, records;
 const elements = new Map();
@@ -118,40 +120,22 @@ function sourceContent(container, row) {
   }
 }
 
-function drawPreview(canvas, lines, page) {
-  const context = canvas.getContext("2d");
-  context.fillStyle = "#dce5c6"; context.fillRect(0, 0, 144, 40);
-  const boxLines = lines.filter(line => line.box === page);
-  const lastOperation = boxLines.flatMap(line => line.operations).at(-1);
-  for (const line of boxLines) {
-    const y = line.row * 11 + 2;
-    for (const operation of line.operations) {
-      if (operation.substitution) {
-        context.fillStyle = "#a4b68d";
-        context.fillRect(operation.x, y, operation.width, 8);
-        context.fillStyle = "#748d64";
-        for (let x = operation.x; x < operation.x + operation.width; x += 3) context.fillRect(x, y + 7, 1, 1);
-      } else if (operation.page) {
-        if (operation !== lastOperation) continue; // Earlier wait markers are cleared as text resumes.
-        context.fillStyle = "#748d64";
-        for (let dy = 0; dy < 4; dy++) context.fillRect(operation.x + dy, y + 2 + dy, 7 - dy * 2, 1);
-      } else if (operation.char !== undefined || data.glyphTokens[operation.symbol]?.pixels) {
-        const palette = {2: "#8e9e80", 3: "#2e4630"};
-        const pixels = data.font.glyphs[operation.char]?.pixels || data.glyphTokens[operation.symbol].pixels;
-        pixels.forEach((pixels, row) => {
-          pixels.forEach((color, x) => {
-            if (palette[color]) { context.fillStyle = palette[color]; context.fillRect(operation.x + x, y + row, 1, 1); }
-          });
-        });
-      } else {
-        context.fillStyle = "#82976d";
-        context.strokeStyle = "#82976d";
-        context.strokeRect(operation.x + .5, y + .5, 6, 6);
-      }
-    }
-    if (line.extent > data.rules.pixelLimit || line.composer > data.rules.composerLimit) {
-      context.fillStyle = "#a44032"; context.fillRect(142, y, 2, 8);
-    }
+function restoreFontStyle() {
+  try {
+    const style = localStorage.getItem(FONT_STORAGE);
+    if (FONT_STYLES.includes(style)) return style;
+  } catch { /* A preview preference does not require browser storage. */ }
+  return "shadowed";
+}
+
+function changeFontStyle() {
+  state.fontStyle = $("#font-style").value;
+  try { localStorage.setItem(FONT_STORAGE, state.fontStyle); }
+  catch { notify("Font style changed for this visit. This browser could not save the preference."); }
+  for (const [loc, card] of elements) {
+    const canvas = card.querySelector("canvas");
+    if (canvas) drawPreview(canvas, validation.get(loc).lines,
+      Number(card.querySelector(".preview").dataset.page || 0), data, state.fontStyle);
   }
 }
 
@@ -179,7 +163,7 @@ function updateFeedback(row, card) {
   const content = details.querySelector(".preview-content"); content.replaceChildren();
   if (!result.lines.length) { content.append(node("p", "preview-side", row.editable ? "Fix the token or font error to restore the preview." : "This native dialogue slot is empty.")); return; }
   const box = node("div", "game-box");
-  const canvas = node("canvas"); canvas.width = 144; canvas.height = 40;
+  const canvas = node("canvas"); canvas.width = WINDOW.width; canvas.height = WINDOW.height;
   canvas.setAttribute("role", "img"); canvas.setAttribute("aria-label", "Preview in the approved game font. Per-line fit measurements follow.");
   box.append(canvas);
   const side = node("div", "preview-side");
@@ -193,7 +177,7 @@ function updateFeedback(row, card) {
     details.dataset.page = page;
     indicator.textContent = `Box ${page + 1} of ${boxes}`;
     back.disabled = page === 0; forward.disabled = page >= boxes - 1;
-    drawPreview(canvas, result.lines, page); meters.replaceChildren();
+    drawPreview(canvas, result.lines, page, data, state.fontStyle); meters.replaceChildren();
     for (const line of result.lines.filter(line => line.box === page)) {
       const over = line.extent > 144 || line.composer > 143;
       const meter = node("div", "line-meter" + (over ? " over" : ""));
@@ -333,7 +317,9 @@ async function initialize() {
   data = await response.json();
   records = new Map(data.records.map(row => [row.loc, row]));
   const start = data.events.find(event => event.id === "opening_sandstorm") || data.events[0];
-  state = {event: start.id, query: "", filter: "all", page: 0, edits: {}, japanese: Object.fromEntries(data.records.map(row => [row.loc, row.japanese])), stale: null};
+  state = {event: start.id, query: "", filter: "all", page: 0, edits: {}, japanese: Object.fromEntries(data.records.map(row => [row.loc, row.japanese])), stale: null, fontStyle: restoreFontStyle()};
+  $("#font-style").value = state.fontStyle;
+  $("#font-style").addEventListener("change", changeFontStyle);
   restore(); validateAll(); navigation(); render(); goToHash();
   window.addEventListener("hashchange", goToHash);
   $("#search").addEventListener("input", event => {

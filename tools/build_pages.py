@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "build/pages"
 RESCUE_FILES = ("index.html", "style.css", "page.js", "i18n.js", "converter.js", "password-data.js")
 TRANSLATION_FILES = ("index.html", "style.css", "prose/index.html", "prose/style.css",
-                     "prose/app.js", "prose/rules.js", "prose/catalog.json", "prose/font-license.txt")
+                     "prose/app.js", "prose/rules.js", "prose/preview.js", "prose/catalog.json", "prose/font-license.txt")
 
 
 def build(output=OUTPUT):

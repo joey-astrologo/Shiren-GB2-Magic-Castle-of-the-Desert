@@ -15,8 +15,13 @@ included in the catalogue, so visitors can start without selecting any files.
 
 Choose a scene and edit the English draft. Enter inserts `<br>`; Ctrl/Cmd+Enter inserts
 `<page><box>`. Word wrapping is automatic; page and box boundaries are authored. The
-preview uses the approved shadowed Thin Pixel-7 glyph pixels and advances, with GB2's
-11px line advance. Shaded spans reserve the project's full runtime-width bounds.
+preview uses GB2's light dialogue window, black frame with a gray inner edge, 8px text
+margin and 11px line advance. **Preview font** near the top switches every preview between
+the approved **Classic** and **Shadowed** Thin Pixel-7 glyphs. The choice is remembered in
+this browser. Both styles use identical advances: switching changes the preview, not
+text validation, saved drafts or exported text. Shaded spans reserve the project's full
+runtime-width bounds. The preview shows the standard English dialogue window; cinematic
+backgrounds and scene-specific palettes are not simulated.
 
 Drafts, including invalid edits, are saved in browser storage. Storage errors are shown.
 An incompatible saved draft is kept for recovery and editing is disabled until the user

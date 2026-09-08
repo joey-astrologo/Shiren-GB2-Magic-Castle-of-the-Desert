@@ -28,7 +28,10 @@
       <div id="notice" class="notice" role="status" hidden></div>
       <p id="allocation-status" class="notice error" role="status" hidden></p>
       <div id="recovery" class="notice warning" hidden><span>A saved draft belongs to an older catalogue. Download it before starting a fresh draft.</span><button id="recover-draft" class="text-button">Download recovery file</button><button id="fresh-draft" class="text-button">Start fresh</button></div>
-      <div class="source-strip"><div><span class="source-symbol" aria-hidden="true">↔</span><strong>Japanese source included</strong><span>72 scenes · 1,768 entries · GB2 controls, terminology and font measurements</span></div></div>
+      <div class="source-strip">
+        <div><span class="source-symbol" aria-hidden="true">↔</span><strong>Japanese source included</strong><span>72 scenes · 1,768 entries · GB2 controls, terminology and font measurements</span></div>
+        <div class="preview-font"><label for="font-style">Preview font</label><select id="font-style" aria-describedby="font-style-help"><option value="classic">Classic</option><option value="shadowed" selected>Shadowed</option></select><small id="font-style-help">Same text widths in both styles.</small></div>
+      </div>
       <section class="toolbar" aria-label="Find dialogue">
         <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4 4"></path></svg><input id="search" type="search" placeholder="Search dialogue, speaker, or address…" aria-label="Search all dialogue"></label>
         <div class="filters" role="group" aria-label="Filter dialogue"><button data-filter="all" class="active" aria-pressed="true">All entries</button><button data-filter="edited" aria-pressed="false">Edited <span id="edited-count">0</span></button><button data-filter="errors" aria-pressed="false">Needs attention <span id="error-count">0</span></button></div>
