@@ -50,6 +50,8 @@ the ordinary check succeeds.
 For one spreadsheet with Japanese, inserted English and a separate proposed-edit
 column, use [`translator-review.tsv`](translator-review.tsv). The
 [spreadsheet guide](translator-review.md) explains its columns and regeneration.
+Use the separate `tools/import_script_sheet.py` to check a returned sheet, build a
+test ROM with `--output`, or synchronize approved edits with `--apply`.
 
 | File | Contents | Records |
 |---|---|---:|

@@ -32,10 +32,84 @@ the source record. The original extraction retains those details for validation.
 One row may serve several places in the game, so a proposed edit applies to all
 uses of that record.
 
-This sheet is a review format. It is not accepted directly by the existing browser
-changes importer. Returned edits need to be converted and validated through the
-appropriate workbench/draft owners before insertion. Keep the unchanged `id`, `jp`
-and `en` columns so that review can detect an outdated baseline.
+The separate `tools/import_script_sheet.py` reads this six-column format. The browser
+changes importer keeps its own format. Keep all rows and the unchanged `id`, `loc`,
+`bytes`, `jp` and `en` columns so the sheet importer can detect an outdated baseline.
+Sorting rows or columns is allowed. Blank `edited_en` cells, or cells identical to
+`en`, make no change.
+
+## Check a returned sheet
+
+With the normal build dependencies, run this from the repository root:
+
+```sh
+ROM="Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
+SHEET="/path/to/returned-review.tsv"
+python3 tools/import_script_sheet.py "$ROM" "$SHEET"
+```
+
+The default is a check only. It prints the proposed project diff and runs the same
+GB2 entry checks, shared terminology/runtime checks, draft owners and complete
+in-memory build used by the subject workbenches. No project files or ROMs are written.
+The spreadsheet is never rewritten.
+
+Only `edited_en` supplies proposed text. Unknown or duplicate IDs, missing rows,
+changed baseline cells and edits to reference-only entries stop the import. Invalid
+glyphs, lost controls, changed runtime selectors, overflows and affected unchanged
+consumers also stop it. `bytes` and `loc` describe the original snapshot; do not
+update them to match your proposed text.
+
+## Insert into a test ROM
+
+Add `--output` to build a separate ROM and its IPS patch for playtesting:
+
+```sh
+python3 tools/import_script_sheet.py "$ROM" "$SHEET" --output build/sheet-review.gbc
+```
+
+This uses the Shadowed font by default. Use `--font-style classic` for Classic, or
+`--font-style both` to write `sheet-review-classic-font.gbc` and
+`sheet-review-shadowed-font.gbc` with their matching IPS patches. Each IPS is reapplied
+in memory and must reproduce its ROM exactly. Existing output files are never
+overwritten; choose another output name for the next review build.
+
+`--output` leaves the project translations unchanged. Review wording, pacing and
+appearance in game before accepting the edits.
+
+## Apply approved edits to the project
+
+```sh
+python3 tools/import_script_sheet.py "$ROM" "$SHEET" --apply
+```
+
+The tool repeats validation, then updates the appropriate authoritative TSVs,
+generated text and ownership records together. Prose goes through the scene editor;
+item/action and combat messages go through their respective drafts. Unchanged
+entries retain their authored drafts. A changed input during validation stops the
+write; a write failure rolls back the files already changed.
+
+You can combine `--apply` and `--output` to update the project and write a review ROM
+in one checked operation. After applying a batch, refresh both browser catalogues
+and export a new sheet for subsequent edits:
+
+```sh
+python3 tools/prose_web.py export "$ROM"
+python3 tools/workbench_web.py export "$ROM"
+python3 tools/export_script_sheet.py "$ROM" script/en --out script/translator-review-v2.tsv
+```
+
+An older sheet is rejected when its baseline no longer matches. Keep returned sheets
+for review; carry any unfinished proposals into the fresh snapshot. Run the project's
+[tests and game acceptance checks](../docs/testing-and-build.md) for the changed text.
+
+The importer has focused parser, owner-routing, ROM/IPS and no-write regression tests:
+
+```sh
+python3 -m unittest tests.test_script_sheet -v
+```
+
+Parser tests run without a ROM; integration tests need the matching local ROM and
+normal build dependencies. Their project-write checks use isolated temporary files.
 
 ## Generate a fresh sheet
 

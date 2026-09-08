@@ -12,6 +12,7 @@ on:
       - 'tests/test_workbench_web.py'
       - 'tests/workbench_web*'
       - 'tests/control_reference.test.mjs'
+      - 'tests/test_script_sheet.py'
       - 'tests/fixtures/workbench_web_cases.json'
       - 'script/en/**'
       - 'assets/fonts/thin_pixel_7*'
@@ -50,6 +51,7 @@ jobs:
           python3 tools/workbench_web.py check-assets
           python3 -m unittest tests.test_prose_web -v
           python3 -m unittest tests.test_workbench_web -v
+          python3 -m unittest tests.test_script_sheet -v
           node tests/prose_web.test.mjs
           node tests/workbench_web.test.mjs
           node tests/control_reference.test.mjs

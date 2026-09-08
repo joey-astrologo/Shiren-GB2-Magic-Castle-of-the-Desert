@@ -158,6 +158,24 @@ See the [workbench guide](docs/translation-tool/workbench/README.md#download-and
 for details. Downloads from the earlier standalone prose editor use its
 [separate importer](docs/translation-tool/prose/README.md#apply-a-download-to-the-project).
 
+### Use the full spreadsheet dump
+
+[`script/translator-review.tsv`](script/translator-review.tsv) contains all extracted
+records with Japanese, inserted English and a blank `edited_en` column. Edit that
+column, then use its separate checker/importer:
+
+```sh
+# Validate and inspect the diff without writing.
+python3 tools/import_script_sheet.py "$ROM" /path/to/returned-review.tsv
+# Insert into a separate test ROM and IPS; keep project translations unchanged.
+python3 tools/import_script_sheet.py "$ROM" /path/to/returned-review.tsv --output build/sheet-review.gbc
+# Apply approved edits to the authoritative project files.
+python3 tools/import_script_sheet.py "$ROM" /path/to/returned-review.tsv --apply
+```
+
+Keep all rows and baseline columns unchanged. The [spreadsheet guide](script/translator-review.md)
+covers font variants, validation, refreshing catalogues and exporting the next sheet.
+
 ### Edit local TSV files
 
 Generate or refresh the ignored source-rich reference catalogs from your own ROM with:
