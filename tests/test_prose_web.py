@@ -136,7 +136,7 @@ class ProseWebTests(unittest.TestCase):
             expected = set(build_pages.RESCUE_FILES) | {"translation-tool/" + name for name in build_pages.TRANSLATION_FILES}
             self.assertEqual(expected, actual)
             self.assertIn('href="translation-tool/index.html"', (output / "index.html").read_text())
-            self.assertIn('href="prose/"', (output / "translation-tool/index.html").read_text())
+            self.assertIn('href="workbench/?subject=prose"', (output / "translation-tool/index.html").read_text())
             self.assertFalse(any(name.endswith((".gbc", ".gb", ".sav")) for name in actual))
 
     @unittest.skipUnless(ROM.exists(), "matching local ROM required for independent Python oracles")

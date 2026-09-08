@@ -98,8 +98,9 @@ and how to enter them. An [offline browser copy](docs/rescue-converter/index.htm
 [website maintenance guide](docs/rescue-converter/README.md) for GitHub Pages deployment.
 
 The rescue page also links to the [GB2 translation tools](docs/translation-tool/README.md).
-The prose editor includes Japanese text, scene navigation, immediate project-rule checks,
-a game-font preview, local drafts, backups and validated TSV downloads.
+The subject workbenches include all 6,695 extracted entries, Japanese text, scene/group
+navigation, shared project-rule checks, game-font previews, local drafts, backups and
+validated TSV downloads.
 
 ## Edit the translation
 

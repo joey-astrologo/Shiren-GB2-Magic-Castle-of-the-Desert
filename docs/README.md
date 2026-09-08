@@ -31,7 +31,7 @@ for Japanese ↔ English conversion and the three promotional mission presets.
 | [RESCUE_SYSTEM.md](RESCUE_SYSTEM.md) | Wanderer Rescue passwords | You are tracing, localizing, testing, or manually exercising the SOS/Revival/Thank-You handshake |
 | [SPECIAL_RESCUE_MISSIONS.md](SPECIAL_RESCUE_MISSIONS.md) | Promotional rescue missions and password conversion | You want the three guidebook SOS passwords in English, the Japanese ↔ English converter, or the ROM audit for additional missions |
 | [rescue-converter/README.md](rescue-converter/README.md) | Converter website maintenance | You are updating the hosted converter, using it offline, or configuring Pages for a fork |
-| [translation-tool/README.md](translation-tool/README.md) | Browser prose editor | You are editing prose in the browser, importing downloads, or maintaining its GB2 rules and Pages assets |
+| [translation-tool/README.md](translation-tool/README.md) | Browser translation workbenches | You are editing any script subject in the browser, importing downloads, or maintaining GB2 rules and Pages coverage |
 | [CLEAR_CAMPAIGN.md](CLEAR_CAMPAIGN.md) | Clear Campaign and True Wanderer certificates | You need the historical mail-in flow, six-symbol display mapping, or PyBoy certificate fixture |
 | [UNIDENTIFIED_ITEM_NAMING.md](UNIDENTIFIED_ITEM_NAMING.md) | Unidentified item Name / Fill In | You need the mode-0 screen, canonical-token storage/history contract, or deterministic PyBoy routes |
 | [ITEM_FORMATTING.md](ITEM_FORMATTING.md) | Dynamic item rows | You need status symbols, counts/modifiers, row-width limits, or the two-page gallery |

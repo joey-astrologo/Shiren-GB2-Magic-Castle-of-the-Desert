@@ -25,6 +25,7 @@
         <div><h1>Prose editor</h1><p>Select a scene to view its dialogue and edit the translation.</p></div>
         <div class="file-actions"><button id="backup-draft" class="text-button" disabled>Back up draft</button><button id="import-edits" class="button secondary">Import edits</button><button id="export-edits" class="button primary" disabled><span aria-hidden="true">↓</span> Download changes <span id="download-count">0</span></button></div>
       </section>
+      <p class="muted">The <a href="../workbench/?subject=prose">subject workbenches</a> include these scenes and the full extracted script. Saved drafts here stay separate.</p>
       <div id="notice" class="notice" role="status" hidden></div>
       <p id="allocation-status" class="notice error" role="status" hidden></p>
       <div id="recovery" class="notice warning" hidden><span>A saved draft belongs to an older catalogue. Download it before starting a fresh draft.</span><button id="recover-draft" class="text-button">Download recovery file</button><button id="fresh-draft" class="text-button">Start fresh</button></div>
@@ -41,7 +42,7 @@
       <section id="records" aria-label="Dialogue entries"></section>
       <div id="empty" class="empty" hidden><span aria-hidden="true">◌</span><h3>No matching entries.</h3><p id="empty-message">Try a different search or filter.</p><button id="clear-filters" class="button secondary">Show all dialogue</button></div>
       <div class="pagination"><button id="previous" class="button secondary">← Previous</button><span id="page-status" role="status"></span><button id="next" class="button secondary">Next →</button></div>
-      <footer class="page-footer"><span>Drafts stay in this browser. Downloads contain only your changes. <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/translation-tool/README.md">Import instructions</a></span><a href="font-license.txt" target="_blank" rel="noopener">Font credit & license</a></footer>
+      <footer class="page-footer"><span>Drafts stay in this browser. Downloads contain only your changes. <a href="https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/blob/main/docs/translation-tool/prose/README.md">Import instructions</a></span><a href="font-license.txt" target="_blank" rel="noopener">Font credit & license</a></footer>
     </main>
   </div>
   <input type="file" id="edits-file" accept=".tsv,.json,text/tab-separated-values,text/plain,application/json" hidden>

@@ -8,8 +8,8 @@ account requirements, or backend services. Keep all six web files together:
 `index.html`, `style.css`, `page.js`, `i18n.js`, `converter.js`, and `password-data.js`.
 
 The rescue converter is the hosted home page. Its bottom link opens the
-[translation tool index](../translation-tool/README.md), which currently offers the GB2
-prose editor with included Japanese text. To preview that navigation locally, stage and
+[translation tool index](../translation-tool/README.md), which offers GB2 subject
+workbenches with all extracted entries and included Japanese text. To preview that navigation locally, stage and
 serve the combined site using the commands in the translation tool documentation.
 
 Use **Language / 言語** at the top of the page to choose **English** or **日本語**.
@@ -25,7 +25,7 @@ requests, original sources, supported passwords, and ROM audit.
 
 The repository includes
 [`.github/workflows/rescue-converter-pages.yml`](../../.github/workflows/rescue-converter-pages.yml).
-It tests the converter and GB2 prose rules, then runs `tools/build_pages.py` to stage an
+It tests the converter and GB2 prose/workbench rules, then runs `tools/build_pages.py` to stage an
 explicit public-file allowlist in `build/pages`. The converter occupies the root and the
 translation index/editor occupy `translation-tool/`. No ROM, save, raw extraction, test
 page or build tool is uploaded. Changes on main deploy automatically after the checks

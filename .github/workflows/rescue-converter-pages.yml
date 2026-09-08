@@ -6,35 +6,20 @@ on:
     paths:
       - 'docs/rescue-converter/**'
       - 'docs/translation-tool/**'
-      - 'script/editing/prose.tsv'
-      - 'script/drafts/prose_scenes.tsv'
+      - 'tools/**'
+      - 'script/drafts/**'
+      - 'script/editing/**'
+      - 'tests/test_workbench_web.py'
+      - 'tests/workbench_web*'
+      - 'tests/fixtures/workbench_web_cases.json'
       - 'script/en/**'
       - 'assets/fonts/thin_pixel_7*'
       - 'data/kanji.tsv'
-      - 'tools/prose_web.py'
-      - 'tools/prose_editor.py'
-      - 'tools/prose_scenes.py'
-      - 'tools/wrap_en.py'
-      - 'tools/layout.py'
-      - 'tools/lint_en.py'
-      - 'tools/runtime_widths.py'
-      - 'tools/runtime_terms.py'
-      - 'tools/translations.py'
-      - 'tools/translate_spells.py'
-      - 'tools/allocate.py'
-      - 'tools/font.py'
-      - 'tools/english_font.py'
-      - 'tools/build_pages.py'
       - 'tests/test_prose_web.py'
       - 'tests/prose_web.test.mjs'
       - 'tests/fixtures/prose_web_cases.json'
       - 'tests/fixtures/prose_web_allocation.json'
       - 'data/special_rescue_missions.json'
-      - 'tools/rescue_converter.py'
-      - 'tools/rescue_password.py'
-      - 'tools/codec.py'
-      - 'tools/english.py'
-      - 'tools/extract.py'
       - 'tests/test_rescue_converter.py'
       - 'tests/rescue_converter.test.cjs'
       - '.github/workflows/rescue-converter-pages.yml'
@@ -56,13 +41,16 @@ jobs:
       pages: read
     steps:
       - uses: actions/checkout@v6
-      - name: Check converter, prose rules and generated assets
+      - name: Check converter, workbench rules and generated assets
         run: |
           node --version
           python3 -m unittest tests.test_rescue_converter -v
           python3 tools/prose_web.py check-assets
+          python3 tools/workbench_web.py check-assets
           python3 -m unittest tests.test_prose_web -v
+          python3 -m unittest tests.test_workbench_web -v
           node tests/prose_web.test.mjs
+          node tests/workbench_web.test.mjs
       - name: Stage public pages
         run: python3 tools/build_pages.py
       - uses: actions/configure-pages@v5

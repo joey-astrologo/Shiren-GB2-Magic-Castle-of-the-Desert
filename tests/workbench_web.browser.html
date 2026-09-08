@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>GB2 workbench browser checks</title>
+<style>body{font:14px system-ui}iframe{width:100%;height:900px}pre{white-space:pre-wrap}</style>
+<h1>GB2 workbench browser checks</h1><pre id="result">Running…</pre><iframe title="Workbench under test"></iframe>
+<script type="module">
+import {importEdits} from "./translation-tool/workbench/rules.js";
+const frame = document.querySelector("iframe"), output = document.querySelector("#result"), messages = [];
+const key = "shiren-gb2-workbench-studio-v1", fontKey = "shiren-gb2-prose-preview-font-v1";
+const original = localStorage.getItem(key), originalFont = localStorage.getItem(fontKey);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const check = (ok, text) => { if (!ok) throw Error(text); messages.push(text); };
+async function until(test) { for (let i = 0; i < 500; i++) { if (test()) return; await wait(20); } throw Error("Timed out waiting for workbench"); }
+async function load(path) {
+  frame.src = "about:blank"; await new Promise(r => frame.onload = r);
+  frame.src = "./translation-tool/workbench/" + path;
+  await until(() => frame.contentDocument?.body?.dataset.ready || frame.contentDocument?.body?.dataset.failed);
+  check(frame.contentDocument.body.dataset.ready === "true", "Workbench loaded: " + path);
+  return frame.contentWindow;
+}
+function change(win, target, value, event = "input") { target.value = value; target.dispatchEvent(new win.Event(event, {bubbles: true})); }
+try {
+  localStorage.removeItem(key); localStorage.removeItem(fontKey);
+  const data = await (await fetch("./translation-tool/workbench/catalog.json")).json();
+  let win = await load("?subject=messages#194%3A%2455B1"), doc = win.document;
+  check(doc.querySelector("#subject option").textContent.includes("6,695"), "Complete catalogue included");
+  check(doc.querySelector('[data-loc="194:$55B1"] .jp').textContent === data.records.find(r => r.loc === "194:$55B1").japanese, "Japanese source loads without a file");
+  let input = doc.querySelector('[data-loc="194:$55B1"] textarea');
+  change(win, input, "Unsupported é"); await wait(500);
+  check(doc.querySelector("#export-edits").disabled && input.getAttribute("aria-invalid") === "true", "Invalid text is saved and blocks download");
+  change(win, input, "But nothing happened!");
+  await until(() => !doc.querySelector("#export-edits").disabled);
+  check(JSON.parse(localStorage.getItem(key)).edits["194:$55B1"] === input.value, "Valid edit is saved to the shared draft");
+  let blob; win.URL.createObjectURL = b => { blob = b; return "blob:test"; }; win.URL.revokeObjectURL = () => {};
+  win.HTMLAnchorElement.prototype.click = function () {};
+  doc.querySelector("#export-edits").click();
+  const download = await blob.text();
+  check(importEdits(download, data)["194:$55B1"] === input.value, "Downloaded TSV reopens with matching metadata");
+  const before = localStorage.getItem(key);
+  change(win, doc.querySelector("#font-style"), "classic", "change");
+  check([...doc.querySelectorAll("canvas")].every(c => c.dataset.fontStyle === "classic") && localStorage.getItem(key) === before, "Classic font repaints every visible preview without changing edits");
+  for (const subject of data.subjects) {
+    change(win, doc.querySelector("#subject"), subject.id, "change");
+    check(doc.querySelector("#row-count").textContent === subject.count + " entries", "Subject coverage: " + subject.name);
+  }
+  check(!doc.querySelector("textarea") && doc.querySelector(".read-only-text"), "Internal references display current text without an edit field");
+  win = await load("?subject=descriptions"); doc = win.document;
+  check(doc.querySelector("#edited-count").textContent === "1", "Draft is shared across subject visits");
+  check(doc.querySelector("#font-style").value === "classic", "Font preference survives navigation");
+  check([...doc.querySelectorAll("canvas")].some(c => c.height > 38), "Full-screen descriptions have a taller text canvas");
+  check([...doc.querySelectorAll("canvas")].filter(c => c.getBoundingClientRect().width).every(c => {
+    const rect = c.getBoundingClientRect(); return Math.abs(rect.width / rect.height - c.width / c.height) < .02;
+  }), "Text canvases retain square pixels at their displayed size");
+  frame.style.width = "390px";
+  await wait(100);
+  check(doc.documentElement.scrollWidth <= win.innerWidth, "Workbench fits a 390px viewport");
+  frame.style.width = "100%";
+  const name = data.definitions.find(d => d.english === "Koppa");
+  win = await load("?subject=names#" + encodeURIComponent(name.record_id)); doc = win.document;
+  input = doc.querySelector('[data-loc="' + name.record_id + '"] textarea');
+  change(win, input, "Koppi"); await wait(700);
+  check(doc.querySelector("#export-edits").disabled && Number(doc.querySelector("#error-count").textContent) > 1, "A name change blocks export when unchanged consumers need edits");
+  doc.querySelector('[data-filter="errors"]').click();
+  check(doc.querySelector("#subject").value === "all" && doc.querySelectorAll(".record").length > 1, "Needs attention finds shared failures across subjects");
+  // Simulate another tab committing a newer shared draft.
+  localStorage.setItem(key, before);
+  win.dispatchEvent(new win.StorageEvent("storage", {key, newValue: before}));
+  check(!doc.querySelector("#recovery").hidden && doc.querySelector("#export-edits").disabled && [...doc.querySelectorAll("textarea")].every(x => x.disabled), "Concurrent tab edits enter recovery and stop writes");
+  output.textContent = "PASS: " + messages.length + " checks\n" + messages.join("\n"); document.body.dataset.result = "passed";
+} catch (error) { output.textContent = "FAIL: " + error.stack + "\n" + messages.join("\n"); document.body.dataset.result = "failed"; }
+finally {
+  frame.src = "about:blank";
+  if (original === null) localStorage.removeItem(key); else localStorage.setItem(key, original);
+  if (originalFont === null) localStorage.removeItem(fontKey); else localStorage.setItem(fontKey, originalFont);
+}
+</script></html>
