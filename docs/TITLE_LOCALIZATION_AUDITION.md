@@ -1,8 +1,9 @@
 # Localized title audition
 
-Status: visual approval pending. This audition does not patch a ROM or change the
-production build. The supplied source artwork remains untouched under
-`assets/graphics/GB2 Title Graphics/`.
+Status: visually approved and inserted into both production font builds. See
+[the installed title](TITLE_LOCALIZATION.md) for cartridge implementation and real-ROM
+captures. This audition remains a standalone reference and does not itself patch a ROM.
+The supplied artwork remains untouched under `assets/graphics/GB2 Title Graphics/`.
 
 ## Proposed appearance
 
@@ -53,7 +54,10 @@ The reviewed output directory also contains `title-audition.gif`,
 `manifest.json`. The manifest records source hashes and proposed timing. The GIF
 is encoded from browser-rendered frames with cumulative centisecond timing.
 
-## Insertion approach after approval
+## Approved insertion plan
+
+The following plan guided the completed implementation; exact packing and transition
+handling are documented in [TITLE_LOCALIZATION.md](TITLE_LOCALIZATION.md).
 
 1. Compile the approved composition into a title-specific combination of native
    tile planes, tilemap, palette attributes, and any needed sprite overlays.
@@ -73,9 +77,6 @@ is encoded from browser-rendered frames with cumulative centisecond timing.
    scenery, sparkle phases, and bat clearance.
 
 The native resource locations are documented in
-[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen). This canvas audition establishes
-appearance and timing, not completed cartridge feasibility. Exact palette/tile
-packing, sprite allocation, ROM hooks, and transition handling remain insertion
-work. Some authored RGB values (such as the logo's `(3,3,3)` ink) also need an
-explicit cartridge-palette mapping rather than silently assuming the PNG is
-already native-format graphics.
+[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen). The installed renderer preserves
+the approved appearance and timing, including the sparkle. Its explicit CGB palette
+mapping changes `(3,3,3)` ink to native `(8,8,8)` and full white to `(248,248,248)`.

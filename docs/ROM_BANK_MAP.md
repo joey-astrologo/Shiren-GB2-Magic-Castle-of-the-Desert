@@ -47,6 +47,8 @@ text growth.
 
 | Bank | CPU range | Owner / contents | Rule |
 |---:|:---|---|---|
+| 0 | `$0044-$0046`, `$004C-$004E`, `$07D9-$081B` | `title_screen.py`: VBlank/STAT gates and displaced title-gradient handler | Exact-byte guarded; private renderer requires scene `$C3B4=$9D` and mode `$C0E5=9`; other routes delegate natively. Preserve shared return `$081C-$081E` |
+| 0 | `$0207-$021E` | Original HRAM DMA routine and its initializer | Preserved and hash-guarded by `title_screen.py`; entry `$FF82` accepts source page A, allowing title-only DMA directly from `245:$5000` |
 | 0 | `$03C9-$046B` | Native actor-record/cache pointer and copy route; actor 0 begins at bank 1 `$D000` and its active cache begins at `$FF90` | Preserved and guarded by `rescue_password.py` for requester fixtures |
 | 0 | `$046F-$0484` | Native current-HP subtract/zero route using actor offset `$16` / `$FFA6` | Preserved and guarded by `rescue_password.py` |
 | 0 | `$1F8C-$1F8E` | `far_text.py`: source selector call | Guarded patch |
@@ -65,6 +67,9 @@ text growth.
 | 4 | `$660E-$6787` | 126-entry script group directory | Rewritten only by `insert.py` |
 | 5 | `$4553-$459F` | Native `$C3EF-$C3F0` story-stage save/load pair | Preserve; Big Moai availability fixture traces this serializer and loader |
 | 5 | `$591D-$5930` | Native event opcode `$60`: branch when `$C3EF` meets its operand threshold | Preserve; Big Moai uses threshold `$09` |
+| 5 | `$5E13-$5E20` | Native display-mode setter, wrapped by `title_screen.py` | Exact-byte guarded; stage title-only WRAM before mode 9, preserve native BC/DE/HL and mode initialization |
+| 24 | `$4000-$4007` | Native map-selector prefix, wrapped by `title_screen.py` | Title moon selectors 0-3 use the private renderer only in the owning scene; other selectors retain the original pointer lookup |
+| 25 | `$4000-$400F` | Native object-selector prefix, wrapped by `title_screen.py` | Suppress native title overlays only for selectors 0-2 in the owning scene; preserve generic lookup and `$C445/$C446` results elsewhere |
 | 6 | `$6268-$626A`, `$7FF4-$7FFF` | Town-refresh call and service-popup cleanup trampoline | `service_menus.py` redirects the native `$69A1` call through guarded bank-254 ninth-column restoration, then resumes `$69A1` |
 | 7 | `$4A87-$4B53` | Native actor Max-HP/current-HP accessors; offset `$15` is doubled/halved Max HP and offset `$16` is current HP | Preserved and guarded by `rescue_password.py` |
 | 11 | `$518A-$5287` | Loaded-diary Training/SOS/Revival/Thank-You record read/write dispatchers | Preserved and guarded by `rescue_password.py`; records are relative to `$C23C + diary * $6A` |
@@ -132,24 +137,25 @@ text growth.
 ## Audited native graphical-text resources
 
 These are native source contracts, not free space. They are emitted by `graphics_audit.py`
-and explained in [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). All remain preserved except the two
-explicit bank-86 sign ranges assigned to `wait_screen.py` and the two bank-243 name-strip
-ranges assigned to `credit_screen.py`. Any later graphics
-installer must exact-byte guard or clone every affected resource and account for the recorded
-aliases before changing it.
+and explained in [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md). The rules below identify installed
+replacements and preserved native evidence. Any later graphics installer must exact-byte
+guard or clone every affected resource and account for the recorded aliases before changing it.
 
 | Bank | CPU range | Native contents | Audit rule |
 |---:|:---|---|---|
-| 0 | `$3CD3-$3CD5`, `$3E0B-$3E0D` | Title selector-0 and credit selector-104 tilemap descriptors | Preserve until their consumers are redirected together |
-| 5 | `$6F35-$6F37`, `$6FE3-$6FE5` | Title selector-0 and credit selector-58 `$8800` plane pointers | Preserve and keep selector identity explicit |
-| 17 | `$416F-$41AE`, `$58F6-$592D` | Title palettes 0-7 and credit base palettes 0-6 | Preserve native palette/fade behavior |
-| 28 | `$4000-$5421` | Title `$8800` plane header/data split across CGB VRAM banks 1 and 0 | Traced stored art; replacement pending |
+| 0 | `$3CD3-$3CD5`, `$3E0B-$3E0D` | Title selector-0 and credit selector-104 tilemap descriptors | `title_screen.py` redirects only title selector 0 to `246:$6000`; credit descriptor remains native |
+| 5 | `$6F35-$6F37`, `$6FE3-$6FE5` | Title selector-0 and credit selector-58 `$8800` plane pointers | `title_screen.py` redirects only title selector 0 to `246:$4000`; credit pointer remains native |
+| 23 | `$416F-$41AE`, `$5D75-$5DB4` | Title BG and OBJ palettes 0-7 | `title_screen.py` exact-byte guards and replaces both complete 64-byte records; bank `$17` is decimal 23 |
+| 23 | `$58F6-$592D` | Credit base palettes 0-6 | Preserve native palette/fade behavior |
+| 24 | `$4014-$4243` | Native map-selector table and four moon maps | Read-only source/hash guard for `title_screen.py`; preserve all native selectors |
+| 25 | `$4025-$4224`, `$4260-$4418` | Native object-selector table, bat descriptors, and static castle overlays | Read-only source/hash guards for `title_screen.py`; preserve native motion and generic selectors |
+| 28 | `$4000-$5421` | Title `$8800` plane header/data split across CGB VRAM banks 1 and 0 | Preserved and hash-guarded as native composition evidence; replacement stored in bank 246 |
 | 45 | `$4F12-$5583` | Credit-transition/backing `$8800` plane header/data | Preserve; live tracing proves this is not the stable visible name plane |
-| 49 | `$4000-$4B01` | Title `$8000` plane header/data split across CGB VRAM banks 1 and 0 | Traced stored art; replacement pending |
+| 49 | `$4000-$4B01` | Title `$8000` plane header/data split across CGB VRAM banks 1 and 0 | Preserved and hash-guarded as native bat/overlay evidence; replacement stored in bank 247 |
 | 54 | `$614A-$626B` | Credit-transition/backing `$8000` plane header/data | Preserve both aliased selectors 57 and 58; not the stable visible name plane |
-| 56 | `$4000-$42D1` | Title 20x18 interleaved tile/attribute map | Selector 0; replacement pending |
+| 56 | `$4000-$42D1` | Title 20x18 interleaved tile/attribute map | Preserved and hash-guarded as native composition evidence; replacement stored in bank 246 |
 | 59 | `$7980-$7E81` | Credit-transition 20x32 interleaved tile/attribute map | Selector 104; preserve transition rows |
-| 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | Preserve both credit aliases |
+| 63 | `$4017-$4019`, `$40C2-$40C7` | Title selector-0 and aliased credit selectors 57/58 `$8000` plane pointers | `title_screen.py` redirects only title selector 0 to `247:$4000`; preserve both credit aliases |
 | 86 | `$7A80-$7E7F` | Save/load wait sign and interleaved bird art | `wait_screen.py` owns only `$7A80-$7B7F` and `$7C80-$7D7F`; preserve both intervening bird blocks |
 | 127 | `$4000-$62EE` | Native arrival-card renderer, 128-block atlas, palette constants, 32-pointer table, and 31 unique sequences | `arrival_cards.py` guards the family and replaces only `$4000-$4008` with a far-call wrapper; native assets remain source evidence |
 | 240 | `$4057-$409E`, `$40EF-$40F1`, `$410A` | Visible credit map generator, selector-24 pointer, and eight-page length | `ending_credits.py` changes only `$4067-$4068` from `ld d,$80` to `ld d,$F0`, reserving tile `$F0`—verified black across every affected opening and ending plane—for outer map cells; all other bytes are preserved |
@@ -169,6 +175,9 @@ after every ROM writer. They are output metadata, not allocation space.
 | Bank(s) | CPU range | Owner / contents | Rule |
 |---:|:---|:---|:---|
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
+| 245 | `$4000-$7FFF` | `title_screen.py`: title renderer, independent animation clocks, OAM reuse, palette/attribute bands, original-selector mirrors, and staged sky handler | Exclusive full-bank zero/collision guard; runtime/data locations detailed in `title_screen_runtime.py` |
+| 246 | `$4000-$7FFF` | `title_screen.py`: localized BG plane at `$4000`, title map at `$6000` | Exclusive full-bank zero/collision guard; native loader header `$1FF0` preserves its two-VRAM-bank contract |
+| 247 | `$4000-$7FFF` | `title_screen.py`: localized correction/shine OBJ plane and preserved native bat tiles at `$4000` | Exclusive full-bank zero/collision guard |
 | 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, Clear Campaign and True Wanderer display-only wrappers, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42D3`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45FF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver; `$45C0-$45FF` owns the hardware-B reset helper | Exclusive |
@@ -178,7 +187,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 254 | `$4000-$49C1` | `stairs_menu.py` base through `$42AA`, including the exact two-record detector, eight-column dungeon frame, five-cell underlay save/restore, native-template clone, and controller-exit cleanup; followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info/Training detector, seven-interior-tile frames, suffix staging, chained helpers, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
 | 255 | `$4000-$4A7C`, `$4B00-$4B38` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus the item-action cursor-column cleanup/upload wrapper | Exclusive; `$4A7D-$4AFF` remains unused separation between the two guarded payloads |
 
-Banks 248-255 were measured empty before these reservations. Their unused tails are not a
+Banks 245-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
 deterministically.
 
@@ -357,6 +366,25 @@ editor that scratch held `$FF`, so `$FFB2-$FFB3` became `$FF,$FF`; the cursor sp
 to OAM `$07,$07`, selection stopped advancing, and repeated movement could corrupt the
 screen. The production installer now leaves `16:$5F9A` byte-exact as `25 66` and writes
 `00 C8` only at the private `$F4` landing pair `16:$615C`.
+
+## Title runtime state
+
+`title_screen.py` temporarily aliases part of the navigation scratch while display mode
+`$C0E5` is 9 **and** scene `$C3B4` is `$9D`. `$C800-$C805` is an offscreen native map
+descriptor, `$C880-$C8DF` stores animation clocks and staged sparkle objects, and
+`$C900-$C9DF` holds the fast sky handler with its palette and event tables. Title entry
+clears state and reloads that handler before enabling the display mode. Title OAM
+`$FE00-$FE9F` is initialized directly from `245:$5000` through native HRAM DMA, followed
+by the animated bat records. The engine retains its ordinary `$C000-$C09F` shadow;
+the private renderer suppresses its pending `$C0EB` DMA and `$C0EC` subtitle palette
+requests only while the title owns the scene.
+
+Attract startup briefly retains mode 9 after releasing title scratch. The scene check is
+therefore required on every title dispatch; this interval uses a ROM-resident native
+gradient fallback, and other modes retain native dispatch. Natural attract replay and
+return verify scratch release/reinitialization. The localized keyboard later replaces
+the buffer with its own navigation graph. These allocations are transient fixed WRAM,
+with no SRAM or persistent save changes. See [TITLE_LOCALIZATION.md](TITLE_LOCALIZATION.md).
 
 ## Safe allocation procedure
 

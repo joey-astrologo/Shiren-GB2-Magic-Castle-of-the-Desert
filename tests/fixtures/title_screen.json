@@ -1,0 +1,15 @@
+{
+  "description": "Approved audition composition after explicit RGB555 normalization, before animated bat overlays. Authored 160x143 pixels plus repeated last sand row.",
+  "rgba_sha256": [
+    "39ae956cf09886fcf05205fab4199b8bff68c3963eb9033d1e6ee7a20c9fd5a0",
+    "eddacd6e62168c31498e3b5652d587a7d5422c9f2a2afff6e8d2f6e54f83426b",
+    "2355bec4de02d4432153ed958a728351184654458f4235fd4e05fe6ecf68a94a",
+    "6b61ace53fac718c2be18666563561b7d386a309eef22ab1c3828a867f795892"
+  ],
+  "moon_phase_frames": 6,
+  "bat_phase_frames": 4,
+  "bat_cycle_frames": 96,
+  "sparkle_phase_frames": 10,
+  "sparkle_cycle_frames": 240,
+  "bat_raise_pixels": 12
+}

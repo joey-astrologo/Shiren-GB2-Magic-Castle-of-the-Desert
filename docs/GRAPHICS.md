@@ -1,7 +1,7 @@
 # Graphics localization
 
-The opening menu/title-screen artwork is the only known remaining graphics localization
-item. This document records the installed graphics, the title-art workflow, and automated
+All known graphics localization items are implemented, including the approved English
+title. This document records the installed graphics, artwork workflow, and automated
 visual coverage.
 
 The first whole-ROM graphical-text inventory is now recorded in
@@ -9,8 +9,8 @@ The first whole-ROM graphical-text inventory is now recorded in
 main title, all 32 town/dungeon/floor arrival selectors, the dedicated dungeon-HUD font,
 and the save/load wait sign. The main-ending staff roll has a PyBoy fixture, a complete
 title-plus-20-card native/English audition, and guarded production insertion. The approved
-English copyright/composer card, main-ending staff cards, arrival cards, HUD, and wait sign
-are installed. Additional automated visual coverage needs a true-ending save state and a
+English title, copyright/composer card, main-ending staff cards, arrival cards, HUD, and wait
+sign are installed. Additional automated visual coverage needs a true-ending save state and a
 live capture of the wait-sign route.
 
 ## Proven storage model
@@ -28,6 +28,7 @@ Map each asset's producer and consumers before changing its graphics.
 
 | Area | State | Owner |
 |---|---|---|
+| Opening title | Complete approved English artwork, native moon and bat cycles, raised moon-side bat, sky gradient, castle, horizon gap, sand, and all eight slower subtitle sparkle phases; exact live pixels and native menu/attract transitions verified | `title_screen.py`, `title_graphics.py`, `title_screen_runtime.py` |
 | In-game proportional font | Selectable Thin Pixel-7 classic black-only or reviewed palette-color-2 `+1,+1` shadowed style in all 79 native one-byte English slots, including the straight ASCII double quote at `$59`; both retain identical color-3 ink and advances | `english_font.py` |
 | Core Status template labels | English bitmap overlay generated from the selected font style; shared native graphics remain unchanged | `menu_graphics.py` |
 | Item-action cursor cells | Post-render cleanup of the two cursor-only canvas columns prevents clipped `Take Out` / `Exchange` shadow pixels from aliasing into lower blank rows; black label rasters remain complete | `menu_graphics.py` |
@@ -56,16 +57,13 @@ whole-frame hash.
 Environmental Japanese shop signs and the main-ending `終` mark are intentionally
 preserved under the [graphics scope decisions](GRAPHICS_AUDIT.md#scope-decisions).
 
-## Remaining localization
+## Installed title
 
-Create, approve, and insert English artwork for the opening menu/title screen. The native
-logo planes, map, palettes, and animation are already traced in
-[GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen).
-
-The supplied English composition now has a
-[title animation audition](TITLE_LOCALIZATION_AUDITION.md), with native moon/bat
-motion and adjustable subtitle sparkle timing. Visual approval and ROM insertion
-are still pending.
+The supplied English composition and [animation audition](TITLE_LOCALIZATION_AUDITION.md)
+were approved and inserted into both font builds. The [implementation notes](TITLE_LOCALIZATION.md)
+describe the palette packing, animation clocks, guarded ROM ownership, transition handling,
+and reproducible preview captured from the production ROM. The native resource inventory
+remains in [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen).
 
 ## Visual verification coverage
 
@@ -121,5 +119,4 @@ A graphical family is complete only when:
 - the result is visually approved at integer scale;
 - the project status and bank map are updated.
 
-Track the opening menu/title screen as the remaining localization item and document
-uncaptured routes as verification gaps in [project-status.md](project-status.md).
+Document uncaptured routes as verification gaps in [project-status.md](project-status.md).

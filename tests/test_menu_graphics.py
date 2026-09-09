@@ -23,6 +23,7 @@ import pyboy_state
 import runtime_widths
 import surfaces
 import translations
+import title_screen
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -249,6 +250,12 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory()
         cls.localized_path = Path(cls.temporary.name) / "localized.gbc"
         cls.localized_path.write_bytes(output)
+        native_title = bytearray(output)
+        for start, end in title_screen.owned_ranges():
+            native_title[start:end] = cls.rom[start:end]
+        cartridge.fix_checksums(native_title)
+        cls.native_title_path = Path(cls.temporary.name) / "native-title-control.gbc"
+        cls.native_title_path.write_bytes(native_title)
         native_hud = bytearray(output)
         digit_start, digit_end = hud_font.digit_range()
         label_start, label_end = hud_font.label_range()
@@ -491,10 +498,40 @@ class LiveLocalizedMainMenuTests(unittest.TestCase):
             for label in expected["dynamic_labels"]:
                 with self.subTest(label=label):
                     self.assertIn(english.encode(label) + b"\xFF", draws)
-            screen = pyboy.screen.image.convert("RGB").tobytes()
-            self.assertEqual(expected["screen_rgb_sha1"], sha1(screen).hexdigest())
+            screen = pyboy.screen.image.convert("RGB").copy()
         finally:
             pyboy.stop(save=False)
+
+        # Larger title initialization shifts the menu arrow's animation clock.
+        # Keep the old fixture hash on a control with only the title restored,
+        # compare every other pixel, and require a real native arrow phase.
+        control = self.PyBoy(
+            str(self.native_title_path),
+            window="null",
+            ram_file=io.BytesIO(b"\xFF" * 0x8000),
+            sound_emulated=False,
+        )
+        control.set_emulation_speed(0)
+        cursor = (4, 14, 14, 25)
+        try:
+            for frame in range(expected["settled_frame"] + 1):
+                if frame == 360:
+                    control.button("start", capture_dialogue.PRESS_FRAMES)
+                if frame == 540:
+                    control.button("a", capture_dialogue.PRESS_FRAMES)
+                control.tick()
+            native = control.screen.image.convert("RGB").copy()
+            self.assertEqual(expected["screen_rgb_sha1"], sha1(native.tobytes()).hexdigest())
+            native_arrows = set()
+            for _ in range(120):
+                native_arrows.add(control.screen.image.convert("RGB").crop(cursor).tobytes())
+                control.tick()
+            self.assertIn(screen.crop(cursor).tobytes(), native_arrows)
+            screen.paste((0, 0, 0), cursor)
+            native.paste((0, 0, 0), cursor)
+            self.assertEqual(native.tobytes(), screen.tobytes())
+        finally:
+            control.stop(save=False)
 
     def test_mamel_hints_popup_titles_are_english_and_bounded(self):
         expected = FIXTURE["live_mamel_hints_popup"]

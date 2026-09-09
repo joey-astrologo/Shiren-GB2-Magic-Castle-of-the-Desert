@@ -31,21 +31,20 @@ listed in [GRAPHICS.md](GRAPHICS.md).
 
 ## Results
 
-The opening menu/title-screen artwork is the only known missing localization asset.
+All known graphical-text localization assets are installed, including the approved title.
 The wait-sign and true-ending capture notes below describe automated verification coverage.
 
 | Priority | Family | Storage | Variants / sharing | Audit state |
 |---:|---|---|---|---|
 | 1 | Post-Chunsoft copyright/credit card | Verbatim foreground plane plus a generated tilemap; surrounding transition resources remain native | Two private 16x2-tile name strips inside `F3:$5D00-$64FF` | English art installed, transition-tested, and visually approved |
-| 1 | Main title screen logo | Stored multi-VRAM-bank tiles plus full-screen map | All three resources use title selector 0 | Fully traced; English art required |
+| 1 | Main title screen logo | Private multi-VRAM-bank planes, map, palette bands, and animated overlays | Only title selector 0 is redirected; native source assets remain preserved | Approved English composition installed; 480 exact live frames, native motion, menu handoff, and attract return tested |
 | 1 | Save/load wait sign | Two stored 64x16 column-major 2bpp sign blocks | Two interleaved 256-byte bird-art blocks are separate and preserved | English art installed and statically pixel-tested; automated live route pending |
 | 2 | Town/dungeon/floor arrival cards | Runtime composition from a dedicated 16x16 block atlas | 32 selectors; duplicate Pot Cave and `Mystery Dungeon` pairs share sequences | Approved English atlas installed and live-pixel tested |
 | 3 | Ending staff roll | One title plane plus twenty variable-size raw row-major 2bpp planes copied directly to VRAM bank 1 at `$8800` | The captured main ending uses the title and cards across banks F0-F3; the Japanese `終` mark remains a shared transition asset | English title and all 20 main-ending cards installed and live-pixel tested; true-ending route still needs a state and comparison |
 
-The title wording shown below remains a working content transcription rather than approved
-replacement art. The credit-card wording and Inter-based treatment have been approved and
-installed; the title's font, capitalization, line division, and exact treatment remain visual
-review decisions.
+The supplied title artwork and its animation audition are approved and installed, using
+**Magic Castle of the Desert** as confirmed by the user. The credit-card wording and
+Inter-based treatment are also approved and installed.
 
 ## Copyright and composer card
 
@@ -125,6 +124,14 @@ complete sign raster without accepting or updating a framebuffer hash. A live ro
 remains the final visual check.
 
 ## Title screen
+
+The approved English composition is installed in both font builds. It includes the full
+logo and scenery, native circular moon and bat animation, the moon-side bat raised 12
+pixels, and all eight subtitle sparkle frames on the slower approved schedule. See
+[TITLE_LOCALIZATION.md](TITLE_LOCALIZATION.md) for the private renderer, guards, ownership,
+480-frame pixel comparison, and native menu/attract transition tests. The following table
+records the preserved original source resources; their title-only pointers now select
+the localized planes and map in banks `$F6/$F7`.
 
 ### Route and visible content
 
@@ -351,10 +358,9 @@ same credit resources. The Japanese end mark remains unchanged by explicit proje
 | Postgame location cards | Covered by the installed 32-selector arrival renderer | Continue rare-route playtesting; all selectors are statically pixel-tested |
 | Ending `Fin` | Explicitly accepted in Japanese | Preserve |
 
-## Implementation order
+## Remaining verification
 
-The remaining implementation is the opening menu/title artwork: a full-screen composition
-with two VRAM planes and eight palettes.
+The approved opening title completes the known graphical-text implementation inventory.
 
 For additional verification, capture the true-ending route and compare its selectors and
 source loads with the installed main-ending family. Capture the wait sign's live appearance

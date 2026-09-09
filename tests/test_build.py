@@ -16,6 +16,7 @@ import capture_dialogue
 import cartridge
 import dialogue_pacing
 import ending_credits
+import title_screen
 import english
 import english_font
 import english_smoke
@@ -193,6 +194,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in ending_credits.owned_ranges()
             for offset in range(start, end)
         }
+        title_screen_offsets = {
+            offset
+            for start, end in title_screen.owned_ranges()
+            for offset in range(start, end)
+        }
         wait_screen_offsets = {
             offset
             for start, end in wait_screen.owned_ranges()
@@ -270,6 +276,7 @@ class TranslationBuildTests(unittest.TestCase):
             | item_status_offsets
             | credit_screen_offsets
             | ending_credit_offsets
+            | title_screen_offsets
             | wait_screen_offsets
             | arrival_card_offsets
             | selector_offsets

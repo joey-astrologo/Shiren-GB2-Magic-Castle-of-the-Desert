@@ -196,6 +196,24 @@ The production builder reruns required safety checks before writing each output.
 relocated through far pointers, so storage growth does not justify shortening visible
 English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifacts.
 
+## Title insertion verification — 2026-09-09
+
+The title-inclusive working tree passes 681 discovered tests in 1,101.074 seconds, with
+zero failures, errors, or skips. Both font ROMs and IPS patches were rebuilt and their
+checksums and IPS reconstruction verified. The normal build now installs the approved
+English title, original moon/bat cycles, and slower eight-frame subtitle sparkle.
+
+Both exact ROMs pass 480-frame pixel comparisons and menu handoff in PyBoy. Independent
+Mesen runs compare 480 exact RGB555 frames, follow natural attract replay and return,
+verify the returned title pixels, and press Start to reach the menu. Mesen exposed late
+palette/OAM writes that PyBoy accepted; the final renderer splits the HBlank writes and
+uses native DMA to leave sufficient VBlank time. See [TITLE_LOCALIZATION.md](TITLE_LOCALIZATION.md)
+for reproducible capture commands, timing, and ownership.
+
+The full-suite log is `build/title-insertion/release-full-tests.log`. Captures and current
+ROM-digest manifests are under `build/title-screen/`, with classic-font counterparts in
+its `classic/` directory. This work does not replace or reverify the older ZIP below.
+
 ## Release verification
 
 The 2026-09-08 public test build at source revision

@@ -18,6 +18,7 @@ import blank_scroll
 import credit_screen
 import dialogue_pacing
 import ending_credits
+import title_screen
 import english
 import english_font
 import extract
@@ -344,6 +345,7 @@ def build_rom(
     output = item_status.install(output)
     output = credit_screen.install(output)
     output = ending_credits.install(output)
+    output = title_screen.install(output)
     output = wait_screen.install(output)
     output = arrival_cards.install(output)
     output = menu_graphics.install(output, approved=approved_font)
@@ -558,6 +560,7 @@ def main(argv=None):
         credit_screen.CreditScreenError,
         dialogue_pacing.DialoguePacingError,
         ending_credits.EndingCreditsError,
+        title_screen.TitleScreenError,
         english_font.FontError,
         extract.ExtractError,
         glyph_cell_clip.GlyphCellClipError,

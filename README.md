@@ -12,19 +12,19 @@ builds and imports require your own matching Japanese cartridge dump.
 
 ## Project status
 
-**The opening menu/title-screen artwork is the only remaining localization work.**
-Story and gameplay text, in-game menus, input screens, and the other localized graphics
-are implemented. Both font variants have passed the complete test suite and release checks.
+**All known localization content is implemented, including the approved English title.**
+Story and gameplay text, in-game menus, input screens, and localized graphics are installed.
+Playtesting and bug fixes continue; automated coverage is recorded below.
 
 | Area | State | Details |
 |---|---|---|
 | Text | **Complete** | All 5,679 production records have explicit English or intentional empty values |
 | In-game menus and input | **Complete** | Player names, Rankings notes, Big Moai codes, Blank Scrolls, unidentified-item naming, service menus, and system screens are localized and fixture-tested |
 | Fonts | **Complete** | Builds are available with either the classic black-only Thin Pixel-7 font or the approved gray-shadowed variant |
-| Opening menu/title screen | **Localization remaining** | English replacement artwork and insertion |
+| Opening menu/title screen | **Implemented** | Complete approved composition, original moon/bat motion, and slower eight-frame subtitle sparkle; [implementation and real-ROM preview](docs/TITLE_LOCALIZATION.md) |
 | Other graphics | **Implemented** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed |
 | Wanderer Rescue | **English input/output implemented and tested** | Native password compatibility, promotional mission acceptance, and Japanese ↔ English conversion are verified |
-| Automated verification | **649 suite tests + 34 release-battery checks passed — 2026-09-08** | Zero failures, errors, or skips; both fonts rebuilt identically from a fresh local clone, with IPS application and save/reload verified |
+| Automated verification | **681 suite tests passed — 2026-09-09** | Zero failures, errors, or skips; both current font ROMs also pass exact title pixels and transitions in PyBoy and Mesen. The older packaged release's separate 34-check battery remains documented in project status |
 
 Playtesting and bug fixes continue. See [project status](docs/project-status.md) for
 verification coverage, the remaining manual route checks, and current artifact hashes.
@@ -47,8 +47,8 @@ Install the Python dependencies with:
 python3 -m pip install pyboy pillow
 ```
 
-The normal ROM build uses Pillow to reproduce the approved main-ending credit rasters from
-their licensed Inter source font.
+The normal ROM build uses Pillow to compile the approved title artwork and reproduce the
+main-ending credit rasters from their licensed Inter source font.
 
 ## Build
 

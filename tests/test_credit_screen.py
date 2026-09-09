@@ -14,6 +14,7 @@ import cartridge
 import credit_screen
 import credit_screen_mockup
 import english_smoke
+import title_screen
 
 
 ROM_NAME = "Fushigi no Dungeon - Fuurai no Shiren GB2 - Sabaku no Majou (Japan).gbc"
@@ -187,8 +188,11 @@ class ProductionCreditScreenTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             production_path = Path(temporary) / "credit-production.gbc"
             production_path.write_bytes(self.production)
+            title_path = Path(temporary) / "title-only.gbc"
+            title_path.write_bytes(title_screen.install(self.original))
             native = self.capture_frames(self.source_path, all_frames)
             actual = self.capture_frames(production_path, all_frames)
+            title = self.capture_frames(title_path, (520,))
 
         stable_candidate = credit_screen_mockup.render_candidate(
             native[320], FONT_PATH
@@ -200,10 +204,11 @@ class ProductionCreditScreenTests(unittest.TestCase):
             for y in range(line.top, line.bottom)
         }
 
-        # Before the card appears and after it hands off to the title, production
-        # must remain pixel-identical to the clean ROM.
+        # Before the card appears, the clean ROM remains the reference. After
+        # handoff, match the independently tested title-only installation at the
+        # same native frame: no credit remnants or transition timing changes.
         self.assertEqual(list(native[240].getdata()), list(actual[240].getdata()))
-        self.assertEqual(list(native[520].getdata()), list(actual[520].getdata()))
+        self.assertEqual(title[520].tobytes(), actual[520].tobytes())
 
         for frame in credit_frames:
             frame_palette = tuple(sorted(set(native[frame].getdata())))
