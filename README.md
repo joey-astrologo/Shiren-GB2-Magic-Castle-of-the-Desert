@@ -10,6 +10,16 @@ This repository contains the translation, graphics assets, build tools, and test
 browser tools include Japanese text for reference. The game ROM is not included; local
 builds and imports require your own matching Japanese cartridge dump.
 
+## Showcase
+
+Screenshots from the English build:
+
+| Localized title screen | Dungeon menu and status |
+|:---:|:---:|
+| ![English title screen for Mystery Dungeon Shiren the Wanderer GB2: Magic Castle of the Desert](docs/images/showcase/title-screen.png) | ![English dungeon menu and character stats](docs/images/showcase/dungeon-menu.png) |
+| **Story dialogue** | **Story cutscene** |
+| ![Pekeji asks to join Shiren's adventure](docs/images/showcase/story-dialogue.png) | ![A story cutscene with English dialogue](docs/images/showcase/story-cutscene.png) |
+
 ## Project status
 
 **All known localization content is implemented, including the approved English title.**
