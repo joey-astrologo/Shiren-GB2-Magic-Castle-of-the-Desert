@@ -207,21 +207,29 @@ Physical Start/OK routes cover all 32 learned Scroll roots in both fonts, includ
 Exorcism, cycling, long prefixes, editing, and no-match input. See
 [Blank Scroll engineering and tests](BLANK_SCROLL.md#english-engineering).
 
-Complete discovery exercised **687 tests in 1,123.417 seconds, with no skips**.
-The initial run reported two stale build-fingerprint checks, one stale generated
-Workbench catalogue, and both font subcases of an edit test that pressed B once
-after the field was already empty. The fingerprints and catalogue were refreshed;
-the edit test now clears exactly the recalled name. All four affected test methods
-pass their focused reruns. The ROM implementation was unchanged during these
-corrections; this is a full discovery run plus corrected focused reruns, not a
-second clean full-discovery run. No unresolved failures remain.
+A fresh complete discovery run passed **687 tests in 1,127.457 seconds**, with
+**zero failures, errors, or skips**. All five production validators, the production
+build, and the standalone Workbench, prose, control-reference, and rescue-converter
+JavaScript checks also passed.
 
-The standalone Workbench, prose, and control-reference JavaScript checks also pass.
-Both production ROMs and IPS patches were rebuilt and checked: each differs from
-its previous font build by 120 bytes, confined to the two autocomplete helpers and
-the global checksum. Both IPS patches reproduce their paired ROM exactly.
-Logs, before/after evidence, and SHA-256 manifests are in `build/blank-scroll-start/`.
-This does not constitute a new full playthrough or packaged-release audit.
+An additional battery passed **41 tests in 36.084 seconds** against the exact rebuilt
+ROMs, with zero failures, errors, or skips. It covers both fonts' cold boots, all 32
+archived state loads, all four cross-font SRAM reload combinations, naming, rescue,
+certificates, ending graphics, equipment, combat borders, Training, and the Blank
+Scroll regressions. This reuses suite coverage against the final artifacts; the
+state-load checks are smoke coverage.
+
+Both fonts' ROMs and IPS patches reproduced byte for byte from an isolated fresh
+source copy containing the current working tree and verified original ROM, without
+cached build outputs. All 439 snapshotted input files remained unchanged through
+validation. Both IPS patches reproduce their paired tested ROM exactly, and both
+ROMs pass cartridge header/global checksum checks.
+
+Current logs, JSON reports, input hashes, and artifact hashes are in
+`build/blank-scroll-release-validation/`. The verified IPS copies and
+`SHA256SUMS.txt` are in its `patches/` directory. The original bug reproduction and
+before/after evidence remain in `build/blank-scroll-start/`. This records automated
+validation; no new full playthrough or ZIP-package audit was performed.
 
 ## Title insertion verification — 2026-09-09
 
