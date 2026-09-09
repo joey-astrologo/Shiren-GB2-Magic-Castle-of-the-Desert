@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shiren GB2 · Title audition</title>
+<style>
+  :root {color-scheme:dark; font:15px/1.5 system-ui,sans-serif; background:#0b101a; color:#f2ead6}
+  body {max-width:1120px; margin:0 auto; padding:32px 24px 48px}
+  h1 {font-size:28px; line-height:1.2; margin:8px 0 14px; font-weight:650}
+  p {max-width:780px; color:#b3becf; margin:8px 0 20px}
+  .eyebrow {color:#e6d677; font-size:12px; letter-spacing:.13em; text-transform:uppercase}
+  .screens {display:flex; flex-wrap:wrap; align-items:start; gap:32px; margin:26px 0}
+  figure {margin:0; max-width:100%}
+  figcaption {margin-bottom:10px; font-size:16px}
+  figcaption span {display:block; color:#8e9bb0; font-size:12px; margin-top:2px}
+  canvas,.reference {image-rendering:pixelated; image-rendering:crisp-edges; max-width:100%; height:auto; background:#484028; box-shadow:0 0 0 1px #29334a}
+  #preview {width:480px}
+  .reference {display:block; width:480px}
+  .controls {display:flex; flex-wrap:wrap; gap:16px; align-items:end; padding:18px; border:1px solid #29334a; border-radius:8px; max-width:970px}
+  label {display:grid; gap:5px; color:#b3becf; font-size:12px}
+  button,select {font:inherit; color:#f2ead6; background:#182337; border:1px solid #3b4960; border-radius:5px; padding:8px 13px; cursor:pointer}
+  button:hover,select:hover {background:#233149}
+  a {color:#e6d677}
+  .note {font-size:13px; margin-top:22px}
+  #status {color:#e6d677; font-size:13px; min-height:20px}
+  #error {color:#ffb3a8}
+  [hidden] {display:none!important}
+</style>
+<div class="eyebrow">Localization · Visual audition 01</div>
+<h1>Shiren the Wanderer GB2</h1>
+<p>Your complete composition, with the original moon rings and bat motion. The small bat beside the moon sits above the lettering. A slower shimmer travels across <em>Magic Castle of the Desert</em>.</p>
+<div class="screens">
+  <figure>
+    <figcaption>Proposed animation<span>Native moon and bat speed · slower subtitle shimmer</span></figcaption>
+    <canvas id="preview" width="160" height="144" aria-label="Animated localized title with moon, castle, two bats, complete English logo, sky gradient, horizon and desert sand"></canvas>
+  </figure>
+  <figure>
+    <figcaption>Supplied draft<span>Original GIF · 80 ms per subtitle frame</span></figcaption>
+    <img id="reference" class="reference" width="480" height="429" alt="The supplied localized title draft">
+  </figure>
+</div>
+<div class="controls">
+  <button id="play" type="button">Pause</button>
+  <button id="restart" type="button">Restart</button>
+  <button id="step" type="button">Next frame</button>
+  <label>Subtitle timing<select id="speed">
+    <option value="10" selected>Recommended · 1.34 s sweep</option>
+    <option value="5">Quick · 0.67 s sweep</option>
+    <option value="15">Gentle · 2.01 s sweep</option>
+  </select></label>
+  <label>View size<select id="zoom"><option value="1">1× native</option><option value="2">2×</option><option value="3" selected>3×</option><option value="4">4×</option></select></label>
+  <button id="still" type="button">Save still</button>
+</div>
+<p id="status" role="status">Loading the artwork and captured motion…</p>
+<p id="error" role="alert"></p>
+<p class="note">Preview only; the game has not been patched. The 12-pixel bat adjustment keeps it clear of “Mystery Dungeon.” The 160×143 artwork stays at its supplied coordinates, with one extra row of sand at the bottom. Each recommended shimmer repeats about every four seconds.</p>
+<p class="note">All supplied scenery and lettering are retained: the top-center bat, moon, castle, full English logo, subtitle, sand, horizon gap, and sky gradient. This auditions the settled title screen; startup transitions and cartridge rendering will be verified during insertion.</p>
+<script>
+const DATA = /* AUDITION_DATA */ null;
+const $ = id => document.getElementById(id);
+const canvas = $('preview'), ctx = canvas.getContext('2d', {willReadFrequently:true});
+let playing = true, elapsed = 0, previous = null, phaseFrames = 10;
+const images = {}, native = [];
+function loadImage(src) {return new Promise((resolve,reject) => {const im = new Image(); im.onload=()=>resolve(im); im.onerror=()=>reject(new Error('An embedded image could not be loaded')); im.src=src;});}
+function surface(w=160,h=144) {const c=document.createElement('canvas'); c.width=w;c.height=h;return c;}
+function keyed(image) {
+  const c=surface(160,143), g=c.getContext('2d');g.drawImage(image,0,0);
+  const pixels=g.getImageData(0,0,160,143);
+  for(let i=0;i<pixels.data.length;i+=4) if(pixels.data[i]===197 && pixels.data[i+1]===0 && pixels.data[i+2]===254) pixels.data[i+3]=0;
+  g.putImageData(pixels,0,0);return c;
+}
+function phaseAt(frame, speed=phaseFrames) {
+  const cycle = Math.max(240, 8*speed+120), phase=frame%cycle-60;
+  return phase>=0 && phase<8*speed ? Math.floor(phase/speed) : -1;
+}
+function render(frame, speed=phaseFrames) {
+  const record=DATA.frames[frame%DATA.frames.length];
+  ctx.drawImage(images.scene,0,0);
+  ctx.drawImage(images.scene,0,142,160,1,0,143,160,1);
+  // Source artwork starts at native screenshot row 1. Keep the authored alignment.
+  ctx.drawImage(native[record.image],0,1,160,43,0,0,160,43);
+  // Restore the actual native BG under each opaque small-bat pixel.
+  for(const [x,y,rgb] of record.bat) {ctx.fillStyle=`rgb(${rgb.join(',')})`;ctx.fillRect(x,y,1,1);}
+  ctx.drawImage(images.title,0,0);
+  ctx.fillStyle='rgb(8,8,8)';
+  for(const [x,y] of record.bat) ctx.fillRect(x,y-DATA.batRaise,1,1);
+  const phase=phaseAt(frame,speed);
+  ctx.drawImage(phase<0?images.subtitle:images['shine'+phase],0,0);
+  return phase;
+}
+function update(time) {
+  if(previous!==null && playing) elapsed+=Math.min(time-previous,100);
+  previous=time;
+  const frame=Math.floor(elapsed*DATA.fps/1000), phase=render(frame);
+  $('status').textContent=phase<0?'Subtitle at rest · moon and bats keep moving':`Subtitle shimmer · frame ${phase+1} of 8`;
+  requestAnimationFrame(update);
+}
+function verify() {
+  const title=surface(160,143), g=title.getContext('2d');g.drawImage(images.title,0,0);
+  const alpha=g.getImageData(0,0,160,143).data;
+  let collisions=0, clipped=0, nearest=999;
+  for(const record of DATA.frames) for(const [x,y] of record.bat) {
+    const yy=y-DATA.batRaise;
+    if(x<0||x>=160||yy<0||yy>=144)clipped++;
+    if(alpha[(yy*160+x)*4+3])collisions++;
+    for(let ty=yy+1;ty<60;ty++) if(alpha[(ty*160+x)*4+3]) {nearest=Math.min(nearest,ty-yy-1);break;}
+  }
+  // Every proposed frame must preserve all authored scenery below the sky patch,
+  // except the authored subtitle pixels. This also protects the visible horizon.
+  const baseline=surface(), b=baseline.getContext('2d');b.drawImage(images.scene,0,0);
+  b.drawImage(images.scene,0,142,160,1,0,143,160,1);
+  const base=b.getImageData(0,0,160,144).data;
+  const mask=surface(), m=mask.getContext('2d');m.drawImage(images.subtitle,0,0);
+  for(let i=0;i<8;i++)m.drawImage(images['shine'+i],0,0);
+  const subtitle=m.getImageData(0,0,160,144).data;
+  let sceneryChanges=0;
+  for(let f=0;f<DATA.frames.length;f++) {
+    render(f,10);const actual=ctx.getImageData(0,0,160,144).data;
+    for(let y=43;y<144;y++)for(let x=0;x<160;x++) {
+      const i=(y*160+x)*4;
+      if(!subtitle[i+3] && (actual[i]!==base[i]||actual[i+1]!==base[i+1]||actual[i+2]!==base[i+2]))sceneryChanges++;
+    }
+  }
+  const result={frames:DATA.frames.length,batTitleCollisions:collisions,batPixelsClipped:clipped,minimumClearRows:nearest,sceneryChangesOutsideSubtitle:sceneryChanges,phaseFrames:10,sweepSeconds:80/DATA.fps,cycleSeconds:240/DATA.fps};
+  if(collisions||clipped||sceneryChanges)throw new Error('Preview validation failed: '+JSON.stringify(result));
+  return result;
+}
+async function start() {
+  await Promise.all(Object.entries(DATA.images).map(async([name,src])=>{images[name]=await loadImage(src);}));
+  native.push(...await Promise.all(DATA.nativeImages.map(loadImage)));
+  for(let i=0;i<8;i++)images['shine'+i]=keyed(images['shine'+i]);
+  $('reference').src=DATA.images.reference;
+  $('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pause':'Play';};
+  $('restart').onclick=()=>{elapsed=0;};
+  $('step').onclick=()=>{playing=false;$('play').textContent='Play';elapsed=(Math.floor(elapsed*DATA.fps/1000)+1)*1000/DATA.fps+0.001;};
+  $('speed').onchange=()=>{phaseFrames=Number($('speed').value);elapsed=0;};
+  $('zoom').onchange=()=>{canvas.style.width=160*Number($('zoom').value)+'px';};
+  $('still').onclick=()=>{const enlarged=surface(640,576),g=enlarged.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(canvas,0,0,640,576);const a=document.createElement('a');a.download='shiren-gb2-title-audition.png';a.href=enlarged.toDataURL();a.click();};
+  const params=new URLSearchParams(location.search);
+  if(params.has('verify')||params.has('export')) {
+    const checks=verify();window.auditionChecks=checks;
+    const packet={checks};
+    if(params.has('export')) {
+      const enlarged=surface(640,576),g=enlarged.getContext('2d');g.imageSmoothingEnabled=false;
+      packet.frames=[];
+      for(let f=0;f<DATA.frames.length;f++) {render(f,10);g.drawImage(canvas,0,0,640,576);packet.frames.push(enlarged.toDataURL());}
+      render(0,10);packet.nativeStill=canvas.toDataURL();
+    }
+    const result=document.createElement('script');result.id='audition-result';result.type='application/json';result.textContent=JSON.stringify(packet);document.body.append(result);
+    render(90,10);$('status').textContent='Preview validation passed';
+  } else requestAnimationFrame(update);
+  window.audition={render,phaseAt,verify,get elapsed(){return elapsed;},get playing(){return playing;}};
+  document.documentElement.dataset.ready='true';
+}
+start().catch(error=>{$('error').textContent=error.message;document.documentElement.dataset.ready='error';});
+</script>
+</html>

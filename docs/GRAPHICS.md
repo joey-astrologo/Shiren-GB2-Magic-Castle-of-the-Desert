@@ -62,6 +62,11 @@ Create, approve, and insert English artwork for the opening menu/title screen. T
 logo planes, map, palettes, and animation are already traced in
 [GRAPHICS_AUDIT.md](GRAPHICS_AUDIT.md#title-screen).
 
+The supplied English composition now has a
+[title animation audition](TITLE_LOCALIZATION_AUDITION.md), with native moon/bat
+motion and adjustable subtitle sparkle timing. Visual approval and ROM insertion
+are still pending.
+
 ## Visual verification coverage
 
 The separate true-ending route needs a captured trace to compare its resource loads with
