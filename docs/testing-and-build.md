@@ -633,6 +633,34 @@ documented in [ITEM_FORMATTING.md](ITEM_FORMATTING.md#synthesis-seal-manual-rout
 helper deliberately erases the prior inventory; never run it against a save you intend to
 keep.
 
+### Blessed Windblade Scroll manual route
+
+[`tools/mesen_spawn_blessed_windblade_scroll.lua`](../tools/mesen_spawn_blessed_windblade_scroll.lua)
+adds one identified, blessed Windblade Scroll to a free inventory slot. Enter a dungeon,
+close menus/messages, pause Mesen, then load the helper through **Debug > Script Window**
+and press **Run (F5)**. Resume and open **Items > Windblade Scroll > Read**.
+
+The blessing is applied once; the helper registers no callbacks and does not restore it
+after use. This lets the game handle blessing loss normally when investigating the
+reported repeated-use behavior. Existing items are preserved, and a full inventory or
+exhausted object pool causes the helper to stop without changing memory. Each deliberate
+rerun creates another scroll. Use a disposable state when testing item consumption.
+
+GB2's native scroll blessing check removes the blessing on 52 of 128 outcomes
+(40.625% per reading), leaving it intact on the other 76 (59.375%). A reading that
+removes the blessing preserves the scroll; the next normal reading consumes it.
+The raw item blessing flag is `$04` (bit 2), not the plating flag `$08` (bit 3).
+The helper was corrected on 2026-09-09 after tracing this distinction in the ROM.
+
+Native evidence: bank `$78:$404B` stores the scroll threshold `$34` (52);
+`$78:$4D67–$4D95` draws an integer from 0 through 127 via `$0000:$1830`, clears
+bit 2 when the result is below the threshold, and emits the blessing-loss message.
+`$78:$6265–$6280` keeps the blessed scroll through that check. These routines and
+the threshold match the original ROM in both English font builds. Mesen checks
+in `build/blessed-windblade-helper/read-check/verification.json` exercise actual
+Read actions with controlled RNG for blessing retention, blessing loss, and the
+final unblessed consumption, alongside the helper's inventory safety checks.
+
 ### Blank Scroll manual route
 
 `tools/mesen_spawn_blank_scroll.lua` safely adds one real Blank Scroll to the first free
