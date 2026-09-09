@@ -198,7 +198,7 @@ English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifact
 
 ## Title insertion verification — 2026-09-09
 
-The title-inclusive working tree passes 681 discovered tests in 1,101.074 seconds, with
+The title-inclusive working tree passes 682 discovered tests in 1,108.344 seconds, with
 zero failures, errors, or skips. Both font ROMs and IPS patches were rebuilt and their
 checksums and IPS reconstruction verified. The normal build now installs the approved
 English title, original moon/bat cycles, and slower eight-frame subtitle sparkle.
@@ -210,7 +210,13 @@ palette/OAM writes that PyBoy accepted; the final renderer splits the HBlank wri
 uses native DMA to leave sufficient VBlank time. See [TITLE_LOCALIZATION.md](TITLE_LOCALIZATION.md)
 for reproducible capture commands, timing, and ownership.
 
-The full-suite log is `build/title-insertion/release-full-tests.log`. Captures and current
+Start-transition coverage now checks every visible fade frame, including the complete
+sky gradient, sand, logo, and active sparkle. The regression fails against the prior
+ROM and passes the correction at three different animation timings. Both rebuilt
+fonts pass 25 transition frames in PyBoy and 33 in Mesen; the Mesen capture compares
+the displayed progression with independently observed native fade commits.
+
+The full-suite log is `build/title-transition-fix/full-tests.log`. Captures and current
 ROM-digest manifests are under `build/title-screen/`, with classic-font counterparts in
 its `classic/` directory. This work does not replace or reverify the older ZIP below.
 

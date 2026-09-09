@@ -178,6 +178,21 @@ def build(source, C):
     )
     a.label("generic").emit("f0b0210056cdd309d1c1c9")
     put(245, a.base, a.finish())
+    # Commit title fades at the native palette writer's boundary. The native
+    # interpolation/timing still runs, but its snapshot cannot represent the
+    # title's different upper/lower palettes and per-line sky gradient.
+    put(6, 0x423D, bytes.fromhex("3ef5218047cdac0900"))
+    a = Asm(0x4780)
+    a.emit("fae5c0fe09").jr("20", "native").emit("fab4c3fe9d").jr("20", "native")
+    a.emit("faf5c0fe02").jr("20", "native")
+    a.emit("faf2defeff").jr("20", "native").emit("faf3defe7f").jr("20", "native")
+    a.emit("faf0de475f3e059047faf1de").jr("28", "selected")
+    a.label("scale").emit("8705").jr("20", "scale")
+    a.label("selected").emit("ea86c8c9")
+    a.label("native").emit("fae2de210048cdd3093e06cdac09c9")
+    assert a.base + len(a.data) <= 0x4800
+    put(245, a.base, a.finish())
+    put(245, 0x4800, original[off(6, 0x426B) : off(6, 0x4283)])
     for phase, m in enumerate(maps):
         put(
             245,
@@ -215,6 +230,7 @@ def build(source, C):
         "20", "native"
     ).emit("2180c80660af")
     a.label("clear").emit("2205").jr("20", "clear").emit("21007d1100c901e000cd620a")
+    a.emit("21e07d1190c8011800cd620a")
     a.label("native").emit("f0b0eae5c0cd6025afe045e0f9d1c1c9")
     put(245, a.base, a.finish())
     bat_frames = []
@@ -276,6 +292,44 @@ def build(source, C):
     actions[112] = ("obj_palette", 56, pals([[(0, 0, 0)] + glint])[:4])
     actions[113] = ("obj_palette", 60, pals([[(0, 0, 0)] + glint])[4:])
     actions[114] = ("obj_enable", True)
+    lower_data = pals(lower[:2]) + pals([[(0, 0, 0)] + glint])
+    put(245, 0x7DE0, lower_data)
+
+    # All 33 RGB555 fade levels are generated from the artwork, including the
+    # dynamic palettes. Each page has 128 upper palette bytes, 24 lower palette
+    # bytes, and the 60-byte sky ramp. Normal builds need no runtime arithmetic.
+    upper_data = bytearray(pals(bg) + pals([[(0, 0, 0)] + p for p in obj]))
+    upper_data[:2] = bytes(2)
+    sky_data = pals(
+        [[tuple((v * i // 32) * 8 for v in (1, 4, 11)) for i in range(2, 32)]]
+    )
+    colors = bytes(upper_data) + lower_data + sky_data
+    for step in range(33):
+        faded = bytearray()
+        for i in range(0, len(colors), 2):
+            color = int.from_bytes(colors[i : i + 2], "little")
+            channels = [(color >> shift) & 31 for shift in (0, 5, 10)]
+            channels = [v + (31 - v) * step // 32 for v in channels]
+            faded.extend(
+                sum(v << shift for v, shift in zip(channels, (0, 5, 10))).to_bytes(
+                    2, "little"
+                )
+            )
+        put(247, 0x5400 + step * 256, faded)
+
+    # Called from VBlank with the hardware bank and bank shadow both set to F5.
+    # Only a new fade level needs all palettes and the WRAM raster data copied.
+    # Other frames restore the 24 upper bytes reused by the lower title band.
+    a = Asm(0x7600)
+    a.emit("fa86c847c654672e00fa87c8b8").addr("ca", "upper")
+    a.emit("78ea87c83e80e0680e69").emit("2ae2" * 64)
+    a.emit("3e80e06a0e6b").emit("2ae2" * 64)
+    a.emit("1190c8").emit("2a121c" * 24)
+    a.emit("1180c9").emit("2a121c" * 60).emit("c9")
+    a.label("upper").emit("3e80e0680e69").emit("2ae2" * 16)
+    a.emit("2e783eb8e06a0e6b").emit("2ae2" * 8).emit("c9")
+    assert a.base + len(a.data) < 0x8000
+    put(247, a.base, a.finish())
     initial_attrs = b"".join(
         attrs[y * 20 : y * 20 + 20] + bytes(12) for y in range(0, 144, 8)
     )
@@ -301,6 +355,9 @@ def build(source, C):
     # VBlank creates next frame's OAM, restores the upper palettes, and seeds line zero attributes.
     a = Asm(0x4000)
     a.emit("fab4c3fe9dc0")
+    # Freeze the moon during departure, leaving VBlank time for a full fade
+    # palette upload. The bat and sparkle clocks continue normally.
+    a.emit("fa86c8a7").addr("c2", "template")
     a.emit("fa85c83cfe06").jr("38", "mooncount").emit("affa81c83ce603ea81c8af")
     a.label("mooncount").emit("ea85c8")
     a.emit("fa81c847fa82c8b8").jr("28", "template").emit("78ea82c85f21005801c000")
@@ -328,8 +385,10 @@ def build(source, C):
     a.label("phase").emit("fe0a").jr("38", "gotphase").emit("d60a04").jr("18", "phase")
     a.label("rest").emit("0600")
     a.label("gotphase").emit("78cb376f265211d0c8").emit("2a1213" * 8)
-    # Restore palettes only outside the native fade writer.
-    a.emit("faf5c0a7").jr("20", "seed")
+    # The committed fade level changes only when the native writer is ready.
+    a.emit("fa86c8a7").jr("28", "normal_palettes")
+    a.emit("f0f7f53ef5e0f73ef7210076cdac09f1e0f7").jr("18", "seed")
+    a.label("normal_palettes")
     for index, data, reg in [
         (0, pals(bg[:2]), 0x68),
         (56, pals([[(0, 0, 0)] + obj[7]]), 0x6A),
@@ -359,6 +418,10 @@ def build(source, C):
         if key == "gradient":
             a.emit("78fe1d").jr("30", "solid").emit("876f26722a4f7e57").jr("18", "wait")
             a.label("solid").emit("0e601628")
+        elif key in actions and actions[key][0] in ("palette", "obj_palette"):
+            action = actions[key]
+            index = action[1] if action[0] == "palette" else 16 + action[1] - 56
+            a.emit(b"\x21" + (0xC890 + index).to_bytes(2, "little"))
         a.label("wait").emit("f041e602").jr("20", "wait")
         if key in attribute_events:
             a.emit("3e01e055")
@@ -388,11 +451,9 @@ def build(source, C):
                 _, index, data = action
                 assert len(data) <= 4
                 reg = 0x68 if action[0] == "palette" else 0x6A
-                a.emit("faf5c0a7").jr("20", "done").emit(
-                    bytes((0x3E, 0x80 | index, 0xE0, reg))
-                )
+                a.emit(bytes((0x3E, 0x80 | index, 0xE0, reg)))
                 for byte in data:
-                    a.emit(bytes((0x3E, byte, 0xE0, reg + 1)))
+                    a.emit(bytes((0x2A, 0xE0, reg + 1)))
         a.label("done").emit("f1e04fc9")
         code = a.finish()
         put(245, cursor, code)
@@ -424,9 +485,7 @@ def build(source, C):
     )
     # A short sky ISR in fixed WRAM avoids a ROM-bank switch on the tightest lines.
     a = Asm(0xC900)
-    a.emit("f04447c6c06f26c97ee045faf5c0a7").addr("c2", 0x0061).emit(
-        "7887c6806f26c92a4f7e57"
-    )
+    a.emit("f04447c6c06f26c97ee045").emit("7887c6806f26c92a4f7e57")
     a.label("wait").emit("f041e602").jr("20", "wait").emit("3e80e06879e0697ae069").addr(
         "c3", 0x0061
     )

@@ -214,6 +214,87 @@ class TitleLiveTests(unittest.TestCase):
             self.assertEqual(7, owner.memory[0xC0E5])
         self.assertEqual(images[0], images[1])
 
+    def test_every_start_transition_frame_fades_the_complete_composition(self):
+        # Observe the original cartridge's interpolation commits independently
+        # of the localized palette tables and private fade state.
+        native = self.emulator(self.native_path)
+        native.tick(650)
+        commits = []
+
+        def at_native_commit(_):
+            commits.append(
+                (native.frame_count, native.memory[0xDEF1], native.memory[0xDEE1])
+            )
+
+        native.hook_register(6, 0x423D, at_native_commit, None)
+        native.button("start", 5)
+        native.tick(60)
+        native_steps = [progress * 32 // total for _, progress, total in commits]
+        native_intervals = [b[0] - a[0] for a, b in zip(commits, commits[1:])]
+        self.assertEqual([2, 10, 18, 26, 32], native_steps)
+        self.assertEqual([4] * 4, native_intervals)
+        native.stop(save=False)
+
+        expected = {
+            (m, s): title_graphics.compose(self.original, m, s, gradient=True)
+            for m in range(4)
+            for s in range(-1, 8)
+        }
+        start = title_graphics.offset(49, 0x4000) + 2 + 0x300
+        tiles = self.original[start : start + 0x800]
+        saw_sparkle = False
+        for press_frame in (600, 650, 730):
+            with self.subTest(press_frame=press_frame):
+                owner = self.emulator(self.output_path)
+                owner.tick(press_frame)
+                owner.button("start", 5)
+                levels = []
+                for frame in range(60):
+                    clock, moon, step = (
+                        owner.memory[a] for a in (0xC880, 0xC881, 0xC887)
+                    )
+                    shine = (clock - 60) // 10 if 60 <= clock < 140 else -1
+                    active = owner.memory[0xC3B4] == 0x9D and owner.memory[0xC0E5] == 9
+                    image = expected[moon, shine].copy()
+                    for i in range(3):
+                        bat = tuple(owner.memory[0xFE00 + i * 4 : 0xFE04 + i * 4])
+                        if active and bat[0]:
+                            for x, y in sprite_pixels(tiles, bat):
+                                image.putpixel((x, y), (8, 8, 8))
+                    owner.tick()
+                    if not active or not owner.memory[0xFF40] & 0x80:
+                        continue
+                    if step:
+                        saw_sparkle |= shine >= 0
+                        if not levels or levels[-1][1] != step:
+                            levels.append((frame, step))
+                    # The native fade interpolates each five-bit channel toward
+                    # white, rounding down. It must hold for every pixel, even
+                    # when one palette is reused for sky, sand, and sparkle.
+                    image = image.point(
+                        [
+                            min(248, v + ((31 - v // 8) * step // 32) * 8)
+                            for v in range(256)
+                        ]
+                        * 3
+                    )
+                    actual = owner.screen.image.convert("RGB")
+                    mismatches = sum(
+                        a != b for a, b in zip(image.getdata(), actual.getdata())
+                    )
+                    self.assertEqual(
+                        0, mismatches, "Start frame %d, fade %d" % (frame, step)
+                    )
+                self.assertEqual(native_steps, [step for _, step in levels])
+                self.assertEqual(
+                    native_intervals, [b[0] - a[0] for a, b in zip(levels, levels[1:])]
+                )
+                self.assertEqual(7, owner.memory[0xC0E5])
+                owner.stop(save=False)
+        self.assertTrue(
+            saw_sparkle, "transition coverage must include an active sparkle"
+        )
+
     def test_attract_replay_releases_scratch_and_reloads_the_title(self):
         owner = self.emulator(self.output_path)
         owner.tick(600)

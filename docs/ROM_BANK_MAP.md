@@ -68,6 +68,7 @@ text growth.
 | 5 | `$4553-$459F` | Native `$C3EF-$C3F0` story-stage save/load pair | Preserve; Big Moai availability fixture traces this serializer and loader |
 | 5 | `$591D-$5930` | Native event opcode `$60`: branch when `$C3EF` meets its operand threshold | Preserve; Big Moai uses threshold `$09` |
 | 5 | `$5E13-$5E20` | Native display-mode setter, wrapped by `title_screen.py` | Exact-byte guarded; stage title-only WRAM before mode 9, preserve native BC/DE/HL and mode initialization |
+| 6 | `$423D-$4245` | Native fade palette commit, wrapped by `title_screen.py` | Exact-byte guarded; title departure applies the original fade progression to all raster palettes; other scenes delegate to the native writer. The original dispatch table `$426B-$4282` and interpolation `$4334-$4398` remain hash-guarded |
 | 24 | `$4000-$4007` | Native map-selector prefix, wrapped by `title_screen.py` | Title moon selectors 0-3 use the private renderer only in the owning scene; other selectors retain the original pointer lookup |
 | 25 | `$4000-$400F` | Native object-selector prefix, wrapped by `title_screen.py` | Suppress native title overlays only for selectors 0-2 in the owning scene; preserve generic lookup and `$C445/$C446` results elsewhere |
 | 6 | `$6268-$626A`, `$7FF4-$7FFF` | Town-refresh call and service-popup cleanup trampoline | `service_menus.py` redirects the native `$69A1` call through guarded bank-254 ninth-column restoration, then resumes `$69A1` |
@@ -177,7 +178,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 215-239 | `$4000-$7FFF` | `allocate.py`/`insert.py`: far tables and relocated records | Script arena only |
 | 245 | `$4000-$7FFF` | `title_screen.py`: title renderer, independent animation clocks, OAM reuse, palette/attribute bands, original-selector mirrors, and staged sky handler | Exclusive full-bank zero/collision guard; runtime/data locations detailed in `title_screen_runtime.py` |
 | 246 | `$4000-$7FFF` | `title_screen.py`: localized BG plane at `$4000`, title map at `$6000` | Exclusive full-bank zero/collision guard; native loader header `$1FF0` preserves its two-VRAM-bank contract |
-| 247 | `$4000-$7FFF` | `title_screen.py`: localized correction/shine OBJ plane and preserved native bat tiles at `$4000` | Exclusive full-bank zero/collision guard |
+| 247 | `$4000-$7FFF` | `title_screen.py`: localized correction/shine OBJ plane and preserved native bat tiles at `$4000`; complete RGB555 fade tables at `$5400-$74D3`, palette uploader at `$7600` | Exclusive full-bank zero/collision guard |
 | 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, Clear Campaign and True Wanderer display-only wrappers, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42D3`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45FF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver; `$45C0-$45FF` owns the hardware-B reset helper | Exclusive |
@@ -378,6 +379,8 @@ clears state and reloads that handler before enabling the display mode. Title OA
 by the animated bat records. The engine retains its ordinary `$C000-$C09F` shadow;
 the private renderer suppresses its pending `$C0EB` DMA and `$C0EC` subtitle palette
 requests only while the title owns the scene.
+`$C886/$C887` store pending/applied native fade levels, `$C890-$C8A7` store the
+corresponding lower palette bytes, and `$C980-$C9BB` holds the current sky ramp.
 
 Attract startup briefly retains mode 9 after releasing title scratch. The scene check is
 therefore required on every title dispatch; this interval uses a ROM-resident native

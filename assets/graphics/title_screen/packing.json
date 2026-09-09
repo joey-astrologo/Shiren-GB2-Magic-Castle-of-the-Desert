@@ -80,6 +80,18 @@
       "address": 519,
       "size": 24,
       "sha256": "1727e711cade827f525e5929936a6de99cbc329902870525de7a291c493f0327"
+    },
+    {
+      "bank": 6,
+      "address": 17003,
+      "size": 24,
+      "sha256": "104d3045ddd6055517d595921d0cb4f70359013cdce2e7b83824280cb23f5be8"
+    },
+    {
+      "bank": 6,
+      "address": 17204,
+      "size": 101,
+      "sha256": "378ae9a47c07ab0d76dbfc4a0acb89fbbcbef784e92510932bcc65ff410ad975"
     }
   ],
   "native_hooks": [
@@ -137,6 +149,11 @@
       "bank": 63,
       "address": 16407,
       "bytes": "004031"
+    },
+    {
+      "bank": 6,
+      "address": 16957,
+      "bytes": "fae2de216b42cdc609"
     }
   ],
   "bg_palettes": [

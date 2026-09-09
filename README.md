@@ -24,7 +24,7 @@ Playtesting and bug fixes continue; automated coverage is recorded below.
 | Opening menu/title screen | **Implemented** | Complete approved composition, original moon/bat motion, and slower eight-frame subtitle sparkle; [implementation and real-ROM preview](docs/TITLE_LOCALIZATION.md) |
 | Other graphics | **Implemented** | Copyright card, main-ending staff title and all 20 staff cards, arrival cards, save/load sign, and dungeon-HUD digits/labels/slash are installed |
 | Wanderer Rescue | **English input/output implemented and tested** | Native password compatibility, promotional mission acceptance, and Japanese ↔ English conversion are verified |
-| Automated verification | **681 suite tests passed — 2026-09-09** | Zero failures, errors, or skips; both current font ROMs also pass exact title pixels and transitions in PyBoy and Mesen. The older packaged release's separate 34-check battery remains documented in project status |
+| Automated verification | **682 suite tests passed — 2026-09-09** | Zero failures, errors, or skips; both current font ROMs also pass exact title pixels and transitions in PyBoy and Mesen. The older packaged release's separate 34-check battery remains documented in project status |
 
 Playtesting and bug fixes continue. See [project status](docs/project-status.md) for
 verification coverage, the remaining manual route checks, and current artifact hashes.

@@ -13,8 +13,17 @@ local function emit(kind)
   end
   print(kind .. " " .. frame .. " " .. emu.read(0xc880, memory)
     .. " " .. emu.read(0xc881, memory) .. " " .. emu.read(0xc883, memory)
+    .. " " .. emu.read(0xc887, memory)
     .. " " .. table.concat(pixels))
 end
+
+emu.addMemoryCallback(function()
+  if pressAt and frame >= pressAt and emu.read(0xfff7, memory) == 6
+    and emu.read(0xc3b4, memory) == 0x9d and emu.read(0xc0e5, memory) == 9 then
+    print("TITLE_FADE_COMMIT " .. frame .. " " .. emu.read(0xdef1, memory)
+      .. " " .. emu.read(0xdee1, memory))
+  end
+end, emu.callbackType.exec, 0x423d, 0x423d, emu.cpuType.gameboy)
 
 emu.addEventCallback(function()
   frame = frame + 1
@@ -32,6 +41,10 @@ emu.addEventCallback(function()
     if returnedAt and frame == returnedAt + 120 then
       emit("TITLE_RETURN")
       pressAt = frame + 1
+    end
+    if pressAt and frame >= pressAt and scene == 0x9d and mode == 9
+      and (emu.read(0xff40, memory) & 0x80) ~= 0 then
+      emit("TITLE_TRANSITION")
     end
     if pressAt and frame == pressAt + 120 then
       if mode ~= 7 then emu.stop(3); return end

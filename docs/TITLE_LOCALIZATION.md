@@ -105,13 +105,29 @@ insufficient. That interval uses a ROM-resident copy of the original gradient ha
 All other display modes delegate to the native interrupt dispatcher. The shared return
 at `0:$081C-$081E` is preserved because another raster mode also uses it.
 
+The Start transition keeps the original fade calculation and commits each resulting
+level through a guarded redirect at `6:$423D-$4245`. The original palette snapshot
+cannot represent palettes reused for sky, sand, and sparkle; disabling raster palette
+updates during the fade caused blue/green sand and mismatched subtitle colors. The
+renderer now applies the native RGB555 interpolation to all upper/lower palettes and
+the complete sky ramp. Prepared tables live at `247:$5400-$74D3`, with the upload routine
+at `$7600`. Other scenes retain the native palette writer.
+
+VBlank uploads each committed fade level atomically, then subsequent frames restore
+only the 24 upper palette bytes reused below. The moon holds its current phase during
+departure to leave enough VBlank time for the complete palette upload; the bats and
+sparkle continue. Normal title animation is unchanged.
+
 Title state uses fixed WRAM `$C800-$C805`, `$C880-$C8DF`, and `$C900-$C9DF`. This aliases
 the localized keyboard navigation buffer only while the title owns the scene. Entry
 clears state and stages the fast handler again; departure stops accessing it. The native
 mode setter's BC/DE/HL preservation is retained, including the script cursor used by
 attract recordings. No persistent save layout or SRAM is changed.
+Within this reservation, `$C886/$C887` hold the committed/applied fade levels and
+`$C890-$C8A7` hold the current lower palette bytes. The existing sky ramp at
+`$C980-$C9BB` receives the corresponding faded colors.
 
-Seven focused tests cover source composition, guarded/idempotent installation, mutation
+Eight focused tests cover source composition, guarded/idempotent installation, mutation
 ownership, graphics budgets, 480 exact rendered frames, original bat motion, moon/sparkle
 timing, Start/menu handoff, and a natural attract replay followed by return to the title.
 The native menu comparison excludes only its blinking selection arrow. Attract recordings
@@ -123,6 +139,13 @@ title handoff with an isolated title installation at the same frame. The product
 menu test retains its original framebuffer hash on a control with the title restored,
 compares all surrounding pixels, and requires the shifted selection arrow to match a
 captured native animation phase. No existing menu framebuffer fixture was rewritten.
+
+The Start regression compares every displayed transition pixel at three different
+animation timings, including an active sparkle, against the complete artwork faded
+with the independently observed native interpolation levels. It also compares the
+intervals between fade levels with the original ROM. Mesen captures every visible
+transition frame after attract return and checks each pixel and the sequence of native
+fade commits; its native calculation can advance by different increments than PyBoy.
 
 Both exact font ROMs have live pixel and transition evidence from PyBoy and Mesen.
 Physical-cartridge behavior still benefits from playtesting, particularly the HBlank

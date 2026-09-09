@@ -37,6 +37,7 @@ def capture(rom_path, reference_path, output):
     start = title_graphics.offset(49, 0x4000) + 2 + 0x300
     bat_tiles = source[start : start + 0x800]
     frames, clocks, phases, bats = [], [], [], []
+    transition = []
     with tempfile.TemporaryDirectory(prefix="shiren-title-capture-") as directory:
         temporary = Path(directory) / "capture.gbc"
         temporary.write_bytes(rom)
@@ -78,7 +79,36 @@ def capture(rom_path, reference_path, output):
             if any(sum(s == phase for _, s in phases) != 20 for phase in range(8)):
                 raise ValueError("sparkle phases did not each last ten native frames")
             owner.button("start", 5)
-            owner.tick(120)
+            for frame in range(120):
+                active = owner.memory[0xC3B4] == 0x9D and owner.memory[0xC0E5] == 9
+                if active:
+                    clock, moon, step = (
+                        owner.memory[a] for a in (0xC880, 0xC881, 0xC887)
+                    )
+                    shine = (clock - 60) // 10 if 60 <= clock < 140 else -1
+                    image = expected[moon, shine].copy()
+                    for i in range(3):
+                        record = tuple(owner.memory[0xFE00 + i * 4 : 0xFE04 + i * 4])
+                        if record[0]:
+                            for x, y in sprite_pixels(bat_tiles, record):
+                                image.putpixel((x, y), (8, 8, 8))
+                    image = image.point(
+                        [
+                            min(248, v + ((31 - v // 8) * step // 32) * 8)
+                            for v in range(256)
+                        ]
+                        * 3
+                    )
+                owner.tick()
+                if active and owner.memory[0xFF40] & 0x80:
+                    actual = owner.screen.image.convert("RGB")
+                    if actual.tobytes() != image.tobytes():
+                        raise ValueError(
+                            "production Start transition differs at frame %d" % frame
+                        )
+                    transition.append((frame, step, actual.copy()))
+            if {step for _, step, _ in transition} != {0, 2, 10, 18, 26, 32}:
+                raise ValueError("production transition did not show every fade level")
             if owner.memory[0xC0E5] != 7:
                 raise ValueError("Start did not reach the native menu")
             menu = owner.screen.image.convert("RGB").copy()
@@ -88,6 +118,8 @@ def capture(rom_path, reference_path, output):
     output.mkdir(parents=True, exist_ok=True)
     frames[0].save(output / "title-screen.png")
     menu.save(output / "start-menu.png")
+    for frame, step, actual in transition:
+        actual.save(output / ("transition-%03d.png" % frame))
     colors = sorted({color for frame in frames for color in frame.getdata()})
     if len(colors) > 256:
         raise ValueError("GIF cannot preserve all title colors")
@@ -141,6 +173,8 @@ def capture(rom_path, reference_path, output):
         "sparkle_cycle_frames": 240,
         "gif_duration_ms": sum(durations),
         "start_menu_handoff": "passed",
+        "verified_transition_frames": len(transition),
+        "fade_levels": sorted({step for _, step, _ in transition}),
         "pixel_comparison": "exact after native RGB555 normalization",
         "capture": "PyBoy cold boot; temporary ROM; saving disabled",
     }

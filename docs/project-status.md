@@ -7,7 +7,7 @@ and bug fixes continue.
 
 The [hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
 is available with all three promotional mission presets. The current title-inclusive build
-passes **681 suite tests**, with zero failures, errors, or skips. Both font ROMs also pass
+passes **682 suite tests**, with zero failures, errors, or skips. Both font ROMs also pass
 exact title pixels and transitions in PyBoy and Mesen. The previous packaged release's
 separate 34-check battery is recorded below and applies to that older package.
 
@@ -226,9 +226,9 @@ recorded in [testing-and-build.md](testing-and-build.md#release-verification).
 
 ## Installed-title build — 2026-09-09
 
-The complete discovered suite passed **681 tests in 1,101.074 seconds**, with no failures,
+The complete discovered suite passed **682 tests in 1,108.344 seconds**, with no failures,
 errors, or skips. The run used the installed VS Code Node 24.18.0 runtime for browser-codec
-parity. Its log is `build/title-insertion/release-full-tests.log`.
+parity. Its log is `build/title-transition-fix/full-tests.log`.
 
 Both current font ROMs include the approved title. Each passed an exact 480-frame
 comparison from a cold boot plus Start/menu handoff, with a lossless-color GIF and
@@ -241,6 +241,14 @@ Mesen independently verifies 480 exact frames in both fonts, natural attract ret
 and Start/menu handoff using temporary portable profiles. Its stricter timing caught
 late palette/OAM writes; the final renderer splits those writes and uses native DMA
 for the OAM template, leaving enough VBlank time for coincident animation updates.
+
+The reported Start-transition discoloration is corrected in both current ROMs. The
+original title/menu endpoint checks did not inspect the intervening fade. The new
+regression reproduces the old ROM's incorrect sand/sky colors and compares every
+transition pixel at three animation timings. Both exact font builds also pass all
+25 visible fade frames in PyBoy and 33 in Mesen, with the native fade calculation
+driving the complete sky, sand, logo, and sparkle palettes. The comparison preview
+is `build/title-transition-fix/comparison.html`.
 
 Current captures are under `build/title-screen/` (shadowed) and
 `build/title-screen/classic/`. The default `build/shiren-gb2-english.gbc` and `.ips`
@@ -273,13 +281,13 @@ The current 2026-09-09 font variants use the same translation and engine patches
 These hashes describe the title-inclusive files, not the older ZIP:
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `2c00a022bc5cdd884093b451c47f6e5a312d15bc`
+  `1eaeea58c363ed4915baf178fcb536a6230fa614`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `68c49ad4c256fbeb213aa2458ab1d0bd65ec4772`
+  `9bda4b5dc39cb1108cad0bf28bb5262434dd0d67`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `05b0c4c0fe0f284060a4fcb309b0b2303dd1f163`
+  `eb0c074b1ef73ec7b6ad841b900300259c23f7bf`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `59662843f220a0c6c7abaa2f61cb59514f10eadb`
+  `de5ca6962c38e36c5f062dc6e08aba1e23a20935`
 
 Always rebuild and verify locally rather than treating those hashes as permanent release
 identifiers.

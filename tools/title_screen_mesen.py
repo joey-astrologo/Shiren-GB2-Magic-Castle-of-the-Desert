@@ -37,6 +37,8 @@ def verify(executable, rom_path, reference_path, output):
     frames, returned, menu = 0, None, None
     clocks = []
     first = None
+    transition = []
+    fade_commits = []
     # Portable settings and all incidental emulator files stay in this directory.
     with tempfile.TemporaryDirectory(prefix="shiren-title-mesen-") as temporary:
         directory = Path(temporary)
@@ -74,9 +76,15 @@ def verify(executable, rom_path, reference_path, output):
                 "Mesen title route exited with code %d" % result.returncode
             )
         for line in log_path.open():
-            if not line.startswith(("TITLE_FRAME ", "TITLE_RETURN ", "TITLE_MENU ")):
+            if line.startswith("TITLE_FADE_COMMIT "):
+                _, frame, progress, total = line.split()
+                fade_commits.append((int(frame), int(progress) * 32 // int(total)))
                 continue
-            kind, frame, clock, moon, bat, pixels = line.split()
+            if not line.startswith(
+                ("TITLE_FRAME ", "TITLE_RETURN ", "TITLE_MENU ", "TITLE_TRANSITION ")
+            ):
+                continue
+            kind, frame, clock, moon, bat, fade, pixels = line.split()
             actual = Image.frombytes("RGB", (160, 144), bytes.fromhex(pixels))
             if kind == "TITLE_MENU":
                 menu = actual
@@ -93,6 +101,12 @@ def verify(executable, rom_path, reference_path, output):
                 if record[0]:
                     for x, y in sprite_pixels(bat_tiles, record):
                         image.putpixel((x, y), (8, 8, 8))
+            if kind == "TITLE_TRANSITION":
+                step = int(fade)
+                image = image.point(
+                    [min(248, v + ((31 - v // 8) * step // 32) * 8) for v in range(256)]
+                    * 3
+                )
             if actual.tobytes() != image.tobytes():
                 output.mkdir(parents=True, exist_ok=True)
                 actual.save(output / "mismatch.png")
@@ -100,7 +114,9 @@ def verify(executable, rom_path, reference_path, output):
                 raise ValueError(
                     "Mesen title differs from approved pixels at frame " + frame
                 )
-            if kind == "TITLE_RETURN":
+            if kind == "TITLE_TRANSITION":
+                transition.append((int(frame), step, actual))
+            elif kind == "TITLE_RETURN":
                 returned = (int(frame), actual)
             else:
                 frames += 1
@@ -111,10 +127,22 @@ def verify(executable, rom_path, reference_path, output):
         raise ValueError("Mesen did not complete every title checkpoint")
     if any(b != (a + 1) % 240 for a, b in zip(clocks, clocks[1:])):
         raise ValueError("Mesen title animation skipped a native frame")
+    displayed_levels = []
+    for _, step, _ in transition:
+        if not displayed_levels or displayed_levels[-1] != step:
+            displayed_levels.append(step)
+    if (
+        len(fade_commits) < 3
+        or displayed_levels != [0] + [step for _, step in fade_commits]
+        or displayed_levels[-1] != 32
+    ):
+        raise ValueError("Mesen transition did not follow every native fade commit")
     output.mkdir(parents=True, exist_ok=True)
     first.save(output / "title-screen.png")
     returned[1].save(output / "attract-return.png")
     menu.save(output / "start-menu.png")
+    for frame, step, actual in transition:
+        actual.save(output / ("transition-%05d.png" % frame))
     manifest = {
         "rom": rom_path.name,
         "rom_sha256": sha256(rom).hexdigest(),
@@ -123,6 +151,9 @@ def verify(executable, rom_path, reference_path, output):
         "verified_frames": frames,
         "attract_return_checkpoint": returned[0],
         "start_after_attract": "passed",
+        "verified_transition_frames": len(transition),
+        "fade_levels": sorted({step for _, step, _ in transition}),
+        "native_fade_commits": fade_commits,
         "pixel_comparison": "exact RGB555, including the returned title",
         "profile": "temporary portable profile and temporary ROM",
     }
