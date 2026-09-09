@@ -28,6 +28,7 @@ for Japanese ↔ English conversion and the three promotional mission presets.
 | [MONSTER_SPECIAL_MOVE_RATES.md](MONSTER_SPECIAL_MOVE_RATES.md) | Monster special-move probabilities | You want the English rates for all 209 Notebook forms, exceptions, and ROM/mgbdis verification |
 | [PLAYER_DAMAGE_FORMULA.md](PLAYER_DAMAGE_FORMULA.md) | Player attack and damage calculation | You want Shiren's melee and incoming physical damage formulas, exact rounding, worked examples, and native verification |
 | [HP_REGENERATION.md](HP_REGENERATION.md) | Natural HP recovery | You want Shiren's regeneration formula, turn timing, hunger/Healing Bracelet rules, and native verification |
+| [EQUIPMENT_SEALS.md](EQUIPMENT_SEALS.md) | Sword and shield seals | You want every obtainable ability, donor items, acquisition routes, rare rescue seals, and ROM verification |
 | [BLANK_SCROLL.md](BLANK_SCROLL.md) | Blank Scroll writing | You need the valid English inputs, native matching rules, patch design, or manual test route |
 | [BIG_MOAI_CODES.md](BIG_MOAI_CODES.md) | Big Moai code list | You want the concise player-facing list of all 100 enterable gift codes |
 | [BIG_MOAI.md](BIG_MOAI.md) | Big Moai promotional spells | You need the four-byte code contract, progression unlock, WISH fixture, or manual Mesen route |

@@ -23,6 +23,8 @@ DEF BlankConfirm         EQU $4080
 DEF BlankResolve         EQU $40B0
 DEF BlankMatchFull       EQU $4100
 DEF BlankNameTable       EQU $4180
+DEF BlankStartRecall     EQU $4320
+DEF BlankRecallPrefix    EQU $C179 ; 12-byte tail of the active input buffer
 DEF ScrollHistory        EQU $DE1C
 DEF HyphenNode           EQU 52 ; the name keyboard's otherwise unused 0 cell
 DEF HyphenCode           EQU $4D
@@ -241,6 +243,67 @@ BlankScrollNameTable::
     db $4E,$09,$40,$04,$0D,$30,$3C,$3F ; Damp
     db $50,$0A,$01,$0B,$1C,$40,$44,$38,$33,$24,$1C,$44,$42,$37,$38 ; Squid Sushi
     db $FF
+
+ASSERT @ <= BlankStartRecall
+    ds BlankStartRecall-@
+
+; START needs a persistent prefix while cycling through notebook entries.
+; Native $12:$5073 copies maximum+1 bytes into $C18D: an eleven-character
+; input overwrites the live mode/cache at $C195/$C196. Mode 1 instead uses
+; twelve disjoint bytes after its presentation field, inside $C16D-$C18C.
+; Keep the native history/category matcher and complete translated preview.
+BlankScrollStartRecall::
+    ld a,[wInputMode]
+    cp 1
+    jr z,.blank
+    ld a,$12
+    ld hl,$5073
+    jp FarDispatch
+.blank
+    ld a,[wInputMatch]
+    inc a
+    jr nz,.search
+    ld hl,$C16D
+    ld de,BlankRecallPrefix
+    ld b,BlankMaximumChars+1
+    call $0A5B
+    ld de,BlankRecallPrefix
+    ld a,$12
+    ld hl,$51EA
+    call FarDispatch
+.search
+    ld c,$FF
+    ld a,$10
+    ld hl,$43E4
+    call FarDispatch
+    ld a,$10
+    ld hl,$4F62
+    call FarDispatch
+    ld bc,BlankRecallPrefix
+    ld a,[wInputMatch]
+    ld d,a
+    ld a,$78
+    ld hl,$4853
+    call FarDispatch
+    ld a,b
+    or c
+    ret z
+    ld a,d
+    ld [wInputMatch],a
+    ld h,b
+    ld l,c
+    ld de,$C16D
+    ld b,BlankMaximumChars+1
+    call $0A5B
+    ld de,$C16D
+    ld a,$12
+    ld hl,$51CA
+    call FarDispatch
+    ld a,$04
+    ld hl,$4D51
+    call FarDispatch
+    ld c,1
+    ret
 
 ASSERT @ <= $4400
     ds $4400-@

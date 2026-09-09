@@ -18,6 +18,7 @@ DEF NavigationScratch    EQU $C800
 DEF Name6ScreenClean     EQU $4232 ; bank $FD
 DEF BlankScrollInput     EQU $4020 ; bank $FB; delegates non-mode-1 to name6
 DEF BlankScrollConfirm   EQU $4080 ; bank $FB; delegates non-mode-1 to native
+DEF BlankStartRecall     EQU $4320 ; bank $FB; bounded mode-1 prefix
 DEF NativeInputAction    EQU $5215 ; bank $12
 DEF NativeStartRecall    EQU $5073 ; bank $12
 DEF NativeConfirm        EQU $50F7 ; bank $12
@@ -402,8 +403,8 @@ ASSERT @ <= $4220
     ds $4220-@
 
 ; The shared editor controller handles START before dispatching the selected
-; grid node, so it bypasses Mode0Input. Preserve that shortcut for every other
-; input mode; mode 0 runs the native history selection at its required
+; grid node, so it bypasses Mode0Input. Delegate other modes through the Blank
+; Scroll wrapper; mode 0 runs the native history selection at its required
 ; seven-cell limit and then reuses the same full canonical-preview finisher as
 ; the visible FILL IN control. The controller consumes C after this call, so
 ; retain the native routine's return value across rendering and navigation
@@ -412,8 +413,8 @@ Mode0StartRecall::
     ld a,[wInputMode]
     and a
     jr z,.mode0
-    ld a,$12
-    ld hl,NativeStartRecall
+    ld a,$FB
+    ld hl,BlankStartRecall
     jp FarDispatch
 .mode0
     ld a,FreeNameMaximum
