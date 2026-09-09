@@ -142,7 +142,10 @@ far call at `16:$5B36` to native `12:$5073`. That bypass originally left the nat
 seven-character preview (`Preserv`) even though the root ID was correct. A mode-checked
 wrapper now preserves the shortcut's native return value and sends mode 0 through the same
 14-cell expansion, aligned redraw, and private-navigation restoration as `FILL IN`. Every
-other graphical-input mode still delegates directly to `12:$5073`.
+other graphical-input mode delegates through the
+[Blank Scroll Start wrapper](BLANK_SCROLL.md#english-engineering) at `251:$4320`:
+mode 1 uses a bounded eleven-character prefix, while the remaining modes retain
+the native routine in bank `$12` at `$5073`.
 
 Persistent custom labels occupy 20 slots beginning at bank 2 `$DD78`. Each slot is eight
 bytes. Free labels retain the native contract of at most seven glyph bytes followed by

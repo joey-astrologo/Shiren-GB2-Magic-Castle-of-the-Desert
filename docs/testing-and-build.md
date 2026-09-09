@@ -196,6 +196,33 @@ The production builder reruns required safety checks before writing each output.
 relocated through far pointers, so storage growth does not justify shortening visible
 English. The builder prints SHA-1 identifiers for the exact ROM and IPS artifacts.
 
+## Blank Scroll Start-autocomplete correction — 2026-09-09
+
+The supplied `blank-scroll-press-start-bug` fixture was converted with the sibling
+Mesen-to-PyBoy tool. Start formerly copied eleven cells plus a terminator into the
+seven-cell native scratch area, corrupting the editor mode and preventing OK from
+confirming. Mode 1 now uses a separate bounded prefix within the active input buffer.
+The exact Mapping reproduction fails against the previous ROM and passes the fix.
+Physical Start/OK routes cover all 32 learned Scroll roots in both fonts, including
+Exorcism, cycling, long prefixes, editing, and no-match input. See
+[Blank Scroll engineering and tests](BLANK_SCROLL.md#english-engineering).
+
+Complete discovery exercised **687 tests in 1,123.417 seconds, with no skips**.
+The initial run reported two stale build-fingerprint checks, one stale generated
+Workbench catalogue, and both font subcases of an edit test that pressed B once
+after the field was already empty. The fingerprints and catalogue were refreshed;
+the edit test now clears exactly the recalled name. All four affected test methods
+pass their focused reruns. The ROM implementation was unchanged during these
+corrections; this is a full discovery run plus corrected focused reruns, not a
+second clean full-discovery run. No unresolved failures remain.
+
+The standalone Workbench, prose, and control-reference JavaScript checks also pass.
+Both production ROMs and IPS patches were rebuilt and checked: each differs from
+its previous font build by 120 bytes, confined to the two autocomplete helpers and
+the global checksum. Both IPS patches reproduce their paired ROM exactly.
+Logs, before/after evidence, and SHA-256 manifests are in `build/blank-scroll-start/`.
+This does not constitute a new full playthrough or packaged-release audit.
+
 ## Title insertion verification — 2026-09-09
 
 The title-inclusive working tree passes 682 discovered tests in 1,108.344 seconds, with

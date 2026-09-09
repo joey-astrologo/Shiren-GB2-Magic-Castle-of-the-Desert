@@ -59,6 +59,14 @@ SHA-1, confirms `Windblade` through PyBoy, and requires conversion without a res
 inventory damage. When the user-supplied ignored `blank-scroll.srm` sidecar is present, the
 test also verifies its SHA-1 and loads it; the immediate regression does not depend on it.
 
+`SaveStates/blank-scroll-press-start-bug.state` freezes the populated inventory for
+the Start-autocomplete/OK failure. It was converted with the sibling converter; source
+SHA-1 `bdc813b15f45b518108c16bcae11809234a9fa4b`, native-state SHA-1
+`065586c449a56c59d093e4ec2bb62d8e15c1d6fe`. `tests.test_pyboy_blank_scroll` opens Write
+through physical input and confirms Mapping from the untouched history. Disposable
+history variants cover all 32 Scroll roots, cycling, long prefixes, and no-match
+input in both fonts, checking conversion and neighboring-memory preservation.
+
 `SaveStates/unidentified-item-naming.state` freezes the Rabbit Scroll Name / `FILL IN`
 editor route. `tests.test_unidentified_names` verifies its SHA-1, the private type `$F4`
 navigation graph, canonical preview/free-entry transitions, and return to Items. The

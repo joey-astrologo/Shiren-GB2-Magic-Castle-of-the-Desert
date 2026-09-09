@@ -6,6 +6,9 @@ The English build fully localizes Blank Scroll writing while retaining GB2's nat
 discovery rule. The keyboard is English, accepts up to 11 characters, and includes the
 hyphen needed by `Trap-eraser`. Enter the complete localized Scroll name without the word
 `Scroll`, as in the other localized Shiren games.
+Press **Start** to fill in a learned Scroll name matching the entered prefix; press
+it again to cycle through other matches. With an empty field it cycles through all
+learned Scrolls. Choose **OK** to write the displayed name.
 
 ## What the game accepts
 
@@ -98,12 +101,13 @@ would accidentally make those entries selectable.
 
 ## English engineering
 
-`tools/blank_scroll.py` layers five mode-specific changes over the shared English name
+`tools/blank_scroll.py` layers six mode-specific changes over the shared English name
 keyboard:
 
 - expands only mode 1 from seven to 11 characters;
 - makes the keyboard's otherwise unused `0` cell enter and display a hyphen;
 - redirects the Blank Scroll screen through the English keyboard resource;
+- gives Start autocomplete a bounded full-length prefix buffer;
 - matches the full localized name and caches its concrete root ID; and
 - restores the original seven-character native field before the action engine resumes,
   then converts from the cached ID instead of reparsing the long text.
@@ -119,6 +123,21 @@ there corrupts that state; for `Windblade`, its ninth encoded character overwrot
 mode and ultimately restarted the game. The localized matcher therefore compares directly
 from `$C16D`, never copies the long string into `$C18D`, and reduces the field to the native
 seven-character contract only after caching the resolved root ID.
+
+Start had a separate instance of this overflow: native `18:$5073` copied the editor's
+maximum plus one bytes into `$C18D`. An empty eleven-cell field replaced mode `$01`
+at `$C195` with padding `$D5`, so the recalled name looked correct but OK could not
+leave the editor. The converted `blank-scroll-press-start-bug.state` reproduces this
+with Mapping; Exorcism was also reported during streaming.
+
+The guarded shared Start call at `16:$5B36` now delegates through the mode-0 wrapper
+to `251:$4320` for Blank Scrolls. This keeps the native category/history matcher at
+`120:$4853`, cycling order, complete translated preview, and controller return values.
+Only its prefix storage changes: mode 1 reserves `$C179-$C184`, immediately after the
+eleven-cell presentation plus terminator at `$C16D-$C178`, within the shared 32-byte
+input area ending at `$C18C`. The prefix survives repeated Start presses and is replaced
+after editing invalidates `$C196`. The legacy scratch at `$C18D-$C194` and neighboring
+live state remain untouched. Other input modes retain their existing behavior.
 
 Bank 251 `$4000-$43FF` owns the Blank Scroll overlay. Its guarded call sites and reservation
 are recorded in [ROM_BANK_MAP.md](ROM_BANK_MAP.md).
@@ -144,6 +163,24 @@ user-supplied `blank-scroll.state` at the populated inventory and confirmation s
 the restart occurred, presses OK, and requires the same object to become a Windblade Scroll
 without a reset or inventory damage. If the supplied `blank-scroll.srm` sidecar is present,
 its hash is also verified and it is loaded; the immediate regression does not depend on it.
+
+The Start regression converts the user source with the sibling converter:
+
+```sh
+python3 ../mesen-to-pyboy/mss_to_pyboy.py \
+  SaveStates/blank-scroll-press-start-bug.mss \
+  --rom build/shiren-gb2-english-shadowed-font.gbc --output-dir SaveStates
+```
+
+Source SHA-1: `bdc813b15f45b518108c16bcae11809234a9fa4b`; converted state SHA-1:
+`065586c449a56c59d093e4ec2bb62d8e15c1d6fe`. The original file remains unchanged.
+The test navigates to **Write**, presses physical Start, selects OK through the real
+keyboard graph, and checks the original inventory object changes from Blank Scroll
+to Mapping. A disposable history matrix repeats conversion for all 32 accepted roots
+in both fonts. It also covers cycling and wraparound, full-length prefixes, spaces,
+hyphens, and no-match/unlearned input, while guarding mode and adjacent scratch bytes.
+The untouched pre-fix ROM fails the Mapping conversion; the corrected ROM passes.
+Before/after captures and focused-test output are under `build/blank-scroll-start/`.
 
 For manual Mesen testing, enter a dungeon, pause, and run
 `tools/mesen_spawn_blank_scroll.lua` through **Debug > Script Window**. Resume, reopen

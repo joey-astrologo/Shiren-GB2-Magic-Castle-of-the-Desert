@@ -4,7 +4,9 @@
 The native mode-1 editor matches the category-filtered item-root table and
 considers only roots whose notebook-history bit is set.  The localized mode
 accepts the longest English Scroll root and adds the hyphen required by
-``Trap-eraser``.  Full names exist only in the editor/matcher: after a match is
+``Trap-eraser``. Start recall keeps its full prefix in the unused presentation
+tail rather than overflowing the native seven-character scratch field.
+Full names exist only in the editor/matcher: after a match is
 resolved to an item ID, the post-match hook restores the native seven-byte
 field boundary before the converted Scroll effect runs.
 """

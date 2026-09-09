@@ -93,7 +93,7 @@ text growth.
 | 16 | `$4689-$4690` | Status-menu refresh template redirect | `menu_graphics.py` only |
 | 16 | `$5AEF-$5AF0` | Shared graphical-input Select event pointer | `name6.py` redirects the Japanese kana modifier to existing idle handler `$5B5B`; guards the complete `$5AE3-$5AF4` event table and idle-handler bytes, preserving every other input event |
 | 16 | `$5B22-$5B29` | Graphical-input hardware-B delete far-call wrapper | `unidentified_names.py` first redirects native bank-18 `$53B0` through bank-250 `$45C0`; `rescue_presentation.py` guards that installed call and wraps it with the localized redraw for modes 5-8/private navigation `$F5` |
-| 16 | `$5B36-$5B3D` | Graphical-input Start-recall redirect | `unidentified_names.py` expands mode-0 history recalls through the same 14-cell preview as `FILL IN`; every other mode delegates unchanged |
+| 16 | `$5B36-$5B3D` | Graphical-input Start-recall redirect | `blank_scroll.py` installs the bounded mode-1 prefix helper at `251:$4320`; `unidentified_names.py` wraps it for mode-0's 14-cell preview. Other modes delegate to native `18:$5073` |
 | 16 | `$5B66-$5B6D` | Shared graphical-input redirect | `name6.py`, mode-1 `blank_scroll.py`, mode-0 `unidentified_names.py`, then rescue modes 5-8 `rescue_presentation.py`; every layer delegates modes it does not own |
 | 16 | `$5B84-$5B8B` | Shared confirmation hook | Mode-1 `blank_scroll.py`, then mode-0 `unidentified_names.py` overlay |
 | 16 | `$5F74-$5F99` | Native navigation pointer types `$00-$12` | Preserve; the generic resolver indexes this table as `$5F74 + 2 * type` |
@@ -182,7 +182,7 @@ after every ROM writer. They are output metadata, not allocation space.
 | 248 | `$4000-$7FFF` | `arrival_cards.py`: cloned native renderer, palette constants, 32-pointer table, 30 unique English sequences, ten byte-exact native Latin digit blocks, one native-derived `F` raised by the approved one pixel, and 206 approved label blocks | Exclusive exact-zero-guarded bank; used data ends at `$797F` |
 | 249 | `$4000-$473F` | `rescue_presentation.py`: bounded native/English output mapping, Clear Campaign and True Wanderer display-only wrappers, modes 5-8 input/screen wrappers, requester-side pre-mode Revival constructor, dedicated hardware-B delete wrapper, native/English 64-symbol tables, private 81-node graph, and approved keyboard map | Exclusive; runtime code ends at `$42D3`, graph begins `$4300`, map begins `$4600` |
 | 250 | `$4000-$45FF` | `unidentified_names.py`: mode-0 editor overlay, navigation/map resources, safe seven-cell history cycle plus 14-cell translated preview aligned to the native seven-cell origin, canonical-to-free edit reset, canonical-token confirmation, and display resolver; `$45C0-$45FF` owns the hardware-B reset helper | Exclusive |
-| 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, and ID resolver | Exclusive |
+| 251 | `$4000-$43FF` | `blank_scroll.py`: mode-1 editor, full-name matcher/table, safe native-tail restore, ID resolver, and bounded Start autocomplete at `$4320` | Exclusive |
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
 | 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |
 | 254 | `$4000-$49C1` | `stairs_menu.py` base through `$42AA`, including the exact two-record detector, eight-column dungeon frame, five-cell underlay save/restore, native-template clone, and controller-exit cleanup; followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info/Training detector, seven-interior-tile frames, suffix staging, chained helpers, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
@@ -241,6 +241,16 @@ name suffixes use otherwise unused SRAM bank 3 space:
 
 The table initializes lazily when its header is absent. Do not grow it into another SRAM
 region without proving every native structure and every bank-selection path.
+
+## Blank Scroll autocomplete scratch
+
+While the mode-1 editor is active, `blank_scroll.py` uses `$C16D-$C178` for the
+eleven-character presentation and terminator, and `$C179-$C184` for a separate
+twelve-byte autocomplete prefix. Both fit within the shared `$C16D-$C18C` input
+area. Other input modes are mutually exclusive users of this area. Start retains
+the prefix for cycling until an edit clears the candidate at `$C196`; the next
+Start replaces it. No persistent item or SRAM record grows. The native seven-cell
+scratch at `$C18D-$C194` and live mode/cache at `$C195/$C196` are not prefix storage.
 
 ## Unidentified-item naming persistence
 
