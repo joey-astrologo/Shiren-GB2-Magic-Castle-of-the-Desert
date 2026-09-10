@@ -101,6 +101,13 @@ after translation; only Pot / Arrow fits. They are kept separate from release bl
 debug tooling does not get mistaken for player-facing game coverage. The audit still lists
 them and will fail if these records move into an unclassified bank.
 
+These menus are reachable by forcing event `$9F` with GameShark code `019F2FC1`
+through a staircase transition. [DEBUG-ROOM.md](DEBUG-ROOM.md) records the verified
+access route, supplied reproduction state, complete menu meanings, and repair
+requirements. "Developer-only" describes their exclusion from ordinary play;
+it does not mean the code is absent or cannot be reactivated. Their geometry
+remains unrepaired.
+
 ## Regression contract
 
 `tests/test_menu_action_audit.py` freezes the opcode size, complete ROM occurrence and set

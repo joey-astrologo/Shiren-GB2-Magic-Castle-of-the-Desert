@@ -42,6 +42,15 @@ The committed `SaveStates/Mamel.state` is the native reproduction input for the
 nested-combat route. Separate `.srm` sidecars are not required because cartridge RAM is
 embedded in each PyBoy state.
 
+`SaveStates/debug-room.state` preserves the supplied staircase prompt on 3F before
+the developer-event transition. Its native-state SHA-1 is
+`a2edb2034941b16fcc40b2b98a2e8b3a322d3099`; the unchanged source capture's SHA-1 is
+`5906eb78869e505a724d65fc4cb2ac7844e07de8`. `tests.test_debug_room` verifies the
+GameShark-dependent entry, all ten menu/Back routes, full inventory behavior,
+immediate Trash operation, and Weapon 1 batch. These native access tests are not
+English renderer acceptance tests. See [DEBUG-ROOM.md](../../docs/DEBUG-ROOM.md)
+for the captures, menu guide, and isolated-rendering repair requirements.
+
 `SaveStates/clear-campaign-password.state` freezes the Adventure → History → Clear
 Campaign certificate. `tests.test_clear_campaign_password` forces a fresh render, requires
 the six native symbols `40 45 49 76 34 4E` to appear as `QVZ9Ee`, and proves the native

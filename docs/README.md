@@ -24,6 +24,7 @@ for Japanese ↔ English conversion and the three promotional mission presets.
 | [ROM_BANK_MAP.md](ROM_BANK_MAP.md) | ROM, WRAM, SRAM, and transient menu-state ownership | **Before** placing or moving ROM, font, menu, navigation, name, gift-code, rescue, graphics, or save data |
 | [MENU_STRUCTURE.md](MENU_STRUCTURE.md) | Menu architecture | You are changing a menu constructor, template, navigation graph, cursor, or return path |
 | [MENU_ACTION_AUDIT.md](MENU_ACTION_AUDIT.md) | Whole-game action-label audit | You need to find every event-choice menu that clips without play-testing each story state |
+| [DEBUG-ROOM.md](DEBUG-ROOM.md) | Original developer menu | You want the verified cheat-code access route, debug-room fixture, complete menu meanings, or requirements for a repair that preserves ordinary gameplay |
 | [BLANK_SCROLL_INPUTS.md](BLANK_SCROLL_INPUTS.md) | Blank Scroll input list | You want the concise player-facing list of every writable Scroll string and its result |
 | [MONSTER_SPECIAL_MOVE_RATES.md](MONSTER_SPECIAL_MOVE_RATES.md) | Monster special-move probabilities | You want the English rates for all 209 Notebook forms, exceptions, and ROM/mgbdis verification |
 | [PLAYER_DAMAGE_FORMULA.md](PLAYER_DAMAGE_FORMULA.md) | Player attack and damage calculation | You want Shiren's melee and incoming physical damage formulas, exact rounding, worked examples, and native verification |

@@ -29,6 +29,13 @@ record plus every internal record required by localized runtime behavior. It
 does not mean rewriting developer-only identifiers that a normal release build
 never renders for the player.
 
+The original developer event menu can be reached with a cheat; see
+[DEBUG-ROOM.md](DEBUG-ROOM.md). Its ten confirmed choice menus use translated
+group-7 records in `ui_system.tsv`, with translated introductory/result prose.
+Their current clipping and ambiguous labels do not establish that the separate
+native-only internal selector families need translation. Any newly observed
+internal consumer needs its own display and policy audit.
+
 Run the audit with:
 
 ```sh
