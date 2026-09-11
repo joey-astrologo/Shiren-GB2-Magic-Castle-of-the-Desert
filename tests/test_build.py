@@ -14,6 +14,7 @@ import arrival_cards
 import build as translated_build
 import capture_dialogue
 import cartridge
+import debug_menus
 import dialogue_pacing
 import ending_credits
 import title_screen
@@ -266,6 +267,11 @@ class TranslationBuildTests(unittest.TestCase):
             for start, end in glyph_cell_clip.owned_ranges()
             for offset in range(start, end)
         }
+        debug_menu_offsets = {
+            offset
+            for start, end in debug_menus.owned_ranges()
+            for offset in range(start, end)
+        }
         allowed = (
             directory_offsets
             | script_offsets
@@ -283,6 +289,7 @@ class TranslationBuildTests(unittest.TestCase):
             | menu_offsets
             | stairs_offsets
             | service_menu_offsets
+            | debug_menu_offsets
             | name6_offsets
             | blank_scroll_offsets
             | spell_input_offsets

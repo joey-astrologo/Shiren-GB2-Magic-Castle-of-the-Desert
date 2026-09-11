@@ -211,8 +211,10 @@ class StairsMenuInstallerTests(unittest.TestCase):
             floor_state.stop, stairs_menu.POPUP_STATE_RESERVED_END
         )
 
-    def test_no_native_fixture_accidentally_arms_floor_cleanup(self):
-        """Unrelated native data is harmless unless both marker bytes match."""
+    def test_only_reviewed_open_floor_fixtures_arm_cleanup(self):
+        """An open English staircase legitimately retains its saved underlay."""
+        debug = json.loads((ROOT / "tests/fixtures/debug_room.json").read_text())
+        reviewed = {ROOT / fixture["state"]: fixture for fixture in (debug, debug["inventory_room"])}
         flat_start = (
             stairs_menu.POPUP_STATE_WRAM_BANK * 0x1000
             + stairs_menu.FLOOR_SAVED_FLAG_ADDRESS
@@ -227,6 +229,19 @@ class StairsMenuInstallerTests(unittest.TestCase):
         for state in states:
             with self.subTest(state=state.name):
                 ram = pyboy_state.work_ram(state, self.path)
+                if state in reviewed:
+                    # This reviewed capture is inside the widened stairs prompt,
+                    # not unrelated native data. Freeze its complete provenance
+                    # and payload; the live debug prototype test also closes it
+                    # and asserts restoration of all five tile/attribute pairs.
+                    fixture = reviewed[state]
+                    self.assertEqual(fixture["state_sha1"], sha1(state.read_bytes()).hexdigest())
+                    expected = fixture["open_stairs"]
+                    self.assertEqual(bytes.fromhex(expected["navigation_c14e_c154_hex"]), ram[0x14E:0x155])
+                    self.assertEqual(bytes.fromhex(expected["saved_cells_hex"]), ram[0x59E0:0x59EA])
+                    self.assertEqual(expected["saved_destination"], int.from_bytes(ram[0x59F4:0x59F6], "little"))
+                    self.assertEqual(armed, ram[flat_start:flat_start + len(armed)])
+                    continue
                 self.assertNotEqual(armed, ram[flat_start:flat_start + len(armed)])
 
     def test_status_exit_preserves_the_native_automatic_text_bank(self):

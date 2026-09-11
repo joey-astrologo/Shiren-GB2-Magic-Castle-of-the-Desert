@@ -46,6 +46,90 @@ converted `training-passwords.state`. Both fonts must show the complete Password
 retain one cursor at every selection, and restore the added BG column. The same fixture
 checks Training View output and accepted nine-character input through the mode-6 editor.
 
+`tests.test_debug_room_prototype` retains its historical name but now builds normal ROMs with readable
+main, category, Weapons/Shields, Bracelets/Grass, Scrolls/Staves, Pots/Arrows, all three Meat pages and Set Flag
+in both fonts through `build.py` and `debug_menus.py`. Its comparison baseline is
+reconstructed only inside the test harness and checked against the frozen
+pre-integration hash. The normal output must match the accepted prototype exactly.
+It checks full label,
+border and cursor pixels, every displayed frame during Up/Down taps and repeats,
+unchanged label tiles while moving, strict event gating, complete background restoration,
+ordinary menus, and the archived staircase's legitimate live cleanup marker.
+It checks repeated transitions among the 9×7, 13×11, 8×9, 10×7, 7×5, 11×11 and 13×9 frames, every vacated
+map cell, native controller state and full VRAM immediately on return, and
+background-before-glyph ordering at the actual upload calls. The private map
+writer rechecks LCD access after DI; the longer Mesen sequence guards the missed
+corner write that the shorter PyBoy route did not reproduce.
+The additional ten-free-slot fixture checks all 25 item presets in both fonts,
+preservation of existing items, inventory order, capacity limits, complete VRAM
+cleanup and subsequent ordinary menu use. Both saved staircase underlays have
+exact fixture contracts and live B/cancel checks.
+All four Weapons/Shields, three Bracelets/Grass, four Scrolls/Staves, two Pots/Arrows presets
+and all twelve Meat batches also run against empty and full inventories,
+with exact item records, ordering, controller-return state and VRAM comparisons.
+The historical [prototype validation record](DEBUG-ROOM.md#prototype-validation-results)
+records a clean complete 711-test run with no failures or skips, including all
+twenty debug regressions. The normal-build preparation is recorded
+[below](#debug-menu-normal-build-playtest).
+The Set Flag fixture freezes all four native action scripts, result messages and
+flag operations. Both supplied states and all-clear/all-set flag arrays exercise
+the effects, unchanged inventory and story-stage pair, complete VRAM at the native
+page-wait point, and cleanup after dismissal and ordinary-menu use.
+The Meat fixtures freeze exact native monster IDs, tiers, English names and grant
+opcodes. Repeated page cycling and B/back check complete private rasters and native
+controller/VRAM state on every immediate return. Final exits must restore both
+full VRAM banks and clear the private scratch.
+The standalone Mesen audit checks 2,340 main-menu, 4,810 category, 1,420
+Weapons/Shields, 1,220 Bracelets/Grass, 1,420 Scrolls/Staves, 1,020 Pots/Arrows, 2,040 Meat page 1, 1,960 Meat page 2, 1,720 Meat page 3 and 1,440 Set Flag
+frames per font, including held directions and repeated returns between all ten
+menus and seven sizes.
+Replaying both native debug-room captures in both fonts checks 77,560 displayed
+navigation frames in total.
+
+## Debug-menu normal-build playtest
+
+The development branch now installs all ten accepted debug layouts through
+`tools/debug_menus.py` and `tools/debug_menus.asm` as part of each normal font build.
+The verified artifacts are installed at `build/shiren-gb2-english-{classic,shadowed}-font.gbc`
+and retained with their local IPS files in `build/debug-menu-release/roms/`. Both ROMs are byte-identical
+to the user-accepted ten-menu experiments, preserving the earlier Mesen evidence.
+The general text catalogs and shared popup templates are unchanged.
+
+Build-fixture hashes and checksum fields now include the installed debug payload;
+script allocation, text-bank hashes and translated-record validation stay frozen.
+The font-variant contract permits style differences only in the ten explicit
+debug artwork blocks. The controller, gates, geometry and navigation remain
+outside that allowance.
+The generated translation-workbench catalogue was refreshed because it fingerprints
+`build.py`; only `inputRevision`, `rulesRevision` and `revision` changed. All 6,695
+records are identical. `workbench-regeneration.json` records that comparison.
+
+Validation reports and logs are under `build/debug-menu-release/`:
+
+| Check | Result | Evidence |
+|---|---|---|
+| Complete discovered suite with Node | 711 tests passed in 1,270.352 seconds; zero failures, errors or skips | `test-results.json`, `logs/full-tests.log` |
+| Final-artifact emulator battery | 41 checks passed in 36.144 seconds; no failures, errors or skips | `battery-results.json` |
+| Source/text/graphics/rescue validators | All nine passed | `validation-results.json` |
+| Standalone browser checks | All four passed | `javascript-results.json` |
+| Isolated source rebuild | Both ROMs and both IPS files byte-identical; 479 source files | `clean-build-results.json` |
+| Integrity | Both cartridge checksums and IPS roundtrips valid; accepted prototype bytes retained | `artifact-integrity.json`, `roms/SHA256SUMS.txt` |
+
+The exact-artifact battery loads all 34 archived PyBoy states in both fonts and
+checks cold boot, all four cross-font SRAM reload combinations, diary names,
+Rescue, Training, equipment, combat borders, Monster Log, ending credits and
+Blank Scroll. The source rebuild includes current uncommitted and untracked files;
+it is not a clone of a committed revision. The verified source ROM and all 73
+archived save-related files retain their hashes.
+`verification.json` records the final preparation and standard output paths.
+
+This build is for the user's main-game playtest. No patch has been published, and
+automated verification does not claim a full playthrough or every floor/save route
+after the complete debug tree. The original saves are read-only inputs; emulator
+battery saves use disposable copies.
+
+## Additional focused regressions
+
 `tests.test_multiple_unidentified_names` also presses physical B after a canonical recall,
 checks the cleared field pixels and native seven-cell buffer, enters forty characters
 through the actual keyboard while guarding adjacent memory, and confirms a seven-character

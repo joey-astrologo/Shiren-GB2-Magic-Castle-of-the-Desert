@@ -1,0 +1,414 @@
+{
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "menu_record": "180:$4B4F",
+  "next_script_position_hex": "5c4b",
+  "choice_record_hex": "05409f07d807d907da07db07",
+  "batches": [
+    {
+      "choice": 1,
+      "original_label": "A-U",
+      "label": "Batch 1 (20)",
+      "count": 20,
+      "native_action_address": 20296,
+      "items": [
+        {
+          "monster": 37,
+          "tier": 1,
+          "name": "Ironhead"
+        },
+        {
+          "monster": 37,
+          "tier": 2,
+          "name": "Chainhead"
+        },
+        {
+          "monster": 37,
+          "tier": 3,
+          "name": "Gigahead"
+        },
+        {
+          "monster": 69,
+          "tier": 1,
+          "name": "Vampire Baron"
+        },
+        {
+          "monster": 69,
+          "tier": 2,
+          "name": "Vampire Duke"
+        },
+        {
+          "monster": 69,
+          "tier": 3,
+          "name": "Vampire Tyrant"
+        },
+        {
+          "monster": 72,
+          "tier": 1,
+          "name": "Shady Wisp"
+        },
+        {
+          "monster": 72,
+          "tier": 2,
+          "name": "Fearful Wisp"
+        },
+        {
+          "monster": 72,
+          "tier": 3,
+          "name": "Wailing Wisp"
+        },
+        {
+          "monster": 47,
+          "tier": 1,
+          "name": "Squid King"
+        },
+        {
+          "monster": 47,
+          "tier": 2,
+          "name": "Squid Lord"
+        },
+        {
+          "monster": 47,
+          "tier": 3,
+          "name": "Squid Emperor"
+        },
+        {
+          "monster": 55,
+          "tier": 1,
+          "name": "Dozy Genie"
+        },
+        {
+          "monster": 55,
+          "tier": 2,
+          "name": "Groggy Genie"
+        },
+        {
+          "monster": 55,
+          "tier": 3,
+          "name": "Sleepy Genie"
+        },
+        {
+          "monster": 4,
+          "tier": 1,
+          "name": "Healer Rabbit"
+        },
+        {
+          "monster": 4,
+          "tier": 2,
+          "name": "Life Rabbit"
+        },
+        {
+          "monster": 49,
+          "tier": 1,
+          "name": "Pitcher Plant"
+        },
+        {
+          "monster": 49,
+          "tier": 2,
+          "name": "Identify Plant"
+        },
+        {
+          "monster": 49,
+          "tier": 3,
+          "name": "Blessing Plant"
+        }
+      ]
+    },
+    {
+      "choice": 2,
+      "original_label": "U-KA",
+      "label": "Batch 2 (18)",
+      "count": 18,
+      "native_action_address": 20360,
+      "items": [
+        {
+          "monster": 36,
+          "tier": 1,
+          "name": "Wolf Droid"
+        },
+        {
+          "monster": 36,
+          "tier": 2,
+          "name": "Gorilla Bot"
+        },
+        {
+          "monster": 36,
+          "tier": 3,
+          "name": "Bear Borg"
+        },
+        {
+          "monster": 29,
+          "tier": 1,
+          "name": "Ether Devil"
+        },
+        {
+          "monster": 29,
+          "tier": 2,
+          "name": "Phantom Devil"
+        },
+        {
+          "monster": 29,
+          "tier": 3,
+          "name": "Mirage Devil"
+        },
+        {
+          "monster": 23,
+          "tier": 1,
+          "name": "Mutaikon"
+        },
+        {
+          "monster": 23,
+          "tier": 2,
+          "name": "Dazikon"
+        },
+        {
+          "monster": 23,
+          "tier": 3,
+          "name": "Dozikon"
+        },
+        {
+          "monster": 11,
+          "tier": 1,
+          "name": "Pop Tank"
+        },
+        {
+          "monster": 11,
+          "tier": 2,
+          "name": "Grampa Tank"
+        },
+        {
+          "monster": 11,
+          "tier": 3,
+          "name": "Ornery Tank"
+        },
+        {
+          "monster": 28,
+          "tier": 1,
+          "name": "Wily Tanuki"
+        },
+        {
+          "monster": 28,
+          "tier": 2,
+          "name": "Tricky Tanuki"
+        },
+        {
+          "monster": 28,
+          "tier": 3,
+          "name": "Crafty Tanuki"
+        },
+        {
+          "monster": 15,
+          "tier": 1,
+          "name": "Impact Boar"
+        },
+        {
+          "monster": 15,
+          "tier": 2,
+          "name": "Crash Boar"
+        },
+        {
+          "monster": 15,
+          "tier": 3,
+          "name": "Wrecker Boar"
+        }
+      ]
+    },
+    {
+      "choice": 3,
+      "original_label": "KA-GYA",
+      "label": "Batch 3 (18)",
+      "count": 18,
+      "native_action_address": 20418,
+      "items": [
+        {
+          "monster": 63,
+          "tier": 1,
+          "name": "Teaser Monkey"
+        },
+        {
+          "monster": 63,
+          "tier": 2,
+          "name": "Derider Monkey"
+        },
+        {
+          "monster": 63,
+          "tier": 3,
+          "name": "Mocker Monkey"
+        },
+        {
+          "monster": 35,
+          "tier": 1,
+          "name": "Crow Tengu"
+        },
+        {
+          "monster": 35,
+          "tier": 2,
+          "name": "Falcon Tengu"
+        },
+        {
+          "monster": 35,
+          "tier": 3,
+          "name": "Eagle Tengu"
+        },
+        {
+          "monster": 54,
+          "tier": 1,
+          "name": "Daze Hermit"
+        },
+        {
+          "monster": 54,
+          "tier": 2,
+          "name": "Scold Hermit"
+        },
+        {
+          "monster": 54,
+          "tier": 3,
+          "name": "Spry Hermit"
+        },
+        {
+          "monster": 31,
+          "tier": 1,
+          "name": "Skull Mage"
+        },
+        {
+          "monster": 31,
+          "tier": 2,
+          "name": "Skull Wizard"
+        },
+        {
+          "monster": 31,
+          "tier": 3,
+          "name": "Skull Wraith"
+        },
+        {
+          "monster": 5,
+          "tier": 1,
+          "name": "Demon Warrior"
+        },
+        {
+          "monster": 5,
+          "tier": 2,
+          "name": "Hannya Warrior"
+        },
+        {
+          "monster": 5,
+          "tier": 3,
+          "name": "Shogun"
+        },
+        {
+          "monster": 58,
+          "tier": 1,
+          "name": "Gyaza"
+        },
+        {
+          "monster": 58,
+          "tier": 2,
+          "name": "Killer Gyaza"
+        },
+        {
+          "monster": 58,
+          "tier": 3,
+          "name": "Hell Gyaza"
+        }
+      ]
+    },
+    {
+      "choice": 4,
+      "original_label": "GYA-KO",
+      "label": "Batch 4 (18)",
+      "count": 18,
+      "native_action_address": 20476,
+      "items": [
+        {
+          "monster": 45,
+          "tier": 1,
+          "name": "Gyadon"
+        },
+        {
+          "monster": 45,
+          "tier": 2,
+          "name": "Gyairas"
+        },
+        {
+          "monster": 45,
+          "tier": 3,
+          "name": "Gyandora"
+        },
+        {
+          "monster": 73,
+          "tier": 1,
+          "name": "Fog Hermit"
+        },
+        {
+          "monster": 73,
+          "tier": 2,
+          "name": "Haze Hermit"
+        },
+        {
+          "monster": 73,
+          "tier": 3,
+          "name": "Mist Hermit"
+        },
+        {
+          "monster": 66,
+          "tier": 1,
+          "name": "Twisty Hani"
+        },
+        {
+          "monster": 50,
+          "tier": 1,
+          "name": "Alert Fly"
+        },
+        {
+          "monster": 50,
+          "tier": 2,
+          "name": "Fink Fly"
+        },
+        {
+          "monster": 50,
+          "tier": 3,
+          "name": "Nark Fly"
+        },
+        {
+          "monster": 14,
+          "tier": 1,
+          "name": "Gazer"
+        },
+        {
+          "monster": 14,
+          "tier": 2,
+          "name": "Super Gazer"
+        },
+        {
+          "monster": 14,
+          "tier": 3,
+          "name": "Hyper Gazer"
+        },
+        {
+          "monster": 44,
+          "tier": 1,
+          "name": "Punter Scarab"
+        },
+        {
+          "monster": 44,
+          "tier": 2,
+          "name": "Striker Scarab"
+        },
+        {
+          "monster": 44,
+          "tier": 3,
+          "name": "Kicker Scarab"
+        },
+        {
+          "monster": 16,
+          "tier": 1,
+          "name": "Boy Tank"
+        },
+        {
+          "monster": 16,
+          "tier": 2,
+          "name": "Mini Tank"
+        }
+      ]
+    }
+  ]
+}

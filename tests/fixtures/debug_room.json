@@ -1,0 +1,37 @@
+{
+  "state": "SaveStates/debug-room.state",
+  "state_sha1": "a2edb2034941b16fcc40b2b98a2e8b3a322d3099",
+  "open_stairs": {
+    "navigation_c14e_c154_hex": "09000001000100",
+    "saved_cells_hex": "0d031d032b0239020f02",
+    "saved_destination": 39195,
+    "marker_hex": "53ac",
+    "visible_column_tiles_hex": "7e7f7f7f7e",
+    "visible_column_attributes_hex": "afafafafef"
+  },
+  "inventory_room": {
+    "state": "SaveStates/debug-room.state.state",
+    "state_sha1": "e153a6467b19d9c3dd1b44183b880551d237a385",
+    "inventory_slots_hex": "0e0d09131910030c0f18ffffffffffffffffffff",
+    "inventory_records_hex": [
+      "0101020100000000",
+      "0101020300000000",
+      "0201050000000000",
+      "0201050010000000",
+      "1501030000000010",
+      "2402030310000400",
+      "6b06000000000000",
+      "6b06000000000000",
+      "6c06000000000000",
+      "9207000000000000"
+    ],
+    "open_stairs": {
+      "navigation_c14e_c154_hex": "09000101000100",
+      "saved_cells_hex": "0d031d032b0239020f02",
+      "saved_destination": 39247,
+      "marker_hex": "53ac",
+      "visible_column_tiles_hex": "7e7f7f7f7e",
+      "visible_column_attributes_hex": "afafafafef"
+    }
+  }
+}

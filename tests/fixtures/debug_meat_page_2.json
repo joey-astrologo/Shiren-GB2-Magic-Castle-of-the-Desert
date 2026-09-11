@@ -1,0 +1,414 @@
+{
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "menu_record": "180:$4B74",
+  "next_script_position_hex": "814b",
+  "choice_record_hex": "05409f07dc07dd07de07df07",
+  "batches": [
+    {
+      "choice": 1,
+      "original_label": "KO-JA",
+      "label": "Batch 5 (18)",
+      "count": 18,
+      "native_action_address": 20534,
+      "items": [
+        {
+          "monster": 52,
+          "tier": 1,
+          "name": "Goggler"
+        },
+        {
+          "monster": 52,
+          "tier": 2,
+          "name": "Worth Goggler"
+        },
+        {
+          "monster": 52,
+          "tier": 3,
+          "name": "Glenn Goggler"
+        },
+        {
+          "monster": 46,
+          "tier": 1,
+          "name": "Samuraidon"
+        },
+        {
+          "monster": 46,
+          "tier": 2,
+          "name": "Taishodon"
+        },
+        {
+          "monster": 46,
+          "tier": 3,
+          "name": "Tonosamadon"
+        },
+        {
+          "monster": 71,
+          "tier": 1,
+          "name": "Zen Guru"
+        },
+        {
+          "monster": 71,
+          "tier": 2,
+          "name": "Zen Monk"
+        },
+        {
+          "monster": 71,
+          "tier": 3,
+          "name": "Zen Priest"
+        },
+        {
+          "monster": 21,
+          "tier": 1,
+          "name": "Death Reaper"
+        },
+        {
+          "monster": 21,
+          "tier": 2,
+          "name": "Hell Reaper"
+        },
+        {
+          "monster": 21,
+          "tier": 3,
+          "name": "Grim Reaper"
+        },
+        {
+          "monster": 8,
+          "tier": 1,
+          "name": "Schubell"
+        },
+        {
+          "monster": 8,
+          "tier": 2,
+          "name": "Menbell"
+        },
+        {
+          "monster": 8,
+          "tier": 3,
+          "name": "Bellthoven"
+        },
+        {
+          "monster": 57,
+          "tier": 1,
+          "name": "Jungarian"
+        },
+        {
+          "monster": 57,
+          "tier": 2,
+          "name": "Campbellan"
+        },
+        {
+          "monster": 57,
+          "tier": 3,
+          "name": "Blackbelly"
+        }
+      ]
+    },
+    {
+      "choice": 2,
+      "original_label": "JI-CHO",
+      "label": "Batch 6 (20)",
+      "count": 20,
+      "native_action_address": 20592,
+      "items": [
+        {
+          "monster": 32,
+          "tier": 1,
+          "name": "Rock Head"
+        },
+        {
+          "monster": 32,
+          "tier": 2,
+          "name": "Ogre Rock"
+        },
+        {
+          "monster": 32,
+          "tier": 3,
+          "name": "Demon Rock"
+        },
+        {
+          "monster": 27,
+          "tier": 1,
+          "name": "Sip Leech"
+        },
+        {
+          "monster": 27,
+          "tier": 2,
+          "name": "Slurp Leech"
+        },
+        {
+          "monster": 27,
+          "tier": 3,
+          "name": "Gulp Leech"
+        },
+        {
+          "monster": 20,
+          "tier": 1,
+          "name": "Cell Armor"
+        },
+        {
+          "monster": 20,
+          "tier": 2,
+          "name": "Chrome Armor"
+        },
+        {
+          "monster": 20,
+          "tier": 3,
+          "name": "Titanium Armor"
+        },
+        {
+          "monster": 3,
+          "tier": 1,
+          "name": "Taur"
+        },
+        {
+          "monster": 3,
+          "tier": 2,
+          "name": "Minotaur"
+        },
+        {
+          "monster": 3,
+          "tier": 3,
+          "name": "Megataur"
+        },
+        {
+          "monster": 40,
+          "tier": 1,
+          "name": "Snacky"
+        },
+        {
+          "monster": 70,
+          "tier": 1,
+          "name": "Dagyan"
+        },
+        {
+          "monster": 70,
+          "tier": 2,
+          "name": "Dagyagan"
+        },
+        {
+          "monster": 70,
+          "tier": 3,
+          "name": "Dagyagyagan"
+        },
+        {
+          "monster": 68,
+          "tier": 1,
+          "name": "Chicken"
+        },
+        {
+          "monster": 33,
+          "tier": 1,
+          "name": "Lamp Puffer"
+        },
+        {
+          "monster": 33,
+          "tier": 2,
+          "name": "Lantern Puffer"
+        },
+        {
+          "monster": 33,
+          "tier": 3,
+          "name": "Beacon Puffer"
+        }
+      ]
+    },
+    {
+      "choice": 3,
+      "original_label": "CHI-DO",
+      "label": "Batch 7 (18)",
+      "count": 18,
+      "native_action_address": 20656,
+      "items": [
+        {
+          "monster": 64,
+          "tier": 1,
+          "name": "Chintala"
+        },
+        {
+          "monster": 64,
+          "tier": 2,
+          "name": "Mid Chintala"
+        },
+        {
+          "monster": 64,
+          "tier": 3,
+          "name": "Big Chintala"
+        },
+        {
+          "monster": 48,
+          "tier": 1,
+          "name": "Baby Mage"
+        },
+        {
+          "monster": 48,
+          "tier": 2,
+          "name": "Boy Mage"
+        },
+        {
+          "monster": 48,
+          "tier": 3,
+          "name": "Brat Mage"
+        },
+        {
+          "monster": 56,
+          "tier": 1,
+          "name": "Pot Fisher"
+        },
+        {
+          "monster": 56,
+          "tier": 2,
+          "name": "Pot Angler"
+        },
+        {
+          "monster": 56,
+          "tier": 3,
+          "name": "Pot Giller"
+        },
+        {
+          "monster": 18,
+          "tier": 1,
+          "name": "Porky"
+        },
+        {
+          "monster": 18,
+          "tier": 2,
+          "name": "Porko"
+        },
+        {
+          "monster": 18,
+          "tier": 3,
+          "name": "Porkon"
+        },
+        {
+          "monster": 9,
+          "tier": 1,
+          "name": "Floor Dragon"
+        },
+        {
+          "monster": 9,
+          "tier": 2,
+          "name": "Dragon Head"
+        },
+        {
+          "monster": 9,
+          "tier": 3,
+          "name": "Tunnel Dragon"
+        },
+        {
+          "monster": 19,
+          "tier": 1,
+          "name": "Dragon"
+        },
+        {
+          "monster": 19,
+          "tier": 2,
+          "name": "Sky Dragon"
+        },
+        {
+          "monster": 19,
+          "tier": 3,
+          "name": "Archdragon"
+        }
+      ]
+    },
+    {
+      "choice": 4,
+      "original_label": "NI-BA",
+      "label": "Batch 8 (18)",
+      "count": 18,
+      "native_action_address": 20714,
+      "items": [
+        {
+          "monster": 12,
+          "tier": 1,
+          "name": "Nigiri Morph"
+        },
+        {
+          "monster": 12,
+          "tier": 2,
+          "name": "Nigiri Boss"
+        },
+        {
+          "monster": 12,
+          "tier": 3,
+          "name": "Nigiri Master"
+        },
+        {
+          "monster": 61,
+          "tier": 1,
+          "name": "Glare Snake"
+        },
+        {
+          "monster": 61,
+          "tier": 2,
+          "name": "Leer Snake"
+        },
+        {
+          "monster": 61,
+          "tier": 3,
+          "name": "Ogle Snake"
+        },
+        {
+          "monster": 62,
+          "tier": 1,
+          "name": "Minion Mouse"
+        },
+        {
+          "monster": 62,
+          "tier": 2,
+          "name": "Mobster Mouse"
+        },
+        {
+          "monster": 62,
+          "tier": 3,
+          "name": "Skipper Mouse"
+        },
+        {
+          "monster": 13,
+          "tier": 1,
+          "name": "Curse Girl"
+        },
+        {
+          "monster": 13,
+          "tier": 2,
+          "name": "Curse Sister"
+        },
+        {
+          "monster": 13,
+          "tier": 3,
+          "name": "Curse Mom"
+        },
+        {
+          "monster": 51,
+          "tier": 1,
+          "name": "Lobber Beetle"
+        },
+        {
+          "monster": 51,
+          "tier": 2,
+          "name": "Heaver Beetle"
+        },
+        {
+          "monster": 51,
+          "tier": 3,
+          "name": "Slinger Beetle"
+        },
+        {
+          "monster": 34,
+          "tier": 1,
+          "name": "Explochin"
+        },
+        {
+          "monster": 34,
+          "tier": 2,
+          "name": "Concusschin"
+        },
+        {
+          "monster": 34,
+          "tier": 3,
+          "name": "Fulminachin"
+        }
+      ]
+    }
+  ]
+}

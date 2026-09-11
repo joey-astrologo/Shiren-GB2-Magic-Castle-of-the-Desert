@@ -16,6 +16,7 @@ import allocate
 import arrival_cards
 import blank_scroll
 import credit_screen
+import debug_menus
 import dialogue_pacing
 import ending_credits
 import title_screen
@@ -358,6 +359,7 @@ def build_rom(
     output = spell_input.install(output, approved=approved_font)
     output = unidentified_names.install(output)
     output = rescue_presentation.install(output)
+    output, _debug_report = debug_menus.install(output)
     layout.validate_overrides(
         output, overrides, runtime_contract=runtime_contract,
         surface_modes=_full_renderer_surface_modes(rom),
@@ -559,6 +561,7 @@ def main(argv=None):
         blank_scroll.BlankScrollError,
         credit_screen.CreditScreenError,
         dialogue_pacing.DialoguePacingError,
+        debug_menus.DebugMenuError,
         ending_credits.EndingCreditsError,
         title_screen.TitleScreenError,
         english_font.FontError,

@@ -1,0 +1,349 @@
+{
+  "source_rom_sha1": "5264f6d0c4f12c9144de1d12fddadbadd82b3e33",
+  "menu_record": "180:$4B99",
+  "next_script_position_hex": "a64b",
+  "choice_record_hex": "05409f07e007e107e207e307",
+  "batches": [
+    {
+      "choice": 1,
+      "original_label": "BA-HYA",
+      "label": "Batch 9 (18)",
+      "count": 18,
+      "native_action_address": 20772,
+      "items": [
+        {
+          "monster": 38,
+          "tier": 1,
+          "name": "Bat Kangaroo"
+        },
+        {
+          "monster": 38,
+          "tier": 2,
+          "name": "Evil Kangaroo"
+        },
+        {
+          "monster": 38,
+          "tier": 3,
+          "name": "Devil Kangaroo"
+        },
+        {
+          "monster": 65,
+          "tier": 1,
+          "name": "King Tusker"
+        },
+        {
+          "monster": 65,
+          "tier": 2,
+          "name": "Monarch Tusker"
+        },
+        {
+          "monster": 65,
+          "tier": 3,
+          "name": "Emperor Tusker"
+        },
+        {
+          "monster": 10,
+          "tier": 1,
+          "name": "Pumphantasm"
+        },
+        {
+          "monster": 10,
+          "tier": 2,
+          "name": "Pumphantom"
+        },
+        {
+          "monster": 10,
+          "tier": 3,
+          "name": "Pumpanshee"
+        },
+        {
+          "monster": 43,
+          "tier": 1,
+          "name": "Sheep Priest"
+        },
+        {
+          "monster": 43,
+          "tier": 2,
+          "name": "Goat Pastor"
+        },
+        {
+          "monster": 43,
+          "tier": 3,
+          "name": "Gazelle Pope"
+        },
+        {
+          "monster": 42,
+          "tier": 1,
+          "name": "Bored Kappa"
+        },
+        {
+          "monster": 42,
+          "tier": 2,
+          "name": "Kappa Pest"
+        },
+        {
+          "monster": 42,
+          "tier": 3,
+          "name": "Vexing Kappa"
+        },
+        {
+          "monster": 24,
+          "tier": 1,
+          "name": "Gawkulus"
+        },
+        {
+          "monster": 24,
+          "tier": 2,
+          "name": "Lockulus"
+        },
+        {
+          "monster": 24,
+          "tier": 3,
+          "name": "Hawkulus"
+        }
+      ]
+    },
+    {
+      "choice": 2,
+      "original_label": "PI-MA",
+      "label": "Batch 10 (19)",
+      "count": 19,
+      "native_action_address": 20830,
+      "items": [
+        {
+          "monster": 7,
+          "tier": 1,
+          "name": "Scurry Egg"
+        },
+        {
+          "monster": 7,
+          "tier": 2,
+          "name": "Scamper Egg"
+        },
+        {
+          "monster": 7,
+          "tier": 3,
+          "name": "Leaping Egg"
+        },
+        {
+          "monster": 30,
+          "tier": 1,
+          "name": "Soldier Ant"
+        },
+        {
+          "monster": 30,
+          "tier": 2,
+          "name": "Captain Ant"
+        },
+        {
+          "monster": 30,
+          "tier": 3,
+          "name": "General Ant"
+        },
+        {
+          "monster": 2,
+          "tier": 1,
+          "name": "Bow Boy"
+        },
+        {
+          "monster": 2,
+          "tier": 2,
+          "name": "Crossbow Boy"
+        },
+        {
+          "monster": 6,
+          "tier": 1,
+          "name": "Ghost Warrior"
+        },
+        {
+          "monster": 6,
+          "tier": 2,
+          "name": "Ghost Hannya"
+        },
+        {
+          "monster": 6,
+          "tier": 3,
+          "name": "Ghost Shogun"
+        },
+        {
+          "monster": 67,
+          "tier": 1,
+          "name": "Master Chicken"
+        },
+        {
+          "monster": 67,
+          "tier": 2,
+          "name": "Great Chicken"
+        },
+        {
+          "monster": 25,
+          "tier": 1,
+          "name": "Doze Mage"
+        },
+        {
+          "monster": 25,
+          "tier": 2,
+          "name": "Sleep Warlock"
+        },
+        {
+          "monster": 25,
+          "tier": 3,
+          "name": "Slumber Wizard"
+        },
+        {
+          "monster": 1,
+          "tier": 1,
+          "name": "Mamel"
+        },
+        {
+          "monster": 1,
+          "tier": 2,
+          "name": "Pit Mamel"
+        },
+        {
+          "monster": 1,
+          "tier": 3,
+          "name": "Cave Mamel"
+        }
+      ]
+    },
+    {
+      "choice": 3,
+      "original_label": "MI-WA",
+      "label": "Batch 11 (18)",
+      "count": 18,
+      "native_action_address": 20891,
+      "items": [
+        {
+          "monster": 17,
+          "tier": 1,
+          "name": "Slime"
+        },
+        {
+          "monster": 17,
+          "tier": 2,
+          "name": "Grime"
+        },
+        {
+          "monster": 17,
+          "tier": 3,
+          "name": "Ooze"
+        },
+        {
+          "monster": 39,
+          "tier": 1,
+          "name": "Mini Mixer"
+        },
+        {
+          "monster": 39,
+          "tier": 2,
+          "name": "Mini Mixermon"
+        },
+        {
+          "monster": 39,
+          "tier": 3,
+          "name": "Mini Mixergon"
+        },
+        {
+          "monster": 60,
+          "tier": 1,
+          "name": "Morabi"
+        },
+        {
+          "monster": 60,
+          "tier": 2,
+          "name": "Warabi"
+        },
+        {
+          "monster": 60,
+          "tier": 3,
+          "name": "Takabi"
+        },
+        {
+          "monster": 59,
+          "tier": 1,
+          "name": "Dark Vassal"
+        },
+        {
+          "monster": 59,
+          "tier": 2,
+          "name": "Demon Vassal"
+        },
+        {
+          "monster": 59,
+          "tier": 3,
+          "name": "Sable Vassal"
+        },
+        {
+          "monster": 53,
+          "tier": 1,
+          "name": "Dark Slasher"
+        },
+        {
+          "monster": 53,
+          "tier": 2,
+          "name": "Sneaky Slasher"
+        },
+        {
+          "monster": 53,
+          "tier": 3,
+          "name": "Shadow Slasher"
+        },
+        {
+          "monster": 41,
+          "tier": 1,
+          "name": "Trap Genin"
+        },
+        {
+          "monster": 41,
+          "tier": 2,
+          "name": "Trap Chunin"
+        },
+        {
+          "monster": 41,
+          "tier": 3,
+          "name": "Trap Jonin"
+        }
+      ]
+    },
+    {
+      "choice": 4,
+      "original_label": "Evil Types",
+      "label": "Batch 12 (6)",
+      "count": 6,
+      "native_action_address": 20949,
+      "items": [
+        {
+          "monster": 22,
+          "tier": 1,
+          "name": "Bad Froggo"
+        },
+        {
+          "monster": 22,
+          "tier": 2,
+          "name": "Bad Froggucci"
+        },
+        {
+          "monster": 22,
+          "tier": 3,
+          "name": "Bad Froggon"
+        },
+        {
+          "monster": 26,
+          "tier": 1,
+          "name": "Bad Zalokleft"
+        },
+        {
+          "monster": 26,
+          "tier": 2,
+          "name": "Gang Zalokleft"
+        },
+        {
+          "monster": 26,
+          "tier": 3,
+          "name": "Mob Zalokleft"
+        }
+      ]
+    }
+  ]
+}

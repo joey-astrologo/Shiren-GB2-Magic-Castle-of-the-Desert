@@ -548,6 +548,39 @@ the re-entered state is a clean control. Neither route uses a framebuffer hash.
 
 ## A wider row does not create another dynamic tile
 
+The developer category menu is a particularly severe example: its 78-pixel label
+cannot fit the native six-tile physical stride. Tracing also found overflow in
+the final border tile's bitmap cache. A larger BG frame alone therefore cannot
+repair it, and reusing the damaged border cache reproduces a corrupt outline.
+The accepted [debug-menu repair](DEBUG-ROOM.md#isolated-debug-menu-prototype) packs
+static label tiles inside the existing pool and explicitly reloads the original
+border. It saves the entire extended frame underlay, including both tile and
+attribute bytes, before native construction. The normal build now installs this
+design through `debug_menus.py`; the service-popup allocation remains unchanged.
+
+Its initial navigation wrapper exposed another failure: calling the original
+cursor renderer before repainting the widened menu briefly corrupted shared
+label tiles at the old row coordinates. A 90-frame settled capture passed while
+the first frames after Up/Down visibly flashed. The repaired private controller
+preserves native cached cursor edits with VRAM uploads suppressed, then changes
+only the old/new cursor map cells together during VBlank. Regressions must check
+**every displayed frame** during taps, repeats and wraparound, as well as require
+the label tile pool to remain unchanged. See the [motion evidence](DEBUG-ROOM.md#cursor-motion-repair).
+
+Teardown has the same alias hazard: uploading the native cached glyphs while
+private map cells still reference them flashes duplicated arrows. Restore the
+saved background first. On entry, prepare the native cache without displaying
+its cramped map, then upload the private artwork before displaying its frame.
+Verify the ordering at the actual upload calls, before a later redraw can hide it.
+
+Changed drawing timing can also expose the native `0:$0AEA` copier's interrupt
+race. An IRQ after its STAT check can return during PPU transfer, causing a
+tile/attribute write to be dropped; a later HBlank status check may miss the
+failure. The debug-menu installer uses a private copier that rechecks after DI,
+leaving the shared routine unchanged. Mesen's longer reopen sequence caught the
+missing corner that shorter PyBoy routes did not. See the
+[transition evidence](DEBUG-ROOM.md#transition-ordering-and-vram-timing).
+
 **Tempting assumption:** after widening a menu from five to seven interior cells, assigning
 `row_base + 0` through `row_base + 6` gives each visible cell independent storage.
 

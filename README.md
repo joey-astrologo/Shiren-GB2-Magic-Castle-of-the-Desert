@@ -10,6 +10,8 @@ This repository contains the translation, graphics assets, build tools, and test
 browser tools include Japanese text for reference. The game ROM is not included; local
 builds and imports require your own matching Japanese cartridge dump.
 
+**[Download the English patch from the releases page](https://github.com/joey-astrologo/Shiren-GB2-Magic-Castle-of-the-Desert/releases).**
+
 ## Showcase
 
 Screenshots from the English build:

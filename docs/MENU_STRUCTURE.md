@@ -8,6 +8,26 @@ when changing menu text, geometry, or navigation.
 The executable call-graph inventory is `tools/surfaces.py`; exact translated-family
 coverage is checked by `tools/menu_text.py` and the production builder.
 
+The retained developer event has ten native choice menus. The normal build installs
+[`debug_menus.py`](../tools/debug_menus.py), whose accepted
+[debug layouts](DEBUG-ROOM.md#isolated-debug-menu-prototype) clone the event
+choice controller behind ten exact event/record gates, paints 9×7 main, 13×11
+category, 8×9 Weapons/Shields, 10×7 Bracelets/Grass, 8×9 Scrolls/Staves, 7×5 Pots/Arrows, 11×11 frames for all three Meat pages, and a 13×9 Set Flag frame
+in the original popup tile pool, and restores each complete saved background
+before native glyph restoration and redraw. The private constructor hides the
+cramped native map, and its private map copier rechecks LCD access after DI.
+Cursor movement preserves the native cached bitmap while updating
+only the two cursor BG cells together during VBlank; visible label tiles remain
+unchanged. The normal builder installs the same runtime bytes as the accepted
+prototype; shared menu templates and their ordinary consumers retain their paths.
+Meat page cycling and B/back
+restore each private page through its complete record gate. Set Flag qualifies
+only at script position `$4BCB` with the full four-choice record; its private labels
+name the four progression presets, while the native action scripts and result
+messages remain unchanged. B returns to main; A runs the preset and exits debug
+after its result page. Numbered batch and progression labels are private artwork;
+shared Next and all production labels remain unchanged.
+
 ## Text APIs
 
 ### Source-composed/full renderer

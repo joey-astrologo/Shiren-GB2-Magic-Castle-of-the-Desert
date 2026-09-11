@@ -289,6 +289,19 @@ class ProductionFontVariantTests(unittest.TestCase):
             )
             for byte in range(size)
         }
+        # Only the ten private debug artwork blocks can depend on font style.
+        # Keep the controller, gates, geometry and navigation outside this set.
+        debug_artwork = {
+            extract.file_offset(254, address)
+            for first, last in (
+                (0x5800, 0x5C2E), (0x5C2E, 0x5FBC),
+                (0x6000, 0x63A0), (0x6400, 0x679C),
+                (0x6800, 0x6BA0), (0x6BA0, 0x6EF6),
+                (0x6EF6, 0x72F8), (0x72F8, 0x76FA),
+                (0x76FA, 0x7AFC), (0x7AFC, 0x7EF6),
+            )
+            for address in range(first, last)
+        }
         checksums = {
             cartridge.HEADER_CHECKSUM,
             cartridge.GLOBAL_CHECKSUM,
@@ -301,6 +314,7 @@ class ProductionFontVariantTests(unittest.TestCase):
             | status_overlay
             | shared_keyboard
             | moai_keyboard
+            | debug_artwork
             | checksums
         )
 

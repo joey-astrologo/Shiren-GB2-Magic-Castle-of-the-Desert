@@ -186,11 +186,49 @@ after every ROM writer. They are output metadata, not allocation space.
 | 252 | `$4000-$488F` | `spell_input.py`: mode-3 Big Moai gift-code runtime, map, and private style-selected glyph atlas | Exclusive |
 | 253 | `$4000-$4D3F` | `name6.py`: player-name/ranking-suffix code, mode-2 Rankings-note presentation and private graph, shared map, and style-selected graphical-input glyph atlas | Exclusive; mode-2 graph begins at `$4B00` |
 | 254 | `$4000-$49C1` | `stairs_menu.py` base through `$42AA`, including the exact two-record detector, eight-column dungeon frame, five-cell underlay save/restore, native-template clone, and controller-exit cleanup; followed by `service_menus.py` exact Rescue/warehouse/Bank Teller/Blacksmith Info/Training detector, seven-interior-tile frames, suffix staging, chained helpers, and ninth-column save/restore routines | Shared only by this ordered installer pair; `service_menus.py` must verify the installed stairs helpers before replacing their reserved slots |
+| 254 | `$5000-$7EFF` | `debug_menus.py`: main/category/Weapons-Shields/Bracelets-Grass/Scrolls-Staves/Pots-Arrows/all-three-Meat-pages/Set-Flag controller and constructor clones, exact gates, saved-background helpers, cached cursor navigation, private map copier, separate artwork for 9×7, 13×11, 8×9, 10×7, 7×5, 11×11 and 13×9 frames | Normal-build owner, retaining the accepted prototype's exact reservation and runtime. Native-dependency and exact-zero guards. `$49C2-$4FFF` separates it from the other popup helpers; packed Set Flag artwork ends at `$7EF5` |
 | 255 | `$4000-$4A7C`, `$4B00-$4B38` | `menu_graphics.py`: English Status bitmap overlay generated from the installed two-tone font, plus the item-action cursor-column cleanup/upload wrapper | Exclusive; `$4A7D-$4AFF` remains unused separation between the two guarded payloads |
 
 Banks 245-255 were measured empty before these reservations. Their unused tails are not a
 general pool; each bank belongs to its subsystem so its installer can reject collisions
 deterministically.
+
+The normal-build debug installer also owns **5:`$58E6-$58ED`**, replacing the
+event-choice call to 18:`$401D` with its exact gate. It copies the reviewed production
+18:`$4000-$4139` controller to 254:`$5000-$5139`; the original controller and its
+production exit chain remain intact. Its event identity and first nine exact choice
+records occupy `$5140-$51AF`; the tenth record (Set Flag) occupies `$51F0-$51FB`.
+Geometry occupies `$51B0-$51E9`, selecting 11×11 for each Meat page and 13×9 for
+Set Flag. Assembler assertions keep these neighbors disjoint from the gate at `$5200`.
+The other pre-constructor helpers end at `$54F4`,
+before the fixed constructor at `$5500`. Only this clone redirects construction, cursor
+painting and pre-redraw restoration. The guarded native constructor
+3:`$69E9-$6AA4` is copied to 254:`$5500-$55BB`, followed by its 14-byte layout
+table at `$55BC-$55C9`. The unchanged NextCell/NextRow map-stepping routines
+occupy `$55D0-$55E7`. Its three local table references are relocated, and only its map-display
+call is suppressed. Native text, bitmap-cache and template preparation remain;
+the original bank-3 routine is unchanged. At 254:`$5600`, it also copies the guarded
+16:`$5D1A-$5D6C` input routine, 16:`$5E38-$5E92` cursor-position routine and type-9
+navigation graph. Private glyph calls preserve the native bitmap cache using
+the compositor's existing `$C4DA` bit-2 upload suppression. Only two cursor BG
+cells are changed together during VBlank; the 49-tile artwork is uploaded only
+when opening. The private map copier at `$56F7` rechecks LCD access after DI
+before writing each tile/attribute pair. These helpers end before category
+artwork at `$5800`; main artwork occupies `$5C2E-$5FBB`. Weapons/Shields artwork
+occupies `$6000-$639F`, Bracelets/Grass occupies `$6400-$679B`, Scrolls/Staves
+occupies `$6800-$6B9F`. The remaining blocks are contiguous: Pots/Arrows
+`$6BA0-$6EF5`, Meat page 1 `$6EF6-$72F7`, Meat page 2 `$72F8-$76F9`, Meat page 3
+`$76FA-$7AFB`, and Set Flag `$7AFC-$7EF5`. Removing unused padding fits all ten
+menus into the unchanged `$5000-$7EFF` reservation. Each block keeps
+its 49-tile payload; the final five tile payloads end at `$6EAF`, `$7205`, `$7607`,
+`$7A09`, and `$7E0B`, followed by 35, 121, 121, 121 and 117 interleaved frame
+cells respectively. The installer verifies the complete controller, constructor,
+navigation and cursor routines, the native popup border at 3:`$4AE2-$4AF1`,
+layout at 3:`$6AA5-$6AB2`, graph at 16:`$6315-$6337`, event choices at
+180:`$4A92-$4BCA`, graph pointer and exact hook operands, approved font glyphs
+and advances, and the entire zero-filled reservation. Ordinary translation edits
+do not require a new whole-ROM allowlist. The historical `debug_room_prototype.py`
+adapter additionally requires one of its two frozen pre-integration ROM hashes.
 
 ## Font ownership
 
@@ -297,6 +335,44 @@ the five tile/attribute pairs covered by the dungeon popup's single added column
 select bank 5 only around state access and restore the caller's bank. Suffix rendering
 explicitly returns to bank 7 before reading or editing the staged frame. This is transient
 rendering state, not SRAM and not general free WRAM.
+
+An English save state captured inside an open popup can legitimately retain this
+live state. `debug-room.state` freezes an armed stairs marker and the five saved
+BG pairs for the added column at `$991B`. Its explicit fixture contract checks
+the entire saved payload and state digest, and a live B/cancel regression requires
+restoration of both tile and attribute bytes plus marker clearing in both font
+builds. The additional ten-free-slot `debug-room.state.state` capture has a
+separate frozen contract for its armed column at `$994F`, including exact state
+digest and saved payload, and passes the same live restoration check. Every
+other archived fixture must still leave that marker unarmed.
+
+The debug-menu installer conditionally borrows WRAM bank 5 **`$DA00-$DB21`**.
+This is disjoint from the stairs/service popup state and remains within the previously
+traced dungeon-popup gap through `$DBFF`. It is **not declared generally free**:
+the exact dungeon event/choice gate additionally requires every borrowed byte to be
+zero on entry. An occupied byte selects the original controller without touching the
+slice. `$DA00-$DA01` stores the BG destination, `$DA02` the last displayed cursor
+selection, and `$DA03` selects category (0), main (1), Weapons/Shields (2),
+Bracelets/Grass (3), Scrolls/Staves (4), Pots/Arrows (5), Meat page 1 (6), Meat page 2 (7), Meat page 3 (8) or Set Flag (9) geometry.
+Starting at `$DA04`, the main frame saves 63 interleaved tile/attribute pairs,
+Weapons/Shields and Scrolls/Staves each save 72 through `$DA93`, Bracelets/Grass
+saves 70 through `$DA8F`, Pots/Arrows saves 35 through `$DA49`, all three Meat pages
+save 121 through `$DAF5`, Set Flag saves 117 through `$DAED`, and categories
+save 143 through `$DB21`. The synchronous wrapper clears the entire borrowed
+slice before returning; there is no
+persistent marker or SRAM allocation. Tests guard the following 16 bytes, reject
+occupied scratch, and compare both full VRAM banks after repeated exits and map wraps.
+
+The debug menus use the existing dungeon popup's VRAM bank-0 **`$8900-$8C0F`**:
+48 text/cursor tiles plus the original border tile. It leaves the native bank-7
+`$D900-$DC0F` bitmap cache available for restoration before native dungeon redraw,
+including all native cursor erase/draw edits during navigation.
+The compact static artwork uses 17 of the 48 text/cursor tiles for main and 40 for
+categories; unused slots are blank. The saved map is restored before replacing
+private artwork with the native cache, preventing visible glyph aliases on exit.
+Bank-1 fixed border tiles are only referenced, never rewritten. Normal builds now
+include these reservations; integration adds no memory use beyond the accepted
+ten-menu prototype.
 
 ## Rescue requester live actor state
 

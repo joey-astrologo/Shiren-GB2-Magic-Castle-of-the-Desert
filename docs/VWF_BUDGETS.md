@@ -123,6 +123,16 @@ The build has explicit contracts for known direct-rendered rows:
 | Diary/front-end hub | x=6 to 80 | 74 px | Conditional rows |
 | Start Adventure submenu | x=56 to 144 | 88 px | Up to eight enabled rows |
 | Dungeon stairs popup labels | x=8 to 48 | 40 px | Floor route adds one interior tile; Status keeps its native eight-column frame |
+| Debug main menu | x=8 to 56 | 48 px | Separate 9×7 frame; three static 8 px text rows at 16 px pitch; 17/48 native text/cursor tiles. Installed by `debug_menus.py` |
+| Debug item categories | x=8 to 88 | 80 px | Separate 13×11 frame; five static 8 px text rows at 16 px pitch; 40/48 native text/cursor tiles. Installed by `debug_menus.py`; see [DEBUG-ROOM.md](DEBUG-ROOM.md#isolated-debug-menu-prototype) |
+| Debug Weapons/Shields | x=8 to 48 | 40 px | Separate 8×9 frame; four static 8 px text rows at 16 px pitch; 14/48 native text/cursor tiles. Uses the shared private debug scratch and native popup tiles |
+| Debug Bracelets/Grass | x=8 to 64 | 56 px | Separate 10×7 frame; three static 8 px text rows at 16 px pitch; 12/48 native text/cursor tiles in classic, 14/48 in shadowed. Uses the shared private debug scratch and native popup tiles |
+| Debug Scrolls/Staves | x=8 to 48 | 40 px | Separate 8×9 frame; four static 8 px text rows at 16 px pitch; widest label 38 px; 15/48 native text/cursor tiles in both fonts. Uses the shared private debug scratch and native popup tiles |
+| Debug Pots/Arrows | x=8 to 40 | 32 px | Separate 7×5 frame; two static 8 px text rows at 16 px pitch; widest label 27 px; 8/48 native text/cursor tiles in both fonts. Uses the shared private debug scratch and native popup tiles |
+| Debug Meat page 1 | x=8 to 72 | 64 px | Separate 11×11 frame; five static 8 px text rows at 16 px pitch; widest label 57 px; 23/48 classic and 24/48 shadowed text/cursor tiles. Counts and numbered batches are private artwork; uses the shared private debug scratch and native popup tiles |
+| Debug Meat page 2 | x=8 to 72 | 64 px | Separate 11×11 frame; five static 8 px text rows at 16 px pitch; widest label 57 px; 23/48 classic and 24/48 shadowed text/cursor tiles. Counts and numbered batches are private artwork; uses the shared private debug scratch and native popup tiles |
+| Debug Meat page 3 | x=8 to 72 | 64 px | Separate 11×11 frame; five static 8 px text rows at 16 px pitch; widest label 62 px; 25/48 classic and 26/48 shadowed text/cursor tiles. Counts and numbered batches are private artwork; uses the shared private debug scratch and native popup tiles |
+| Debug Set Flag | x=8 to 88 | 80 px | Separate 13×9 frame; four static 8 px text rows at 16 px pitch; Enable Zenmaiger uses exactly 80 px, verified against the complete glyph raster; 30/48 text/cursor tiles in both fonts. Private action labels retain native progression scripts and result messages; no additional WRAM or VRAM |
 | Main-menu left slots | caller-specific | 50 px typical | Exact slot domains live in `build.py`/`surfaces.py` |
 | Main-menu location | right-aligned to x=142 | 83 px from x=59 | Uses the native alignment wrapper |
 

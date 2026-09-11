@@ -6,10 +6,22 @@ In-game menus, input screens, and localized graphics are implemented; playtestin
 and bug fixes continue.
 
 The [hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
-is available with all three promotional mission presets. The current title-inclusive build
-passes **682 suite tests**, with zero failures, errors, or skips. Both font ROMs also pass
-exact title pixels and transitions in PyBoy and Mesen. The previous packaged release's
-separate 34-check battery is recorded below and applies to that older package.
+is available with all three promotional mission presets. On the development branch,
+the normal builder now includes all ten accepted debug menus. Both output ROMs
+are byte-identical to the accepted experiments; main-game playtesting is next.
+The integrated build passed **711 tests in 1,270.352 seconds**, with zero failures,
+errors or skips, plus **41 exact-artifact checks**, nine validators and four browser
+checks. Both ROMs and local patches reproduce byte-for-byte from an isolated
+working-tree source copy. Results and normal output paths are recorded in
+[testing-and-build.md](testing-and-build.md#debug-menu-normal-build-playtest).
+No new IPS has been published.
+
+The accepted prototype passed **711 tests with no failures or skips**, including
+item grants, pagination, all four Set Flag actions and browser-codec parity.
+Its Mesen run passed 77,560 displayed navigation frames across both fonts and both
+debug-room saves. These historical results and matching artifact hashes are in
+[DEBUG-ROOM.md](DEBUG-ROOM.md#prototype-validation-results). The previous packaged
+release's separate 34-check battery below applies to that older package.
 
 ## Text coverage
 
@@ -36,6 +48,32 @@ native empty slot. The remaining 18 prose-catalog records are ending or credit l
 edited through the ordinary catalog workflow.
 
 ## Completed engineering
+
+- The normal-build [debug-menu repair](DEBUG-ROOM.md#normal-build-integration)
+  makes Give Item / Set Flag / Trash, the five category names, all four
+  Weapons/Shields presets, all three Bracelets/Grass presets, all four Scrolls/Staves
+  presets, both Pots/Arrows presets, all three Meat pages and Set Flag readable using the existing popup tile pool.
+  The ten menus' 9×7, 13×11, 8×9, 10×7, 7×5, 11×11 and 13×9 frames have exact record gates,
+  complete background restoration and unchanged text tiles during movement.
+  Native text is prepared without exposing its cramped map, background is
+  restored before native glyphs, and a private map copier prevents missed writes
+  after interrupts. PyBoy and Mesen exercise motion and repeated size transitions;
+  normal integration preserves those accepted runtime bytes and all catalogs.
+  Set Flag names all four actions
+  explicitly and retains native progression scripts and result messages. Full and
+  partial inventory fixtures are retained; all 25 item presets in both fonts
+  preserve existing items and match baseline grants, cleanup and ordinary menu
+  returns. All four Weapons/Shields, three Bracelets/Grass, four Scrolls/Staves and
+  two Pots/Arrows grants and all twelve Meat batches also match with empty and full inventories. Set Flag also checks
+  both supplied progression states and all-clear/all-set flag arrays, complete
+  result-page VRAM, inventory preservation and ordinary-menu cleanup. Its artwork
+  fits the existing reservation by removing padding between the final blocks; no
+  additional WRAM or VRAM is borrowed. All ten layouts have user visual acceptance;
+  verified local normal builds are ready for main-game playtesting, including
+  floor changes and save/resume after debug use.
+  All three Meat pages use numbered batches with counts and documented exact English
+  contents. The complete three-page cycle and B/back paths have matching native
+  return-state and full VRAM cleanup checks.
 
 - The approved English title is installed in both font builds, including the full logo,
   castle, moon, sky gradient, horizon gap, sand, both native bats, and all eight subtitle
