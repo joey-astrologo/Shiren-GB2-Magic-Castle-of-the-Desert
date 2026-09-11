@@ -88,7 +88,7 @@ navigation frames in total.
 
 ## Debug-menu normal-build playtest
 
-The development branch now installs all ten accepted debug layouts through
+The normal build installs all ten accepted debug layouts through
 `tools/debug_menus.py` and `tools/debug_menus.asm` as part of each normal font build.
 The verified artifacts are installed at `build/shiren-gb2-english-{classic,shadowed}-font.gbc`
 and retained with their local IPS files in `build/debug-menu-release/roms/`. Both ROMs are byte-identical
@@ -104,7 +104,8 @@ The generated translation-workbench catalogue was refreshed because it fingerpri
 `build.py`; only `inputRevision`, `rulesRevision` and `revision` changed. All 6,695
 records are identical. `workbench-regeneration.json` records that comparison.
 
-Validation reports and logs are under `build/debug-menu-release/`:
+The final automated run completed on **2026-09-11**. Validation reports and logs
+are under `build/debug-menu-release/`:
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -123,10 +124,16 @@ it is not a clone of a committed revision. The verified source ROM and all 73
 archived save-related files retain their hashes.
 `verification.json` records the final preparation and standard output paths.
 
-This build is for the user's main-game playtest. No patch has been published, and
+This build is for the user's main-game playtest. No patch was published as part of
+this preparation, and
 automated verification does not claim a full playthrough or every floor/save route
 after the complete debug tree. The original saves are read-only inputs; emulator
 battery saves use disposable copies.
+
+The [debug-menu risk assessment](DEBUG-ROOM.md#risk-and-remaining-playtest-coverage)
+records low residual risk during ordinary play, the shared entry check, and the
+remaining post-debug transition and progression checks. The 41-check save battery
+does not certify every debug route followed by a floor change or save/reload.
 
 ## Additional focused regressions
 
@@ -373,13 +380,14 @@ clean-clone ROMs and IPS patches also match the existing latest builds byte for 
 
 The battery runner, JSON reports, logs, ROMs, and package are local generated artifacts in
 `build/release-2026-09-08/`; they are not tracked test infrastructure. The package's current
-identity is recorded in [project-status.md](project-status.md#verified-build-and-package).
+identity is recorded in [project-status.md](project-status.md#previous-verified-package--2026-09-08).
 Future builds need their own run and artifact hashes.
 
 This run did not perform a full playthrough or physical-hardware testing. Remaining route
 coverage includes the complete Rescue Gate/two-diary/cable exchange, a dedicated true-ending
 trace, and live visual verification of the installed wait sign. The opening menu/title
-screen is the only known remaining localization item.
+screen was still unlocalized at the time of this older run; it is now implemented
+and covered by the later title and normal-build checks above.
 
 ## Tests
 

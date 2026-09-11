@@ -28,6 +28,11 @@ messages remain unchanged. B returns to main; A runs the preset and exits debug
 after its result page. Numbered batch and progression labels are private artwork;
 shared Next and all production labels remain unchanged.
 
+The dispatch check also runs for ordinary event choices, which retain their
+existing controller when the debug identity does not match. Final validation and
+the residual risk during ordinary play are recorded in
+[DEBUG-ROOM.md](DEBUG-ROOM.md#risk-and-remaining-playtest-coverage).
+
 ## Text APIs
 
 ### Source-composed/full renderer

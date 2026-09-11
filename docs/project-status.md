@@ -6,15 +6,17 @@ In-game menus, input screens, and localized graphics are implemented; playtestin
 and bug fixes continue.
 
 The [hosted rescue password converter](https://joey-astrologo.github.io/Shiren-GB2-Magic-Castle-of-the-Desert/)
-is available with all three promotional mission presets. On the development branch,
-the normal builder now includes all ten accepted debug menus. Both output ROMs
+is available with all three promotional mission presets. The normal builder now
+includes all ten accepted debug menus. Both output ROMs
 are byte-identical to the accepted experiments; main-game playtesting is next.
-The integrated build passed **711 tests in 1,270.352 seconds**, with zero failures,
+On **2026-09-11**, the integrated build passed **711 tests in 1,270.352 seconds**, with zero failures,
 errors or skips, plus **41 exact-artifact checks**, nine validators and four browser
 checks. Both ROMs and local patches reproduce byte-for-byte from an isolated
 working-tree source copy. Results and normal output paths are recorded in
 [testing-and-build.md](testing-and-build.md#debug-menu-normal-build-playtest).
-No new IPS has been published.
+No IPS was published as part of that preparation. The
+[debug-menu risk assessment](DEBUG-ROOM.md#risk-and-remaining-playtest-coverage)
+records low residual risk for ordinary players and the remaining manual coverage.
 
 The accepted prototype passed **711 tests with no failures or skips**, including
 item grants, pagination, all four Set Flag actions and browser-codec parity.
@@ -315,17 +317,19 @@ acceptance and playthrough evidence.
 
 ## Current ROM and patch hashes
 
-The current 2026-09-09 font variants use the same translation and engine patches.
-These hashes describe the title-inclusive files, not the older ZIP:
+The verified **2026-09-11** normal font variants include the title and all ten
+accepted debug layouts. These hashes describe the locally prepared artifacts;
+the older ZIP above retains its own historical identity.
 
 - `build/shiren-gb2-english-classic-font.gbc` — SHA-1
-  `1eaeea58c363ed4915baf178fcb536a6230fa614`
+  `7329b1e9cd7c0b51b54f5cbc471985083f3da4af`
 - `build/shiren-gb2-english-classic-font.ips` — SHA-1
-  `9bda4b5dc39cb1108cad0bf28bb5262434dd0d67`
+  `a7b23e76440446d6b50eeeb74ac85b3fa2a621e9`
 - `build/shiren-gb2-english-shadowed-font.gbc` — SHA-1
-  `eb0c074b1ef73ec7b6ad841b900300259c23f7bf`
+  `bd4fdae48457ea6a0297de6d4f6dc0253b149e7e`
 - `build/shiren-gb2-english-shadowed-font.ips` — SHA-1
-  `de5ca6962c38e36c5f062dc6e08aba1e23a20935`
+  `95674240bf47668eda13a42682c45875b8e640d7`
 
-Always rebuild and verify locally rather than treating those hashes as permanent release
-identifiers.
+SHA-256 hashes, cartridge checksums and IPS reconstruction results are recorded in
+`build/debug-menu-release/artifact-integrity.json`. These identify this validated
+build; future changes need a new build, verification and artifact record.

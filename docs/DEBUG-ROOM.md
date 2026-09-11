@@ -14,6 +14,12 @@ The access code is still needed; there is no extra build flag. See
 and validation, and the [prototype history](#isolated-debug-menu-prototype) for
 layout and timing evidence.
 
+**Final automated validation: 2026-09-11.** All ten layouts have user visual
+acceptance. The integrated normal builds passed 711 tests and 41 additional
+artifact checks with zero failures, errors or skips. See the
+[final results](#final-validation-results) and
+[ordinary-gameplay risk assessment](#risk-and-remaining-playtest-coverage).
+
 ## Access
 
 1. Make a separate save state and use a disposable save for experimentation.
@@ -55,7 +61,7 @@ bank-5 `$D9F6-$D9F7` holds its armed `$53/$AC` cleanup marker. The saved added
 column starts at BG `$991B`, with five tile/attribute pairs
 `0D 03 / 1D 03 / 2B 02 / 39 02 / 0F 02`. The live column contains the widened
 right border. Pressing B restores those exact pairs and clears both marker bytes
-in the baseline and experimental ROMs, in both fonts. This is intentional saved
+in the frozen baseline and repaired normal ROMs, in both fonts. This is intentional saved
 popup state, not unrelated native data accidentally arming cleanup.
 [`tests/fixtures/debug_room.json`](../tests/fixtures/debug_room.json) freezes its
 hash, navigation state and underlay. The additional inventory-space capture below
@@ -100,7 +106,7 @@ the user's source filename is preserved. Conversion used
 `experiment-shadowed-font.gbc` and verified 12 frames. The new fixture freezes
 the ten existing item records and slot order, the state digest, and its armed
 stairs underlay at `$994F`. B/cancel must restore every saved tile/attribute
-pair and clear the marker in both fonts and both baseline/experimental ROMs.
+pair and clear the marker in both fonts and both baseline/repaired normal ROMs.
 
 All **25 item presets in both fonts** have been replayed from this capture
 against the frozen baselines. Every original item is preserved, the granted
@@ -118,7 +124,9 @@ The initial audit and its per-preset results are under
 
 ## Reading the current menus
 
-These captures show the current defects, not a repaired layout:
+The captures below are **historical, before the repair**. They show the clipping
+and overlap that prompted this work. The normal builds now show the
+[accepted readable layouts](#isolated-debug-menu-prototype).
 
 | Main menu | Give Item categories |
 |---|---|
@@ -127,10 +135,10 @@ These captures show the current defects, not a repaired layout:
 | ![Romanized meat preset ranges](images/debug-room/meat-1.png) | ![Clipped developer flag menu](images/debug-room/flags.png) |
 
 Use Up/Down and A to select. B returns to the parent menu; in Meat pages 2 and 3
-it returns to the preceding page. **Next** cycles Meat pages 1 → 2 → 3 → 1.
+it returns to the preceding page. **Next Page** cycles Meat pages 1 → 2 → 3 → 1.
 
-The following lists give the complete labels in visible top-to-bottom order,
-even where the current screen clips or overlaps them.
+The following lists describe the current labels and native actions. Older labels
+are retained explicitly where they help identify the original presets.
 
 ### Main menu
 
@@ -163,29 +171,30 @@ does not establish that an item or configuration is obtainable in ordinary play.
 
 ### Meat
 
-Labels such as **A-U** and **KA-GYA** transliterate the original Japanese name
-ranges. They are not English alphabetical filters. Each selection gives a fixed
-batch; **Next** is the first option on every page.
+The old labels such as **A-U** and **KA-GYA** transliterate Japanese name ranges.
+The normal build replaces these with numbered batches and native item counts.
+Each selection gives a fixed batch; **Next Page** is the first option on every
+page. The original catalog's shared **Next** label remains unchanged.
 
 The family names below use the current English catalog. Unless a subset is
 specified, the batch includes the family's variants present in the native preset.
 
-| Page | Current option | Count | Included families / special subsets |
-|---|---|---:|---|
-| 1 | A-U | 20 | Ironhead, Vampire Baron, Shady Wisp, Squid King, Dozy Genie, Pitcher Plant; Healer Rabbit and Life Rabbit only |
-| 1 | U-KA | 18 | Wolf Droid, Ether Devil, Mutaikon, Pop Tank, Wily Tanuki, Impact Boar |
-| 1 | KA-GYA | 18 | Teaser Monkey, Crow Tengu, Daze Hermit, Skull Mage, Demon Warrior, Gyaza |
-| 1 | GYA-KO | 18 | Gyadon, Fog Hermit, Twisty Hani only, Alert Fly, Gazer, Punter Scarab; Boy Tank and Mini Tank |
-| 2 | KO-JA | 18 | Goggler, Samuraidon, Zen Guru, Death Reaper, Schubell, Jungarian |
-| 2 | JI-CHO | 20 | Rock Head, Sip Leech, Cell Armor, Taur, Dagyan, Lamp Puffer; Snacky and Chicken only |
-| 2 | CHI-DO | 18 | Chintala, Baby Mage, Pot Fisher, Porky, Floor Dragon, Dragon |
-| 2 | NI-BA | 18 | Nigiri Morph, Glare Snake, Minion Mouse, Curse Girl, Lobber Beetle, Explochin |
-| 3 | BA-HYA | 18 | Bat Kangaroo, King Tusker, Pumphantasm, Sheep Priest, Bored Kappa, Gawkulus |
-| 3 | PI-MA | 19 | Scurry Egg, Soldier Ant, Ghost Warrior, Doze Mage, Mamel; Bow Boy and Crossbow Boy; Master Chicken and Great Chicken |
-| 3 | MI-WA | 18 | Slime, Mini Mixer, Morabi, Dark Vassal, Dark Slasher, Trap Genin |
-| 3 | Evil Types | 6 | Bad Froggo and Bad Zalokleft |
+| Page | Normal-build option | Before-repair label | Included families / special subsets |
+|---|---|---|---|
+| 1 | Batch 1 (20) | A-U | Ironhead, Vampire Baron, Shady Wisp, Squid King, Dozy Genie, Pitcher Plant; Healer Rabbit and Life Rabbit only |
+| 1 | Batch 2 (18) | U-KA | Wolf Droid, Ether Devil, Mutaikon, Pop Tank, Wily Tanuki, Impact Boar |
+| 1 | Batch 3 (18) | KA-GYA | Teaser Monkey, Crow Tengu, Daze Hermit, Skull Mage, Demon Warrior, Gyaza |
+| 1 | Batch 4 (18) | GYA-KO | Gyadon, Fog Hermit, Twisty Hani only, Alert Fly, Gazer, Punter Scarab; Boy Tank and Mini Tank |
+| 2 | Batch 5 (18) | KO-JA | Goggler, Samuraidon, Zen Guru, Death Reaper, Schubell, Jungarian |
+| 2 | Batch 6 (20) | JI-CHO | Rock Head, Sip Leech, Cell Armor, Taur, Dagyan, Lamp Puffer; Snacky and Chicken only |
+| 2 | Batch 7 (18) | CHI-DO | Chintala, Baby Mage, Pot Fisher, Porky, Floor Dragon, Dragon |
+| 2 | Batch 8 (18) | NI-BA | Nigiri Morph, Glare Snake, Minion Mouse, Curse Girl, Lobber Beetle, Explochin |
+| 3 | Batch 9 (18) | BA-HYA | Bat Kangaroo, King Tusker, Pumphantasm, Sheep Priest, Bored Kappa, Gawkulus |
+| 3 | Batch 10 (19) | PI-MA | Scurry Egg, Soldier Ant, Ghost Warrior, Doze Mage, Mamel; Bow Boy and Crossbow Boy; Master Chicken and Great Chicken |
+| 3 | Batch 11 (18) | MI-WA | Slime, Mini Mixer, Morabi, Dark Vassal, Dark Slasher, Trap Genin |
+| 3 | Batch 12 (6) | Evil Types | Bad Froggo and Bad Zalokleft |
 
-### First Meat page in the experiment
+### First Meat page
 
 The first page uses **Next Page**, **Batch 1 (20)**, **Batch 2 (18)**,
 **Batch 3 (18)** and **Batch 4 (18)**. Counts describe the full native preset in
@@ -193,7 +202,7 @@ an empty inventory. Existing items are preserved, and only the remaining slots
 are filled, in the order below. These are fixed batches, not alphabetical filters.
 The menu artwork alone changes; native actions and production/shared labels do not.
 
-| Experimental label | Original label | Native action |
+| Normal-build label | Original label | Native action |
 |---|---|---|
 | Batch 1 (20) | A-U | `180:$4F48` |
 | Batch 2 (18) | U-KA | `180:$4F88` |
@@ -213,14 +222,14 @@ grant stream and translated monster names, then verifies every resulting item
 record against the production ROM in both fonts. The trace is archived at
 `build/debug-room-prototype/meat-page-1/native-trace.json`.
 
-### Second Meat page in the experiment
+### Second Meat page
 
 Choose **Give Item → Meat → Next Page**. Page 2 continues with **Batch 5 (18)**,
 **Batch 6 (20)**, **Batch 7 (18)** and **Batch 8 (18)**. Counts again assume an
 empty inventory; existing items are preserved and free slots fill in grant order.
 **Next Page** opens the third repaired page. B returns to the first repaired page.
 
-| Experimental label | Original label | Native action |
+| Normal-build label | Original label | Native action |
 |---|---|---|
 | Batch 5 (18) | KO-JA | `180:$5036` |
 | Batch 6 (20) | JI-CHO | `180:$5070` |
@@ -240,14 +249,14 @@ freezes every monster ID, tier and name. Tests compare the native grant opcodes,
 live empty/full inventory results, and immediate controller cleanup in both fonts.
 The independent trace is `build/debug-room-prototype/meat-page-2/native-trace.json`.
 
-### Third Meat page in the experiment
+### Third Meat page
 
 Choose **Give Item → Meat**, then **Next Page** twice. The final page contains
 **Batch 9 (18)**, **Batch 10 (19)**, **Batch 11 (18)** and **Batch 12 (6)**.
 **Next Page** cycles back to page 1; B returns to page 2. Counts describe empty
 inventory grants; existing items stay in place and only free slots are filled.
 
-| Experimental label | Original label | Native action |
+| Normal-build label | Original label | Native action |
 |---|---|---|
 | Batch 9 (18) | BA-HYA | `180:$5124` |
 | Batch 10 (19) | PI-MA | `180:$515E` |
@@ -273,18 +282,18 @@ trace is `build/debug-room-prototype/meat-page-3/native-trace.json`.
 
 ### Set Flag
 
-| Current option | Native action's translated result / verification |
-|---|---|
-| Mamo | Reports that Mamo can appear and asks the player to exit and reenter the facility. |
-| Robot | Reports that **Zenmaiger** can appear and asks the player to exit and reenter the facility. The generic label hides the character's name. |
-| Furnace | Reports that Mamo can appear and the **Blacksmith's Furnace** has opened. |
-| Moai | Reports that **Big Moai has departed the town**. It changes several flag/state fields. It is not the minimal gift-code-screen unlock helper. |
+| Normal-build option | Before-repair label | Native action's translated result / verification |
+|---|---|---|
+| Enable Mamo | Mamo | Reports that Mamo can appear and asks the player to exit and reenter the facility. |
+| Enable Zenmaiger | Robot | Reports that **Zenmaiger** can appear and asks the player to exit and reenter the facility. |
+| Open Furnace | Furnace | Reports that Mamo can appear and the **Blacksmith's Furnace** has opened. |
+| Moai Leaves | Moai | Reports that **Big Moai has departed the town**. It changes several flag/state fields. It is not the minimal gift-code-screen unlock helper. |
 
 These result messages and their immediate RAM effects were observed. The
 downstream NPC routes were not played through in this investigation. The exact
 meaning of every flag changed by these presets remains a separate tracing task.
 
-The isolated prototype uses the following clearer private labels. It runs the
+The normal build uses the following clearer private labels. It runs the
 same event bytes, keeps the result messages unchanged and changes no progression
 logic. The tracked [flag fixture](../tests/fixtures/debug_flags.json) records the
 opcode operands and the observed immediate state. Native flag bits are stored
@@ -314,7 +323,7 @@ For the narrow Big Moai gift-code-screen unlock, use the separately documented
 The debug Moai preset left the helper's `$C3EF-$C3F0` stage pair unchanged in this
 fixture while changing other state, including `$C3EE` and `$C3E9-$C3ED`.
 
-## What is translated, and what is broken
+## Translation coverage and original layout limitations
 
 All **38 distinct choice labels** used by these ten menus already have English
 overrides in [`script/en/ui_system.tsv`](../script/en/ui_system.tsv).
@@ -326,16 +335,17 @@ The introductory and flag-result messages are also translated: group 112
 indices 48–52, stable IDs `200:$44C8`, `200:$44E3`, `200:$450B`, `200:$4536`,
 and `200:$4559`. Their authoring owner is the prose editor.
 
-No missing English override was found among these choices and messages. There
-are still wording problems: the romanized Meat ranges, the generic Robot label,
-and Moai's unspecified action. Translating arbitrary rows in `internal.tsv`
-would not resolve these observed menus. The retained developer selectors in
+No missing English override was found among these choices and messages. The
+romanized Meat ranges, generic Robot label and unspecified Moai action were
+clarified through private debug artwork. Their catalog strings and the shared
+Trash/Next labels were preserved. No edit to `internal.tsv` was needed. The retained developer selectors in
 groups 0, 13, and 14 are a separate inventory, not proof that event `$9F` uses them.
 See [the internal-text boundary](internal-text-audit.md).
 
-The generic popup has **five interior tiles**. The cursor consumes eight pixels,
-leaving **32 pixels for each label**. Nine of the ten debug menus exceed that
-budget. The choice records are native event opcode `$1E`, each 13 bytes long,
+The original generic popup has **five interior tiles**. The cursor consumes eight pixels,
+leaving **32 pixels for each label**. Before repair, nine of the ten debug menus exceeded
+that budget. This table records the original limitation, not the final frame sizes.
+The choice records are native event opcode `$1E`, each 13 bytes long,
 in **bank 180 decimal / `$B4` hexadecimal**:
 
 | Menu | Original choice record | Widest label | Width | Minimum total frame columns¹ |
@@ -356,11 +366,12 @@ in **bank 180 decimal / `$B4` hexadecimal**:
 It does not prove that the native text-tile allocation or cleanup can support
 that width. The existing service extension supplies only 48 label pixels.
 
-The item-category capture also shows text occupying other rows' cursor areas.
+The before-repair item-category capture shows text occupying other rows' cursor areas.
 Tracing confirms the six-tile-per-physical-row allocation described in
 [`service_menus.py`](../tools/service_menus.py): extending the map alone would
 expose aliases into other rows. The overflowing native category renderer also
-damages its border bitmap at the end of the popup pool. Both must be addressed.
+damaged its border bitmap at the end of the popup pool. The completed repair
+handles both the row aliases and the border tile explicitly.
 
 ## Repair requirements: preserve ordinary gameplay
 
@@ -402,8 +413,8 @@ The repair was developed against these requirements:
    [ROM_BANK_MAP.md](ROM_BANK_MAP.md), and [TRAPS.md](TRAPS.md).
 
 All ten layouts below have been accepted in user testing. At the user's request,
-the same runtime is now integrated on the development branch for a local normal-build
-playtest. The full tree followed by floor changes and save/resume remains manual
+the same runtime is now integrated into the normal build for local
+playtesting. The full tree followed by floor changes and save/resume remains manual
 acceptance work; integration does not claim that exhaustive matrix is complete.
 
 ## Normal-build integration
@@ -422,7 +433,10 @@ normal translation builds, including the partial-translation build fixture,
 while rejecting changed dependencies or collisions. The historical adapter keeps
 its additional frozen-ROM guard for reproducing earlier comparisons.
 
-The local preparation is recorded under `build/debug-menu-release/`. Both normal
+### Final validation results
+
+The final automated run completed on **2026-09-11**. The local preparation is
+recorded under `build/debug-menu-release/`. Both normal
 ROMs are byte-for-byte identical to the accepted ten-menu experiments:
 
 | Font | Normal-build SHA-1 |
@@ -430,15 +444,81 @@ ROMs are byte-for-byte identical to the accepted ten-menu experiments:
 | Classic | `7329b1e9cd7c0b51b54f5cbc471985083f3da4af` |
 | Shadowed | `bd4fdae48457ea6a0297de6d4f6dc0253b149e7e` |
 
-Automated release validation passed **711 tests in 1,270.352 seconds** with no
-failures, errors or skips, plus **41 exact-artifact checks**, nine validators and
-four browser checks. Both ROMs and IPS files reproduce from an isolated copy of
-the current source. The verified ROMs are also installed at
-`build/shiren-gb2-english-{classic,shadowed}-font.gbc`. Results and coverage are in
-[testing-and-build.md](testing-and-build.md#debug-menu-normal-build-playtest), with
-the final local manifest at `build/debug-menu-release/verification.json`.
-This is a local playtest build; the IPS files have not been published. The user's
-main-game playtest and extended post-debug floor/save routes remain pending.
+| Check | Final result | Evidence under `build/debug-menu-release/` |
+|---|---|---|
+| Complete discovered suite | **711 tests in 1,270.352 seconds**, including all 20 debug regressions; zero failures, errors or skips | `test-results.json`, `logs/full-tests.log` |
+| Exact-artifact emulator battery | **41 checks in 36.144 seconds**; zero failures, errors or skips | `battery-results.json`, `logs/artifact-battery.log` |
+| Text, layout, graphics and rescue validators | All nine passed | `validation-results.json` |
+| Standalone browser checks | All four passed with Node available | `javascript-results.json` |
+| Fresh source rebuild | Both ROMs and both IPS files reproduced byte-for-byte from an isolated 479-file working-tree copy | `clean-build-results.json` |
+| Artifact integrity | Valid cartridge checksums and IPS reconstruction; exact accepted-prototype ROM bytes | `artifact-integrity.json`, `roms/SHA256SUMS.txt` |
+| Preserved inputs | Verified Japanese ROM and all 73 archived save-related files unchanged | `artifact-integrity.json`, `saved-input-sha256.json` |
+
+The exact-artifact battery covers cold boot, all 34 archived PyBoy states in each
+font, all four classic/shadowed SRAM save/reload combinations, diary names, Rescue,
+Training, equipment, combat borders, Monster Log, ending credits and Blank Scroll.
+These general save tests are separate from an exhaustive save/reload matrix after
+every debug-menu route.
+
+The accepted prototype also passed **77,560 Mesen navigation frames** across both
+fonts and both supplied saves, covering all forty cursor positions. Its comparison
+page contains **1,760 opening/closing frames**. This is the earlier
+[prototype evidence](#prototype-validation-results), retained because normal-build
+integration produced identical ROM bytes; it is not an additional Mesen rerun.
+
+The integration refreshed the build fixture's output hashes/checksums and the
+font-variant artwork ownership contract. The workbench catalogue was regenerated
+through its owner: only three revision fields changed, with all 6,695 records
+identical. The final suite above passed after these updates; earlier incomplete
+runs are not the final acceptance result.
+
+The verified ROMs are installed at
+`build/shiren-gb2-english-{classic,shadowed}-font.gbc`, with local IPS files beside
+them and identical copies under `build/debug-menu-release/roms/`. Previous normal
+artifacts are backed up in `build/debug-menu-release/before/normal-artifacts/`.
+The preparation manifest is `build/debug-menu-release/verification.json`;
+[testing-and-build.md](testing-and-build.md#debug-menu-normal-build-playtest)
+records the wider release checks. No patch was published as part of this
+preparation. Automated acceptance is complete for the recorded checks; full
+manual playthrough acceptance remains open.
+
+### Risk and remaining playtest coverage
+
+**Ordinary players who do not use debug have low residual risk from this change,
+not a guarantee of zero risk.** This is an engineering assessment based on patch
+scope and observed tests, not a measured failure probability.
+
+The shared event-choice entry at 5:`$58E6` now runs a small dispatch check.
+The widened renderer and its restoration routines require the exact debug event,
+script position and complete choice record. Ordinary choices fall back to their
+existing controller; nonzero temporary scratch also selects that fallback.
+Because that entry check is shared, the ordinary game is not
+entirely untouched; no regressions were found in the tested ordinary routes.
+
+Combat rules, encounters, native item grants and progression scripts are unchanged.
+The repair leaves shared menu templates intact, saves and restores every covered
+background tile and attribute, preserves text tiles during cursor movement, and
+clears its temporary WRAM before returning. There is no new SRAM allocation or
+save-format change. Unknown interactions remain possible on routes not exercised.
+
+The main remaining rendering uncertainty is an unusual transition after debug
+use. Automated coverage includes repeated size changes, map-edge wrapping, both
+VRAM banks, interrupt-sensitive copying and returns to ordinary menus. It does
+not prove every subsequent floor, scene or save/reload sequence.
+
+Manual acceptance still includes:
+
+- A full ordinary playthrough, including floor changes, Items/Status and save/resume.
+- Closing the complete debug tree, then exercising floor changes and save/reload
+  in both fonts; not every combination has been covered.
+- Downstream NPC/story routes after each Set Flag preset. Immediate flag effects
+  and result pages are tested, but those longer progression routes remain open.
+
+**Set Flag intentionally changes story progression**, and Trash removes inventory.
+These are native developer actions preserved by the repair. Judge ordinary story
+progression with a save that has not had the flag presets applied; use separate
+copies when testing those presets. Disable `019F2FC1` after the debug root appears
+so it does not keep overriding later events.
 
 ## Isolated debug menu prototype
 
@@ -630,11 +710,11 @@ Trash and B exits retain their native behavior. A transition regression requires
 the saved background to be visible before both initial artwork upload and
 subsequent native-cache restoration. The partial-inventory fixture checks all 25
 presets, preservation of existing items and successful creation/exit paths.
-All four Weapons/Shields, all three Bracelets/Grass, all four Scrolls/Staves
+All four Weapons/Shields, all three Bracelets/Grass, all four Scrolls/Staves,
 both Pots/Arrows presets and all twelve Meat batches also run with empty and full inventories in both
 fonts, comparing inventory order, item records and immediate controller returns
 against the frozen pre-integration ROM. The Meat fixtures additionally freeze every
-monster ID, tier and English name and checks each native grant opcode. Repeated
+monster ID, tier and English name and check each native grant opcode. Repeated
 three-page cycles and B returns check each complete private raster, every
 unowned VRAM byte, and the native controller/VRAM state at every immediate
 return. Exiting all pages must restore full VRAM and clear the private scratch.
@@ -672,6 +752,8 @@ Status and save/resume. When using debug, disable the access cheat once the root
 menu appears, close the tree completely, then exercise the same ordinary routes.
 The automated layout/action checks and general save battery do not certify every
 post-debug floor/save combination.
+See [risk and remaining playtest coverage](#risk-and-remaining-playtest-coverage)
+for the distinction between ordinary gameplay and intentional flag-preset effects.
 
 ### Cursor-motion repair
 
@@ -682,7 +764,7 @@ full repaint hid the corruption in settled screenshots while flashing text and
 a misplaced cursor remained visible during movement. Frame 1 after Down changed
 40 non-cursor pixels in classic and 47 in shadowed.
 
-The repair stays inside the existing experimental reservation. It copies the
+The repair stays inside the accepted debug reservation. It copies the
 reviewed native input and cursor-coordinate routines into bank 254, retaining
 their repeat, wrap, sound and cached-bitmap behavior. Its private glyph wrapper
 uses `$C4DA=$05`: the compositor's existing bit-2 mode suppresses VRAM uploads
@@ -698,8 +780,10 @@ of taps, held directions, wraparound and rapid reversals: **456 main-menu,
 each matching an independently constructed
 complete menu raster. It also requires the entire 49-tile pool to remain
 byte-identical. Mesen independently passes **38,780 checked frames across both
-fonts**, including held directions and repeated returns. Original save-state
-hashes and production ROM hashes are unchanged.
+fonts** from the original capture, including held directions and repeated returns.
+The later inventory-space capture brings the final total to **77,560 frames**.
+During the prototype phase the pre-integration normal ROMs were unchanged; the
+current normal builds have the accepted repaired ROM hashes listed above.
 
 Evidence: `build/debug-room-prototype/cursor-motion/` contains the before/after
 frames and focused regression logs; `report.json` and `mesen-*.log` in its parent
@@ -727,7 +811,7 @@ on scanline 103, PPU cycles 231 and 249, while VRAM was locked. The subsequent
 status check was already in HBlank, so the native retry missed the dropped cell.
 The private copier checks the display state again after disabling interrupts
 and writes the tile/attribute pair within a bounded interval. This change is
-confined to the experimental controller; the shared copier is untouched.
+confined to the private debug controller; the shared copier is untouched.
 
 The forced-scroll wrap test injects scroll at construction, after the gate's
 scratch scan, and uses the pre-construction background as its map reference.
@@ -790,8 +874,9 @@ event byte alone is insufficient, that the real GameShark code dispatches `$9F`,
 that all ten menus and their Back routes work after removing the cheat, and that
 full inventory, Trash, and Weapon 1 have the documented distinct effects.
 
-These are access/behavior tests. They **do not certify a future English layout
-repair**; the renderer-specific checks above must accompany that repair.
+These are original-game access/behavior tests. The repaired layouts are covered
+by `tests.test_debug_room_prototype`, which now runs the normal builds, and the
+[final validation results](#final-validation-results) above.
 
 ```sh
 python3 -m unittest \
@@ -807,6 +892,6 @@ python3 tools/menu_action_audit.py \
 On 2026-09-10, the focused run passed **16 tests**, without failures or skips.
 The English investigation also navigated all ten menus, exercised all 25 item
 batches with empty inventories, and observed all four flag-result messages.
-Screenshots above came from the supplied state with the English shadowed-font
+The historical before-repair screenshots came from the supplied state with the English shadowed-font
 ROM SHA-1 `3838dd39959ef075dfaf5a4c30363db6579573c2`; the verified Japanese source
 SHA-1 is `5264f6d0c4f12c9144de1d12fddadbadd82b3e33`.
